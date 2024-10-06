@@ -1,0 +1,379 @@
+# serializer version: 1
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works.3
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works.4
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_tgz_with_explicit_index_js_works.5
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_explicit_index_js_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_explicit_index_js_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_explicit_index_js_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_index_ts_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_index_ts_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_with_index_ts_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_frontend_tsx_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_frontend_tsx_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'frontend.tsx'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_frontend_tsx_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_site_ts_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_site_ts_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'site.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_from_zip_without_index_ts_but_site_ts_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works.3
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works.4
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'frontend.tsx'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_twice_from_zip_with_index_ts_replaced_by_frontend_tsx_works.5
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_with_subdir_works
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'plugin.json'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_with_subdir_works.1
+  '''
+  SELECT "markettor_pluginsourcefile"."id",
+         "markettor_pluginsourcefile"."plugin_id",
+         "markettor_pluginsourcefile"."filename",
+         "markettor_pluginsourcefile"."source",
+         "markettor_pluginsourcefile"."status",
+         "markettor_pluginsourcefile"."transpiled",
+         "markettor_pluginsourcefile"."error",
+         "markettor_pluginsourcefile"."updated_at"
+  FROM "markettor_pluginsourcefile"
+  WHERE ("markettor_pluginsourcefile"."filename" = 'index.ts'
+         AND "markettor_pluginsourcefile"."plugin_id" = 2)
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestPluginSourceFile.test_sync_from_plugin_archive_with_subdir_works.2
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "markettor_pluginsourcefile"
+  '''
+# ---

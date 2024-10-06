@@ -1,0 +1,2272 @@
+# serializer version: 1
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.1
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.10
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.11
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.12
+  '''
+  SELECT "markettor_dashboardtile"."id"
+  FROM "markettor_dashboardtile"
+  INNER JOIN "markettor_dashboard" ON ("markettor_dashboardtile"."dashboard_id" = "markettor_dashboard"."id")
+  WHERE (NOT ("markettor_dashboardtile"."deleted"
+              AND "markettor_dashboardtile"."deleted" IS NOT NULL)
+         AND NOT ("markettor_dashboard"."deleted")
+         AND "markettor_dashboardtile"."dashboard_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.13
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.14
+  '''
+  SELECT "markettor_dashboardtile"."id"
+  FROM "markettor_dashboardtile"
+  INNER JOIN "markettor_dashboard" ON ("markettor_dashboardtile"."dashboard_id" = "markettor_dashboard"."id")
+  WHERE (NOT ("markettor_dashboardtile"."deleted"
+              AND "markettor_dashboardtile"."deleted" IS NOT NULL)
+         AND NOT ("markettor_dashboard"."deleted")
+         AND "markettor_dashboardtile"."dashboard_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.15
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.16
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.17
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.18
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.19
+  '''
+  SELECT "markettor_dashboardtile"."id",
+         "markettor_dashboardtile"."dashboard_id",
+         "markettor_dashboardtile"."insight_id",
+         "markettor_dashboardtile"."text_id",
+         "markettor_dashboardtile"."layouts",
+         "markettor_dashboardtile"."color",
+         "markettor_dashboardtile"."filters_hash",
+         "markettor_dashboardtile"."last_refresh",
+         "markettor_dashboardtile"."refreshing",
+         "markettor_dashboardtile"."refresh_attempt",
+         "markettor_dashboardtile"."deleted"
+  FROM "markettor_dashboardtile"
+  WHERE "markettor_dashboardtile"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.2
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.20
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.21
+  '''
+  SELECT "markettor_dashboard"."id",
+         "markettor_dashboard"."name",
+         "markettor_dashboard"."description",
+         "markettor_dashboard"."team_id",
+         "markettor_dashboard"."pinned",
+         "markettor_dashboard"."created_at",
+         "markettor_dashboard"."created_by_id",
+         "markettor_dashboard"."deleted",
+         "markettor_dashboard"."last_accessed_at",
+         "markettor_dashboard"."filters",
+         "markettor_dashboard"."creation_mode",
+         "markettor_dashboard"."restriction_level",
+         "markettor_dashboard"."deprecated_tags",
+         "markettor_dashboard"."tags",
+         "markettor_dashboard"."share_token",
+         "markettor_dashboard"."is_shared"
+  FROM "markettor_dashboard"
+  WHERE "markettor_dashboard"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.22
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.23
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.24
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.25
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.26
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.27
+  '''
+  SELECT "markettor_dashboardtile"."id",
+         "markettor_dashboardtile"."dashboard_id",
+         "markettor_dashboardtile"."insight_id",
+         "markettor_dashboardtile"."text_id",
+         "markettor_dashboardtile"."layouts",
+         "markettor_dashboardtile"."color",
+         "markettor_dashboardtile"."filters_hash",
+         "markettor_dashboardtile"."last_refresh",
+         "markettor_dashboardtile"."refreshing",
+         "markettor_dashboardtile"."refresh_attempt",
+         "markettor_dashboardtile"."deleted"
+  FROM "markettor_dashboardtile"
+  WHERE "markettor_dashboardtile"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.28
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.29
+  '''
+  SELECT "markettor_dashboard"."id",
+         "markettor_dashboard"."name",
+         "markettor_dashboard"."description",
+         "markettor_dashboard"."team_id",
+         "markettor_dashboard"."pinned",
+         "markettor_dashboard"."created_at",
+         "markettor_dashboard"."created_by_id",
+         "markettor_dashboard"."deleted",
+         "markettor_dashboard"."last_accessed_at",
+         "markettor_dashboard"."filters",
+         "markettor_dashboard"."creation_mode",
+         "markettor_dashboard"."restriction_level",
+         "markettor_dashboard"."deprecated_tags",
+         "markettor_dashboard"."tags",
+         "markettor_dashboard"."share_token",
+         "markettor_dashboard"."is_shared"
+  FROM "markettor_dashboard"
+  WHERE "markettor_dashboard"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.3
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."key" = 'copied-flag-key'
+         AND "markettor_featureflag"."team_id" = 2)
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.30
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.31
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.32
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.33
+  '''
+  SELECT "markettor_experiment"."id",
+         "markettor_experiment"."name",
+         "markettor_experiment"."description",
+         "markettor_experiment"."team_id",
+         "markettor_experiment"."filters",
+         "markettor_experiment"."parameters",
+         "markettor_experiment"."secondary_metrics",
+         "markettor_experiment"."created_by_id",
+         "markettor_experiment"."feature_flag_id",
+         "markettor_experiment"."exposure_cohort_id",
+         "markettor_experiment"."start_date",
+         "markettor_experiment"."end_date",
+         "markettor_experiment"."created_at",
+         "markettor_experiment"."updated_at",
+         "markettor_experiment"."archived",
+         "markettor_experiment"."type",
+         "markettor_experiment"."variants",
+         "markettor_experiment"."metrics"
+  FROM "markettor_experiment"
+  WHERE "markettor_experiment"."feature_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.34
+  '''
+  SELECT "markettor_survey"."id",
+         "markettor_survey"."team_id",
+         "markettor_survey"."name",
+         "markettor_survey"."description",
+         "markettor_survey"."linked_flag_id",
+         "markettor_survey"."targeting_flag_id",
+         "markettor_survey"."internal_targeting_flag_id",
+         "markettor_survey"."type",
+         "markettor_survey"."conditions",
+         "markettor_survey"."questions",
+         "markettor_survey"."appearance",
+         "markettor_survey"."created_at",
+         "markettor_survey"."created_by_id",
+         "markettor_survey"."start_date",
+         "markettor_survey"."end_date",
+         "markettor_survey"."updated_at",
+         "markettor_survey"."archived",
+         "markettor_survey"."responses_limit",
+         "markettor_survey"."iteration_count",
+         "markettor_survey"."iteration_frequency_days",
+         "markettor_survey"."iteration_start_dates",
+         "markettor_survey"."current_iteration",
+         "markettor_survey"."current_iteration_start_date"
+  FROM "markettor_survey"
+  WHERE "markettor_survey"."linked_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.35
+  '''
+  SELECT "markettor_earlyaccessfeature"."id",
+         "markettor_earlyaccessfeature"."team_id",
+         "markettor_earlyaccessfeature"."feature_flag_id",
+         "markettor_earlyaccessfeature"."name",
+         "markettor_earlyaccessfeature"."description",
+         "markettor_earlyaccessfeature"."stage",
+         "markettor_earlyaccessfeature"."documentation_url",
+         "markettor_earlyaccessfeature"."created_at"
+  FROM "markettor_earlyaccessfeature"
+  WHERE "markettor_earlyaccessfeature"."feature_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.36
+  '''
+  SELECT "markettor_dashboard"."id",
+         "markettor_dashboard"."name",
+         "markettor_dashboard"."description",
+         "markettor_dashboard"."team_id",
+         "markettor_dashboard"."pinned",
+         "markettor_dashboard"."created_at",
+         "markettor_dashboard"."created_by_id",
+         "markettor_dashboard"."deleted",
+         "markettor_dashboard"."last_accessed_at",
+         "markettor_dashboard"."filters",
+         "markettor_dashboard"."creation_mode",
+         "markettor_dashboard"."restriction_level",
+         "markettor_dashboard"."deprecated_tags",
+         "markettor_dashboard"."tags",
+         "markettor_dashboard"."share_token",
+         "markettor_dashboard"."is_shared"
+  FROM "markettor_dashboard"
+  INNER JOIN "markettor_featureflagdashboards" ON ("markettor_dashboard"."id" = "markettor_featureflagdashboards"."dashboard_id")
+  WHERE (NOT ("markettor_dashboard"."deleted")
+         AND "markettor_featureflagdashboards"."feature_flag_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.37
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.38
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.39
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.4
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.40
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.41
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.42
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.43
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.44
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.45
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.46
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.47
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.48
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.49
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.5
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.50
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.51
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.52
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.53
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.54
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.55
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.56
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.57
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.58
+  '''
+  SELECT "markettor_dashboardtile"."id",
+         "markettor_dashboardtile"."dashboard_id",
+         "markettor_dashboardtile"."insight_id",
+         "markettor_dashboardtile"."text_id",
+         "markettor_dashboardtile"."layouts",
+         "markettor_dashboardtile"."color",
+         "markettor_dashboardtile"."filters_hash",
+         "markettor_dashboardtile"."last_refresh",
+         "markettor_dashboardtile"."refreshing",
+         "markettor_dashboardtile"."refresh_attempt",
+         "markettor_dashboardtile"."deleted"
+  FROM "markettor_dashboardtile"
+  WHERE "markettor_dashboardtile"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.59
+  '''
+  SELECT "markettor_dashboarditem"."id",
+         "markettor_dashboarditem"."name",
+         "markettor_dashboarditem"."derived_name",
+         "markettor_dashboarditem"."description",
+         "markettor_dashboarditem"."team_id",
+         "markettor_dashboarditem"."filters",
+         "markettor_dashboarditem"."filters_hash",
+         "markettor_dashboarditem"."query",
+         "markettor_dashboarditem"."order",
+         "markettor_dashboarditem"."deleted",
+         "markettor_dashboarditem"."saved",
+         "markettor_dashboarditem"."created_at",
+         "markettor_dashboarditem"."last_refresh",
+         "markettor_dashboarditem"."refreshing",
+         "markettor_dashboarditem"."created_by_id",
+         "markettor_dashboarditem"."is_sample",
+         "markettor_dashboarditem"."short_id",
+         "markettor_dashboarditem"."favorited",
+         "markettor_dashboarditem"."refresh_attempt",
+         "markettor_dashboarditem"."last_modified_at",
+         "markettor_dashboarditem"."last_modified_by_id",
+         "markettor_dashboarditem"."dashboard_id",
+         "markettor_dashboarditem"."layouts",
+         "markettor_dashboarditem"."color",
+         "markettor_dashboarditem"."dive_dashboard_id",
+         "markettor_dashboarditem"."updated_at",
+         "markettor_dashboarditem"."deprecated_tags",
+         "markettor_dashboarditem"."tags"
+  FROM "markettor_dashboarditem"
+  WHERE "markettor_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.6
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE (NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."key" = 'copied-flag-key'
+         AND "markettor_featureflag"."team_id" = 2)
+  ORDER BY "markettor_featureflag"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.60
+  '''
+  SELECT "markettor_dashboard"."id",
+         "markettor_dashboard"."name",
+         "markettor_dashboard"."description",
+         "markettor_dashboard"."team_id",
+         "markettor_dashboard"."pinned",
+         "markettor_dashboard"."created_at",
+         "markettor_dashboard"."created_by_id",
+         "markettor_dashboard"."deleted",
+         "markettor_dashboard"."last_accessed_at",
+         "markettor_dashboard"."filters",
+         "markettor_dashboard"."creation_mode",
+         "markettor_dashboard"."restriction_level",
+         "markettor_dashboard"."deprecated_tags",
+         "markettor_dashboard"."tags",
+         "markettor_dashboard"."share_token",
+         "markettor_dashboard"."is_shared"
+  FROM "markettor_dashboard"
+  WHERE "markettor_dashboard"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.61
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.62
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.63
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.64
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.65
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.66
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_V2_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.67
+  '''
+  SELECT "markettor_instancesetting"."id",
+         "markettor_instancesetting"."key",
+         "markettor_instancesetting"."raw_value"
+  FROM "markettor_instancesetting"
+  WHERE "markettor_instancesetting"."key" = 'constance:markettor:PERSON_ON_EVENTS_ENABLED'
+  ORDER BY "markettor_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.68
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.69
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.7
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_featureflag"
+  WHERE (NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."key" = 'copied-flag-key'
+         AND "markettor_featureflag"."team_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.70
+  '''
+  SELECT "markettor_experiment"."id",
+         "markettor_experiment"."name",
+         "markettor_experiment"."description",
+         "markettor_experiment"."team_id",
+         "markettor_experiment"."filters",
+         "markettor_experiment"."parameters",
+         "markettor_experiment"."secondary_metrics",
+         "markettor_experiment"."created_by_id",
+         "markettor_experiment"."feature_flag_id",
+         "markettor_experiment"."exposure_cohort_id",
+         "markettor_experiment"."start_date",
+         "markettor_experiment"."end_date",
+         "markettor_experiment"."created_at",
+         "markettor_experiment"."updated_at",
+         "markettor_experiment"."archived"
+  FROM "markettor_experiment"
+  WHERE "markettor_experiment"."feature_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.71
+  '''
+  SELECT "markettor_survey"."id",
+         "markettor_survey"."team_id",
+         "markettor_survey"."name",
+         "markettor_survey"."description",
+         "markettor_survey"."linked_flag_id",
+         "markettor_survey"."targeting_flag_id",
+         "markettor_survey"."type",
+         "markettor_survey"."conditions",
+         "markettor_survey"."questions",
+         "markettor_survey"."appearance",
+         "markettor_survey"."created_at",
+         "markettor_survey"."created_by_id",
+         "markettor_survey"."start_date",
+         "markettor_survey"."end_date",
+         "markettor_survey"."updated_at",
+         "markettor_survey"."archived",
+         "markettor_survey"."responses_limit"
+  FROM "markettor_survey"
+  WHERE "markettor_survey"."linked_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.72
+  '''
+  SELECT "markettor_earlyaccessfeature"."id",
+         "markettor_earlyaccessfeature"."team_id",
+         "markettor_earlyaccessfeature"."feature_flag_id",
+         "markettor_earlyaccessfeature"."name",
+         "markettor_earlyaccessfeature"."description",
+         "markettor_earlyaccessfeature"."stage",
+         "markettor_earlyaccessfeature"."documentation_url",
+         "markettor_earlyaccessfeature"."created_at"
+  FROM "markettor_earlyaccessfeature"
+  WHERE "markettor_earlyaccessfeature"."feature_flag_id" = 2
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.73
+  '''
+  SELECT "markettor_dashboard"."id",
+         "markettor_dashboard"."name",
+         "markettor_dashboard"."description",
+         "markettor_dashboard"."team_id",
+         "markettor_dashboard"."pinned",
+         "markettor_dashboard"."created_at",
+         "markettor_dashboard"."created_by_id",
+         "markettor_dashboard"."deleted",
+         "markettor_dashboard"."last_accessed_at",
+         "markettor_dashboard"."filters",
+         "markettor_dashboard"."creation_mode",
+         "markettor_dashboard"."restriction_level",
+         "markettor_dashboard"."deprecated_tags",
+         "markettor_dashboard"."tags",
+         "markettor_dashboard"."share_token",
+         "markettor_dashboard"."is_shared"
+  FROM "markettor_dashboard"
+  INNER JOIN "markettor_featureflagdashboards" ON ("markettor_dashboard"."id" = "markettor_featureflagdashboards"."dashboard_id")
+  WHERE (NOT ("markettor_dashboard"."deleted")
+         AND "markettor_featureflagdashboards"."feature_flag_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.8
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."key" = 'copied-flag-key'
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestOrganizationFeatureFlagCopy.test_copy_feature_flag_create_new.9
+  '''
+  SELECT (true) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  WHERE "markettor_person"."team_id" = 2
+  LIMIT 10
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.1
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.2
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.3
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.4
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE (NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."key" = 'key-1'
+         AND "markettor_featureflag"."team_id" IN (1,
+                                                 2,
+                                                 3,
+                                                 4,
+                                                 5 /* ... */))
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.5
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."requested_password_reset_at",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.6
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."requested_password_reset_at",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationFeatureFlagGet.test_get_feature_flag_success.7
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."requested_password_reset_at",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---

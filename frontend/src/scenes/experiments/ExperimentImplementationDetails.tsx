@@ -1,0 +1,158 @@
+import { LemonSelect, Link } from '@markettor/lemon-ui'
+import { IconGolang, IconJavascript, IconNodeJS, IconPHP, IconPython, IconRuby } from 'lib/lemon-ui/icons'
+import { useState } from 'react'
+
+import { Experiment, MultivariateFlagVariant } from '~/types'
+
+import {
+    GolangSnippet,
+    JSSnippet,
+    NodeJSSnippet,
+    PHPSnippet,
+    PythonSnippet,
+    RNSnippet,
+    RubySnippet,
+} from './ExperimentCodeSnippets'
+
+interface ExperimentImplementationDetailsProps {
+    experiment: Partial<Experiment> | null
+}
+
+const UTM_TAGS = '?utm_medium=in-product&utm_campaign=experiment'
+const DOC_BASE_URL = 'https://markettor.com/docs/'
+const FF_ANCHOR = '#feature-flags'
+
+const OPTIONS = [
+    {
+        value: 'JavaScript',
+        documentationLink: `${DOC_BASE_URL}libraries/js${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconJavascript,
+        Snippet: JSSnippet,
+    },
+    {
+        value: 'ReactNative',
+        documentationLink: `${DOC_BASE_URL}libraries/react-native${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconJavascript,
+        Snippet: RNSnippet,
+    },
+    {
+        value: 'Node.js',
+        documentationLink: `${DOC_BASE_URL}libraries/node${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconNodeJS,
+        Snippet: NodeJSSnippet,
+    },
+    {
+        value: 'PHP',
+        documentationLink: `${DOC_BASE_URL}libraries/php${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconPHP,
+        Snippet: PHPSnippet,
+    },
+    {
+        value: 'Ruby',
+        documentationLink: `${DOC_BASE_URL}libraries/ruby${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconRuby,
+        Snippet: RubySnippet,
+    },
+    {
+        value: 'Golang',
+        documentationLink: `${DOC_BASE_URL}libraries/go${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconGolang,
+        Snippet: GolangSnippet,
+    },
+    {
+        value: 'Python',
+        documentationLink: `${DOC_BASE_URL}libraries/python${UTM_TAGS}${FF_ANCHOR}`,
+        Icon: IconPython,
+        Snippet: PythonSnippet,
+    },
+]
+
+export function CodeLanguageSelect({
+    selectedOptionValue,
+    selectOption,
+}: {
+    selectedOptionValue: string
+    selectOption: (selectedValue: string) => void
+}): JSX.Element {
+    return (
+        <LemonSelect
+            size="small"
+            className="min-w-[7.5rem]"
+            onSelect={selectOption}
+            value={selectedOptionValue}
+            options={OPTIONS.map(({ value, Icon }) => ({
+                value,
+                label: value,
+                labelInMenu: (
+                    <div className="flex items-center space-x-2">
+                        <Icon />
+                        <span>{value}</span>
+                    </div>
+                ),
+            }))}
+        />
+    )
+}
+
+export function ExperimentImplementationDetails({ experiment }: ExperimentImplementationDetailsProps): JSX.Element {
+    const defaultVariant = experiment?.parameters?.feature_flag_variants?.[1]?.key ?? 'test'
+    const [currentVariant, setCurrentVariant] = useState(defaultVariant)
+    const [defaultSelectedOption] = OPTIONS
+    const [selectedOption, setSelectedOption] = useState(defaultSelectedOption)
+
+    const selectOption = (selectedValue: string): void => {
+        const option = OPTIONS.find((option) => option.value === selectedValue)
+
+        if (option) {
+            setSelectedOption(option)
+        }
+    }
+
+    return (
+        <div>
+            <h2 className="font-semibold text-lg mb-2">Implementation</h2>
+            <div className="border rounded bg-bg-light">
+                <div className="p-6 space-y-4">
+                    <div className="flex justify-between">
+                        <div className="flex items-center">
+                            <span className="mr-2">Variant group</span>
+                            <LemonSelect
+                                size="small"
+                                className="min-w-[5rem]"
+                                onSelect={setCurrentVariant}
+                                value={currentVariant}
+                                options={(experiment?.parameters?.feature_flag_variants || []).map(
+                                    (variant: MultivariateFlagVariant) => ({
+                                        value: variant.key,
+                                        label: variant.key,
+                                    })
+                                )}
+                            />
+                        </div>
+                        <div>
+                            <CodeLanguageSelect
+                                selectOption={selectOption}
+                                selectedOptionValue={selectedOption.value}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mb-1">
+                            <b>Implement your experiment in code</b>
+                        </div>
+                        <div className="mb-1">
+                            <selectedOption.Snippet
+                                variant={currentVariant}
+                                flagKey={experiment?.feature_flag?.key ?? ''}
+                            />
+                        </div>
+
+                        <Link subtle to={selectedOption.documentationLink} target="_blank">
+                            See the docs for more implementation information.
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

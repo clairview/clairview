@@ -1,0 +1,93 @@
+import * as Sentry from '@sentry/react'
+import { FEATURE_FLAGS } from 'lib/constants'
+import markettor, { MarketTorConfig } from 'markettor-js'
+
+const configWithSentry = (config: Partial<MarketTorConfig>): Partial<MarketTorConfig> => {
+    if ((window as any).SENTRY_DSN) {
+        config.on_xhr_error = (failedRequest: XMLHttpRequest) => {
+            const status = failedRequest.status
+            const statusText = failedRequest.statusText || 'no status text in error'
+            Sentry.captureException(
+                new Error(`Failed with status ${status} while sending to MarketTor. Message: ${statusText}`),
+                { tags: { status, statusText } }
+            )
+        }
+    }
+    return config
+}
+
+export function loadMarketTorJS(): void {
+    if (window.JS_MARKETTOR_API_KEY) {
+        markettor.init(
+            window.JS_MARKETTOR_API_KEY,
+            configWithSentry({
+                opt_out_useragent_filter: window.location.hostname === 'localhost', // we ARE a bot when running in localhost, so we need to enable this opt-out
+                api_host: window.JS_MARKETTOR_HOST,
+                ui_host: window.JS_MARKETTOR_UI_HOST,
+                rageclick: true,
+                persistence: 'localStorage+cookie',
+                bootstrap: window.MARKETTOR_USER_IDENTITY_WITH_FLAGS ? window.MARKETTOR_USER_IDENTITY_WITH_FLAGS : {},
+                opt_in_site_apps: true,
+                api_transport: 'fetch',
+                loaded: (markettor) => {
+                    if (markettor.sessionRecording) {
+                        markettor.sessionRecording._forceAllowLocalhostNetworkCapture = true
+                    }
+
+                    if (window.IMPERSONATED_SESSION) {
+                        markettor.opt_out_capturing()
+                    } else {
+                        markettor.opt_in_capturing()
+                    }
+                },
+                scroll_root_selector: ['main', 'html'],
+                autocapture: {
+                    capture_copied_text: true,
+                },
+                person_profiles: 'always',
+
+                // Helper to capture events for assertions in Cypress
+                _onCapture: (window as any)._cypress_markettor_captures
+                    ? (_, event) => (window as any)._cypress_markettor_captures.push(event)
+                    : undefined,
+            })
+        )
+
+        const Cypress = (window as any).Cypress
+
+        if (Cypress) {
+            Object.entries(Cypress.env()).forEach(([key, value]) => {
+                if (key.startsWith('MARKETTOR_PROPERTY_')) {
+                    markettor.register_for_session({
+                        [key.replace('MARKETTOR_PROPERTY_', 'E2E_TESTING_').toLowerCase()]: value,
+                    })
+                }
+            })
+        }
+
+        // This is a helpful flag to set to automatically reset the recording session on load for testing multiple recordings
+        const shouldResetSessionOnLoad = markettor.getFeatureFlag(FEATURE_FLAGS.SESSION_RESET_ON_LOAD)
+        if (shouldResetSessionOnLoad) {
+            markettor.sessionManager?.resetSessionId()
+        }
+        // Make sure we have access to the object in window for debugging
+        window.markettor = markettor
+    } else {
+        markettor.init('fake token', {
+            autocapture: false,
+            loaded: function (ph) {
+                ph.opt_out_capturing()
+            },
+        })
+    }
+
+    if (window.SENTRY_DSN) {
+        Sentry.init({
+            dsn: window.SENTRY_DSN,
+            environment: window.SENTRY_ENVIRONMENT,
+            ...(location.host.includes('markettor.com') && {
+                integrations: [new markettor.SentryIntegration(markettor, 'markettor', 1899813, undefined, '*')],
+            }),
+        })
+    }
+}

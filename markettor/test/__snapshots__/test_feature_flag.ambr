@@ -1,0 +1,1147 @@
+# serializer version: 1
+# name: TestFeatureFlagMatcher.test_coercion_of_booleans_with_is_not_operator
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_coercion_of_booleans_with_is_not_operator.1
+  '''
+  SELECT NOT ((("markettor_person"."properties" -> 'disabled') = 'false'::jsonb
+               OR ("markettor_person"."properties" -> 'disabled') = '"false"'::jsonb)
+              AND "markettor_person"."properties" ? 'disabled'
+              AND NOT (("markettor_person"."properties" -> 'disabled') = 'null'::jsonb)) AS "flag_X_condition_0",
+             NOT ((("markettor_person"."properties" -> 'disabled') = 'false'::jsonb
+                   OR ("markettor_person"."properties" -> 'disabled') = '"false"'::jsonb)
+                  AND "markettor_person"."properties" ? 'disabled'
+                  AND NOT (("markettor_person"."properties" -> 'disabled') = 'null'::jsonb)) AS "flag_X_condition_1",
+                 NOT ((("markettor_person"."properties" -> 'disabled') = 'false'::jsonb
+                       OR ("markettor_person"."properties" -> 'disabled') = '"false"'::jsonb)
+                      AND "markettor_person"."properties" ? 'disabled'
+                      AND NOT (("markettor_person"."properties" -> 'disabled') = 'null'::jsonb)) AS "flag_X_condition_2",
+                     NOT ((("markettor_person"."properties" -> 'disabled') = 'false'::jsonb
+                           OR ("markettor_person"."properties" -> 'disabled') = '"false"'::jsonb)
+                          AND "markettor_person"."properties" ? 'disabled'
+                          AND NOT (("markettor_person"."properties" -> 'disabled') = 'null'::jsonb)) AS "flag_X_condition_3",
+                         NOT ((("markettor_person"."properties" -> 'disabled') = 'false'::jsonb
+                               OR ("markettor_person"."properties" -> 'disabled') = '"false"'::jsonb)
+                              AND "markettor_person"."properties" ? 'disabled'
+                              AND NOT (("markettor_person"."properties" -> 'disabled') = 'null'::jsonb)) AS "flag_X_condition_4",
+                             NOT ((("markettor_person"."properties" -> 'string_disabled') = 'false'::jsonb
+                                   OR ("markettor_person"."properties" -> 'string_disabled') = '"false"'::jsonb)
+                                  AND "markettor_person"."properties" ? 'string_disabled'
+                                  AND NOT (("markettor_person"."properties" -> 'string_disabled') = 'null'::jsonb)) AS "flag_X_condition_5",
+                                 NOT ((("markettor_person"."properties" -> 'string_disabled') = 'false'::jsonb
+                                       OR ("markettor_person"."properties" -> 'string_disabled') = '"false"'::jsonb)
+                                      AND "markettor_person"."properties" ? 'string_disabled'
+                                      AND NOT (("markettor_person"."properties" -> 'string_disabled') = 'null'::jsonb)) AS "flag_X_condition_6",
+                                     NOT ((("markettor_person"."properties" -> 'string_disabled') = 'false'::jsonb
+                                           OR ("markettor_person"."properties" -> 'string_disabled') = '"false"'::jsonb)
+                                          AND "markettor_person"."properties" ? 'string_disabled'
+                                          AND NOT (("markettor_person"."properties" -> 'string_disabled') = 'null'::jsonb)) AS "flag_X_condition_7",
+                                         NOT ((("markettor_person"."properties" -> 'string_disabled') = 'false'::jsonb
+                                               OR ("markettor_person"."properties" -> 'string_disabled') = '"false"'::jsonb)
+                                              AND "markettor_person"."properties" ? 'string_disabled'
+                                              AND NOT (("markettor_person"."properties" -> 'string_disabled') = 'null'::jsonb)) AS "flag_X_condition_8"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_coercion_of_strings_and_numbers_with_is_not_operator
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_coercion_of_strings_and_numbers_with_is_not_operator.1
+  '''
+  SELECT (NOT ((("markettor_person"."properties" -> 'Organizer Id') IN ('"307"'::jsonb)
+                OR ("markettor_person"."properties" -> 'Organizer Id') IN ('307'::jsonb))
+               AND "markettor_person"."properties" ? 'Organizer Id'
+               AND NOT (("markettor_person"."properties" -> 'Organizer Id') = 'null'::jsonb))
+          AND NOT (("markettor_person"."properties" -> 'Organizer Id') IN ('307'::jsonb)
+                   AND "markettor_person"."properties" ? 'Organizer Id'
+                   AND NOT (("markettor_person"."properties" -> 'Organizer Id') = 'null'::jsonb))
+          AND NOT ((("markettor_person"."properties" -> 'Organizer Id') = '"307"'::jsonb
+                    OR ("markettor_person"."properties" -> 'Organizer Id') = '307'::jsonb)
+                   AND "markettor_person"."properties" ? 'Organizer Id'
+                   AND NOT (("markettor_person"."properties" -> 'Organizer Id') = 'null'::jsonb))
+          AND NOT (("markettor_person"."properties" -> 'Organizer Id') = '307'::jsonb
+                   AND "markettor_person"."properties" ? 'Organizer Id'
+                   AND NOT (("markettor_person"."properties" -> 'Organizer Id') = 'null'::jsonb))) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_coercion_of_strings_and_numbers_with_is_not_operator.2
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_coercion_of_strings_and_numbers_with_is_not_operator.3
+  '''
+  SELECT NOT ((("markettor_person"."properties" -> 'Distinct Id') IN ('"307"'::jsonb)
+               OR ("markettor_person"."properties" -> 'Distinct Id') IN ('307'::jsonb))
+              AND "markettor_person"."properties" ? 'Distinct Id'
+              AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_0",
+             NOT (("markettor_person"."properties" -> 'Distinct Id') IN ('307'::jsonb)
+                  AND "markettor_person"."properties" ? 'Distinct Id'
+                  AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_1",
+                 NOT ((("markettor_person"."properties" -> 'Distinct Id') = '"307"'::jsonb
+                       OR ("markettor_person"."properties" -> 'Distinct Id') = '307'::jsonb)
+                      AND "markettor_person"."properties" ? 'Distinct Id'
+                      AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_2",
+                     NOT (("markettor_person"."properties" -> 'Distinct Id') = '307'::jsonb
+                          AND "markettor_person"."properties" ? 'Distinct Id'
+                          AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_3"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.1
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.2
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.3
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.4
+  '''
+  SELECT ((("markettor_person"."properties" -> 'Distinct Id') IN ('"307"'::jsonb)
+           OR ("markettor_person"."properties" -> 'Distinct Id') IN ('307'::jsonb))
+          AND "markettor_person"."properties" ? 'Distinct Id'
+          AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.5
+  '''
+  SELECT (("markettor_person"."properties" -> 'Distinct Id') IN ('307'::jsonb)
+          AND "markettor_person"."properties" ? 'Distinct Id'
+          AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_db_matches_independent_of_string_or_number_type.6
+  '''
+  SELECT (("markettor_person"."properties" -> 'Distinct Id') = '307'::jsonb
+          AND "markettor_person"."properties" ? 'Distinct Id'
+          AND NOT (("markettor_person"."properties" -> 'Distinct Id') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_invalid_regex_match_flag
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_invalid_regex_match_flag.1
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_invalid_regex_match_flag.2
+  '''
+  SELECT (("markettor_person"."properties" ->> 'email')::text ~ '["neil@x.com"]'
+          AND "markettor_person"."properties" ? 'email'
+          AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_invalid_regex_match_flag.3
+  '''
+  SELECT (("markettor_person"."properties" ->> 'email')::text ~ '["neil@x.com"]'
+          AND "markettor_person"."properties" ? 'email'
+          AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = 'another_id'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags
+  '''
+  SELECT "markettor_grouptypemapping"."id",
+         "markettor_grouptypemapping"."team_id",
+         "markettor_grouptypemapping"."group_type",
+         "markettor_grouptypemapping"."group_type_index",
+         "markettor_grouptypemapping"."name_singular",
+         "markettor_grouptypemapping"."name_plural"
+  FROM "markettor_grouptypemapping"
+  WHERE "markettor_grouptypemapping"."team_id" = 2
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.1
+  '''
+  SELECT (("markettor_person"."properties" -> 'email') = '"test@markettor.com"'::jsonb
+          AND "markettor_person"."properties" ? 'email'
+          AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_1",
+         (true) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = 'test_id'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.2
+  '''
+  SELECT (true) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_0"
+  FROM "markettor_group"
+  WHERE ("markettor_group"."team_id" = 2
+         AND "markettor_group"."group_key" = 'group_key'
+         AND "markettor_group"."group_type_index" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.3
+  '''
+  SELECT (("markettor_group"."group_properties" -> 'name') IN ('"foo.inc"'::jsonb)
+          AND "markettor_group"."group_properties" ? 'name'
+          AND NOT (("markettor_group"."group_properties" -> 'name') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (("markettor_group"."group_properties" -> 'name') IN ('"foo2.inc"'::jsonb)
+          AND "markettor_group"."group_properties" ? 'name'
+          AND NOT (("markettor_group"."group_properties" -> 'name') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_group"
+  WHERE ("markettor_group"."team_id" = 2
+         AND "markettor_group"."group_key" = 'foo'
+         AND "markettor_group"."group_type_index" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.4
+  '''
+  SELECT "markettor_grouptypemapping"."id",
+         "markettor_grouptypemapping"."team_id",
+         "markettor_grouptypemapping"."group_type",
+         "markettor_grouptypemapping"."group_type_index",
+         "markettor_grouptypemapping"."name_singular",
+         "markettor_grouptypemapping"."name_plural"
+  FROM "markettor_grouptypemapping"
+  WHERE "markettor_grouptypemapping"."team_id" = 2
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.5
+  '''
+  SELECT (("markettor_person"."properties" -> 'email') = '"test@markettor.com"'::jsonb
+          AND "markettor_person"."properties" ? 'email'
+          AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_1",
+         (true) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_0",
+         (true) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = 'test_id'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_multiple_flags.6
+  '''
+  SELECT (("markettor_group"."group_properties" -> 'name') IN ('"foo.inc"'::jsonb)
+          AND "markettor_group"."group_properties" ? 'name'
+          AND NOT (("markettor_group"."group_properties" -> 'name') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (("markettor_group"."group_properties" -> 'name') IN ('"foo2.inc"'::jsonb)
+          AND "markettor_group"."group_properties" ? 'name'
+          AND NOT (("markettor_group"."group_properties" -> 'name') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_group"
+  WHERE ("markettor_group"."team_id" = 2
+         AND "markettor_group"."group_key" = 'foo2'
+         AND "markettor_group"."group_type_index" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_cohorts_and_nested_cohorts
+  '''
+  SELECT "markettor_cohort"."id",
+         "markettor_cohort"."name",
+         "markettor_cohort"."description",
+         "markettor_cohort"."team_id",
+         "markettor_cohort"."deleted",
+         "markettor_cohort"."filters",
+         "markettor_cohort"."query",
+         "markettor_cohort"."version",
+         "markettor_cohort"."pending_version",
+         "markettor_cohort"."count",
+         "markettor_cohort"."created_by_id",
+         "markettor_cohort"."created_at",
+         "markettor_cohort"."is_calculating",
+         "markettor_cohort"."last_calculation",
+         "markettor_cohort"."errors_calculating",
+         "markettor_cohort"."is_static",
+         "markettor_cohort"."groups"
+  FROM "markettor_cohort"
+  WHERE (NOT "markettor_cohort"."deleted"
+         AND "markettor_cohort"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_cohorts_and_nested_cohorts.1
+  '''
+  SELECT (((("markettor_person"."properties" -> 'number') > '"100"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('string'))
+           OR (("markettor_person"."properties" -> 'number') > '100.0'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('number')))
+          AND "markettor_person"."properties" ? 'number'
+          AND NOT (("markettor_person"."properties" -> 'number') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (((("markettor_person"."properties" -> 'version') > '"1.05"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'version')) = ('string'))
+           OR (("markettor_person"."properties" -> 'version') > '1.05'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'version')) = ('number')))
+          AND "markettor_person"."properties" ? 'version'
+          AND NOT (("markettor_person"."properties" -> 'version') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (((("markettor_person"."properties" -> 'number') < '"31"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('string'))
+           OR (("markettor_person"."properties" -> 'number') < '31.0'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('number')))
+          AND "markettor_person"."properties" ? 'number'
+          AND NOT (("markettor_person"."properties" -> 'number') = 'null'::jsonb)
+          AND ((("markettor_person"."properties" -> 'nested_prop') > '"20"'::jsonb
+                AND JSONB_TYPEOF(("markettor_person"."properties" -> 'nested_prop')) = ('string'))
+               OR (("markettor_person"."properties" -> 'nested_prop') > '20.0'::jsonb
+                   AND JSONB_TYPEOF(("markettor_person"."properties" -> 'nested_prop')) = ('number')))
+          AND "markettor_person"."properties" ? 'nested_prop'
+          AND NOT (("markettor_person"."properties" -> 'nested_prop') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_groups_and_person_flags
+  '''
+  SELECT "markettor_grouptypemapping"."id",
+         "markettor_grouptypemapping"."team_id",
+         "markettor_grouptypemapping"."group_type",
+         "markettor_grouptypemapping"."group_type_index",
+         "markettor_grouptypemapping"."name_singular",
+         "markettor_grouptypemapping"."name_plural"
+  FROM "markettor_grouptypemapping"
+  WHERE "markettor_grouptypemapping"."team_id" = 2
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_groups_and_person_flags.1
+  '''
+  SELECT (((("markettor_person"."properties" -> 'number') >= '"20"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('string'))
+           OR (("markettor_person"."properties" -> 'number') >= '20.0'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number')) = ('number')))
+          AND "markettor_person"."properties" ? 'number'
+          AND NOT (("markettor_person"."properties" -> 'number') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_groups_and_person_flags.2
+  '''
+  SELECT (((("markettor_group"."group_properties" -> 'number') > '"100"'::jsonb
+            AND JSONB_TYPEOF(("markettor_group"."group_properties" -> 'number')) = ('string'))
+           OR (("markettor_group"."group_properties" -> 'number') > '100.0'::jsonb
+               AND JSONB_TYPEOF(("markettor_group"."group_properties" -> 'number')) = ('number')))
+          AND "markettor_group"."group_properties" ? 'number'
+          AND NOT (("markettor_group"."group_properties" -> 'number') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_group"
+  WHERE ("markettor_group"."team_id" = 2
+         AND "markettor_group"."group_key" = 'foo'
+         AND "markettor_group"."group_type_index" = 0)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_numeric_operator_with_groups_and_person_flags.3
+  '''
+  SELECT (("markettor_group"."group_properties" -> 'number') > '"100b2c"'::jsonb
+          AND "markettor_group"."group_properties" ? 'number'
+          AND NOT (("markettor_group"."group_properties" -> 'number') = 'null'::jsonb)) AS "flag_X_condition_0"
+  FROM "markettor_group"
+  WHERE ("markettor_group"."team_id" = 2
+         AND "markettor_group"."group_key" = 'foo-project'
+         AND "markettor_group"."group_type_index" = 1)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_super_condition_matches_string
+  '''
+  SELECT ((("markettor_person"."properties" -> 'is_enabled') = 'true'::jsonb
+           OR ("markettor_person"."properties" -> 'is_enabled') = '"true"'::jsonb)
+          AND "markettor_person"."properties" ? 'is_enabled'
+          AND NOT (("markettor_person"."properties" -> 'is_enabled') = 'null'::jsonb)) AS "flag_X_super_condition", ("markettor_person"."properties" -> 'is_enabled') IS NOT NULL AS "flag_X_super_condition_is_set",
+                                                                                                                                                                                 (("markettor_person"."properties" -> 'email') = '"fake@markettor.com"'::jsonb
+                                                                                                                                                                                  AND "markettor_person"."properties" ? 'email'
+                                                                                                                                                                                  AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_0",
+                                                                                                                                                                                 (("markettor_person"."properties" -> 'email') = '"test@markettor.com"'::jsonb
+                                                                                                                                                                                  AND "markettor_person"."properties" ? 'email'
+                                                                                                                                                                                  AND NOT (("markettor_person"."properties" -> 'email') = 'null'::jsonb)) AS "flag_X_condition_1",
+                                                                                                                                                                                 (true) AS "flag_X_condition_2"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = 'test_id'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_with_sql_injection_properties_and_other_aliases
+  '''
+  SELECT "markettor_team"."id",
+         "markettor_team"."uuid",
+         "markettor_team"."organization_id",
+         "markettor_team"."project_id",
+         "markettor_team"."api_token",
+         "markettor_team"."app_urls",
+         "markettor_team"."name",
+         "markettor_team"."slack_incoming_webhook",
+         "markettor_team"."created_at",
+         "markettor_team"."updated_at",
+         "markettor_team"."anonymize_ips",
+         "markettor_team"."completed_snippet_onboarding",
+         "markettor_team"."has_completed_onboarding_for",
+         "markettor_team"."ingested_event",
+         "markettor_team"."autocapture_opt_out",
+         "markettor_team"."autocapture_web_vitals_opt_in",
+         "markettor_team"."autocapture_web_vitals_allowed_metrics",
+         "markettor_team"."autocapture_exceptions_opt_in",
+         "markettor_team"."autocapture_exceptions_errors_to_ignore",
+         "markettor_team"."session_recording_opt_in",
+         "markettor_team"."session_recording_sample_rate",
+         "markettor_team"."session_recording_minimum_duration_milliseconds",
+         "markettor_team"."session_recording_linked_flag",
+         "markettor_team"."session_recording_network_payload_capture_config",
+         "markettor_team"."session_replay_config",
+         "markettor_team"."capture_console_log_opt_in",
+         "markettor_team"."capture_performance_opt_in",
+         "markettor_team"."surveys_opt_in",
+         "markettor_team"."heatmaps_opt_in",
+         "markettor_team"."session_recording_version",
+         "markettor_team"."signup_token",
+         "markettor_team"."is_demo",
+         "markettor_team"."access_control",
+         "markettor_team"."week_start_day",
+         "markettor_team"."inject_web_apps",
+         "markettor_team"."test_account_filters",
+         "markettor_team"."test_account_filters_default_checked",
+         "markettor_team"."path_cleaning_filters",
+         "markettor_team"."timezone",
+         "markettor_team"."data_attributes",
+         "markettor_team"."person_display_name_properties",
+         "markettor_team"."live_events_columns",
+         "markettor_team"."recording_domains",
+         "markettor_team"."primary_dashboard_id",
+         "markettor_team"."extra_settings",
+         "markettor_team"."modifiers",
+         "markettor_team"."correlation_config",
+         "markettor_team"."session_recording_retention_period_days",
+         "markettor_team"."plugins_opt_in",
+         "markettor_team"."opt_out_capture",
+         "markettor_team"."event_names",
+         "markettor_team"."event_names_with_usage",
+         "markettor_team"."event_properties",
+         "markettor_team"."event_properties_with_usage",
+         "markettor_team"."event_properties_numerical",
+         "markettor_team"."external_data_workspace_id",
+         "markettor_team"."external_data_workspace_last_synced_at"
+  FROM "markettor_team"
+  WHERE "markettor_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_with_sql_injection_properties_and_other_aliases.1
+  '''
+  SELECT "markettor_featureflag"."id",
+         "markettor_featureflag"."key",
+         "markettor_featureflag"."name",
+         "markettor_featureflag"."filters",
+         "markettor_featureflag"."rollout_percentage",
+         "markettor_featureflag"."team_id",
+         "markettor_featureflag"."created_by_id",
+         "markettor_featureflag"."created_at",
+         "markettor_featureflag"."deleted",
+         "markettor_featureflag"."active",
+         "markettor_featureflag"."rollback_conditions",
+         "markettor_featureflag"."performed_rollback",
+         "markettor_featureflag"."ensure_experience_continuity",
+         "markettor_featureflag"."usage_dashboard_id",
+         "markettor_featureflag"."has_enriched_analytics"
+  FROM "markettor_featureflag"
+  WHERE ("markettor_featureflag"."active"
+         AND NOT "markettor_featureflag"."deleted"
+         AND "markettor_featureflag"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_with_sql_injection_properties_and_other_aliases.2
+  '''
+  SELECT "markettor_cohort"."id",
+         "markettor_cohort"."name",
+         "markettor_cohort"."description",
+         "markettor_cohort"."team_id",
+         "markettor_cohort"."deleted",
+         "markettor_cohort"."filters",
+         "markettor_cohort"."query",
+         "markettor_cohort"."version",
+         "markettor_cohort"."pending_version",
+         "markettor_cohort"."count",
+         "markettor_cohort"."created_by_id",
+         "markettor_cohort"."created_at",
+         "markettor_cohort"."is_calculating",
+         "markettor_cohort"."last_calculation",
+         "markettor_cohort"."errors_calculating",
+         "markettor_cohort"."is_static",
+         "markettor_cohort"."groups"
+  FROM "markettor_cohort"
+  WHERE (NOT "markettor_cohort"."deleted"
+         AND "markettor_cohort"."team_id" = 2)
+  '''
+# ---
+# name: TestFeatureFlagMatcher.test_with_sql_injection_properties_and_other_aliases.3
+  '''
+  SELECT (((("markettor_person"."properties" -> 'number space') > '"100"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number space')) = ('string'))
+           OR (("markettor_person"."properties" -> 'number space') > '100.0'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'number space')) = ('number')))
+          AND "markettor_person"."properties" ? 'number space'
+          AND NOT (("markettor_person"."properties" -> 'number space') = 'null'::jsonb)
+          AND ((JSONB_TYPEOF(("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;')) = ('string')
+                AND ("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') > '"100"'::jsonb)
+               OR (JSONB_TYPEOF(("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;')) = ('number')
+                   AND ("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') > '100.0'::jsonb))
+          AND "markettor_person"."properties" ? ';''" SELECT 1; DROP TABLE markettor_featureflag;'
+          AND NOT (("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') = 'null'::jsonb)) AS "flag_X_condition_0",
+         (((JSONB_TYPEOF(("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;')) = ('string')
+            AND ("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') > '"100"'::jsonb)
+           OR (JSONB_TYPEOF(("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;')) = ('number')
+               AND ("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') > '100.0'::jsonb))
+          AND "markettor_person"."properties" ? ';''" SELECT 1; DROP TABLE markettor_featureflag;'
+          AND NOT (("markettor_person"."properties" -> ';''" SELECT 1; DROP TABLE markettor_featureflag;') = 'null'::jsonb)) AS "flag_X_condition_1",
+         (((("markettor_person"."properties" -> 'version!!!') > '"1.05"'::jsonb
+            AND JSONB_TYPEOF(("markettor_person"."properties" -> 'version!!!')) = ('string'))
+           OR (("markettor_person"."properties" -> 'version!!!') > '1.05'::jsonb
+               AND JSONB_TYPEOF(("markettor_person"."properties" -> 'version!!!')) = ('number')))
+          AND "markettor_person"."properties" ? 'version!!!'
+          AND NOT (("markettor_person"."properties" -> 'version!!!') = 'null'::jsonb)) AS "flag_X_condition_2",
+         ((("markettor_person"."properties" -> 'nested_prop --random #comment //test') = '"21"'::jsonb
+           OR ("markettor_person"."properties" -> 'nested_prop --random #comment //test') = '21'::jsonb)
+          AND "markettor_person"."properties" ? 'nested_prop --random #comment //test'
+          AND NOT (("markettor_person"."properties" -> 'nested_prop --random #comment //test') = 'null'::jsonb)) AS "flag_X_condition_3"
+  FROM "markettor_person"
+  INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
+  WHERE ("markettor_persondistinctid"."distinct_id" = '307'
+         AND "markettor_persondistinctid"."team_id" = 2
+         AND "markettor_person"."team_id" = 2)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.1
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.10
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) ),
+       flags_to_override AS
+    (SELECT key
+     FROM markettor_featureflag
+     WHERE team_id = 2
+       AND ensure_experience_continuity = TRUE
+       AND active = TRUE
+       AND deleted = FALSE
+       AND key NOT IN
+         (SELECT feature_flag_key
+          FROM existing_overrides) )
+  INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+  SELECT team_id,
+         person_id,
+         key,
+         'example_id'
+  FROM flags_to_override,
+       target_person_ids
+  WHERE EXISTS
+      (SELECT 1
+       FROM markettor_person
+       WHERE id = person_id
+         AND team_id = 2) ON CONFLICT DO NOTHING
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.11
+  'ROLLBACK'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.12
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.13
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.14
+  '''
+  SELECT "markettor_persondistinctid"."person_id",
+         "markettor_persondistinctid"."distinct_id"
+  FROM "markettor_persondistinctid"
+  WHERE ("markettor_persondistinctid"."distinct_id" IN ('other_id',
+                                                      'example_id')
+         AND "markettor_persondistinctid"."team_id" = 2)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.15
+  '''
+  SELECT "markettor_featureflaghashkeyoverride"."feature_flag_key",
+         "markettor_featureflaghashkeyoverride"."hash_key",
+         "markettor_featureflaghashkeyoverride"."person_id"
+  FROM "markettor_featureflaghashkeyoverride"
+  WHERE ("markettor_featureflaghashkeyoverride"."person_id" IN (1,
+                                                              2,
+                                                              3,
+                                                              4,
+                                                              5 /* ... */)
+         AND "markettor_featureflaghashkeyoverride"."team_id" = 2)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.16
+  'COMMIT'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.2
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) )
+  SELECT key
+  FROM markettor_featureflag
+  WHERE team_id = 2
+    AND ensure_experience_continuity = TRUE
+    AND active = TRUE
+    AND deleted = FALSE
+    AND key NOT IN
+      (SELECT feature_flag_key
+       FROM existing_overrides)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.3
+  'COMMIT'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.4
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.5
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.6
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) ),
+       flags_to_override AS
+    (SELECT key
+     FROM markettor_featureflag
+     WHERE team_id = 2
+       AND ensure_experience_continuity = TRUE
+       AND active = TRUE
+       AND deleted = FALSE
+       AND key NOT IN
+         (SELECT feature_flag_key
+          FROM existing_overrides) )
+  INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+  SELECT team_id,
+         person_id,
+         key,
+         'example_id'
+  FROM flags_to_override,
+       target_person_ids
+  WHERE EXISTS
+      (SELECT 1
+       FROM markettor_person
+       WHERE id = person_id
+         AND team_id = 2) ON CONFLICT DO NOTHING
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.7
+  'ROLLBACK'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.8
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_error_race_conditions_on_person_merging.9
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.1
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.10
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) ),
+       flags_to_override AS
+    (SELECT key
+     FROM markettor_featureflag
+     WHERE team_id = 2
+       AND ensure_experience_continuity = TRUE
+       AND active = TRUE
+       AND deleted = FALSE
+       AND key NOT IN
+         (SELECT feature_flag_key
+          FROM existing_overrides) )
+  INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+  SELECT team_id,
+         person_id,
+         key,
+         'example_id'
+  FROM flags_to_override,
+       target_person_ids
+  WHERE EXISTS
+      (SELECT 1
+       FROM markettor_person
+       WHERE id = person_id
+         AND team_id = 2) ON CONFLICT DO NOTHING
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.11
+  'COMMIT'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.12
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.13
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.14
+  '''
+  SELECT "markettor_persondistinctid"."person_id",
+         "markettor_persondistinctid"."distinct_id"
+  FROM "markettor_persondistinctid"
+  WHERE ("markettor_persondistinctid"."distinct_id" IN ('other_id',
+                                                      'example_id')
+         AND "markettor_persondistinctid"."team_id" = 2)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.15
+  '''
+  SELECT "markettor_featureflaghashkeyoverride"."feature_flag_key",
+         "markettor_featureflaghashkeyoverride"."hash_key",
+         "markettor_featureflaghashkeyoverride"."person_id"
+  FROM "markettor_featureflaghashkeyoverride"
+  WHERE ("markettor_featureflaghashkeyoverride"."person_id" IN (1,
+                                                              2,
+                                                              3,
+                                                              4,
+                                                              5 /* ... */)
+         AND "markettor_featureflaghashkeyoverride"."team_id" = 2)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.16
+  'COMMIT'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.2
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) )
+  SELECT key
+  FROM markettor_featureflag
+  WHERE team_id = 2
+    AND ensure_experience_continuity = TRUE
+    AND active = TRUE
+    AND deleted = FALSE
+    AND key NOT IN
+      (SELECT feature_flag_key
+       FROM existing_overrides)
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.3
+  'COMMIT'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.4
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.5
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.6
+  '''
+  WITH target_person_ids AS
+    (SELECT team_id,
+            person_id
+     FROM markettor_persondistinctid
+     WHERE team_id = 2
+       AND distinct_id = ANY('{other_id,example_id}') ),
+       existing_overrides AS
+    (SELECT team_id,
+            person_id,
+            feature_flag_key,
+            hash_key
+     FROM markettor_featureflaghashkeyoverride
+     WHERE team_id = 2
+       AND person_id IN
+         (SELECT person_id
+          FROM target_person_ids) ),
+       flags_to_override AS
+    (SELECT key
+     FROM markettor_featureflag
+     WHERE team_id = 2
+       AND ensure_experience_continuity = TRUE
+       AND active = TRUE
+       AND deleted = FALSE
+       AND key NOT IN
+         (SELECT feature_flag_key
+          FROM existing_overrides) )
+  INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+  SELECT team_id,
+         person_id,
+         key,
+         'example_id'
+  FROM flags_to_override,
+       target_person_ids
+  WHERE EXISTS
+      (SELECT 1
+       FROM markettor_person
+       WHERE id = person_id
+         AND team_id = 2) ON CONFLICT DO NOTHING
+  '''
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.7
+  'ROLLBACK'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.8
+  'BEGIN'
+# ---
+# name: TestHashKeyOverridesRaceConditions.test_hash_key_overrides_with_simulated_race_conditions_on_person_merging.9
+  '''
+  
+  SET LOCAL statement_timeout = 2
+  '''
+# ---

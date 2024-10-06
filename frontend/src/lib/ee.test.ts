@@ -1,0 +1,26 @@
+import fs from 'fs'
+
+const eeFolderExists = fs.existsSync('ee/frontend/exports.ts')
+export const ifEeIt = eeFolderExists ? it : it.skip
+export const ifFossIt = !eeFolderExists ? it : it.skip
+export const ifEeDescribe = eeFolderExists ? describe : describe.skip
+export const ifFossDescribe = !eeFolderExists ? describe : describe.skip
+
+import markettorEE from '@markettor/ee/exports'
+
+import { MarketTorEE } from '../../@markettor/ee/types'
+
+describe('ee importing', () => {
+    let markettorEEModule: MarketTorEE
+
+    beforeEach(async () => {
+        markettorEEModule = await markettorEE()
+    })
+    ifEeIt('should import actual ee code', () => {
+        expect(markettorEEModule.enabled).toBe(true)
+    })
+
+    ifFossIt('should import actual ee code', () => {
+        expect(markettorEEModule.enabled).toBe(false)
+    })
+})

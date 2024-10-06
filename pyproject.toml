@@ -1,0 +1,99 @@
+[project]
+requires-python = ">=3.11"
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    ".git",
+    "./plugin-server/node_modules/",
+    "./plugins/node_modules/",
+    "./env",
+    "./markettor/hogql/grammar",
+]
+
+[tool.ruff.lint]
+ignore = [
+    "B017",
+    "B019",
+    "B904",
+    "B905",
+    "C901",
+    "E501",
+    "E722",
+    "E731",
+    "F403",
+    "F541",
+    "F601",
+    "UP007",
+    "UP032",
+]
+select = [
+    "B",
+    "C4",
+    "C9",
+    "DJ012",
+    "E",
+    "F",
+    "RUF005",
+    "RUF013",
+    "RUF015",
+    "RUF019",
+    "T2",
+    "TRY201",
+    "TRY400",
+    "UP",
+    "W",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"./markettor/queries/column_optimizer/column_optimizer.py" = ["F401"]
+"./markettor/migrations/0027_move_elements_to_group.py" = ["T201"]
+"./markettor/queries/cohort_query.py" = ["F401"]
+"./markettor/client.py" = ["T201"]
+"./markettor/async_migrations/test/test_migrations_not_required.py" = ["T201"]
+"__init__.py" = ["F401"]
+"./markettor/api/capture.py" = ["T201"]
+"./ee/clickhouse/generate_local.py" = ["T201"]
+"./markettor/management/commands/merge_distinct_emails.py" = ["T201"]
+"./markettor/demo/matrix/matrix.py" = ["T201"]
+"./markettor/migrations/0038_migrate_actions_to_precalculate_events.py" = ["T201"]
+"./markettor/settings/overrides.py" = ["T201"]
+"./bin/hobby-ci.py" = ["T201"]
+"./markettor/management/commands/migrate_elementgroup.py" = ["T201"]
+"./markettor/models/plugin.py" = ["T201"]
+"./docker-compose-config.py" = ["T201"]
+"./markettor/management/commands/backfill_persons_and_groups_on_events.py" = ["T201"]
+"./markettor/management/commands/generate_demo_data.py" = ["T201"]
+"./markettor/apps.py" = ["T201"]
+"./markettor/management/commands/partition.py" = ["T201"]
+"./markettor/management/commands/migrate_clickhouse.py" = ["T201"]
+"./markettor/email.py" = ["T201"]
+"./markettor/hogql/grammar/HogQLParser.py" = [
+    "F401",
+    "F841",
+    "E711",
+]
+"./markettor/celery.py" = ["T201"]
+"./markettor/hogql/grammar/HogQLLexer.py" = ["F401"]
+"./markettor/utils.py" = ["T201"]
+"./markettor/management/commands/sync_feature_flags.py" = ["T201"]
+"./cypress/wait.py" = ["T201"]
+"./markettor/management/commands/notify_helm_install.py" = [
+    "T201",
+    "T203",
+]
+"./gunicorn.config.py" = ["T201"]
+"./markettor/management/commands/run_async_migrations.py" = ["T201"]
+"./markettor/management/commands/test_migrations_are_safe.py" = ["T201"]
+"./markettor/management/commands/api_keys.py" = ["T201"]
+"./markettor/demo/matrix/manager.py" = ["T201"]

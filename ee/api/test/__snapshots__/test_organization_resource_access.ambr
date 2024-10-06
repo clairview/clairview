@@ -1,0 +1,271 @@
+# serializer version: 1
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.1
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.10
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.11
+  '''
+  SELECT "markettor_organizationmembership"."id",
+         "markettor_organizationmembership"."organization_id",
+         "markettor_organizationmembership"."user_id",
+         "markettor_organizationmembership"."level",
+         "markettor_organizationmembership"."joined_at",
+         "markettor_organizationmembership"."updated_at"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.12
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "ee_organizationresourceaccess"
+  WHERE "ee_organizationresourceaccess"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.13
+  '''
+  SELECT "ee_organizationresourceaccess"."id",
+         "ee_organizationresourceaccess"."resource",
+         "ee_organizationresourceaccess"."access_level",
+         "ee_organizationresourceaccess"."organization_id",
+         "ee_organizationresourceaccess"."created_by_id",
+         "ee_organizationresourceaccess"."created_at",
+         "ee_organizationresourceaccess"."updated_at"
+  FROM "ee_organizationresourceaccess"
+  WHERE "ee_organizationresourceaccess"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 100
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.14
+  '''
+  SELECT "ee_organizationresourceaccess"."id",
+         "ee_organizationresourceaccess"."resource",
+         "ee_organizationresourceaccess"."access_level",
+         "ee_organizationresourceaccess"."organization_id",
+         "ee_organizationresourceaccess"."created_by_id",
+         "ee_organizationresourceaccess"."created_at",
+         "ee_organizationresourceaccess"."updated_at"
+  FROM "ee_organizationresourceaccess"
+  WHERE "ee_organizationresourceaccess"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 100
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.2
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.3
+  '''
+  SELECT 1 AS "a"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.4
+  '''
+  SELECT "markettor_organizationmembership"."id",
+         "markettor_organizationmembership"."organization_id",
+         "markettor_organizationmembership"."user_id",
+         "markettor_organizationmembership"."level",
+         "markettor_organizationmembership"."joined_at",
+         "markettor_organizationmembership"."updated_at"
+  FROM "markettor_organizationmembership"
+  WHERE ("markettor_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "markettor_organizationmembership"."user_id" = 2)
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.5
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "ee_organizationresourceaccess"
+  WHERE "ee_organizationresourceaccess"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.6
+  '''
+  SELECT "ee_organizationresourceaccess"."id",
+         "ee_organizationresourceaccess"."resource",
+         "ee_organizationresourceaccess"."access_level",
+         "ee_organizationresourceaccess"."organization_id",
+         "ee_organizationresourceaccess"."created_by_id",
+         "ee_organizationresourceaccess"."created_at",
+         "ee_organizationresourceaccess"."updated_at"
+  FROM "ee_organizationresourceaccess"
+  WHERE "ee_organizationresourceaccess"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 100
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.7
+  '''
+  SELECT "markettor_user"."id",
+         "markettor_user"."password",
+         "markettor_user"."last_login",
+         "markettor_user"."first_name",
+         "markettor_user"."last_name",
+         "markettor_user"."is_staff",
+         "markettor_user"."is_active",
+         "markettor_user"."date_joined",
+         "markettor_user"."uuid",
+         "markettor_user"."current_organization_id",
+         "markettor_user"."current_team_id",
+         "markettor_user"."email",
+         "markettor_user"."pending_email",
+         "markettor_user"."temporary_token",
+         "markettor_user"."distinct_id",
+         "markettor_user"."is_email_verified",
+         "markettor_user"."has_seen_product_intro_for",
+         "markettor_user"."strapi_id",
+         "markettor_user"."theme_mode",
+         "markettor_user"."partial_notification_settings",
+         "markettor_user"."anonymize_data",
+         "markettor_user"."toolbar_mode",
+         "markettor_user"."hedgehog_config",
+         "markettor_user"."events_column_config",
+         "markettor_user"."email_opt_in"
+  FROM "markettor_user"
+  WHERE "markettor_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.8
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestOrganizationResourceAccessAPI.test_list_organization_resource_access_is_not_nplus1.9
+  '''
+  SELECT "markettor_organization"."id",
+         "markettor_organization"."name",
+         "markettor_organization"."slug",
+         "markettor_organization"."logo_media_id",
+         "markettor_organization"."created_at",
+         "markettor_organization"."updated_at",
+         "markettor_organization"."plugins_access_level",
+         "markettor_organization"."for_internal_metrics",
+         "markettor_organization"."is_member_join_email_enabled",
+         "markettor_organization"."enforce_2fa",
+         "markettor_organization"."is_hipaa",
+         "markettor_organization"."customer_id",
+         "markettor_organization"."available_product_features",
+         "markettor_organization"."usage",
+         "markettor_organization"."never_drop_data",
+         "markettor_organization"."customer_trust_scores",
+         "markettor_organization"."setup_section_2_completed",
+         "markettor_organization"."personalization",
+         "markettor_organization"."domain_whitelist"
+  FROM "markettor_organization"
+  WHERE "markettor_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---

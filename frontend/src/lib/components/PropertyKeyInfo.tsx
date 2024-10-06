@@ -1,0 +1,104 @@
+import './PropertyKeyInfo.scss'
+
+import { LemonDivider, TooltipProps } from '@markettor/lemon-ui'
+import clsx from 'clsx'
+import { Popover } from 'lib/lemon-ui/Popover'
+import { getCoreFilterDefinition, PropertyKey } from 'lib/taxonomy'
+import React, { useState } from 'react'
+
+import { TaxonomicFilterGroupType } from './TaxonomicFilter/types'
+
+interface PropertyKeyInfoProps {
+    value: PropertyKey
+    type?: TaxonomicFilterGroupType
+    tooltipPlacement?: TooltipProps['placement']
+    disablePopover?: boolean
+    disableIcon?: boolean
+    /** @default true */
+    ellipsis?: boolean
+    className?: string
+}
+
+export const PropertyKeyInfo = React.forwardRef<HTMLSpanElement, PropertyKeyInfoProps>(function PropertyKeyInfo(
+    {
+        value,
+        type = TaxonomicFilterGroupType.EventProperties,
+        disablePopover = false,
+        disableIcon = false,
+        ellipsis = true,
+        className = '',
+    },
+    ref
+): JSX.Element {
+    const [popoverVisible, setPopoverVisible] = useState(false)
+
+    value = value?.toString() ?? '' // convert to string
+
+    const coreDefinition = getCoreFilterDefinition(value, type)
+    const valueDisplayText = (coreDefinition ? coreDefinition.label : value)?.trim() ?? ''
+    const valueDisplayElement = valueDisplayText === '' ? <i>(empty string)</i> : valueDisplayText
+
+    const recognizedSource: 'markettor' | 'langfuse' | null = coreDefinition
+        ? 'markettor'
+        : value.startsWith('langfuse ')
+        ? 'langfuse'
+        : null
+
+    const innerContent = (
+        <span
+            className={clsx('PropertyKeyInfo', className)}
+            aria-label={valueDisplayText}
+            title={ellipsis && disablePopover ? valueDisplayText : undefined}
+            ref={ref}
+        >
+            {recognizedSource && !disableIcon && (
+                <span className={`PropertyKeyInfo__logo PropertyKeyInfo__logo--${recognizedSource}`} />
+            )}
+            <span className={clsx('PropertyKeyInfo__text', ellipsis && 'PropertyKeyInfo__text--ellipsis')}>
+                {valueDisplayElement}
+            </span>
+        </span>
+    )
+
+    return !coreDefinition || disablePopover ? (
+        innerContent
+    ) : (
+        <Popover
+            className={className}
+            overlay={
+                <div className="PropertyKeyInfo__overlay">
+                    <div className="PropertyKeyInfo__header">
+                        {!!coreDefinition && <span className="PropertyKeyInfo__logo" />}
+                        {coreDefinition.label}
+                    </div>
+                    {coreDefinition.description || coreDefinition.examples ? (
+                        <>
+                            <LemonDivider className="my-3" />
+                            <div>
+                                {coreDefinition.description ? <p>{coreDefinition.description}</p> : null}
+                                {coreDefinition.examples ? (
+                                    <p>
+                                        <i>Example value{coreDefinition.examples.length === 1 ? '' : 's'}: </i>
+                                        {coreDefinition.examples.join(', ')}
+                                    </p>
+                                ) : null}
+                            </div>
+                        </>
+                    ) : null}
+                    <LemonDivider className="my-3" />
+                    <div>
+                        Sent as <code>{value}</code>
+                    </div>
+                </div>
+            }
+            visible={popoverVisible}
+            showArrow
+            placement="right"
+        >
+            {React.cloneElement(innerContent, {
+                onMouseEnter: () => setPopoverVisible(true),
+                onMouseLeave: () => setPopoverVisible(false),
+            })}
+        </Popover>
+    )
+})
