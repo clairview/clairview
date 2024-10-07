@@ -70,5 +70,4 @@ plugin-transpiler/dist
 # pyright config (keep this until we have a standardized one)
 pyrightconfig.json
 
-.github/
 archive
