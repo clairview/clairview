@@ -7,7 +7,7 @@ from django.db import transaction
 
 from markettor.errors import CHQueryErrorTooManySimultaneousQueries
 from markettor.models import ExportedAsset
-from markettor.settings import HOGQL_INCREASED_MAX_EXECUTION_TIME
+from markettor.settings import TORQL_INCREASED_MAX_EXECUTION_TIME
 from markettor.tasks.utils import CeleryQueue
 
 EXPORT_QUEUED_COUNTER = Counter(
@@ -42,11 +42,11 @@ EXPORT_TIMER = Histogram(
 @shared_task(
     acks_late=True,
     ignore_result=False,
-    # we let the hogql query run for HOGQL_INCREASED_MAX_EXECUTION_TIME, give this some breathing room
+    # we let the torql query run for TORQL_INCREASED_MAX_EXECUTION_TIME, give this some breathing room
     # soft time limit throws an error and lets us clean up
     # hard time limit kills without a word
-    soft_time_limit=HOGQL_INCREASED_MAX_EXECUTION_TIME + 60,
-    time_limit=HOGQL_INCREASED_MAX_EXECUTION_TIME + 120,
+    soft_time_limit=TORQL_INCREASED_MAX_EXECUTION_TIME + 60,
+    time_limit=TORQL_INCREASED_MAX_EXECUTION_TIME + 120,
     queue=CeleryQueue.EXPORTS.value,
     autoretry_for=(CHQueryErrorTooManySimultaneousQueries,),
     retry_backoff=1,

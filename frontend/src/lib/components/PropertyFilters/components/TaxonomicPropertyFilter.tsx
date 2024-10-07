@@ -57,7 +57,7 @@ export function TaxonomicPropertyFilter({
         TaxonomicFilterGroupType.EventFeatureFlags,
         TaxonomicFilterGroupType.Cohorts,
         TaxonomicFilterGroupType.Elements,
-        TaxonomicFilterGroupType.HogQLExpression,
+        TaxonomicFilterGroupType.TorQLExpression,
     ]
     const taxonomicOnChange: (group: TaxonomicFilterGroup, value: TaxonomicFilterValue, item: any) => void = (
         taxonomicGroup,
@@ -65,7 +65,7 @@ export function TaxonomicPropertyFilter({
         item
     ) => {
         selectItem(taxonomicGroup, value, item?.propertyFilterType)
-        if (taxonomicGroup.type === TaxonomicFilterGroupType.HogQLExpression) {
+        if (taxonomicGroup.type === TaxonomicFilterGroupType.TorQLExpression) {
             onComplete?.()
         }
     }
@@ -85,11 +85,11 @@ export function TaxonomicPropertyFilter({
     const valuePresent = filter?.type === 'cohort' || !!filter?.key
     const showInitialSearchInline =
         !disablePopover &&
-        ((!filter?.type && (!filter || !(filter as any)?.key)) || filter?.type === PropertyFilterType.HogQL)
+        ((!filter?.type && (!filter || !(filter as any)?.key)) || filter?.type === PropertyFilterType.TorQL)
     const showOperatorValueSelect =
         filter?.type &&
         filter?.key &&
-        !(filter?.type === PropertyFilterType.HogQL) &&
+        !(filter?.type === PropertyFilterType.TorQL) &&
         // If we're in a feature flag, we don't want to show operators for cohorts because
         // we don't support any cohort matching operators other than "in"
         // See https://github.com/MarketTor/markettor/pull/25149/

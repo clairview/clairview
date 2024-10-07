@@ -7,7 +7,7 @@ import {
     EventsNode,
     EventsQuery,
     FunnelsQuery,
-    HogQLQuery,
+    TorQLQuery,
     HogQuery,
     InsightVizNode,
     LifecycleQuery,
@@ -251,8 +251,8 @@ const InsightLifecycleQuery: LifecycleQuery = {
     series, // TODO: Visualization only supports one event or action
 }
 
-const HogQLRaw: HogQLQuery = {
-    kind: NodeKind.HogQLQuery,
+const TorQLRaw: TorQLQuery = {
+    kind: NodeKind.TorQLQuery,
     query: `   select event,
           person.properties.email,
           properties.$browser,
@@ -272,8 +272,8 @@ const HogQLRaw: HogQLQuery = {
     },
 }
 
-const HogQLForDataVisualization: HogQLQuery = {
-    kind: NodeKind.HogQLQuery,
+const TorQLForDataVisualization: TorQLQuery = {
+    kind: NodeKind.TorQLQuery,
     query: `select toDate(timestamp) as timestamp, count()
 from events
 where {filters} and timestamp <= now()
@@ -288,8 +288,8 @@ limit 100`,
     },
 }
 
-const HogQLForDataWarehouse: HogQLQuery = {
-    kind: NodeKind.HogQLQuery,
+const TorQLForDataWarehouse: TorQLQuery = {
+    kind: NodeKind.TorQLQuery,
     query: `select toDate(timestamp) as timestamp, count()
 from events
 group by timestamp
@@ -299,18 +299,18 @@ limit 100`,
 
 const DataWarehouse: DataVisualizationNode = {
     kind: NodeKind.DataVisualizationNode,
-    source: HogQLForDataWarehouse,
+    source: TorQLForDataWarehouse,
 }
 
-const HogQLTable: DataTableNode = {
+const TorQLTable: DataTableNode = {
     kind: NodeKind.DataTableNode,
     full: true,
-    source: HogQLRaw,
+    source: TorQLRaw,
 }
 
 const DataVisualization: DataVisualizationNode = {
     kind: NodeKind.DataVisualizationNode,
-    source: HogQLForDataVisualization,
+    source: TorQLForDataVisualization,
     tableSettings: {
         columns: [
             {
@@ -352,7 +352,7 @@ const Hoggonacci: HogQuery = {
 }
 return fibonacci(16);`,
 }
-/* a subset of examples including only those we can show all users and that don't use HogQL */
+/* a subset of examples including only those we can show all users and that don't use TorQL */
 export const queryExamples: Record<string, Node> = {
     Events,
     EventsTable,
@@ -392,8 +392,8 @@ export const stringifiedQueryExamples: Record<string, string> = Object.fromEntri
 
 export const examples: Record<string, Node> = {
     ...queryExamples,
-    HogQLRaw,
-    HogQLTable,
+    TorQLRaw,
+    TorQLTable,
     DataVisualization,
     Hog,
     Hoggonacci,

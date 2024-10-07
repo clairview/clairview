@@ -30,11 +30,11 @@ from markettor.batch_exports.service import (
     sync_batch_export,
     unpause_batch_export,
 )
-from markettor.hogql import ast, errors
-from markettor.hogql.hogql import HogQLContext
-from markettor.hogql.parser import parse_select
-from markettor.hogql.printer import prepare_ast_for_printing, print_prepared_ast
-from markettor.hogql.visitor import clone_expr
+from markettor.torql import ast, errors
+from markettor.torql.torql import TorQLContext
+from markettor.torql.parser import parse_select
+from markettor.torql.printer import prepare_ast_for_printing, print_prepared_ast
+from markettor.torql.visitor import clone_expr
 from markettor.models import (
     BatchExport,
     BatchExportDestination,
@@ -169,9 +169,9 @@ class BatchExportDestinationSerializer(serializers.ModelSerializer):
         return data
 
 
-class HogQLSelectQueryField(serializers.Field):
+class TorQLSelectQueryField(serializers.Field):
     def to_internal_value(self, data: str) -> ast.SelectQuery | ast.SelectUnionQuery:
-        """Parse a HogQL SelectQuery from a string query."""
+        """Parse a TorQL SelectQuery from a string query."""
         try:
             parsed_query = parse_select(data)
         except Exception:
@@ -182,12 +182,12 @@ class HogQLSelectQueryField(serializers.Field):
                 ast.SelectQuery,
                 prepare_ast_for_printing(
                     parsed_query,
-                    context=HogQLContext(team_id=self.context["team_id"], enable_select_queries=True),
-                    dialect="hogql",
+                    context=TorQLContext(team_id=self.context["team_id"], enable_select_queries=True),
+                    dialect="torql",
                 ),
             )
-        except errors.ExposedHogQLError as e:
-            raise serializers.ValidationError(f"Invalid HogQL query: {e}")
+        except errors.ExposedTorQLError as e:
+            raise serializers.ValidationError(f"Invalid TorQL query: {e}")
 
         return prepared_select_query
 
@@ -200,7 +200,7 @@ class BatchExportsField(TypedDict):
 class BatchExportsSchema(TypedDict):
     fields: list[BatchExportsField]
     values: dict[str, str]
-    hogql_query: str
+    torql_query: str
 
 
 class BatchExportSerializer(serializers.ModelSerializer):
@@ -209,7 +209,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
     destination = BatchExportDestinationSerializer()
     latest_runs = BatchExportRunSerializer(many=True, read_only=True)
     interval = serializers.ChoiceField(choices=BATCH_EXPORT_INTERVALS)
-    hogql_query = HogQLSelectQueryField(required=False)
+    torql_query = TorQLSelectQueryField(required=False)
 
     class Meta:
         model = BatchExport
@@ -227,7 +227,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
             "start_at",
             "end_at",
             "latest_runs",
-            "hogql_query",
+            "torql_query",
             "schema",
         ]
         read_only_fields = ["id", "team_id", "created_at", "last_updated_at", "latest_runs", "schema"]
@@ -254,9 +254,9 @@ class BatchExportSerializer(serializers.ModelSerializer):
             ):
                 raise PermissionDenied("Higher frequency exports are not enabled for this team.")
 
-        hogql_query = None
-        if hogql_query := validated_data.pop("hogql_query", None):
-            batch_export_schema = self.serialize_hogql_query_to_batch_export_schema(hogql_query)
+        torql_query = None
+        if torql_query := validated_data.pop("torql_query", None):
+            batch_export_schema = self.serialize_torql_query_to_batch_export_schema(torql_query)
             validated_data["schema"] = batch_export_schema
 
         destination = BatchExportDestination(**destination_data)
@@ -269,19 +269,19 @@ class BatchExportSerializer(serializers.ModelSerializer):
 
         return batch_export
 
-    def serialize_hogql_query_to_batch_export_schema(self, hogql_query: ast.SelectQuery) -> BatchExportSchema:
-        """Return a batch export schema from a HogQL query ast."""
+    def serialize_torql_query_to_batch_export_schema(self, torql_query: ast.SelectQuery) -> BatchExportSchema:
+        """Return a batch export schema from a TorQL query ast."""
         try:
             # Print the query in ClickHouse dialect to catch unresolved field errors, and discard the result
-            context = HogQLContext(
+            context = TorQLContext(
                 team_id=self.context["team_id"],
                 enable_select_queries=True,
                 limit_top_select=False,
             )
-            print_prepared_ast(clone_expr(hogql_query), context=context, dialect="clickhouse")
+            print_prepared_ast(clone_expr(torql_query), context=context, dialect="clickhouse")
 
             # Recreate the context
-            context = HogQLContext(
+            context = TorQLContext(
                 team_id=self.context["team_id"],
                 enable_select_queries=True,
                 limit_top_select=False,
@@ -289,12 +289,12 @@ class BatchExportSerializer(serializers.ModelSerializer):
             batch_export_schema: BatchExportsSchema = {
                 "fields": [],
                 "values": {},
-                "hogql_query": print_prepared_ast(hogql_query, context=context, dialect="hogql"),
+                "torql_query": print_prepared_ast(torql_query, context=context, dialect="torql"),
             }
-        except errors.ExposedHogQLError:
-            raise serializers.ValidationError("Unsupported HogQL query")
+        except errors.ExposedTorQLError:
+            raise serializers.ValidationError("Unsupported TorQL query")
 
-        for field in hogql_query.select:
+        for field in torql_query.select:
             expression = print_prepared_ast(
                 field.expr,  # type: ignore
                 context=context,
@@ -316,8 +316,8 @@ class BatchExportSerializer(serializers.ModelSerializer):
 
         return batch_export_schema
 
-    def validate_hogql_query(self, hogql_query: ast.SelectQuery | ast.SelectUnionQuery) -> ast.SelectQuery:
-        """Validate a HogQLQuery being used for batch exports.
+    def validate_torql_query(self, torql_query: ast.SelectQuery | ast.SelectUnionQuery) -> ast.SelectQuery:
+        """Validate a TorQLQuery being used for batch exports.
 
         This method essentially checks that a query is supported by batch exports:
         1. UNION ALL is not supported.
@@ -325,10 +325,10 @@ class BatchExportSerializer(serializers.ModelSerializer):
         3. Query must SELECT FROM events, and only from events.
         """
 
-        if isinstance(hogql_query, ast.SelectUnionQuery):
+        if isinstance(torql_query, ast.SelectUnionQuery):
             raise serializers.ValidationError("UNIONs are not supported")
 
-        parsed = cast(ast.SelectQuery, hogql_query)
+        parsed = cast(ast.SelectQuery, torql_query)
 
         if parsed.select_from is None:
             raise serializers.ValidationError("Query must SELECT FROM events")
@@ -342,7 +342,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
         if parsed.select_from.next_join is not None:
             raise serializers.ValidationError("JOINs are not supported")
 
-        return hogql_query
+        return torql_query
 
     def update(self, batch_export: BatchExport, validated_data: dict) -> BatchExport:
         """Update a BatchExport."""
@@ -356,8 +356,8 @@ class BatchExportSerializer(serializers.ModelSerializer):
                     **destination_data.get("config", {}),
                 }
 
-            if hogql_query := validated_data.pop("hogql_query", None):
-                batch_export_schema = self.serialize_hogql_query_to_batch_export_schema(hogql_query)
+            if torql_query := validated_data.pop("torql_query", None):
+                batch_export_schema = self.serialize_torql_query_to_batch_export_schema(torql_query)
                 validated_data["schema"] = batch_export_schema
 
             batch_export.destination.save()

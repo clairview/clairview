@@ -12,7 +12,7 @@ import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { SceneExport } from 'scenes/sceneTypes'
 
 import { Query } from '~/queries/Query/Query'
-import { DataTableNode, HogQLQuery, SessionAttributionGroupBy } from '~/queries/schema'
+import { DataTableNode, TorQLQuery, SessionAttributionGroupBy } from '~/queries/schema'
 import { isSessionPropertyFilters } from '~/queries/schema-guards'
 import { QueryContext, QueryContextColumnComponent } from '~/queries/types'
 
@@ -232,7 +232,7 @@ export function SessionAttributionExplorer(): JSX.Element {
                 context={queryContext}
                 query={query}
                 setQuery={(query) => {
-                    const source = query.source as HogQLQuery
+                    const source = query.source as TorQLQuery
                     if (source.filters && isSessionPropertyFilters(source.filters.properties)) {
                         setProperties(source.filters.properties)
                     } else {

@@ -136,7 +136,7 @@ class BreakdownType(StrEnum):
     EVENT = "event"
     GROUP = "group"
     SESSION = "session"
-    HOGQL = "hogql"
+    TORQL = "torql"
     DATA_WAREHOUSE = "data_warehouse"
     DATA_WAREHOUSE_PERSON_PROPERTY = "data_warehouse_person_property"
 
@@ -615,12 +615,12 @@ class HogCompileResponse(BaseModel):
 class HogLanguage(StrEnum):
     HOG = "hog"
     HOG_JSON = "hogJson"
-    HOG_QL = "hogQL"
-    HOG_QL_EXPR = "hogQLExpr"
+    HOG_QL = "torQL"
+    HOG_QL_EXPR = "torQLExpr"
     HOG_TEMPLATE = "hogTemplate"
 
 
-class HogQLNotice(BaseModel):
+class TorQLNotice(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -680,7 +680,7 @@ class SessionTableVersion(StrEnum):
     V2 = "v2"
 
 
-class HogQLQueryModifiers(BaseModel):
+class TorQLQueryModifiers(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -699,7 +699,7 @@ class HogQLQueryModifiers(BaseModel):
     useMaterializedViews: Optional[bool] = None
 
 
-class HogQLVariable(BaseModel):
+class TorQLVariable(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -799,7 +799,7 @@ class MultipleBreakdownType(StrEnum):
     EVENT = "event"
     GROUP = "group"
     SESSION = "session"
-    HOGQL = "hogql"
+    TORQL = "torql"
 
 
 class NodeKind(StrEnum):
@@ -809,9 +809,9 @@ class NodeKind(StrEnum):
     EVENTS_QUERY = "EventsQuery"
     PERSONS_NODE = "PersonsNode"
     HOG_QUERY = "HogQuery"
-    HOG_QL_QUERY = "HogQLQuery"
-    HOG_QL_METADATA = "HogQLMetadata"
-    HOG_QL_AUTOCOMPLETE = "HogQLAutocomplete"
+    HOG_QL_QUERY = "TorQLQuery"
+    HOG_QL_METADATA = "TorQLMetadata"
+    HOG_QL_AUTOCOMPLETE = "TorQLAutocomplete"
     ACTORS_QUERY = "ActorsQuery"
     FUNNELS_ACTORS_QUERY = "FunnelsActorsQuery"
     FUNNEL_CORRELATION_ACTORS_QUERY = "FunnelCorrelationActorsQuery"
@@ -854,7 +854,7 @@ class PathType(StrEnum):
     FIELD_PAGEVIEW = "$pageview"
     FIELD_SCREEN = "$screen"
     CUSTOM_EVENT = "custom_event"
-    HOGQL = "hogql"
+    TORQL = "torql"
 
 
 class PathsFilter(BaseModel):
@@ -873,7 +873,7 @@ class PathsFilter(BaseModel):
     pathGroupings: Optional[list[str]] = None
     pathReplacements: Optional[bool] = None
     pathStartKey: Optional[str] = Field(default=None, description="Relevant only within actors query")
-    pathsHogQLExpression: Optional[str] = None
+    pathsTorQLExpression: Optional[str] = None
     startPoint: Optional[str] = None
     stepLimit: Optional[int] = 5
 
@@ -894,7 +894,7 @@ class PathsFilterLegacy(BaseModel):
     path_groupings: Optional[list[str]] = None
     path_replacements: Optional[bool] = None
     path_type: Optional[PathType] = None
-    paths_hogql_expression: Optional[str] = None
+    paths_torql_expression: Optional[str] = None
     start_point: Optional[str] = None
     step_limit: Optional[int] = None
 
@@ -923,7 +923,7 @@ class PropertyFilterType(StrEnum):
     RECORDING = "recording"
     LOG_ENTRY = "log_entry"
     GROUP = "group"
-    HOGQL = "hogql"
+    TORQL = "torql"
     DATA_WAREHOUSE = "data_warehouse"
     DATA_WAREHOUSE_PERSON_PROPERTY = "data_warehouse_person_property"
 
@@ -977,12 +977,12 @@ class QueryResponseAlternative7(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    errors: list[HogQLNotice]
+    errors: list[TorQLNotice]
     isValid: Optional[bool] = None
     isValidView: Optional[bool] = None
-    notices: list[HogQLNotice]
+    notices: list[TorQLNotice]
     query: Optional[str] = None
-    warnings: list[HogQLNotice]
+    warnings: list[TorQLNotice]
 
 
 class QueryResponseAlternative16(BaseModel):
@@ -1140,9 +1140,9 @@ class SessionAttributionExplorerQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -1224,8 +1224,8 @@ class StickinessQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -1264,7 +1264,7 @@ class TaxonomicFilterGroupType(StrEnum):
     DASHBOARDS = "dashboards"
     NAME_GROUPS = "name_groups"
     SESSION_PROPERTIES = "session_properties"
-    HOGQL_EXPRESSION = "hogql_expression"
+    TORQL_EXPRESSION = "torql_expression"
     NOTEBOOKS = "notebooks"
     LOG_ENTRIES = "log_entries"
     REPLAY = "replay"
@@ -1278,8 +1278,8 @@ class TestBasicQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -1304,10 +1304,10 @@ class TestCachedBasicQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1394,8 +1394,8 @@ class TrendsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = Field(default=None, description="Wether more breakdown values are available.")
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -1450,9 +1450,9 @@ class WebExternalClicksTableQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -1477,9 +1477,9 @@ class WebGoalsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -1522,8 +1522,8 @@ class WebOverviewQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -1567,9 +1567,9 @@ class WebStatsTableQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -1593,8 +1593,8 @@ class WebTopClicksQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -1631,10 +1631,10 @@ class ActorsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: int
     missing_actors_count: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: int
@@ -1704,12 +1704,12 @@ class CachedActorsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: int
     missing_actors_count: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1740,11 +1740,11 @@ class CachedErrorTrackingQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1774,11 +1774,11 @@ class CachedEventsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1849,11 +1849,11 @@ class CachedFunnelCorrelationResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1882,11 +1882,11 @@ class CachedFunnelsQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     isUdf: Optional[bool] = None
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1913,10 +1913,10 @@ class CachedLifecycleQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1943,10 +1943,10 @@ class CachedPathsQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -1975,11 +1975,11 @@ class CachedSessionAttributionExplorerQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2009,10 +2009,10 @@ class CachedSessionsTimelineQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2039,10 +2039,10 @@ class CachedStickinessQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2070,10 +2070,10 @@ class CachedTrendsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = Field(default=None, description="Wether more breakdown values are available.")
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2102,11 +2102,11 @@ class CachedWebExternalClicksTableQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2138,11 +2138,11 @@ class CachedWebGoalsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2174,10 +2174,10 @@ class CachedWebOverviewQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2207,11 +2207,11 @@ class CachedWebStatsTableQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2242,10 +2242,10 @@ class CachedWebTopClicksQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -2313,9 +2313,9 @@ class Response(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2339,10 +2339,10 @@ class Response1(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: int
     missing_actors_count: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: int
@@ -2366,8 +2366,8 @@ class Response3(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -2390,9 +2390,9 @@ class Response4(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2416,8 +2416,8 @@ class Response6(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -2441,9 +2441,9 @@ class Response7(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2468,9 +2468,9 @@ class Response8(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2494,9 +2494,9 @@ class Response9(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2553,7 +2553,7 @@ class DatabaseSchemaField(BaseModel):
     )
     chain: Optional[list[Union[str, int]]] = None
     fields: Optional[list[str]] = None
-    hogql_value: str
+    torql_value: str
     id: Optional[str] = None
     name: str
     schema_valid: bool
@@ -2602,9 +2602,9 @@ class ErrorTrackingQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2638,9 +2638,9 @@ class EventsQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2701,9 +2701,9 @@ class FunnelCorrelationResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2725,7 +2725,7 @@ class FunnelsFilterLegacy(BaseModel):
     breakdown_attribution_type: Optional[BreakdownAttributionType] = None
     breakdown_attribution_value: Optional[float] = None
     exclusions: Optional[list[FunnelExclusionLegacy]] = None
-    funnel_aggregate_by_hogql: Optional[str] = None
+    funnel_aggregate_by_torql: Optional[str] = None
     funnel_from_step: Optional[float] = None
     funnel_order_type: Optional[StepOrderValue] = None
     funnel_step_reference: Optional[FunnelStepReference] = None
@@ -2745,9 +2745,9 @@ class FunnelsQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     isUdf: Optional[bool] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -2786,7 +2786,7 @@ class GroupPropertyFilter(BaseModel):
     value: Optional[Union[str, float, list[Union[str, float]]]] = None
 
 
-class HogQLAutocompleteResponse(BaseModel):
+class TorQLAutocompleteResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -2797,29 +2797,29 @@ class HogQLAutocompleteResponse(BaseModel):
     )
 
 
-class HogQLMetadataResponse(BaseModel):
+class TorQLMetadataResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    errors: list[HogQLNotice]
+    errors: list[TorQLNotice]
     isValid: Optional[bool] = None
     isValidView: Optional[bool] = None
-    notices: list[HogQLNotice]
+    notices: list[TorQLNotice]
     query: Optional[str] = None
-    warnings: list[HogQLNotice]
+    warnings: list[TorQLNotice]
 
 
-class HogQLPropertyFilter(BaseModel):
+class TorQLPropertyFilter(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     key: str
     label: Optional[str] = None
-    type: Literal["hogql"] = "hogql"
+    type: Literal["torql"] = "torql"
     value: Optional[Union[str, float, list[Union[str, float]]]] = None
 
 
-class HogQLQueryResponse(BaseModel):
+class TorQLQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -2831,10 +2831,10 @@ class HogQLQueryResponse(BaseModel):
     )
     explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    metadata: Optional[TorQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -2855,7 +2855,7 @@ class HogQuery(BaseModel):
     )
     code: Optional[str] = None
     kind: Literal["HogQuery"] = "HogQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[HogQueryResponse] = None
@@ -2867,7 +2867,7 @@ class InsightActorsQueryBase(BaseModel):
     )
     includeRecordings: Optional[bool] = None
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ActorsQueryResponse] = None
@@ -2906,8 +2906,8 @@ class LifecycleQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -2953,8 +2953,8 @@ class PathsQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -2987,9 +2987,9 @@ class QueryResponseAlternative1(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3013,10 +3013,10 @@ class QueryResponseAlternative2(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: int
     missing_actors_count: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: int
@@ -3052,8 +3052,8 @@ class QueryResponseAlternative4(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3077,10 +3077,10 @@ class QueryResponseAlternative6(BaseModel):
     )
     explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    metadata: Optional[TorQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3116,8 +3116,8 @@ class QueryResponseAlternative9(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3140,9 +3140,9 @@ class QueryResponseAlternative10(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3166,8 +3166,8 @@ class QueryResponseAlternative12(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3191,9 +3191,9 @@ class QueryResponseAlternative13(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3218,9 +3218,9 @@ class QueryResponseAlternative14(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3244,9 +3244,9 @@ class QueryResponseAlternative15(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3269,9 +3269,9 @@ class QueryResponseAlternative18(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3295,10 +3295,10 @@ class QueryResponseAlternative19(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: str = Field(..., description="Generated HogQL query.")
+    torql: str = Field(..., description="Generated TorQL query.")
     limit: int
     missing_actors_count: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: int
@@ -3324,10 +3324,10 @@ class QueryResponseAlternative20(BaseModel):
     )
     explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    metadata: Optional[TorQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3352,8 +3352,8 @@ class QueryResponseAlternative21(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3376,9 +3376,9 @@ class QueryResponseAlternative22(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3402,8 +3402,8 @@ class QueryResponseAlternative24(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3427,9 +3427,9 @@ class QueryResponseAlternative25(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3454,9 +3454,9 @@ class QueryResponseAlternative26(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3480,9 +3480,9 @@ class QueryResponseAlternative27(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3504,8 +3504,8 @@ class QueryResponseAlternative30(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = Field(default=None, description="Wether more breakdown values are available.")
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3525,9 +3525,9 @@ class QueryResponseAlternative31(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     isUdf: Optional[bool] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3547,8 +3547,8 @@ class QueryResponseAlternative33(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3570,9 +3570,9 @@ class QueryResponseAlternative36(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3654,7 +3654,7 @@ class SavedInsightNode(BaseModel):
     showExport: Optional[bool] = Field(default=None, description="Show the export button")
     showFilters: Optional[bool] = None
     showHeader: Optional[bool] = None
-    showHogQLEditor: Optional[bool] = Field(default=None, description="Include a HogQL query editor above HogQL tables")
+    showTorQLEditor: Optional[bool] = Field(default=None, description="Include a TorQL query editor above TorQL tables")
     showLastComputation: Optional[bool] = None
     showLastComputationRefresh: Optional[bool] = None
     showOpenEditorButton: Optional[bool] = Field(
@@ -3694,7 +3694,7 @@ class SessionAttributionExplorerQuery(BaseModel):
     groupBy: list[SessionAttributionGroupBy]
     kind: Literal["SessionAttributionExplorerQuery"] = "SessionAttributionExplorerQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -3746,8 +3746,8 @@ class SessionsTimelineQueryResponse(BaseModel):
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -3776,7 +3776,7 @@ class WebExternalClicksTableQuery(BaseModel):
     filterTestAccounts: Optional[bool] = None
     kind: Literal["WebExternalClicksTableQuery"] = "WebExternalClicksTableQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: list[Union[EventPropertyFilter, PersonPropertyFilter, SessionPropertyFilter]]
@@ -3795,7 +3795,7 @@ class WebGoalsQuery(BaseModel):
     filterTestAccounts: Optional[bool] = None
     kind: Literal["WebGoalsQuery"] = "WebGoalsQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: list[Union[EventPropertyFilter, PersonPropertyFilter, SessionPropertyFilter]]
@@ -3814,7 +3814,7 @@ class WebOverviewQuery(BaseModel):
     filterTestAccounts: Optional[bool] = None
     includeLCPScore: Optional[bool] = None
     kind: Literal["WebOverviewQuery"] = "WebOverviewQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: list[Union[EventPropertyFilter, PersonPropertyFilter, SessionPropertyFilter]]
@@ -3836,7 +3836,7 @@ class WebStatsTableQuery(BaseModel):
     includeScrollDepth: Optional[bool] = None
     kind: Literal["WebStatsTableQuery"] = "WebStatsTableQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: list[Union[EventPropertyFilter, PersonPropertyFilter, SessionPropertyFilter]]
@@ -3853,7 +3853,7 @@ class WebTopClicksQuery(BaseModel):
     dateRange: Optional[DateRange] = None
     filterTestAccounts: Optional[bool] = None
     kind: Literal["WebTopClicksQuery"] = "WebTopClicksQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: list[Union[EventPropertyFilter, PersonPropertyFilter, SessionPropertyFilter]]
@@ -3867,9 +3867,9 @@ class AnyResponseType(
         Union[
             dict[str, Any],
             HogQueryResponse,
-            HogQLQueryResponse,
-            HogQLMetadataResponse,
-            HogQLAutocompleteResponse,
+            TorQLQueryResponse,
+            TorQLMetadataResponse,
+            TorQLAutocompleteResponse,
             Any,
             EventsQueryResponse,
         ]
@@ -3878,15 +3878,15 @@ class AnyResponseType(
     root: Union[
         dict[str, Any],
         HogQueryResponse,
-        HogQLQueryResponse,
-        HogQLMetadataResponse,
-        HogQLAutocompleteResponse,
+        TorQLQueryResponse,
+        TorQLMetadataResponse,
+        TorQLAutocompleteResponse,
         Any,
         EventsQueryResponse,
     ]
 
 
-class CachedHogQLQueryResponse(BaseModel):
+class CachedTorQLQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -3903,12 +3903,12 @@ class CachedHogQLQueryResponse(BaseModel):
     )
     explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
     limit: Optional[int] = None
-    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    metadata: Optional[TorQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -3963,10 +3963,10 @@ class CachedRetentionQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     is_cached: bool
     last_refresh: AwareDatetime
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     next_allowed_client_refresh: AwareDatetime
@@ -3998,7 +3998,7 @@ class DashboardFilter(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4019,10 +4019,10 @@ class Response2(BaseModel):
     )
     explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
     hasMore: Optional[bool] = None
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
     limit: Optional[int] = None
-    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    metadata: Optional[TorQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -4055,7 +4055,7 @@ class DataWarehouseNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4069,10 +4069,10 @@ class DataWarehouseNode(BaseModel):
     id_field: str
     kind: Literal["DataWarehouseNode"] = "DataWarehouseNode"
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     properties: Optional[
@@ -4087,7 +4087,7 @@ class DataWarehouseNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4140,7 +4140,7 @@ class EntityNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4152,10 +4152,10 @@ class EntityNode(BaseModel):
     )
     kind: NodeKind
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     properties: Optional[
@@ -4170,7 +4170,7 @@ class EntityNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4198,7 +4198,7 @@ class EventsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4211,10 +4211,10 @@ class EventsNode(BaseModel):
     kind: Literal["EventsNode"] = "EventsNode"
     limit: Optional[int] = None
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     orderBy: Optional[list[str]] = Field(default=None, description="Columns to order by")
@@ -4230,7 +4230,7 @@ class EventsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4257,7 +4257,7 @@ class FunnelExclusionActionsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4272,10 +4272,10 @@ class FunnelExclusionActionsNode(BaseModel):
     id: int
     kind: Literal["ActionsNode"] = "ActionsNode"
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     properties: Optional[
@@ -4290,7 +4290,7 @@ class FunnelExclusionActionsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4318,7 +4318,7 @@ class FunnelExclusionEventsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4333,10 +4333,10 @@ class FunnelExclusionEventsNode(BaseModel):
     kind: Literal["EventsNode"] = "EventsNode"
     limit: Optional[int] = None
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     orderBy: Optional[list[str]] = Field(default=None, description="Columns to order by")
@@ -4352,7 +4352,7 @@ class FunnelExclusionEventsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4362,7 +4362,7 @@ class FunnelExclusionEventsNode(BaseModel):
     response: Optional[dict[str, Any]] = None
 
 
-class HogQLFilters(BaseModel):
+class TorQLFilters(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
@@ -4380,7 +4380,7 @@ class HogQLFilters(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4389,22 +4389,22 @@ class HogQLFilters(BaseModel):
     ] = None
 
 
-class HogQLQuery(BaseModel):
+class TorQLQuery(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     explain: Optional[bool] = None
-    filters: Optional[HogQLFilters] = None
-    kind: Literal["HogQLQuery"] = "HogQLQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    filters: Optional[TorQLFilters] = None
+    kind: Literal["TorQLQuery"] = "TorQLQuery"
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query: str
-    response: Optional[HogQLQueryResponse] = None
+    response: Optional[TorQLQueryResponse] = None
     values: Optional[dict[str, Any]] = Field(
         default=None, description="Constant values that can be referenced with the {placeholder} syntax in the query"
     )
-    variables: Optional[dict[str, HogQLVariable]] = Field(
+    variables: Optional[dict[str, TorQLVariable]] = Field(
         default=None, description="Variables to be subsituted into the query"
     )
 
@@ -4440,7 +4440,7 @@ class PersonsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4452,7 +4452,7 @@ class PersonsNode(BaseModel):
     )
     kind: Literal["PersonsNode"] = "PersonsNode"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -4468,7 +4468,7 @@ class PersonsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4497,7 +4497,7 @@ class PropertyGroupFilterValue(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4514,8 +4514,8 @@ class QueryResponseAlternative32(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -4543,8 +4543,8 @@ class RetentionQueryResponse(BaseModel):
         default=None,
         description="Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
     )
-    hogql: Optional[str] = Field(default=None, description="Generated HogQL query.")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    torql: Optional[str] = Field(default=None, description="Generated TorQL query.")
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query_status: Optional[QueryStatus] = Field(
@@ -4567,7 +4567,7 @@ class SessionsTimelineQuery(BaseModel):
         default=None, description="Only fetch sessions that started before this timestamp (default: '+5s')"
     )
     kind: Literal["SessionsTimelineQuery"] = "SessionsTimelineQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     personId: Optional[str] = Field(default=None, description="Fetch sessions only for a given person")
@@ -4594,7 +4594,7 @@ class AIActionsNode(BaseModel):
     ] = None
     kind: Literal["EventsNode"] = "EventsNode"
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
     math_property: Optional[str] = None
@@ -4635,7 +4635,7 @@ class AIEventsNode(BaseModel):
     ] = None
     kind: Literal["EventsNode"] = "EventsNode"
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
     math_property: Optional[str] = None
@@ -4673,7 +4673,7 @@ class ActionsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4686,10 +4686,10 @@ class ActionsNode(BaseModel):
     id: int
     kind: Literal["ActionsNode"] = "ActionsNode"
     math: Optional[
-        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["hogql"]]
+        Union[BaseMathType, PropertyMathType, CountPerActorMathType, Literal["unique_group"], Literal["torql"]]
     ] = None
     math_group_type_index: Optional[MathGroupTypeIndex] = None
-    math_hogql: Optional[str] = None
+    math_torql: Optional[str] = None
     math_property: Optional[str] = None
     name: Optional[str] = None
     properties: Optional[
@@ -4704,7 +4704,7 @@ class ActionsNode(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4721,7 +4721,7 @@ class DataVisualizationNode(BaseModel):
     chartSettings: Optional[ChartSettings] = None
     display: Optional[ChartDisplayType] = None
     kind: Literal["DataVisualizationNode"] = "DataVisualizationNode"
-    source: HogQLQuery
+    source: TorQLQuery
     tableSettings: Optional[TableSettings] = None
 
 
@@ -4733,7 +4733,7 @@ class DatabaseSchemaMaterializedViewTable(BaseModel):
     id: str
     last_run_at: Optional[str] = None
     name: str
-    query: HogQLQuery
+    query: TorQLQuery
     status: Optional[str] = None
     type: Literal["materialized_view"] = "materialized_view"
 
@@ -4745,7 +4745,7 @@ class DatabaseSchemaViewTable(BaseModel):
     fields: dict[str, DatabaseSchemaField]
     id: str
     name: str
-    query: HogQLQuery
+    query: TorQLQuery
     type: Literal["view"] = "view"
 
 
@@ -4790,7 +4790,7 @@ class FunnelsFilter(BaseModel):
     breakdownAttributionType: Optional[BreakdownAttributionType] = BreakdownAttributionType.FIRST_TOUCH
     breakdownAttributionValue: Optional[int] = None
     exclusions: Optional[list[Union[FunnelExclusionEventsNode, FunnelExclusionActionsNode]]] = []
-    funnelAggregateByHogQL: Optional[str] = None
+    funnelAggregateByTorQL: Optional[str] = None
     funnelFromStep: Optional[int] = None
     funnelOrderType: Optional[StepOrderValue] = StepOrderValue.ORDERED
     funnelStepReference: Optional[FunnelStepReference] = FunnelStepReference.TOTAL
@@ -4839,7 +4839,7 @@ class RecordingsQuery(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4848,7 +4848,7 @@ class RecordingsQuery(BaseModel):
     ] = None
     kind: Literal["RecordingsQuery"] = "RecordingsQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
@@ -4867,7 +4867,7 @@ class RecordingsQuery(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -4889,7 +4889,7 @@ class RetentionQuery(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: Literal["RetentionQuery"] = "RetentionQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -4905,7 +4905,7 @@ class RetentionQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -4933,7 +4933,7 @@ class StickinessQuery(BaseModel):
         description="Granularity of the response. Can be one of `hour`, `day`, `week` or `month`",
     )
     kind: Literal["StickinessQuery"] = "StickinessQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -4949,7 +4949,7 @@ class StickinessQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -4984,7 +4984,7 @@ class TrendsQuery(BaseModel):
         description="Granularity of the response. Can be one of `hour`, `day`, `week` or `month`",
     )
     kind: Literal["TrendsQuery"] = "TrendsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5000,7 +5000,7 @@ class TrendsQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5028,7 +5028,7 @@ class ErrorTrackingQuery(BaseModel):
     fingerprint: Optional[list[str]] = None
     kind: Literal["ErrorTrackingQuery"] = "ErrorTrackingQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     order: Optional[Order] = None
@@ -5061,7 +5061,7 @@ class EventsQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5074,7 +5074,7 @@ class EventsQuery(BaseModel):
     )
     kind: Literal["EventsQuery"] = "EventsQuery"
     limit: Optional[int] = Field(default=None, description="Number of rows to return")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = Field(default=None, description="Number of rows to skip before returning rows")
@@ -5092,7 +5092,7 @@ class EventsQuery(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -5101,7 +5101,7 @@ class EventsQuery(BaseModel):
     ] = Field(default=None, description="Properties configurable in the interface")
     response: Optional[EventsQueryResponse] = None
     select: list[str] = Field(..., description="Return a limited set of data. Required.")
-    where: Optional[list[str]] = Field(default=None, description="HogQL filters to apply on returned data")
+    where: Optional[list[str]] = Field(default=None, description="TorQL filters to apply on returned data")
 
 
 class ExperimentTrendQuery(BaseModel):
@@ -5112,7 +5112,7 @@ class ExperimentTrendQuery(BaseModel):
     experiment_id: int
     exposure_query: Optional[TrendsQuery] = None
     kind: Literal["ExperimentTrendQuery"] = "ExperimentTrendQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ExperimentTrendQueryResponse] = None
@@ -5135,7 +5135,7 @@ class FunnelsQuery(BaseModel):
         default=None, description="Granularity of the response. Can be one of `hour`, `day`, `week` or `month`"
     )
     kind: Literal["FunnelsQuery"] = "FunnelsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5151,7 +5151,7 @@ class FunnelsQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5181,7 +5181,7 @@ class InsightsQueryBaseFunnelsQueryResponse(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5197,7 +5197,7 @@ class InsightsQueryBaseFunnelsQueryResponse(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5220,7 +5220,7 @@ class InsightsQueryBaseLifecycleQueryResponse(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5236,7 +5236,7 @@ class InsightsQueryBaseLifecycleQueryResponse(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5259,7 +5259,7 @@ class InsightsQueryBasePathsQueryResponse(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5275,7 +5275,7 @@ class InsightsQueryBasePathsQueryResponse(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5298,7 +5298,7 @@ class InsightsQueryBaseRetentionQueryResponse(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5314,7 +5314,7 @@ class InsightsQueryBaseRetentionQueryResponse(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5337,7 +5337,7 @@ class InsightsQueryBaseTrendsQueryResponse(BaseModel):
         default=False, description="Exclude internal and test users by applying the respective filters"
     )
     kind: NodeKind
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5353,7 +5353,7 @@ class InsightsQueryBaseTrendsQueryResponse(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5383,7 +5383,7 @@ class LifecycleQuery(BaseModel):
     lifecycleFilter: Optional[LifecycleFilter] = Field(
         default=None, description="Properties specific to the lifecycle insight"
     )
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     properties: Optional[
@@ -5399,7 +5399,7 @@ class LifecycleQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5533,7 +5533,7 @@ class ExperimentFunnelQuery(BaseModel):
     )
     experiment_id: int
     kind: Literal["ExperimentFunnelQuery"] = "ExperimentFunnelQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ExperimentFunnelQueryResponse] = None
@@ -5580,7 +5580,7 @@ class FunnelsActorsQuery(BaseModel):
     )
     includeRecordings: Optional[bool] = None
     kind: Literal["FunnelsActorsQuery"] = "FunnelsActorsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ActorsQueryResponse] = None
@@ -5600,7 +5600,7 @@ class PathsQuery(BaseModel):
         default=None, description="Used for displaying paths in relation to funnel steps."
     )
     kind: Literal["PathsQuery"] = "PathsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     pathsFilter: PathsFilter = Field(..., description="Properties specific to the paths insight")
@@ -5617,7 +5617,7 @@ class PathsQuery(BaseModel):
                     LogEntryPropertyFilter,
                     GroupPropertyFilter,
                     FeaturePropertyFilter,
-                    HogQLPropertyFilter,
+                    TorQLPropertyFilter,
                     EmptyPropertyFilter,
                     DataWarehousePropertyFilter,
                     DataWarehousePersonPropertyFilter,
@@ -5635,7 +5635,7 @@ class DatabaseSchemaQuery(BaseModel):
         extra="forbid",
     )
     kind: Literal["DatabaseSchemaQuery"] = "DatabaseSchemaQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[DatabaseSchemaQueryResponse] = None
@@ -5698,7 +5698,7 @@ class FunnelCorrelationActorsQuery(BaseModel):
                 LogEntryPropertyFilter,
                 GroupPropertyFilter,
                 FeaturePropertyFilter,
-                HogQLPropertyFilter,
+                TorQLPropertyFilter,
                 EmptyPropertyFilter,
                 DataWarehousePropertyFilter,
                 DataWarehousePersonPropertyFilter,
@@ -5707,7 +5707,7 @@ class FunnelCorrelationActorsQuery(BaseModel):
     ] = None
     includeRecordings: Optional[bool] = None
     kind: Literal["FunnelCorrelationActorsQuery"] = "FunnelCorrelationActorsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ActorsQueryResponse] = None
@@ -5726,7 +5726,7 @@ class InsightActorsQuery(BaseModel):
         default=None, description="An interval selected out of available intervals in source query."
     )
     kind: Literal["InsightActorsQuery"] = "InsightActorsQuery"
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     response: Optional[ActorsQueryResponse] = None
@@ -5751,7 +5751,7 @@ class ActorsQuery(BaseModel):
         extra="forbid",
     )
     fixedProperties: Optional[
-        list[Union[PersonPropertyFilter, CohortPropertyFilter, HogQLPropertyFilter, EmptyPropertyFilter]]
+        list[Union[PersonPropertyFilter, CohortPropertyFilter, TorQLPropertyFilter, EmptyPropertyFilter]]
     ] = Field(
         default=None,
         description=(
@@ -5761,13 +5761,13 @@ class ActorsQuery(BaseModel):
     )
     kind: Literal["ActorsQuery"] = "ActorsQuery"
     limit: Optional[int] = None
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     offset: Optional[int] = None
     orderBy: Optional[list[str]] = None
     properties: Optional[
-        list[Union[PersonPropertyFilter, CohortPropertyFilter, HogQLPropertyFilter, EmptyPropertyFilter]]
+        list[Union[PersonPropertyFilter, CohortPropertyFilter, TorQLPropertyFilter, EmptyPropertyFilter]]
     ] = Field(
         default=None,
         description=(
@@ -5778,7 +5778,7 @@ class ActorsQuery(BaseModel):
     response: Optional[ActorsQueryResponse] = None
     search: Optional[str] = None
     select: Optional[list[str]] = None
-    source: Optional[Union[InsightActorsQuery, FunnelsActorsQuery, FunnelCorrelationActorsQuery, HogQLQuery]] = None
+    source: Optional[Union[InsightActorsQuery, FunnelsActorsQuery, FunnelCorrelationActorsQuery, TorQLQuery]] = None
 
 
 class DataTableNode(BaseModel):
@@ -5827,7 +5827,7 @@ class DataTableNode(BaseModel):
         default=None, description="Include an event filter above the table (EventsNode only)"
     )
     showExport: Optional[bool] = Field(default=None, description="Show the export button")
-    showHogQLEditor: Optional[bool] = Field(default=None, description="Include a HogQL query editor above HogQL tables")
+    showTorQLEditor: Optional[bool] = Field(default=None, description="Include a TorQL query editor above TorQL tables")
     showOpenEditorButton: Optional[bool] = Field(
         default=None, description="Show a button to open the current query as a new insight. (default: true)"
     )
@@ -5848,7 +5848,7 @@ class DataTableNode(BaseModel):
         EventsQuery,
         PersonsNode,
         ActorsQuery,
-        HogQLQuery,
+        TorQLQuery,
         WebOverviewQuery,
         WebStatsTableQuery,
         WebExternalClicksTableQuery,
@@ -5861,20 +5861,20 @@ class DataTableNode(BaseModel):
     ] = Field(..., description="Source of the events")
 
 
-class HogQLAutocomplete(BaseModel):
+class TorQLAutocomplete(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     endPosition: int = Field(..., description="End position of the editor word")
-    filters: Optional[HogQLFilters] = Field(default=None, description="Table to validate the expression against")
+    filters: Optional[TorQLFilters] = Field(default=None, description="Table to validate the expression against")
     globals: Optional[dict[str, Any]] = Field(default=None, description="Global values in scope")
-    kind: Literal["HogQLAutocomplete"] = "HogQLAutocomplete"
+    kind: Literal["TorQLAutocomplete"] = "TorQLAutocomplete"
     language: HogLanguage = Field(..., description="Language to validate")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query: str = Field(..., description="Query to validate")
-    response: Optional[HogQLAutocompleteResponse] = None
+    response: Optional[TorQLAutocompleteResponse] = None
     sourceQuery: Optional[
         Union[
             EventsNode,
@@ -5886,9 +5886,9 @@ class HogQLAutocomplete(BaseModel):
             InsightActorsQueryOptions,
             SessionsTimelineQuery,
             HogQuery,
-            HogQLQuery,
-            HogQLMetadata,
-            HogQLAutocomplete,
+            TorQLQuery,
+            TorQLMetadata,
+            TorQLAutocomplete,
             WebOverviewQuery,
             WebStatsTableQuery,
             WebExternalClicksTableQuery,
@@ -5903,22 +5903,22 @@ class HogQLAutocomplete(BaseModel):
     startPosition: int = Field(..., description="Start position of the editor word")
 
 
-class HogQLMetadata(BaseModel):
+class TorQLMetadata(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     debug: Optional[bool] = Field(
         default=None, description="Enable more verbose output, usually run from the /debug page"
     )
-    filters: Optional[HogQLFilters] = Field(default=None, description="Extra filters applied to query via {filters}")
+    filters: Optional[TorQLFilters] = Field(default=None, description="Extra filters applied to query via {filters}")
     globals: Optional[dict[str, Any]] = Field(default=None, description="Extra globals for the query")
-    kind: Literal["HogQLMetadata"] = "HogQLMetadata"
+    kind: Literal["TorQLMetadata"] = "TorQLMetadata"
     language: HogLanguage = Field(..., description="Language to validate")
-    modifiers: Optional[HogQLQueryModifiers] = Field(
+    modifiers: Optional[TorQLQueryModifiers] = Field(
         default=None, description="Modifiers used when performing the query"
     )
     query: str = Field(..., description="Query to validate")
-    response: Optional[HogQLMetadataResponse] = None
+    response: Optional[TorQLMetadataResponse] = None
     sourceQuery: Optional[
         Union[
             EventsNode,
@@ -5930,9 +5930,9 @@ class HogQLMetadata(BaseModel):
             InsightActorsQueryOptions,
             SessionsTimelineQuery,
             HogQuery,
-            HogQLQuery,
-            HogQLMetadata,
-            HogQLAutocomplete,
+            TorQLQuery,
+            TorQLMetadata,
+            TorQLAutocomplete,
             WebOverviewQuery,
             WebStatsTableQuery,
             WebExternalClicksTableQuery,
@@ -5947,7 +5947,7 @@ class HogQLMetadata(BaseModel):
         default=None,
         description='Query within which "expr" and "template" are validated. Defaults to "select * from events"',
     )
-    variables: Optional[dict[str, HogQLVariable]] = Field(
+    variables: Optional[dict[str, TorQLVariable]] = Field(
         default=None, description="Variables to be subsituted into the query"
     )
 
@@ -5972,9 +5972,9 @@ class QueryRequest(BaseModel):
         InsightActorsQueryOptions,
         SessionsTimelineQuery,
         HogQuery,
-        HogQLQuery,
-        HogQLMetadata,
-        HogQLAutocomplete,
+        TorQLQuery,
+        TorQLMetadata,
+        TorQLAutocomplete,
         WebOverviewQuery,
         WebStatsTableQuery,
         WebExternalClicksTableQuery,
@@ -5999,10 +5999,10 @@ class QueryRequest(BaseModel):
     ] = Field(
         ...,
         description=(
-            "Submit a JSON string representing a query for MarketTor data analysis, for example a HogQL query.\n\nExample"
-            ' payload:\n\n```\n\n{"query": {"kind": "HogQLQuery", "query": "select * from events limit'
-            ' 100"}}\n\n```\n\nFor more details on HogQL queries, see the [MarketTor HogQL'
-            " documentation](/docs/hogql#api-access)."
+            "Submit a JSON string representing a query for MarketTor data analysis, for example a TorQL query.\n\nExample"
+            ' payload:\n\n```\n\n{"query": {"kind": "TorQLQuery", "query": "select * from events limit'
+            ' 100"}}\n\n```\n\nFor more details on TorQL queries, see the [MarketTor TorQL'
+            " documentation](/docs/torql#api-access)."
         ),
         discriminator="kind",
     )
@@ -6035,9 +6035,9 @@ class QuerySchemaRoot(
             InsightActorsQueryOptions,
             SessionsTimelineQuery,
             HogQuery,
-            HogQLQuery,
-            HogQLMetadata,
-            HogQLAutocomplete,
+            TorQLQuery,
+            TorQLMetadata,
+            TorQLAutocomplete,
             WebOverviewQuery,
             WebStatsTableQuery,
             WebExternalClicksTableQuery,
@@ -6073,9 +6073,9 @@ class QuerySchemaRoot(
         InsightActorsQueryOptions,
         SessionsTimelineQuery,
         HogQuery,
-        HogQLQuery,
-        HogQLMetadata,
-        HogQLAutocomplete,
+        TorQLQuery,
+        TorQLMetadata,
+        TorQLAutocomplete,
         WebOverviewQuery,
         WebStatsTableQuery,
         WebExternalClicksTableQuery,

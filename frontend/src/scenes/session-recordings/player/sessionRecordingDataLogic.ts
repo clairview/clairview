@@ -29,8 +29,8 @@ import markettor from 'markettor-js'
 import { compressedEventWithTime } from 'markettor-js/lib/src/extensions/replay/sessionrecording'
 import { RecordingComment } from 'scenes/session-recordings/player/inspector/playerInspectorLogic'
 
-import { HogQLQuery, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { TorQLQuery, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 import {
     AnyPropertyFilter,
     EncodedRecordingSnapshot,
@@ -664,9 +664,9 @@ export const sessionRecordingDataLogic = kea<sessionRecordingDataLogicType>([
                     const earliestTimestamp = timestamps.reduce((a, b) => Math.min(a, b))
                     const latestTimestamp = timestamps.reduce((a, b) => Math.max(a, b))
                     try {
-                        const query: HogQLQuery = {
-                            kind: NodeKind.HogQLQuery,
-                            query: hogql`SELECT properties, uuid
+                        const query: TorQLQuery = {
+                            kind: NodeKind.TorQLQuery,
+                            query: torql`SELECT properties, uuid
                                          FROM events
                                          WHERE timestamp > ${(earliestTimestamp - 1000) / 1000}
                                            AND timestamp < ${(latestTimestamp + 1000) / 1000}

@@ -81,7 +81,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
     def _filter_recordings_by(self, recordings_filter: dict) -> SessionRecordingQueryResult:
         the_filter = SessionRecordingsFilter(team=self.team, data=recordings_filter)
         session_recording_list_instance = SessionRecordingListFromFilters(
-            filter=the_filter, team=self.team, hogql_query_modifiers=None
+            filter=the_filter, team=self.team, torql_query_modifiers=None
         )
         return session_recording_list_instance.run()
 
@@ -2357,12 +2357,12 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
 
     @also_test_with_materialized_columns(event_properties=["$current_url", "$browser"], person_properties=["email"])
     @snapshot_clickhouse_queries
-    def test_event_filter_with_hogql_properties(self):
-        user = "test_event_filter_with_hogql_properties-user"
+    def test_event_filter_with_torql_properties(self):
+        user = "test_event_filter_with_torql_properties-user"
 
         Person.objects.create(team=self.team, distinct_ids=[user], properties={"email": "bla"})
 
-        session_id = f"test_event_filter_with_hogql_properties-1-{str(uuid4())}"
+        session_id = f"test_event_filter_with_torql_properties-1-{str(uuid4())}"
         self.create_event(
             user,
             self.an_hour_ago,
@@ -2395,7 +2395,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
                         "order": 0,
                         "name": "$pageview",
                         "properties": [
-                            {"key": "properties.$browser == 'Chrome'", "type": "hogql"},
+                            {"key": "properties.$browser == 'Chrome'", "type": "torql"},
                         ],
                     }
                 ]
@@ -2413,7 +2413,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
                         "type": "events",
                         "order": 0,
                         "name": "$pageview",
-                        "properties": [{"key": "properties.$browser == 'Firefox'", "type": "hogql"}],
+                        "properties": [{"key": "properties.$browser == 'Firefox'", "type": "torql"}],
                     }
                 ]
             }
@@ -2422,12 +2422,12 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         assert session_recordings == []
 
     @snapshot_clickhouse_queries
-    def test_event_filter_with_hogql_person_properties(self):
-        user = "test_event_filter_with_hogql_properties-user"
+    def test_event_filter_with_torql_person_properties(self):
+        user = "test_event_filter_with_torql_properties-user"
 
         Person.objects.create(team=self.team, distinct_ids=[user], properties={"email": "bla"})
 
-        session_id = f"test_event_filter_with_hogql_properties-1-{str(uuid4())}"
+        session_id = f"test_event_filter_with_torql_properties-1-{str(uuid4())}"
         self.create_event(
             user,
             self.an_hour_ago,
@@ -2462,7 +2462,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
                         "properties": [
                             {
                                 "key": "person.properties.email == 'bla'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ],
                     }
@@ -2484,7 +2484,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
                         "properties": [
                             {
                                 "key": "person.properties.email == 'something else'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ],
                     }
@@ -3068,7 +3068,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
                 "operator": "exact",
                 "type": "event",
             },
-            {"key": "properties.$browser == 'Chrome'", "type": "hogql"},
+            {"key": "properties.$browser == 'Chrome'", "type": "torql"},
         ]
         self.team.save()
 
@@ -3133,9 +3133,9 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
     )
     @freeze_time("2021-01-21T20:00:00.000Z")
     @snapshot_clickhouse_queries
-    def test_event_filter_with_hogql_event_properties_test_accounts_excluded(self):
+    def test_event_filter_with_torql_event_properties_test_accounts_excluded(self):
         self.team.test_account_filters = [
-            {"key": "properties.$browser == 'Chrome'", "type": "hogql"},
+            {"key": "properties.$browser == 'Chrome'", "type": "torql"},
         ]
         self.team.save()
 
@@ -3179,7 +3179,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3194,13 +3194,13 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(len(session_recordings), 2)
 
         self.team.test_account_filters = [
-            {"key": "person.properties.email == 'bla'", "type": "hogql"},
+            {"key": "person.properties.email == 'bla'", "type": "torql"},
         ]
         self.team.save()
 
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # only 1 pageview that matches the hogql test_accounts filter
+                # only 1 pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3215,8 +3215,8 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(len(session_recordings), 1)
 
         self.team.test_account_filters = [
-            {"key": "properties.$browser == 'Chrome'", "type": "hogql"},
-            {"key": "person.properties.email == 'bla'", "type": "hogql"},
+            {"key": "properties.$browser == 'Chrome'", "type": "torql"},
+            {"key": "person.properties.email == 'bla'", "type": "torql"},
         ]
         self.team.save()
 
@@ -3298,7 +3298,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3390,7 +3390,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
             # there are 2 pageviews
             (session_recordings, _, _) = self._filter_recordings_by(
                 {
-                    # pageview that matches the hogql test_accounts filter
+                    # pageview that matches the torql test_accounts filter
                     "events": [
                         {
                             "id": "$pageview",
@@ -3415,7 +3415,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
     @also_test_with_materialized_columns(event_properties=["is_internal_user"])
     @freeze_time("2021-01-21T20:00:00.000Z")
     @snapshot_clickhouse_queries
-    def test_top_level_hogql_event_property_test_account_filter(self):
+    def test_top_level_torql_event_property_test_account_filter(self):
         """
         This is a regression test. A user with an $ip test account filter
         reported the filtering wasn't working.
@@ -3423,7 +3423,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         The filter wasn't triggering the "should join events" check, and so we didn't apply the filter at all
         """
         self.team.test_account_filters = [
-            {"key": "properties.is_internal_user == 'true'", "type": "hogql"},
+            {"key": "properties.is_internal_user == 'true'", "type": "torql"},
         ]
         self.team.save()
 
@@ -3475,7 +3475,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3500,7 +3500,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
     @also_test_with_materialized_columns(person_properties=["email"], verify_no_jsonextract=False)
     @freeze_time("2021-01-21T20:00:00.000Z")
     @snapshot_clickhouse_queries
-    def test_top_level_hogql_person_property_test_account_filter(self):
+    def test_top_level_torql_person_property_test_account_filter(self):
         """
         This is a regression test. A user with an $ip test account filter
         reported the filtering wasn't working.
@@ -3508,7 +3508,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         The filter wasn't triggering the "should join events" check, and so we didn't apply the filter at all
         """
         self.team.test_account_filters = [
-            {"key": "person.properties.email == 'bla'", "type": "hogql"},
+            {"key": "person.properties.email == 'bla'", "type": "torql"},
         ]
         self.team.save()
 
@@ -3560,7 +3560,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3643,7 +3643,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",
@@ -3935,7 +3935,7 @@ class TestSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest):
         # there are 2 pageviews
         (session_recordings, _, _) = self._filter_recordings_by(
             {
-                # pageview that matches the hogql test_accounts filter
+                # pageview that matches the torql test_accounts filter
                 "events": [
                     {
                         "id": "$pageview",

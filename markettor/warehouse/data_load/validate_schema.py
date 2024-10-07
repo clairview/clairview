@@ -2,7 +2,7 @@ import uuid
 from django.conf import settings
 from dlt.common.schema.typing import TSchemaTables
 from dlt.common.data_types.typing import TDataType
-from markettor.hogql.database.models import (
+from markettor.torql.database.models import (
     BooleanDatabaseField,
     DatabaseField,
     DateDatabaseField,
@@ -33,37 +33,37 @@ from markettor.warehouse.models.external_data_schema import ExternalDataSchema
 from dlt.common.normalizers.naming.snake_case import NamingConvention
 
 
-def dlt_to_hogql_type(dlt_type: TDataType | None) -> str:
-    hogql_type: type[DatabaseField] = DatabaseField
+def dlt_to_torql_type(dlt_type: TDataType | None) -> str:
+    torql_type: type[DatabaseField] = DatabaseField
 
     if dlt_type is None:
-        hogql_type = StringDatabaseField
+        torql_type = StringDatabaseField
     elif dlt_type == "text":
-        hogql_type = StringDatabaseField
+        torql_type = StringDatabaseField
     elif dlt_type == "double":
-        hogql_type = IntegerDatabaseField
+        torql_type = IntegerDatabaseField
     elif dlt_type == "bool":
-        hogql_type = BooleanDatabaseField
+        torql_type = BooleanDatabaseField
     elif dlt_type == "timestamp":
-        hogql_type = DateTimeDatabaseField
+        torql_type = DateTimeDatabaseField
     elif dlt_type == "bigint":
-        hogql_type = IntegerDatabaseField
+        torql_type = IntegerDatabaseField
     elif dlt_type == "binary":
         raise Exception("DLT type 'binary' is not a supported column type")
     elif dlt_type == "complex":
-        hogql_type = StringJSONDatabaseField
+        torql_type = StringJSONDatabaseField
     elif dlt_type == "decimal":
-        hogql_type = IntegerDatabaseField
+        torql_type = IntegerDatabaseField
     elif dlt_type == "wei":
         raise Exception("DLT type 'wei' is not a supported column type")
     elif dlt_type == "date":
-        hogql_type = DateDatabaseField
+        torql_type = DateDatabaseField
     elif dlt_type == "time":
-        hogql_type = DateTimeDatabaseField
+        torql_type = DateTimeDatabaseField
     else:
         raise Exception(f"DLT type '{dlt_type}' is not a supported column type")
 
-    return hogql_type.__name__
+    return torql_type.__name__
 
 
 async def update_last_synced_at(job_id: str, schema_id: str, team_id: int) -> None:
@@ -175,13 +175,13 @@ async def validate_schema_and_update_table(
                     dlt_column = schema_columns.get(column_name)
                     if dlt_column is not None:
                         dlt_data_type = dlt_column.get("data_type")
-                        hogql_type = dlt_to_hogql_type(dlt_data_type)
+                        torql_type = dlt_to_torql_type(dlt_data_type)
                     else:
-                        hogql_type = dlt_to_hogql_type(None)
+                        torql_type = dlt_to_torql_type(None)
 
                     columns[column_name] = {
                         "clickhouse": db_column_type,
-                        "hogql": hogql_type,
+                        "torql": torql_type,
                     }
                 table_created.columns = columns
                 break

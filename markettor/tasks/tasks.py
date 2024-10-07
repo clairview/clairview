@@ -14,7 +14,7 @@ from structlog import get_logger
 from markettor.clickhouse.client.limit import CeleryConcurrencyLimitExceeded, limit_concurrency
 from markettor.cloud_utils import is_cloud
 from markettor.errors import CHQueryErrorTooManySimultaneousQueries
-from markettor.hogql.constants import LimitContext
+from markettor.torql.constants import LimitContext
 from markettor.metrics import pushed_metrics_registry
 from markettor.ph_client import get_ph_client
 from markettor.redis import get_client

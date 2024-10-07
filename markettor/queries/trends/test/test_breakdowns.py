@@ -498,11 +498,11 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         )
 
     @snapshot_clickhouse_queries
-    def test_breakdown_numeric_hogql(self):
+    def test_breakdown_numeric_torql(self):
         response = self._run(
             {
                 "breakdown": "length(properties.$current_url)",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_limit": 2,
             },
         )
@@ -516,11 +516,11 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         )
 
     @snapshot_clickhouse_queries
-    def test_breakdown_numeric_hogql_hide_other(self):
+    def test_breakdown_numeric_torql_hide_other(self):
         response = self._run(
             {
                 "breakdown": "length(properties.$current_url)",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_hide_other_aggregation": True,
                 "breakdown_limit": 2,
             },
@@ -535,7 +535,7 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         response = self._run(
             {
                 "breakdown": "length(properties.$current_url)",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_hide_other_aggregation": True,
                 "breakdown_limit": 3,
             },
@@ -550,11 +550,11 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         )
 
     @snapshot_clickhouse_queries
-    def test_breakdown_string_hogql(self):
+    def test_breakdown_string_torql(self):
         response = self._run(
             {
                 "breakdown": "properties.$current_url",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_limit": 2,
             },
         )
@@ -568,11 +568,11 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         )
 
     @snapshot_clickhouse_queries
-    def test_breakdown_string_hogql_hide_other(self):
+    def test_breakdown_string_torql_hide_other(self):
         response = self._run(
             {
                 "breakdown": "properties.$current_url",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_hide_other_aggregation": True,
                 "breakdown_limit": 2,
             },
@@ -587,7 +587,7 @@ class TestBreakdowns(ClickhouseTestMixin, APIBaseTest):
         response = self._run(
             {
                 "breakdown": "properties.$current_url",
-                "breakdown_type": "hogql",
+                "breakdown_type": "torql",
                 "breakdown_hide_other_aggregation": True,
                 "breakdown_limit": 3,
             },

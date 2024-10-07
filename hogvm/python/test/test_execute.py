@@ -6,12 +6,12 @@ from collections.abc import Callable
 from hogvm.python.execute import execute_bytecode, get_nested_value
 from hogvm.python.operation import (
     Operation as op,
-    HOGQL_BYTECODE_IDENTIFIER as _H,
-    HOGQL_BYTECODE_VERSION as VERSION,
+    TORQL_BYTECODE_IDENTIFIER as _H,
+    TORQL_BYTECODE_VERSION as VERSION,
 )
 from hogvm.python.utils import UncaughtHogVMException
-from markettor.hogql.bytecode import create_bytecode
-from markettor.hogql.parser import parse_expr, parse_program
+from markettor.torql.bytecode import create_bytecode
+from markettor.torql.parser import parse_expr, parse_program
 
 
 class TestBytecodeExecute:
@@ -301,7 +301,7 @@ class TestBytecodeExecute:
         )
 
     def test_version_0_and_1(self):
-        # version 0 of HogQL bytecode had arguments in a different order
+        # version 0 of TorQL bytecode had arguments in a different order
         assert (
             execute_bytecode(["_h", op.STRING, "1", op.STRING, "2", op.CALL_GLOBAL, "concat", 2, op.RETURN]).result
             == "21"

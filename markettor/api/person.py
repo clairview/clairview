@@ -37,7 +37,7 @@ from markettor.constants import (
     OFFSET,
     FunnelVizType,
 )
-from markettor.hogql.constants import CSV_EXPORT_LIMIT
+from markettor.torql.constants import CSV_EXPORT_LIMIT
 from markettor.decorators import cached_by_filters
 from markettor.logging.timing import timed
 from markettor.models import Cohort, Filter, Person, User, Team
@@ -301,7 +301,7 @@ class PersonViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
 
         raw_paginated_result = insight_sync_execute(
             paginated_query,
-            {**paginated_params, **filter.hogql_context.values},
+            {**paginated_params, **filter.torql_context.values},
             filter=filter,
             query_type="person_list",
             team_id=team.pk,
@@ -320,7 +320,7 @@ class PersonViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
             total_query_aggregated = f"SELECT count() FROM ({total_query})"
             raw_paginated_result = insight_sync_execute(
                 total_query_aggregated,
-                {**total_params, **filter.hogql_context.values},
+                {**total_params, **filter.torql_context.values},
                 filter=filter,
                 query_type="person_list_total",
                 team_id=team.pk,

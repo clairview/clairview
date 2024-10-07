@@ -11,7 +11,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events LIMIT 100",
                 },
             },
@@ -40,7 +40,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "events",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events LIMIT 100",
                 },
             },
@@ -53,7 +53,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from event_view LIMIT 100",
                 },
             },
@@ -66,7 +66,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events LIMIT 100",
                 },
             },
@@ -77,7 +77,7 @@ class TestSavedQuery(APIBaseTest):
             f"/api/projects/{self.team.id}/warehouse_saved_queries/" + saved_query_1_response["id"],
             {
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select distinct_id as distinct_id from events LIMIT 100",
                 },
             },
@@ -107,7 +107,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events LIMIT 100",
                 },
             },
@@ -119,7 +119,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "outer_event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event from event_view LIMIT 100",
                 },
             },
@@ -132,7 +132,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events",
                 },
             },
@@ -150,7 +150,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from events",
                 },
             },
@@ -162,7 +162,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view_2",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from event_view",
                 },
             },
@@ -193,7 +193,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": query,
                 },
             },
@@ -204,7 +204,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view_2",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from event_view",
                 },
             },
@@ -273,7 +273,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": query,
                 },
             },
@@ -284,7 +284,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view_2",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from event_view",
                 },
             },
@@ -295,7 +295,7 @@ class TestSavedQuery(APIBaseTest):
             {
                 "name": "event_view_3",
                 "query": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": "select event as event from event_view_2",
                 },
             },

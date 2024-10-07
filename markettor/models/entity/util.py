@@ -2,7 +2,7 @@ from typing import Any
 from collections.abc import Sequence
 
 from markettor.constants import TREND_FILTER_TYPE_ACTIONS
-from markettor.hogql.hogql import HogQLContext
+from markettor.torql.torql import TorQLContext
 from markettor.models.action.util import format_action_filter, format_action_filter_event_only
 from markettor.models.entity import Entity
 from markettor.queries.util import PersonPropertiesMode
@@ -11,7 +11,7 @@ from markettor.queries.util import PersonPropertiesMode
 def get_entity_filtering_params(
     allowed_entities: Sequence[Entity],
     team_id: int,
-    hogql_context: HogQLContext,
+    torql_context: TorQLContext,
     table_name: str = "",
     *,
     person_properties_mode: PersonPropertiesMode = PersonPropertiesMode.USING_PERSON_PROPERTIES_COLUMN,
@@ -41,7 +41,7 @@ def get_entity_filtering_params(
                     table_name=table_name,
                     person_properties_mode=person_properties_mode,
                     person_id_joined_alias=person_id_joined_alias,
-                    hogql_context=hogql_context,
+                    torql_context=torql_context,
                 )
                 if not deep_filtering
                 else format_action_filter_event_only(action)

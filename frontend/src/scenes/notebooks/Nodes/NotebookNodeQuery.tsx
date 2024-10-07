@@ -6,7 +6,7 @@ import { useActions, useMountedLogic, useValues } from 'kea'
 import { useEffect, useMemo } from 'react'
 import { notebookNodeLogic } from './notebookNodeLogic'
 import { NotebookNodeProps, NotebookNodeAttributeProperties } from '../Notebook/utils'
-import { containsHogQLQuery, isHogQLQuery, isInsightVizNode, isNodeWithSource } from '~/queries/utils'
+import { containsTorQLQuery, isTorQLQuery, isInsightVizNode, isNodeWithSource } from '~/queries/utils'
 import { LemonButton } from '@markettor/lemon-ui'
 import { urls } from 'scenes/urls'
 
@@ -74,7 +74,7 @@ const Component = ({
         if (NodeKind.DataTableNode === modifiedQuery.kind || NodeKind.SavedInsightNode === modifiedQuery.kind) {
             modifiedQuery.showOpenEditorButton = false
             modifiedQuery.full = false
-            modifiedQuery.showHogQLEditor = false
+            modifiedQuery.showTorQLEditor = false
             modifiedQuery.embedded = true
             modifiedQuery.showTimings = false
         }
@@ -128,7 +128,7 @@ export const Settings = ({
 
         if (NodeKind.DataTableNode === modifiedQuery.kind || NodeKind.SavedInsightNode === modifiedQuery.kind) {
             modifiedQuery.showOpenEditorButton = false
-            modifiedQuery.showHogQLEditor = true
+            modifiedQuery.showTorQLEditor = true
             modifiedQuery.showResultsTable = false
 
             modifiedQuery.showReload = true
@@ -248,12 +248,12 @@ export const NotebookNodeQuery = createMarketTorWidgetNode<NotebookNodeQueryAttr
     serializedText: (attrs) => {
         let text = ''
         const q = attrs.query
-        if (containsHogQLQuery(q)) {
-            if (isHogQLQuery(q)) {
+        if (containsTorQLQuery(q)) {
+            if (isTorQLQuery(q)) {
                 text = q.query
             }
             if (isNodeWithSource(q)) {
-                text = isHogQLQuery(q.source) ? q.source.query : ''
+                text = isTorQLQuery(q.source) ? q.source.query : ''
             }
         }
         return text

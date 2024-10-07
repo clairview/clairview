@@ -11,8 +11,8 @@ import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { Scene } from 'scenes/sceneTypes'
 import { urls } from 'scenes/urls'
 
-import { DataTableNode, HogQLQuery, InsightVizNode, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { DataTableNode, TorQLQuery, InsightVizNode, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 import {
     BaseMathType,
     Breadcrumb,
@@ -245,9 +245,9 @@ export const surveyLogic = kea<surveyLogicType>([
                     ? dayjs(survey.end_date).add(1, 'day').format('YYYY-MM-DD')
                     : dayjs().add(1, 'day').format('YYYY-MM-DD')
 
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
-                    query: hogql`
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
+                    query: torql`
                         SELECT
                             (SELECT COUNT(DISTINCT person_id)
                                 FROM events
@@ -302,8 +302,8 @@ export const surveyLogic = kea<surveyLogicType>([
                 if (iteration && iteration > 0) {
                     iterationCondition = ` AND properties.$survey_iteration='${iteration}' `
                 }
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
                     query: `
                         SELECT
                             JSONExtractString(properties, '${getResponseField(questionIndex)}') AS survey_response,
@@ -352,8 +352,8 @@ export const surveyLogic = kea<surveyLogicType>([
                     ? dayjs(survey.end_date).add(1, 'day').format('YYYY-MM-DD')
                     : dayjs().add(1, 'day').format('YYYY-MM-DD')
 
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
                     query: `
                         SELECT
                             JSONExtractString(properties, '$survey_iteration') AS survey_iteration,
@@ -432,8 +432,8 @@ export const surveyLogic = kea<surveyLogicType>([
                     ? dayjs(survey.end_date).add(1, 'day').format('YYYY-MM-DD')
                     : dayjs().add(1, 'day').format('YYYY-MM-DD')
 
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
                     query: `
                         SELECT
                             JSONExtractString(properties, '${getResponseField(questionIndex)}') AS survey_response,
@@ -473,8 +473,8 @@ export const surveyLogic = kea<surveyLogicType>([
                     ? dayjs(survey.end_date).add(1, 'day').format('YYYY-MM-DD')
                     : dayjs().add(1, 'day').format('YYYY-MM-DD')
 
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
                     query: `
                         SELECT 
                             count(),
@@ -527,8 +527,8 @@ export const surveyLogic = kea<surveyLogicType>([
                     ? dayjs(survey.end_date).add(1, 'day').format('YYYY-MM-DD')
                     : dayjs().add(1, 'day').format('YYYY-MM-DD')
 
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
                     query: `
                         SELECT distinct_id, properties, person.properties
                         FROM events

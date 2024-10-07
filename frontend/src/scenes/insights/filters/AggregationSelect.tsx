@@ -1,6 +1,6 @@
 import { LemonSelect, LemonSelectSection } from '@markettor/lemon-ui'
 import { useActions, useValues } from 'kea'
-import { HogQLEditor } from 'lib/components/HogQLEditor/HogQLEditor'
+import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
 import { groupsAccessLogic } from 'lib/introductions/groupsAccessLogic'
 import { GroupIntroductionFooter } from 'scenes/groups/GroupsIntroduction'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'
@@ -10,7 +10,7 @@ import { FunnelsQuery } from '~/queries/schema'
 import { isFunnelsQuery, isInsightQueryNode, isStickinessQuery } from '~/queries/utils'
 import { InsightLogicProps } from '~/types'
 
-function getHogQLValue(groupIndex?: number, aggregationQuery?: string): string {
+function getTorQLValue(groupIndex?: number, aggregationQuery?: string): string {
     if (groupIndex !== undefined) {
         return `$group_${groupIndex}`
     } else if (aggregationQuery) {
@@ -19,7 +19,7 @@ function getHogQLValue(groupIndex?: number, aggregationQuery?: string): string {
     return UNIQUE_USERS
 }
 
-function hogQLToFilterValue(value?: string): { groupIndex?: number; aggregationQuery?: string } {
+function torQLToFilterValue(value?: string): { groupIndex?: number; aggregationQuery?: string } {
     if (value?.match(/^\$group_[0-9]+$/)) {
         return { groupIndex: parseInt(value.replace('$group_', '')) }
     } else if (value === 'person_id') {
@@ -33,14 +33,14 @@ const UNIQUE_USERS = 'person_id'
 type AggregationSelectProps = {
     insightProps: InsightLogicProps
     className?: string
-    hogqlAvailable?: boolean
+    torqlAvailable?: boolean
     value?: string
 }
 
 export function AggregationSelect({
     insightProps,
     className,
-    hogqlAvailable,
+    torqlAvailable,
 }: AggregationSelectProps): JSX.Element | null {
     const { querySource } = useValues(insightVizDataLogic(insightProps))
     const { updateQuerySource } = useActions(insightVizDataLogic(insightProps))
@@ -52,16 +52,16 @@ export function AggregationSelect({
         return null
     }
 
-    const value = getHogQLValue(
+    const value = getTorQLValue(
         isStickinessQuery(querySource) ? undefined : querySource.aggregation_group_type_index,
-        isFunnelsQuery(querySource) ? querySource.funnelsFilter?.funnelAggregateByHogQL : undefined
+        isFunnelsQuery(querySource) ? querySource.funnelsFilter?.funnelAggregateByTorQL : undefined
     )
     const onChange = (value: string): void => {
-        const { aggregationQuery, groupIndex } = hogQLToFilterValue(value)
+        const { aggregationQuery, groupIndex } = torQLToFilterValue(value)
         if (isFunnelsQuery(querySource)) {
             updateQuerySource({
                 aggregation_group_type_index: groupIndex,
-                funnelsFilter: { ...querySource.funnelsFilter, funnelAggregateByHogQL: aggregationQuery },
+                funnelsFilter: { ...querySource.funnelsFilter, funnelAggregateByTorQL: aggregationQuery },
             } as FunnelsQuery)
         } else {
             updateQuerySource({ aggregation_group_type_index: groupIndex } as FunnelsQuery)
@@ -93,29 +93,29 @@ export function AggregationSelect({
         })
     }
 
-    if (hogqlAvailable) {
+    if (torqlAvailable) {
         baseValues.push(`properties.$session_id`)
         optionSections[0].options.push({
             value: 'properties.$session_id',
             label: `Unique sessions`,
         })
         optionSections[0].options.push({
-            label: 'Custom HogQL expression',
+            label: 'Custom TorQL expression',
             options: [
                 {
-                    // This is a bit of a hack so that the HogQL option is only highlighted as active when the user has
-                    // set a custom value (because actually _all_ the options are HogQL)
+                    // This is a bit of a hack so that the TorQL option is only highlighted as active when the user has
+                    // set a custom value (because actually _all_ the options are TorQL)
                     value: !value || baseValues.includes(value) ? '' : value,
                     label: <span className="font-mono">{value}</span>,
-                    labelInMenu: function CustomHogQLOptionWrapped({ onSelect }) {
+                    labelInMenu: function CustomTorQLOptionWrapped({ onSelect }) {
                         return (
                             // eslint-disable-next-line react/forbid-dom-props
                             <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                                <HogQLEditor
+                                <TorQLEditor
                                     onChange={onSelect}
                                     value={value}
                                     placeholder={
-                                        "Enter HogQL expression, such as:\n- distinct_id\n- properties.$session_id\n- concat(distinct_id, ' ', properties.$session_id)\n- if(1 < 2, 'one', 'two')"
+                                        "Enter TorQL expression, such as:\n- distinct_id\n- properties.$session_id\n- concat(distinct_id, ' ', properties.$session_id)\n- if(1 < 2, 'one', 'two')"
                                     }
                                 />
                             </div>

@@ -973,11 +973,11 @@ TEST_MODELS: list[BatchExportModel | BatchExportSchema | None] = [
         schema={
             "fields": [
                 {"expression": "event", "alias": "event"},
-                {"expression": "nullIf(JSONExtractString(properties, %(hogql_val_0)s), '')", "alias": "browser"},
-                {"expression": "nullIf(JSONExtractString(properties, %(hogql_val_1)s), '')", "alias": "os"},
+                {"expression": "nullIf(JSONExtractString(properties, %(torql_val_0)s), '')", "alias": "browser"},
+                {"expression": "nullIf(JSONExtractString(properties, %(torql_val_1)s), '')", "alias": "os"},
                 {"expression": "nullIf(properties, '')", "alias": "all_properties"},
             ],
-            "values": {"hogql_val_0": "$browser", "hogql_val_1": "$os"},
+            "values": {"torql_val_0": "$browser", "torql_val_1": "$os"},
         },
     ),
     BatchExportModel(name="events", schema=None),
@@ -985,11 +985,11 @@ TEST_MODELS: list[BatchExportModel | BatchExportSchema | None] = [
     {
         "fields": [
             {"expression": "event", "alias": "event"},
-            {"expression": "nullIf(JSONExtractString(properties, %(hogql_val_0)s), '')", "alias": "browser"},
-            {"expression": "nullIf(JSONExtractString(properties, %(hogql_val_1)s), '')", "alias": "os"},
+            {"expression": "nullIf(JSONExtractString(properties, %(torql_val_0)s), '')", "alias": "browser"},
+            {"expression": "nullIf(JSONExtractString(properties, %(torql_val_1)s), '')", "alias": "os"},
             {"expression": "nullIf(properties, '')", "alias": "all_properties"},
         ],
-        "values": {"hogql_val_0": "$browser", "hogql_val_1": "$os"},
+        "values": {"torql_val_0": "$browser", "torql_val_1": "$os"},
     },
     None,
 ]

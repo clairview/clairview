@@ -38,9 +38,9 @@ import {
 } from '~/queries/nodes/DataTable/utils'
 import { EventName } from '~/queries/nodes/EventsNode/EventName'
 import { EventPropertyFilters } from '~/queries/nodes/EventsNode/EventPropertyFilters'
-import { HogQLQueryEditor } from '~/queries/nodes/HogQLQuery/HogQLQueryEditor'
+import { TorQLQueryEditor } from '~/queries/nodes/TorQLQuery/TorQLQueryEditor'
 import { insightVizDataNodeKey } from '~/queries/nodes/InsightViz/InsightViz'
-import { EditHogQLButton } from '~/queries/nodes/Node/EditHogQLButton'
+import { EditTorQLButton } from '~/queries/nodes/Node/EditTorQLButton'
 import { OpenEditorButton } from '~/queries/nodes/Node/OpenEditorButton'
 import { PersonPropertyFilters } from '~/queries/nodes/PersonsNode/PersonPropertyFilters'
 import { PersonsSearch } from '~/queries/nodes/PersonsNode/PersonsSearch'
@@ -50,7 +50,7 @@ import {
     DataTableNode,
     EventsNode,
     EventsQuery,
-    HogQLQuery,
+    TorQLQuery,
     PersonsNode,
     SessionAttributionExplorerQuery,
 } from '~/queries/schema'
@@ -58,11 +58,11 @@ import { QueryContext } from '~/queries/types'
 import {
     isActorsQuery,
     isEventsQuery,
-    isHogQlAggregation,
-    isHogQLQuery,
+    isTorQlAggregation,
+    isTorQLQuery,
     isInsightActorsQuery,
-    taxonomicEventFilterToHogQL,
-    taxonomicPersonFilterToHogQL,
+    taxonomicEventFilterToTorQL,
+    taxonomicPersonFilterToTorQL,
 } from '~/queries/utils'
 import { EventType, InsightLogicProps } from '~/types'
 
@@ -82,12 +82,12 @@ interface DataTableProps {
 }
 
 const eventGroupTypes = [
-    TaxonomicFilterGroupType.HogQLExpression,
+    TaxonomicFilterGroupType.TorQLExpression,
     TaxonomicFilterGroupType.EventProperties,
     TaxonomicFilterGroupType.PersonProperties,
     TaxonomicFilterGroupType.EventFeatureFlags,
 ]
-const personGroupTypes = [TaxonomicFilterGroupType.HogQLExpression, TaxonomicFilterGroupType.PersonProperties]
+const personGroupTypes = [TaxonomicFilterGroupType.TorQLExpression, TaxonomicFilterGroupType.PersonProperties]
 
 let uniqueNode = 0
 
@@ -139,7 +139,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showSearch,
         showEventFilter,
         showPropertyFilter,
-        showHogQLEditor,
+        showTorQLEditor,
         showReload,
         showExport,
         showElapsedTime,
@@ -195,7 +195,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                         </div>
                         <LemonDivider />
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.HogQLExpression}
+                            groupType={TaxonomicFilterGroupType.TorQLExpression}
                             value={key}
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -203,15 +203,15 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const hogQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToHogQL(g, v)
-                                    : taxonomicEventFilterToHogQL(g, v)
-                                if (setQuery && hogQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                const torQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToTorQL(g, v)
+                                    : taxonomicEventFilterToTorQL(g, v)
+                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
                                     // Typecasting to a query type with select and order_by fields.
                                     // The actual query may or may not be an events query.
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
-                                    const isAggregation = isHogQlAggregation(hogQl)
+                                    const isAggregation = isTorQlAggregation(torQl)
                                     const isOrderBy = source.orderBy?.[0] === key
                                     const isDescOrderBy = source.orderBy?.[0] === `${key} DESC`
                                     setQuery({
@@ -219,13 +219,13 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                                         source: {
                                             ...source,
                                             select: columns
-                                                .map((s, i) => (i === index ? hogQl : s))
+                                                .map((s, i) => (i === index ? torQl : s))
                                                 .filter((c) =>
                                                     isAggregation ? c !== '*' && c !== 'person.$delete' : true
                                                 ),
                                             orderBy:
                                                 isOrderBy || isDescOrderBy
-                                                    ? [isDescOrderBy ? `${hogQl} DESC` : hogQl]
+                                                    ? [isDescOrderBy ? `${torQl} DESC` : torQl]
                                                     : source.orderBy,
                                         },
                                     })
@@ -269,7 +269,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             </>
                         ) : null}
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.HogQLExpression}
+                            groupType={TaxonomicFilterGroupType.TorQLExpression}
                             value=""
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -278,18 +278,18 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const hogQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToHogQL(g, v)
-                                    : taxonomicEventFilterToHogQL(g, v)
-                                if (setQuery && hogQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
-                                    const isAggregation = isHogQlAggregation(hogQl)
+                                const torQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToTorQL(g, v)
+                                    : taxonomicEventFilterToTorQL(g, v)
+                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                    const isAggregation = isTorQlAggregation(torQl)
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
                                     setQuery({
                                         ...query,
                                         source: {
                                             ...source,
-                                            select: [...columns.slice(0, index), hogQl, ...columns.slice(index)].filter(
+                                            select: [...columns.slice(0, index), torQl, ...columns.slice(index)].filter(
                                                 (c) => (isAggregation ? c !== '*' && c !== 'person.$delete' : true)
                                             ),
                                         } as EventsQuery | ActorsQuery,
@@ -298,7 +298,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             }}
                         />
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.HogQLExpression}
+                            groupType={TaxonomicFilterGroupType.TorQLExpression}
                             value=""
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -307,11 +307,11 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const hogQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToHogQL(g, v)
-                                    : taxonomicEventFilterToHogQL(g, v)
-                                if (setQuery && hogQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
-                                    const isAggregation = isHogQlAggregation(hogQl)
+                                const torQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToTorQL(g, v)
+                                    : taxonomicEventFilterToTorQL(g, v)
+                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                    const isAggregation = isTorQlAggregation(torQl)
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
                                     setQuery?.({
@@ -320,7 +320,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                                             ...source,
                                             select: [
                                                 ...columns.slice(0, index + 1),
-                                                hogQl,
+                                                torQl,
                                                 ...columns.slice(index + 1),
                                             ].filter((c) =>
                                                 isAggregation ? c !== '*' && c !== 'person.$delete' : true
@@ -385,7 +385,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
     ].filter((column) => !query.hiddenColumns?.includes(column.dataIndex) && column.dataIndex !== '*')
 
     const setQuerySource = useCallback(
-        (source: EventsNode | EventsQuery | PersonsNode | ActorsQuery | HogQLQuery | SessionAttributionExplorerQuery) =>
+        (source: EventsNode | EventsQuery | PersonsNode | ActorsQuery | TorQLQuery | SessionAttributionExplorerQuery) =>
             setQuery?.({ ...query, source }),
         [setQuery]
     )
@@ -407,7 +407,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showDateRange && sourceFeatures.has(QueryFeature.dateRangePicker) ? (
             <DateRange
                 key="date-range"
-                query={query.source as HogQLQuery | EventsQuery | SessionAttributionExplorerQuery}
+                query={query.source as TorQLQuery | EventsQuery | SessionAttributionExplorerQuery}
                 setQuery={setQuerySource}
             />
         ) : null,
@@ -420,7 +420,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showPropertyFilter && sourceFeatures.has(QueryFeature.eventPropertyFilters) ? (
             <EventPropertyFilters
                 key="event-property"
-                query={query.source as EventsQuery | HogQLQuery | SessionAttributionExplorerQuery}
+                query={query.source as EventsQuery | TorQLQuery | SessionAttributionExplorerQuery}
                 setQuery={setQuerySource}
                 taxonomicGroupTypes={Array.isArray(showPropertyFilter) ? showPropertyFilter : undefined}
             />
@@ -468,7 +468,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
     const editorButton = (
         <>
             <OpenEditorButton query={query} />
-            {response?.hogql ? <EditHogQLButton hogql={response.hogql} /> : null}
+            {response?.torql ? <EditTorQLButton torql={response.torql} /> : null}
         </>
     )
 
@@ -485,8 +485,8 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         <BindLogic logic={dataTableLogic} props={dataTableLogicProps}>
             <BindLogic logic={dataNodeLogic} props={dataNodeLogicProps}>
                 <div className="relative w-full flex flex-col gap-4 flex-1 h-full">
-                    {showHogQLEditor && isHogQLQuery(query.source) && !isReadOnly ? (
-                        <HogQLQueryEditor query={query.source} setQuery={setQuerySource} embedded={embedded} />
+                    {showTorQLEditor && isTorQLQuery(query.source) && !isReadOnly ? (
+                        <TorQLQueryEditor query={query.source} setQuery={setQuerySource} embedded={embedded} />
                     ) : null}
                     {showFirstRow && (
                         <div className="flex gap-4 items-center flex-wrap">

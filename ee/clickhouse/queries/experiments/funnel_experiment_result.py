@@ -7,8 +7,8 @@ from zoneinfo import ZoneInfo
 from rest_framework.exceptions import ValidationError
 
 from markettor.constants import ExperimentSignificanceCode, ExperimentNoResultsErrorKeys
-from markettor.hogql_queries.experiments import CONTROL_VARIANT_KEY
-from markettor.hogql_queries.experiments.funnel_statistics import (
+from markettor.torql_queries.experiments import CONTROL_VARIANT_KEY
+from markettor.torql_queries.experiments.funnel_statistics import (
     are_results_significant,
     calculate_credible_intervals,
     calculate_probabilities,

@@ -52,8 +52,8 @@ export function DataWarehouseExternalScene(): JSX.Element {
                 caption={
                     <div>
                         Explore all your data in MarketTor with{' '}
-                        <Link to="https://markettor.com/manual/hogql" target="_blank">
-                            HogQL
+                        <Link to="https://markettor.com/manual/torql" target="_blank">
+                            TorQL
                         </Link>
                         . Connect your own tables from S3 to query data from outside MarketTor.{' '}
                         <Link to="https://markettor.com/docs/data/data-warehouse">Learn more</Link>

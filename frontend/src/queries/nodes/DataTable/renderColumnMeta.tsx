@@ -6,7 +6,7 @@ import { getQueryFeatures, QueryFeature } from '~/queries/nodes/DataTable/queryF
 import { extractExpressionComment } from '~/queries/nodes/DataTable/utils'
 import { DataTableNode, EventsQuery } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'
-import { isHogQLQuery, trimQuotes } from '~/queries/utils'
+import { isTorQLQuery, trimQuotes } from '~/queries/utils'
 
 export interface ColumnMeta {
     title?: JSX.Element | string
@@ -27,7 +27,7 @@ export function renderColumnMeta(key: string, query: DataTableNode, context?: Qu
     if (queryContextColumnName && queryContextColumn && (queryContextColumn.title || queryContextColumn.renderTitle)) {
         const Component = queryContextColumn.renderTitle
         title = Component ? <Component columnName={queryContextColumnName} query={query} /> : queryContextColumn.title
-    } else if (isHogQLQuery(query.source)) {
+    } else if (isTorQLQuery(query.source)) {
         title = key
         if (title.startsWith('`') && title.endsWith('`')) {
             title = title.substring(1, title.length - 1)

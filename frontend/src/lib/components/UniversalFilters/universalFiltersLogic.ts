@@ -97,7 +97,7 @@ export const universalFiltersLogic = kea<universalFiltersLogicType>([
                         TaxonomicFilterGroupType.EventFeatureFlags,
                         TaxonomicFilterGroupType.Cohorts,
                         TaxonomicFilterGroupType.Elements,
-                        TaxonomicFilterGroupType.HogQLExpression,
+                        TaxonomicFilterGroupType.TorQLExpression,
                     ].includes(t)
                 ),
         ],

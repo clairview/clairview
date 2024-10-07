@@ -74,7 +74,7 @@ class GroupsJoinQuery:
             group_properties_joined=True,
             person_properties_mode=PersonPropertiesMode.DIRECT,
             _top_level=True,
-            hogql_context=self._filter.hogql_context,
+            torql_context=self._filter.torql_context,
         )
 
         params.update(filter_params)

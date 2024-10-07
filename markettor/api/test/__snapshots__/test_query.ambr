@@ -176,7 +176,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_full_hogql_query
+# name: TestQuery.test_full_torql_query
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -195,7 +195,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_full_hogql_query_materialized
+# name: TestQuery.test_full_torql_query_materialized
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -214,7 +214,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_full_hogql_query_view
+# name: TestQuery.test_full_torql_query_view
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -233,7 +233,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_full_hogql_query_view.1
+# name: TestQuery.test_full_torql_query_view.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT event_view.event AS event,
@@ -256,7 +256,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter
+# name: TestQuery.test_torql_property_filter
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -277,7 +277,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter.1
+# name: TestQuery.test_torql_property_filter.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -298,7 +298,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter.2
+# name: TestQuery.test_torql_property_filter.2
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -319,7 +319,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter.3
+# name: TestQuery.test_torql_property_filter.3
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -340,7 +340,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter_materialized
+# name: TestQuery.test_torql_property_filter_materialized
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -361,7 +361,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter_materialized.1
+# name: TestQuery.test_torql_property_filter_materialized.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -382,7 +382,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter_materialized.2
+# name: TestQuery.test_torql_property_filter_materialized.2
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -403,7 +403,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_hogql_property_filter_materialized.3
+# name: TestQuery.test_torql_property_filter_materialized.3
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT events.event AS event,
@@ -597,7 +597,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_select_hogql_expressions
+# name: TestQuery.test_select_torql_expressions
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, 'key'), ''), 'null'), '^"|"$', '') AS key,
@@ -617,7 +617,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_select_hogql_expressions.1
+# name: TestQuery.test_select_torql_expressions.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT tuple(events.uuid, events.event, events.properties, toTimeZone(events.timestamp, 'UTC'), events.team_id, events.distinct_id, events.elements_chain, toTimeZone(events.created_at, 'UTC')),
@@ -635,7 +635,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_select_hogql_expressions.2
+# name: TestQuery.test_select_torql_expressions.2
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT count(),
@@ -654,7 +654,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestQuery.test_select_hogql_expressions.3
+# name: TestQuery.test_select_torql_expressions.3
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT count(),

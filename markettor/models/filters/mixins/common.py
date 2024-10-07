@@ -50,7 +50,7 @@ from markettor.constants import (
     TRENDS_WORLD_MAP,
     BreakdownAttributionType,
 )
-from markettor.hogql.constants import BREAKDOWN_VALUES_LIMIT, BREAKDOWN_VALUES_LIMIT_FOR_COUNTRIES
+from markettor.torql.constants import BREAKDOWN_VALUES_LIMIT, BREAKDOWN_VALUES_LIMIT_FOR_COUNTRIES
 from markettor.models.entity import Entity, ExclusionEntity, MathType
 from markettor.models.filters.mixins.base import BaseParamMixin, BreakdownType
 from markettor.models.filters.mixins.utils import (

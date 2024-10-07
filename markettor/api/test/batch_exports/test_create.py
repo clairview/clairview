@@ -260,7 +260,7 @@ def test_cannot_create_a_batch_export_with_higher_frequencies_if_not_enabled(cli
             )
 
 
-TEST_HOGQL_QUERY = """
+TEST_TORQL_QUERY = """
 SELECT
   event,
   team_id AS my_team,
@@ -272,7 +272,7 @@ FROM events
 
 
 def test_create_batch_export_with_custom_schema(client: HttpClient):
-    """Test creating a BatchExport with a custom schema expressed as a HogQL Query.
+    """Test creating a BatchExport with a custom schema expressed as a TorQL Query.
 
     When creating a BatchExport, we should create a corresponding Schedule in
     Temporal as described by the associated BatchExportSchedule model. In this
@@ -295,7 +295,7 @@ def test_create_batch_export_with_custom_schema(client: HttpClient):
     batch_export_data = {
         "name": "my-production-s3-bucket-destination",
         "destination": destination_data,
-        "hogql_query": TEST_HOGQL_QUERY,
+        "torql_query": TEST_TORQL_QUERY,
         "interval": "hour",
     }
 
@@ -314,8 +314,8 @@ def test_create_batch_export_with_custom_schema(client: HttpClient):
         assert response.status_code == status.HTTP_201_CREATED, response.json()
 
         data = response.json()
-        expected_hogql_query = " ".join(TEST_HOGQL_QUERY.split())  # Don't care about whitespace
-        assert data["schema"]["hogql_query"] == expected_hogql_query
+        expected_torql_query = " ".join(TEST_TORQL_QUERY.split())  # Don't care about whitespace
+        assert data["schema"]["torql_query"] == expected_torql_query
 
         codec = EncryptionCodec(settings=settings)
         schedule = describe_schedule(temporal, data["id"])
@@ -330,21 +330,21 @@ def test_create_batch_export_with_custom_schema(client: HttpClient):
             {"expression": "events.team_id", "alias": "my_team"},
             {"expression": "events.properties", "alias": "properties"},
             {
-                "expression": "replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(hogql_val_0)s), ''), 'null'), '^\"|\"$', '')",
+                "expression": "replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(torql_val_0)s), ''), 'null'), '^\"|\"$', '')",
                 "alias": "browser",
             },
             {
-                "expression": "replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(hogql_val_1)s), ''), 'null'), '^\"|\"$', '')",
+                "expression": "replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(torql_val_1)s), ''), 'null'), '^\"|\"$', '')",
                 "alias": "custom",
             },
         ]
         expected_schema = {
             "fields": expected_fields,
             "values": {
-                "hogql_val_0": "$browser",
-                "hogql_val_1": "custom",
+                "torql_val_0": "$browser",
+                "torql_val_1": "custom",
             },
-            "hogql_query": expected_hogql_query,
+            "torql_query": expected_torql_query,
         }
 
         assert batch_export.schema == expected_schema
@@ -380,7 +380,7 @@ def test_create_batch_export_fails_with_invalid_query(client: HttpClient, invali
         "name": "my-production-s3-bucket-destination",
         "destination": destination_data,
         "interval": "hour",
-        "hogql_query": invalid_query,
+        "torql_query": invalid_query,
     }
 
     organization = create_organization("Test Org")

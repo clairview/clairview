@@ -4,7 +4,7 @@ import { groupsAccessLogic } from 'lib/introductions/groupsAccessLogic'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 
 import { groupsModel } from '~/models/groupsModel'
-import { BaseMathType, CountPerActorMathType, HogQLMathType, PropertyMathType } from '~/types'
+import { BaseMathType, CountPerActorMathType, TorQLMathType, PropertyMathType } from '~/types'
 
 import type { mathsLogicType } from './mathsLogicType'
 
@@ -14,7 +14,7 @@ export enum MathCategory {
     ActorCount,
     EventCountPerActor,
     PropertyValue,
-    HogQLExpression,
+    TorQLExpression,
 }
 
 export interface MathDefinition {
@@ -220,12 +220,12 @@ export const PROPERTY_MATH_DEFINITIONS: Record<PropertyMathType, MathDefinition>
         category: MathCategory.PropertyValue,
     },
 }
-export const HOGQL_MATH_DEFINITIONS: Record<HogQLMathType, MathDefinition> = {
-    [HogQLMathType.HogQL]: {
-        name: 'HogQL expression',
-        shortName: 'HogQL expression',
-        description: <>Aggregate with a custom HogQL expression.</>,
-        category: MathCategory.HogQLExpression,
+export const TORQL_MATH_DEFINITIONS: Record<TorQLMathType, MathDefinition> = {
+    [TorQLMathType.TorQL]: {
+        name: 'TorQL expression',
+        shortName: 'TorQL expression',
+        description: <>Aggregate with a custom TorQL expression.</>,
+        category: MathCategory.TorQLExpression,
     },
 }
 
@@ -315,7 +315,7 @@ export const mathsLogic = kea<mathsLogicType>([
                     ...groupsMathDefinitions,
                     ...PROPERTY_MATH_DEFINITIONS,
                     ...COUNT_PER_ACTOR_MATH_DEFINITIONS,
-                    ...HOGQL_MATH_DEFINITIONS,
+                    ...TORQL_MATH_DEFINITIONS,
                 }
                 return filterMathTypesUnderFeatureFlags(allMathDefinitions, featureFlags)
             },

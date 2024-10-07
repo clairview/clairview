@@ -121,9 +121,9 @@ def print(args: list[Any], team: Optional["Team"], stdout: Optional[list[str]], 
 def run(args: list[Any], team: Optional["Team"], stdout: Optional[list[str]], timeout: float) -> list[Any]:
     if team is None:
         return []
-    from markettor.hogql.query import execute_hogql_query
+    from markettor.torql.query import execute_torql_query
 
-    response = execute_hogql_query(query=args[0], team=team)
+    response = execute_torql_query(query=args[0], team=team)
     return response.results
 
 

@@ -43,7 +43,7 @@ from markettor.constants import (
     FunnelCorrelationType,
     FunnelOrderType,
     FunnelVizType,
-    FUNNEL_AGGREAGTE_BY_HOGQL,
+    FUNNEL_AGGREAGTE_BY_TORQL,
 )
 from markettor.models.filters.mixins.base import BaseParamMixin, FunnelWindowIntervalType
 from markettor.models.filters.mixins.utils import cached_property, include_dict
@@ -211,14 +211,14 @@ class FunnelLayoutMixin(BaseParamMixin):
         return {FUNNEL_LAYOUT: self.layout} if self.layout else {}
 
 
-class FunnelHogQLAggregationMixin(BaseParamMixin):
+class FunnelTorQLAggregationMixin(BaseParamMixin):
     @cached_property
-    def funnel_aggregate_by_hogql(self) -> Optional[str]:
-        return self._data.get(FUNNEL_AGGREAGTE_BY_HOGQL)
+    def funnel_aggregate_by_torql(self) -> Optional[str]:
+        return self._data.get(FUNNEL_AGGREAGTE_BY_TORQL)
 
     @include_dict
-    def funnel_aggregate_by_hogql_to_dict(self):
-        return {FUNNEL_AGGREAGTE_BY_HOGQL: self.funnel_aggregate_by_hogql} if self.funnel_aggregate_by_hogql else {}
+    def funnel_aggregate_by_torql_to_dict(self):
+        return {FUNNEL_AGGREAGTE_BY_TORQL: self.funnel_aggregate_by_torql} if self.funnel_aggregate_by_torql else {}
 
 
 class FunnelTypeMixin(BaseParamMixin):

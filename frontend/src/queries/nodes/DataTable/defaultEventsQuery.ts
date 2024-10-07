@@ -1,15 +1,15 @@
 import { getDefaultEventsSceneQuery } from 'scenes/activity/explore/defaults'
 
 import { EventsQuery, NodeKind } from '~/queries/schema'
-import { escapePropertyAsHogQlIdentifier } from '~/queries/utils'
+import { escapePropertyAsTorQlIdentifier } from '~/queries/utils'
 import { TeamType } from '~/types'
 
-/** Indicates HogQL usage if team.live_events_columns = [HOGQL_COLUMNS_KEY, ...] */
-export const HOGQL_COLUMNS_KEY = '--v2:hogql'
+/** Indicates TorQL usage if team.live_events_columns = [TORQL_COLUMNS_KEY, ...] */
+export const TORQL_COLUMNS_KEY = '--v2:torql'
 
 export function cleanLiveEventsColumns(columns: string[]): string[] {
     // new columns
-    if (columns.length > 0 && columns[0] === HOGQL_COLUMNS_KEY) {
+    if (columns.length > 0 && columns[0] === TORQL_COLUMNS_KEY) {
         return columns.slice(1)
     }
     // legacy columns
@@ -25,7 +25,7 @@ export function cleanLiveEventsColumns(columns: string[]): string[] {
             if (column === 'source') {
                 return 'properties.$lib'
             }
-            return `properties.${escapePropertyAsHogQlIdentifier(String(column))}`
+            return `properties.${escapePropertyAsTorQlIdentifier(String(column))}`
         }),
         'timestamp',
     ]

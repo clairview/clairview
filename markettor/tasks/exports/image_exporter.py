@@ -16,9 +16,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from markettor.api.services.query import process_query_dict
-from markettor.hogql.constants import LimitContext
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from markettor.hogql_queries.query_runner import ExecutionMode
+from markettor.torql.constants import LimitContext
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from markettor.torql_queries.query_runner import ExecutionMode
 from markettor.models.exported_asset import (
     ExportedAsset,
     get_public_access_token,

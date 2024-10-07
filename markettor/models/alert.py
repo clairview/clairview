@@ -6,7 +6,7 @@ from dateutil.relativedelta import relativedelta
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
 from markettor.models.insight import Insight
 from markettor.models.utils import UUIDModel, CreatedMetaFields
 from markettor.schema import AlertCondition, InsightThreshold, AlertState, AlertCalculationInterval

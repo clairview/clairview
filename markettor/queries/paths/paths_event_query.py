@@ -6,9 +6,9 @@ from markettor.constants import (
     FUNNEL_PATH_BETWEEN_STEPS,
     PAGEVIEW_EVENT,
     SCREEN_EVENT,
-    HOGQL,
+    TORQL,
 )
-from markettor.hogql.hogql import translate_hogql
+from markettor.torql.torql import translate_torql
 from markettor.models.filters.path_filter import PathFilter
 from markettor.models.property.util import get_property_string_expr
 from markettor.models.team import Team
@@ -65,20 +65,20 @@ class PathEventQuery(EventQuery):
             for field in self._extra_event_properties
         ]
 
-        event_hogql = "event"
+        event_torql = "event"
 
-        if self._should_query_hogql():
-            event_hogql = self._filter.paths_hogql_expression or event_hogql
+        if self._should_query_torql():
+            event_torql = self._filter.paths_torql_expression or event_torql
         if self._should_query_url():
-            event_hogql = f"if(event = '{PAGEVIEW_EVENT}', replaceRegexpAll(ifNull(properties.$current_url, ''), '(.)/$', '\\\\1'), {event_hogql})"
+            event_torql = f"if(event = '{PAGEVIEW_EVENT}', replaceRegexpAll(ifNull(properties.$current_url, ''), '(.)/$', '\\\\1'), {event_torql})"
         if self._should_query_screen():
-            event_hogql = f"if(event = '{SCREEN_EVENT}', properties.$screen_name, {event_hogql})"
+            event_torql = f"if(event = '{SCREEN_EVENT}', properties.$screen_name, {event_torql})"
 
         event_conditional = (
             "ifNull("
-            + translate_hogql(
-                query=event_hogql,
-                context=self._filter.hogql_context,
+            + translate_torql(
+                query=event_torql,
+                context=self._filter.torql_context,
                 dialect="clickhouse",
                 events_table_alias=self.EVENT_TABLE_ALIAS,
             )
@@ -202,7 +202,7 @@ class PathEventQuery(EventQuery):
         if self._filter.include_all_custom_events:
             or_conditions.append(f"NOT event LIKE '$%%'")
 
-        if self._filter.include_hogql:
+        if self._filter.include_torql:
             or_conditions.append(f"1 = 1")
 
         if self._filter.custom_events:
@@ -241,12 +241,12 @@ class PathEventQuery(EventQuery):
 
         return False
 
-    def _should_query_hogql(self) -> bool:
+    def _should_query_torql(self) -> bool:
         if (
             self._filter.target_events == [] and self._filter.custom_events == []
-        ) and HOGQL not in self._filter.exclude_events:
+        ) and TORQL not in self._filter.exclude_events:
             return True
-        elif self._filter.include_hogql:
+        elif self._filter.include_torql:
             return True
 
         return False

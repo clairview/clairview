@@ -4,11 +4,11 @@ from django.db import models
 
 from markettor.client import sync_execute
 from markettor.errors import wrap_query_error
-from markettor.hogql import ast
-from markettor.hogql.database.models import (
+from markettor.torql import ast
+from markettor.torql.database.models import (
     FieldOrTable,
 )
-from markettor.hogql.database.s3_table import S3Table, build_function_call
+from markettor.torql.database.s3_table import S3Table, build_function_call
 from markettor.models.team import Team
 from markettor.models.utils import (
     CreatedMetaFields,
@@ -17,7 +17,7 @@ from markettor.models.utils import (
     UpdatedMetaFields,
     sane_repr,
 )
-from markettor.schema import DatabaseSerializedFieldType, HogQLQueryModifiers
+from markettor.schema import DatabaseSerializedFieldType, TorQLQueryModifiers
 from markettor.warehouse.models.util import remove_named_tuples
 from markettor.warehouse.models.external_data_schema import ExternalDataSchema
 from django.db.models import Q
@@ -25,7 +25,7 @@ from .credential import DataWarehouseCredential
 from uuid import UUID
 from sentry_sdk import capture_exception
 from markettor.warehouse.util import database_sync_to_async
-from markettor.warehouse.models.util import CLICKHOUSE_HOGQL_MAPPING, clean_type, STR_TO_HOGQL_MAPPING
+from markettor.warehouse.models.util import CLICKHOUSE_TORQL_MAPPING, clean_type, STR_TO_TORQL_MAPPING
 from .external_table_definitions import external_tables
 
 SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING: dict[DatabaseSerializedFieldType, str] = {
@@ -119,7 +119,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
         return self.name[len(prefix) :]
 
     def validate_column_type(self, column_key) -> bool:
-        from markettor.hogql.query import execute_hogql_query
+        from markettor.torql.query import execute_torql_query
 
         if column_key not in self.columns.keys():
             raise Exception(f"Column {column_key} does not exist on table: {self.name}")
@@ -130,7 +130,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
                 select_from=ast.JoinExpr(table=ast.Field(chain=[self.name])),
             )
 
-            execute_hogql_query(query, self.team, modifiers=HogQLQueryModifiers(s3TableUseInvalidColumns=True))
+            execute_torql_query(query, self.team, modifiers=TorQLQueryModifiers(s3TableUseInvalidColumns=True))
             return True
         except:
             return False
@@ -163,7 +163,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
         columns = {
             str(item[0]): {
-                "hogql": CLICKHOUSE_HOGQL_MAPPING[clean_type(str(item[1]))].__name__,
+                "torql": CLICKHOUSE_TORQL_MAPPING[clean_type(str(item[1]))].__name__,
                 "clickhouse": item[1],
                 "valid": True,
             }
@@ -193,7 +193,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
         return result[0][0]
 
-    def hogql_definition(self, modifiers: Optional[HogQLQueryModifiers] = None) -> S3Table:
+    def torql_definition(self, modifiers: Optional[TorQLQueryModifiers] = None) -> S3Table:
         columns = self.columns or {}
 
         fields: dict[str, FieldOrTable] = {}
@@ -228,12 +228,12 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
             # Support for 'old' style columns
             if isinstance(type, str):
-                hogql_type_str = clickhouse_type.partition("(")[0]
-                hogql_type = CLICKHOUSE_HOGQL_MAPPING[hogql_type_str]
+                torql_type_str = clickhouse_type.partition("(")[0]
+                torql_type = CLICKHOUSE_TORQL_MAPPING[torql_type_str]
             else:
-                hogql_type = STR_TO_HOGQL_MAPPING[type["hogql"]]
+                torql_type = STR_TO_TORQL_MAPPING[type["torql"]]
 
-            fields[column] = hogql_type(name=column, nullable=is_nullable)
+            fields[column] = torql_type(name=column, nullable=is_nullable)
 
         # Replace fields with any redefined fields if they exist
         external_table_fields = external_tables.get(self.table_name_without_prefix())

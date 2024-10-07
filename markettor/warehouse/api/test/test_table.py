@@ -12,8 +12,8 @@ class TestTable(APIBaseTest):
     @patch(
         "markettor.warehouse.models.table.DataWarehouseTable.get_columns",
         return_value={
-            "id": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
-            "a_column": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
+            "id": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
+            "a_column": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
         },
     )
     @patch(
@@ -41,8 +41,8 @@ class TestTable(APIBaseTest):
 
         assert table.name == "whatever"
         assert table.columns == {
-            "id": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
-            "a_column": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
+            "id": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
+            "a_column": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
         }
 
         assert table.credential.access_key, "_accesskey"
@@ -51,8 +51,8 @@ class TestTable(APIBaseTest):
     @patch(
         "markettor.warehouse.models.table.DataWarehouseTable.get_columns",
         return_value={
-            "id": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
-            "a_column": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
+            "id": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
+            "a_column": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
         },
     )
     @patch(
@@ -80,8 +80,8 @@ class TestTable(APIBaseTest):
 
         assert table.name == "whatever"
         assert table.columns == {
-            "id": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": False},
-            "a_column": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": False},
+            "id": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": False},
+            "a_column": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": False},
         }
 
         assert table.credential.access_key, "_accesskey"
@@ -123,7 +123,7 @@ class TestTable(APIBaseTest):
         table.refresh_from_db()
 
         assert response.status_code == 200
-        assert table.columns["id"] == {"clickhouse": "Nullable(Float64)", "hogql": "FloatDatabaseField", "valid": True}
+        assert table.columns["id"] == {"clickhouse": "Nullable(Float64)", "torql": "FloatDatabaseField", "valid": True}
 
     @patch(
         "markettor.warehouse.models.table.DataWarehouseTable.validate_column_type",
@@ -135,7 +135,7 @@ class TestTable(APIBaseTest):
             format="Parquet",
             team=self.team,
             team_id=self.team.pk,
-            columns={"id": {"clickhouse": "Nullable(Int64)", "hogql": "IntegerDatabaseField"}},
+            columns={"id": {"clickhouse": "Nullable(Int64)", "torql": "IntegerDatabaseField"}},
         )
         response = self.client.post(
             f"/api/projects/{self.team.pk}/warehouse_tables/{table.id}/update_schema", {"updates": {"id": "float"}}
@@ -144,10 +144,10 @@ class TestTable(APIBaseTest):
         table.refresh_from_db()
 
         assert response.status_code == 200
-        assert table.columns["id"] == {"clickhouse": "Nullable(Float64)", "hogql": "FloatDatabaseField", "valid": True}
+        assert table.columns["id"] == {"clickhouse": "Nullable(Float64)", "torql": "FloatDatabaseField", "valid": True}
 
     def test_update_schema_200_no_updates(self):
-        columns = {"id": {"clickhouse": "Nullable(Int64)", "hogql": "IntegerDatabaseField"}}
+        columns = {"id": {"clickhouse": "Nullable(Int64)", "torql": "IntegerDatabaseField"}}
         table = DataWarehouseTable.objects.create(
             name="test_table",
             format="Parquet",
@@ -172,7 +172,7 @@ class TestTable(APIBaseTest):
         assert table.columns == columns
 
     def test_update_schema_400_with_source(self):
-        columns = {"id": {"clickhouse": "Nullable(Int64)", "hogql": "IntegerDatabaseField"}}
+        columns = {"id": {"clickhouse": "Nullable(Int64)", "torql": "IntegerDatabaseField"}}
 
         souce = ExternalDataSource.objects.create(team=self.team, team_id=self.team.pk)
         table = DataWarehouseTable.objects.create(
@@ -194,7 +194,7 @@ class TestTable(APIBaseTest):
         assert table.columns == columns
 
     def test_update_schema_400_with_non_existing_column(self):
-        columns = {"id": {"clickhouse": "Nullable(Int64)", "hogql": "IntegerDatabaseField"}}
+        columns = {"id": {"clickhouse": "Nullable(Int64)", "torql": "IntegerDatabaseField"}}
 
         table = DataWarehouseTable.objects.create(
             name="test_table",
@@ -215,7 +215,7 @@ class TestTable(APIBaseTest):
         assert table.columns == columns
 
     def test_update_schema_400_with_invalid_type(self):
-        columns = {"id": {"clickhouse": "Nullable(Int64)", "hogql": "IntegerDatabaseField"}}
+        columns = {"id": {"clickhouse": "Nullable(Int64)", "torql": "IntegerDatabaseField"}}
 
         table = DataWarehouseTable.objects.create(
             name="test_table",
@@ -238,8 +238,8 @@ class TestTable(APIBaseTest):
     @patch(
         "markettor.warehouse.models.table.DataWarehouseTable.get_columns",
         return_value={
-            "id": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
-            "a_column": {"clickhouse": "Nullable(String)", "hogql": "StringDatabaseField", "valid": True},
+            "id": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
+            "a_column": {"clickhouse": "Nullable(String)", "torql": "StringDatabaseField", "valid": True},
         },
     )
     @patch(

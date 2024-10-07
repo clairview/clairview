@@ -1405,7 +1405,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1443,7 +1443,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded.1
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1496,7 +1496,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded.2
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded.2
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1549,7 +1549,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1587,7 +1587,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized.1
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1640,7 +1640,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized.2
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized.2
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1693,7 +1693,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_person_properties
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_person_properties
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1746,7 +1746,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_person_properties.1
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_person_properties.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1799,7 +1799,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_properties
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_properties
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1837,7 +1837,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_properties.1
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_properties.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1875,7 +1875,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_properties_materialized
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_properties_materialized
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -1913,7 +1913,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_event_filter_with_hogql_properties_materialized.1
+# name: TestSessionRecordingsListFromFilters.test_event_filter_with_torql_properties_materialized.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4662,7 +4662,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_event_property_test_account_filter
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_event_property_test_account_filter
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4700,7 +4700,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_event_property_test_account_filter.1
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_event_property_test_account_filter.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4738,7 +4738,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_event_property_test_account_filter_materialized
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_event_property_test_account_filter_materialized
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4776,7 +4776,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_event_property_test_account_filter_materialized.1
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_event_property_test_account_filter_materialized.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4814,7 +4814,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_person_property_test_account_filter
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_person_property_test_account_filter
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4852,7 +4852,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_person_property_test_account_filter.1
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_person_property_test_account_filter.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4905,7 +4905,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_person_property_test_account_filter_materialized
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_person_property_test_account_filter_materialized
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),
@@ -4943,7 +4943,7 @@
                     max_bytes_before_external_group_by=0
   '''
 # ---
-# name: TestSessionRecordingsListFromFilters.test_top_level_hogql_person_property_test_account_filter_materialized.1
+# name: TestSessionRecordingsListFromFilters.test_top_level_torql_person_property_test_account_filter_materialized.1
   '''
   SELECT s.session_id AS session_id,
          any(s.team_id),

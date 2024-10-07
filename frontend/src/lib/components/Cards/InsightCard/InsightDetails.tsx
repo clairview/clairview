@@ -203,8 +203,8 @@ function SeriesDisplay({
                 {!isFunnelsQuery(query) && (
                     <span className="leading-none">
                         counted by{' '}
-                        {mathDefinition?.category === MathCategory.HogQLExpression ? (
-                            <code>{filter.math_hogql}</code>
+                        {mathDefinition?.category === MathCategory.TorQLExpression ? (
+                            <code>{filter.math_torql}</code>
                         ) : (
                             <>
                                 {mathDefinition?.category === MathCategory.PropertyValue && filter.math_property && (
@@ -366,7 +366,7 @@ function InsightDetailsInternal(
 ): JSX.Element {
     const { created_at, created_by, query } = insight
 
-    // TODO: Implement summaries for HogQL query insights
+    // TODO: Implement summaries for TorQL query insights
     return (
         <div className="InsightDetails" ref={ref}>
             {isInsightVizNode(query) && (

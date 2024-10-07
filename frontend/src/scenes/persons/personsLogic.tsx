@@ -14,7 +14,7 @@ import { teamLogic } from 'scenes/teamLogic'
 import { urls } from 'scenes/urls'
 
 import { ActivityFilters } from '~/layout/navigation-3000/sidepanel/panels/activity/activityForSceneLogic'
-import { hogqlQuery } from '~/queries/query'
+import { torqlQuery } from '~/queries/query'
 import {
     ActivityScope,
     AnyPropertyFilter,
@@ -112,7 +112,7 @@ export const personsLogic = kea<personsLogicType>([
                     return person
                 },
                 loadPersonUUID: async ({ uuid }): Promise<PersonType | null> => {
-                    const response = await hogqlQuery(
+                    const response = await torqlQuery(
                         'select id, groupArray(pdi.distinct_id) as distinct_ids, properties, is_identified, created_at from persons where id={id} group by id, properties, is_identified, created_at',
                         { id: uuid }
                     )

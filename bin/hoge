@@ -2,7 +2,7 @@
 set -e
 
 if [[ "$@" == *".hog"* ]]; then
-  exec python3 -m markettor.hogql.cli --compile "$@"
+  exec python3 -m markettor.torql.cli --compile "$@"
 else
   echo "$0 - the Hog compilër! 🦔+🕶️= Hoge"
   echo ""

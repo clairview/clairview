@@ -6,7 +6,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.utils import timezone
 
-from markettor.hogql.errors import BaseHogQLError
+from markettor.torql.errors import BaseTorQLError
 from markettor.models.signals import mutable_receiver
 from markettor.plugins.plugin_server_api import drop_action_on_workers, reload_action_on_workers
 
@@ -89,15 +89,15 @@ class Action(models.Model):
         return [action_step.event for action_step in self.steps]
 
     def refresh_bytecode(self):
-        from markettor.hogql.property import action_to_expr
-        from markettor.hogql.bytecode import create_bytecode
+        from markettor.torql.property import action_to_expr
+        from markettor.torql.bytecode import create_bytecode
 
         try:
             new_bytecode = create_bytecode(action_to_expr(self))
             if new_bytecode != self.bytecode or self.bytecode_error is not None:
                 self.bytecode = new_bytecode
                 self.bytecode_error = None
-        except BaseHogQLError as e:
+        except BaseTorQLError as e:
             # There are several known cases when bytecode generation can fail. Instead of spamming
             # Sentry with errors, ignore those cases for now.
             if self.bytecode is not None or self.bytecode_error != str(e):

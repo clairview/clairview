@@ -16,11 +16,11 @@ interface DataTableOpenEditorProps {
 export function DataTableOpenEditor({ query }: DataTableOpenEditorProps): JSX.Element | null {
     const { response } = useValues(dataTableLogic)
 
-    const tableInsightQuery: DataTableNode | null = response?.hogql
+    const tableInsightQuery: DataTableNode | null = response?.torql
         ? {
               kind: NodeKind.DataTableNode,
               full: true,
-              source: { kind: NodeKind.HogQLQuery, query: response.hogql },
+              source: { kind: NodeKind.TorQLQuery, query: response.torql },
           }
         : null
 
@@ -30,7 +30,7 @@ export function DataTableOpenEditor({ query }: DataTableOpenEditorProps): JSX.El
             icon={<IconTableChart />}
             to={urls.insightNew(undefined, undefined, query)}
             sideAction={
-                response?.hogql
+                response?.torql
                     ? {
                           dropdown: {
                               overlay: (

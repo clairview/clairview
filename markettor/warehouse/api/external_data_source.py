@@ -22,7 +22,7 @@ from markettor.warehouse.data_load.service import (
 )
 from markettor.warehouse.models import ExternalDataSource, ExternalDataSchema, ExternalDataJob
 from markettor.warehouse.api.external_data_schema import ExternalDataSchemaSerializer, SimpleExternalDataSchemaSerializer
-from markettor.hogql.database.database import create_hogql_database
+from markettor.torql.database.database import create_torql_database
 from markettor.temporal.data_imports.pipelines.stripe import validate_credentials as validate_stripe_credentials
 from markettor.temporal.data_imports.pipelines.zendesk import validate_credentials as validate_zendesk_credentials
 from markettor.temporal.data_imports.pipelines.vitally import validate_credentials as validate_vitally_credentials
@@ -228,7 +228,7 @@ class ExternalDataSourceViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_hogql_database(team_id=self.team_id)
+        context["database"] = create_torql_database(team_id=self.team_id)
 
         return context
 

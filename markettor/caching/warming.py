@@ -14,9 +14,9 @@ from markettor.api.services.query import process_query_dict
 from markettor.caching.utils import largest_teams
 from markettor.clickhouse.query_tagging import tag_queries
 from markettor.errors import CHQueryErrorTooManySimultaneousQueries
-from markettor.hogql_queries.query_cache import QueryCacheManager
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from markettor.hogql_queries.query_runner import ExecutionMode
+from markettor.torql_queries.query_cache import QueryCacheManager
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from markettor.torql_queries.query_runner import ExecutionMode
 from markettor.models import Team, Insight, DashboardTile
 from markettor.tasks.utils import CeleryQueue
 

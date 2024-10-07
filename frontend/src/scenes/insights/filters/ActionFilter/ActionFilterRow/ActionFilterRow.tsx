@@ -15,7 +15,7 @@ import {
 } from '@markettor/lemon-ui'
 import { BuiltLogic, useActions, useValues } from 'kea'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'
-import { HogQLEditor } from 'lib/components/HogQLEditor/HogQLEditor'
+import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
 import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { SeriesGlyph, SeriesLetter } from 'lib/components/SeriesGlyph'
@@ -52,7 +52,7 @@ import {
     EntityType,
     EntityTypes,
     FunnelExclusionLegacy,
-    HogQLMathType,
+    TorQLMathType,
     PropertyFilterValue,
     PropertyMathType,
 } from '~/types'
@@ -168,7 +168,7 @@ export function ActionFilterRow({
     const { mathDefinitions } = useValues(mathsLogic)
     const { dataWarehouseTablesMap } = useValues(databaseTableListLogic)
 
-    const [isHogQLDropdownVisible, setIsHogQLDropdownVisible] = useState(false)
+    const [isTorQLDropdownVisible, setIsTorQLDropdownVisible] = useState(false)
     const [isMenuVisible, setIsMenuVisible] = useState(false)
 
     const { setNodeRef, attributes, transform, transition, listeners, isDragging } = useSortable({ id: filter.uuid })
@@ -179,7 +179,7 @@ export function ActionFilterRow({
     const {
         math,
         math_property: mathProperty,
-        math_hogql: mathHogQL,
+        math_torql: mathTorQL,
         math_group_type_index: mathGroupTypeIndex,
     } = filter
 
@@ -194,14 +194,14 @@ export function ActionFilterRow({
                       mathDefinitions[selectedMath]?.category === MathCategory.PropertyValue
                           ? mathProperty ?? '$time'
                           : undefined,
-                  math_hogql:
-                      mathDefinitions[selectedMath]?.category === MathCategory.HogQLExpression
-                          ? mathHogQL ?? 'count()'
+                  math_torql:
+                      mathDefinitions[selectedMath]?.category === MathCategory.TorQLExpression
+                          ? mathTorQL ?? 'count()'
                           : undefined,
               }
             : {
                   math_property: undefined,
-                  math_hogql: undefined,
+                  math_torql: undefined,
                   math_group_type_index: undefined,
                   math: undefined,
               }
@@ -215,17 +215,17 @@ export function ActionFilterRow({
     const onMathPropertySelect = (_: unknown, property: string): void => {
         updateFilterMath({
             ...filter,
-            math_hogql: undefined,
+            math_torql: undefined,
             math_property: property,
             index,
         })
     }
 
-    const onMathHogQLSelect = (_: unknown, hogql: string): void => {
+    const onMathTorQLSelect = (_: unknown, torql: string): void => {
         updateFilterMath({
             ...filter,
             math_property: undefined,
-            math_hogql: hogql,
+            math_torql: torql,
             index,
         })
     }
@@ -479,20 +479,20 @@ export function ActionFilterRow({
                                             </div>
                                         )}
                                         {mathDefinitions[math || BaseMathType.TotalCount]?.category ===
-                                            MathCategory.HogQLExpression && (
+                                            MathCategory.TorQLExpression && (
                                             <div className="flex-auto overflow-hidden">
                                                 <LemonDropdown
-                                                    visible={isHogQLDropdownVisible}
+                                                    visible={isTorQLDropdownVisible}
                                                     closeOnClickInside={false}
-                                                    onClickOutside={() => setIsHogQLDropdownVisible(false)}
+                                                    onClickOutside={() => setIsTorQLDropdownVisible(false)}
                                                     overlay={
                                                         // eslint-disable-next-line react/forbid-dom-props
                                                         <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                                                            <HogQLEditor
-                                                                value={mathHogQL}
+                                                            <TorQLEditor
+                                                                value={mathTorQL}
                                                                 onChange={(currentValue) => {
-                                                                    onMathHogQLSelect(index, currentValue)
-                                                                    setIsHogQLDropdownVisible(false)
+                                                                    onMathTorQLSelect(index, currentValue)
+                                                                    setIsTorQLDropdownVisible(false)
                                                                 }}
                                                             />
                                                         </div>
@@ -501,12 +501,12 @@ export function ActionFilterRow({
                                                     <LemonButton
                                                         fullWidth
                                                         type="secondary"
-                                                        data-attr={`math-hogql-select-${index}`}
+                                                        data-attr={`math-torql-select-${index}`}
                                                         onClick={() =>
-                                                            setIsHogQLDropdownVisible(!isHogQLDropdownVisible)
+                                                            setIsTorQLDropdownVisible(!isTorQLDropdownVisible)
                                                         }
                                                     >
-                                                        <code>{mathHogQL}</code>
+                                                        <code>{mathTorQL}</code>
                                                     </LemonButton>
                                                 </LemonDropdown>
                                             </div>
@@ -750,10 +750,10 @@ function useMathSelectorOptions({
     }
 
     options.push({
-        value: HogQLMathType.HogQL,
-        label: 'HogQL expression',
+        value: TorQLMathType.TorQL,
+        label: 'TorQL expression',
         tooltip: 'Aggregate events by custom SQL expression.',
-        'data-attr': `math-node-hogql-expression-${index}`,
+        'data-attr': `math-node-torql-expression-${index}`,
     })
 
     return [

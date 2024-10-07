@@ -7,7 +7,7 @@ from freezegun import freeze_time
 from inline_snapshot import snapshot
 from rest_framework import status
 
-from hogvm.python.operation import HOGQL_BYTECODE_VERSION
+from hogvm.python.operation import TORQL_BYTECODE_VERSION
 from markettor.constants import AvailableFeature
 from markettor.models.action.action import Action
 from markettor.models.hog_functions.hog_function import DEFAULT_STATE, HogFunction
@@ -149,10 +149,10 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             "updated_at": ANY,
             "enabled": False,
             "hog": "fetch(inputs.url);",
-            "bytecode": ["_H", HOGQL_BYTECODE_VERSION, 32, "url", 32, "inputs", 1, 2, 2, "fetch", 1, 35],
+            "bytecode": ["_H", TORQL_BYTECODE_VERSION, 32, "url", 32, "inputs", 1, 2, 2, "fetch", 1, 35],
             "inputs_schema": [],
             "inputs": {},
-            "filters": {"bytecode": ["_H", HOGQL_BYTECODE_VERSION, 29]},
+            "filters": {"bytecode": ["_H", TORQL_BYTECODE_VERSION, 29]},
             "icon_url": None,
             "template": None,
             "masking": None,
@@ -386,7 +386,7 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         )
         # JSON loads for one line comparison
         assert response.json()["bytecode"] == json.loads(
-            f'["_H", {HOGQL_BYTECODE_VERSION}, 33, 0, 33, 3, 36, 0, 15, 40, 45, 33, 1, 36, 0, 6, 37, 0, 32, "url", 32, "inputs", 1, 2, 32, "headers", 32, "x-count", 36, 0, 42, 1, 32, "body", 32, "payload", 32, "inputs", 1, 2, 32, "method", 32, "method", 32, "inputs", 1, 2, 42, 3, 2, "fetch", 2, 35, 39, -52, 35]'
+            f'["_H", {TORQL_BYTECODE_VERSION}, 33, 0, 33, 3, 36, 0, 15, 40, 45, 33, 1, 36, 0, 6, 37, 0, 32, "url", 32, "inputs", 1, 2, 32, "headers", 32, "x-count", 36, 0, 42, 1, 32, "body", 32, "payload", 32, "inputs", 1, 2, 32, "method", 32, "method", 32, "inputs", 1, 2, 42, 3, 2, "fetch", 2, 35, 39, -52, 35]'
         ), response.json()
 
     def test_generates_inputs_bytecode(self, *args):
@@ -397,7 +397,7 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 "value": "http://localhost:2080/0e02d917-563f-4050-9725-aad881b69937",
                 "bytecode": [
                     "_H",
-                    HOGQL_BYTECODE_VERSION,
+                    TORQL_BYTECODE_VERSION,
                     32,
                     "http://localhost:2080/0e02d917-563f-4050-9725-aad881b69937",
                 ],
@@ -411,13 +411,13 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                     "event_url": "{f'{event.url}-test'}",
                 },
                 "bytecode": {
-                    "event": ["_H", HOGQL_BYTECODE_VERSION, 32, "event", 1, 1],
-                    "groups": ["_H", HOGQL_BYTECODE_VERSION, 32, "groups", 1, 1],
-                    "nested": {"foo": ["_H", HOGQL_BYTECODE_VERSION, 32, "url", 32, "event", 1, 2]},
-                    "person": ["_H", HOGQL_BYTECODE_VERSION, 32, "person", 1, 1],
+                    "event": ["_H", TORQL_BYTECODE_VERSION, 32, "event", 1, 1],
+                    "groups": ["_H", TORQL_BYTECODE_VERSION, 32, "groups", 1, 1],
+                    "nested": {"foo": ["_H", TORQL_BYTECODE_VERSION, 32, "url", 32, "event", 1, 2]},
+                    "person": ["_H", TORQL_BYTECODE_VERSION, 32, "person", 1, 1],
                     "event_url": [
                         "_H",
-                        HOGQL_BYTECODE_VERSION,
+                        TORQL_BYTECODE_VERSION,
                         32,
                         "url",
                         32,
@@ -438,7 +438,7 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 "bytecode": {
                     "version": [
                         "_H",
-                        HOGQL_BYTECODE_VERSION,
+                        TORQL_BYTECODE_VERSION,
                         32,
                         "v=",
                         32,
@@ -491,7 +491,7 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             "filter_test_accounts": True,
             "bytecode": [
                 "_H",
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 32,
                 "%@markettor.com%",
                 32,
@@ -562,7 +562,7 @@ class TestHogFunctionAPI(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 "ttl": 60,
                 "threshold": 20,
                 "hash": "{person.properties.email}",
-                "bytecode": ["_H", HOGQL_BYTECODE_VERSION, 32, "email", 32, "properties", 32, "person", 1, 3],
+                "bytecode": ["_H", TORQL_BYTECODE_VERSION, 32, "email", 32, "properties", 32, "person", 1, 3],
             }
         )
 

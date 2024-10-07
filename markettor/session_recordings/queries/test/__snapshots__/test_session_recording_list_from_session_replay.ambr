@@ -1414,7 +1414,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded
   '''
   
   SELECT s.session_id,
@@ -1459,7 +1459,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded.1
   '''
   
   SELECT s.session_id,
@@ -1540,7 +1540,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded.2
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded.2
   '''
   
   SELECT s.session_id,
@@ -1619,7 +1619,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized
   '''
   
   SELECT s.session_id,
@@ -1664,7 +1664,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized.1
   '''
   
   SELECT s.session_id,
@@ -1743,7 +1743,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_event_properties_test_accounts_excluded_materialized.2
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_event_properties_test_accounts_excluded_materialized.2
   '''
   
   SELECT s.session_id,
@@ -1820,7 +1820,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_person_properties
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_person_properties
   '''
   
   SELECT s.session_id,
@@ -1898,7 +1898,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_person_properties.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_person_properties.1
   '''
   
   SELECT s.session_id,
@@ -1976,7 +1976,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_properties
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_properties
   '''
   
   SELECT s.session_id,
@@ -2022,7 +2022,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_properties.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_properties.1
   '''
   
   SELECT s.session_id,
@@ -2068,7 +2068,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_properties_materialized
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_properties_materialized
   '''
   
   SELECT s.session_id,
@@ -2114,7 +2114,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_hogql_properties_materialized.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_event_filter_with_torql_properties_materialized.1
   '''
   
   SELECT s.session_id,
@@ -4020,7 +4020,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_event_property_test_account_filter
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_event_property_test_account_filter
   '''
   
   SELECT s.session_id,
@@ -4065,7 +4065,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_event_property_test_account_filter.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_event_property_test_account_filter.1
   '''
   
   SELECT s.session_id,
@@ -4108,7 +4108,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_event_property_test_account_filter_materialized
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_event_property_test_account_filter_materialized
   '''
   
   SELECT s.session_id,
@@ -4153,7 +4153,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_event_property_test_account_filter_materialized.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_event_property_test_account_filter_materialized.1
   '''
   
   SELECT s.session_id,
@@ -4196,7 +4196,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_person_property_test_account_filter
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_person_property_test_account_filter
   '''
   
   SELECT s.session_id,
@@ -4241,7 +4241,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_person_property_test_account_filter.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_person_property_test_account_filter.1
   '''
   
   SELECT s.session_id,
@@ -4289,7 +4289,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_person_property_test_account_filter_materialized
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_person_property_test_account_filter_materialized
   '''
   
   SELECT s.session_id,
@@ -4334,7 +4334,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_hogql_person_property_test_account_filter_materialized.1
+# name: TestClickhouseSessionRecordingsListFromSessionReplay.test_top_level_torql_person_property_test_account_filter_materialized.1
   '''
   
   SELECT s.session_id,

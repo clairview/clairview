@@ -54,20 +54,20 @@ from markettor.event_usage import groups
 from markettor.helpers.multi_property_breakdown import (
     protect_old_clients_from_multi_property_default,
 )
-from markettor.hogql.constants import BREAKDOWN_VALUES_LIMIT
-from markettor.hogql.errors import ExposedHogQLError
-from markettor.hogql.timings import HogQLTimings
-from markettor.hogql_queries.apply_dashboard_filters import (
+from markettor.torql.constants import BREAKDOWN_VALUES_LIMIT
+from markettor.torql.errors import ExposedTorQLError
+from markettor.torql.timings import TorQLTimings
+from markettor.torql_queries.apply_dashboard_filters import (
     WRAPPER_NODE_KINDS,
     apply_dashboard_filters_to_dict,
 )
-from markettor.hogql_queries.legacy_compatibility.feature_flag import (
-    hogql_insights_replace_filters,
+from markettor.torql_queries.legacy_compatibility.feature_flag import (
+    torql_insights_replace_filters,
 )
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import (
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import (
     conversion_to_query_based,
 )
-from markettor.hogql_queries.query_runner import (
+from markettor.torql_queries.query_runner import (
     ExecutionMode,
     execution_mode_from_refresh,
     shared_insights_execution_mode,
@@ -232,7 +232,7 @@ class InsightBasicSerializer(TaggedItemSerializerMixin, serializers.ModelSeriali
 
         representation["dashboards"] = [tile["dashboard_id"] for tile in representation["dashboard_tiles"]]
 
-        if hogql_insights_replace_filters(instance.team) and (
+        if torql_insights_replace_filters(instance.team) and (
             instance.query is not None or instance.query_from_filters is not None
         ):
             representation["filters"] = {}
@@ -296,7 +296,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
     )
     query = serializers.JSONField(required=False, allow_null=True, help_text="Query node JSON string")
     query_status = serializers.SerializerMethodField()
-    hogql = serializers.SerializerMethodField()
+    torql = serializers.SerializerMethodField()
     types = serializers.SerializerMethodField()
 
     class Meta:
@@ -333,7 +333,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
             "timezone",
             "is_cached",
             "query_status",
-            "hogql",
+            "torql",
             "types",
         ]
         read_only_fields = (
@@ -561,8 +561,8 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
     def get_query_status(self, insight: Insight):
         return self.insight_result(insight).query_status
 
-    def get_hogql(self, insight: Insight):
-        return self.insight_result(insight).hogql
+    def get_torql(self, insight: Insight):
+        return self.insight_result(insight).torql
 
     def get_types(self, insight: Insight):
         return self.insight_result(insight).types
@@ -595,7 +595,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
         request: Optional[Request] = self.context.get("request")
         dashboard_filters_override = filters_override_requested_by_client(request) if request else None
 
-        if hogql_insights_replace_filters(instance.team) and (
+        if torql_insights_replace_filters(instance.team) and (
             instance.query is not None or instance.query_from_filters is not None
         ):
             query = instance.query or instance.query_from_filters
@@ -650,7 +650,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
                     user=self.context["request"].user,
                     filters_override=filters_override,
                 )
-            except ExposedHogQLError as e:
+            except ExposedTorQLError as e:
                 raise ValidationError(str(e))
 
     @lru_cache(maxsize=1)  # each serializer instance should only deal with one insight/tile combo
@@ -814,10 +814,10 @@ class InsightViewSet(
                 insight = request.GET[INSIGHT]
                 if insight == "JSON":
                     queryset = queryset.filter(query__isnull=False)
-                    queryset = queryset.exclude(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="HogQLQuery")
+                    queryset = queryset.exclude(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="TorQLQuery")
                 elif insight == "SQL":
                     queryset = queryset.filter(query__isnull=False)
-                    queryset = queryset.filter(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="HogQLQuery")
+                    queryset = queryset.filter(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="TorQLQuery")
                 else:
                     queryset = queryset.filter(query__isnull=True)
                     queryset = queryset.filter(filters__insight=insight)
@@ -926,11 +926,11 @@ When set, the specified dashboard's filters and date range override will be appl
     )
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def trend(self, request: request.Request, *args: Any, **kwargs: Any):
-        timings = HogQLTimings()
+        timings = TorQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_trends(request)
-        except ExposedHogQLError as e:
+        except ExposedTorQLError as e:
             raise ValidationError(str(e))
         filter = Filter(request=request, team=self.team)
 
@@ -1012,11 +1012,11 @@ When set, the specified dashboard's filters and date range override will be appl
     )
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def funnel(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = HogQLTimings()
+        timings = TorQLTimings()
         try:
             with timings.measure("calculate"):
                 funnel = self.calculate_funnel(request)
-        except ExposedHogQLError as e:
+        except ExposedTorQLError as e:
             raise ValidationError(str(e))
 
         funnel["result"] = protect_old_clients_from_multi_property_default(request.data, funnel["result"])
@@ -1054,11 +1054,11 @@ When set, the specified dashboard's filters and date range override will be appl
     # ******************************************
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def retention(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = HogQLTimings()
+        timings = TorQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_retention(request)
-        except ExposedHogQLError as e:
+        except ExposedTorQLError as e:
             raise ValidationError(str(e))
 
         result["timings"] = [val.model_dump() for val in timings.to_list()]
@@ -1084,11 +1084,11 @@ When set, the specified dashboard's filters and date range override will be appl
     # ******************************************
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def path(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = HogQLTimings()
+        timings = TorQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_path(request)
-        except ExposedHogQLError as e:
+        except ExposedTorQLError as e:
             raise ValidationError(str(e))
 
         result["timings"] = [val.model_dump() for val in timings.to_list()]

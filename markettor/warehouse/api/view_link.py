@@ -4,9 +4,9 @@ from rest_framework import filters, serializers, viewsets
 
 from markettor.api.routing import TeamAndOrgViewSetMixin
 from markettor.api.shared import UserBasicSerializer
-from markettor.hogql.ast import Field
-from markettor.hogql.database.database import create_hogql_database
-from markettor.hogql.parser import parse_expr
+from markettor.torql.ast import Field
+from markettor.torql.database.database import create_torql_database
+from markettor.torql.parser import parse_expr
 from markettor.warehouse.models import DataWarehouseJoin
 
 
@@ -50,7 +50,7 @@ class ViewLinkSerializer(serializers.ModelSerializer):
         if field_name is None:
             raise serializers.ValidationError("Field name must not be empty.")
 
-        database = create_hogql_database(team_id)
+        database = create_torql_database(team_id)
         table = database.get_table(table_name)
         field = table.fields.get(field_name)
         if field is not None:
@@ -63,7 +63,7 @@ class ViewLinkSerializer(serializers.ModelSerializer):
         if not table:
             raise serializers.ValidationError("View column must have a table.")
 
-        database = create_hogql_database(team_id)
+        database = create_torql_database(team_id)
         try:
             database.get_table(table)
         except Exception:

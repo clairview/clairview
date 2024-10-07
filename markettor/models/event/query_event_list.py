@@ -7,8 +7,8 @@ from django.utils.timezone import now
 
 from markettor.api.utils import get_pk_or_uuid
 from markettor.clickhouse.client.connection import Workload
-from markettor.hogql.constants import DEFAULT_RETURNED_ROWS
-from markettor.hogql.context import HogQLContext
+from markettor.torql.constants import DEFAULT_RETURNED_ROWS
+from markettor.torql.context import TorQLContext
 from markettor.models import Action, Filter, Person, Team
 from markettor.models.action.util import format_action_filter
 from markettor.models.event.sql import (
@@ -67,7 +67,7 @@ def query_events_list(
 ) -> list:
     # Note: This code is inefficient and problematic, see https://github.com/MarketTor/markettor/issues/13485 for details.
     # To isolate its impact from rest of the queries its queries are run on different nodes as part of "offline" workloads.
-    hogql_context = HogQLContext(within_non_hogql_query=True, team_id=team.pk, enable_select_queries=True)
+    torql_context = TorQLContext(within_non_torql_query=True, team_id=team.pk, enable_select_queries=True)
 
     limit += 1
     limit_sql = "LIMIT %(limit)s"
@@ -110,7 +110,7 @@ def query_events_list(
         team_id=team.pk,
         property_group=filter.property_groups,
         has_person_id_joined=False,
-        hogql_context=hogql_context,
+        torql_context=torql_context,
     )
 
     if action_id:
@@ -121,7 +121,7 @@ def query_events_list(
         except Action.DoesNotExist:
             return []
 
-        action_query, params = format_action_filter(team_id=team.pk, action=action, hogql_context=hogql_context)
+        action_query, params = format_action_filter(team_id=team.pk, action=action, torql_context=torql_context)
         prop_filters += " AND {}".format(action_query)
         prop_filter_params = {**prop_filter_params, **params}
 
@@ -139,7 +139,7 @@ def query_events_list(
                 "offset": offset,
                 **condition_params,
                 **prop_filter_params,
-                **hogql_context.values,
+                **torql_context.values,
             },
             query_type="events_list",
             workload=Workload.OFFLINE,
@@ -153,7 +153,7 @@ def query_events_list(
                 "limit": limit,
                 "offset": offset,
                 **condition_params,
-                **hogql_context.values,
+                **torql_context.values,
             },
             query_type="events_list",
             workload=Workload.OFFLINE,

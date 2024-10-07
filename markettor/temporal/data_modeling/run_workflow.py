@@ -23,8 +23,8 @@ from deltalake import DeltaTable
 from django.conf import settings
 from dlt.common.libs.deltalake import get_delta_tables
 
-from markettor.hogql.database.database import create_hogql_database
-from markettor.hogql.query import execute_hogql_query
+from markettor.torql.database.database import create_torql_database
+from markettor.torql.query import execute_torql_query
 from markettor.models import Team
 from markettor.settings.base_variables import TEST
 from markettor.temporal.batch_exports.base import MarketTorWorkflow
@@ -65,9 +65,9 @@ CLICKHOUSE_DLT_MAPPING: dict[str, dlt_data_types.TDataType] = {
 }
 
 
-class EmptyHogQLResponseColumnsError(Exception):
+class EmptyTorQLResponseColumnsError(Exception):
     def __init__(self):
-        super().__init__("After running a HogQL query, no columns where returned")
+        super().__init__("After running a TorQL query, no columns where returned")
 
 
 @dataclasses.dataclass(frozen=True)
@@ -313,7 +313,7 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
         }
         table_columns[column_name] = column_schema
 
-    hogql_query = saved_query.query["query"]
+    torql_query = saved_query.query["query"]
 
     destination = get_dlt_destination()
     pipeline = dlt.pipeline(
@@ -321,7 +321,7 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
         destination=destination,
         dataset_name=f"team_{team.pk}_model_{model_label}",
     )
-    _ = await asyncio.to_thread(pipeline.run, hogql_table(hogql_query, team, saved_query.name, table_columns))
+    _ = await asyncio.to_thread(pipeline.run, torql_table(torql_query, team, saved_query.name, table_columns))
 
     tables = get_delta_tables(pipeline)
 
@@ -337,14 +337,14 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
 
 
 @dlt.source(max_table_nesting=0)
-def hogql_table(query: str, team: Team, table_name: str, table_columns: dlt_typing.TTableSchemaColumns):
-    """A dlt source representing a HogQL table given by a HogQL query."""
+def torql_table(query: str, team: Team, table_name: str, table_columns: dlt_typing.TTableSchemaColumns):
+    """A dlt source representing a TorQL table given by a TorQL query."""
 
-    async def get_hogql_rows():
-        response = await asyncio.to_thread(execute_hogql_query, query, team)
+    async def get_torql_rows():
+        response = await asyncio.to_thread(execute_torql_query, query, team)
 
         if not response.columns:
-            raise EmptyHogQLResponseColumnsError()
+            raise EmptyTorQLResponseColumnsError()
 
         columns: list[str] = response.columns
 
@@ -352,8 +352,8 @@ def hogql_table(query: str, team: Team, table_name: str, table_columns: dlt_typi
             yield dict(zip(columns, row))
 
     yield dlt.resource(
-        get_hogql_rows,
-        name="hogql_table",
+        get_torql_rows,
+        name="torql_table",
         table_name=table_name,
         table_format="delta",
         write_disposition="replace",
@@ -520,8 +520,8 @@ async def build_dag_from_selectors(selector_paths: SelectorPaths, team_id: int) 
 
 async def get_markettor_tables(team_id: int) -> list[str]:
     team = await database_sync_to_async(Team.objects.get)(id=team_id)
-    hogql_db = await database_sync_to_async(create_hogql_database)(team_id=team_id, team_arg=team)
-    markettor_tables = hogql_db.get_markettor_tables()
+    torql_db = await database_sync_to_async(create_torql_database)(team_id=team_id, team_arg=team)
+    markettor_tables = torql_db.get_markettor_tables()
     return markettor_tables
 
 

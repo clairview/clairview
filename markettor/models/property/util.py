@@ -19,11 +19,11 @@ from markettor.clickhouse.materialized_columns import (
     get_materialized_columns,
 )
 from markettor.constants import PropertyOperatorType
-from markettor.hogql import ast
-from markettor.hogql.hogql import HogQLContext
-from markettor.hogql.parser import parse_expr
-from markettor.hogql.visitor import TraversingVisitor
-from markettor.hogql.database.s3_table import S3Table
+from markettor.torql import ast
+from markettor.torql.torql import TorQLContext
+from markettor.torql.parser import parse_expr
+from markettor.torql.visitor import TraversingVisitor
+from markettor.torql.database.s3_table import S3Table
 from markettor.models.action.action import Action
 from markettor.models.action.util import get_action_tables_and_properties
 from markettor.models.cohort import Cohort
@@ -76,7 +76,7 @@ def parse_prop_grouped_clauses(
     team_id: int,
     property_group: Optional[PropertyGroup],
     *,
-    hogql_context: HogQLContext,
+    torql_context: TorQLContext,
     prepend: str = "global",
     table_name: str = "",
     allow_denormalized_props: bool = True,
@@ -105,7 +105,7 @@ def parse_prop_grouped_clauses(
                     person_properties_mode=person_properties_mode,
                     person_id_joined_alias=person_id_joined_alias,
                     group_properties_joined=group_properties_joined,
-                    hogql_context=hogql_context,
+                    torql_context=torql_context,
                     _top_level=False,
                 )
                 group_clauses.append(clause)
@@ -126,7 +126,7 @@ def parse_prop_grouped_clauses(
             group_properties_joined=group_properties_joined,
             property_operator=property_group.type,
             team_id=team_id,
-            hogql_context=hogql_context,
+            torql_context=torql_context,
         )
 
     if not _final:
@@ -150,7 +150,7 @@ def parse_prop_clauses(
     team_id: int,
     filters: list[Property],
     *,
-    hogql_context: Optional[HogQLContext],
+    torql_context: Optional[TorQLContext],
     prepend: str = "global",
     table_name: str = "",
     allow_denormalized_props: bool = True,
@@ -181,7 +181,7 @@ def parse_prop_clauses(
                     person_id_query, cohort_filter_params = format_filter_query(
                         cohort,
                         idx,
-                        hogql_context,
+                        torql_context,
                         custom_match_field=person_id_joined_alias,
                     )
                     params = {**params, **cohort_filter_params}
@@ -190,7 +190,7 @@ def parse_prop_clauses(
                     person_id_query, cohort_filter_params = format_cohort_subquery(
                         cohort,
                         idx,
-                        hogql_context,
+                        torql_context,
                         custom_match_field=f"{person_id_joined_alias}",
                     )
                     params = {**params, **cohort_filter_params}
@@ -342,12 +342,12 @@ def parse_prop_clauses(
             filter_query, filter_params = get_session_property_filter_statement(prop, idx, prepend)
             final.append(f"{property_operator} {filter_query}")
             params.update(filter_params)
-        elif prop.type == "hogql":
-            if hogql_context is None:
-                raise ValueError("HogQL is not supported here")
-            from markettor.hogql.hogql import translate_hogql
+        elif prop.type == "torql":
+            if torql_context is None:
+                raise ValueError("TorQL is not supported here")
+            from markettor.torql.torql import translate_torql
 
-            filter_query = translate_hogql(prop.key, hogql_context)
+            filter_query = translate_torql(prop.key, torql_context)
             final.append(f"{property_operator} {filter_query}")
 
     if final:
@@ -843,7 +843,7 @@ def build_selector_regex(selector: Selector) -> str:
         return r""
 
 
-class HogQLPropertyChecker(TraversingVisitor):
+class TorQLPropertyChecker(TraversingVisitor):
     def __init__(self):
         self.event_properties: list[str] = []
         self.person_properties: list[str] = []
@@ -867,8 +867,8 @@ class HogQLPropertyChecker(TraversingVisitor):
 def extract_tables_and_properties(props: list[Property]) -> TCounter[PropertyIdentifier]:
     counters: list[tuple] = []
     for prop in props:
-        if prop.type == "hogql":
-            counters.extend(count_hogql_properties(prop.key))
+        if prop.type == "torql":
+            counters.extend(count_torql_properties(prop.key))
         elif prop.type == "behavioral" and prop.event_type == "actions":
             action = Action.objects.get(pk=prop.key)
             action_counter = get_action_tables_and_properties(action)
@@ -878,13 +878,13 @@ def extract_tables_and_properties(props: list[Property]) -> TCounter[PropertyIde
     return Counter(cast(Iterable, counters))
 
 
-def count_hogql_properties(
+def count_torql_properties(
     expr: str, counter: Optional[TCounter[PropertyIdentifier]] = None
 ) -> TCounter[PropertyIdentifier]:
     if not counter:
         counter = Counter()
     node = parse_expr(expr)
-    property_checker = HogQLPropertyChecker()
+    property_checker = TorQLPropertyChecker()
     property_checker.visit(node)
     for field in property_checker.event_properties:
         counter[(field, "event", None)] += 1
@@ -908,7 +908,7 @@ def get_session_property_filter_statement(prop: Property, idx: int, prepend: str
         )
 
     else:
-        raise exceptions.ValidationError(f"Session property '{prop.key}' is only valid in HogQL queries.")
+        raise exceptions.ValidationError(f"Session property '{prop.key}' is only valid in TorQL queries.")
 
 
 def clear_excess_levels(prop: Union["PropertyGroup", "Property"], skip=False):

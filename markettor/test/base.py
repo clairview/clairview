@@ -605,7 +605,7 @@ class QueryMatchingTest:
             flags=re.IGNORECASE,
         )
 
-        # HogQL person id in session recording queries
+        # TorQL person id in session recording queries
         # ifNull(equals(s__pdi.person_id, '0176be33-0398-0091-ec89-570d7768f2f4'), 0))
         # ifNull(equals(person_distinct_ids__person.id, '0176be33-0398-000c-0772-f78c97593bdd'), 0))))
         # equals(events.person_id, '0176be33-0398-0060-abed-8da43384e020')

@@ -90,8 +90,8 @@ describe('propertyFilterTypeToTaxonomicFilterType()', () => {
                 type: PropertyFilterType.Session,
             } as SessionPropertyFilter)
         ).toEqual(TaxonomicFilterGroupType.SessionProperties)
-        expect(propertyFilterTypeToTaxonomicFilterType({ ...baseFilter, type: PropertyFilterType.HogQL })).toEqual(
-            TaxonomicFilterGroupType.HogQLExpression
+        expect(propertyFilterTypeToTaxonomicFilterType({ ...baseFilter, type: PropertyFilterType.TorQL })).toEqual(
+            TaxonomicFilterGroupType.TorQLExpression
         )
     })
 })
@@ -130,8 +130,8 @@ describe('breakdownFilterToTaxonomicFilterType()', () => {
         expect(breakdownFilterToTaxonomicFilterType({ ...baseFilter, breakdown_type: 'session' })).toEqual(
             TaxonomicFilterGroupType.SessionProperties
         )
-        expect(breakdownFilterToTaxonomicFilterType({ ...baseFilter, breakdown_type: 'hogql' })).toEqual(
-            TaxonomicFilterGroupType.HogQLExpression
+        expect(breakdownFilterToTaxonomicFilterType({ ...baseFilter, breakdown_type: 'torql' })).toEqual(
+            TaxonomicFilterGroupType.TorQLExpression
         )
     })
 })

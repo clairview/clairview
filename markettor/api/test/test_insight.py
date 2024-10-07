@@ -16,8 +16,8 @@ from markettor import settings
 from markettor.api.test.dashboards import DashboardAPI
 from markettor.caching.insight_cache import update_cache
 from markettor.caching.insight_caching_state import TargetCacheAge
-from markettor.hogql.query import execute_hogql_query
-from markettor.hogql_queries.query_runner import ExecutionMode
+from markettor.torql.query import execute_torql_query
+from markettor.torql_queries.query_runner import ExecutionMode
 from markettor.models import (
     Cohort,
     Dashboard,
@@ -41,8 +41,8 @@ from markettor.schema import (
     EventsNode,
     EventsQuery,
     FilterLogicalOperator,
-    HogQLFilters,
-    HogQLQuery,
+    TorQLFilters,
+    TorQLQuery,
     InsightNodeKind,
     NodeKind,
     PropertyGroupFilter,
@@ -1059,7 +1059,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                             "type": "events",
                             "order": 0,
                             "properties": [],
-                            "math_hogql": None,
+                            "math_torql": None,
                             "math_property": None,
                         },
                         {
@@ -1069,7 +1069,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                             "type": "events",
                             "order": 2,
                             "properties": [],
-                            "math_hogql": None,
+                            "math_torql": None,
                             "math_property": None,
                         },
                     ],
@@ -1233,8 +1233,8 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             ],
         ]
     )
-    @patch("markettor.hogql_queries.insights.trends.trends_query_runner.execute_hogql_query", wraps=execute_hogql_query)
-    def test_insight_refreshing_query(self, properties_filter, spy_execute_hogql_query) -> None:
+    @patch("markettor.torql_queries.insights.trends.trends_query_runner.execute_torql_query", wraps=execute_torql_query)
+    def test_insight_refreshing_query(self, properties_filter, spy_execute_torql_query) -> None:
         dashboard_id, _ = self.dashboard_api.create_dashboard({"filters": {"date_from": "-14d"}})
 
         with freeze_time("2012-01-14T03:21:34.000Z"):
@@ -1280,7 +1280,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=true").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 1)
+            self.assertEqual(spy_execute_torql_query.call_count, 1)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 0])
             self.assertEqual(response["last_refresh"], "2012-01-15T04:01:34Z")
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")
@@ -1290,7 +1290,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             _create_event(team=self.team, event="$pageview", distinct_id="1")
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=true").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 2)
+            self.assertEqual(spy_execute_torql_query.call_count, 2)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 1])
             self.assertEqual(response["last_refresh"], "2012-01-15T05:01:34Z")
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")  # did not change
@@ -1299,7 +1299,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         with freeze_time("2012-01-15T05:17:34.000Z"):
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 2)
+            self.assertEqual(spy_execute_torql_query.call_count, 2)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 1])
             self.assertEqual(response["last_refresh"], "2012-01-15T05:01:34Z")  # Using cached result
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")  # did not change
@@ -1309,7 +1309,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             # Make sure the /query/ endpoint reuses the same cached result
             response = self.client.post(f"/api/projects/{self.team.id}/query/", {"query": query_dict}).json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 2)
+            self.assertEqual(spy_execute_torql_query.call_count, 2)
             self.assertEqual(response["results"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 1])
             self.assertEqual(response["last_refresh"], "2012-01-15T05:01:34Z")  # Using cached result
             self.assertTrue(response["is_cached"])
@@ -1320,7 +1320,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=true&from_dashboard={dashboard_id}"
             ).json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 3)
+            self.assertEqual(spy_execute_torql_query.call_count, 3)
             self.assertEqual(
                 response["result"][0]["data"],
                 [
@@ -1359,7 +1359,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=true&from_dashboard={dashboard_id}"
             ).json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 4)
+            self.assertEqual(spy_execute_torql_query.call_count, 4)
             self.assertEqual(
                 response["result"][0]["data"],
                 [
@@ -1465,7 +1465,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             ],
         ]
     )
-    @patch("markettor.hogql_queries.insights.trends.trends_query_runner.execute_hogql_query", wraps=execute_hogql_query)
+    @patch("markettor.torql_queries.insights.trends.trends_query_runner.execute_torql_query", wraps=execute_torql_query)
     @patch(
         "markettor.caching.insight_caching_state.calculate_target_age_insight",
         # The tested insight normally wouldn't satisfy the criteria for being refreshed in the background,
@@ -1473,7 +1473,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         return_value=TargetCacheAge.MID_PRIORITY,
     )
     def test_insight_refreshing_query_with_background_update(
-        self, properties_filter, spy_execute_hogql_query, spy_calculate_target_age_insight
+        self, properties_filter, spy_execute_torql_query, spy_calculate_target_age_insight
     ) -> None:
         with freeze_time("2012-01-14T03:21:34.000Z"):
             _create_event(
@@ -1513,7 +1513,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=true").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 1)
+            self.assertEqual(spy_execute_torql_query.call_count, 1)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 0])
             self.assertEqual(response["last_refresh"], "2012-01-15T04:01:34Z")
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")
@@ -1525,7 +1525,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         with freeze_time("2012-01-17T06:01:34.000Z"):
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=false").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 1)
+            self.assertEqual(spy_execute_torql_query.call_count, 1)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 2, 0, 0, 0])
             self.assertEqual(response["last_refresh"], "2012-01-17T05:01:34Z")  # Got refreshed with `update_cache`!
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")
@@ -1549,8 +1549,8 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             ],
         ]
     )
-    @patch("markettor.hogql_queries.insights.trends.trends_query_runner.execute_hogql_query", wraps=execute_hogql_query)
-    def test_insight_refreshing_query_async(self, properties_filter, spy_execute_hogql_query) -> None:
+    @patch("markettor.torql_queries.insights.trends.trends_query_runner.execute_torql_query", wraps=execute_torql_query)
+    def test_insight_refreshing_query_async(self, properties_filter, spy_execute_torql_query) -> None:
         dashboard_id, _ = self.dashboard_api.create_dashboard({"filters": {"date_from": "-14d"}})
 
         with freeze_time("2012-01-14T03:21:34.000Z"):
@@ -1596,7 +1596,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
             response = self.client.get(f"/api/projects/{self.team.id}/insights/{insight_id}/?refresh=blocking").json()
             self.assertNotIn("code", response)
-            self.assertEqual(spy_execute_hogql_query.call_count, 1)
+            self.assertEqual(spy_execute_torql_query.call_count, 1)
             self.assertEqual(response["result"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 0])
             self.assertEqual(response["last_refresh"], "2012-01-15T04:01:34Z")
             self.assertEqual(response["last_modified_at"], "2012-01-15T04:01:34Z")
@@ -1609,7 +1609,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             ).json()
             self.assertNotIn("code", response)
             self.assertIsNone(response.get("query_status"))
-            self.assertEqual(spy_execute_hogql_query.call_count, 1)
+            self.assertEqual(spy_execute_torql_query.call_count, 1)
             self.assertEqual(response["results"][0]["data"], [0, 0, 0, 0, 0, 0, 2, 0])
             self.assertEqual(response["last_refresh"], "2012-01-15T04:01:34Z")  # Using cached result
             self.assertTrue(response["is_cached"])
@@ -1658,8 +1658,8 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             {"name": "the dashboard", "filters": {"date_from": "-180d"}}
         )
         query = DataTableNode(
-            source=HogQLQuery(
-                query="SELECT count(1) FROM events", filters=HogQLFilters(dateRange=DateRange(date_from="-3d"))
+            source=TorQLQuery(
+                query="SELECT count(1) FROM events", filters=TorQLFilters(dateRange=DateRange(date_from="-3d"))
             ),
         ).model_dump()
         insight_id, _ = self.dashboard_api.create_insight(
@@ -1683,8 +1683,8 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             {"name": "the dashboard", "filters": {"date_from": "-180d"}}
         )
         query = DataVisualizationNode(
-            source=HogQLQuery(
-                query="SELECT count(1) FROM events", filters=HogQLFilters(dateRange=DateRange(date_from="-3d"))
+            source=TorQLQuery(
+                query="SELECT count(1) FROM events", filters=TorQLFilters(dateRange=DateRange(date_from="-3d"))
             ),
         ).model_dump()
         insight_id, _ = self.dashboard_api.create_insight(
@@ -2017,35 +2017,35 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         ).json()
         self.assertEqual(len(post_response["result"]), 1)
 
-        hogql_response = self.client.get(
+        torql_response = self.client.get(
             f"/api/projects/{self.team.id}/insights/path",
             data={
                 "properties": json.dumps(
                     [
                         {
                             "key": "properties.test == 'val' and person.properties.$os == 'Mac'",
-                            "type": "hogql",
+                            "type": "torql",
                         }
                     ]
                 )
             },
         ).json()
-        self.assertEqual(len(hogql_response["result"]), 1)
+        self.assertEqual(len(torql_response["result"]), 1)
 
-        hogql_non_response = self.client.get(
+        torql_non_response = self.client.get(
             f"/api/projects/{self.team.id}/insights/path",
             data={
                 "properties": json.dumps(
                     [
                         {
                             "key": "properties.test == 'val' and person.properties.$os == 'Windows'",
-                            "type": "hogql",
+                            "type": "torql",
                         }
                     ]
                 )
             },
         ).json()
-        self.assertEqual(len(hogql_non_response["result"]), 0)
+        self.assertEqual(len(torql_non_response["result"]), 0)
 
     def test_insight_funnels_basic_post(self) -> None:
         _create_person(team=self.team, distinct_ids=["1"])
@@ -2820,7 +2820,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
     @snapshot_clickhouse_queries
-    def test_insight_trend_hogql_global_filters(self) -> None:
+    def test_insight_trend_torql_global_filters(self) -> None:
         _create_person(team=self.team, distinct_ids=["1"], properties={"fish": "there is no fish"})
         with freeze_time("2012-01-14T03:21:34.000Z"):
             for i in range(25):
@@ -2848,11 +2848,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) > 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                             {
                                 "key": "like(person.properties.fish, '%fish%')",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -2869,7 +2869,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                     "events": json.dumps([{"id": "$pageview"}]),
                     "properties": json.dumps(
                         [
-                            {"key": "{team_id} * 5", "type": "hogql"},
+                            {"key": "{team_id} * 5", "type": "torql"},
                         ]
                     ),
                 },
@@ -2886,7 +2886,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
     @snapshot_clickhouse_queries
-    def test_insight_trend_hogql_local_filters(self) -> None:
+    def test_insight_trend_torql_local_filters(self) -> None:
         _create_person(team=self.team, distinct_ids=["1"], properties={"fish": "there is no fish"})
         with freeze_time("2012-01-14T03:21:34.000Z"):
             for i in range(25):
@@ -2909,11 +2909,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                                     [
                                         {
                                             "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                            "type": "hogql",
+                                            "type": "torql",
                                         },
                                         {
                                             "key": "like(person.properties.fish, '%fish%')",
-                                            "type": "hogql",
+                                            "type": "torql",
                                         },
                                     ]
                                 ),
@@ -2927,7 +2927,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
     @snapshot_clickhouse_queries
-    def test_insight_trend_hogql_breakdown(self) -> None:
+    def test_insight_trend_torql_breakdown(self) -> None:
         _create_person(team=self.team, distinct_ids=["1"], properties={"fish": "there is no fish"})
         with freeze_time("2012-01-14T03:21:34.000Z"):
             for i in range(25):
@@ -2943,7 +2943,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                 f"/api/projects/{self.team.id}/insights/trend/",
                 data={
                     "events": json.dumps([{"id": "$pageview"}]),
-                    "breakdown_type": "hogql",
+                    "breakdown_type": "torql",
                     "breakdown": "if(toInt(properties.int_value) < 10, 'le%ss', 'more')",
                 },
             )
@@ -2955,7 +2955,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @snapshot_clickhouse_queries
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
-    def test_insight_funnels_hogql_global_filters(self) -> None:
+    def test_insight_funnels_torql_global_filters(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(
                 team=self.team,
@@ -2985,11 +2985,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                             {
                                 "key": "like(person.properties.fish, '%fish%')",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -3007,7 +3007,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @snapshot_clickhouse_queries
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
-    def test_insight_funnels_hogql_local_filters(self) -> None:
+    def test_insight_funnels_torql_local_filters(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(
                 team=self.team,
@@ -3038,11 +3038,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                                 [
                                     {
                                         "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                        "type": "hogql",
+                                        "type": "torql",
                                     },
                                     {
                                         "key": "like(person.properties.fish, '%fish%')",
-                                        "type": "hogql",
+                                        "type": "torql",
                                     },
                                 ]
                             ),
@@ -3055,11 +3055,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                                 [
                                     {
                                         "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                        "type": "hogql",
+                                        "type": "torql",
                                     },
                                     {
                                         "key": "like(person.properties.fish, '%fish%')",
-                                        "type": "hogql",
+                                        "type": "torql",
                                     },
                                 ]
                             ),
@@ -3079,7 +3079,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     @snapshot_clickhouse_queries
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
-    def test_insight_funnels_hogql_breakdown(self) -> None:
+    def test_insight_funnels_torql_breakdown(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(
                 team=self.team,
@@ -3101,8 +3101,8 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 f"/api/projects/{self.team.id}/insights/funnel/",
                 {
-                    "breakdown_type": "hogql",
-                    "breakdowns": [{"property": "person.properties.fish", "type": "hogql"}],
+                    "breakdown_type": "torql",
+                    "breakdowns": [{"property": "person.properties.fish", "type": "torql"}],
                     "events": [
                         {"id": "user signed up", "type": "events", "order": 0},
                         {"id": "user did things", "type": "events", "order": 1},
@@ -3111,7 +3111,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -3134,7 +3134,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
     # @snapshot_clickhouse_queries
     @also_test_with_materialized_columns(event_properties=["int_value"], person_properties=["fish"])
-    def test_insight_funnels_hogql_breakdown_single(self) -> None:
+    def test_insight_funnels_torql_breakdown_single(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(
                 team=self.team,
@@ -3156,7 +3156,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 f"/api/projects/{self.team.id}/insights/funnel/",
                 {
-                    "breakdown_type": "hogql",
+                    "breakdown_type": "torql",
                     "breakdown": "person.properties.fish",
                     "events": [
                         {"id": "user signed up", "type": "events", "order": 0},
@@ -3166,7 +3166,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -3187,7 +3187,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             self.assertEqual(response_json["result"][0][1]["breakdown_value"], ["there is no fish"])
             self.assertEqual(response_json["timezone"], "UTC")
 
-    def test_insight_funnels_hogql_aggregating_steps(self) -> None:
+    def test_insight_funnels_torql_aggregating_steps(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(team=self.team, distinct_ids=["1"], properties={"int_value": 1})
             _create_event(
@@ -3231,11 +3231,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(person.properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
-                    "funnel_aggregate_by_hogql": "properties.$browser",
+                    "funnel_aggregate_by_torql": "properties.$browser",
                     "funnel_viz_type": "steps",
                 },
             )
@@ -3249,7 +3249,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             self.assertEqual(response_json["timezone"], "UTC")
 
     @skip("Compatibility issue CH 23.12 (see #21318)")
-    def test_insight_funnels_hogql_aggregating_time_to_convert(self) -> None:
+    def test_insight_funnels_torql_aggregating_time_to_convert(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(team=self.team, distinct_ids=["1"], properties={"int_value": 1})
             _create_event(
@@ -3296,11 +3296,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(person.properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
-                    "funnel_aggregate_by_hogql": "properties.$browser",
+                    "funnel_aggregate_by_torql": "properties.$browser",
                     "funnel_viz_type": "time_to_convert",
                     "date_from": "-14d",
                     "date_to": None,
@@ -3312,7 +3312,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             self.assertEqual(response_json["result"]["average_conversion_time"], 4.0)
             self.assertEqual(response_json["timezone"], "UTC")
 
-    def test_insight_funnels_hogql_aggregating_trends(self) -> None:
+    def test_insight_funnels_torql_aggregating_trends(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(team=self.team, distinct_ids=["1"], properties={"int_value": 1})
             _create_event(
@@ -3349,11 +3349,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(person.properties.int_value) < 10 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
-                    "funnel_aggregate_by_hogql": "properties.$browser",
+                    "funnel_aggregate_by_torql": "properties.$browser",
                     "funnel_viz_type": "trends",
                 },
             )
@@ -3392,7 +3392,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             )
             self.assertEqual(response_json["timezone"], "UTC")
 
-    def test_insight_retention_hogql(self) -> None:
+    def test_insight_retention_torql(self) -> None:
         with freeze_time("2012-01-15T04:01:34.000Z"):
             _create_person(
                 team=self.team,
@@ -3426,11 +3426,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) > 100 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                             {
                                 "key": "like(person.properties.email, '%test.com%')",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -3446,11 +3446,11 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
                         [
                             {
                                 "key": "toInt(properties.int_value) > 0 and 'bla' != 'a%sd'",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                             {
                                 "key": "like(person.properties.email, '%test.com%')",
-                                "type": "hogql",
+                                "type": "torql",
                             },
                         ]
                     ),
@@ -3459,7 +3459,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
             self.assertEqual(len(response["result"]), 11)
             self.assertEqual(response["result"][0]["values"][0]["count"], 1)
 
-    def test_insight_with_filters_via_hogql(self) -> None:
+    def test_insight_with_filters_via_torql(self) -> None:
         filter_dict = {"insight": "LIFECYCLE", "events": [{"id": "$pageview"}]}
 
         insight = Insight.objects.create(
@@ -3480,7 +3480,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         self.assertEqual(response.json()["result"][0]["data"], [0, 0, 0, 0, 0, 0, 0, 0])
         self.assertTrue(response.json()["is_cached"])
 
-    def test_insight_returns_cached_hogql(self) -> None:
+    def test_insight_returns_cached_torql(self) -> None:
         insight = Insight.objects.create(
             query={
                 "kind": NodeKind.INSIGHT_VIZ_NODE.value,
@@ -3511,7 +3511,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
 
         self.assertNotIn("code", response)  # Watching out for an error code
         self.assertEqual(response["results"][0]["last_refresh"], None)
-        self.assertIsNone(response["results"][0]["hogql"])
+        self.assertIsNone(response["results"][0]["torql"])
 
         response = self.client.get(
             f"/api/projects/{self.team.id}/insights",
@@ -3519,7 +3519,7 @@ class TestInsight(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         ).json()
 
         self.assertNotIn("code", response)
-        self.assertIsNotNone(response["results"][0]["hogql"])
+        self.assertIsNotNone(response["results"][0]["torql"])
 
     def test_insight_returns_cached_types(self) -> None:
         insight = Insight.objects.create(

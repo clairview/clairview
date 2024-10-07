@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Any, Optional, Union
 
 from markettor.clickhouse.materialized_columns import ColumnName
-from markettor.hogql.database.database import create_hogql_database
+from markettor.torql.database.database import create_torql_database
 from markettor.models import Cohort, Filter, Property
 from markettor.models.cohort.util import is_precalculated_query
 from markettor.models.filters import AnyFilter
@@ -91,11 +91,11 @@ class EventQuery(metaclass=ABCMeta):
         self._extra_fields = extra_fields
         self._person_on_events_mode = alias_poe_mode_for_legacy(person_on_events_mode)
 
-        # HACK: Because we're in a legacy query, we need to override hogql_context with the legacy-alised PoE mode
-        self._filter.hogql_context.modifiers.personsOnEventsMode = self._person_on_events_mode
+        # HACK: Because we're in a legacy query, we need to override torql_context with the legacy-alised PoE mode
+        self._filter.torql_context.modifiers.personsOnEventsMode = self._person_on_events_mode
         # Recreate the database with the legacy-alised PoE mode
-        self._filter.hogql_context.database = create_hogql_database(
-            team_id=self._team.pk, modifiers=self._filter.hogql_context.modifiers
+        self._filter.torql_context.database = create_torql_database(
+            team_id=self._team.pk, modifiers=self._filter.torql_context.modifiers
         )
 
         # Guards against a ClickHouse bug involving multiple joins against the same table with the same column name.
@@ -298,7 +298,7 @@ class EventQuery(metaclass=ABCMeta):
             allow_denormalized_props=allow_denormalized_props,
             person_properties_mode=person_properties_mode,
             person_id_joined_alias=person_id_joined_alias,
-            hogql_context=self._filter.hogql_context,
+            torql_context=self._filter.torql_context,
         )
 
     def _get_not_null_actor_condition(self) -> str:

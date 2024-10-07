@@ -10,12 +10,12 @@ from rest_framework.decorators import action
 from markettor.api.routing import TeamAndOrgViewSetMixin
 from markettor.api.shared import UserBasicSerializer
 from markettor.constants import DATA_WAREHOUSE_TASK_QUEUE
-from markettor.hogql.context import HogQLContext
-from markettor.hogql.database.database import SerializedField, create_hogql_database, serialize_fields
-from markettor.hogql.errors import ExposedHogQLError
-from markettor.hogql.metadata import is_valid_view
-from markettor.hogql.parser import parse_select
-from markettor.hogql.printer import print_ast
+from markettor.torql.context import TorQLContext
+from markettor.torql.database.database import SerializedField, create_torql_database, serialize_fields
+from markettor.torql.errors import ExposedTorQLError
+from markettor.torql.metadata import is_valid_view
+from markettor.torql.parser import parse_select
+from markettor.torql.printer import print_ast
 from markettor.temporal.common.client import sync_connect
 from markettor.temporal.data_modeling.run_workflow import RunWorkflowInputs, Selector
 from markettor.warehouse.models import DataWarehouseJoin, DataWarehouseModelPath, DataWarehouseSavedQuery
@@ -46,9 +46,9 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
 
     def get_columns(self, view: DataWarehouseSavedQuery) -> list[SerializedField]:
         team_id = self.context["team_id"]
-        context = HogQLContext(team_id=team_id, database=create_hogql_database(team_id=team_id))
+        context = TorQLContext(team_id=team_id, database=create_torql_database(team_id=team_id))
 
-        fields = serialize_fields(view.hogql_definition().fields, context, view.name, table_type="external")
+        fields = serialize_fields(view.torql_definition().fields, context, view.name, table_type="external")
         return [
             SerializedField(
                 key=field.name,
@@ -112,7 +112,7 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
     def validate_query(self, query):
         team_id = self.context["team_id"]
 
-        context = HogQLContext(team_id=team_id, enable_select_queries=True)
+        context = TorQLContext(team_id=team_id, enable_select_queries=True)
         select_ast = parse_select(query["query"])
         _is_valid_view = is_valid_view(select_ast)
         if not _is_valid_view:
@@ -127,7 +127,7 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
                 settings=None,
             )
         except Exception as err:
-            if isinstance(err, ExposedHogQLError):
+            if isinstance(err, ExposedTorQLError):
                 error = str(err)
                 raise exceptions.ValidationError(detail=f"Invalid query: {error}")
             elif not settings.DEBUG:

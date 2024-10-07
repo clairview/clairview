@@ -13,11 +13,11 @@ import { DatabaseTableTreeWithItems } from 'scenes/data-warehouse/external/DataW
 import { InsightErrorState } from 'scenes/insights/EmptyStates'
 import { insightDataLogic } from 'scenes/insights/insightDataLogic'
 import { insightLogic } from 'scenes/insights/insightLogic'
-import { HogQLBoldNumber } from 'scenes/insights/views/BoldNumber/BoldNumber'
+import { TorQLBoldNumber } from 'scenes/insights/views/BoldNumber/BoldNumber'
 import { urls } from 'scenes/urls'
 
 import { insightVizDataCollectionId, insightVizDataNodeKey } from '~/queries/nodes/InsightViz/InsightViz'
-import { AnyResponseType, DataVisualizationNode, HogQLQuery, HogQLQueryResponse, NodeKind } from '~/queries/schema'
+import { AnyResponseType, DataVisualizationNode, TorQLQuery, TorQLQueryResponse, NodeKind } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'
 import { ChartDisplayType, ExporterFormat, InsightLogicProps } from '~/types'
 
@@ -26,7 +26,7 @@ import { DateRange } from '../DataNode/DateRange'
 import { ElapsedTime } from '../DataNode/ElapsedTime'
 import { Reload } from '../DataNode/Reload'
 import { QueryFeature } from '../DataTable/queryFeatures'
-import { HogQLQueryEditor } from '../HogQLQuery/HogQLQueryEditor'
+import { TorQLQueryEditor } from '../TorQLQuery/TorQLQueryEditor'
 import { LineGraph } from './Components/Charts/LineGraph'
 import { SideBar } from './Components/SideBar'
 import { Table } from './Components/Table'
@@ -128,7 +128,7 @@ function InternalDataTableVisualization(props: DataTableVisualizationProps): JSX
     const { toggleChartSettingsPanel } = useActions(dataVisualizationLogic)
 
     const setQuerySource = useCallback(
-        (source: HogQLQuery) => props.setQuery?.({ ...props.query, source }),
+        (source: TorQLQuery) => props.setQuery?.({ ...props.query, source }),
         [props.setQuery]
     )
 
@@ -147,7 +147,7 @@ function InternalDataTableVisualization(props: DataTableVisualizationProps): JSX
                 uniqueKey={props.uniqueKey}
                 query={query}
                 context={props.context}
-                cachedResults={props.cachedResults as HogQLQueryResponse | undefined}
+                cachedResults={props.cachedResults as TorQLQueryResponse | undefined}
             />
         )
     } else if (
@@ -158,7 +158,7 @@ function InternalDataTableVisualization(props: DataTableVisualizationProps): JSX
     ) {
         component = <LineGraph />
     } else if (visualizationType === ChartDisplayType.BoldNumber) {
-        component = <HogQLBoldNumber />
+        component = <TorQLBoldNumber />
     }
 
     return (
@@ -171,7 +171,7 @@ function InternalDataTableVisualization(props: DataTableVisualizationProps): JSX
             <div className="relative w-full flex flex-col gap-4 flex-1 overflow-hidden">
                 {!readOnly && showEditingUI && (
                     <>
-                        <HogQLQueryEditor
+                        <TorQLQueryEditor
                             query={query.source}
                             setQuery={setQuerySource}
                             embedded
@@ -197,7 +197,7 @@ function InternalDataTableVisualization(props: DataTableVisualizationProps): JSX
                                                 key="date-range"
                                                 query={query.source}
                                                 setQuery={(query) => {
-                                                    if (query.kind === NodeKind.HogQLQuery) {
+                                                    if (query.kind === NodeKind.TorQLQuery) {
                                                         setQuerySource(query)
                                                     }
                                                 }}

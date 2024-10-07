@@ -13,7 +13,7 @@ from markettor.api.services.query import ExecutionMode
 from markettor.caching.calculate_results import calculate_for_query_based_insight
 from markettor.email import EmailMessage
 from markettor.errors import CHQueryErrorTooManySimultaneousQueries
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import (
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import (
     conversion_to_query_based,
 )
 from markettor.models import AlertConfiguration

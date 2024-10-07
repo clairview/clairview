@@ -5,8 +5,8 @@ import api from 'lib/api'
 import { LemonSelectOptions } from 'lib/lemon-ui/LemonSelect/LemonSelect'
 import { liveEventsTableLogic } from 'scenes/activity/live/liveEventsTableLogic'
 
-import { HogQLQuery, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { TorQLQuery, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 import { ProductKey, SDK, SDKInstructionsMap } from '~/types'
 
 import { onboardingLogic } from '../onboardingLogic'
@@ -139,9 +139,9 @@ export const sdksLogic = kea<sdksLogicType>([
             null as boolean | null,
             {
                 loadSnippetEvents: async () => {
-                    const query: HogQLQuery = {
-                        kind: NodeKind.HogQLQuery,
-                        query: hogql`SELECT
+                    const query: TorQLQuery = {
+                        kind: NodeKind.TorQLQuery,
+                        query: torql`SELECT
                                         max(timestamp) AS latest_timestamp,
                                         concat(
                                             concat({protocol}, '//'),

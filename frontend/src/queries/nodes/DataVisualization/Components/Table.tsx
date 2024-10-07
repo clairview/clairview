@@ -5,7 +5,7 @@ import { lightenDarkenColor } from 'lib/utils'
 import { InsightEmptyState, InsightErrorState } from 'scenes/insights/EmptyStates'
 
 import { themeLogic } from '~/layout/navigation-3000/themeLogic'
-import { DataVisualizationNode, HogQLQueryResponse, NodeKind } from '~/queries/schema'
+import { DataVisualizationNode, TorQLQueryResponse, NodeKind } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'
 
 import { LoadNext } from '../../DataNode/LoadNext'
@@ -16,7 +16,7 @@ interface TableProps {
     query: DataVisualizationNode
     uniqueKey: string | number | undefined
     context: QueryContext<DataVisualizationNode> | undefined
-    cachedResults: HogQLQueryResponse | undefined
+    cachedResults: TorQLQueryResponse | undefined
 }
 
 export const Table = (props: TableProps): JSX.Element => {

@@ -4,7 +4,7 @@ from unittest.mock import ANY
 from ee.api.hooks import valid_domain
 from ee.api.test.base import APILicensedTest
 from ee.models.hook import Hook
-from hogvm.python.operation import HOGQL_BYTECODE_VERSION
+from hogvm.python.operation import TORQL_BYTECODE_VERSION
 from markettor.models.action.action import Action
 from markettor.models.hog_functions.hog_function import HogFunction
 from markettor.test.base import ClickhouseTestMixin
@@ -114,7 +114,7 @@ class TestHooksAPI(ClickhouseTestMixin, APILicensedTest):
 
         assert hog_function.filters == {
             "actions": [{"id": str(self.action.id), "name": "", "type": "actions", "order": 0}],
-            "bytecode": ["_H", HOGQL_BYTECODE_VERSION, 32, "$pageview", 32, "event", 1, 1, 11, 3, 1, 4, 1],
+            "bytecode": ["_H", TORQL_BYTECODE_VERSION, 32, "$pageview", 32, "event", 1, 1, 11, 3, 1, 4, 1],
         }
 
         assert hog_function.inputs == {
@@ -144,7 +144,7 @@ class TestHooksAPI(ClickhouseTestMixin, APILicensedTest):
             "hook": {
                 "bytecode": [
                     "_H",
-                    HOGQL_BYTECODE_VERSION,
+                    TORQL_BYTECODE_VERSION,
                     32,
                     "hooks/standard/1234/abcd",
                 ],

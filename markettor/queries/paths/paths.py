@@ -97,7 +97,7 @@ class Paths:
         query = self.get_query()
         return insight_sync_execute(
             query,
-            {**self.params, **self._filter.hogql_context.values},
+            {**self.params, **self._filter.torql_context.values},
             query_type="paths",
             filter=self._filter,
             team_id=self._team.pk,

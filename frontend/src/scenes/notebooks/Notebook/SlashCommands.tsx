@@ -1,7 +1,7 @@
 import {
     IconCursor,
     IconFunnels,
-    IconHogQL,
+    IconTorQL,
     IconLifecycle,
     IconPeople,
     IconRetention,
@@ -233,16 +233,16 @@ const SLASH_COMMANDS: SlashCommandsItem[] = [
             ),
     },
     {
-        title: 'HogQL',
+        title: 'TorQL',
         search: 'sql',
-        icon: <IconHogQL color="currentColor" />,
+        icon: <IconTorQL color="currentColor" />,
         command: (chain, pos) =>
             chain.insertContentAt(
                 pos,
                 buildNodeQueryContent({
                     kind: NodeKind.DataTableNode,
                     source: {
-                        kind: NodeKind.HogQLQuery,
+                        kind: NodeKind.TorQLQuery,
                         query: `select event,
         person.properties.email,
         properties.$browser,

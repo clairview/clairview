@@ -3,7 +3,7 @@ import { LemonButton } from 'lib/lemon-ui/LemonButton'
 
 import { dataNodeLogic } from '~/queries/nodes/DataNode/dataNodeLogic'
 import { DataNode } from '~/queries/schema'
-import { isHogQLQuery } from '~/queries/utils'
+import { isTorQLQuery } from '~/queries/utils'
 
 interface LoadNextProps {
     query: DataNode
@@ -15,7 +15,7 @@ export function LoadNext({ query }: LoadNextProps): JSX.Element {
     return (
         <div className="m-2 flex items-center">
             <LemonButton onClick={loadNextData} loading={nextDataLoading} fullWidth center disabled={!canLoadNextData}>
-                {isHogQLQuery(query) && !canLoadNextData && hasMoreData && dataLimit ? (
+                {isTorQLQuery(query) && !canLoadNextData && hasMoreData && dataLimit ? (
                     <>
                         <br />
                         Default limit of {dataLimit} rows reached. Try adding a LIMIT clause to adjust.

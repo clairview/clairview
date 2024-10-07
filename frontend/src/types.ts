@@ -35,8 +35,8 @@ import { QueryContext } from '~/queries/types'
 import type {
     DashboardFilter,
     DatabaseSchemaField,
-    HogQLQuery,
-    HogQLQueryModifiers,
+    TorQLQuery,
+    TorQLQueryModifiers,
     InsightVizNode,
     Node,
     QueryStatus,
@@ -533,8 +533,8 @@ export interface TeamType extends TeamBasicType {
     correlation_config: CorrelationConfigType | null
     person_on_events_querying_enabled: boolean
     extra_settings?: Record<string, string | number | boolean | undefined>
-    modifiers?: HogQLQueryModifiers
-    default_modifiers?: HogQLQueryModifiers
+    modifiers?: TorQLQueryModifiers
+    default_modifiers?: TorQLQueryModifiers
 }
 
 // This type would be more correct without `Partial<TeamType>`, but it's only used in the shared dashboard/insight
@@ -727,7 +727,7 @@ export enum PropertyFilterType {
     Recording = 'recording',
     LogEntry = 'log_entry',
     Group = 'group',
-    HogQL = 'hogql',
+    TorQL = 'torql',
     DataWarehouse = 'data_warehouse',
     DataWarehousePersonProperty = 'data_warehouse_person_property',
 }
@@ -796,8 +796,8 @@ export interface FeaturePropertyFilter extends BasePropertyFilter {
     operator: PropertyOperator
 }
 
-export interface HogQLPropertyFilter extends BasePropertyFilter {
-    type: PropertyFilterType.HogQL
+export interface TorQLPropertyFilter extends BasePropertyFilter {
+    type: PropertyFilterType.TorQL
     key: string
 }
 
@@ -818,7 +818,7 @@ export type AnyPropertyFilter =
     | LogEntryPropertyFilter
     | GroupPropertyFilter
     | FeaturePropertyFilter
-    | HogQLPropertyFilter
+    | TorQLPropertyFilter
     | EmptyPropertyFilter
     | DataWarehousePropertyFilter
     | DataWarehousePersonPropertyFilter
@@ -827,7 +827,7 @@ export type AnyPropertyFilter =
 export type AnyPersonScopeFilter =
     | PersonPropertyFilter
     | CohortPropertyFilter
-    | HogQLPropertyFilter
+    | TorQLPropertyFilter
     | EmptyPropertyFilter
 
 export type AnyFilterLike = AnyPropertyFilter | PropertyGroupFilter | PropertyGroupFilterValue
@@ -1091,7 +1091,7 @@ export interface ActionFilter extends EntityFilter {
     math?: string
     math_property?: string
     math_group_type_index?: integer | null
-    math_hogql?: string
+    math_torql?: string
     properties?: AnyPropertyFilter[]
     type: EntityType
     days?: string[] // TODO: why was this added here?
@@ -2093,7 +2093,7 @@ export type BreakdownType =
     | 'event'
     | 'group'
     | 'session'
-    | 'hogql'
+    | 'torql'
     | 'data_warehouse'
     | 'data_warehouse_person_property'
 export type IntervalType = 'minute' | 'hour' | 'day' | 'week' | 'month'
@@ -2115,7 +2115,7 @@ export enum PathType {
     PageView = '$pageview',
     Screen = '$screen',
     CustomEvent = 'custom_event',
-    HogQL = 'hogql',
+    TorQL = 'torql',
 }
 
 export enum FunnelPathType {
@@ -2272,7 +2272,7 @@ export interface FunnelsFilterType extends FilterType {
     funnel_window_interval?: number | undefined // length of conversion window
     funnel_order_type?: StepOrderValue
     exclusions?: FunnelExclusionLegacy[] // used in funnel exclusion filters
-    funnel_aggregate_by_hogql?: string
+    funnel_aggregate_by_torql?: string
 
     // frontend only
     layout?: FunnelLayout // used only for funnels
@@ -2290,7 +2290,7 @@ export interface FunnelsFilterType extends FilterType {
 }
 export interface PathsFilterType extends FilterType {
     path_type?: PathType
-    paths_hogql_expression?: string
+    paths_torql_expression?: string
     include_event_types?: PathType[]
     start_point?: string
     end_point?: string
@@ -3542,8 +3542,8 @@ export enum CountPerActorMathType {
     P99 = 'p99_count_per_actor',
 }
 
-export enum HogQLMathType {
-    HogQL = 'hogql',
+export enum TorQLMathType {
+    TorQL = 'torql',
 }
 export enum GroupMathType {
     UniqueGroup = 'unique_group',
@@ -3915,7 +3915,7 @@ export interface DataWarehouseSavedQuery {
     /** UUID */
     id: string
     name: string
-    query: HogQLQuery
+    query: TorQLQuery
     columns: DatabaseSchemaField[]
     last_run_at?: string
     status?: string
@@ -4451,7 +4451,7 @@ export type HogFunctionFilterPropertyFilter = (
     | ElementPropertyFilter
     | GroupPropertyFilter
     | FeaturePropertyFilter
-    | HogQLPropertyFilter
+    | TorQLPropertyFilter
 )[]
 
 export interface HogFunctionFiltersType {

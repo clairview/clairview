@@ -20,7 +20,7 @@ import {
     FunnelsFilterType,
     GroupMathType,
     GroupPropertyFilter,
-    HogQLMathType,
+    TorQLMathType,
     InsightShortId,
     InsightType,
     IntervalType,
@@ -64,9 +64,9 @@ export enum NodeKind {
     EventsQuery = 'EventsQuery',
     PersonsNode = 'PersonsNode',
     HogQuery = 'HogQuery',
-    HogQLQuery = 'HogQLQuery',
-    HogQLMetadata = 'HogQLMetadata',
-    HogQLAutocomplete = 'HogQLAutocomplete',
+    TorQLQuery = 'TorQLQuery',
+    TorQLMetadata = 'TorQLMetadata',
+    TorQLAutocomplete = 'TorQLAutocomplete',
     ActorsQuery = 'ActorsQuery',
     FunnelsActorsQuery = 'FunnelsActorsQuery',
     FunnelCorrelationActorsQuery = 'FunnelCorrelationActorsQuery',
@@ -116,9 +116,9 @@ export type AnyDataNode =
     | InsightActorsQueryOptions
     | SessionsTimelineQuery
     | HogQuery
-    | HogQLQuery
-    | HogQLMetadata
-    | HogQLAutocomplete
+    | TorQLQuery
+    | TorQLMetadata
+    | TorQLAutocomplete
     | WebOverviewQuery
     | WebStatsTableQuery
     | WebExternalClicksTableQuery
@@ -144,9 +144,9 @@ export type QuerySchema =
     | InsightActorsQueryOptions
     | SessionsTimelineQuery
     | HogQuery
-    | HogQLQuery
-    | HogQLMetadata
-    | HogQLAutocomplete
+    | TorQLQuery
+    | TorQLMetadata
+    | TorQLAutocomplete
     | WebOverviewQuery
     | WebStatsTableQuery
     | WebExternalClicksTableQuery
@@ -198,20 +198,20 @@ export interface Node<R extends Record<string, any> = Record<string, any>> {
 export type AnyResponseType =
     | Record<string, any>
     | HogQueryResponse
-    | HogQLQueryResponse
-    | HogQLMetadataResponse
-    | HogQLAutocompleteResponse
+    | TorQLQueryResponse
+    | TorQLMetadataResponse
+    | TorQLAutocompleteResponse
     | EventsNode['response']
     | EventsQueryResponse
 
 /** @internal - no need to emit to schema.json. */
 export interface DataNode<R extends Record<string, any> = Record<string, any>> extends Node<R> {
     /** Modifiers used when performing the query */
-    modifiers?: HogQLQueryModifiers
+    modifiers?: TorQLQueryModifiers
 }
 
-/** HogQL Query Options are automatically set per team. However, they can be overriden in the query. */
-export interface HogQLQueryModifiers {
+/** TorQL Query Options are automatically set per team. However, they can be overriden in the query. */
+export interface TorQLQueryModifiers {
     personsOnEventsMode?:
         | 'disabled' // `disabled` is deprecated and set for removal - `person_id_override_properties_joined` is its faster functional equivalent
         | 'person_id_no_override_properties_on_events'
@@ -238,7 +238,7 @@ export interface DataWarehouseEventsModifier {
     id_field: string
 }
 
-export interface HogQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
+export interface TorQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
     /** Input query string */
     query?: string
     /** Executed ClickHouse query */
@@ -250,33 +250,33 @@ export interface HogQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
     /** Query explanation output */
     explain?: string[]
     /** Query metadata output */
-    metadata?: HogQLMetadataResponse
+    metadata?: TorQLMetadataResponse
     hasMore?: boolean
     limit?: integer
     offset?: integer
 }
 
-export type CachedHogQLQueryResponse = CachedQueryResponse<HogQLQueryResponse>
+export type CachedTorQLQueryResponse = CachedQueryResponse<TorQLQueryResponse>
 
-/** Filters object that will be converted to a HogQL {filters} placeholder */
-export interface HogQLFilters {
+/** Filters object that will be converted to a TorQL {filters} placeholder */
+export interface TorQLFilters {
     properties?: AnyPropertyFilter[]
     dateRange?: DateRange
     filterTestAccounts?: boolean
 }
 
-export interface HogQLVariable {
+export interface TorQLVariable {
     variableId: string
     code_name: string
     value?: any
 }
 
-export interface HogQLQuery extends DataNode<HogQLQueryResponse> {
-    kind: NodeKind.HogQLQuery
+export interface TorQLQuery extends DataNode<TorQLQueryResponse> {
+    kind: NodeKind.TorQLQuery
     query: string
-    filters?: HogQLFilters
+    filters?: TorQLFilters
     /** Variables to be subsituted into the query */
-    variables?: Record<string, HogQLVariable>
+    variables?: Record<string, TorQLVariable>
     /** Constant values that can be referenced with the {placeholder} syntax in the query */
     values?: Record<string, any>
     /** @deprecated use modifiers.debug instead */
@@ -326,20 +326,20 @@ export interface RecordingsQuery extends DataNode<RecordingsQueryResponse> {
     user_modified_filters?: Record<string, any>
 }
 
-export interface HogQLNotice {
+export interface TorQLNotice {
     start?: integer
     end?: integer
     message: string
     fix?: string
 }
 
-export interface HogQLMetadataResponse {
+export interface TorQLMetadataResponse {
     query?: string
     isValid?: boolean
     isValidView?: boolean
-    errors: HogQLNotice[]
-    warnings: HogQLNotice[]
-    notices: HogQLNotice[]
+    errors: TorQLNotice[]
+    warnings: TorQLNotice[]
+    notices: TorQLNotice[]
     query_status?: never
 }
 
@@ -399,7 +399,7 @@ export interface AutocompleteCompletionItem {
         | 'Snippet'
 }
 
-export interface HogQLAutocompleteResponse {
+export interface TorQLAutocompleteResponse {
     suggestions: AutocompleteCompletionItem[]
     /** Whether or not the suggestions returned are complete */
     incomplete_list: boolean
@@ -411,13 +411,13 @@ export interface HogQLAutocompleteResponse {
 export enum HogLanguage {
     hog = 'hog',
     hogJson = 'hogJson',
-    hogQL = 'hogQL',
-    hogQLExpr = 'hogQLExpr',
+    torQL = 'torQL',
+    torQLExpr = 'torQLExpr',
     hogTemplate = 'hogTemplate',
 }
 
-export interface HogQLMetadata extends DataNode<HogQLMetadataResponse> {
-    kind: NodeKind.HogQLMetadata
+export interface TorQLMetadata extends DataNode<TorQLMetadataResponse> {
+    kind: NodeKind.TorQLMetadata
     /** Language to validate */
     language: HogLanguage
     /** Query to validate */
@@ -427,15 +427,15 @@ export interface HogQLMetadata extends DataNode<HogQLMetadataResponse> {
     /** Extra globals for the query */
     globals?: Record<string, any>
     /** Extra filters applied to query via {filters} */
-    filters?: HogQLFilters
+    filters?: TorQLFilters
     /** Variables to be subsituted into the query */
-    variables?: Record<string, HogQLVariable>
+    variables?: Record<string, TorQLVariable>
     /** Enable more verbose output, usually run from the /debug page */
     debug?: boolean
 }
 
-export interface HogQLAutocomplete extends DataNode<HogQLAutocompleteResponse> {
-    kind: NodeKind.HogQLAutocomplete
+export interface TorQLAutocomplete extends DataNode<TorQLAutocompleteResponse> {
+    kind: NodeKind.TorQLAutocomplete
     /** Language to validate */
     language: HogLanguage
     /** Query to validate */
@@ -445,7 +445,7 @@ export interface HogQLAutocomplete extends DataNode<HogQLAutocompleteResponse> {
     /** Global values in scope */
     globals?: Record<string, any>
     /** Table to validate the expression against */
-    filters?: HogQLFilters
+    filters?: TorQLFilters
     /**
      * Start position of the editor word
      */
@@ -456,14 +456,14 @@ export interface HogQLAutocomplete extends DataNode<HogQLAutocompleteResponse> {
     endPosition: integer
 }
 
-export type MathType = BaseMathType | PropertyMathType | CountPerActorMathType | GroupMathType | HogQLMathType
+export type MathType = BaseMathType | PropertyMathType | CountPerActorMathType | GroupMathType | TorQLMathType
 
 export interface EntityNode extends Node {
     name?: string
     custom_name?: string
     math?: MathType
     math_property?: string
-    math_hogql?: string
+    math_torql?: string
     math_group_type_index?: 0 | 1 | 2 | 3 | 4
     /** Properties configurable in the interface */
     properties?: AnyPropertyFilter[]
@@ -505,7 +505,7 @@ export interface QueryTiming {
 export interface EventsQueryResponse extends AnalyticsQueryResponseBase<any[][]> {
     columns: any[]
     types: string[]
-    hogql: string
+    torql: string
     hasMore?: boolean
     limit?: integer
     offset?: integer
@@ -525,9 +525,9 @@ export interface EventsQueryPersonColumn {
 export interface EventsQuery extends DataNode<EventsQueryResponse> {
     kind: NodeKind.EventsQuery
     /** Return a limited set of data. Required. */
-    select: HogQLExpression[]
-    /** HogQL filters to apply on returned data */
-    where?: HogQLExpression[]
+    select: TorQLExpression[]
+    /** TorQL filters to apply on returned data */
+    where?: TorQLExpression[]
     /** Properties configurable in the interface */
     properties?: AnyPropertyFilter[]
     /** Fixed properties in the query, can't be edited in the interface (e.g. scoping down by person) */
@@ -586,7 +586,7 @@ export interface DataTableNode
                     | EventsQuery
                     | PersonsNode
                     | ActorsQuery
-                    | HogQLQuery
+                    | TorQLQuery
                     | WebOverviewQuery
                     | WebStatsTableQuery
                     | WebExternalClicksTableQuery
@@ -607,7 +607,7 @@ export interface DataTableNode
         | EventsQuery
         | PersonsNode
         | ActorsQuery
-        | HogQLQuery
+        | TorQLQuery
         | WebOverviewQuery
         | WebStatsTableQuery
         | WebExternalClicksTableQuery
@@ -618,9 +618,9 @@ export interface DataTableNode
         | ExperimentFunnelQuery
         | ExperimentTrendQuery
     /** Columns shown in the table, unless the `source` provides them. */
-    columns?: HogQLExpression[]
+    columns?: TorQLExpression[]
     /** Columns that aren't shown in the table, even if in columns or returned data */
-    hiddenColumns?: HogQLExpression[]
+    hiddenColumns?: TorQLExpression[]
 }
 
 export interface GoalLine {
@@ -684,7 +684,7 @@ export interface TableSettings {
 
 export interface DataVisualizationNode extends Node<never> {
     kind: NodeKind.DataVisualizationNode
-    source: HogQLQuery
+    source: TorQLQuery
     display?: ChartDisplayType
     chartSettings?: ChartSettings
     tableSettings?: TableSettings
@@ -700,8 +700,8 @@ interface DataTableNodeViewProps {
     showPropertyFilter?: boolean | TaxonomicFilterGroupType[]
     /** Show filter to exclude test accounts */
     showTestAccountFilters?: boolean
-    /** Include a HogQL query editor above HogQL tables */
-    showHogQLEditor?: boolean
+    /** Include a TorQL query editor above TorQL tables */
+    showTorQLEditor?: boolean
     /** Show the kebab menu at the end of the row */
     showActions?: boolean
     /** Show date range selector */
@@ -804,7 +804,7 @@ export interface InsightsQueryBase<R extends AnalyticsQueryResponseBase<any>> ex
     /** Sampling rate */
     samplingFactor?: number | null
     /** Modifiers used when performing the query */
-    modifiers?: HogQLQueryModifiers
+    modifiers?: TorQLQueryModifiers
 }
 
 /** `TrendsFilterType` minus everything inherited from `FilterType` and `shown_as` */
@@ -883,7 +883,7 @@ export type AIPropertyFilter =
     | CohortPropertyFilter
     // | RecordingPropertyFilter
     // | LogEntryPropertyFilter
-    // | HogQLPropertyFilter
+    // | TorQLPropertyFilter
     // | EmptyPropertyFilter
     // | DataWarehousePropertyFilter
     // | DataWarehousePersonPropertyFilter
@@ -891,13 +891,13 @@ export type AIPropertyFilter =
     | FeaturePropertyFilter
 
 export interface AIEventsNode
-    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_hogql' | 'limit' | 'groupBy'> {
+    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_torql' | 'limit' | 'groupBy'> {
     properties?: AIPropertyFilter[]
     fixedProperties?: AIPropertyFilter[]
 }
 
 export interface AIActionsNode
-    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_hogql' | 'limit' | 'groupBy'> {
+    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_torql' | 'limit' | 'groupBy'> {
     properties?: AIPropertyFilter[]
     fixedProperties?: AIPropertyFilter[]
 }
@@ -979,7 +979,7 @@ export type FunnelsFilter = {
     /** @default first_touch */
     breakdownAttributionType?: FunnelsFilterLegacy['breakdown_attribution_type']
     breakdownAttributionValue?: integer
-    funnelAggregateByHogQL?: FunnelsFilterLegacy['funnel_aggregate_by_hogql']
+    funnelAggregateByTorQL?: FunnelsFilterLegacy['funnel_aggregate_by_torql']
     funnelToStep?: integer
     funnelFromStep?: integer
     /** @default ordered */
@@ -1076,7 +1076,7 @@ export type PathsFilterLegacy = Omit<
 export type PathsFilter = {
     /** @default 50 */
     edgeLimit?: integer
-    pathsHogQLExpression?: PathsFilterLegacy['paths_hogql_expression']
+    pathsTorQLExpression?: PathsFilterLegacy['paths_torql_expression']
     includeEventTypes?: PathsFilterLegacy['include_event_types']
     startPoint?: PathsFilterLegacy['start_point']
     endPoint?: PathsFilterLegacy['end_point']
@@ -1190,18 +1190,18 @@ export interface QueryRequest {
     async?: boolean
     /**
      * Submit a JSON string representing a query for MarketTor data analysis,
-     * for example a HogQL query.
+     * for example a TorQL query.
      *
      * Example payload:
      *
      * ```
      *
-     * {"query": {"kind": "HogQLQuery", "query": "select * from events limit 100"}}
+     * {"query": {"kind": "TorQLQuery", "query": "select * from events limit 100"}}
      *
      * ```
      *
-     * For more details on HogQL queries,
-     * see the [MarketTor HogQL documentation](/docs/hogql#api-access).
+     * For more details on TorQL queries,
+     * see the [MarketTor TorQL documentation](/docs/torql#api-access).
      */
     query: QuerySchema
     filters_override?: DashboardFilter
@@ -1215,12 +1215,12 @@ export interface AnalyticsQueryResponseBase<T> {
     results: T
     /** Measured timings for different parts of the query generation process */
     timings?: QueryTiming[]
-    /** Generated HogQL query. */
-    hogql?: string
+    /** Generated TorQL query. */
+    torql?: string
     /** Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise. */
     error?: string
     /** Modifiers used when performing the query */
-    modifiers?: HogQLQueryModifiers
+    modifiers?: TorQLQueryModifiers
     /** Query status indicates whether next to the provided data, a query is still running. */
     query_status?: QueryStatus
 }
@@ -1325,7 +1325,7 @@ export interface LifecycleQuery extends InsightsQueryBase<LifecycleQueryResponse
 export interface ActorsQueryResponse extends AnalyticsQueryResponseBase<any[][]> {
     columns: any[]
     types: string[]
-    hogql: string
+    torql: string
     hasMore?: boolean
     limit: integer
     offset: integer
@@ -1336,8 +1336,8 @@ export type CachedActorsQueryResponse = CachedQueryResponse<ActorsQueryResponse>
 
 export interface ActorsQuery extends DataNode<ActorsQueryResponse> {
     kind: NodeKind.ActorsQuery
-    source?: InsightActorsQuery | FunnelsActorsQuery | FunnelCorrelationActorsQuery | HogQLQuery
-    select?: HogQLExpression[]
+    source?: InsightActorsQuery | FunnelsActorsQuery | FunnelCorrelationActorsQuery | TorQLQuery
+    select?: TorQLExpression[]
     search?: string
     /** Currently only person filters supported. No filters for querying groups. See `filter_conditions()` in actor_strategies.py. */
     properties?: AnyPersonScopeFilter[]
@@ -1463,7 +1463,7 @@ export interface WebStatsTableQuery extends WebAnalyticsQueryBase<WebStatsTableQ
 export interface WebStatsTableQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    hogql?: string
+    torql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1479,7 +1479,7 @@ export interface WebExternalClicksTableQuery extends WebAnalyticsQueryBase<WebEx
 export interface WebExternalClicksTableQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    hogql?: string
+    torql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1495,7 +1495,7 @@ export interface WebGoalsQuery extends WebAnalyticsQueryBase<WebGoalsQueryRespon
 export interface WebGoalsQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    hogql?: string
+    torql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1535,7 +1535,7 @@ export type CachedSessionAttributionExplorerQueryResponse = CachedQueryResponse<
 export interface ErrorTrackingQuery extends DataNode<ErrorTrackingQueryResponse> {
     kind: NodeKind.ErrorTrackingQuery
     fingerprint?: string[]
-    select?: HogQLExpression[]
+    select?: TorQLExpression[]
     order?: 'last_seen' | 'first_seen' | 'occurrences' | 'users' | 'sessions'
     dateRange: DateRange
     assignee?: integer | null
@@ -1614,7 +1614,7 @@ export interface ExperimentTrendQuery extends DataNode<ExperimentTrendQueryRespo
     kind: NodeKind.ExperimentTrendQuery
     count_query: TrendsQuery
     // Defaults to $feature_flag_called if not specified
-    // https://github.com/MarketTor/markettor/blob/master/markettor/hogql_queries/experiments/experiment_trend_query_runner.py
+    // https://github.com/MarketTor/markettor/blob/master/markettor/torql_queries/experiments/experiment_trend_query_runner.py
     exposure_query?: TrendsQuery
     experiment_id: integer
 }
@@ -1643,7 +1643,7 @@ export type Day = integer
 
 export interface InsightActorsQueryBase extends DataNode<ActorsQueryResponse> {
     includeRecordings?: boolean
-    modifiers?: HogQLQueryModifiers
+    modifiers?: TorQLQueryModifiers
 }
 
 export interface InsightActorsQuery<S extends InsightsQueryBase<AnalyticsQueryResponseBase<any>> = InsightQuerySource>
@@ -1805,7 +1805,7 @@ export interface DatabaseSchemaSource {
 
 export interface DatabaseSchemaField {
     name: string
-    hogql_value: string
+    torql_value: string
     type: DatabaseSerializedFieldType
     schema_valid: boolean
     table?: string
@@ -1823,12 +1823,12 @@ export interface DatabaseSchemaTableCommon {
 
 export interface DatabaseSchemaViewTable extends DatabaseSchemaTableCommon {
     type: 'view'
-    query: HogQLQuery
+    query: TorQLQuery
 }
 
 export interface DatabaseSchemaMaterializedViewTable extends DatabaseSchemaTableCommon {
     type: 'materialized_view'
-    query: HogQLQuery
+    query: TorQLQuery
     last_run_at?: string
     status?: string
 }
@@ -1880,7 +1880,7 @@ export type DatabaseSerializedFieldType =
     | 'view'
     | 'materialized_view'
 
-export type HogQLExpression = string
+export type TorQLExpression = string
 
 // Various utility types below
 
@@ -1905,7 +1905,7 @@ export interface InsightDateRange {
     explicitDate?: boolean | null
 }
 
-export type MultipleBreakdownType = Extract<BreakdownType, 'person' | 'event' | 'group' | 'session' | 'hogql'>
+export type MultipleBreakdownType = Extract<BreakdownType, 'person' | 'event' | 'group' | 'session' | 'torql'>
 
 export interface Breakdown {
     type?: MultipleBreakdownType | null
@@ -1936,7 +1936,7 @@ export interface CompareFilter {
     compare_to?: string
 }
 
-// TODO: Rename to `DashboardFilters` for consistency with `HogQLFilters`
+// TODO: Rename to `DashboardFilters` for consistency with `TorQLFilters`
 export interface DashboardFilter {
     date_from?: string | null
     date_to?: string | null

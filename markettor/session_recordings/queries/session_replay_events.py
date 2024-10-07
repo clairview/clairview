@@ -132,8 +132,8 @@ class SessionReplayEvents:
     def get_events(
         self, session_id: str, team: Team, metadata: RecordingMetadata, events_to_ignore: list[str] | None
     ) -> tuple[list | None, list | None]:
-        from markettor.schema import HogQLQuery, HogQLQueryResponse
-        from markettor.hogql_queries.hogql_query_runner import HogQLQueryRunner
+        from markettor.schema import TorQLQuery, TorQLQueryResponse
+        from markettor.torql_queries.torql_query_runner import TorQLQueryRunner
 
         q = """
             select event, timestamp, elements_chain_href, elements_chain_texts, elements_chain_elements, properties.$window_id, properties.$current_url, properties.$event_type
@@ -146,7 +146,7 @@ class SessionReplayEvents:
 
         q += " order by timestamp asc"
 
-        hq = HogQLQuery(
+        hq = TorQLQuery(
             query=q,
             values={
                 # add some wiggle room to the timings, to ensure we get all the events
@@ -158,7 +158,7 @@ class SessionReplayEvents:
             },
         )
 
-        result: HogQLQueryResponse = HogQLQueryRunner(
+        result: TorQLQueryResponse = TorQLQueryRunner(
             team=team,
             query=hq,
         ).calculate()

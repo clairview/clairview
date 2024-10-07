@@ -6,7 +6,7 @@ import { FEATURE_FLAGS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { getVariablesFromQuery } from 'scenes/insights/utils/queryUtils'
 
-import { DataVisualizationNode, HogQLVariable } from '~/queries/schema'
+import { DataVisualizationNode, TorQLVariable } from '~/queries/schema'
 
 import { dataVisualizationLogic } from '../../dataVisualizationLogic'
 import { Variable } from '../../types'
@@ -27,13 +27,13 @@ export const variablesLogic = kea<variablesLogicType>([
         values: [dataVisualizationLogic, ['query'], featureFlagLogic, ['featureFlags']],
     }),
     actions({
-        addVariable: (variable: HogQLVariable) => ({ variable }),
+        addVariable: (variable: TorQLVariable) => ({ variable }),
         updateVariableValue: (variableId: string, value: any) => ({ variableId, value }),
         setEditorQuery: (query: string) => ({ query }),
     }),
     reducers({
         internalSelectedVariables: [
-            [] as HogQLVariable[],
+            [] as TorQLVariable[],
             {
                 addVariable: (state, { variable }) => {
                     return [...state, { ...variable }]
@@ -108,7 +108,7 @@ export const variablesLogic = kea<variablesLogicType>([
                         }
 
                         return acc
-                    }, {} as Record<string, HogQLVariable>),
+                    }, {} as Record<string, TorQLVariable>),
                 },
             }
 

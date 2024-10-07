@@ -42,7 +42,7 @@ export function HogQueryEditor(props: HogQueryEditorProps): JSX.Element {
 
     return (
         <div className="space-y-2">
-            <div data-attr="hogql-query-editor" className={clsx('flex flex-col rounded space-y-2 w-full p-2 border')}>
+            <div data-attr="torql-query-editor" className={clsx('flex flex-col rounded space-y-2 w-full p-2 border')}>
                 <div className="relative flex-1 overflow-hidden">
                     <div className="resize-y overflow-hidden h-[222px]">
                         <CodeEditor
@@ -86,7 +86,7 @@ export function HogQueryEditor(props: HogQueryEditorProps): JSX.Element {
                             disabledReason={!props.setQuery ? 'No permission to update' : undefined}
                             center
                             fullWidth
-                            data-attr="hogql-query-editor-save"
+                            data-attr="torql-query-editor-save"
                         >
                             {!props.setQuery ? 'No permission to update' : 'Update and run'}
                         </LemonButton>

@@ -1,7 +1,7 @@
 import json
 from typing import Optional, Literal, Union
 
-from markettor.hogql import ast
+from markettor.torql import ast
 from markettor.constants import PERSON_UUID_FILTER, SESSION_RECORDINGS_FILTER_IDS, PropertyOperatorType
 from markettor.models.filters.mixins.common import BaseParamMixin
 from markettor.models.filters.mixins.property import PropertyMixin

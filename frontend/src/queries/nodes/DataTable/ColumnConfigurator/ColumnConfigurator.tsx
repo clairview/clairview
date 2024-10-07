@@ -22,7 +22,7 @@ import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer'
 
 import { dataTableLogic } from '~/queries/nodes/DataTable/dataTableLogic'
 import { DataTableNode, NodeKind } from '~/queries/schema'
-import { isEventsQuery, taxonomicEventFilterToHogQL, trimQuotes } from '~/queries/utils'
+import { isEventsQuery, taxonomicEventFilterToTorQL, trimQuotes } from '~/queries/utils'
 import { PropertyFilterType } from '~/types'
 
 import { defaultDataTableColumns, extractExpressionComment, removeExpressionComment } from '../utils'
@@ -168,12 +168,12 @@ function ColumnConfiguratorModal({ query }: ColumnConfiguratorProps): JSX.Elemen
                                             TaxonomicFilterGroupType.EventFeatureFlags,
                                             TaxonomicFilterGroupType.PersonProperties,
                                             ...(isEventsQuery(query.source)
-                                                ? [TaxonomicFilterGroupType.HogQLExpression]
+                                                ? [TaxonomicFilterGroupType.TorQLExpression]
                                                 : []),
                                         ]}
                                         value={undefined}
                                         onChange={(group, value) => {
-                                            const column = taxonomicEventFilterToHogQL(group.type, value)
+                                            const column = taxonomicEventFilterToTorQL(group.type, value)
                                             if (column !== null) {
                                                 selectColumn(column)
                                             }

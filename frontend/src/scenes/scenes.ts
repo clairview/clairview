@@ -410,7 +410,7 @@ export const redirects: Record<
     '/events/:id/*': ({ id, _ }) => {
         const query = getDefaultEventsSceneQuery([
             {
-                type: PropertyFilterType.HogQL,
+                type: PropertyFilterType.TorQL,
                 key: `uuid = '${id.replaceAll(/[^a-f0-9-]/g, '')}'`,
                 value: null,
             },

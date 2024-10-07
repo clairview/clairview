@@ -110,7 +110,7 @@ SCREEN_EVENT = "$screen"
 AUTOCAPTURE_EVENT = "$autocapture"
 PAGEVIEW_EVENT = "$pageview"
 CUSTOM_EVENT = "custom_event"
-HOGQL = "hogql"
+TORQL = "torql"
 
 
 DATE_FROM = "date_from"
@@ -169,7 +169,7 @@ FUNNEL_STEP = "funnel_step"
 FUNNEL_CUSTOM_STEPS = "funnel_custom_steps"
 FUNNEL_STEP_BREAKDOWN = "funnel_step_breakdown"
 FUNNEL_LAYOUT = "layout"
-FUNNEL_AGGREAGTE_BY_HOGQL = "funnel_aggregate_by_hogql"
+FUNNEL_AGGREAGTE_BY_TORQL = "funnel_aggregate_by_torql"
 FUNNEL_ORDER_TYPE = "funnel_order_type"
 FUNNEL_VIZ_TYPE = "funnel_viz_type"
 FUNNEL_CORRELATION_TYPE = "funnel_correlation_type"
@@ -190,7 +190,7 @@ BIN_COUNT = "bin_count"
 ENTRANCE_PERIOD_START = "entrance_period_start"
 DROP_OFF = "drop_off"
 FUNNEL_PATHS = "funnel_paths"
-PATHS_HOGQL_EXPRESSION = "paths_hogql_expression"
+PATHS_TORQL_EXPRESSION = "paths_torql_expression"
 PATHS_INCLUDE_EVENT_TYPES = "include_event_types"
 PATHS_INCLUDE_CUSTOM_EVENTS = "include_custom_events"
 PATHS_EXCLUDE_EVENTS = "exclude_events"
@@ -213,7 +213,7 @@ BREAKDOWN_NORMALIZE_URL = "breakdown_normalize_url"
 SAMPLING_FACTOR = "sampling_factor"
 
 
-BREAKDOWN_TYPES = Literal["event", "person", "cohort", "group", "session", "hogql"]
+BREAKDOWN_TYPES = Literal["event", "person", "cohort", "group", "session", "torql"]
 
 
 class FunnelOrderType(StrEnum):

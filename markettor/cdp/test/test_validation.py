@@ -2,7 +2,7 @@ import json
 
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import HOGQL_BYTECODE_VERSION
+from hogvm.python.operation import TORQL_BYTECODE_VERSION
 from markettor.cdp.validation import validate_inputs, validate_inputs_schema
 from markettor.test.base import APIBaseTest, ClickhouseTestMixin, QueryMatchingTest
 
@@ -81,7 +81,7 @@ class TestHogFunctionValidation(ClickhouseTestMixin, APIBaseTest, QueryMatchingT
                     "value": "http://localhost:2080/0e02d917-563f-4050-9725-aad881b69937",
                     "bytecode": [
                         "_H",
-                        HOGQL_BYTECODE_VERSION,
+                        TORQL_BYTECODE_VERSION,
                         32,
                         "http://localhost:2080/0e02d917-563f-4050-9725-aad881b69937",
                     ],
@@ -95,13 +95,13 @@ class TestHogFunctionValidation(ClickhouseTestMixin, APIBaseTest, QueryMatchingT
                         "event_url": "{f'{event.url}-test'}",
                     },
                     "bytecode": {
-                        "event": ["_H", HOGQL_BYTECODE_VERSION, 32, "event", 1, 1],
-                        "groups": ["_H", HOGQL_BYTECODE_VERSION, 32, "groups", 1, 1],
-                        "nested": {"foo": ["_H", HOGQL_BYTECODE_VERSION, 32, "url", 32, "event", 1, 2]},
-                        "person": ["_H", HOGQL_BYTECODE_VERSION, 32, "person", 1, 1],
+                        "event": ["_H", TORQL_BYTECODE_VERSION, 32, "event", 1, 1],
+                        "groups": ["_H", TORQL_BYTECODE_VERSION, 32, "groups", 1, 1],
+                        "nested": {"foo": ["_H", TORQL_BYTECODE_VERSION, 32, "url", 32, "event", 1, 2]},
+                        "person": ["_H", TORQL_BYTECODE_VERSION, 32, "person", 1, 1],
                         "event_url": [
                             "_H",
-                            HOGQL_BYTECODE_VERSION,
+                            TORQL_BYTECODE_VERSION,
                             32,
                             "url",
                             32,
@@ -122,7 +122,7 @@ class TestHogFunctionValidation(ClickhouseTestMixin, APIBaseTest, QueryMatchingT
                     "bytecode": {
                         "version": [
                             "_H",
-                            HOGQL_BYTECODE_VERSION,
+                            TORQL_BYTECODE_VERSION,
                             32,
                             "v=",
                             32,
@@ -162,7 +162,7 @@ class TestHogFunctionValidation(ClickhouseTestMixin, APIBaseTest, QueryMatchingT
                 "html": {
                     "bytecode": [
                         "_H",
-                        HOGQL_BYTECODE_VERSION,
+                        TORQL_BYTECODE_VERSION,
                         32,
                         '<html>\n<head>\n<style type="text/css">\n  .css {\n    width: 500px !important;\n  }</style>\n</head>\n\n<body>\n    <p>Hi ',
                         32,

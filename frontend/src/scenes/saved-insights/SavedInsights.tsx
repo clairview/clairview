@@ -7,7 +7,7 @@ import {
     IconFlask,
     IconFunnels,
     IconGraph,
-    IconHogQL,
+    IconTorQL,
     IconLifecycle,
     IconPerson,
     IconPieChart,
@@ -109,8 +109,8 @@ export const INSIGHT_TYPES_METADATA: Record<InsightType, InsightTypeMetadata> = 
     },
     [InsightType.SQL]: {
         name: 'SQL',
-        description: 'Use HogQL to query your data.',
-        icon: IconHogQL,
+        description: 'Use TorQL to query your data.',
+        icon: IconTorQL,
         inMenu: true,
     },
     [InsightType.JSON]: {
@@ -122,7 +122,7 @@ export const INSIGHT_TYPES_METADATA: Record<InsightType, InsightTypeMetadata> = 
     [InsightType.HOG]: {
         name: 'Hog',
         description: 'Use Hog to query your data.',
-        icon: IconHogQL,
+        icon: IconTorQL,
         inMenu: true,
     },
 }
@@ -260,28 +260,28 @@ export const QUERY_TYPES_METADATA: Record<NodeKind, InsightTypeMetadata> = {
         icon: IconTrends,
         inMenu: true,
     },
-    [NodeKind.HogQLQuery]: {
-        name: 'HogQL',
-        description: 'Direct HogQL query',
+    [NodeKind.TorQLQuery]: {
+        name: 'TorQL',
+        description: 'Direct TorQL query',
         icon: IconBrackets,
         inMenu: true,
     },
-    [NodeKind.HogQLMetadata]: {
-        name: 'HogQL Metadata',
-        description: 'Metadata for a HogQL query',
-        icon: IconHogQL,
+    [NodeKind.TorQLMetadata]: {
+        name: 'TorQL Metadata',
+        description: 'Metadata for a TorQL query',
+        icon: IconTorQL,
         inMenu: true,
     },
-    [NodeKind.HogQLAutocomplete]: {
-        name: 'HogQL Autocomplete',
-        description: 'Autocomplete for the HogQL query editor',
-        icon: IconHogQL,
+    [NodeKind.TorQLAutocomplete]: {
+        name: 'TorQL Autocomplete',
+        description: 'Autocomplete for the TorQL query editor',
+        icon: IconTorQL,
         inMenu: false,
     },
     [NodeKind.DatabaseSchemaQuery]: {
         name: 'Database Schema',
         description: 'Introspect the MarketTor database schema',
-        icon: IconHogQL,
+        icon: IconTorQL,
         inMenu: true,
     },
     [NodeKind.WebOverviewQuery]: {
@@ -317,7 +317,7 @@ export const QUERY_TYPES_METADATA: Record<NodeKind, InsightTypeMetadata> = {
     [NodeKind.HogQuery]: {
         name: 'Hog',
         description: 'Hog query',
-        icon: IconHogQL,
+        icon: IconTorQL,
         inMenu: true,
     },
     [NodeKind.SessionAttributionExplorerQuery]: {

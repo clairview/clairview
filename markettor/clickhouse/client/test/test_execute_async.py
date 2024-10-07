@@ -26,7 +26,7 @@ from markettor.clickhouse.client.execute_async import (
 
 def build_query(sql):
     return {
-        "kind": "HogQLQuery",
+        "kind": "TorQLQuery",
         "query": sql,
     }
 

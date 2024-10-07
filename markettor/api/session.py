@@ -5,15 +5,15 @@ from markettor.api.utils import action
 from rest_framework.exceptions import ValidationError
 
 from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.hogql.database.schema.sessions_v1 import (
+from markettor.torql.database.schema.sessions_v1 import (
     get_lazy_session_table_properties_v1,
     get_lazy_session_table_values_v1,
 )
-from markettor.hogql.database.schema.sessions_v2 import (
+from markettor.torql.database.schema.sessions_v2 import (
     get_lazy_session_table_values_v2,
     get_lazy_session_table_properties_v2,
 )
-from markettor.hogql.modifiers import create_default_modifiers_for_team
+from markettor.torql.modifiers import create_default_modifiers_for_team
 from markettor.rate_limit import (
     ClickHouseBurstRateThrottle,
     ClickHouseSustainedRateThrottle,

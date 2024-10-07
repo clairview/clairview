@@ -26,7 +26,7 @@ class InsightResult:
     timings: Optional[list[QueryTiming]] = None
     columns: Optional[list] = None
     query_status: Optional[Any] = None
-    hogql: Optional[str] = None
+    torql: Optional[str] = None
     types: Optional[list] = None
 
 

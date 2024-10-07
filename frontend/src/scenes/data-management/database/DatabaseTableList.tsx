@@ -16,8 +16,8 @@ export function DatabaseTableList(): JSX.Element {
             <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
                     These are the database tables you can query under SQL insights with{' '}
-                    <Link to="https://markettor.com/manual/hogql" target="_blank">
-                        HogQL
+                    <Link to="https://markettor.com/manual/torql" target="_blank">
+                        TorQL
                     </Link>
                     .
                 </div>

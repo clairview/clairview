@@ -22,8 +22,8 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 import { urls } from 'scenes/urls'
 
-import { HogQLQuery, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { TorQLQuery, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 import { ToolbarParams, ToolbarUserIntent } from '~/types'
 
 import type { authorizedUrlListLogicType } from './authorizedUrlListLogicType'
@@ -173,9 +173,9 @@ export const authorizedUrlListLogic = kea<authorizedUrlListLogicType>([
         suggestions: {
             __default: [] as string[],
             loadSuggestions: async () => {
-                const query: HogQLQuery = {
-                    kind: NodeKind.HogQLQuery,
-                    query: hogql`select properties.$current_url, count()
+                const query: TorQLQuery = {
+                    kind: NodeKind.TorQLQuery,
+                    query: torql`select properties.$current_url, count()
                         from events
                            where event = '$pageview'
                            and timestamp >= now() - interval 3 day 

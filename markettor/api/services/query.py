@@ -7,21 +7,21 @@ from rest_framework.exceptions import ValidationError
 from hogvm.python.debugger import color_bytecode
 from markettor.clickhouse.query_tagging import tag_queries
 from markettor.cloud_utils import is_cloud
-from markettor.hogql.bytecode import execute_hog
-from markettor.hogql.constants import LimitContext
-from markettor.hogql.context import HogQLContext
-from markettor.hogql.database.database import create_hogql_database, serialize_database
-from markettor.hogql.autocomplete import get_hogql_autocomplete
-from markettor.hogql.metadata import get_hogql_metadata
-from markettor.hogql.modifiers import create_default_modifiers_for_team
-from markettor.hogql_queries.query_runner import CacheMissResponse, ExecutionMode, get_query_runner
+from markettor.torql.bytecode import execute_hog
+from markettor.torql.constants import LimitContext
+from markettor.torql.context import TorQLContext
+from markettor.torql.database.database import create_torql_database, serialize_database
+from markettor.torql.autocomplete import get_torql_autocomplete
+from markettor.torql.metadata import get_torql_metadata
+from markettor.torql.modifiers import create_default_modifiers_for_team
+from markettor.torql_queries.query_runner import CacheMissResponse, ExecutionMode, get_query_runner
 from markettor.models import Team, User
 from markettor.schema import (
     DatabaseSchemaQueryResponse,
     HogQuery,
     DashboardFilter,
-    HogQLAutocomplete,
-    HogQLMetadata,
+    TorQLAutocomplete,
+    TorQLMetadata,
     QuerySchemaRoot,
     DatabaseSchemaQuery,
     HogQueryResponse,
@@ -104,15 +104,15 @@ def process_query_model(
                 )
             except Exception as e:
                 result = HogQueryResponse(results=f"ERROR: {str(e)}")
-        elif isinstance(query, HogQLAutocomplete):
-            result = get_hogql_autocomplete(query=query, team=team)
-        elif isinstance(query, HogQLMetadata):
-            metadata_query = HogQLMetadata.model_validate(query)
-            metadata_response = get_hogql_metadata(query=metadata_query, team=team)
+        elif isinstance(query, TorQLAutocomplete):
+            result = get_torql_autocomplete(query=query, team=team)
+        elif isinstance(query, TorQLMetadata):
+            metadata_query = TorQLMetadata.model_validate(query)
+            metadata_response = get_torql_metadata(query=metadata_query, team=team)
             result = metadata_response
         elif isinstance(query, DatabaseSchemaQuery):
-            database = create_hogql_database(team.pk, modifiers=create_default_modifiers_for_team(team))
-            context = HogQLContext(team_id=team.pk, team=team, database=database)
+            database = create_torql_database(team.pk, modifiers=create_default_modifiers_for_team(team))
+            context = TorQLContext(team_id=team.pk, team=team, database=database)
             result = DatabaseSchemaQueryResponse(tables=serialize_database(context))
         else:
             raise ValidationError(f"Unsupported query kind: {query.__class__.__name__}")

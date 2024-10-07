@@ -7,9 +7,9 @@ import markettor from 'markettor-js'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { HogQLQueryModifiers } from '~/queries/schema'
+import { TorQLQueryModifiers } from '~/queries/schema'
 
-type PoEMode = NonNullable<HogQLQueryModifiers['personsOnEventsMode']>
+type PoEMode = NonNullable<TorQLQueryModifiers['personsOnEventsMode']>
 
 const POE_OPTIONS: LemonRadioOption<PoEMode>[] = [
     {

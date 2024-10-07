@@ -16,8 +16,8 @@ import {
     EventsNode,
     EventsQuery,
     FunnelsQuery,
-    HogQLMetadata,
-    HogQLQuery,
+    TorQLMetadata,
+    TorQLQuery,
     HogQuery,
     InsightActorsQuery,
     InsightFilter,
@@ -51,8 +51,8 @@ export function isDataNode(node?: Record<string, any> | null): node is EventsQue
         isPersonsNode(node) ||
         isEventsQuery(node) ||
         isActorsQuery(node) ||
-        isHogQLQuery(node) ||
-        isHogQLMetadata(node)
+        isTorQLQuery(node) ||
+        isTorQLMetadata(node)
     )
 }
 
@@ -113,12 +113,12 @@ export function isHogQuery(node?: Record<string, any> | null): node is HogQuery 
     return node?.kind === NodeKind.HogQuery
 }
 
-export function isHogQLQuery(node?: Record<string, any> | null): node is HogQLQuery {
-    return node?.kind === NodeKind.HogQLQuery
+export function isTorQLQuery(node?: Record<string, any> | null): node is TorQLQuery {
+    return node?.kind === NodeKind.TorQLQuery
 }
 
-export function isHogQLMetadata(node?: Record<string, any> | null): node is HogQLMetadata {
-    return node?.kind === NodeKind.HogQLMetadata
+export function isTorQLMetadata(node?: Record<string, any> | null): node is TorQLMetadata {
+    return node?.kind === NodeKind.TorQLMetadata
 }
 
 export function isWebOverviewQuery(node?: Record<string, any> | null): node is WebOverviewQuery {
@@ -147,11 +147,11 @@ export function isSessionAttributionExplorerQuery(
     return node?.kind === NodeKind.SessionAttributionExplorerQuery
 }
 
-export function containsHogQLQuery(node?: Record<string, any> | null): boolean {
+export function containsTorQLQuery(node?: Record<string, any> | null): boolean {
     if (!node) {
         return false
     }
-    return isHogQLQuery(node) || (isNodeWithSource(node) && isHogQLQuery(node.source))
+    return isTorQLQuery(node) || (isNodeWithSource(node) && isTorQLQuery(node.source))
 }
 
 /*
@@ -365,9 +365,9 @@ export function trimQuotes(identifier: string): string {
 }
 
 /** Make sure the property key is wrapped in quotes if it contains any special characters. */
-export function escapePropertyAsHogQlIdentifier(identifier: string): string {
+export function escapePropertyAsTorQlIdentifier(identifier: string): string {
     if (identifier.match(/^[A-Za-z_$][A-Za-z0-9_$]*$/)) {
-        // Same regex as in the backend escape_hogql_identifier
+        // Same regex as in the backend escape_torql_identifier
         return identifier // This identifier is simple
     }
     if (isQuoted(identifier)) {
@@ -376,79 +376,79 @@ export function escapePropertyAsHogQlIdentifier(identifier: string): string {
     return !identifier.includes('"') ? `"${identifier}"` : `\`${identifier}\``
 }
 
-export function taxonomicEventFilterToHogQL(
+export function taxonomicEventFilterToTorQL(
     groupType: TaxonomicFilterGroupType,
     value: TaxonomicFilterValue
 ): string | null {
     if (groupType === TaxonomicFilterGroupType.EventProperties) {
-        return `properties.${escapePropertyAsHogQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
     }
     if (groupType === TaxonomicFilterGroupType.PersonProperties) {
-        return `person.properties.${escapePropertyAsHogQlIdentifier(String(value))}`
+        return `person.properties.${escapePropertyAsTorQlIdentifier(String(value))}`
     }
     if (groupType === TaxonomicFilterGroupType.EventFeatureFlags) {
-        return `properties.${escapePropertyAsHogQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
     }
-    if (groupType === TaxonomicFilterGroupType.HogQLExpression && value) {
+    if (groupType === TaxonomicFilterGroupType.TorQLExpression && value) {
         return String(value)
     }
     return null
 }
 
-export function taxonomicPersonFilterToHogQL(
+export function taxonomicPersonFilterToTorQL(
     groupType: TaxonomicFilterGroupType,
     value: TaxonomicFilterValue
 ): string | null {
     if (groupType === TaxonomicFilterGroupType.PersonProperties) {
-        return `properties.${escapePropertyAsHogQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
     }
-    if (groupType === TaxonomicFilterGroupType.HogQLExpression && value) {
+    if (groupType === TaxonomicFilterGroupType.TorQLExpression && value) {
         return String(value)
     }
     return null
 }
 
-export function isHogQlAggregation(hogQl: string): boolean {
+export function isTorQlAggregation(torQl: string): boolean {
     return (
-        hogQl.includes('count(') ||
-        hogQl.includes('any(') ||
-        hogQl.includes('sum(') ||
-        hogQl.includes('avg(') ||
-        hogQl.includes('min(') ||
-        hogQl.includes('max(')
+        torQl.includes('count(') ||
+        torQl.includes('any(') ||
+        torQl.includes('sum(') ||
+        torQl.includes('avg(') ||
+        torQl.includes('min(') ||
+        torQl.includes('max(')
     )
 }
 
-export interface HogQLIdentifier {
-    __hogql_identifier: true
+export interface TorQLIdentifier {
+    __torql_identifier: true
     identifier: string
 }
 
-function hogQlIdentifier(identifier: string): HogQLIdentifier {
+function torQlIdentifier(identifier: string): TorQLIdentifier {
     return {
-        __hogql_identifier: true,
+        __torql_identifier: true,
         identifier,
     }
 }
 
-function isHogQlIdentifier(value: any): value is HogQLIdentifier {
-    return !!value?.__hogql_identifier
+function isTorQlIdentifier(value: any): value is TorQLIdentifier {
+    return !!value?.__torql_identifier
 }
 
-function formatHogQlValue(value: any): string {
+function formatTorQlValue(value: any): string {
     if (Array.isArray(value)) {
-        return `[${value.map(formatHogQlValue).join(', ')}]`
+        return `[${value.map(formatTorQlValue).join(', ')}]`
     } else if (dayjs.isDayjs(value)) {
         return value.tz(teamLogic.values.timezone).format("'YYYY-MM-DD HH:mm:ss'")
-    } else if (isHogQlIdentifier(value)) {
-        return escapePropertyAsHogQlIdentifier(value.identifier)
+    } else if (isTorQlIdentifier(value)) {
+        return escapePropertyAsTorQlIdentifier(value.identifier)
     } else if (typeof value === 'string') {
         return `'${value}'`
     } else if (typeof value === 'number') {
         return String(value)
     } else if (value === null) {
         throw new Error(
-            `null cannot be interpolated for HogQL. if a null check is needed, make 'IS NULL' part of your query`
+            `null cannot be interpolated for TorQL. if a null check is needed, make 'IS NULL' part of your query`
         )
     } else {
         throw new Error(`Unsupported interpolated value type: ${typeof value}`)
@@ -456,13 +456,13 @@ function formatHogQlValue(value: any): string {
 }
 
 /**
- * Template tag for HogQL formatting. Handles formatting of values for you.
- * @example hogql`SELECT * FROM events WHERE properties.text = ${text} AND timestamp > ${dayjs()}`
+ * Template tag for TorQL formatting. Handles formatting of values for you.
+ * @example torql`SELECT * FROM events WHERE properties.text = ${text} AND timestamp > ${dayjs()}`
  */
-export function hogql(strings: TemplateStringsArray, ...values: any[]): string {
-    return strings.reduce((acc, str, i) => acc + str + (i < strings.length - 1 ? formatHogQlValue(values[i]) : ''), '')
+export function torql(strings: TemplateStringsArray, ...values: any[]): string {
+    return strings.reduce((acc, str, i) => acc + str + (i < strings.length - 1 ? formatTorQlValue(values[i]) : ''), '')
 }
-hogql.identifier = hogQlIdentifier
+torql.identifier = torQlIdentifier
 
 /**
  * Wether we have a valid `breakdownFilter` or not.

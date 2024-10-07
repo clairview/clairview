@@ -13,7 +13,7 @@ from sentry_sdk import capture_exception, push_scope
 from requests.exceptions import HTTPError
 
 from markettor.api.services.query import process_query_dict
-from markettor.hogql_queries.query_runner import ExecutionMode
+from markettor.torql_queries.query_runner import ExecutionMode
 from markettor.jwt import MarkettorJwtAudience, encode_jwt
 from markettor.models.exported_asset import ExportedAsset, save_content
 from markettor.utils import absolute_uri
@@ -25,8 +25,8 @@ from ..exporter import (
     EXPORT_TIMER,
 )
 from ...exceptions import QuerySizeExceeded
-from ...hogql.constants import CSV_EXPORT_LIMIT, CSV_EXPORT_BREAKDOWN_LIMIT_INITIAL, CSV_EXPORT_BREAKDOWN_LIMIT_LOW
-from ...hogql.query import LimitContext
+from ...torql.constants import CSV_EXPORT_LIMIT, CSV_EXPORT_BREAKDOWN_LIMIT_INITIAL, CSV_EXPORT_BREAKDOWN_LIMIT_LOW
+from ...torql.query import LimitContext
 
 logger = structlog.get_logger(__name__)
 
@@ -256,7 +256,7 @@ def get_from_insights_api(exported_asset: ExportedAsset, limit: int, resource: d
         next_url = data.get("next")
 
 
-def get_from_hogql_query(exported_asset: ExportedAsset, limit: int, resource: dict) -> Generator[Any, None, None]:
+def get_from_torql_query(exported_asset: ExportedAsset, limit: int, resource: dict) -> Generator[Any, None, None]:
     query = resource.get("source")
     assert query is not None
 
@@ -290,7 +290,7 @@ def _export_to_dict(exported_asset: ExportedAsset, limit: int) -> Any:
     returned_rows: Generator[Any, None, None]
 
     if resource.get("source"):
-        returned_rows = get_from_hogql_query(exported_asset, limit, resource)
+        returned_rows = get_from_torql_query(exported_asset, limit, resource)
     else:
         returned_rows = get_from_insights_api(exported_asset, limit, resource)
 

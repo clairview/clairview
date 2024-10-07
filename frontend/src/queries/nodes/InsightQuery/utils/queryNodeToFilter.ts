@@ -53,7 +53,7 @@ export const seriesNodeToFilter = (
         // TODO: math is not supported by funnel and lifecycle queries
         math: node.math,
         math_property: node.math_property,
-        math_hogql: node.math_hogql,
+        math_torql: node.math_torql,
         math_group_type_index: node.math_group_type_index,
         properties: node.properties as any, // TODO,
         ...(isDataWarehouseNode(node)
@@ -217,7 +217,7 @@ export const queryNodeToFilter = (query: InsightQueryNode): Partial<FilterType> 
         camelCasedFunnelsProps.bin_count = queryCopy.funnelsFilter?.binCount
         camelCasedFunnelsProps.breakdown_attribution_type = queryCopy.funnelsFilter?.breakdownAttributionType
         camelCasedFunnelsProps.breakdown_attribution_value = queryCopy.funnelsFilter?.breakdownAttributionValue
-        camelCasedFunnelsProps.funnel_aggregate_by_hogql = queryCopy.funnelsFilter?.funnelAggregateByHogQL
+        camelCasedFunnelsProps.funnel_aggregate_by_torql = queryCopy.funnelsFilter?.funnelAggregateByTorQL
         camelCasedFunnelsProps.funnel_to_step = queryCopy.funnelsFilter?.funnelToStep
         camelCasedFunnelsProps.funnel_from_step = queryCopy.funnelsFilter?.funnelFromStep
         camelCasedFunnelsProps.funnel_order_type = queryCopy.funnelsFilter?.funnelOrderType
@@ -232,7 +232,7 @@ export const queryNodeToFilter = (query: InsightQueryNode): Partial<FilterType> 
         delete queryCopy.funnelsFilter?.binCount
         delete queryCopy.funnelsFilter?.breakdownAttributionType
         delete queryCopy.funnelsFilter?.breakdownAttributionValue
-        delete queryCopy.funnelsFilter?.funnelAggregateByHogQL
+        delete queryCopy.funnelsFilter?.funnelAggregateByTorQL
         delete queryCopy.funnelsFilter?.funnelToStep
         delete queryCopy.funnelsFilter?.funnelFromStep
         delete queryCopy.funnelsFilter?.funnelOrderType
@@ -258,7 +258,7 @@ export const queryNodeToFilter = (query: InsightQueryNode): Partial<FilterType> 
         delete queryCopy.retentionFilter?.cumulative
     } else if (isPathsQuery(queryCopy)) {
         camelCasedPathsProps.edge_limit = queryCopy.pathsFilter?.edgeLimit
-        camelCasedPathsProps.paths_hogql_expression = queryCopy.pathsFilter?.pathsHogQLExpression
+        camelCasedPathsProps.paths_torql_expression = queryCopy.pathsFilter?.pathsTorQLExpression
         camelCasedPathsProps.include_event_types = queryCopy.pathsFilter?.includeEventTypes
         camelCasedPathsProps.start_point = queryCopy.pathsFilter?.startPoint
         camelCasedPathsProps.end_point = queryCopy.pathsFilter?.endPoint
@@ -278,7 +278,7 @@ export const queryNodeToFilter = (query: InsightQueryNode): Partial<FilterType> 
                   }
                 : undefined
         delete queryCopy.pathsFilter?.edgeLimit
-        delete queryCopy.pathsFilter?.pathsHogQLExpression
+        delete queryCopy.pathsFilter?.pathsTorQLExpression
         delete queryCopy.pathsFilter?.includeEventTypes
         delete queryCopy.pathsFilter?.startPoint
         delete queryCopy.pathsFilter?.endPoint

@@ -33,7 +33,7 @@ class TestStickinessFilter(BaseTest):
                         "name": "$pageview",
                         "custom_name": "Custom event",
                         "math": None,
-                        "math_hogql": None,
+                        "math_torql": None,
                         "math_property": None,
                         "math_group_type_index": None,
                         "properties": {},

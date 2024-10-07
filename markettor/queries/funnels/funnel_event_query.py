@@ -1,7 +1,7 @@
 from typing import Any, Union
 
 from markettor.constants import TREND_FILTER_TYPE_ACTIONS
-from markettor.hogql.hogql import translate_hogql
+from markettor.torql.torql import translate_torql
 from markettor.models.filters.filter import Filter
 from markettor.models.group.util import get_aggregation_target_field
 from markettor.queries.event_query import EventQuery
@@ -26,12 +26,12 @@ class FunnelEventQuery(EventQuery):
                 self._person_id_alias,
             )
 
-        # Aggregating by HogQL
-        elif self._filter.funnel_aggregate_by_hogql and self._filter.funnel_aggregate_by_hogql != "person_id":
-            aggregation_target = translate_hogql(
-                self._filter.funnel_aggregate_by_hogql,
+        # Aggregating by TorQL
+        elif self._filter.funnel_aggregate_by_torql and self._filter.funnel_aggregate_by_torql != "person_id":
+            aggregation_target = translate_torql(
+                self._filter.funnel_aggregate_by_torql,
                 events_table_alias=self.EVENT_TABLE_ALIAS,
-                context=self._filter.hogql_context,
+                context=self._filter.torql_context,
             )
 
         # Aggregating by Distinct ID

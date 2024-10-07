@@ -36,14 +36,14 @@ class TestPathFilter(BaseTest):
             },
         )
 
-    def test_to_dict_hogql(self):
+    def test_to_dict_torql(self):
         filter = PathFilter(
             data={
                 "date_from": "-14d",
                 "exclude_events": [],
                 "include_custom_events": ["potato"],
                 "filter_test_accounts": False,
-                "include_event_types": ["$pageview", "hogql"],
+                "include_event_types": ["$pageview", "torql"],
                 "insight": "PATHS",
                 "start_point": "https://www.random.com/pricing/",
                 "step_limit": 3,
@@ -56,7 +56,7 @@ class TestPathFilter(BaseTest):
             filter.to_dict()
             | {
                 "date_from": "-14d",
-                "include_event_types": ["$pageview", "hogql"],
+                "include_event_types": ["$pageview", "torql"],
                 "insight": "PATHS",
                 "start_point": "https://www.random.com/pricing",
                 "step_limit": 3,
@@ -66,6 +66,6 @@ class TestPathFilter(BaseTest):
                 "breakdown_normalize_url": False,
                 "interval": "day",
                 "sampling_factor": 0.1,
-                "paths_hogql_expression": "event",
+                "paths_torql_expression": "event",
             },
         )

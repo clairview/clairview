@@ -29,7 +29,7 @@ from markettor.tasks.exports.csv_exporter import (
     add_query_params,
     _convert_response_to_csv_data,
 )
-from markettor.hogql.constants import CSV_EXPORT_BREAKDOWN_LIMIT_INITIAL
+from markettor.torql.constants import CSV_EXPORT_BREAKDOWN_LIMIT_INITIAL
 from markettor.test.base import APIBaseTest, _create_event, flush_persons_and_events, _create_person
 from markettor.test.test_journeys import journeys_for
 from markettor.utils import absolute_uri
@@ -366,10 +366,10 @@ class TestCSVExporter(APIBaseTest):
         with pytest.raises(UnexpectedEmptyJsonResponse, match="JSON is None when calling API for data"):
             csv_exporter.export_tabular(self._create_asset())
 
-    @patch("markettor.hogql.constants.MAX_SELECT_RETURNED_ROWS", 10)
-    @patch("markettor.hogql.constants.DEFAULT_RETURNED_ROWS", 5)
+    @patch("markettor.torql.constants.MAX_SELECT_RETURNED_ROWS", 10)
+    @patch("markettor.torql.constants.DEFAULT_RETURNED_ROWS", 5)
     @patch("markettor.models.exported_asset.UUIDT")
-    def test_csv_exporter_hogql_query(
+    def test_csv_exporter_torql_query(
         self, mocked_uuidt: Any, DEFAULT_RETURNED_ROWS=5, MAX_SELECT_RETURNED_ROWS=10
     ) -> None:
         random_uuid = f"RANDOM_TEST_ID::{UUIDT()}"
@@ -388,7 +388,7 @@ class TestCSVExporter(APIBaseTest):
             export_format=ExportedAsset.ExportFormat.CSV,
             export_context={
                 "source": {
-                    "kind": "HogQLQuery",
+                    "kind": "TorQLQuery",
                     "query": f"select event from events where distinct_id = '{random_uuid}'",
                 }
             },
@@ -412,7 +412,7 @@ class TestCSVExporter(APIBaseTest):
 
             assert exported_asset.content is None
 
-    @patch("markettor.hogql.constants.MAX_SELECT_RETURNED_ROWS", 10)
+    @patch("markettor.torql.constants.MAX_SELECT_RETURNED_ROWS", 10)
     @patch("markettor.models.exported_asset.UUIDT")
     def test_csv_exporter_events_query(self, mocked_uuidt: Any, MAX_SELECT_RETURNED_ROWS=10) -> None:
         random_uuid = f"RANDOM_TEST_ID::{UUIDT()}"
@@ -455,7 +455,7 @@ class TestCSVExporter(APIBaseTest):
             self.assertEqual(first_row[2], "$pageview")
             self.assertEqual(first_row[5], str(self.team.pk))
 
-    @patch("markettor.hogql.constants.MAX_SELECT_RETURNED_ROWS", 10)
+    @patch("markettor.torql.constants.MAX_SELECT_RETURNED_ROWS", 10)
     @patch("markettor.models.exported_asset.UUIDT")
     def test_csv_exporter_events_query_with_columns(
         self, mocked_uuidt: Any, MAX_SELECT_RETURNED_ROWS: int = 10
@@ -500,7 +500,7 @@ class TestCSVExporter(APIBaseTest):
             self.assertEqual(first_row[1], "$pageview")
             self.assertEqual(first_row[4], str(self.team.pk))
 
-    @patch("markettor.hogql.constants.MAX_SELECT_RETURNED_ROWS", 10)
+    @patch("markettor.torql.constants.MAX_SELECT_RETURNED_ROWS", 10)
     @patch("markettor.models.exported_asset.UUIDT")
     def test_csv_exporter_funnels_query(self, mocked_uuidt: Any, MAX_SELECT_RETURNED_ROWS: int = 10) -> None:
         _create_person(
@@ -621,8 +621,8 @@ class TestCSVExporter(APIBaseTest):
         exported_asset.save()
         mocked_uuidt.return_value = "a-guid"
 
-        with patch("markettor.tasks.exports.csv_exporter.get_from_hogql_query") as mocked_get_from_hogql_query:
-            mocked_get_from_hogql_query.return_value = iter([])
+        with patch("markettor.tasks.exports.csv_exporter.get_from_torql_query") as mocked_get_from_torql_query:
+            mocked_get_from_torql_query.return_value = iter([])
 
             with self.settings(OBJECT_STORAGE_ENABLED=True, OBJECT_STORAGE_EXPORTS_FOLDER="Test-Exports"):
                 csv_exporter.export_tabular(exported_asset)
@@ -636,7 +636,7 @@ class TestCSVExporter(APIBaseTest):
         assert len(first_split_parts) == 2
         return {bits[0]: bits[1] for bits in [param.split("=") for param in first_split_parts[1].split("&")]}
 
-    @patch("markettor.hogql.constants.MAX_SELECT_RETURNED_ROWS", 10)
+    @patch("markettor.torql.constants.MAX_SELECT_RETURNED_ROWS", 10)
     @patch("markettor.models.exported_asset.UUIDT")
     def test_csv_exporter_trends_query_with_none_action(
         self, mocked_uuidt: Any, MAX_SELECT_RETURNED_ROWS: int = 10

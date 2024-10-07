@@ -2,17 +2,17 @@ import re
 from typing import Any, NamedTuple, cast, Optional, Union
 from datetime import datetime, timedelta
 
-from markettor.hogql import ast
-from markettor.hogql.ast import CompareOperation
-from markettor.hogql.parser import parse_select
-from markettor.hogql.property import entity_to_expr, property_to_expr
-from markettor.hogql.query import execute_hogql_query
-from markettor.hogql_queries.insights.paginators import HogQLHasMorePaginator
+from markettor.torql import ast
+from markettor.torql.ast import CompareOperation
+from markettor.torql.parser import parse_select
+from markettor.torql.property import entity_to_expr, property_to_expr
+from markettor.torql.query import execute_torql_query
+from markettor.torql_queries.insights.paginators import TorQLHasMorePaginator
 from markettor.models import Team, Property
 from markettor.models.filters.session_recordings_filter import SessionRecordingsFilter
 from markettor.models.filters.mixins.utils import cached_property
 from markettor.models.property import PropertyGroup
-from markettor.schema import QueryTiming, HogQLQueryModifiers, PersonsOnEventsMode
+from markettor.schema import QueryTiming, TorQLQueryModifiers, PersonsOnEventsMode
 from markettor.session_recordings.queries.session_replay_events import ttl_days
 from markettor.constants import TREND_FILTER_TYPE_ACTIONS
 
@@ -22,11 +22,11 @@ logger = structlog.get_logger(__name__)
 
 
 def is_event_property(p: Property) -> bool:
-    return p.type == "event" or (p.type == "hogql" and bool(re.search(r"(?<!person\.)properties\.", p.key)))
+    return p.type == "event" or (p.type == "torql" and bool(re.search(r"(?<!person\.)properties\.", p.key)))
 
 
 def is_person_property(p: Property) -> bool:
-    return p.type == "person" or (p.type == "hogql" and "person.properties" in p.key)
+    return p.type == "person" or (p.type == "torql" and "person.properties" in p.key)
 
 
 def is_group_property(p: Property) -> bool:
@@ -101,15 +101,15 @@ class SessionRecordingListFromFilters:
         self,
         team: Team,
         filter: SessionRecordingsFilter,
-        hogql_query_modifiers: Optional[HogQLQueryModifiers],
+        torql_query_modifiers: Optional[TorQLQueryModifiers],
         **_,
     ):
         self._team = team
         self._filter = filter
-        self._paginator = HogQLHasMorePaginator(
+        self._paginator = TorQLHasMorePaginator(
             limit=filter.limit or self.SESSION_RECORDINGS_DEFAULT_LIMIT, offset=filter.offset or 0
         )
-        self._hogql_query_modifiers = hogql_query_modifiers
+        self._torql_query_modifiers = torql_query_modifiers
 
     @property
     def ttl_days(self):
@@ -118,12 +118,12 @@ class SessionRecordingListFromFilters:
     def run(self) -> SessionRecordingQueryResult:
         query = self.get_query()
 
-        paginated_response = self._paginator.execute_hogql_query(
+        paginated_response = self._paginator.execute_torql_query(
             # TODO I guess the paginator needs to know how to handle union queries or all callers are supposed to collapse them or .... 🤷
             query=cast(ast.SelectQuery, query),
             team=self._team,
             query_type="SessionRecordingListQuery",
-            modifiers=self._hogql_query_modifiers,
+            modifiers=self._torql_query_modifiers,
         )
 
         return SessionRecordingQueryResult(
@@ -418,11 +418,11 @@ class ReplayFiltersEventsSubQuery:
         self,
         team: Team,
         filter: SessionRecordingsFilter,
-        hogql_query_modifiers: Optional[HogQLQueryModifiers] = None,
+        torql_query_modifiers: Optional[TorQLQueryModifiers] = None,
     ):
         self._team = team
         self._filter = filter
-        self._hogql_query_modifiers = hogql_query_modifiers
+        self._torql_query_modifiers = torql_query_modifiers
 
     @cached_property
     def _event_predicates(self):
@@ -471,19 +471,19 @@ class ReplayFiltersEventsSubQuery:
     def get_event_ids_for_session(self) -> SessionRecordingQueryResult:
         query = self.get_query_for_event_id_matching()
 
-        hogql_query_response = execute_hogql_query(
+        torql_query_response = execute_torql_query(
             query=query,
             team=self._team,
             query_type="SessionRecordingMatchingEventsForSessionQuery",
-            modifiers=self._hogql_query_modifiers,
+            modifiers=self._torql_query_modifiers,
         )
 
-        flattened_results = [str(uuid) for row in hogql_query_response.results for uuid in row[0]]
+        flattened_results = [str(uuid) for row in torql_query_response.results for uuid in row[0]]
 
         return SessionRecordingQueryResult(
             results=flattened_results,
             has_more_recording=False,
-            timings=hogql_query_response.timings,
+            timings=torql_query_response.timings,
         )
 
     def _where_predicates(self) -> ast.Expr:

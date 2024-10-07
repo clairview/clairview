@@ -78,14 +78,14 @@ export function FunnelsQuerySteps({ insightProps }: EditorFilterProps): JSX.Elem
                     TaxonomicFilterGroupType.Cohorts,
                     TaxonomicFilterGroupType.Elements,
                     TaxonomicFilterGroupType.SessionProperties,
-                    TaxonomicFilterGroupType.HogQLExpression,
+                    TaxonomicFilterGroupType.TorQLExpression,
                 ]}
             />
             <div className="mt-4 space-y-4">
                 {showGroupsOptions && (
                     <div className="flex items-center w-full gap-2">
                         <span>Aggregating by</span>
-                        <AggregationSelect insightProps={insightProps} hogqlAvailable />
+                        <AggregationSelect insightProps={insightProps} torqlAvailable />
                     </div>
                 )}
 

@@ -13,7 +13,7 @@ import {
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
-import { HogQLEditor } from 'lib/components/HogQLEditor/HogQLEditor'
+import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
 import { IconSwapHoriz } from 'lib/lemon-ui/icons'
 import { useState } from 'react'
 import { viewLinkLogic } from 'scenes/data-warehouse/viewLinkLogic'
@@ -55,8 +55,8 @@ export function ViewLinkForm(): JSX.Element {
         isNewJoin,
         selectedSourceKey,
         selectedJoiningKey,
-        sourceIsUsingHogQLExpression,
-        joiningIsUsingHogQLExpression,
+        sourceIsUsingTorQLExpression,
+        joiningIsUsingTorQLExpression,
         isViewLinkSubmitting,
     } = useValues(viewLinkLogic)
     const {
@@ -110,15 +110,15 @@ export function ViewLinkForm(): JSX.Element {
                                 <LemonSelect
                                     fullWidth
                                     onSelect={selectSourceKey}
-                                    value={sourceIsUsingHogQLExpression ? '' : selectedSourceKey ?? undefined}
+                                    value={sourceIsUsingTorQLExpression ? '' : selectedSourceKey ?? undefined}
                                     disabledReason={selectedSourceTableName ? '' : 'Select a table to choose join key'}
-                                    options={[...sourceTableKeys, { value: '', label: <span>HogQL Expression</span> }]}
+                                    options={[...sourceTableKeys, { value: '', label: <span>TorQL Expression</span> }]}
                                     placeholder="Select a key"
                                 />
-                                {sourceIsUsingHogQLExpression && (
-                                    <HogQLDropdown
-                                        hogQLValue={selectedSourceKey ?? ''}
-                                        onHogQLValueChange={selectSourceKey}
+                                {sourceIsUsingTorQLExpression && (
+                                    <TorQLDropdown
+                                        torQLValue={selectedSourceKey ?? ''}
+                                        onTorQLValueChange={selectSourceKey}
                                         tableName={selectedSourceTableName ?? ''}
                                     />
                                 )}
@@ -135,15 +135,15 @@ export function ViewLinkForm(): JSX.Element {
                                 <LemonSelect
                                     fullWidth
                                     onSelect={selectJoiningKey}
-                                    value={joiningIsUsingHogQLExpression ? '' : selectedJoiningKey ?? undefined}
+                                    value={joiningIsUsingTorQLExpression ? '' : selectedJoiningKey ?? undefined}
                                     disabledReason={selectedJoiningTableName ? '' : 'Select a table to choose join key'}
-                                    options={[...joiningTableKeys, { value: '', label: <span>HogQL Expression</span> }]}
+                                    options={[...joiningTableKeys, { value: '', label: <span>TorQL Expression</span> }]}
                                     placeholder="Select a key"
                                 />
-                                {joiningIsUsingHogQLExpression && (
-                                    <HogQLDropdown
-                                        hogQLValue={selectedJoiningKey ?? ''}
-                                        onHogQLValueChange={selectJoiningKey}
+                                {joiningIsUsingTorQLExpression && (
+                                    <TorQLDropdown
+                                        torQLValue={selectedJoiningKey ?? ''}
+                                        onTorQLValueChange={selectJoiningKey}
                                         tableName={selectedJoiningTableName ?? ''}
                                     />
                                 )}
@@ -211,32 +211,32 @@ export function ViewLinkForm(): JSX.Element {
     )
 }
 
-const HogQLDropdown = ({
-    hogQLValue,
-    onHogQLValueChange,
+const TorQLDropdown = ({
+    torQLValue,
+    onTorQLValueChange,
     tableName,
 }: {
-    hogQLValue: string
+    torQLValue: string
     tableName: string
-    onHogQLValueChange: (hogQLValue: string) => void
+    onTorQLValueChange: (torQLValue: string) => void
 }): JSX.Element => {
-    const [isHogQLDropdownVisible, setIsHogQLDropdownVisible] = useState(false)
+    const [isTorQLDropdownVisible, setIsTorQLDropdownVisible] = useState(false)
 
     return (
         <div className="flex-auto overflow-hidden mt-2">
             <LemonDropdown
-                visible={isHogQLDropdownVisible}
+                visible={isTorQLDropdownVisible}
                 closeOnClickInside={false}
-                onClickOutside={() => setIsHogQLDropdownVisible(false)}
+                onClickOutside={() => setIsTorQLDropdownVisible(false)}
                 overlay={
                     // eslint-disable-next-line react/forbid-dom-props
                     <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                        <HogQLEditor
-                            value={hogQLValue}
-                            metadataSource={{ kind: NodeKind.HogQLQuery, query: `SELECT * FROM ${tableName}` }}
+                        <TorQLEditor
+                            value={torQLValue}
+                            metadataSource={{ kind: NodeKind.TorQLQuery, query: `SELECT * FROM ${tableName}` }}
                             onChange={(currentValue) => {
-                                onHogQLValueChange(currentValue)
-                                setIsHogQLDropdownVisible(false)
+                                onTorQLValueChange(currentValue)
+                                setIsTorQLDropdownVisible(false)
                             }}
                         />
                     </div>
@@ -245,9 +245,9 @@ const HogQLDropdown = ({
                 <LemonButton
                     fullWidth
                     type="secondary"
-                    onClick={() => setIsHogQLDropdownVisible(!isHogQLDropdownVisible)}
+                    onClick={() => setIsTorQLDropdownVisible(!isTorQLDropdownVisible)}
                 >
-                    <code>{hogQLValue}</code>
+                    <code>{torQLValue}</code>
                 </LemonButton>
             </LemonDropdown>
         </div>

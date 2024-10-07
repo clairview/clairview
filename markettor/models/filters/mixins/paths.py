@@ -16,14 +16,14 @@ from markettor.constants import (
     PATH_REPLACEMENTS,
     PATH_START_KEY,
     PATH_TYPE,
-    PATHS_HOGQL_EXPRESSION,
+    PATHS_TORQL_EXPRESSION,
     PATHS_EXCLUDE_EVENTS,
     PATHS_INCLUDE_CUSTOM_EVENTS,
     PATHS_INCLUDE_EVENT_TYPES,
     SCREEN_EVENT,
     START_POINT,
     STEP_LIMIT,
-    HOGQL,
+    TORQL,
 )
 from markettor.models.filters.mixins.common import BaseParamMixin
 from markettor.models.filters.mixins.utils import cached_property, include_dict
@@ -69,17 +69,17 @@ class EndPointMixin(BaseParamMixin):
         return {"end_point": self.end_point} if self.end_point else {}
 
 
-class PathsHogQLExpressionMixin(PathTypeMixin):
+class PathsTorQLExpressionMixin(PathTypeMixin):
     @cached_property
-    def paths_hogql_expression(self) -> Optional[str]:
-        if self.path_type == HOGQL or HOGQL in self._data.get(PATHS_INCLUDE_EVENT_TYPES, []):
-            return self._data.get(PATHS_HOGQL_EXPRESSION, "event")
+    def paths_torql_expression(self) -> Optional[str]:
+        if self.path_type == TORQL or TORQL in self._data.get(PATHS_INCLUDE_EVENT_TYPES, []):
+            return self._data.get(PATHS_TORQL_EXPRESSION, "event")
         else:
             return None
 
     @include_dict
-    def paths_hogql_expression_to_dict(self):
-        return {"paths_hogql_expression": self.paths_hogql_expression} if self.paths_hogql_expression else {}
+    def paths_torql_expression_to_dict(self):
+        return {"paths_torql_expression": self.paths_torql_expression} if self.paths_torql_expression else {}
 
 
 class TargetEventsMixin(BaseParamMixin):
@@ -118,8 +118,8 @@ class TargetEventsMixin(BaseParamMixin):
         return CUSTOM_EVENT in self.target_events
 
     @property
-    def include_hogql(self) -> bool:
-        return HOGQL in self.target_events
+    def include_torql(self) -> bool:
+        return TORQL in self.target_events
 
     @include_dict
     def target_events_to_dict(self) -> dict:

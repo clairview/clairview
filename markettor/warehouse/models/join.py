@@ -3,11 +3,11 @@ from warnings import warn
 
 from django.db import models
 
-from markettor.hogql.ast import SelectQuery
-from markettor.hogql.context import HogQLContext
-from markettor.hogql.database.models import LazyJoinToAdd
-from markettor.hogql.errors import ResolutionError
-from markettor.hogql.parser import parse_expr
+from markettor.torql.ast import SelectQuery
+from markettor.torql.context import TorQLContext
+from markettor.torql.database.models import LazyJoinToAdd
+from markettor.torql.errors import ResolutionError
+from markettor.torql.parser import parse_expr
 from markettor.models.team import Team
 from markettor.models.utils import CreatedMetaFields, DeletedMetaFields, UUIDModel
 from markettor.warehouse.models.datawarehouse_saved_query import DataWarehouseSavedQuery
@@ -46,25 +46,25 @@ class DataWarehouseJoin(CreatedMetaFields, UUIDModel, DeletedMetaFields):
     ):
         def _join_function(
             join_to_add: LazyJoinToAdd,
-            context: HogQLContext,
+            context: TorQLContext,
             node: SelectQuery,
         ):
             _source_table_key = override_source_table_key or self.source_table_key
             _joining_table_key = override_joining_table_key or self.joining_table_key
 
-            from markettor.hogql import ast
+            from markettor.torql import ast
 
             if not join_to_add.fields_accessed:
                 raise ResolutionError(f"No fields requested from {join_to_add.to_table}")
 
             left = parse_expr(_source_table_key)
             if not isinstance(left, ast.Field):
-                raise ResolutionError("Data Warehouse Join HogQL expression should be a Field node")
+                raise ResolutionError("Data Warehouse Join TorQL expression should be a Field node")
             left.chain = [join_to_add.from_table, *left.chain]
 
             right = parse_expr(_joining_table_key)
             if not isinstance(right, ast.Field):
-                raise ResolutionError("Data Warehouse Join HogQL expression should be a Field node")
+                raise ResolutionError("Data Warehouse Join TorQL expression should be a Field node")
             right.chain = [join_to_add.to_table, *right.chain]
 
             join_expr = ast.JoinExpr(

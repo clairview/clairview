@@ -1,8 +1,8 @@
 from typing import Optional
 from markettor.models.action.action import Action
-from markettor.hogql.bytecode import create_bytecode
-from markettor.hogql.parser import parse_expr
-from markettor.hogql.property import action_to_expr, property_to_expr, ast
+from markettor.torql.bytecode import create_bytecode
+from markettor.torql.parser import parse_expr
+from markettor.torql.property import action_to_expr, property_to_expr, ast
 from markettor.models.team.team import Team
 
 

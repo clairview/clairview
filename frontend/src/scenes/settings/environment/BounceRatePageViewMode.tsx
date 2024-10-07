@@ -5,9 +5,9 @@ import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { HogQLQueryModifiers } from '~/queries/schema'
+import { TorQLQueryModifiers } from '~/queries/schema'
 
-type BounceRatePageViewMode = NonNullable<HogQLQueryModifiers['bounceRatePageViewMode']>
+type BounceRatePageViewMode = NonNullable<TorQLQueryModifiers['bounceRatePageViewMode']>
 
 const bounceRatePageViewModeOptions: LemonRadioOption<BounceRatePageViewMode>[] = [
     {

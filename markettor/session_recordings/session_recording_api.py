@@ -40,7 +40,7 @@ from markettor.rate_limit import (
     ClickHouseSustainedRateThrottle,
     PersonalApiKeyRateThrottle,
 )
-from markettor.schema import HogQLQueryModifiers, QueryTiming
+from markettor.schema import TorQLQueryModifiers, QueryTiming
 from markettor.session_recordings.models.session_recording import SessionRecording
 from markettor.session_recordings.models.session_recording_event import (
     SessionRecordingViewed,
@@ -350,7 +350,7 @@ class SessionRecordingViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet, U
         distinct_id = str(cast(User, request.user).distinct_id)
         modifiers = safely_read_modifiers_overrides(distinct_id, self.team)
         matching_events_query_response = ReplayFiltersEventsSubQuery(
-            filter=filter, team=self.team, hogql_query_modifiers=modifiers
+            filter=filter, team=self.team, torql_query_modifiers=modifiers
         ).get_event_ids_for_session()
 
         response = JsonResponse(data={"results": matching_events_query_response.results})
@@ -886,7 +886,7 @@ def list_recordings(
     recordings: list[SessionRecording] = []
     more_recordings_available = False
     team = context["get_team"]()
-    hogql_timings: list[QueryTiming] | None = None
+    torql_timings: list[QueryTiming] | None = None
 
     timer = ServerTimingsGathered()
 
@@ -910,9 +910,9 @@ def list_recordings(
         distinct_id = str(cast(User, request.user).distinct_id)
         modifiers = safely_read_modifiers_overrides(distinct_id, team)
 
-        with timer("load_recordings_from_hogql"):
-            (ch_session_recordings, more_recordings_available, hogql_timings) = SessionRecordingListFromFilters(
-                filter=filter, team=team, hogql_query_modifiers=modifiers
+        with timer("load_recordings_from_torql"):
+            (ch_session_recordings, more_recordings_available, torql_timings) = SessionRecordingListFromFilters(
+                filter=filter, team=team, torql_query_modifiers=modifiers
             ).run()
 
         with timer("build_recordings"):
@@ -961,15 +961,15 @@ def list_recordings(
     session_recording_serializer = SessionRecordingSerializer(recordings, context=context, many=True)
     results = session_recording_serializer.data
 
-    all_timings = _generate_timings(hogql_timings, timer)
+    all_timings = _generate_timings(torql_timings, timer)
     return (
         {"results": results, "has_next": more_recordings_available, "version": 3},
         all_timings,
     )
 
 
-def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> HogQLQueryModifiers:
-    modifiers = HogQLQueryModifiers()
+def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> TorQLQueryModifiers:
+    modifiers = TorQLQueryModifiers()
 
     try:
         groups = {"organization": str(team.organization.id)}
@@ -994,12 +994,12 @@ def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> HogQLQueryM
     return modifiers
 
 
-def _generate_timings(hogql_timings: list[QueryTiming] | None, timer: ServerTimingsGathered) -> dict[str, float]:
+def _generate_timings(torql_timings: list[QueryTiming] | None, timer: ServerTimingsGathered) -> dict[str, float]:
     timings_dict = timer.get_all_timings()
-    hogql_timings_dict = {}
-    for key, value in hogql_timings or {}:
-        new_key = f"hogql_{key[1].lstrip('./').replace('/', '_')}"
-        # HogQL query timings are in seconds, convert to milliseconds
-        hogql_timings_dict[new_key] = value[1] * 1000
-    all_timings = {**timings_dict, **hogql_timings_dict}
+    torql_timings_dict = {}
+    for key, value in torql_timings or {}:
+        new_key = f"torql_{key[1].lstrip('./').replace('/', '_')}"
+        # TorQL query timings are in seconds, convert to milliseconds
+        torql_timings_dict[new_key] = value[1] * 1000
+    all_timings = {**timings_dict, **torql_timings_dict}
     return all_timings

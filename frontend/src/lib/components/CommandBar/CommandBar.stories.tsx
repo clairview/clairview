@@ -75,7 +75,7 @@ const SEARCH_RESULT = {
                     full: true,
                     kind: 'DataTableNode',
                     source: {
-                        kind: 'HogQLQuery',
+                        kind: 'TorQLQuery',
                         query: '   select event,\n          person.properties.email,\n          properties.$browser,\n          count()\n     from events\n    where {filters} -- replaced with global date and property filters\n      and person.properties.email is not null\n group by event,\n          properties.$browser,\n          person.properties.email\n order by count() desc\n    limit 100',
                         filters: {
                             dateRange: {
@@ -177,7 +177,7 @@ const SEARCH_RESULT = {
                     full: true,
                     kind: 'DataTableNode',
                     source: {
-                        kind: 'HogQLQuery',
+                        kind: 'TorQLQuery',
                         query: '   select event,\n          person.properties.email,\n          properties.$browser,\n          count()\n     from events\n    where {filters} -- replaced with global date and property filters\n      and person.properties.email is not null\n group by event,\n          properties.$browser,\n          person.properties.email\n order by count() desc\n    limit 100',
                         filters: {
                             dateRange: {

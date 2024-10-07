@@ -194,7 +194,7 @@ describe('queryNodeToFilter', () => {
             layout: FunnelLayout.horizontal,
             interval: undefined,
             hidden_legend_keys: undefined,
-            funnel_aggregate_by_hogql: undefined,
+            funnel_aggregate_by_torql: undefined,
             entity_type: 'events',
         }
         expect(result).toEqual(filters)
@@ -271,7 +271,7 @@ describe('queryNodeToFilter', () => {
                 bin_count: undefined,
                 breakdown_attribution_type: undefined,
                 breakdown_attribution_value: undefined,
-                funnel_aggregate_by_hogql: undefined,
+                funnel_aggregate_by_torql: undefined,
                 funnel_from_step: undefined,
                 funnel_to_step: undefined,
                 funnel_order_type: undefined,
@@ -291,7 +291,7 @@ describe('queryNodeToFilter', () => {
             edge_limit: 1,
             min_edge_weight: 1,
             max_edge_weight: 1,
-            paths_hogql_expression: undefined,
+            paths_torql_expression: undefined,
         }
         expect(result).toEqual(filters)
     })

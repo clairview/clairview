@@ -1,9 +1,9 @@
 import json
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import HOGQL_BYTECODE_VERSION
+from hogvm.python.operation import TORQL_BYTECODE_VERSION
 from markettor.cdp.filters import hog_function_filters_to_expr
-from markettor.hogql.bytecode import create_bytecode
+from markettor.torql.bytecode import create_bytecode
 from markettor.models.action.action import Action
 from markettor.test.base import APIBaseTest, ClickhouseTestMixin, QueryMatchingTest
 
@@ -64,7 +64,7 @@ class TestHogFunctionFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest
         return json.loads(json.dumps(create_bytecode(res)))
 
     def test_filters_empty(self):
-        assert self.filters_to_bytecode(filters={}) == snapshot(["_H", HOGQL_BYTECODE_VERSION, 29])
+        assert self.filters_to_bytecode(filters={}) == snapshot(["_H", TORQL_BYTECODE_VERSION, 29])
 
     def test_filters_all_events(self):
         assert self.filters_to_bytecode(
@@ -78,14 +78,14 @@ class TestHogFunctionFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest
                     }
                 ]
             }
-        ) == snapshot(["_H", HOGQL_BYTECODE_VERSION, 29, 3, 0, 4, 2])
+        ) == snapshot(["_H", TORQL_BYTECODE_VERSION, 29, 3, 0, 4, 2])
 
     def test_filters_events(self):
         bytecode = self.filters_to_bytecode(filters={"events": self.filters["events"]})
         assert bytecode == snapshot(
             [
                 "_H",
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 32,
                 "$pageview",
                 32,
@@ -114,7 +114,7 @@ class TestHogFunctionFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest
         assert bytecode == snapshot(
             [
                 "_H",
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 32,
                 "$pageview",
                 32,
@@ -144,7 +144,7 @@ class TestHogFunctionFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest
         assert self.filters_to_bytecode(filters={"properties": self.filters["properties"]}) == snapshot(
             [
                 "_H",
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 32,
                 "%@markettor.com%",
                 32,
@@ -177,7 +177,7 @@ class TestHogFunctionFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest
         assert bytecode == snapshot(
             [
                 "_H",
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 32,
                 "%@markettor.com%",
                 32,

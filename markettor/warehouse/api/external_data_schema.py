@@ -14,7 +14,7 @@ from markettor.api.utils import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.request import Request
 from rest_framework.response import Response
-from markettor.hogql.database.database import create_hogql_database
+from markettor.torql.database.database import create_torql_database
 from markettor.api.log_entries import LogEntryMixin
 
 from markettor.warehouse.data_load.service import (
@@ -100,11 +100,11 @@ class ExternalDataSchemaSerializer(serializers.ModelSerializer):
     def get_table(self, schema: ExternalDataSchema) -> Optional[dict]:
         from markettor.warehouse.api.table import SimpleTableSerializer
 
-        hogql_context = self.context.get("database", None)
-        if not hogql_context:
-            hogql_context = create_hogql_database(team_id=self.context["team_id"])
+        torql_context = self.context.get("database", None)
+        if not torql_context:
+            torql_context = create_torql_database(team_id=self.context["team_id"])
 
-        return SimpleTableSerializer(schema.table, context={"database": hogql_context}).data or None
+        return SimpleTableSerializer(schema.table, context={"database": torql_context}).data or None
 
     def get_sync_frequency(self, schema: ExternalDataSchema):
         return sync_frequency_interval_to_sync_frequency(schema)
@@ -205,7 +205,7 @@ class ExternalDataSchemaViewset(TeamAndOrgViewSetMixin, LogEntryMixin, viewsets.
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_hogql_database(team_id=self.team_id)
+        context["database"] = create_torql_database(team_id=self.team_id)
         return context
 
     def safely_get_queryset(self, queryset):

@@ -35,9 +35,9 @@ export function PathsEventsTypes({ insightProps }: EditorFilterProps): JSX.Eleme
             selected: includeEventTypes?.includes(PathType.CustomEvent),
         },
         {
-            type: PathType.HogQL,
-            label: 'HogQL expression',
-            selected: includeEventTypes?.includes(PathType.HogQL),
+            type: PathType.TorQL,
+            label: 'TorQL expression',
+            selected: includeEventTypes?.includes(PathType.TorQL),
         },
     ]
 

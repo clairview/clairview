@@ -35,7 +35,7 @@ from .mixins.paths import (
     PathStepLimitMixin,
     StartPointMixin,
     TargetEventsMixin,
-    PathsHogQLExpressionMixin,
+    PathsTorQLExpressionMixin,
 )
 from .mixins.property import PropertyMixin
 from .mixins.simplify import SimplifyFilterMixin
@@ -51,7 +51,7 @@ class PathFilter(
     DateMixin,
     BreakdownMixin,
     EntitiesMixin,
-    PathsHogQLExpressionMixin,
+    PathsTorQLExpressionMixin,
     PathStepLimitMixin,
     FunnelPathsMixin,
     TargetEventsMixin,

@@ -5,9 +5,9 @@ import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { HogQLQueryModifiers } from '~/queries/schema'
+import { TorQLQueryModifiers } from '~/queries/schema'
 
-type PersonsJoinMode = NonNullable<HogQLQueryModifiers['personsJoinMode']>
+type PersonsJoinMode = NonNullable<TorQLQueryModifiers['personsJoinMode']>
 
 const personsJoinOptions: LemonRadioOption<PersonsJoinMode>[] = [
     {

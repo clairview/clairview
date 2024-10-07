@@ -8,7 +8,7 @@ import { urls } from 'scenes/urls'
 
 import { Query } from '~/queries/Query/Query'
 import { Node } from '~/queries/schema'
-import { containsHogQLQuery, isInsightVizNode } from '~/queries/utils'
+import { containsTorQLQuery, isInsightVizNode } from '~/queries/utils'
 import { InsightShortId, ItemMode } from '~/types'
 
 import { insightCommandLogic } from './insightCommandLogic'
@@ -79,7 +79,7 @@ export function Insight({ insightId }: InsightSceneProps): JSX.Element {
                     context={{
                         showOpenEditorButton: false,
                         showQueryEditor: actuallyShowQueryEditor,
-                        showQueryHelp: insightMode === ItemMode.Edit && !containsHogQLQuery(query),
+                        showQueryHelp: insightMode === ItemMode.Edit && !containsTorQLQuery(query),
                         insightProps,
                     }}
                     filtersOverride={filtersOverride}

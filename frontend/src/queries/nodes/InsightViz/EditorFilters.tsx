@@ -13,7 +13,7 @@ import { FunnelsQuerySteps } from 'scenes/insights/EditorFilters/FunnelsQuerySte
 import { PathsAdvanced } from 'scenes/insights/EditorFilters/PathsAdvanced'
 import { PathsEventsTypes } from 'scenes/insights/EditorFilters/PathsEventTypes'
 import { PathsExclusions } from 'scenes/insights/EditorFilters/PathsExclusions'
-import { PathsHogQL } from 'scenes/insights/EditorFilters/PathsHogQL'
+import { PathsTorQL } from 'scenes/insights/EditorFilters/PathsTorQL'
 import { PathsTargetEnd, PathsTargetStart } from 'scenes/insights/EditorFilters/PathsTarget'
 import { PathsWildcardGroups } from 'scenes/insights/EditorFilters/PathsWildcardGroups'
 import { RetentionSummary } from 'scenes/insights/EditorFilters/RetentionSummary'
@@ -76,7 +76,7 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
         isTrendsFunnel
     const hasPathsAdvanced = hasAvailableFeature(AvailableFeature.PATHS_ADVANCED)
     const hasAttribution = isStepsFunnel
-    const hasPathsHogQL = isPaths && pathsFilter?.includeEventTypes?.includes(PathType.HogQL)
+    const hasPathsTorQL = isPaths && pathsFilter?.includeEventTypes?.includes(PathType.TorQL)
 
     const editorFilters: InsightEditorFilterGroup[] = [
         {
@@ -94,10 +94,10 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
                               label: 'Event Types',
                               component: PathsEventsTypes,
                           },
-                          hasPathsHogQL && {
-                              key: 'hogql',
-                              label: 'HogQL Expression',
-                              component: PathsHogQL,
+                          hasPathsTorQL && {
+                              key: 'torql',
+                              label: 'TorQL Expression',
+                              component: PathsTorQL,
                           },
                           hasPathsAdvanced && {
                               key: 'wildcard-groups',

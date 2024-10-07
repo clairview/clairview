@@ -5,19 +5,19 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 
-from markettor.hogql import ast
-from markettor.hogql.database.database import Database
-from markettor.hogql.database.models import FieldOrTable, SavedQuery
+from markettor.torql import ast
+from markettor.torql.database.database import Database
+from markettor.torql.database.models import FieldOrTable, SavedQuery
 from markettor.models.team import Team
 from markettor.models.utils import CreatedMetaFields, DeletedMetaFields, UUIDModel
-from markettor.schema import HogQLQueryModifiers
+from markettor.schema import TorQLQueryModifiers
 from markettor.warehouse.models.util import (
-    CLICKHOUSE_HOGQL_MAPPING,
-    STR_TO_HOGQL_MAPPING,
+    CLICKHOUSE_TORQL_MAPPING,
+    STR_TO_TORQL_MAPPING,
     clean_type,
     remove_named_tuples,
 )
-from markettor.hogql.database.s3_table import S3Table
+from markettor.torql.database.s3_table import S3Table
 from markettor.warehouse.util import database_sync_to_async
 
 
@@ -58,7 +58,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
         help_text="Dict of all columns with ClickHouse type (including Nullable())",
     )
     external_tables = models.JSONField(default=list, null=True, blank=True, help_text="List of all external tables")
-    query = models.JSONField(default=dict, null=True, blank=True, help_text="HogQL query")
+    query = models.JSONField(default=dict, null=True, blank=True, help_text="TorQL query")
     status = models.CharField(
         null=True, choices=Status.choices, max_length=64, help_text="The status of when this SavedQuery last ran."
     )
@@ -78,7 +78,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
     def get_columns(self) -> dict[str, dict[str, Any]]:
         from markettor.api.services.query import process_query_dict
-        from markettor.hogql_queries.query_runner import ExecutionMode
+        from markettor.torql_queries.query_runner import ExecutionMode
 
         response = process_query_dict(self.team, self.query, execution_mode=ExecutionMode.CALCULATE_BLOCKING_ALWAYS)
         result = getattr(response, "types", [])
@@ -88,7 +88,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
         columns = {
             str(item[0]): {
-                "hogql": CLICKHOUSE_HOGQL_MAPPING[clean_type(str(item[1]))].__name__,
+                "torql": CLICKHOUSE_TORQL_MAPPING[clean_type(str(item[1]))].__name__,
                 "clickhouse": item[1],
                 "valid": True,
             }
@@ -110,20 +110,20 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
     @property
     def s3_tables(self):
-        from markettor.hogql.context import HogQLContext
-        from markettor.hogql.database.database import create_hogql_database
-        from markettor.hogql.parser import parse_select
-        from markettor.hogql.query import create_default_modifiers_for_team
-        from markettor.hogql.resolver import resolve_types
+        from markettor.torql.context import TorQLContext
+        from markettor.torql.database.database import create_torql_database
+        from markettor.torql.parser import parse_select
+        from markettor.torql.query import create_default_modifiers_for_team
+        from markettor.torql.resolver import resolve_types
         from markettor.models.property.util import S3TableVisitor
 
-        context = HogQLContext(
+        context = TorQLContext(
             team_id=self.team.pk,
             enable_select_queries=True,
             modifiers=create_default_modifiers_for_team(self.team),
         )
         node = parse_select(self.query["query"])
-        context.database = create_hogql_database(context.team_id)
+        context.database = create_torql_database(context.team_id)
 
         node = resolve_types(node, context, dialect="clickhouse")
         table_collector = S3TableVisitor()
@@ -141,8 +141,8 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
             f"https://{settings.AIRBYTE_BUCKET_DOMAIN}/dlt/team_{self.team.pk}_model_{self.id.hex}/modeling/{self.name}"
         )
 
-    def hogql_definition(self, modifiers: Optional[HogQLQueryModifiers] = None) -> Union[SavedQuery, S3Table]:
-        from markettor.warehouse.models.table import CLICKHOUSE_HOGQL_MAPPING
+    def torql_definition(self, modifiers: Optional[TorQLQueryModifiers] = None) -> Union[SavedQuery, S3Table]:
+        from markettor.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING
 
         columns = self.columns or {}
 
@@ -172,12 +172,12 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
             # Support for 'old' style columns
             if isinstance(type, str):
-                hogql_type_str = clickhouse_type.partition("(")[0]
-                hogql_type = CLICKHOUSE_HOGQL_MAPPING[hogql_type_str]
+                torql_type_str = clickhouse_type.partition("(")[0]
+                torql_type = CLICKHOUSE_TORQL_MAPPING[torql_type_str]
             else:
-                hogql_type = STR_TO_HOGQL_MAPPING[type["hogql"]]
+                torql_type = STR_TO_TORQL_MAPPING[type["torql"]]
 
-            fields[column] = hogql_type(name=column)
+            fields[column] = torql_type(name=column)
 
         if (
             self.table is not None
@@ -185,7 +185,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
             and modifiers is not None
             and modifiers.useMaterializedViews
         ):
-            return self.table.hogql_definition(modifiers)
+            return self.table.torql_definition(modifiers)
         else:
             return SavedQuery(
                 id=str(self.id),

@@ -31,7 +31,7 @@ class LifecycleActors(ActorBaseQuery):
             ),
             {
                 **event_params,
-                **self._filter.hogql_context.values,
+                **self._filter.torql_context.values,
                 "offset": self._filter.offset,
                 "limit": self._filter.limit,
                 "status": lifecycle_type,

@@ -52,7 +52,7 @@ export type TaxonomicFilterRender = (props: {
 
 export interface TaxonomicFilterGroup {
     name: string
-    /** Null means this group is not searchable (like HogQL expressions). */
+    /** Null means this group is not searchable (like TorQL expressions). */
     searchPlaceholder: string | null
     type: TaxonomicFilterGroupType
     /** Component to show instead of the usual taxonomic list. */
@@ -107,7 +107,7 @@ export enum TaxonomicFilterGroupType {
     Dashboards = 'dashboards',
     GroupNamesPrefix = 'name_groups',
     SessionProperties = 'session_properties',
-    HogQLExpression = 'hogql_expression',
+    TorQLExpression = 'torql_expression',
     Notebooks = 'notebooks',
     LogEntries = 'log_entries',
     // Misc

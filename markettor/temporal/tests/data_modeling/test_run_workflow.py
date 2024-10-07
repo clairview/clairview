@@ -18,7 +18,7 @@ from dlt.common.libs.deltalake import get_delta_tables
 from freezegun.api import freeze_time
 
 from markettor import constants
-from markettor.hogql.database.database import create_hogql_database
+from markettor.torql.database.database import create_torql_database
 from markettor.models import Team
 from markettor.temporal.data_modeling.run_workflow import (
     BuildDagActivityInputs,
@@ -50,8 +50,8 @@ TEST_TIME = dt.datetime.now(dt.UTC)
 @pytest_asyncio.fixture
 async def markettor_tables(ateam):
     team = await database_sync_to_async(Team.objects.get)(id=ateam.pk)
-    hogql_db = await database_sync_to_async(create_hogql_database)(team_id=ateam.pk, team_arg=team)
-    markettor_tables = hogql_db.get_markettor_tables()
+    torql_db = await database_sync_to_async(create_torql_database)(team_id=ateam.pk, team_arg=team)
+    markettor_tables = torql_db.get_markettor_tables()
 
     return markettor_tables
 
@@ -109,7 +109,7 @@ async def test_create_table_activity(activity_environment, ateam):
     saved_query = await DataWarehouseSavedQuery.objects.acreate(
         team=ateam,
         name="my_model",
-        query={"query": query, "kind": "HogQLQuery"},
+        query={"query": query, "kind": "TorQLQuery"},
     )
 
     create_table_activity_inputs = CreateTableActivityInputs(team_id=ateam.pk, models=[saved_query.id.hex])
@@ -121,8 +121,8 @@ async def test_create_table_activity(activity_environment, ateam):
         unittest.mock.patch(
             "markettor.warehouse.models.table.DataWarehouseTable.get_columns",
             return_value={
-                "id": {"clickhouse": "String", "hogql": "StringDatabaseField", "valid": True},
-                "a_column": {"clickhouse": "String", "hogql": "StringDatabaseField", "valid": True},
+                "id": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
+                "a_column": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
             },
         ),
     ):
@@ -300,7 +300,7 @@ async def test_materialize_model(ateam, bucket_name, minio_client, pageview_even
     saved_query = await DataWarehouseSavedQuery.objects.acreate(
         team=ateam,
         name="my_model",
-        query={"query": query, "kind": "HogQLQuery"},
+        query={"query": query, "kind": "TorQLQuery"},
     )
 
     with (
@@ -357,22 +357,22 @@ async def saved_queries(ateam):
     parent_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model",
-        query={"query": parent_query, "kind": "HogQLQuery"},
+        query={"query": parent_query, "kind": "TorQLQuery"},
     )
     child_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_child",
-        query={"query": "select * from my_model where distinct_id = 'b'", "kind": "HogQLQuery"},
+        query={"query": "select * from my_model where distinct_id = 'b'", "kind": "TorQLQuery"},
     )
     child_2_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_child_2",
-        query={"query": "select * from my_model where distinct_id = 'a'", "kind": "HogQLQuery"},
+        query={"query": "select * from my_model where distinct_id = 'a'", "kind": "TorQLQuery"},
     )
     grand_child_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_grand_child",
-        query={"query": "select * from my_model_child union all select * from my_model_child_2", "kind": "HogQLQuery"},
+        query={"query": "select * from my_model_child union all select * from my_model_child_2", "kind": "TorQLQuery"},
     )
     await database_sync_to_async(DataWarehouseModelPath.objects.create_from_saved_query)(parent_saved_query)
     await database_sync_to_async(DataWarehouseModelPath.objects.create_from_saved_query)(child_saved_query)

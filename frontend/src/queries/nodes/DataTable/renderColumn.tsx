@@ -15,11 +15,11 @@ import { PersonDisplay, PersonDisplayProps } from 'scenes/persons/PersonDisplay'
 import { urls } from 'scenes/urls'
 
 import { errorColumn, loadingColumn } from '~/queries/nodes/DataTable/dataTableLogic'
-import { renderHogQLX } from '~/queries/nodes/HogQLX/render'
+import { renderTorQLX } from '~/queries/nodes/TorQLX/render'
 import { DeletePersonButton } from '~/queries/nodes/PersonsNode/DeletePersonButton'
 import { DataTableNode, EventsQueryPersonColumn, HasPropertiesNode } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'
-import { isActorsQuery, isEventsQuery, isHogQLQuery, isPersonsNode, trimQuotes } from '~/queries/utils'
+import { isActorsQuery, isEventsQuery, isTorQLQuery, isPersonsNode, trimQuotes } from '~/queries/utils'
 import { AnyPropertyFilter, EventType, PersonType, PropertyFilterType, PropertyOperator } from '~/types'
 
 export function renderColumn(
@@ -57,7 +57,7 @@ export function renderColumn(
             String(value)
         )
     } else if (typeof value === 'object' && Array.isArray(value) && value[0] === '__hx_tag') {
-        return renderHogQLX(value)
+        return renderTorQLX(value)
     } else if (value === null) {
         return (
             <Tooltip title="NULL" placement="right" delayMs={0}>
@@ -66,7 +66,7 @@ export function renderColumn(
                 </span>
             </Tooltip>
         )
-    } else if (isHogQLQuery(query.source)) {
+    } else if (isTorQLQuery(query.source)) {
         if (typeof value === 'string') {
             try {
                 if (value.startsWith('{') && value.endsWith('}')) {

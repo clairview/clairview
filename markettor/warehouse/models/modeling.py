@@ -7,9 +7,9 @@ from django.contrib.postgres import indexes as pg_indexes
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection, models, transaction
 
-from markettor.hogql import ast
-from markettor.hogql.database.database import Database, create_hogql_database
-from markettor.hogql.parser import parse_select
+from markettor.torql import ast
+from markettor.torql.database.database import Database, create_torql_database
+from markettor.torql.parser import parse_select
 from markettor.models.team import Team
 from markettor.models.user import User
 from markettor.models.utils import (
@@ -97,12 +97,12 @@ def get_parents_from_model_query(model_query: str) -> set[str]:
     The parents of a query are any names in the `FROM` clause of the query.
     """
 
-    hogql_query = parse_select(model_query)
+    torql_query = parse_select(model_query)
 
-    if isinstance(hogql_query, ast.SelectUnionQuery):
-        queries = hogql_query.select_queries
+    if isinstance(torql_query, ast.SelectUnionQuery):
+        queries = torql_query.select_queries
     else:
-        queries = [hogql_query]
+        queries = [torql_query]
 
     parents = set()
     ctes = set()
@@ -302,7 +302,7 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
     ) -> tuple["DataWarehouseModelPath", bool]:
         """Get a root path for a MarketTor source, creating it if it doesn't exist.
 
-        MarketTor sources are well-known MarketTor tables. We check against the team's HogQL database
+        MarketTor sources are well-known MarketTor tables. We check against the team's TorQL database
         to ensure that the source exists before creating the path.
 
         Raises:
@@ -311,15 +311,15 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
         Returns:
             A tuple with the model path and a `bool` indicating whether it was created or not.
         """
-        markettor_tables = self.get_hogql_database(team).get_markettor_tables()
+        markettor_tables = self.get_torql_database(team).get_markettor_tables()
         if markettor_source_name not in markettor_tables:
             raise ValueError(f"Provided source {markettor_source_name} is not a MarketTor table")
 
         return self.get_or_create(path=[markettor_source_name], team=team, defaults={"saved_query": None})
 
-    def get_hogql_database(self, team: Team) -> Database:
-        """Get the HogQL database for given team."""
-        return create_hogql_database(team_id=team.pk, team_arg=team)
+    def get_torql_database(self, team: Team) -> Database:
+        """Get the TorQL database for given team."""
+        return create_torql_database(team_id=team.pk, team_arg=team)
 
     def get_or_create_root_path_for_data_warehouse_table(
         self, data_warehouse_table: DataWarehouseTable
@@ -415,7 +415,7 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
         the transaction and clean them up.
         """
         parents = get_parents_from_model_query(query)
-        markettor_tables = self.get_hogql_database(team).get_markettor_tables()
+        markettor_tables = self.get_torql_database(team).get_markettor_tables()
 
         base_params = {
             "team_id": team.pk,

@@ -26,15 +26,15 @@ from markettor.clickhouse.client.execute_async import (
 from markettor.clickhouse.query_tagging import tag_queries
 from markettor.errors import ExposedCHQueryError
 from markettor.event_usage import report_user_action
-from markettor.hogql.ai import PromptUnclear, write_sql_from_prompt
-from markettor.hogql.errors import ExposedHogQLError
-from markettor.hogql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
-from markettor.hogql_queries.query_runner import ExecutionMode, execution_mode_from_refresh
+from markettor.torql.ai import PromptUnclear, write_sql_from_prompt
+from markettor.torql.errors import ExposedTorQLError
+from markettor.torql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
+from markettor.torql_queries.query_runner import ExecutionMode, execution_mode_from_refresh
 from markettor.models.user import User
 from markettor.rate_limit import (
     AIBurstRateThrottle,
     AISustainedRateThrottle,
-    HogQLQueryThrottle,
+    TorQLQueryThrottle,
     ClickHouseBurstRateThrottle,
     ClickHouseSustainedRateThrottle,
 )
@@ -61,8 +61,8 @@ class QueryViewSet(TeamAndOrgViewSetMixin, PydanticModelMixin, viewsets.ViewSet)
         if self.action in ("draft_sql", "chat"):
             return [AIBurstRateThrottle(), AISustainedRateThrottle()]
         if query := self.request.data.get("query"):
-            if isinstance(query, dict) and query.get("kind") == "HogQLQuery":
-                return [HogQLQueryThrottle()]
+            if isinstance(query, dict) and query.get("kind") == "TorQLQuery":
+                return [TorQLQueryThrottle()]
         return [ClickHouseBurstRateThrottle(), ClickHouseSustainedRateThrottle()]
 
     @extend_schema(
@@ -106,7 +106,7 @@ class QueryViewSet(TeamAndOrgViewSetMixin, PydanticModelMixin, viewsets.ViewSet)
             if result.get("query_status") and result["query_status"].get("complete") is False:
                 response_status = status.HTTP_202_ACCEPTED
             return Response(result, status=response_status)
-        except (ExposedHogQLError, ExposedCHQueryError) as e:
+        except (ExposedTorQLError, ExposedCHQueryError) as e:
             raise ValidationError(str(e), getattr(e, "code_name", None))
         except Exception as e:
             self.handle_column_ch_error(e)

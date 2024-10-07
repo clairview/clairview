@@ -124,7 +124,7 @@ class TestWarehouse(APIBaseTest):
             name="table_name",
             format="Parquet",
             team=self.team,
-            columns={"some_columns": {"hogql": "StringDatabaseField", "clickhouse": "Nullable(String)"}},
+            columns={"some_columns": {"torql": "StringDatabaseField", "clickhouse": "Nullable(String)"}},
         )
 
         with patch.object(DataWarehouseTable, "validate_column_type", return_value=True):

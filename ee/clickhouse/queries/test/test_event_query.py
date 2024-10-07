@@ -55,7 +55,7 @@ class TestEventQuery(ClickhouseTestMixin, APIBaseTest):
             person_on_events_mode=self.team.person_on_events_mode,
         ).get_query()
 
-        result = sync_execute(query, {**params, **filter.hogql_context.values})
+        result = sync_execute(query, {**params, **filter.torql_context.values})
 
         return result, query
 

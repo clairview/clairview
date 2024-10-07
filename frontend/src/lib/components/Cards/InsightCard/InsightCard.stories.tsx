@@ -5,7 +5,7 @@ import { getQueryBasedInsightModel } from '~/queries/nodes/InsightViz/utils'
 import { ChartDisplayType, InsightColor, InsightModel, InsightShortId, TrendsFilterType } from '~/types'
 
 import EXAMPLE_DATA_TABLE_NODE_EVENTS_QUERY from '../../../../mocks/fixtures/api/projects/team_id/insights/dataTableEvents.json'
-import EXAMPLE_DATA_TABLE_NODE_HOGQL_QUERY from '../../../../mocks/fixtures/api/projects/team_id/insights/dataTableHogQL.json'
+import EXAMPLE_DATA_TABLE_NODE_TORQL_QUERY from '../../../../mocks/fixtures/api/projects/team_id/insights/dataTableTorQL.json'
 import EXAMPLE_FUNNEL from '../../../../mocks/fixtures/api/projects/team_id/insights/funnelLeftToRight.json'
 import EXAMPLE_LIFECYCLE from '../../../../mocks/fixtures/api/projects/team_id/insights/lifecycle.json'
 import EXAMPLE_RETENTION from '../../../../mocks/fixtures/api/projects/team_id/insights/retention.json'
@@ -31,7 +31,7 @@ const examples = [
     EXAMPLE_RETENTION,
     EXAMPLE_STICKINESS,
     EXAMPLE_LIFECYCLE,
-    EXAMPLE_DATA_TABLE_NODE_HOGQL_QUERY,
+    EXAMPLE_DATA_TABLE_NODE_TORQL_QUERY,
     EXAMPLE_DATA_TABLE_NODE_EVENTS_QUERY,
 ] as unknown as InsightModel[]
 
@@ -40,7 +40,7 @@ const meta: Meta = {
     component: InsightCardComponent,
     parameters: {
         mockDate: '2023-07-01',
-        featureFlags: ['hogql'],
+        featureFlags: ['torql'],
     },
     argTypes: {
         insightName: {

@@ -29,7 +29,7 @@ export function PersonPropertyFilters({ query, setQuery }: PersonPropertyFilters
                     ? [
                           TaxonomicFilterGroupType.PersonProperties,
                           TaxonomicFilterGroupType.Cohorts,
-                          TaxonomicFilterGroupType.HogQLExpression,
+                          TaxonomicFilterGroupType.TorQLExpression,
                       ]
                     : [TaxonomicFilterGroupType.PersonProperties]
             }

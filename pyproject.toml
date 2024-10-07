@@ -15,7 +15,7 @@ exclude = [
     "./plugin-server/node_modules/",
     "./plugins/node_modules/",
     "./env",
-    "./markettor/hogql/grammar",
+    "./markettor/torql/grammar",
 ]
 
 [tool.ruff.lint]
@@ -78,13 +78,13 @@ max-complexity = 10
 "./markettor/management/commands/partition.py" = ["T201"]
 "./markettor/management/commands/migrate_clickhouse.py" = ["T201"]
 "./markettor/email.py" = ["T201"]
-"./markettor/hogql/grammar/HogQLParser.py" = [
+"./markettor/torql/grammar/TorQLParser.py" = [
     "F401",
     "F841",
     "E711",
 ]
 "./markettor/celery.py" = ["T201"]
-"./markettor/hogql/grammar/HogQLLexer.py" = ["F401"]
+"./markettor/torql/grammar/TorQLLexer.py" = ["F401"]
 "./markettor/utils.py" = ["T201"]
 "./markettor/management/commands/sync_feature_flags.py" = ["T201"]
 "./cypress/wait.py" = ["T201"]

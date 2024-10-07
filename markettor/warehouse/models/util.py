@@ -1,6 +1,6 @@
 import re
 
-from markettor.hogql.database.models import (
+from markettor.torql.database.models import (
     BooleanDatabaseField,
     DateDatabaseField,
     DateTimeDatabaseField,
@@ -37,13 +37,13 @@ def get_view_or_table_by_name(team, name) -> Union["DataWarehouseSavedQuery", "D
 
 def remove_named_tuples(type):
     """Remove named tuples from query"""
-    from markettor.warehouse.models.table import CLICKHOUSE_HOGQL_MAPPING
+    from markettor.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING
 
     tokenified_type = re.split(r"(\W)", type)
     filtered_tokens = [
         token
         for token in tokenified_type
-        if token == "Nullable" or (len(token) == 1 and not token.isalnum()) or token in CLICKHOUSE_HOGQL_MAPPING.keys()
+        if token == "Nullable" or (len(token) == 1 and not token.isalnum()) or token in CLICKHOUSE_TORQL_MAPPING.keys()
     ]
     return "".join(filtered_tokens)
 
@@ -60,7 +60,7 @@ def clean_type(column_type: str) -> str:
     return column_type
 
 
-CLICKHOUSE_HOGQL_MAPPING = {
+CLICKHOUSE_TORQL_MAPPING = {
     "UUID": StringDatabaseField,
     "String": StringDatabaseField,
     "DateTime64": DateTimeDatabaseField,
@@ -87,7 +87,7 @@ CLICKHOUSE_HOGQL_MAPPING = {
     "Decimal": FloatDatabaseField,
 }
 
-STR_TO_HOGQL_MAPPING = {
+STR_TO_TORQL_MAPPING = {
     "BooleanDatabaseField": BooleanDatabaseField,
     "DateDatabaseField": DateDatabaseField,
     "DateTimeDatabaseField": DateTimeDatabaseField,

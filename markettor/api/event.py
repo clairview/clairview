@@ -17,7 +17,7 @@ from sentry_sdk import capture_exception
 from markettor.api.documentation import PropertiesSerializer, extend_schema
 from markettor.api.routing import TeamAndOrgViewSetMixin
 from markettor.client import query_with_columns, sync_execute
-from markettor.hogql.constants import DEFAULT_RETURNED_ROWS, MAX_SELECT_RETURNED_ROWS
+from markettor.torql.constants import DEFAULT_RETURNED_ROWS, MAX_SELECT_RETURNED_ROWS
 from markettor.models import Element, Filter, Person
 from markettor.models.event.query_event_list import query_events_list
 from markettor.models.event.sql import GET_CUSTOM_EVENTS, SELECT_ONE_EVENT_SQL
@@ -122,13 +122,13 @@ class EventViewSet(
             OpenApiParameter(
                 "select",
                 OpenApiTypes.STR,
-                description="(Experimental) JSON-serialized array of HogQL expressions to return",
+                description="(Experimental) JSON-serialized array of TorQL expressions to return",
                 many=True,
             ),
             OpenApiParameter(
                 "where",
                 OpenApiTypes.STR,
-                description="(Experimental) JSON-serialized array of HogQL expressions that must pass",
+                description="(Experimental) JSON-serialized array of TorQL expressions that must pass",
                 many=True,
             ),
             OpenApiParameter("person_id", OpenApiTypes.INT, description="Filter list by person id."),

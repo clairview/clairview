@@ -1,9 +1,9 @@
 import dataclasses
 
 from markettor.client import sync_execute
-from markettor.hogql.bytecode import create_bytecode
-from markettor.hogql.hogql import HogQLContext
-from markettor.hogql.property import action_to_expr
+from markettor.torql.bytecode import create_bytecode
+from markettor.torql.torql import TorQLContext
+from markettor.torql.property import action_to_expr
 from markettor.models.action import Action
 from markettor.models.action.util import filter_event, format_action_filter
 from markettor.models.test.test_event_model import filter_by_actions_factory
@@ -13,7 +13,7 @@ from markettor.test.base import (
     _create_event,
     _create_person,
 )
-from hogvm.python.operation import Operation as op, HOGQL_BYTECODE_IDENTIFIER as _H, HOGQL_BYTECODE_VERSION
+from hogvm.python.operation import Operation as op, TORQL_BYTECODE_IDENTIFIER as _H, TORQL_BYTECODE_VERSION
 
 
 @dataclasses.dataclass
@@ -23,9 +23,9 @@ class MockEvent:
 
 
 def _get_events_for_action(action: Action) -> list[MockEvent]:
-    hogql_context = HogQLContext(team_id=action.team_id)
+    torql_context = TorQLContext(team_id=action.team_id)
     formatted_query, params = format_action_filter(
-        team_id=action.team_id, action=action, prepend="", hogql_context=hogql_context
+        team_id=action.team_id, action=action, prepend="", torql_context=torql_context
     )
     query = f"""
         SELECT
@@ -38,7 +38,7 @@ def _get_events_for_action(action: Action) -> list[MockEvent]:
     """
     events = sync_execute(
         query,
-        {"team_id": action.team_id, **params, **hogql_context.values},
+        {"team_id": action.team_id, **params, **torql_context.values},
         team_id=action.team_id,
     )
     return [MockEvent(str(uuid), distinct_id) for uuid, distinct_id in events]
@@ -256,7 +256,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
         events = _get_events_for_action(action1)
         self.assertEqual(len(events), 1)
 
-    def test_filter_with_hogql(self):
+    def test_filter_with_torql(self):
         _create_event(
             event="insight viewed",
             team=self.team,
@@ -276,7 +276,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "insight viewed",
-                    "properties": [{"key": "toInt(properties.filters_count) > 10", "type": "hogql"}],
+                    "properties": [{"key": "toInt(properties.filters_count) > 10", "type": "torql"}],
                 }
             ],
         )
@@ -289,7 +289,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             action1.bytecode,
             [
                 _H,
-                HOGQL_BYTECODE_VERSION,
+                TORQL_BYTECODE_VERSION,
                 # event = 'insight viewed'
                 op.STRING,
                 "insight viewed",

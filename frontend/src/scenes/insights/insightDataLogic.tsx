@@ -159,11 +159,11 @@ export const insightDataLogic = kea<insightDataLogicType>([
             },
         ],
 
-        hogQL: [
+        torQL: [
             (s) => [s.insightData],
             (insightData): string | null => {
-                if (insightData && 'hogql' in insightData && insightData.hogql !== '') {
-                    return insightData.hogql
+                if (insightData && 'torql' in insightData && insightData.torql !== '') {
+                    return insightData.torql
                 }
                 return null
             },

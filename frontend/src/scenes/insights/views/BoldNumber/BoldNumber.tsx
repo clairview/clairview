@@ -209,7 +209,7 @@ function BoldNumberComparison({ showPersonsModal }: Pick<ChartParams, 'showPerso
     )
 }
 
-export function HogQLBoldNumber(): JSX.Element {
+export function TorQLBoldNumber(): JSX.Element {
     const { response, responseLoading, tabularData } = useValues(dataVisualizationLogic)
 
     const displayValue =
@@ -221,7 +221,7 @@ export function HogQLBoldNumber(): JSX.Element {
         'Error'
 
     return (
-        <div className="BoldNumber LemonTable HogQL">
+        <div className="BoldNumber LemonTable TorQL">
             <div className="BoldNumber__value">
                 <Textfit min={32} max={120}>
                     {displayValue}

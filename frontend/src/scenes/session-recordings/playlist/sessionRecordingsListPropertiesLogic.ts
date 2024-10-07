@@ -4,8 +4,8 @@ import api from 'lib/api'
 import { dayjs } from 'lib/dayjs'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 
-import { HogQLQuery, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { TorQLQuery, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 import { SessionRecordingPropertiesType, SessionRecordingType } from '~/types'
 
 import type { sessionRecordingsListPropertiesLogicType } from './sessionRecordingsListPropertiesLogicType'
@@ -36,9 +36,9 @@ export const sessionRecordingsListPropertiesLogic = kea<sessionRecordingsListPro
                     const oldestTimestamp = sessions.map((x) => x.start_time).sort()[0]
                     const newestTimestamp = sessions.map((x) => x.end_time).sort()[sessions.length - 1]
 
-                    const query: HogQLQuery = {
-                        kind: NodeKind.HogQLQuery,
-                        query: hogql`SELECT properties.$session_id as session_id, any(properties) as properties
+                    const query: TorQLQuery = {
+                        kind: NodeKind.TorQLQuery,
+                        query: torql`SELECT properties.$session_id as session_id, any(properties) as properties
                                 FROM events
                                 WHERE event IN ['$pageview', '$autocapture']
                                 AND session_id IN ${sessionIds}

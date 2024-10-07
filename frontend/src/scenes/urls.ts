@@ -3,7 +3,7 @@ import { AlertType } from 'lib/components/Alerts/types'
 import { getCurrentTeamId } from 'lib/utils/getAppContext'
 
 import { ExportOptions } from '~/exporter/types'
-import { DashboardFilter, HogQLFilters, Node } from '~/queries/schema'
+import { DashboardFilter, TorQLFilters, Node } from '~/queries/schema'
 import {
     ActionType,
     ActivityTab,
@@ -78,7 +78,7 @@ export const urls = {
             ...(type ? { insight: type } : {}),
             ...(query ? { q: typeof query === 'string' ? query : JSON.stringify(query) } : {}),
         }).url,
-    insightNewHogQL: (query: string, filters?: HogQLFilters): string =>
+    insightNewTorQL: (query: string, filters?: TorQLFilters): string =>
         combineUrl(
             `/data-warehouse`,
             {},
@@ -86,7 +86,7 @@ export const urls = {
                 q: JSON.stringify({
                     kind: 'DataTableNode',
                     full: true,
-                    source: { kind: 'HogQLQuery', query, filters },
+                    source: { kind: 'TorQLQuery', query, filters },
                 }),
             }
         ).url,

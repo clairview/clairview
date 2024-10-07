@@ -43,7 +43,7 @@ export const BreakdownTag: Story = {
         <>
             <BreakdownTagComponent breakdownType="event" breakdown="$browser" />
             <div className="mt-1" />
-            <BreakdownTagComponent breakdownType="hogql" breakdown="$properties.browser" />
+            <BreakdownTagComponent breakdownType="torql" breakdown="$properties.browser" />
             <div className="mt-1" />
             <BreakdownTagComponent breakdownType="cohort" breakdown={1} />
         </>

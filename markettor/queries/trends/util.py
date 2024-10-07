@@ -14,7 +14,7 @@ from markettor.constants import (
     UNIQUE_USERS,
     WEEKLY_ACTIVE,
 )
-from markettor.hogql.hogql import translate_hogql
+from markettor.torql.torql import translate_torql
 from markettor.models.entity import Entity
 from markettor.models.event.sql import EVENT_JOIN_PERSON_SQL
 from markettor.models.filters import Filter
@@ -93,8 +93,8 @@ def process_math(
             params[key] = entity.math_property
     elif entity.math in COUNT_PER_ACTOR_MATH_FUNCTIONS:
         aggregate_operation = f"{COUNT_PER_ACTOR_MATH_FUNCTIONS[entity.math]}(intermediate_count)"
-    elif entity.math == "hogql":
-        aggregate_operation = translate_hogql(entity.math_hogql, filter.hogql_context)
+    elif entity.math == "torql":
+        aggregate_operation = translate_torql(entity.math_torql, filter.torql_context)
 
     return aggregate_operation, join_condition, params
 

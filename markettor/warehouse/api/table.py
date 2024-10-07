@@ -5,8 +5,8 @@ from markettor.api.utils import action
 
 from markettor.api.routing import TeamAndOrgViewSetMixin
 from markettor.api.shared import UserBasicSerializer
-from markettor.hogql.context import HogQLContext
-from markettor.hogql.database.database import SerializedField, create_hogql_database, serialize_fields
+from markettor.torql.context import TorQLContext
+from markettor.torql.database.database import SerializedField, create_torql_database, serialize_fields
 from markettor.schema import DatabaseSerializedFieldType
 from markettor.tasks.warehouse import validate_data_warehouse_table_columns
 from markettor.warehouse.models import (
@@ -15,7 +15,7 @@ from markettor.warehouse.models import (
     DataWarehouseTable,
 )
 from markettor.warehouse.api.external_data_source import SimpleExternalDataSourceSerializers
-from markettor.warehouse.models.table import CLICKHOUSE_HOGQL_MAPPING, SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING
+from markettor.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING, SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING
 
 
 class CredentialSerializer(serializers.ModelSerializer):
@@ -59,16 +59,16 @@ class TableSerializer(serializers.ModelSerializer):
     def get_columns(self, table: DataWarehouseTable) -> list[SerializedField]:
         database = self.context.get("database", None)
         if not database:
-            database = create_hogql_database(team_id=self.context["team_id"])
+            database = create_torql_database(team_id=self.context["team_id"])
 
         if database.has_table(table.name):
             fields = database.get_table(table.name).fields
         else:
-            fields = table.hogql_definition().fields
+            fields = table.torql_definition().fields
 
         serializes_fields = serialize_fields(
             fields,
-            HogQLContext(database=database, team_id=self.context["team_id"]),
+            TorQLContext(database=database, team_id=self.context["team_id"]),
             table.name,
             table.columns,
             table_type="external",
@@ -136,11 +136,11 @@ class SimpleTableSerializer(serializers.ModelSerializer):
         team_id = self.context.get("team_id", None)
 
         if not database:
-            database = create_hogql_database(team_id=self.context["team_id"])
+            database = create_torql_database(team_id=self.context["team_id"])
 
         fields = serialize_fields(
-            table.hogql_definition().fields,
-            HogQLContext(database=database, team_id=team_id),
+            table.torql_definition().fields,
+            TorQLContext(database=database, team_id=team_id),
             table.name,
             table_type="external",
         )
@@ -172,7 +172,7 @@ class TableViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_hogql_database(team_id=self.team_id)
+        context["database"] = create_torql_database(team_id=self.team_id)
         context["team_id"] = self.team_id
         return context
 
@@ -227,7 +227,7 @@ class TableViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
                 columns[key] = {}
 
             columns[key]["clickhouse"] = f"Nullable({SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]})"
-            columns[key]["hogql"] = CLICKHOUSE_HOGQL_MAPPING[SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]].__name__
+            columns[key]["torql"] = CLICKHOUSE_TORQL_MAPPING[SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]].__name__
 
         table.columns = columns
         table.save()

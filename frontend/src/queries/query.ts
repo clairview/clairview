@@ -6,12 +6,12 @@ import markettor from 'markettor-js'
 
 import { OnlineExportContext, QueryExportContext } from '~/types'
 
-import { DashboardFilter, DataNode, HogQLQuery, HogQLQueryResponse, NodeKind, PersonsNode, QueryStatus } from './schema'
+import { DashboardFilter, DataNode, TorQLQuery, TorQLQueryResponse, NodeKind, PersonsNode, QueryStatus } from './schema'
 import {
     isAsyncResponse,
     isDataTableNode,
     isDataVisualizationNode,
-    isHogQLQuery,
+    isTorQLQuery,
     isInsightVizNode,
     isPersonsNode,
 } from './utils'
@@ -35,8 +35,8 @@ export function queryExportContext<N extends DataNode>(
 
 const SYNC_ONLY_QUERY_KINDS = [
     'HogQuery',
-    'HogQLMetadata',
-    'HogQLAutocomplete',
+    'TorQLMetadata',
+    'TorQLAutocomplete',
     'DatabaseSchemaQuery',
     'ErrorTrackingQuery',
 ] satisfies NodeKind[keyof NodeKind][]
@@ -143,8 +143,8 @@ export async function performQuery<N extends DataNode>(
                 filtersOverride,
                 pollOnly
             )
-            if (isHogQLQuery(queryNode) && response && typeof response === 'object') {
-                logParams.clickhouse_sql = (response as HogQLQueryResponse)?.clickhouse
+            if (isTorQLQuery(queryNode) && response && typeof response === 'object') {
+                logParams.clickhouse_sql = (response as TorQLQueryResponse)?.clickhouse
             }
         }
         markettor.capture('query completed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
@@ -169,9 +169,9 @@ export function getPersonsEndpoint(query: PersonsNode): string {
     return api.persons.determineListUrl(params)
 }
 
-export async function hogqlQuery(queryString: string, values?: Record<string, any>): Promise<HogQLQueryResponse> {
-    return await performQuery<HogQLQuery>({
-        kind: NodeKind.HogQLQuery,
+export async function torqlQuery(queryString: string, values?: Record<string, any>): Promise<TorQLQueryResponse> {
+    return await performQuery<TorQLQuery>({
+        kind: NodeKind.TorQLQuery,
         query: queryString,
         values,
     })

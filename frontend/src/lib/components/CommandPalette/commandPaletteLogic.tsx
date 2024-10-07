@@ -13,7 +13,7 @@ import {
     IconGear,
     IconGithub,
     IconGraph,
-    IconHogQL,
+    IconTorQL,
     IconHome,
     IconKeyboard,
     IconLaptop,
@@ -476,9 +476,9 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                         },
                     },
                     {
-                        icon: IconHogQL,
-                        display: 'Create a new HogQL insight',
-                        synonyms: ['hogql', 'sql'],
+                        icon: IconTorQL,
+                        display: 'Create a new TorQL insight',
+                        synonyms: ['torql', 'sql'],
                         executor: () => {
                             // TODO: Don't reset insight on change
                             push(insightTypeURL[InsightType.SQL])

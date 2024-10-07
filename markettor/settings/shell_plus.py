@@ -17,7 +17,7 @@ SHELL_PLUS_POST_IMPORTS = [
     ("markettor.models.filters", ("Filter",)),
     ("markettor.models.property", ("Property",)),
     ("markettor.client", ("sync_execute",)),
-    ("markettor.hogql", ("ast")),
-    ("markettor.hogql.parser", ("parse_select", "parse_expr")),
-    ("markettor.hogql.query", ("execute_hogql_query")),
+    ("markettor.torql", ("ast")),
+    ("markettor.torql.parser", ("parse_select", "parse_expr")),
+    ("markettor.torql.query", ("execute_torql_query")),
 ]

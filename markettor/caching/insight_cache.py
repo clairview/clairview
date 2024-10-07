@@ -12,8 +12,8 @@ from sentry_sdk.api import capture_exception
 
 from markettor.api.services.query import process_query_dict
 from markettor.clickhouse.query_tagging import tag_queries
-from markettor.hogql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from markettor.hogql_queries.query_runner import ExecutionMode
+from markettor.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from markettor.torql_queries.query_runner import ExecutionMode
 from markettor.models import Dashboard, Insight, InsightCachingState
 from markettor.models.instance_setting import get_instance_setting
 from markettor.tasks.tasks import update_cache_task
@@ -178,7 +178,7 @@ def update_cached_state(
     result: Any,
     ttl: Optional[int] = None,
 ):
-    if result is not None:  # This is particularly the case for HogQL-based queries, which cache.set() on their own
+    if result is not None:  # This is particularly the case for TorQL-based queries, which cache.set() on their own
         cache.set(cache_key, result, ttl if ttl is not None else settings.CACHED_RESULTS_TTL)
         INSIGHT_CACHE_WRITE_COUNTER.inc()
 

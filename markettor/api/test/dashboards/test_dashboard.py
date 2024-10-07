@@ -11,7 +11,7 @@ from rest_framework import status
 from markettor.api.dashboards.dashboard import DashboardSerializer
 from markettor.api.test.dashboards import DashboardAPI
 from markettor.constants import AvailableFeature
-from markettor.hogql_queries.legacy_compatibility.filter_to_query import filter_to_query
+from markettor.torql_queries.legacy_compatibility.filter_to_query import filter_to_query
 from markettor.models import Dashboard, DashboardTile, Filter, Insight, Team, User
 from markettor.models.organization import Organization
 from markettor.models.sharing_configuration import SharingConfiguration
@@ -1308,7 +1308,7 @@ class TestDashboard(APIBaseTest, QueryMatchingTest):
                     "tags": [],
                     "timezone": None,
                     "updated_at": ANY,
-                    "hogql": ANY,
+                    "torql": ANY,
                     "types": ANY,
                 },
                 "is_cached": False,

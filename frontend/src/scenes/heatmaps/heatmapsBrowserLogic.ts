@@ -14,8 +14,8 @@ import { objectsEqual } from 'lib/utils'
 import markettor from 'markettor-js'
 import { RefObject } from 'react'
 
-import { HogQLQuery, NodeKind } from '~/queries/schema'
-import { hogql } from '~/queries/utils'
+import { TorQLQuery, NodeKind } from '~/queries/schema'
+import { torql } from '~/queries/utils'
 
 import type { heatmapsBrowserLogicType } from './heatmapsBrowserLogicType'
 
@@ -72,13 +72,13 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
                         return []
                     }
 
-                    const query: HogQLQuery = {
-                        kind: NodeKind.HogQLQuery,
-                        query: hogql`SELECT distinct properties.$current_url AS urls
+                    const query: TorQLQuery = {
+                        kind: NodeKind.TorQLQuery,
+                        query: torql`SELECT distinct properties.$current_url AS urls
                                      FROM events
                                      WHERE timestamp >= now() - INTERVAL 7 DAY
                                        AND timestamp <= now()
-                                       AND properties.$current_url like '%${hogql.identifier(
+                                       AND properties.$current_url like '%${torql.identifier(
                                            values.browserSearchTerm
                                        )}%'
                                      ORDER BY timestamp DESC
@@ -96,9 +96,9 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
             null as { url: string; count: number }[] | null,
             {
                 loadTopUrls: async () => {
-                    const query: HogQLQuery = {
-                        kind: NodeKind.HogQLQuery,
-                        query: hogql`SELECT properties.$current_url AS url, count() as count
+                    const query: TorQLQuery = {
+                        kind: NodeKind.TorQLQuery,
+                        query: torql`SELECT properties.$current_url AS url, count() as count
                                      FROM events
                                      WHERE timestamp >= now() - INTERVAL 7 DAY
                                        AND event in ('$pageview'

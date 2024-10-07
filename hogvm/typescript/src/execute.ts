@@ -69,7 +69,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
         bytecode = code
     }
     if (!bytecode || bytecode.length === 0 || (bytecode[0] !== '_h' && bytecode[0] !== '_H')) {
-        throw new HogVMException("Invalid HogQL bytecode, must start with '_H'")
+        throw new HogVMException("Invalid TorQL bytecode, must start with '_H'")
     }
     const version = bytecode[0] === '_H' ? bytecode[1] ?? 0 : 0
 
@@ -138,7 +138,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
     function popStack(): any {
         if (stack.length === 0) {
             logTelemetry()
-            throw new HogVMException('Invalid HogQL bytecode, stack is empty, can not pop')
+            throw new HogVMException('Invalid TorQL bytecode, stack is empty, can not pop')
         }
         memUsed -= memStack.pop() ?? 0
         return stack.pop()

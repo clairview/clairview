@@ -1,7 +1,7 @@
 import dataclasses
 from copy import deepcopy
 from markettor.cdp.templates.hog_function_template import HogFunctionTemplate, HogFunctionTemplateMigrator
-from markettor.hogql.escape_sql import escape_hogql_string
+from markettor.torql.escape_sql import escape_torql_string
 
 template: HogFunctionTemplate = HogFunctionTemplate(
     status="beta",
@@ -155,14 +155,14 @@ class TemplateAvoMigrator(HogFunctionTemplateMigrator):
                 {"id": event, "name": event, "type": "events", "order": 0} for event in events_to_include
             ]
         elif events_to_exclude:
-            event_string = ", ".join(escape_hogql_string(event) for event in events_to_exclude)
+            event_string = ", ".join(escape_torql_string(event) for event in events_to_exclude)
             hf["filters"]["events"] = [
                 {
                     "id": None,
                     "name": "All events",
                     "type": "events",
                     "order": 0,
-                    "properties": [{"key": f"event not in ({event_string})", "type": "hogql"}],
+                    "properties": [{"key": f"event not in ({event_string})", "type": "torql"}],
                 }
             ]
 

@@ -4,7 +4,7 @@ from django.utils import timezone
 from freezegun import freeze_time
 
 from markettor.client import sync_execute
-from markettor.hogql.hogql import HogQLContext
+from markettor.torql.torql import TorQLContext
 from markettor.models.action import Action
 from markettor.models.cohort import Cohort
 from markettor.models.cohort.sql import GET_COHORTPEOPLE_BY_COHORT_ID
@@ -93,12 +93,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         query, params = parse_prop_grouped_clauses(
             team_id=self.team.pk,
             property_group=filter.property_groups,
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 1)
 
@@ -147,12 +147,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                 if self.team.person_on_events_mode == PersonsOnEventsMode.DISABLED
                 else PersonPropertiesMode.DIRECT_ON_EVENTS
             ),
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
 
         self.assertEqual(len(result), 1)
@@ -204,12 +204,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                 if self.team.person_on_events_mode == PersonsOnEventsMode.DISABLED
                 else PersonPropertiesMode.DIRECT_ON_EVENTS
             ),
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 1)
 
@@ -231,12 +231,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                 if self.team.person_on_events_mode == PersonsOnEventsMode.DISABLED
                 else PersonPropertiesMode.DIRECT_ON_EVENTS
             ),
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 2)
 
@@ -284,12 +284,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                 if self.team.person_on_events_mode == PersonsOnEventsMode.DISABLED
                 else PersonPropertiesMode.DIRECT_ON_EVENTS
             ),
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 1)
 
@@ -307,12 +307,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                 if self.team.person_on_events_mode == PersonsOnEventsMode.DISABLED
                 else PersonPropertiesMode.DIRECT_ON_EVENTS
             ),
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 2)
 
@@ -358,12 +358,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         query, params = parse_prop_grouped_clauses(
             team_id=self.team.pk,
             property_group=filter.property_groups,
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 2)
 
@@ -419,14 +419,14 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         query, params = parse_prop_grouped_clauses(
             team_id=self.team.pk,
             property_group=filter.property_groups,
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         self.assertIn("\nFROM person_distinct_id2\n", final_query)
 
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 0)
 
@@ -819,7 +819,7 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         cohort.calculate_people_ch(pending_version=0)
 
         with self.settings(USE_PRECALCULATED_CH_COHORT_PEOPLE=True):
-            sql, _ = format_filter_query(cohort, 0, HogQLContext(team_id=self.team.pk))
+            sql, _ = format_filter_query(cohort, 0, TorQLContext(team_id=self.team.pk))
             self.assertQueryMatchesSnapshot(sql)
 
     def test_cohortpeople_with_valid_other_cohort_filter(self):
@@ -926,13 +926,13 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
             query, params = parse_prop_grouped_clauses(
                 team_id=self.team.pk,
                 property_group=filter.property_groups,
-                hogql_context=filter.hogql_context,
+                torql_context=filter.torql_context,
             )
             final_query = "SELECT uuid, distinct_id FROM events WHERE team_id = %(team_id)s {}".format(query)
 
             result = sync_execute(
                 final_query,
-                {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+                {**params, **filter.torql_context.values, "team_id": self.team.pk},
             )
 
         self.assertEqual(len(result), 1)
@@ -1008,14 +1008,14 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         query, params = parse_prop_grouped_clauses(
             team_id=self.team.pk,
             property_group=filter.property_groups,
-            hogql_context=filter.hogql_context,
+            torql_context=filter.torql_context,
         )
         final_query = "SELECT uuid, distinct_id FROM events WHERE team_id = %(team_id)s {}".format(query)
         self.assertIn("\nFROM person_distinct_id2\n", final_query)
 
         result = sync_execute(
             final_query,
-            {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+            {**params, **filter.torql_context.values, "team_id": self.team.pk},
         )
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0][1], "2")  # distinct_id '2' is the one in cohort
@@ -1114,13 +1114,13 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
             query, params = parse_prop_grouped_clauses(
                 team_id=self.team.pk,
                 property_group=filter.property_groups,
-                hogql_context=filter.hogql_context,
+                torql_context=filter.torql_context,
             )
             final_query = "SELECT uuid, distinct_id FROM events WHERE team_id = %(team_id)s {}".format(query)
 
             result = sync_execute(
                 final_query,
-                {**params, **filter.hogql_context.values, "team_id": self.team.pk},
+                {**params, **filter.torql_context.values, "team_id": self.team.pk},
             )
 
         self.assertEqual(len(result), 1)

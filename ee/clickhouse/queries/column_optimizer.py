@@ -10,7 +10,7 @@ from markettor.models.filters.utils import GroupTypeIndex
 from markettor.models.property import PropertyIdentifier
 from markettor.models.property.util import (
     box_value,
-    count_hogql_properties,
+    count_torql_properties,
     extract_tables_and_properties,
 )
 from markettor.queries.column_optimizer.foss_column_optimizer import FOSSColumnOptimizer
@@ -54,18 +54,18 @@ class EnterpriseColumnOptimizer(FOSSColumnOptimizer):
                         self.filter.breakdown_group_type_index,
                     )
                 ] += 1
-            elif self.filter.breakdown_type == "hogql":
+            elif self.filter.breakdown_type == "torql":
                 if isinstance(self.filter.breakdown, list):
                     expr = str(self.filter.breakdown[0])
                 else:
                     expr = str(self.filter.breakdown)
-                counter = count_hogql_properties(expr, counter)
+                counter = count_torql_properties(expr, counter)
 
             # If we have a breakdowns attribute then make sure we pull in everything we
             # need to calculate it
             for breakdown in self.filter.breakdowns or []:
-                if breakdown["type"] == "hogql":
-                    counter = count_hogql_properties(breakdown["property"], counter)
+                if breakdown["type"] == "torql":
+                    counter = count_torql_properties(breakdown["property"], counter)
                 else:
                     counter[
                         (

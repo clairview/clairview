@@ -5,15 +5,15 @@ from rest_framework import viewsets, request, response, serializers, status
 
 from markettor.api.routing import TeamAndOrgViewSetMixin
 from markettor.auth import TemporaryTokenAuthentication
-from markettor.hogql import ast
-from markettor.hogql.ast import Constant
-from markettor.hogql.base import Expr
-from markettor.hogql.constants import LimitContext
-from markettor.hogql.context import HogQLContext
-from markettor.hogql.parser import parse_expr, parse_select
-from markettor.hogql.query import execute_hogql_query
+from markettor.torql import ast
+from markettor.torql.ast import Constant
+from markettor.torql.base import Expr
+from markettor.torql.constants import LimitContext
+from markettor.torql.context import TorQLContext
+from markettor.torql.parser import parse_expr, parse_select
+from markettor.torql.query import execute_torql_query
 from markettor.rate_limit import ClickHouseSustainedRateThrottle, ClickHouseBurstRateThrottle
-from markettor.schema import HogQLQueryResponse
+from markettor.schema import TorQLQueryResponse
 from markettor.utils import relative_date_parse_with_delta_mapping
 
 DEFAULT_QUERY = """
@@ -166,8 +166,8 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         exprs = self._predicate_expressions(placeholders)
 
         stmt = parse_select(raw_query, {"aggregation_count": aggregation_count, "predicates": ast.And(exprs=exprs)})
-        context = HogQLContext(team_id=self.team.pk, limit_top_select=False)
-        results = execute_hogql_query(query=stmt, team=self.team, limit_context=LimitContext.HEATMAPS, context=context)
+        context = TorQLContext(team_id=self.team.pk, limit_top_select=False)
+        results = execute_torql_query(query=stmt, team=self.team, limit_context=LimitContext.HEATMAPS, context=context)
 
         if is_scrolldepth_query:
             return self._return_scroll_depth_response(results)
@@ -208,7 +208,7 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         return predicate_expressions
 
     @staticmethod
-    def _return_heatmap_coordinates_response(query_response: HogQLQueryResponse) -> response.Response:
+    def _return_heatmap_coordinates_response(query_response: TorQLQueryResponse) -> response.Response:
         data = [
             {
                 "pointer_target_fixed": item[0],
@@ -224,7 +224,7 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         return response.Response(response_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
-    def _return_scroll_depth_response(query_response: HogQLQueryResponse) -> response.Response:
+    def _return_scroll_depth_response(query_response: TorQLQueryResponse) -> response.Response:
         data = [
             {
                 "scroll_depth_bucket": item[0],

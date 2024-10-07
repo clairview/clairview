@@ -2,8 +2,8 @@ import logging
 from typing import Any, Optional
 from rest_framework import serializers
 
-from markettor.hogql.bytecode import create_bytecode
-from markettor.hogql.parser import parse_program, parse_string_template
+from markettor.torql.bytecode import create_bytecode
+from markettor.torql.parser import parse_program, parse_string_template
 
 logger = logging.getLogger(__name__)
 

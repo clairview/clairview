@@ -2,7 +2,7 @@ import { Node } from '~/queries/schema'
 import {
     isActorsQuery,
     isEventsQuery,
-    isHogQLQuery,
+    isTorQLQuery,
     isPersonsNode,
     isSessionAttributionExplorerQuery,
     isWebExternalClicksQuery,
@@ -32,7 +32,7 @@ export enum QueryFeature {
 export function getQueryFeatures(query: Node): Set<QueryFeature> {
     const features = new Set<QueryFeature>()
 
-    if (isHogQLQuery(query) || isEventsQuery(query) || isSessionAttributionExplorerQuery(query)) {
+    if (isTorQLQuery(query) || isEventsQuery(query) || isSessionAttributionExplorerQuery(query)) {
         features.add(QueryFeature.dateRangePicker)
         features.add(QueryFeature.columnsInResponse)
         features.add(QueryFeature.eventPropertyFilters)

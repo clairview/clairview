@@ -221,7 +221,7 @@ class RetentionEventsQuery(EventQuery):
                 prepend=prepend,
                 person_properties_mode=get_person_properties_mode(self._team),
                 person_id_joined_alias=self._person_id_alias,
-                hogql_context=self._filter.hogql_context,
+                torql_context=self._filter.torql_context,
             )
             condition = action_query
         elif entity.type == TREND_FILTER_TYPE_EVENTS:

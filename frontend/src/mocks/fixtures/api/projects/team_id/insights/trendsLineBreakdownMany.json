@@ -176,7 +176,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -267,7 +267,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -358,7 +358,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -449,7 +449,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -540,7 +540,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -631,7 +631,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -722,7 +722,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -813,7 +813,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -904,7 +904,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -995,7 +995,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1086,7 +1086,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1177,7 +1177,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1268,7 +1268,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1359,7 +1359,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1450,7 +1450,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1541,7 +1541,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1632,7 +1632,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1723,7 +1723,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1814,7 +1814,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1905,7 +1905,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -1996,7 +1996,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2087,7 +2087,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2178,7 +2178,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2269,7 +2269,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2360,7 +2360,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2451,7 +2451,7 @@
                 "custom_name": null,
                 "math": "dau",
                 "math_property": null,
-                "math_hogql": null,
+                "math_torql": null,
                 "math_group_type_index": null,
                 "properties": {}
             },
@@ -2499,7 +2499,7 @@
     "timezone": "US/Pacific",
     "is_cached": true,
     "query_status": null,
-    "hogql": "SELECT\n    groupArray(1)(date)[1] AS date,\n    arrayFold((acc, x) -> arrayMap(i -> plus(acc[i], x[i]), range(1, plus(length(date), 1))), groupArray(total), arrayWithConstant(length(date), reinterpretAsFloat64(0))) AS total,\n    if(ifNull(greaterOrEquals(row_number, 25), 0), '$$_markettor_breakdown_other_$$', breakdown_value) AS breakdown_value\nFROM\n    (SELECT\n        arrayMap(number -> plus(toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00'))), toIntervalWeek(number)), range(0, plus(coalesce(dateDiff('week', toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00'))), toStartOfWeek(assumeNotNull(toDateTime('2024-07-23 23:59:59'))))), 1))) AS date,\n        arrayMap(_match_date -> arraySum(arraySlice(groupArray(count), indexOf(groupArray(day_start) AS _days_for_count, _match_date) AS _index, plus(minus(arrayLastIndex(x -> equals(x, _match_date), _days_for_count), _index), 1))), date) AS total,\n        breakdown_value AS breakdown_value,\n        rowNumberInAllBlocks() AS row_number\n    FROM\n        (SELECT\n            sum(total) AS count,\n            day_start,\n            breakdown_value\n        FROM\n            (SELECT\n                count(DISTINCT e.person_id) AS total,\n                toStartOfWeek(timestamp) AS day_start,\n                ifNull(nullIf(toString(properties.$referring_domain), ''), '$$_markettor_breakdown_null_$$') AS breakdown_value\n            FROM\n                events AS e SAMPLE 1\n            WHERE\n                and(greaterOrEquals(timestamp, toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00')))), lessOrEquals(timestamp, assumeNotNull(toDateTime('2024-07-23 23:59:59'))), equals(event, '$pageview'), notILike(person.properties.email, '%markettor.com%'), and(notEquals(properties.$host, '127.0.0.1:3000'), notEquals(properties.$host, '127.0.0.1:5000'), notEquals(properties.$host, 'localhost:5000'), notEquals(properties.$host, 'localhost:8000'), notEquals(properties.$host, 'localhost:8001'), notEquals(properties.$host, 'localhost')), notILike(properties.distinct_id, '%markettor.com%'), notEquals(person.properties.email, 'capturi@capturi.com'), notEquals(person.properties.email, 'fuziontech@gmail.com'), notEquals(properties.realm, 'demo'), notEquals(properties.$ip, '71.84.26.175'), notEquals(person.properties.email, 'corywatilo@gmail.com'), 1, and(ifNull(match(toString(properties.$referring_domain), 'google|duckduckgo|brave|bing'), 0), equals(properties.$host, 'markettor.com'), notILike(properties.utm_medium, '%cpc%')))\n            GROUP BY\n                day_start,\n                breakdown_value)\n        GROUP BY\n            day_start,\n            breakdown_value\n        ORDER BY\n            day_start ASC,\n            breakdown_value ASC)\n    GROUP BY\n        breakdown_value\n    ORDER BY\n        if(equals(breakdown_value, '$$_markettor_breakdown_other_$$'), 2, if(equals(breakdown_value, '$$_markettor_breakdown_null_$$'), 1, 0)) ASC,\n        arraySum(total) DESC,\n        breakdown_value ASC)\nWHERE\n    notEquals(breakdown_value, NULL)\nGROUP BY\n    breakdown_value\nORDER BY\n    if(equals(breakdown_value, '$$_markettor_breakdown_other_$$'), 2, if(equals(breakdown_value, '$$_markettor_breakdown_null_$$'), 1, 0)) ASC,\n    arraySum(total) DESC,\n    breakdown_value ASC\nLIMIT 50000",
+    "torql": "SELECT\n    groupArray(1)(date)[1] AS date,\n    arrayFold((acc, x) -> arrayMap(i -> plus(acc[i], x[i]), range(1, plus(length(date), 1))), groupArray(total), arrayWithConstant(length(date), reinterpretAsFloat64(0))) AS total,\n    if(ifNull(greaterOrEquals(row_number, 25), 0), '$$_markettor_breakdown_other_$$', breakdown_value) AS breakdown_value\nFROM\n    (SELECT\n        arrayMap(number -> plus(toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00'))), toIntervalWeek(number)), range(0, plus(coalesce(dateDiff('week', toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00'))), toStartOfWeek(assumeNotNull(toDateTime('2024-07-23 23:59:59'))))), 1))) AS date,\n        arrayMap(_match_date -> arraySum(arraySlice(groupArray(count), indexOf(groupArray(day_start) AS _days_for_count, _match_date) AS _index, plus(minus(arrayLastIndex(x -> equals(x, _match_date), _days_for_count), _index), 1))), date) AS total,\n        breakdown_value AS breakdown_value,\n        rowNumberInAllBlocks() AS row_number\n    FROM\n        (SELECT\n            sum(total) AS count,\n            day_start,\n            breakdown_value\n        FROM\n            (SELECT\n                count(DISTINCT e.person_id) AS total,\n                toStartOfWeek(timestamp) AS day_start,\n                ifNull(nullIf(toString(properties.$referring_domain), ''), '$$_markettor_breakdown_null_$$') AS breakdown_value\n            FROM\n                events AS e SAMPLE 1\n            WHERE\n                and(greaterOrEquals(timestamp, toStartOfWeek(assumeNotNull(toDateTime('2024-04-24 00:00:00')))), lessOrEquals(timestamp, assumeNotNull(toDateTime('2024-07-23 23:59:59'))), equals(event, '$pageview'), notILike(person.properties.email, '%markettor.com%'), and(notEquals(properties.$host, '127.0.0.1:3000'), notEquals(properties.$host, '127.0.0.1:5000'), notEquals(properties.$host, 'localhost:5000'), notEquals(properties.$host, 'localhost:8000'), notEquals(properties.$host, 'localhost:8001'), notEquals(properties.$host, 'localhost')), notILike(properties.distinct_id, '%markettor.com%'), notEquals(person.properties.email, 'capturi@capturi.com'), notEquals(person.properties.email, 'fuziontech@gmail.com'), notEquals(properties.realm, 'demo'), notEquals(properties.$ip, '71.84.26.175'), notEquals(person.properties.email, 'corywatilo@gmail.com'), 1, and(ifNull(match(toString(properties.$referring_domain), 'google|duckduckgo|brave|bing'), 0), equals(properties.$host, 'markettor.com'), notILike(properties.utm_medium, '%cpc%')))\n            GROUP BY\n                day_start,\n                breakdown_value)\n        GROUP BY\n            day_start,\n            breakdown_value\n        ORDER BY\n            day_start ASC,\n            breakdown_value ASC)\n    GROUP BY\n        breakdown_value\n    ORDER BY\n        if(equals(breakdown_value, '$$_markettor_breakdown_other_$$'), 2, if(equals(breakdown_value, '$$_markettor_breakdown_null_$$'), 1, 0)) ASC,\n        arraySum(total) DESC,\n        breakdown_value ASC)\nWHERE\n    notEquals(breakdown_value, NULL)\nGROUP BY\n    breakdown_value\nORDER BY\n    if(equals(breakdown_value, '$$_markettor_breakdown_other_$$'), 2, if(equals(breakdown_value, '$$_markettor_breakdown_null_$$'), 1, 0)) ASC,\n    arraySum(total) DESC,\n    breakdown_value ASC\nLIMIT 50000",
     "tags": [],
     "filters_hash": "cache_e602fce24dcd9dc0b8e3f9adbaa38217"
 }

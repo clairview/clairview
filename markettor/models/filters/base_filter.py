@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any, Optional
 
 from rest_framework import request
 
-from markettor.hogql.context import HogQLContext
+from markettor.torql.context import TorQLContext
 from .mixins.common import BaseParamMixin
 from markettor.models.utils import sane_repr
 from markettor.utils import encode_get_request_params
@@ -20,7 +20,7 @@ class BaseFilter(BaseParamMixin):
     _data: dict
     team: Optional["Team"]
     kwargs: dict
-    hogql_context: HogQLContext
+    torql_context: TorQLContext
 
     def __init__(
         self,
@@ -53,17 +53,17 @@ class BaseFilter(BaseParamMixin):
         self.kwargs = kwargs
         self.team = team
 
-        # Set the HogQL context for the request
-        self.hogql_context = self.kwargs.get(
-            "hogql_context",
-            HogQLContext(
-                within_non_hogql_query=True,
+        # Set the TorQL context for the request
+        self.torql_context = self.kwargs.get(
+            "torql_context",
+            TorQLContext(
+                within_non_torql_query=True,
                 team_id=self.team.pk if self.team else None,
                 team=self.team if self.team else None,
             ),
         )
         if self.team:
-            self.hogql_context.modifiers.personsOnEventsMode = self.team.person_on_events_mode
+            self.torql_context.modifiers.personsOnEventsMode = self.team.person_on_events_mode
 
         if self.team and hasattr(self, "simplify") and not getattr(self, "is_simplified", False):
             simplified_filter = self.simplify(self.team)
@@ -85,10 +85,10 @@ class BaseFilter(BaseParamMixin):
         return json.dumps(self.to_dict(), default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
     def shallow_clone(self, overrides: dict[str, Any]):
-        "Clone the filter's data while sharing the HogQL context"
+        "Clone the filter's data while sharing the TorQL context"
         return type(self)(
             data={**self._data, **overrides},
-            **{**self.kwargs, "team": self.team, "hogql_context": self.hogql_context},
+            **{**self.kwargs, "team": self.team, "torql_context": self.torql_context},
         )
 
     def query_tags(self) -> dict[str, Any]:

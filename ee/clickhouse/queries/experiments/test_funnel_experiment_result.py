@@ -5,7 +5,7 @@ from math import exp, lgamma, log, ceil
 from flaky import flaky
 
 from markettor.constants import ExperimentSignificanceCode
-from markettor.hogql_queries.experiments.funnel_statistics import (
+from markettor.torql_queries.experiments.funnel_statistics import (
     are_results_significant,
     calculate_expected_loss,
     calculate_probabilities,

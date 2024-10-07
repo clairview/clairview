@@ -106,7 +106,7 @@ class TestTemplateMigration(BaseTest):
                     "name": "All events",
                     "type": "events",
                     "order": 0,
-                    "properties": [{"type": "hogql", "key": "event not in ('event1', 'event2', '\\'smore')"}],
+                    "properties": [{"type": "torql", "key": "event not in ('event1', 'event2', '\\'smore')"}],
                 }
             ]
         }

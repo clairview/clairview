@@ -3,7 +3,7 @@ import markettor from 'markettor-js'
 
 import { useMocks } from '~/mocks/jest'
 import { performQuery, queryExportContext } from '~/queries/query'
-import { EventsQuery, HogQLQuery, NodeKind } from '~/queries/schema'
+import { EventsQuery, TorQLQuery, NodeKind } from '~/queries/schema'
 import { initKeaTests } from '~/test/init'
 import { PropertyFilterType, PropertyOperator } from '~/types'
 
@@ -13,8 +13,8 @@ describe('query', () => {
             post: {
                 '/api/projects/:team/query': (req) => {
                     const data = req.body as any
-                    if (data.query?.kind === 'HogQLQuery') {
-                        return [200, { results: [], clickhouse: 'clickhouse string', hogql: 'hogql string' }]
+                    if (data.query?.kind === 'TorQLQuery') {
+                        return [200, { results: [], clickhouse: 'clickhouse string', torql: 'torql string' }]
                     }
                     if (data.query?.kind === 'EventsQuery' && data.query.select[0] === 'error') {
                         return [500, { detail: 'error' }]
@@ -83,10 +83,10 @@ describe('query', () => {
         expect(markettor.capture).toHaveBeenCalledWith('query completed', { query: q, duration: expect.any(Number) })
     })
 
-    it('emits a specific event on a HogQLQuery', async () => {
+    it('emits a specific event on a TorQLQuery', async () => {
         jest.spyOn(markettor, 'capture')
-        const q: HogQLQuery = {
-            kind: NodeKind.HogQLQuery,
+        const q: TorQLQuery = {
+            kind: NodeKind.TorQLQuery,
             query: 'select * from events',
         }
         await performQuery(q)
