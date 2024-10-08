@@ -1,6 +1,9 @@
 name: Release clairql-parser
 
 on:
+    push:
+        branches:
+            - master
     pull_request:
         paths:
             - clairql_parser/**
