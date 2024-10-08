@@ -1,0 +1,8 @@
+frontend/src/scenes/settings/project/SurveySettings.tsx @ClairView/team-feature-success
+frontend/src/scenes/surveys/ @ClairView/team-feature-success
+clairview/admin/admins/survey_admin.py @ClairView/team-feature-success
+clairview/api/survey.py @ClairView/team-feature-success
+clairview/api/test/test_survey.py @ClairView/team-feature-success
+clairview/models/feedback/survey.py @ClairView/team-feature-success
+clairview/tasks/stop_surveys_reached_target.py @ClairView/team-feature-success
+clairview/tasks/test/test_stop_surveys_reached_target.py @ClairView/team-feature-success

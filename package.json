@@ -4,13 +4,13 @@
     "version": "0.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ClairView/clairview.git"
+        "url": "https://github.com/clairview/clairview.git"
     },
-    "author": "Clairview Inc.",
+    "author": "ClairView Inc.",
     "bugs": {
-        "url": "https://github.com/ClairView/clairview/issues"
+        "url": "https://github.com/clairview/clairview/issues"
     },
-    "homepage": "https://github.com/ClairView/clairview#readme",
+    "homepage": "https://github.com/clairview/clairview#readme",
     "license": "MIT",
     "engines": {
         "node": ">=18 <19"

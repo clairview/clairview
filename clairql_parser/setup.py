@@ -35,7 +35,7 @@ setup(
     version="1.0.45",
     url="https://github.com/ClairView/clairview/tree/master/clairql_parser",
     author="ClairView Inc.",
-    author_email="developers@clairview.com",
+    author_email="hey@clairview.com",
     maintainer="ClairView Inc.",
     maintainer_email="hey@clairview.com",
     description="ClairQL parser for internal ClairView use",

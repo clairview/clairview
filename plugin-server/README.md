@@ -145,7 +145,7 @@ There's a multitude of settings you can use to control the plugin server. Use th
 ## Releasing a new version
 
 Just bump up `version` in `package.json` on the main branch and the new version will be published automatically,
-with a matching PR in the [main ClairView repo](https://github.com/ClairView/clairview) created.
+with a matching PR in the [main ClairView repo](https://github.com/clairview/clairview) created.
 
 It's advised to use `bump patch/minor/major` label on PRs - that way the above will be done automatically when the PR is merged.
 

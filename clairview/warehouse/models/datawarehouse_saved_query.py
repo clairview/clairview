@@ -19,6 +19,7 @@ from clairview.warehouse.models.util import (
 )
 from clairview.clairql.database.s3_table import S3Table
 from clairview.warehouse.util import database_sync_to_async
+from dlt.common.normalizers.naming.snake_case import NamingConvention
 
 
 def validate_saved_query_name(value):
@@ -137,9 +138,8 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
     @property
     def url_pattern(self):
-        return (
-            f"https://{settings.AIRBYTE_BUCKET_DOMAIN}/dlt/team_{self.team.pk}_model_{self.id.hex}/modeling/{self.name}"
-        )
+        normalized_name = NamingConvention().normalize_identifier(self.name)
+        return f"https://{settings.AIRBYTE_BUCKET_DOMAIN}/dlt/team_{self.team.pk}_model_{self.id.hex}/modeling/{normalized_name}"
 
     def clairql_definition(self, modifiers: Optional[ClairQLQueryModifiers] = None) -> Union[SavedQuery, S3Table]:
         from clairview.warehouse.models.table import CLICKHOUSE_CLAIRQL_MAPPING

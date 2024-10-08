@@ -184,7 +184,7 @@ def mocked_plugin_requests_get(*args, **kwargs):
                 [
                     {
                         "name": "clairview-currency-normalization-plugin",
-                        "url": "https://github.com/ClairView/clairview-currency-normalization-plugin",
+                        "url": "https://github.com/clairview/clairview-currency-normalization-plugin",
                         "description": "Normalise monerary values into a base currency",
                         "icon": "https://raw.githubusercontent.com/clairview/clairview-currency-normalization-plugin/main/logo.png",
                         "verified": False,

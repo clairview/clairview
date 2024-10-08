@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/ClairView/clairview/livestream/mocks"
+	"github.com/clairview/clairview/livestream/mocks"
 	"github.com/stretchr/testify/assert"
 )
 

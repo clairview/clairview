@@ -6,7 +6,7 @@ outpkg: '{{.PackageName}}'
 filename: '{{.InterfaceName}}.go'
 all: True
 packages:
-    github.com/ClairView/clairview/livestream:
+    github.com/clairview/clairview/livestream:
         config:
             recursive: True
             outpkg: mocks

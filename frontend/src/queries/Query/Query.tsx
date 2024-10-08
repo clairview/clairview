@@ -157,7 +157,7 @@ export function Query<Q extends Node>(props: QueryProps<Q>): JSX.Element | null 
 
     return (
         <div className="text-danger border border-danger p-2">
-            <strong>PostHoqQuery error:</strong> {query?.kind ? `Invalid node type "${query.kind}"` : 'Invalid query'}
+            <strong>ClairViewQuery error:</strong> {query?.kind ? `Invalid node type "${query.kind}"` : 'Invalid query'}
         </div>
     )
 }

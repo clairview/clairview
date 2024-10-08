@@ -1,6 +1,6 @@
 import { LemonTag, LemonTagProps } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
-import { HoqQLPropertyInfo } from 'lib/components/HoqQLPropertyInfo'
+import { ClairQLPropertyInfo } from 'lib/components/ClairQLPropertyInfo'
 import { PROPERTY_FILTER_TYPE_TO_TAXONOMIC_FILTER_GROUP_TYPE } from 'lib/components/PropertyFilters/utils'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
@@ -112,7 +112,7 @@ export function BreakdownTag({
     return (
         <LemonTag type="breakdown" {...props}>
             {breakdownType === 'clairql' ? (
-                <HoqQLPropertyInfo value={propertyName as string} />
+                <ClairQLPropertyInfo value={propertyName as string} />
             ) : (
                 <PropertyKeyInfo
                     value={propertyName as string}

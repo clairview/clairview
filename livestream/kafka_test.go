@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/ClairView/clairview/livestream/mocks"
+	"github.com/clairview/clairview/livestream/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

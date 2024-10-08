@@ -272,6 +272,15 @@
 # ---
 # name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.14
   '''
+  SELECT "clairview_productintent"."product_type",
+         "clairview_productintent"."created_at",
+         "clairview_productintent"."onboarding_completed_at"
+  FROM "clairview_productintent"
+  WHERE "clairview_productintent"."team_id" = 2
+  '''
+# ---
+# name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.15
+  '''
   SELECT "clairview_user"."id",
          "clairview_user"."password",
          "clairview_user"."last_login",
@@ -302,7 +311,7 @@
   LIMIT 21
   '''
 # ---
-# name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.15
+# name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.16
   '''
   SELECT "clairview_featureflag"."id",
          "clairview_featureflag"."key",
@@ -325,7 +334,7 @@
          AND "clairview_featureflag"."team_id" = 2)
   '''
 # ---
-# name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.16
+# name: TestDecide.test_decide_doesnt_error_out_when_database_is_down.17
   '''
   SELECT "clairview_pluginconfig"."id",
          "clairview_pluginconfig"."web_token",

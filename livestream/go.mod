@@ -1,4 +1,4 @@
-module github.com/ClairView/clairview/livestream
+module github.com/clairview/clairview/livestream
 
 go 1.22.2
 
