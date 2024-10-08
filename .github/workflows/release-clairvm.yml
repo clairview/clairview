@@ -16,11 +16,11 @@ jobs:
             - name: Checkout the repository
               uses: actions/checkout@v4
 
-            - name: Check package version and detect an update
-              id: check-package-version
-              uses: ClairView/check-package-version@v2
-              with:
-                  path: clairvm/typescript
+#            - name: Check package version and detect an update
+#              id: check-package-version
+#              uses: ClairView/check-package-version@v2
+#              with:
+#                  path: clairvm/typescript
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4
