@@ -1,4 +1,4 @@
-import { VMState } from '@clairview/hogvm'
+import { VMState } from '@clairview/clairvm'
 import { DateTime } from 'luxon'
 
 import {

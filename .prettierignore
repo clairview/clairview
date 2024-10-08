@@ -17,4 +17,4 @@ dist/
 node_modules/
 pnpm-lock.yaml
 clairview/templates/email/*
-hogvm/typescript/src/stl/bytecode.ts
+clairvm/typescript/src/stl/bytecode.ts

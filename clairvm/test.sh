@@ -6,16 +6,16 @@ cd ..
 
 cd ..
 
-rm -f hogvm/__tests__/__snapshots__/*.stdout.nodejs
-rm -f hogvm/__tests__/__snapshots__/*.stdout.python
+rm -f clairvm/__tests__/__snapshots__/*.stdout.nodejs
+rm -f clairvm/__tests__/__snapshots__/*.stdout.python
 
-for file in hogvm/__tests__/*.hog; do
+for file in clairvm/__tests__/*.hog; do
     echo "Testing $file"
 
-    # from hogvm/__tests__/*.hog get hogvm/__tests__/__snapshots__/*
+    # from clairvm/__tests__/*.hog get clairvm/__tests__/__snapshots__/*
     basename="${file%.hog}"
     basename="${basename##*/}"
-    basename="hogvm/__tests__/__snapshots__/$basename"
+    basename="clairvm/__tests__/__snapshots__/$basename"
 
     ./bin/hoge $file $basename.hoge
     ./bin/hog --nodejs $basename.hoge > $basename.stdout.nodejs

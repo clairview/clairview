@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 from rest_framework.exceptions import ValidationError
 
-from hogvm.python.debugger import color_bytecode
+from clairvm.python.debugger import color_bytecode
 from clairview.clickhouse.query_tagging import tag_queries
 from clairview.cloud_utils import is_cloud
 from clairview.clairql.bytecode import execute_hog

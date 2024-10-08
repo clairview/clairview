@@ -7,7 +7,7 @@ from freezegun import freeze_time
 from inline_snapshot import snapshot
 from rest_framework import status
 
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.constants import AvailableFeature
 from clairview.models.action.action import Action
 from clairview.models.hog_functions.hog_function import DEFAULT_STATE, HogFunction

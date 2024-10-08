@@ -2,7 +2,7 @@ import json
 
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.cdp.validation import validate_inputs, validate_inputs_schema
 from clairview.test.base import APIBaseTest, ClickhouseTestMixin, QueryMatchingTest
 

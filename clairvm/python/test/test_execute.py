@@ -3,13 +3,13 @@ from typing import Any, Optional
 from collections.abc import Callable
 
 
-from hogvm.python.execute import execute_bytecode, get_nested_value
-from hogvm.python.operation import (
+from clairvm.python.execute import execute_bytecode, get_nested_value
+from clairvm.python.operation import (
     Operation as op,
     CLAIRQL_BYTECODE_IDENTIFIER as _H,
     CLAIRQL_BYTECODE_VERSION as VERSION,
 )
-from hogvm.python.utils import UncaughtHogVMException
+from clairvm.python.utils import UncaughtClairVMException
 from clairview.clairql.bytecode import create_bytecode
 from clairview.clairql.parser import parse_expr, parse_program
 
@@ -991,7 +991,7 @@ class TestBytecodeExecute:
     def test_bytecode_uncaught_errors(self):
         try:
             self._run_program("throw Error('Not a good day')")
-        except UncaughtHogVMException as e:
+        except UncaughtClairVMException as e:
             assert str(e) == "Error('Not a good day')"
             assert e.type == "Error"
             assert e.message == "Not a good day"
@@ -1001,7 +1001,7 @@ class TestBytecodeExecute:
 
         try:
             self._run_program("throw RetryError('Not a good day', {'key': 'value'})")
-        except UncaughtHogVMException as e:
+        except UncaughtClairVMException as e:
             assert str(e) == "RetryError('Not a good day')"
             assert e.type == "RetryError"
             assert e.message == "Not a good day"

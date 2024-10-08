@@ -5,16 +5,16 @@ from copy import deepcopy
 from typing import Any, Optional, TYPE_CHECKING
 from collections.abc import Callable
 
-from hogvm.python.debugger import debugger, color_bytecode
-from hogvm.python.objects import is_hog_error, new_hog_closure, CallFrame, ThrowFrame, new_hog_callable, is_hog_upvalue
-from hogvm.python.operation import Operation, CLAIRQL_BYTECODE_IDENTIFIER, CLAIRQL_BYTECODE_IDENTIFIER_V0
-from hogvm.python.stl import STL
-from hogvm.python.stl.bytecode import BYTECODE_STL
+from clairvm.python.debugger import debugger, color_bytecode
+from clairvm.python.objects import is_hog_error, new_hog_closure, CallFrame, ThrowFrame, new_hog_callable, is_hog_upvalue
+from clairvm.python.operation import Operation, CLAIRQL_BYTECODE_IDENTIFIER, CLAIRQL_BYTECODE_IDENTIFIER_V0
+from clairvm.python.stl import STL
+from clairvm.python.stl.bytecode import BYTECODE_STL
 from dataclasses import dataclass
 
-from hogvm.python.utils import (
-    UncaughtHogVMException,
-    HogVMException,
+from clairvm.python.utils import (
+    UncaughtClairVMException,
+    ClairVMException,
     get_nested_value,
     like,
     set_nested_value,
@@ -45,7 +45,7 @@ def execute_bytecode(
     debug=False,
 ) -> BytecodeResult:
     if len(bytecode) == 0 or (bytecode[0] != CLAIRQL_BYTECODE_IDENTIFIER and bytecode[0] != CLAIRQL_BYTECODE_IDENTIFIER_V0):
-        raise HogVMException(f"Invalid bytecode. Must start with '{CLAIRQL_BYTECODE_IDENTIFIER}'")
+        raise ClairVMException(f"Invalid bytecode. Must start with '{CLAIRQL_BYTECODE_IDENTIFIER}'")
     version = bytecode[1] if len(bytecode) >= 2 and bytecode[0] == CLAIRQL_BYTECODE_IDENTIFIER else 0
     result = None
     start_time = time.time()
@@ -96,12 +96,12 @@ def execute_bytecode(
             chunk_bytecode = BYTECODE_STL[frame.chunk[4:]][1]
             last_op = len(bytecode) - 1
         else:
-            raise HogVMException(f"Unknown chunk: {frame.chunk}")
+            raise ClairVMException(f"Unknown chunk: {frame.chunk}")
 
     def stack_keep_first_elements(count: int) -> list[Any]:
         nonlocal stack, mem_stack, mem_used
         if count < 0 or len(stack) < count:
-            raise HogVMException("Stack underflow")
+            raise ClairVMException("Stack underflow")
         for upvalue in reversed(upvalues):
             if upvalue["location"] >= count:
                 if not upvalue["closed"]:
@@ -118,13 +118,13 @@ def execute_bytecode(
     def next_token():
         nonlocal frame, chunk_bytecode
         if frame.ip >= last_op:
-            raise HogVMException("Unexpected end of bytecode")
+            raise ClairVMException("Unexpected end of bytecode")
         frame.ip += 1
         return chunk_bytecode[frame.ip]
 
     def pop_stack():
         if not stack:
-            raise HogVMException("Stack underflow")
+            raise ClairVMException("Stack underflow")
         nonlocal mem_used
         mem_used -= mem_stack.pop()
         return stack.pop()
@@ -137,11 +137,11 @@ def execute_bytecode(
         nonlocal max_mem_used
         max_mem_used = max(mem_used, max_mem_used)
         if mem_used > MAX_MEMORY:
-            raise HogVMException(f"Memory limit of {MAX_MEMORY} bytes exceeded. Tried to allocate {mem_used} bytes.")
+            raise ClairVMException(f"Memory limit of {MAX_MEMORY} bytes exceeded. Tried to allocate {mem_used} bytes.")
 
     def check_timeout():
         if time.time() - start_time > timeout.total_seconds() and not debug:
-            raise HogVMException(f"Execution timed out after {timeout.total_seconds()} seconds. Performed {ops} ops.")
+            raise ClairVMException(f"Execution timed out after {timeout.total_seconds()} seconds. Performed {ops} ops.")
 
     def capture_upvalue(index) -> dict:
         nonlocal upvalues
@@ -289,7 +289,7 @@ def execute_bytecode(
                         )
                     )
                 else:
-                    raise HogVMException(f"Global variable not found: {chain[0]}")
+                    raise ClairVMException(f"Global variable not found: {chain[0]}")
             case Operation.POP:
                 pop_stack()
             case Operation.CLOSE_UPVALUE:
@@ -398,7 +398,7 @@ def execute_bytecode(
                 stack_start = frame.stack_start
                 upvalue_count = next_token()
                 if upvalue_count != closure_callable["upvalueCount"]:
-                    raise HogVMException(
+                    raise ClairVMException(
                         f"Invalid upvalue count. Expected {closure_callable['upvalueCount']}, got {upvalue_count}"
                     )
                 for _ in range(closure_callable["upvalueCount"]):
@@ -412,10 +412,10 @@ def execute_bytecode(
                 index = next_token()
                 closure = frame.closure
                 if index >= len(closure["upvalues"]):
-                    raise HogVMException(f"Invalid upvalue index: {index}")
+                    raise ClairVMException(f"Invalid upvalue index: {index}")
                 upvalue = upvalues_by_id[closure["upvalues"][index]]
                 if not is_hog_upvalue(upvalue):
-                    raise HogVMException(f"Invalid upvalue: {upvalue}")
+                    raise ClairVMException(f"Invalid upvalue: {upvalue}")
                 if upvalue["closed"]:
                     push_stack(upvalue["value"])
                 else:
@@ -424,10 +424,10 @@ def execute_bytecode(
                 index = next_token()
                 closure = frame.closure
                 if index >= len(closure["upvalues"]):
-                    raise HogVMException(f"Invalid upvalue index: {index}")
+                    raise ClairVMException(f"Invalid upvalue index: {index}")
                 upvalue = upvalues_by_id[closure["upvalues"][index]]
                 if not is_hog_upvalue(upvalue):
-                    raise HogVMException(f"Invalid upvalue: {upvalue}")
+                    raise ClairVMException(f"Invalid upvalue: {upvalue}")
                 if upvalue["closed"]:
                     upvalue["value"] = pop_stack()
                 else:
@@ -477,7 +477,7 @@ def execute_bytecode(
                     elif name in BYTECODE_STL:
                         arg_names = BYTECODE_STL[name][0]
                         if len(arg_names) != arg_count:
-                            raise HogVMException(f"Function {name} requires exactly {len(arg_names)} arguments")
+                            raise ClairVMException(f"Function {name} requires exactly {len(arg_names)} arguments")
                         frame.ip += 1  # advance for when we return
                         frame = CallFrame(
                             ip=0,
@@ -499,18 +499,18 @@ def execute_bytecode(
                         call_stack.append(frame)
                         continue  # resume the loop without incrementing frame.ip
                     else:
-                        raise HogVMException(f"Unsupported function call: {name}")
+                        raise ClairVMException(f"Unsupported function call: {name}")
             case Operation.CALL_LOCAL:
                 check_timeout()
                 closure = pop_stack()
                 if not isinstance(closure, dict) or closure.get("__hogClosure__") is None:
-                    raise HogVMException(f"Invalid closure: {closure}")
+                    raise ClairVMException(f"Invalid closure: {closure}")
                 callable = closure.get("callable")
                 if not isinstance(callable, dict) or callable.get("__hogCallable__") is None:
-                    raise HogVMException(f"Invalid callable: {callable}")
+                    raise ClairVMException(f"Invalid callable: {callable}")
                 args_length = next_token()
                 if args_length > MAX_FUNCTION_ARGS_LENGTH:
-                    raise HogVMException("Too many arguments")
+                    raise ClairVMException("Too many arguments")
 
                 if callable.get("__hogCallable__") == "local":
                     if callable["argCount"] > args_length:
@@ -518,7 +518,7 @@ def execute_bytecode(
                         for _ in range(callable["argCount"] - args_length):
                             push_stack(None)
                     elif callable["argCount"] < args_length:
-                        raise HogVMException(
+                        raise ClairVMException(
                             f"Too many arguments. Passed {args_length}, expected {callable['argCount']}"
                         )
                     frame.ip += 1  # advance for when we return
@@ -535,14 +535,14 @@ def execute_bytecode(
 
                 elif callable.get("__hogCallable__") == "stl":
                     if callable["name"] not in STL:
-                        raise HogVMException(f"Unsupported function call: {callable['name']}")
+                        raise ClairVMException(f"Unsupported function call: {callable['name']}")
                     stl_fn = STL[callable["name"]]
                     if stl_fn.minArgs is not None and args_length < stl_fn.minArgs:
-                        raise HogVMException(
+                        raise ClairVMException(
                             f"Function {callable['name']} requires at least {stl_fn.minArgs} arguments"
                         )
                     if stl_fn.maxArgs is not None and args_length > stl_fn.maxArgs:
-                        raise HogVMException(f"Function {callable['name']} requires at most {stl_fn.maxArgs} arguments")
+                        raise ClairVMException(f"Function {callable['name']} requires at most {stl_fn.maxArgs} arguments")
                     if version == 0:
                         args = [pop_stack() for _ in range(args_length)]
                     else:
@@ -552,10 +552,10 @@ def execute_bytecode(
                     push_stack(stl_fn.fn(args, team, stdout, timeout.total_seconds()))
 
                 elif callable.get("__hogCallable__") == "async":
-                    raise HogVMException("Async functions are not supported")
+                    raise ClairVMException("Async functions are not supported")
 
                 else:
-                    raise HogVMException("Invalid callable")
+                    raise ClairVMException("Invalid callable")
 
             case Operation.TRY:
                 throw_stack.append(
@@ -567,11 +567,11 @@ def execute_bytecode(
                 if throw_stack:
                     throw_stack.pop()
                 else:
-                    raise HogVMException("Invalid operation POP_TRY: no try block to pop")
+                    raise ClairVMException("Invalid operation POP_TRY: no try block to pop")
             case Operation.THROW:
                 exception = pop_stack()
                 if not is_hog_error(exception):
-                    raise HogVMException("Can not throw: value is not of type Error")
+                    raise ClairVMException("Can not throw: value is not of type Error")
                 if throw_stack:
                     last_throw = throw_stack.pop()
                     call_stack_len, stack_len, catch_ip = (
@@ -587,13 +587,13 @@ def execute_bytecode(
                     frame.ip = catch_ip
                     continue
                 else:
-                    raise UncaughtHogVMException(
+                    raise UncaughtClairVMException(
                         type=exception.get("type"),
                         message=exception.get("message"),
                         payload=exception.get("payload"),
                     )
             case _:
-                raise HogVMException(
+                raise ClairVMException(
                     f'Unexpected node while running bytecode in chunk "{frame.chunk}": {chunk_bytecode[frame.ip]}'
                 )
 
@@ -601,7 +601,7 @@ def execute_bytecode(
     if debug:
         debugger(symbol, bytecode, colored_bytecode, frame.ip, stack, call_stack, throw_stack)
     if len(stack) > 1:
-        raise HogVMException("Invalid bytecode. More than one value left on stack")
+        raise ClairVMException("Invalid bytecode. More than one value left on stack")
     if len(stack) == 1:
         result = pop_stack()
     return BytecodeResult(result=result, stdout=stdout, bytecode=bytecode)

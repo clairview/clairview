@@ -9,10 +9,10 @@ import {
     convertHogToJS,
     convertJSToHog,
     getNestedValue,
-    HogVMException,
+    ClairVMException,
     like,
     setNestedValue,
-    UncaughtHogVMException,
+    UncaughtClairVMException,
     unifyComparisonTypes,
 } from './utils'
 
@@ -24,7 +24,7 @@ export function execSync(bytecode: any[] | VMState, options?: ExecOptions): any 
     if (response.error) {
         throw response.error
     }
-    throw new HogVMException('Unexpected async function call: ' + response.asyncFunctionName)
+    throw new ClairVMException('Unexpected async function call: ' + response.asyncFunctionName)
 }
 
 export async function execAsync(bytecode: any[] | VMState, options?: ExecOptions): Promise<any> {
@@ -50,10 +50,10 @@ export async function execAsync(bytecode: any[] | VMState, options?: ExecOptions
                 )
                 vmState.stack.push(result)
             } else {
-                throw new HogVMException('Invalid async function call: ' + response.asyncFunctionName)
+                throw new ClairVMException('Invalid async function call: ' + response.asyncFunctionName)
             }
         } else {
-            throw new HogVMException('Invalid async function call')
+            throw new ClairVMException('Invalid async function call')
         }
     }
 }
@@ -69,7 +69,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
         bytecode = code
     }
     if (!bytecode || bytecode.length === 0 || (bytecode[0] !== '_h' && bytecode[0] !== '_H')) {
-        throw new HogVMException("Invalid ClairQL bytecode, must start with '_H'")
+        throw new ClairVMException("Invalid ClairQL bytecode, must start with '_H'")
     }
     const version = bytecode[0] === '_H' ? bytecode[1] ?? 0 : 0
 
@@ -131,14 +131,14 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
         } else if (frame.chunk.startsWith('stl/') && frame.chunk.substring(4) in BYTECODE_STL) {
             chunkBytecode = BYTECODE_STL[frame.chunk.substring(4)][1]
         } else {
-            throw new HogVMException(`Unknown chunk: ${frame.chunk}`)
+            throw new ClairVMException(`Unknown chunk: ${frame.chunk}`)
         }
     }
 
     function popStack(): any {
         if (stack.length === 0) {
             logTelemetry()
-            throw new HogVMException('Invalid ClairQL bytecode, stack is empty, can not pop')
+            throw new ClairVMException('Invalid ClairQL bytecode, stack is empty, can not pop')
         }
         memUsed -= memStack.pop() ?? 0
         return stack.pop()
@@ -149,7 +149,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
         memUsed += memStack[memStack.length - 1]
         maxMemUsed = Math.max(maxMemUsed, memUsed)
         if (memUsed > memLimit && memLimit > 0) {
-            throw new HogVMException(`Memory limit of ${memLimit} bytes exceeded. Tried to allocate ${memUsed} bytes.`)
+            throw new ClairVMException(`Memory limit of ${memLimit} bytes exceeded. Tried to allocate ${memUsed} bytes.`)
         }
         return stack.push(value)
     }
@@ -161,7 +161,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
 
     function stackKeepFirstElements(count: number): any[] {
         if (count < 0 || stack.length < count) {
-            throw new HogVMException('Stack underflow')
+            throw new ClairVMException('Stack underflow')
         }
         for (let i = sortedUpValues.length - 1; i >= 0; i--) {
             if (sortedUpValues[i].location >= count) {
@@ -180,14 +180,14 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
 
     function next(): any {
         if (frame.ip >= chunkBytecode.length - 1) {
-            throw new HogVMException('Unexpected end of bytecode')
+            throw new ClairVMException('Unexpected end of bytecode')
         }
         return chunkBytecode[++frame.ip]
     }
 
     function checkTimeout(): void {
         if (syncDuration + Date.now() - startTime > timeout) {
-            throw new HogVMException(`Execution timed out after ${timeout / 1000} seconds. Performed ${ops} ops.`)
+            throw new ClairVMException(`Execution timed out after ${timeout / 1000} seconds. Performed ${ops} ops.`)
         }
     }
 
@@ -234,7 +234,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
 
     function regexMatch(): (regex: string, value: string) => boolean {
         if (!options?.external?.regex?.match) {
-            throw new HogVMException('Set options.external.regex.match for RegEx support')
+            throw new ClairVMException('Set options.external.regex.match for RegEx support')
         }
         return options.external.regex.match
     }
@@ -463,7 +463,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                             )
                         )
                     } else {
-                        throw new HogVMException(`Global variable not found: ${chain.join('.')}`)
+                        throw new ClairVMException(`Global variable not found: ${chain.join('.')}`)
                     }
                     break
                 }
@@ -579,12 +579,12 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                 case Operation.CLOSURE: {
                     const callable = popStack()
                     if (!isHogCallable(callable)) {
-                        throw new HogVMException(`Invalid callable: ${JSON.stringify(callable)}`)
+                        throw new ClairVMException(`Invalid callable: ${JSON.stringify(callable)}`)
                     }
                     const upvalueCount = next()
                     const closureUpValues: number[] = []
                     if (upvalueCount !== callable.upvalueCount) {
-                        throw new HogVMException(
+                        throw new ClairVMException(
                             `Invalid upvalue count. Expected ${callable.upvalueCount}, got ${upvalueCount}`
                         )
                     }
@@ -603,11 +603,11 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                 case Operation.GET_UPVALUE: {
                     const index = next()
                     if (index >= frame.closure.upvalues.length) {
-                        throw new HogVMException(`Invalid upvalue index: ${index}`)
+                        throw new ClairVMException(`Invalid upvalue index: ${index}`)
                     }
                     const upvalue = upvaluesById[frame.closure.upvalues[index]]
                     if (!isHogUpValue(upvalue)) {
-                        throw new HogVMException(`Invalid upvalue: ${upvalue}`)
+                        throw new ClairVMException(`Invalid upvalue: ${upvalue}`)
                     }
                     if (upvalue.closed) {
                         pushStack(upvalue.value)
@@ -619,11 +619,11 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                 case Operation.SET_UPVALUE: {
                     const index = next()
                     if (index >= frame.closure.upvalues.length) {
-                        throw new HogVMException(`Invalid upvalue index: ${index}`)
+                        throw new ClairVMException(`Invalid upvalue index: ${index}`)
                     }
                     const upvalue = upvaluesById[frame.closure.upvalues[index]]
                     if (!isHogUpValue(upvalue)) {
-                        throw new HogVMException(`Invalid upvalue: ${upvalue}`)
+                        throw new ClairVMException(`Invalid upvalue: ${upvalue}`)
                     }
                     if (upvalue.closed) {
                         upvalue.value = popStack()
@@ -665,10 +665,10 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                         continue // resume the loop without incrementing frame.ip
                     } else {
                         if (temp > stack.length) {
-                            throw new HogVMException('Not enough arguments on the stack')
+                            throw new ClairVMException('Not enough arguments on the stack')
                         }
                         if (temp > MAX_FUNCTION_ARGS_LENGTH) {
-                            throw new HogVMException('Too many arguments')
+                            throw new ClairVMException('Too many arguments')
                         }
 
                         if (options?.functions && Object.hasOwn(options.functions, name) && options.functions[name]) {
@@ -687,7 +687,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                                 name in ASYNC_STL)
                         ) {
                             if (asyncSteps >= maxAsyncSteps) {
-                                throw new HogVMException(`Exceeded maximum number of async steps: ${maxAsyncSteps}`)
+                                throw new ClairVMException(`Exceeded maximum number of async steps: ${maxAsyncSteps}`)
                             }
 
                             const args =
@@ -720,7 +720,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                         } else if (name in BYTECODE_STL) {
                             const argNames = BYTECODE_STL[name][0]
                             if (argNames.length !== temp) {
-                                throw new HogVMException(
+                                throw new ClairVMException(
                                     `Function ${name} requires exactly ${argNames.length} arguments`
                                 )
                             }
@@ -744,7 +744,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                             callStack.push(frame)
                             continue // resume the loop without incrementing frame.ip
                         } else {
-                            throw new HogVMException(`Unsupported function call: ${name}`)
+                            throw new ClairVMException(`Unsupported function call: ${name}`)
                         }
                     }
                     break
@@ -753,17 +753,17 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                     checkTimeout()
                     const closure = popStack()
                     if (!isHogClosure(closure)) {
-                        throw new HogVMException(`Invalid closure: ${JSON.stringify(closure)}`)
+                        throw new ClairVMException(`Invalid closure: ${JSON.stringify(closure)}`)
                     }
                     if (!isHogCallable(closure.callable)) {
-                        throw new HogVMException(`Invalid callable: ${JSON.stringify(closure.callable)}`)
+                        throw new ClairVMException(`Invalid callable: ${JSON.stringify(closure.callable)}`)
                     }
                     temp = next() // args.length
                     if (temp > stack.length) {
-                        throw new HogVMException('Not enough arguments on the stack')
+                        throw new ClairVMException('Not enough arguments on the stack')
                     }
                     if (temp > MAX_FUNCTION_ARGS_LENGTH) {
-                        throw new HogVMException('Too many arguments')
+                        throw new ClairVMException('Too many arguments')
                     }
                     if (closure.callable.__hogCallable__ === 'local') {
                         if (closure.callable.argCount > temp) {
@@ -771,7 +771,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                                 pushStack(null)
                             }
                         } else if (closure.callable.argCount < temp) {
-                            throw new HogVMException(
+                            throw new ClairVMException(
                                 `Too many arguments. Passed ${temp}, expected ${closure.callable.argCount}`
                             )
                         }
@@ -788,16 +788,16 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                         continue // resume the loop without incrementing frame.ip
                     } else if (closure.callable.__hogCallable__ === 'stl') {
                         if (!closure.callable.name || !(closure.callable.name in STL)) {
-                            throw new HogVMException(`Unsupported function call: ${closure.callable.name}`)
+                            throw new ClairVMException(`Unsupported function call: ${closure.callable.name}`)
                         }
                         const stlFn = STL[closure.callable.name]
                         if (stlFn.minArgs !== undefined && temp < stlFn.minArgs) {
-                            throw new HogVMException(
+                            throw new ClairVMException(
                                 `Function ${closure.callable.name} requires at least ${stlFn.minArgs} arguments`
                             )
                         }
                         if (stlFn.maxArgs !== undefined && temp > stlFn.maxArgs) {
-                            throw new HogVMException(
+                            throw new ClairVMException(
                                 `Function ${closure.callable.name} requires at most ${stlFn.maxArgs} arguments`
                             )
                         }
@@ -815,7 +815,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                         pushStack(stlFn.fn(args, closure.callable.name, options))
                     } else if (closure.callable.__hogCallable__ === 'async') {
                         if (asyncSteps >= maxAsyncSteps) {
-                            throw new HogVMException(`Exceeded maximum number of async steps: ${maxAsyncSteps}`)
+                            throw new ClairVMException(`Exceeded maximum number of async steps: ${maxAsyncSteps}`)
                         }
                         const args = Array(temp)
                             .fill(null)
@@ -828,7 +828,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                             state: { ...getVMState(), asyncSteps: asyncSteps + 1 },
                         } satisfies ExecResult
                     } else {
-                        throw new HogVMException(`Unsupported function call: ${closure.callable.name}`)
+                        throw new ClairVMException(`Unsupported function call: ${closure.callable.name}`)
                     }
                     break
                 }
@@ -843,13 +843,13 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                     if (throwStack.length > 0) {
                         throwStack.pop()
                     } else {
-                        throw new HogVMException('Invalid operation POP_TRY: no try block to pop')
+                        throw new ClairVMException('Invalid operation POP_TRY: no try block to pop')
                     }
                     break
                 case Operation.THROW: {
                     const exception = popStack()
                     if (!isHogError(exception)) {
-                        throw new HogVMException('Can not throw: value is not of type Error')
+                        throw new ClairVMException('Can not throw: value is not of type Error')
                     }
                     if (throwStack.length > 0) {
                         const { callStackLen, stackLen, catchIp } = throwStack.pop()!
@@ -862,11 +862,11 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
                         frame.ip = catchIp
                         continue // resume the loop without incrementing frame.ip
                     } else {
-                        throw new UncaughtHogVMException(exception.type, exception.message, exception.payload)
+                        throw new UncaughtClairVMException(exception.type, exception.message, exception.payload)
                     }
                 }
                 default:
-                    throw new HogVMException(
+                    throw new ClairVMException(
                         `Unexpected node while running bytecode in chunk "${frame.chunk}": ${chunkBytecode[frame.ip]}`
                     )
             }
@@ -876,7 +876,7 @@ export function exec(code: any[] | VMState, options?: ExecOptions): ExecResult {
         }
 
         if (stack.length > 1) {
-            throw new HogVMException('Invalid bytecode. More than one value left on stack')
+            throw new ClairVMException('Invalid bytecode. More than one value left on stack')
         }
     } catch (e) {
         return { result: null, finished: false, error: e, state: getVMState() } satisfies ExecResult

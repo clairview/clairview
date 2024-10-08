@@ -1,19 +1,19 @@
 import { toHogDate, toHogDateTime } from './stl/date'
 
-export class HogVMException extends Error {
+export class ClairVMException extends Error {
     constructor(message: string) {
         super(message)
-        this.name = 'HogVMException'
+        this.name = 'ClairVMException'
     }
 }
 
-export class UncaughtHogVMException extends HogVMException {
+export class UncaughtClairVMException extends ClairVMException {
     type: any
     payload: any
 
     constructor(type: string, message: string, payload: any = null) {
         super(message)
-        this.name = 'UncaughtHogVMException'
+        this.name = 'UncaughtClairVMException'
         this.type = type
         this.payload = payload
     }

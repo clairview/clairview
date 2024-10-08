@@ -1,7 +1,7 @@
 import json
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.cdp.filters import hog_function_filters_to_expr
 from clairview.clairql.bytecode import create_bytecode
 from clairview.models.action.action import Action

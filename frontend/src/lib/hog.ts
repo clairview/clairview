@@ -1,4 +1,4 @@
-import { exec as hogExec, ExecOptions, ExecResult, VMState } from '@clairview/hogvm'
+import { exec as hogExec, ExecOptions, ExecResult, VMState } from '@clairview/clairvm'
 import * as crypto from 'crypto'
 import { RE2JS } from 're2js'
 

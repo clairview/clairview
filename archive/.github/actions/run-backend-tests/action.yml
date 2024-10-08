@@ -164,7 +164,7 @@ runs:
                   || 'clairview'
               }} ${{ inputs.person-on-events == 'true' && 'ee/clickhouse/' || 'ee/' }} -m "not async_migrations" \
                   --ignore=clairview/temporal \
-                  --ignore=hogvm/python/test \
+                  --ignore=clairvm/python/test \
                   --splits ${{ inputs.concurrency }} --group ${{ inputs.group }} \
                   --durations=100 --durations-min=1.0 --store-durations \
                   $PYTEST_ARGS

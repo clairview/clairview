@@ -13,7 +13,7 @@ from clairview.test.base import (
     _create_event,
     _create_person,
 )
-from hogvm.python.operation import Operation as op, CLAIRQL_BYTECODE_IDENTIFIER as _H, CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import Operation as op, CLAIRQL_BYTECODE_IDENTIFIER as _H, CLAIRQL_BYTECODE_VERSION
 
 
 @dataclasses.dataclass

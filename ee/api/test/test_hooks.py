@@ -4,7 +4,7 @@ from unittest.mock import ANY
 from ee.api.hooks import valid_domain
 from ee.api.test.base import APILicensedTest
 from ee.models.hook import Hook
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.models.action.action import Action
 from clairview.models.hog_functions.hog_function import HogFunction
 from clairview.test.base import ClickhouseTestMixin

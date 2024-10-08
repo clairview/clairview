@@ -2,8 +2,8 @@ import os
 from time import sleep
 from typing import Any
 
-from hogvm.python.objects import CallFrame
-from hogvm.python.operation import Operation
+from clairvm.python.objects import CallFrame
+from clairvm.python.operation import Operation
 
 debug_speed = -1
 

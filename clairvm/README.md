@@ -1,6 +1,6 @@
-# HogVM
+# ClairVM
 
-A HogVM is a 🦔 that runs Hog bytecode. It's purpose is to locally evaluate Hog/QL expressions against any object.
+A ClairVM is a 🦔 that runs Hog bytecode. It's purpose is to locally evaluate Hog/QL expressions against any object.
 
 ## Hog bytecode
 

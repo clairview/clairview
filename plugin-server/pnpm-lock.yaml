@@ -46,7 +46,7 @@ dependencies:
   '@clairview/cyclotron':
     specifier: file:../rust/cyclotron-node
     version: file:../rust/cyclotron-node
-  '@clairview/hogvm':
+  '@clairview/clairvm':
     specifier: ^1.0.54
     version: 1.0.54(luxon@3.4.4)
   '@clairview/plugin-scaffold':
@@ -3119,7 +3119,7 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /@clairview/hogvm@1.0.54(luxon@3.4.4):
+  /@clairview/clairvm@1.0.54(luxon@3.4.4):
     resolution: {integrity: sha512-vHYdiFcIvJ3CxYd/8rSZoUk8ZkeHETGb1dbBhURLejxp9dMyWC1qJnmcIlkH/vsbed/4hVUtFMqtp4bnQSmi2g==}
     peerDependencies:
       luxon: ^3.4.4

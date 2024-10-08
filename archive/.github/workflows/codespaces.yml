@@ -1,13 +1,5 @@
 name: GitHub Codespaces image build
 
-# Run only on master branch. We could also build on branch but this seems like
-# an optimization that can be done as and when desired. The main use case we're
-# handling is creating and working off a branch from master, so it doesn't seem
-# like an immediate requirement to have branches as well.
-#
-# NOTE: the job is setup to also push branch images as well, and using branch
-# and master as caching, so if we want to add the optimisation for branches we
-# can just remove the master branch restriction.
 on:
     push:
         branches:

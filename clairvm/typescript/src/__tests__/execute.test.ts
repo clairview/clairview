@@ -1,7 +1,7 @@
 import RE2 from 're2'
 import { exec, execAsync, execSync } from '../execute'
 import { Operation as op } from '../operation'
-import { UncaughtHogVMException } from '../utils'
+import { UncaughtClairVMException } from '../utils'
 
 export function delay(ms: number): Promise<void> {
     return new Promise((resolve) => {
@@ -15,7 +15,7 @@ const tuple = (array: any[]): any[] => {
     return array
 }
 
-describe('hogvm execute', () => {
+describe('clairvm execute', () => {
     test('execution results', async () => {
         const globals = { properties: { foo: 'bar', nullValue: null } }
         const options = {
@@ -1909,7 +1909,7 @@ describe('hogvm execute', () => {
     test('uncaught exceptions', () => {
         // throw Error('Not a good day')
         const bytecode1 = ['_h', op.NULL, op.NULL, op.STRING, 'Not a good day', op.CALL_GLOBAL, 'Error', 3, op.THROW]
-        expect(() => execSync(bytecode1)).toThrow(new UncaughtHogVMException('Error', 'Not a good day', null))
+        expect(() => execSync(bytecode1)).toThrow(new UncaughtClairVMException('Error', 'Not a good day', null))
 
         // throw RetryError('Not a good day', {'key': 'value'})
         const bytecode2 = [
@@ -1928,7 +1928,7 @@ describe('hogvm execute', () => {
             op.THROW,
         ]
         expect(() => execSync(bytecode2)).toThrow(
-            new UncaughtHogVMException('RetryError', 'Not a good day', { key: 'value' })
+            new UncaughtClairVMException('RetryError', 'Not a good day', { key: 'value' })
         )
     })
 

@@ -3,15 +3,15 @@ from datetime import timedelta
 from typing import Any, Optional, cast, TYPE_CHECKING
 from collections.abc import Callable
 
-from hogvm.python.execute import execute_bytecode, BytecodeResult
-from hogvm.python.stl import STL
+from clairvm.python.execute import execute_bytecode, BytecodeResult
+from clairvm.python.stl import STL
 from clairview.clairql import ast
 from clairview.clairql.base import AST
 from clairview.clairql.context import ClairQLContext
 from clairview.clairql.errors import QueryError
 from clairview.clairql.parser import parse_program
 from clairview.clairql.visitor import Visitor
-from hogvm.python.operation import (
+from clairvm.python.operation import (
     Operation,
     CLAIRQL_BYTECODE_IDENTIFIER,
     CLAIRQL_BYTECODE_VERSION,

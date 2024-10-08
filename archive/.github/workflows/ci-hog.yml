@@ -37,7 +37,7 @@ jobs:
                   filters: |
                       hog:
                         # Avoid running tests for irrelevant changes
-                        - 'hogvm/**/*'
+                        - 'clairvm/**/*'
                         - 'clairview/clairql/**/*'
                         - 'bin/hog'
                         - 'bin/hoge'
@@ -125,25 +125,25 @@ jobs:
             - name: Check if STL bytecode is up to date
               if: needs.changes.outputs.hog == 'true'
               run: |
-                  python -m hogvm.stl.compile
+                  python -m clairvm.stl.compile
                   git diff --exit-code
 
-            - name: Run HogVM Python tests
+            - name: Run ClairVM Python tests
               if: needs.changes.outputs.hog == 'true'
               run: |
-                  pytest hogvm
+                  pytest clairvm
 
-            - name: Run HogVM TypeScript tests
+            - name: Run ClairVM TypeScript tests
               if: needs.changes.outputs.hog == 'true'
               run: |
-                  cd hogvm/typescript
+                  cd clairvm/typescript
                   pnpm install --frozen-lockfile
                   pnpm run test
 
             - name: Run Hog tests
               if: needs.changes.outputs.hog == 'true'
               run: |
-                  cd hogvm/typescript
+                  cd clairvm/typescript
                   pnpm run build 
                   cd ../
                   ./test.sh && git diff --exit-code

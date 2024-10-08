@@ -1,5 +1,5 @@
 from ee.models.hook import Hook
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.cdp.templates.zapier.template_zapier import template as template_zapier
 from clairview.management.commands.migrate_hooks import migrate_hooks
 from clairview.models.action.action import Action

@@ -2,7 +2,7 @@ import json
 from django.test import TestCase
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.models.action.action import Action
 from clairview.models.hog_functions.hog_function import HogFunction
 from clairview.models.user import User

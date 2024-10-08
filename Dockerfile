@@ -115,7 +115,7 @@ ENV PATH=/python-runtime/bin:$PATH \
 
 # Add in Django deps and generate Django's static files.
 COPY manage.py manage.py
-COPY hogvm hogvm/
+COPY clairvm clairvm/
 COPY clairview clairview/
 COPY ee ee/
 COPY --from=frontend-build /code/frontend/dist /code/frontend/dist
@@ -214,7 +214,7 @@ COPY --chown=clairview:clairview ./bin ./bin/
 COPY --chown=clairview:clairview manage.py manage.py
 COPY --chown=clairview:clairview clairview clairview/
 COPY --chown=clairview:clairview ee ee/
-COPY --chown=clairview:clairview hogvm hogvm/
+COPY --chown=clairview:clairview clairvm clairvm/
 
 # Keep server command backwards compatible
 RUN cp ./bin/docker-server-unit ./bin/docker-server

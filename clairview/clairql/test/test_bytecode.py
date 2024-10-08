@@ -1,7 +1,7 @@
 import pytest
 
 from clairview.clairql.bytecode import to_bytecode, execute_hog
-from hogvm.python.operation import Operation as op, CLAIRQL_BYTECODE_IDENTIFIER as _H, CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import Operation as op, CLAIRQL_BYTECODE_IDENTIFIER as _H, CLAIRQL_BYTECODE_VERSION
 from clairview.clairql.errors import NotImplementedError, QueryError
 from clairview.test.base import BaseTest
 
@@ -234,7 +234,7 @@ class TestBytecode(BaseTest):
         )
 
     def test_bytecode_execute(self):
-        # Test a simple operations. The Hog execution itself is tested under hogvm/python/
+        # Test a simple operations. The Hog execution itself is tested under clairvm/python/
         self.assertEqual(execute_hog("1 + 2", team=self.team).result, 3)
         self.assertEqual(
             execute_hog(

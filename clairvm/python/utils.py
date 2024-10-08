@@ -5,11 +5,11 @@ from typing import Any
 COST_PER_UNIT = 8
 
 
-class HogVMException(Exception):
+class ClairVMException(Exception):
     pass
 
 
-class UncaughtHogVMException(HogVMException):
+class UncaughtClairVMException(ClairVMException):
     type: str
     message: str
     payload: Any
@@ -39,7 +39,7 @@ def get_nested_value(obj, chain, nullish=False) -> Any:
             return None
         if isinstance(key, int):
             if key == 0:
-                raise HogVMException(f"Hog arrays start from index 1")
+                raise ClairVMException(f"Hog arrays start from index 1")
             elif key > 0:
                 if key > len(obj):
                     return None
@@ -66,12 +66,12 @@ def set_nested_value(obj, chain, value) -> Any:
         obj[chain[-1]] = value
     elif isinstance(obj, list):
         if not isinstance(chain[-1], int):
-            raise HogVMException(f"Invalid index: {chain[-1]}")
+            raise ClairVMException(f"Invalid index: {chain[-1]}")
         if chain[-1] <= 0:
-            raise HogVMException(f"Hog arrays start from index 1")
+            raise ClairVMException(f"Hog arrays start from index 1")
         obj[chain[-1] - 1] = value
     else:
-        raise HogVMException(f'Can not set property "{chain[-1]}" on object of type "{type(obj).__name__}"')
+        raise ClairVMException(f'Can not set property "{chain[-1]}" on object of type "{type(obj).__name__}"')
 
     return obj
 

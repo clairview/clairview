@@ -1,6 +1,6 @@
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
+from clairvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.cdp.templates.webhook.template_webhook import template as template_webhook
 from clairview.management.commands.migrate_action_webhooks import migrate_action_webhooks
 from clairview.models import Action

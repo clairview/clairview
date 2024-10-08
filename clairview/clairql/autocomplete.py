@@ -38,7 +38,7 @@ from clairview.schema import (
     Kind,
     HogLanguage,
 )
-from hogvm.python.stl import STL
+from clairvm.python.stl import STL
 
 ALL_HOG_FUNCTIONS = list(STL.keys())
 MATCH_ANY_CHARACTER = "$$_CLAIRVIEW_ANY_$$"

@@ -1,4 +1,4 @@
-import { calculateCost, convertHogToJS, exec, ExecOptions, ExecResult } from '@clairview/hogvm'
+import { calculateCost, convertHogToJS, exec, ExecOptions, ExecResult } from '@clairview/clairvm'
 import crypto from 'crypto'
 import { DateTime } from 'luxon'
 import { Histogram } from 'prom-client'

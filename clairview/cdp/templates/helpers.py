@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 from clairview.cdp.templates.hog_function_template import HogFunctionTemplate
 from clairview.cdp.validation import compile_hog
 from clairview.test.base import BaseTest
-from hogvm.python.execute import execute_bytecode
+from clairvm.python.execute import execute_bytecode
 
 
 class BaseHogFunctionTemplateTest(BaseTest):
