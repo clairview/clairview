@@ -9,7 +9,7 @@ export interface ObjectTagsLogicProps {
 }
 
 function cleanTag(tag?: string): string {
-    // Same clean done in markettor/api/tagged_item.py on frontend to mitigate confusion on tag create.
+    // Same clean done in clairview/api/tagged_item.py on frontend to mitigate confusion on tag create.
     return (tag ?? '').trim().toLowerCase()
 }
 

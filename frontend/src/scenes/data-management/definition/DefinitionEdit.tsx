@@ -1,4 +1,4 @@
-import { LemonSkeleton, LemonTag } from '@markettor/lemon-ui'
+import { LemonSkeleton, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { VerifiedDefinitionCheckbox } from 'lib/components/DefinitionPopover/DefinitionPopoverContents'

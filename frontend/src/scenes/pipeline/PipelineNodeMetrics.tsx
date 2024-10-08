@@ -1,4 +1,4 @@
-import { IconCalendar, IconCollapse, IconExpand, IconInfo } from '@markettor/icons'
+import { IconCalendar, IconCollapse, IconExpand, IconInfo } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { Chart, ChartDataset, ChartItem } from 'lib/Chart'
 import { getColorVar } from 'lib/colors'

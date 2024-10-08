@@ -1,8 +1,8 @@
 import './SurveyView.scss'
 
-import { TZLabel } from '@markettor/apps-common'
-import { IconGraph } from '@markettor/icons'
-import { LemonButton, LemonDialog, LemonDivider, Link } from '@markettor/lemon-ui'
+import { TZLabel } from '@clairview/apps-common'
+import { IconGraph } from '@clairview/icons'
+import { LemonButton, LemonDialog, LemonDivider, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
 import { EditableField } from 'lib/components/EditableField/EditableField'
@@ -366,7 +366,7 @@ export function SurveyView({ id }: { id: string }): JSX.Element {
                                                         <Link
                                                             data-attr="survey-doc-link"
                                                             target="_blank"
-                                                            to="https://markettor.com/docs/surveys/implementing-custom-surveys"
+                                                            to="https://clairview.com/docs/surveys/implementing-custom-surveys"
                                                             targetBlankIcon
                                                         >
                                                             in the docs

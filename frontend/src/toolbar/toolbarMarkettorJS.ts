@@ -1,14 +1,14 @@
 import { FeatureFlagKey } from 'lib/constants'
-import MarketTor from 'markettor-js-lite'
+import ClairView from 'clairview-js-lite'
 import { useEffect, useState } from 'react'
 
 const DEFAULT_API_KEY = 'sTMFPsFhdP1Ssg'
 
 const runningOnMarkettor = !!window.MARKETTOR_APP_CONTEXT
 const apiKey = runningOnMarkettor ? window.JS_MARKETTOR_API_KEY : DEFAULT_API_KEY
-const apiHost = runningOnMarkettor ? window.JS_MARKETTOR_HOST : 'https://internal-t.markettor.com'
+const apiHost = runningOnMarkettor ? window.JS_MARKETTOR_HOST : 'https://internal-t.clairview.com'
 
-export const toolbarMarkettorJS = new MarketTor(apiKey || DEFAULT_API_KEY, {
+export const toolbarMarkettorJS = new ClairView(apiKey || DEFAULT_API_KEY, {
     host: apiHost,
     defaultOptIn: false, // must call .optIn() before any events are sent
     persistence: 'memory', // We don't want to persist anything, all events are in-memory

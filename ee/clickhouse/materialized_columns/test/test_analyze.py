@@ -1,5 +1,5 @@
-from markettor.test.base import BaseTest, ClickhouseTestMixin
-from markettor.client import sync_execute
+from clairview.test.base import BaseTest, ClickhouseTestMixin
+from clairview.client import sync_execute
 from ee.clickhouse.materialized_columns.analyze import materialize_properties_task
 
 from unittest.mock import patch, call

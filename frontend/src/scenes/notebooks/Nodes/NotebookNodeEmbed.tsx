@@ -1,7 +1,7 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType } from '~/types'
 import { JSONContent, NotebookNodeAttributeProperties, NotebookNodeProps } from '../Notebook/utils'
-import { LemonButton, LemonInput, SpinnerOverlay } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, SpinnerOverlay } from '@clairview/lemon-ui'
 import { useEffect, useMemo, useState } from 'react'
 import { useActions } from 'kea'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -120,7 +120,7 @@ const Settings = ({
     )
 }
 
-export const NotebookNodeEmbed = createMarketTorWidgetNode<NotebookNodeEmbedAttributes>({
+export const NotebookNodeEmbed = createClairViewWidgetNode<NotebookNodeEmbedAttributes>({
     nodeType: NotebookNodeType.Embed,
     titlePlaceholder: 'Embed',
     Component,

@@ -1,5 +1,5 @@
-import { IconGraph } from '@markettor/icons'
-import { LemonButton, LemonDropdown, LemonInput } from '@markettor/lemon-ui'
+import { IconGraph } from '@clairview/icons'
+import { LemonButton, LemonDropdown, LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BIN_COUNT_AUTO } from 'lib/constants'
 import { useState } from 'react'

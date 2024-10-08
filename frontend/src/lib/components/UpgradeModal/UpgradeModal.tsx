@@ -1,4 +1,4 @@
-import { LemonModal } from '@markettor/lemon-ui'
+import { LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 

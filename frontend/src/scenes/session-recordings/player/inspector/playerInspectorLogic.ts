@@ -160,7 +160,7 @@ function estimateSize(snapshot: unknown): number {
 }
 
 function getPayloadFor(customEvent: customEvent, tag: string): Record<string, any> {
-    if (tag === '$markettor_config') {
+    if (tag === '$clairview_config') {
         return (customEvent.data.payload as any)?.config as Record<string, any>
     }
 

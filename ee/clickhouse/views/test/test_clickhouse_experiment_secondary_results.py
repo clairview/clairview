@@ -3,9 +3,9 @@ from flaky import flaky
 
 
 from ee.api.test.base import APILicensedTest
-from markettor.models.signals import mute_selected_signals
-from markettor.test.base import ClickhouseTestMixin, snapshot_clickhouse_queries
-from markettor.test.test_journeys import journeys_for
+from clairview.models.signals import mute_selected_signals
+from clairview.test.base import ClickhouseTestMixin, snapshot_clickhouse_queries
+from clairview.test.test_journeys import journeys_for
 
 DEFAULT_JOURNEYS_FOR_PAYLOAD: dict[str, list[dict[str, Any]]] = {
     # For a trend pageview metric

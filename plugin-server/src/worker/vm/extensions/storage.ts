@@ -1,4 +1,4 @@
-import { StorageExtension } from '@markettor/plugin-scaffold'
+import { StorageExtension } from '@clairview/plugin-scaffold'
 import { Counter, Summary } from 'prom-client'
 
 import { Hub, PluginConfig } from '../../../types'
@@ -32,7 +32,7 @@ export function createStorage(server: Hub, pluginConfig: PluginConfig): StorageE
             await server.db.postgres.query(
                 PostgresUse.PLUGIN_STORAGE_RW,
                 `
-                    INSERT INTO markettor_pluginstorage ("plugin_config_id", "key", "value")
+                    INSERT INTO clairview_pluginstorage ("plugin_config_id", "key", "value")
                     VALUES ($1, $2, $3)
                     ON CONFLICT ("plugin_config_id", "key")
                     DO UPDATE SET value = $3
@@ -50,7 +50,7 @@ export function createStorage(server: Hub, pluginConfig: PluginConfig): StorageE
     const del = async function (key: string): Promise<void> {
         await server.db.postgres.query(
             PostgresUse.PLUGIN_STORAGE_RW,
-            'DELETE FROM markettor_pluginstorage WHERE "plugin_config_id"=$1 AND "key"=$2',
+            'DELETE FROM clairview_pluginstorage WHERE "plugin_config_id"=$1 AND "key"=$2',
             [pluginConfig.id, key],
             'storageDelete'
         )

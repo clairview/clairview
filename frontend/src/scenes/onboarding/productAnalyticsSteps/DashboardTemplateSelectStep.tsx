@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonField } from 'lib/lemon-ui/LemonField'
@@ -83,7 +83,7 @@ export const OnboardingDashboardTemplateSelectStep = ({
             >
                 <div className="max-w-md">
                     <p>
-                        MarketTor can collect and visualize data from anywhere. We're still adding more templates to this
+                        ClairView can collect and visualize data from anywhere. We're still adding more templates to this
                         onboarding flow for different use-cases and business types.
                     </p>
                     <p>Let us know what kind of template you'd like to see and we'll work on adding one.</p>

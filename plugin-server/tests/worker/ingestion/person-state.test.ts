@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 import { DateTime } from 'luxon'
 
 import { Database, Hub, InternalPerson } from '../../../src/types'
@@ -179,7 +179,7 @@ describe('PersonState.update()', () => {
             expect(distinctIds).toEqual(expect.arrayContaining([]))
         })
 
-        it('overrides are created only when distinct_id is in markettor_personlessdistinctid', async () => {
+        it('overrides are created only when distinct_id is in clairview_personlessdistinctid', async () => {
             // oldUserDistinctId exists, and 'old2' will merge into it, but not create an override
             await hub.db.createPerson(timestamp, {}, {}, {}, teamId, null, false, oldUserUuid, [
                 { distinctId: oldUserDistinctId },
@@ -221,7 +221,7 @@ describe('PersonState.update()', () => {
             await kafkaAcks
             await kafkaAcks2
 
-            // new2 has an override, because it was in markettor_personlessdistinctid
+            // new2 has an override, because it was in clairview_personlessdistinctid
             await delayUntilEventIngested(() => fetchOverridesForDistinctId('new2'))
             const chOverrides = await fetchOverridesForDistinctId('new2')
             expect(chOverrides.length).toEqual(1)
@@ -235,7 +235,7 @@ describe('PersonState.update()', () => {
                 ])
             )
 
-            // old2 has no override, because it wasn't in markettor_personlessdistinctid
+            // old2 has no override, because it wasn't in clairview_personlessdistinctid
             const chOverridesOld = await fetchOverridesForDistinctId('old2')
             expect(chOverridesOld.length).toEqual(0)
         })
@@ -1646,13 +1646,13 @@ describe('PersonState.update()', () => {
             )
 
             // existing overrides
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: anonPerson.id,
                 feature_flag_key: 'beta-feature',
                 hash_key: 'example_id',
             })
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: identifiedPerson.id,
                 feature_flag_key: 'multivariate-flag',
@@ -1678,7 +1678,7 @@ describe('PersonState.update()', () => {
 
             const result = await hub.db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "markettor_featureflaghashkeyoverride" WHERE "team_id" = $1`,
+                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "clairview_featureflaghashkeyoverride" WHERE "team_id" = $1`,
                 [teamId],
                 'testQueryHashKeyOverride'
             )
@@ -1724,19 +1724,19 @@ describe('PersonState.update()', () => {
 
             // existing overrides for both anonPerson and identifiedPerson
             // which implies a clash when they are merged
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: anonPerson.id,
                 feature_flag_key: 'beta-feature',
                 hash_key: 'anon_id',
             })
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: identifiedPerson.id,
                 feature_flag_key: 'beta-feature',
                 hash_key: 'identified_id',
             })
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: anonPerson.id,
                 feature_flag_key: 'multivariate-flag',
@@ -1763,7 +1763,7 @@ describe('PersonState.update()', () => {
 
             const result = await hub.db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "markettor_featureflaghashkeyoverride" WHERE "team_id" = $1`,
+                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "clairview_featureflaghashkeyoverride" WHERE "team_id" = $1`,
                 [teamId],
                 'testQueryHashKeyOverride'
             )
@@ -1807,13 +1807,13 @@ describe('PersonState.update()', () => {
                 [{ distinctId: 'new_distinct_id' }]
             )
 
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: identifiedPerson.id,
                 feature_flag_key: 'beta-feature',
                 hash_key: 'example_id',
             })
-            await insertRow(hub.db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(hub.db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: teamId,
                 person_id: identifiedPerson.id,
                 feature_flag_key: 'multivariate-flag',
@@ -1836,7 +1836,7 @@ describe('PersonState.update()', () => {
 
             const result = await hub.db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "markettor_featureflaghashkeyoverride" WHERE "team_id" = $1`,
+                `SELECT "feature_flag_key", "person_id", "hash_key" FROM "clairview_featureflaghashkeyoverride" WHERE "team_id" = $1`,
                 [teamId],
                 'testQueryHashKeyOverride'
             )

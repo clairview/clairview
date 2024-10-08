@@ -1,4 +1,4 @@
-import { IconCheck, IconX } from '@markettor/icons'
+import { IconCheck, IconX } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -76,7 +76,7 @@ export function ManageAlertsModal(props: ManageAlertsModalProps): JSX.Element {
             </LemonModal.Header>
             <LemonModal.Content>
                 <div className="mb-4">
-                    With alerts, MarketTor will monitor your insight and notify you when certain conditions are met. We do
+                    With alerts, ClairView will monitor your insight and notify you when certain conditions are met. We do
                     not evaluate alerts in real-time, but rather on a schedule of once every hour. Please note that
                     alerts are in alpha and may not be fully reliable.
                 </div>

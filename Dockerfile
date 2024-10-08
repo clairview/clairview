@@ -1,16 +1,16 @@
 #
 # This Dockerfile is used for self-hosted production builds.
 #
-# MarketTor has sunset support for self-hosted K8s deployments.
-# See: https://markettor.com/blog/sunsetting-helm-support-markettor
+# ClairView has sunset support for self-hosted K8s deployments.
+# See: https://clairview.com/blog/sunsetting-helm-support-clairview
 #
-# Note: for MarketTor Cloud remember to update ‘Dockerfile.cloud’ as appropriate.
+# Note: for ClairView Cloud remember to update ‘Dockerfile.cloud’ as appropriate.
 #
 # The stages are used to:
 #
 # - frontend-build: build the frontend (static assets)
 # - plugin-server-build: build plugin-server (Node.js app) & fetch its runtime dependencies
-# - markettor-build: fetch MarketTor (Django app) dependencies & build Django collectstatic
+# - clairview-build: fetch ClairView (Django app) dependencies & build Django collectstatic
 # - fetch-geoip-db: fetch the GeoIP database
 #
 # In the last stage, we import the artifacts from the previous
@@ -41,7 +41,7 @@ RUN pnpm build
 #
 # ---------------------------------------------------------
 #
-FROM ghcr.io/markettor/rust-node-container:bullseye_rust_1.80.1-node_18.19.1 AS plugin-server-build
+FROM ghcr.io/clairview/rust-node-container:bullseye_rust_1.80.1-node_18.19.1 AS plugin-server-build
 WORKDIR /code
 COPY ./rust ./rust
 COPY ./plugin-transpiler/ ./plugin-transpiler/
@@ -88,7 +88,7 @@ RUN corepack enable && \
 #
 # ---------------------------------------------------------
 #
-FROM python:3.11.9-slim-bullseye AS markettor-build
+FROM python:3.11.9-slim-bullseye AS clairview-build
 WORKDIR /code
 SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
@@ -116,7 +116,7 @@ ENV PATH=/python-runtime/bin:$PATH \
 # Add in Django deps and generate Django's static files.
 COPY manage.py manage.py
 COPY hogvm hogvm/
-COPY markettor markettor/
+COPY clairview clairview/
 COPY ee ee/
 COPY --from=frontend-build /code/frontend/dist /code/frontend/dist
 RUN SKIP_SERVICE_VERSION_REQUIREMENTS=1 STATIC_COLLECTION=1 DATABASE_URL='postgres:///' REDIS_URL='redis:///' python manage.py collectstatic --noinput
@@ -138,7 +138,7 @@ RUN apt-get update && \
     && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir share && \
-    ( curl -s -L "https://mmdbcdn.markettor.net/" --http1.1 | brotli --decompress --output=./share/GeoLite2-City.mmdb ) && \
+    ( curl -s -L "https://mmdbcdn.clairview.net/" --http1.1 | brotli --decompress --output=./share/GeoLite2-City.mmdb ) && \
     chmod -R 755 ./share/GeoLite2-City.mmdb
 
 
@@ -180,41 +180,41 @@ RUN apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Install and use a non-root user.
-RUN groupadd -g 1000 markettor && \
-    useradd -r -g markettor markettor && \
-    chown markettor:markettor /code
-USER markettor
+RUN groupadd -g 1000 clairview && \
+    useradd -r -g clairview clairview && \
+    chown clairview:clairview /code
+USER clairview
 
 # Add the commit hash
 ARG COMMIT_HASH
 RUN echo $COMMIT_HASH > /code/commit.txt
 
 # Add in the compiled plugin-server & its runtime dependencies from the plugin-server-build stage.
-COPY --from=plugin-server-build --chown=markettor:markettor /code/plugin-transpiler/dist /code/plugin-transpiler/dist
-COPY --from=plugin-server-build --chown=markettor:markettor /code/plugin-server/dist /code/plugin-server/dist
-COPY --from=plugin-server-build --chown=markettor:markettor /code/plugin-server/node_modules /code/plugin-server/node_modules
-COPY --from=plugin-server-build --chown=markettor:markettor /code/plugin-server/package.json /code/plugin-server/package.json
+COPY --from=plugin-server-build --chown=clairview:clairview /code/plugin-transpiler/dist /code/plugin-transpiler/dist
+COPY --from=plugin-server-build --chown=clairview:clairview /code/plugin-server/dist /code/plugin-server/dist
+COPY --from=plugin-server-build --chown=clairview:clairview /code/plugin-server/node_modules /code/plugin-server/node_modules
+COPY --from=plugin-server-build --chown=clairview:clairview /code/plugin-server/package.json /code/plugin-server/package.json
 
-# Copy the Python dependencies and Django staticfiles from the markettor-build stage.
-COPY --from=markettor-build --chown=markettor:markettor /code/staticfiles /code/staticfiles
-COPY --from=markettor-build --chown=markettor:markettor /python-runtime /python-runtime
+# Copy the Python dependencies and Django staticfiles from the clairview-build stage.
+COPY --from=clairview-build --chown=clairview:clairview /code/staticfiles /code/staticfiles
+COPY --from=clairview-build --chown=clairview:clairview /python-runtime /python-runtime
 ENV PATH=/python-runtime/bin:$PATH \
     PYTHONPATH=/python-runtime
 
 # Copy the frontend assets from the frontend-build stage.
 # TODO: this copy should not be necessary, we should remove it once we verify everything still works.
-COPY --from=frontend-build --chown=markettor:markettor /code/frontend/dist /code/frontend/dist
+COPY --from=frontend-build --chown=clairview:clairview /code/frontend/dist /code/frontend/dist
 
 # Copy the GeoLite2-City database from the fetch-geoip-db stage.
-COPY --from=fetch-geoip-db --chown=markettor:markettor /code/share/GeoLite2-City.mmdb /code/share/GeoLite2-City.mmdb
+COPY --from=fetch-geoip-db --chown=clairview:clairview /code/share/GeoLite2-City.mmdb /code/share/GeoLite2-City.mmdb
 
 # Add in the Gunicorn config, custom bin files and Django deps.
-COPY --chown=markettor:markettor gunicorn.config.py ./
-COPY --chown=markettor:markettor ./bin ./bin/
-COPY --chown=markettor:markettor manage.py manage.py
-COPY --chown=markettor:markettor markettor markettor/
-COPY --chown=markettor:markettor ee ee/
-COPY --chown=markettor:markettor hogvm hogvm/
+COPY --chown=clairview:clairview gunicorn.config.py ./
+COPY --chown=clairview:clairview ./bin ./bin/
+COPY --chown=clairview:clairview manage.py manage.py
+COPY --chown=clairview:clairview clairview clairview/
+COPY --chown=clairview:clairview ee ee/
+COPY --chown=clairview:clairview hogvm hogvm/
 
 # Keep server command backwards compatible
 RUN cp ./bin/docker-server-unit ./bin/docker-server

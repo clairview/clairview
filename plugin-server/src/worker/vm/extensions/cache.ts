@@ -1,4 +1,4 @@
-import { CacheExtension } from '@markettor/plugin-scaffold'
+import { CacheExtension } from '@clairview/plugin-scaffold'
 
 import { Hub } from '../../../types'
 import { IllegalOperationError } from '../../../utils/utils'

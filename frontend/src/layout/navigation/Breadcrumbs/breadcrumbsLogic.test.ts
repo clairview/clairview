@@ -27,11 +27,11 @@ describe('breadcrumbsLogic', () => {
 
         // test with .delay because subscriptions happen async
         router.actions.push(urls.savedInsights())
-        await expectLogic(logic).delay(1).toMatchValues({ documentTitle: 'Product analytics • MarketTor' })
-        expect(global.document.title).toEqual('Product analytics • MarketTor')
+        await expectLogic(logic).delay(1).toMatchValues({ documentTitle: 'Product analytics • ClairView' })
+        expect(global.document.title).toEqual('Product analytics • ClairView')
 
         router.actions.push(urls.dashboards())
-        await expectLogic(logic).delay(1).toMatchValues({ documentTitle: 'Dashboards • MarketTor' })
-        expect(global.document.title).toEqual('Dashboards • MarketTor')
+        await expectLogic(logic).delay(1).toMatchValues({ documentTitle: 'Dashboards • ClairView' })
+        expect(global.document.title).toEqual('Dashboards • ClairView')
     })
 })

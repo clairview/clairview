@@ -6,17 +6,17 @@ from zoneinfo import ZoneInfo
 
 from rest_framework.exceptions import ValidationError
 
-from markettor.constants import ExperimentSignificanceCode, ExperimentNoResultsErrorKeys
-from markettor.torql_queries.experiments import CONTROL_VARIANT_KEY
-from markettor.torql_queries.experiments.funnel_statistics import (
+from clairview.constants import ExperimentSignificanceCode, ExperimentNoResultsErrorKeys
+from clairview.torql_queries.experiments import CONTROL_VARIANT_KEY
+from clairview.torql_queries.experiments.funnel_statistics import (
     are_results_significant,
     calculate_credible_intervals,
     calculate_probabilities,
 )
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.filters.filter import Filter
-from markettor.models.team import Team
-from markettor.queries.funnels import ClickhouseFunnel
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.filters.filter import Filter
+from clairview.models.team import Team
+from clairview.queries.funnels import ClickhouseFunnel
 
 Probability = float
 

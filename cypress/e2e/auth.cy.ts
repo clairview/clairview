@@ -11,7 +11,7 @@ describe('Auth', () => {
     it('Logout and login', () => {
         cy.get('[data-attr=top-menu-item-logout]').click()
 
-        cy.get('[data-attr=login-email]').type('test@markettor.com').should('have.value', 'test@markettor.com').blur()
+        cy.get('[data-attr=login-email]').type('test@clairview.com').should('have.value', 'test@clairview.com').blur()
         cy.get('[data-attr=password]', { timeout: 5000 }).should('be.visible') // Wait for login precheck (note blur above)
 
         cy.get('[data-attr=password]').type('12345678').should('have.value', '12345678')
@@ -36,7 +36,7 @@ describe('Auth', () => {
     it('Try logging in improperly and then properly', () => {
         cy.get('[data-attr=top-menu-item-logout]').click()
 
-        cy.get('[data-attr=login-email]').type('test@markettor.com').should('have.value', 'test@markettor.com').blur()
+        cy.get('[data-attr=login-email]').type('test@clairview.com').should('have.value', 'test@clairview.com').blur()
         cy.get('[data-attr=password]', { timeout: 5000 }).should('be.visible') // Wait for login precheck (note blur above)
         cy.get('[data-attr=password]').type('wrong password').should('have.value', 'wrong password')
         cy.get('[type=submit]').click()
@@ -56,7 +56,7 @@ describe('Auth', () => {
         cy.visit('/activity/explore')
         cy.location('pathname').should('include', '/login') // Should be redirected to login because we're now logged out
 
-        cy.get('[data-attr=login-email]').type('test@markettor.com').blur()
+        cy.get('[data-attr=login-email]').type('test@clairview.com').blur()
         cy.get('[data-attr=password]', { timeout: 5000 }).should('be.visible') // Wait for login precheck (note blur above)
         cy.get('[data-attr=password]').type('12345678')
         cy.get('[type=submit]').click()
@@ -71,7 +71,7 @@ describe('Auth', () => {
         cy.visit('/insights?search=testString')
         cy.location('pathname').should('include', '/login') // Should be redirected to login because we're now logged out
 
-        cy.get('[data-attr=login-email]').type('test@markettor.com').blur()
+        cy.get('[data-attr=login-email]').type('test@clairview.com').blur()
         cy.get('[data-attr=password]', { timeout: 5000 }).should('be.visible') // Wait for login precheck (note blur above)
         cy.get('[data-attr=password]').type('12345678')
         cy.get('[type=submit]').click()

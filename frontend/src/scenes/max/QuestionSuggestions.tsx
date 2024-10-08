@@ -1,5 +1,5 @@
-import { IconArrowUpRight } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconArrowUpRight } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 
 import { maxLogic } from './maxLogic'

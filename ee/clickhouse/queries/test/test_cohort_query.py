@@ -2,14 +2,14 @@ from datetime import datetime, timedelta
 
 
 from ee.clickhouse.queries.enterprise_cohort_query import check_negation_clause
-from markettor.client import sync_execute
-from markettor.constants import PropertyOperatorType
-from markettor.models.action import Action
-from markettor.models.cohort import Cohort
-from markettor.models.filters.filter import Filter
-from markettor.models.property import Property, PropertyGroup
-from markettor.queries.cohort_query import CohortQuery
-from markettor.test.base import (
+from clairview.client import sync_execute
+from clairview.constants import PropertyOperatorType
+from clairview.models.action import Action
+from clairview.models.cohort import Cohort
+from clairview.models.filters.filter import Filter
+from clairview.models.property import Property, PropertyGroup
+from clairview.queries.cohort_query import CohortQuery
+from clairview.test.base import (
     BaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -59,7 +59,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$autocapture",
-                    "url": "https://markettor.com/feedback/123",
+                    "url": "https://clairview.com/feedback/123",
                     "url_matching": "exact",
                 }
             ],
@@ -69,12 +69,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p1",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -90,12 +90,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p2",
             timestamp=datetime.now() - timedelta(weeks=3),
         )
@@ -111,12 +111,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test", "email": "testXX@markettor.com"},
+            properties={"name": "test", "email": "testXX@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p3",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -168,7 +168,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                                 },
                                 {
                                     "key": "email",
-                                    "value": "test@markettor.com",
+                                    "value": "test@clairview.com",
                                     "type": "person",
                                 },
                             ],
@@ -190,7 +190,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -203,7 +203,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -241,7 +241,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -254,7 +254,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -306,7 +306,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -327,7 +327,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -367,7 +367,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -388,7 +388,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -439,13 +439,13 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -458,7 +458,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test3", "email": "test3@markettor.com"},
+            properties={"name": "test3", "email": "test3@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -505,7 +505,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -518,7 +518,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -531,7 +531,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test3", "email": "test3@markettor.com"},
+            properties={"name": "test3", "email": "test3@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -611,7 +611,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -624,7 +624,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -688,17 +688,17 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test2", "email": "test2@markettor.com"},
+            properties={"name": "test2", "email": "test2@clairview.com"},
         )
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test3", "email": "test3@markettor.com"},
+            properties={"name": "test3", "email": "test3@clairview.com"},
         )
 
         # P1 events (proper restarting sequence)
@@ -803,12 +803,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test2", "email": "test2@markettor.com"},
+            properties={"name": "test2", "email": "test2@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -858,7 +858,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 3, [1, 1, 1])
@@ -897,12 +897,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test2", "email": "test2@markettor.com"},
+            properties={"name": "test2", "email": "test2@clairview.com"},
         )
         # p1 gets variable number of events in each period
         _make_event_sequence(self.team, "p1", 3, [0, 1, 2])
@@ -973,23 +973,23 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test1@markettor.com"},
+            properties={"name": "test", "email": "test1@clairview.com"},
         )
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test2@markettor.com"},
+            properties={"name": "test", "email": "test2@clairview.com"},
         )
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test3", "email": "test3@markettor.com"},
+            properties={"name": "test3", "email": "test3@clairview.com"},
         )
         # doesn't match
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p4"],
-            properties={"name": "test3", "email": "test4@markettor.com"},
+            properties={"name": "test3", "email": "test4@clairview.com"},
         )
 
         filter = Filter(
@@ -1002,12 +1002,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                             "values": [
                                 {
                                     "key": "email",
-                                    "value": "test1@markettor.com",
+                                    "value": "test1@clairview.com",
                                     "type": "person",
                                 },
                                 {
                                     "key": "email",
-                                    "value": "test2@markettor.com",
+                                    "value": "test2@clairview.com",
                                     "type": "person",
                                 },
                             ],
@@ -1018,7 +1018,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                                 {"key": "name", "value": "test3", "type": "person"},
                                 {
                                     "key": "email",
-                                    "value": "test3@markettor.com",
+                                    "value": "test3@clairview.com",
                                     "type": "person",
                                 },
                             ],
@@ -1044,7 +1044,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$autocapture",
-                    "url": "https://markettor.com/feedback/123",
+                    "url": "https://clairview.com/feedback/123",
                     "url_matching": "exact",
                 }
             ],
@@ -1054,12 +1054,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p1",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -1075,12 +1075,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p2",
             timestamp=datetime.now() - timedelta(weeks=3),
         )
@@ -1096,12 +1096,12 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "special", "email": "test@markettor.com"},
+            properties={"name": "special", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p3",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -1151,7 +1151,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                                 },
                                 {
                                     "key": "email",
-                                    "value": "test@markettor.com",
+                                    "value": "test@clairview.com",
                                     "type": "person",
                                 },  # this is pushed down
                             ],
@@ -1173,7 +1173,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "$sample_field": "test@markettor.com"},
+            properties={"name": "test", "$sample_field": "test@clairview.com"},
         )
         filter = Filter(
             data={
@@ -1190,7 +1190,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                         },
                         {
                             "key": "$sample_field",
-                            "value": "test@markettor.com",
+                            "value": "test@clairview.com",
                             "type": "person",
                         },
                     ],
@@ -1306,7 +1306,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1319,7 +1319,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1355,7 +1355,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1368,7 +1368,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1381,7 +1381,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1430,7 +1430,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1452,7 +1452,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1466,7 +1466,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1488,7 +1488,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p4 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p4"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1536,7 +1536,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         # pageview sequence that happens today, and 2 days ago
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -1552,7 +1552,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _make_event_sequence(self.team, "p2", 2, [1, 1])
 
@@ -1560,7 +1560,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p3 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1588,7 +1588,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p4 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p4"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1602,7 +1602,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p5 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p5"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1623,7 +1623,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p6 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p6"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         # pageview sequence that happens today, and 4 days ago
         _make_event_sequence(self.team, "p6", 4, [1, 1])
@@ -1912,7 +1912,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -1986,7 +1986,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _make_event_sequence(self.team, "p2", 2, [1, 1])
         _make_event_sequence(self.team, "p2", 6, [1, 1], event="$new_view")
@@ -1995,7 +1995,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"email": "test@markettor.com"},
+            properties={"email": "test@clairview.com"},
         )
         _make_event_sequence(self.team, "p3", 2, [1, 1])
 
@@ -2003,7 +2003,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p4"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _make_event_sequence(self.team, "p4", 6, [1, 1])
         _make_event_sequence(self.team, "p4", 6, [1, 1], event="$new_view")
@@ -2099,7 +2099,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -2165,7 +2165,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -2173,7 +2173,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2217,7 +2217,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         action1 = Action.objects.create(
@@ -2226,7 +2226,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$pageview",
-                    "url": "https://markettor.com/feedback/123",
+                    "url": "https://clairview.com/feedback/123",
                     "url_matching": "exact",
                 }
             ],
@@ -2237,19 +2237,19 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
             "p1",
             2,
             [1, 1],
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
             team=self.team,
             event="$pageview",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p2",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -2286,7 +2286,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -2294,7 +2294,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2354,7 +2354,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -2378,7 +2378,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2432,7 +2432,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -2456,7 +2456,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2470,7 +2470,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test22", "email": "test22@markettor.com"},
+            properties={"name": "test22", "email": "test22@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p3", 2, [1, 1])
@@ -2522,7 +2522,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
                         },
                         {
                             "key": "email",
-                            "value": "test@markettor.com",
+                            "value": "test@clairview.com",
                             "type": "person",
                         },  # pushed down
                     ],
@@ -2539,7 +2539,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _make_event_sequence(self.team, "p1", 2, [1, 1])
@@ -2563,7 +2563,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2627,7 +2627,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p1 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2649,7 +2649,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2710,7 +2710,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
@@ -2803,7 +2803,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test2", "email": "test@markettor.com"},
+            properties={"name": "test2", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2824,7 +2824,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p2 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2838,7 +2838,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test2", "email": "test@markettor.com"},
+            properties={"name": "test2", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2921,7 +2921,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test2", "email": "test@markettor.com"},
+            properties={"name": "test2", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2942,7 +2942,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2956,7 +2956,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "test2", "email": "test@markettor.com"},
+            properties={"name": "test2", "email": "test@clairview.com"},
         )
 
         _create_event(
@@ -2970,7 +2970,7 @@ class TestCohortQuery(ClickhouseTestMixin, BaseTest):
         p4 = _create_person(
             team_id=self.team.pk,
             distinct_ids=["p4"],
-            properties={"name": "test3", "email": "test@markettor.com"},
+            properties={"name": "test3", "email": "test@clairview.com"},
         )
 
         _create_event(

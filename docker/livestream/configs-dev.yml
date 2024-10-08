@@ -11,4 +11,4 @@ mmdb:
 jwt:
     token: '<randomly generated secret key>'
 postgres:
-    url: 'postgres://markettor:markettor@db:5432/markettor'
+    url: 'postgres://clairview:clairview@db:5432/clairview'

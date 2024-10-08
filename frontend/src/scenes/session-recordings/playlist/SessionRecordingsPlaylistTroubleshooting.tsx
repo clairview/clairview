@@ -1,4 +1,4 @@
-import { LemonDivider, Link } from '@markettor/lemon-ui'
+import { LemonDivider, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { playerSettingsLogic } from '../player/playerSettingsLogic'
@@ -34,7 +34,7 @@ export const SessionRecordingsPlaylistTroubleshooting = (): JSX.Element => {
                         </li>
                     )}
                     <li>
-                        <Link to="https://markettor.com/docs/session-replay/data-retention" target="_blank">
+                        <Link to="https://clairview.com/docs/session-replay/data-retention" target="_blank">
                             They are outside the retention period
                         </Link>
                     </li>
@@ -42,7 +42,7 @@ export const SessionRecordingsPlaylistTroubleshooting = (): JSX.Element => {
                     <h5>Web recordings</h5>
                     <li>
                         <Link
-                            to="https://markettor.com/docs/session-replay/troubleshooting#4-adtracking-blockers"
+                            to="https://clairview.com/docs/session-replay/troubleshooting#4-adtracking-blockers"
                             target="_blank"
                         >
                             An ad blocker prevented recording
@@ -50,7 +50,7 @@ export const SessionRecordingsPlaylistTroubleshooting = (): JSX.Element => {
                     </li>
                     <li>
                         <Link
-                            to="https://markettor.com/docs/session-replay/troubleshooting#1-authorized-domains-for-recordings"
+                            to="https://clairview.com/docs/session-replay/troubleshooting#1-authorized-domains-for-recordings"
                             target="_blank"
                         >
                             Your domain is not authorized

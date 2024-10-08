@@ -6,16 +6,16 @@ import { createRoot } from 'react-dom/client'
 import { Exporter } from '~/exporter/Exporter'
 import { ExportedData } from '~/exporter/types'
 import { initKea } from '~/initKea'
-import { loadMarketTorJS } from '~/loadMarketTorJS'
+import { loadClairViewJS } from '~/loadClairViewJS'
 
 import { ErrorBoundary } from '../layout/ErrorBoundary'
 
 // Disable tracking for all exports and embeds.
 // This is explicitly set as to not track our customers' customers data.
-// Without it, embeds of self-hosted iframes will log metrics to app.markettor.com.
+// Without it, embeds of self-hosted iframes will log metrics to app.clairview.com.
 window.JS_MARKETTOR_API_KEY = undefined
 
-loadMarketTorJS()
+loadClairViewJS()
 initKea()
 
 const exportedData: ExportedData = window.MARKETTOR_EXPORTED_DATA
@@ -29,7 +29,7 @@ function renderApp(): void {
             </ErrorBoundary>
         )
     } else {
-        console.error('Attempted, but could not render MarketTor app because <div id="root" /> is not found.')
+        console.error('Attempted, but could not render ClairView app because <div id="root" /> is not found.')
     }
 }
 

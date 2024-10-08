@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput, LemonSelect, LemonTag, Link } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput, LemonSelect, LemonTag, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Group } from 'kea-forms'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
@@ -229,7 +229,7 @@ export function FeatureFlagAutoRollback({ readOnly }: FeatureFlagAutoRollbackPro
                                     </div>
                                 ) : (
                                     <p className="text-muted">
-                                        This MarketTor instance is not configured for Sentry. Please contact the instance
+                                        This ClairView instance is not configured for Sentry. Please contact the instance
                                         owner to configure it.
                                     </p>
                                 )}

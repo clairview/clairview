@@ -1,6 +1,6 @@
 import './TextCard.scss'
 
-import { LemonButton, LemonButtonWithDropdown, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonButtonWithDropdown, LemonDivider } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'

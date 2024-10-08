@@ -47,7 +47,7 @@ function PersonDashboardExisting({
         if (dashboard && person) {
             // `dashboard?.filters.properties` is typed as `any` but it's a list...
             const current = Array.isArray(dashboard?.filters.properties) ? dashboard?.filters.properties : []
-            // TODO: needs https://github.com/MarketTor/markettor/pull/16653 so we can filter by person ID
+            // TODO: needs https://github.com/ClairView/clairview/pull/16653 so we can filter by person ID
             const torQLPersonFilter = `person.properties.email = '${person.properties.email}'`
             const desired: TorQLPropertyFilter = {
                 type: PropertyFilterType.TorQL,

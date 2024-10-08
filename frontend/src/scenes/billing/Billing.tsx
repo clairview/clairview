@@ -1,6 +1,6 @@
 import './Billing.scss'
 
-import { LemonButton, LemonDivider, LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider, LemonInput, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
@@ -70,7 +70,7 @@ export function Billing(): JSX.Element {
                             submit a bug report
                         </Link>
                     ) : (
-                        <Link to="mailto:sales@markettor.com">contact sales@markettor.com</Link>
+                        <Link to="mailto:sales@clairview.com">contact sales@clairview.com</Link>
                     )}
                     .
                 </LemonBanner>

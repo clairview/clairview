@@ -1,5 +1,5 @@
-import { IconArrowRightDown } from '@markettor/icons'
-import { LemonBanner, LemonTable, LemonTableColumns } from '@markettor/lemon-ui'
+import { IconArrowRightDown } from '@clairview/icons'
+import { LemonBanner, LemonTable, LemonTableColumns } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { compactNumber } from 'lib/utils'
 

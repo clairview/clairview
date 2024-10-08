@@ -128,7 +128,7 @@ exports[`sessionRecordingPlayerLogic loading session core loads metadata and sna
                         "childNodes": [
                           {
                             "id": 7,
-                            "textContent": "MarketTor",
+                            "textContent": "ClairView",
                             "type": 3,
                           },
                         ],
@@ -280,7 +280,7 @@ exports[`sessionRecordingPlayerLogic loading session core loads metadata and sna
                                 "childNodes": [
                                   {
                                     "id": 25,
-                                    "textContent": "MarketTor React",
+                                    "textContent": "ClairView React",
                                     "type": 3,
                                   },
                                 ],
@@ -1176,7 +1176,7 @@ exports[`sessionRecordingPlayerLogic loading session core loads metadata and sna
                         "childNodes": [
                           {
                             "id": 11,
-                            "textContent": "MarketTor",
+                            "textContent": "ClairView",
                             "type": 3,
                           },
                         ],
@@ -1328,7 +1328,7 @@ exports[`sessionRecordingPlayerLogic loading session core loads metadata and sna
                                 "childNodes": [
                                   {
                                     "id": 29,
-                                    "textContent": "MarketTor React",
+                                    "textContent": "ClairView React",
                                     "type": 3,
                                   },
                                 ],
@@ -1821,7 +1821,7 @@ exports[`sessionRecordingPlayerLogic loading session core loads metadata and sna
               "nextId": null,
               "node": {
                 "id": 68,
-                "textContent": "MarketTor",
+                "textContent": "ClairView",
                 "type": 3,
               },
               "parentId": 10,

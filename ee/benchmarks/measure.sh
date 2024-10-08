@@ -99,7 +99,7 @@ if [[ -v TUNNEL_SERVER ]]; then
   sleep 5
 fi
 
-CLICKHOUSE_QUERY_ENDPOINT="http://${USER}:${PASSWORD}@${QUERY_HOST}:$PORT/?database=markettor"
+CLICKHOUSE_QUERY_ENDPOINT="http://${USER}:${PASSWORD}@${QUERY_HOST}:$PORT/?database=clairview"
 CLICKHOUSE_DSN_STRING="http://${USER}:${PASSWORD}@${QUERY_HOST}:$PORT"
 
 

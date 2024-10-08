@@ -1,7 +1,7 @@
 /*
 Scene to enter a new password from a received reset link
 */
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { BridgePage } from 'lib/components/BridgePage/BridgePage'

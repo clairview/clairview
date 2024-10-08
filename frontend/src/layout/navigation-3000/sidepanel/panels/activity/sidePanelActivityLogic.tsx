@@ -7,7 +7,7 @@ import { ActivityLogItem, humanize, HumanizedActivityLogItem } from 'lib/compone
 import { dayjs } from 'lib/dayjs'
 import { LemonMarkdown } from 'lib/lemon-ui/LemonMarkdown'
 import { toParams } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { teamLogic } from 'scenes/teamLogic'
 
 import { ActivityFilters, activityForSceneLogic } from './activityForSceneLogic'
@@ -199,7 +199,7 @@ export const sidePanelActivityLogic = kea<sidePanelActivityLogicType>([
                     const importantChangesHumanized = humanize(importantChanges?.results || [], describerFor, true)
 
                     let changelogNotification: ChangelogFlagPayload | null = null
-                    const flagPayload = markettor.getFeatureFlagPayload('changelog-notification')
+                    const flagPayload = clairview.getFeatureFlagPayload('changelog-notification')
                     if (flagPayload) {
                         changelogNotification = {
                             markdown: flagPayload['markdown'],
@@ -215,7 +215,7 @@ export const sidePanelActivityLogic = kea<sidePanelActivityLogicType>([
                                 lastRead == changelogNotification.notificationDate)
 
                         const changelogNotificationHumanized: HumanizedActivityLogItem = {
-                            email: 'joe@markettor.com',
+                            email: 'joe@clairview.com',
                             name: 'Joe',
                             isSystem: true,
                             description: <LemonMarkdown>{changelogNotification.markdown}</LemonMarkdown>,

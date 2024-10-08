@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import { DateTime } from 'luxon'
 
 import { Group, Hub, Team } from '../../../src/types'

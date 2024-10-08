@@ -134,7 +134,7 @@ describe('CDP Processed Events Consumer', () => {
                         uuid: 'b3a1fe86-b10c-43cc-acaf-d208977608d0',
                         event: '$pageview',
                         properties: {
-                            $current_url: 'https://markettor.com',
+                            $current_url: 'https://clairview.com',
                             $lib_version: '1.0.0',
                         },
                     } as any,

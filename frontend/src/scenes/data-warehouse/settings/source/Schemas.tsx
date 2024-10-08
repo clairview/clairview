@@ -1,4 +1,4 @@
-import { TZLabel } from '@markettor/apps-common'
+import { TZLabel } from '@clairview/apps-common'
 import {
     LemonButton,
     LemonModal,
@@ -10,7 +10,7 @@ import {
     Link,
     Spinner,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { More } from 'lib/lemon-ui/LemonButton/More'
 import { useEffect } from 'react'

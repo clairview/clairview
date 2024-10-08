@@ -4,7 +4,7 @@ import { execHog } from './hog-executor'
 import { CdpRedis } from './redis'
 import { HogFunctionInvocation } from './types'
 
-export const BASE_REDIS_KEY = process.env.NODE_ENV == 'test' ? '@markettor-test/hog-masker' : '@markettor/hog-masker'
+export const BASE_REDIS_KEY = process.env.NODE_ENV == 'test' ? '@clairview-test/hog-masker' : '@clairview/hog-masker'
 const REDIS_KEY_TOKENS = `${BASE_REDIS_KEY}/mask`
 
 // NOTE: These are controlled via the api so are more of a sanity fallback

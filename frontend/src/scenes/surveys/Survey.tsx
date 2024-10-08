@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider, LemonTag, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider, LemonTag, Link } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { router } from 'kea-router'

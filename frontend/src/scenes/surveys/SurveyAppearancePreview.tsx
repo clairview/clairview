@@ -1,5 +1,5 @@
 import { useValues } from 'kea'
-import { renderFeedbackWidgetPreview, renderSurveysPreview } from 'markettor-js/dist/surveys-preview'
+import { renderFeedbackWidgetPreview, renderSurveysPreview } from 'clairview-js/dist/surveys-preview'
 import { useEffect, useRef } from 'react'
 
 import { Survey } from '~/types'

@@ -14,7 +14,7 @@ import { ingestionWarningsResponse } from './ingestion-warnings/__mocks__/ingest
 const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
     tables: {
         events: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'events',
             name: 'events',
             fields: {
@@ -62,7 +62,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         persons: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'persons',
             name: 'persons',
             fields: {
@@ -80,7 +80,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         person_distinct_ids: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'person_distinct_ids',
             name: 'person_distinct_ids',
             fields: {
@@ -98,7 +98,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         session_recording_events: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'session_recording_events',
             name: 'session_recording_events',
             fields: {
@@ -176,7 +176,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         cohort_people: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'cohort_people',
             name: 'cohort_people',
             fields: {
@@ -194,7 +194,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         static_cohort_people: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'static_cohort_people',
             name: 'static_cohort_people',
             fields: {
@@ -210,7 +210,7 @@ const MOCK_DATABASE: DatabaseSchemaQueryResponse = {
             },
         },
         groups: {
-            type: 'markettor',
+            type: 'clairview',
             id: 'groups',
             name: 'groups',
             fields: {

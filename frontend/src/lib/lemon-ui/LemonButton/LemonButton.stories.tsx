@@ -1,5 +1,5 @@
-import { IconGear, IconInfo, IconPlus } from '@markettor/icons'
-import { Link } from '@markettor/lemon-ui'
+import { IconGear, IconInfo, IconPlus } from '@clairview/icons'
+import { Link } from '@clairview/lemon-ui'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import clsx from 'clsx'
 import { useAsyncHandler } from 'lib/hooks/useAsyncHandler'
@@ -344,13 +344,13 @@ export const AsLinks = (): JSX.Element => {
             <LemonButton to={urls.projectHomepage()}>Internal link with "to"</LemonButton>
 
             <p>External links will be automatically detected and routed to normally</p>
-            <LemonButton to="https://markettor.com">External link</LemonButton>
+            <LemonButton to="https://clairview.com">External link</LemonButton>
 
             <p>
                 The <code>targetBlank</code> prop will open the link in a new window/tab, setting the appropriate
                 attributed like <code>rel="noopener"</code>
             </p>
-            <LemonButton to="https://markettor.com" targetBlank>
+            <LemonButton to="https://clairview.com" targetBlank>
                 External link with "targetBlank"
             </LemonButton>
         </div>

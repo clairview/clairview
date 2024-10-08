@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconX } from '@markettor/icons'
-import { LemonButton, LemonButtonWithSideActionProps } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconX } from '@clairview/icons'
+import { LemonButton, LemonButtonWithSideActionProps } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ProfessorHog } from 'lib/components/hedgehogs'
 import { LemonIconProps } from 'lib/lemon-ui/icons'
@@ -20,7 +20,7 @@ export const SidePanelActivation = (): JSX.Element => {
         <>
             <SidePanelPaneHeader title="Quick start" />
             <div className="p-4 space-y-2 overflow-y-auto">
-                <p>Use our Quick Start guide to learn about everything MarketTor can do for you and your product.</p>
+                <p>Use our Quick Start guide to learn about everything ClairView can do for you and your product.</p>
                 <div className="flex items-center justify-center">
                     <div className="flex flex-col items-center">
                         <LemonProgressCircle progress={completionPercent / 100} size={100} className="text-primary">

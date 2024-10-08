@@ -23,7 +23,7 @@ export const mockBasicUser: UserBasicType = {
     uuid: '1234',
     distinct_id: '1234',
     first_name: 'Tim',
-    email: 'tim@markettor.com',
+    email: 'tim@clairview.com',
 }
 
 export const mockEvent: EventType = {
@@ -39,7 +39,7 @@ export const mockEvent: EventType = {
         is_identified: true,
         distinct_ids: ['abcde'],
         properties: {
-            email: 'alex@markettor.com',
+            email: 'alex@clairview.com',
         },
     },
     elements: [],
@@ -194,7 +194,7 @@ export const mockSubscription: SubscriptionType = {
     id: 1,
     title: 'My example subscription',
     target_type: 'email',
-    target_value: 'ben@markettor.com,geoff@other-company.com',
+    target_value: 'ben@clairview.com,geoff@other-company.com',
     frequency: 'monthly',
     interval: 2,
     start_date: '2022-01-01T00:09:00',
@@ -216,7 +216,7 @@ export const mockIntegration: IntegrationType = {
     config: {
         team: {
             id: '123',
-            name: 'MarketTor',
+            name: 'ClairView',
         },
     },
     icon_url: '',

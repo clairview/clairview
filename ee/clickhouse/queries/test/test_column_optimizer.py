@@ -1,8 +1,8 @@
 from ee.clickhouse.materialized_columns.columns import materialize
 from ee.clickhouse.queries.column_optimizer import EnterpriseColumnOptimizer
-from markettor.models import Action
-from markettor.models.filters import Filter, RetentionFilter
-from markettor.test.base import (
+from clairview.models import Action
+from clairview.models.filters import Filter, RetentionFilter
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     cleanup_materialized_columns,

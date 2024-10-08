@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 
 function ServerSideWarning(): JSX.Element {
@@ -7,7 +7,7 @@ function ServerSideWarning(): JSX.Element {
             <p>
                 <b>Warning:</b> Server side experiment metrics require you to manually send the feature flag
                 information.{' '}
-                <Link to="https://markettor.com/tutorials/experiments#step-2-sending-the-right-events" target="_blank">
+                <Link to="https://clairview.com/tutorials/experiments#step-2-sending-the-right-events" target="_blank">
                     See this tutorial for more information.
                 </Link>
             </p>
@@ -42,7 +42,7 @@ export function JSSnippet({ flagKey, variant }: SnippetProps): JSX.Element {
     return (
         <div>
             <CodeSnippet language={Language.JavaScript} wrap>
-                {`if (markettor.getFeatureFlag('${flagKey}') === '${variant}') {
+                {`if (clairview.getFeatureFlag('${flagKey}') === '${variant}') {
     // Do something differently for this user
 } else {
     // It's a good idea to let control variant always be the default behaviour,
@@ -53,7 +53,7 @@ export function JSSnippet({ flagKey, variant }: SnippetProps): JSX.Element {
                 <b>Test that it works</b>
             </div>
             <CodeSnippet language={Language.JavaScript} wrap>
-                {`markettor.featureFlags.override({'${flagKey}': '${variant}'})`}
+                {`clairview.featureFlags.override({'${flagKey}': '${variant}'})`}
             </CodeSnippet>
         </div>
     )
@@ -63,7 +63,7 @@ export function RNSnippet({ flagKey, variant }: SnippetProps): JSX.Element {
     return (
         <>
             <CodeSnippet language={Language.JavaScript} wrap>
-                {`if (markettor.getFeatureFlag('${flagKey}') === '${variant}') {
+                {`if (clairview.getFeatureFlag('${flagKey}') === '${variant}') {
     // Do something differently for this user
 } else {
     // It's a good idea to let control variant always be the default behaviour,
@@ -78,7 +78,7 @@ export function PHPSnippet({ flagKey, variant }: SnippetProps): JSX.Element {
     return (
         <>
             <CodeSnippet language={Language.PHP} wrap>
-                {`if (MarketTor::getFeatureFlag('${flagKey}', 'user distinct id') == '${variant}') {
+                {`if (ClairView::getFeatureFlag('${flagKey}', 'user distinct id') == '${variant}') {
     // Do something differently for this user
 } else {
     // It's a good idea to let control variant always be the default behaviour,
@@ -116,7 +116,7 @@ export function RubySnippet({ flagKey, variant }: SnippetProps): JSX.Element {
     return (
         <>
             <CodeSnippet language={Language.Ruby} wrap>
-                {`experimentFlagValue = markettor.get_feature_flag('${flagKey}', 'user distinct id')
+                {`experimentFlagValue = clairview.get_feature_flag('${flagKey}', 'user distinct id')
 
 
 if experimentFlagValue == '${variant}'
@@ -136,7 +136,7 @@ export function PythonSnippet({ flagKey, variant }: SnippetProps): JSX.Element {
     return (
         <>
             <CodeSnippet language={Language.Python} wrap>
-                {`experiment_flag_value = markettor.get_feature_flag("${flagKey}", "user_distinct_id"):
+                {`experiment_flag_value = clairview.get_feature_flag("${flagKey}", "user_distinct_id"):
 
 if experiment_flag_value == '${variant}':
     # Do something differently for this user

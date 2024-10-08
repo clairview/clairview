@@ -7,16 +7,16 @@ from kafka import KafkaProducer
 from ee.clickhouse.models.test.utils.util import (
     delay_until_clickhouse_consumes_from_kafka,
 )
-from markettor.clickhouse.dead_letter_queue import (
+from clairview.clickhouse.dead_letter_queue import (
     DEAD_LETTER_QUEUE_TABLE,
     DEAD_LETTER_QUEUE_TABLE_MV_SQL,
     INSERT_DEAD_LETTER_QUEUE_EVENT_SQL,
     KAFKA_DEAD_LETTER_QUEUE_TABLE_SQL,
 )
-from markettor.client import sync_execute
-from markettor.kafka_client.topics import KAFKA_DEAD_LETTER_QUEUE
-from markettor.settings import KAFKA_HOSTS
-from markettor.test.base import BaseTest, ClickhouseTestMixin
+from clairview.client import sync_execute
+from clairview.kafka_client.topics import KAFKA_DEAD_LETTER_QUEUE
+from clairview.settings import KAFKA_HOSTS
+from clairview.test.base import BaseTest, ClickhouseTestMixin
 
 TEST_EVENT_RAW_PAYLOAD = json.dumps({"event": "some event", "properties": {"distinct_id": 2, "token": "invalid token"}})
 

@@ -1,4 +1,4 @@
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { NotFound } from 'lib/components/NotFound'
 import { NotebookNodeProps } from 'scenes/notebooks/Notebook/utils'
@@ -6,7 +6,7 @@ import { personLogic } from 'scenes/persons/personLogic'
 
 import { NotebookNodeType, PersonType } from '~/types'
 
-import { createMarketTorWidgetNode } from '../NodeWrapper'
+import { createClairViewWidgetNode } from '../NodeWrapper'
 import { notebookNodePersonFeedLogic } from './notebookNodePersonFeedLogic'
 import { Session } from './Session'
 
@@ -58,7 +58,7 @@ type NotebookNodePersonFeedAttributes = {
     id: string
 }
 
-export const NotebookNodePersonFeed = createMarketTorWidgetNode<NotebookNodePersonFeedAttributes>({
+export const NotebookNodePersonFeed = createClairViewWidgetNode<NotebookNodePersonFeedAttributes>({
     nodeType: NotebookNodeType.PersonFeed,
     titlePlaceholder: 'Feed',
     Component,

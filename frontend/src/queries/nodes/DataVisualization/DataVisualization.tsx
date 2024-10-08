@@ -1,7 +1,7 @@
 import './Components/Chart.scss'
 
-import { IconGear } from '@markettor/icons'
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { IconGear } from '@clairview/icons'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { router } from 'kea-router'

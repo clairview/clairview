@@ -12,7 +12,7 @@ import { Node } from './types'
 export const dataModelSceneLogic = kea<dataModelSceneLogicType>([
     path(['scenes', 'data-model', 'dataModelSceneLogic']),
     connect(() => ({
-        values: [databaseTableListLogic, ['markettorTablesMap', 'viewsMapById', 'dataWarehouseTablesMapById']],
+        values: [databaseTableListLogic, ['clairviewTablesMap', 'viewsMapById', 'dataWarehouseTablesMapById']],
     })),
     actions({
         traverseAncestors: (viewId: DataWarehouseSavedQuery['id'], level: number) => ({ viewId, level }),
@@ -48,7 +48,7 @@ export const dataModelSceneLogic = kea<dataModelSceneLogicType>([
         },
     })),
     selectors({
-        personFields: [(s) => [s.markettorTablesMap], (markettorTablesMap) => markettorTablesMap['persons']?.fields || []],
+        personFields: [(s) => [s.clairviewTablesMap], (clairviewTablesMap) => clairviewTablesMap['persons']?.fields || []],
         simplifiedPersonFields: [
             (s) => [s.personFields],
             (personFields) =>

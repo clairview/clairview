@@ -1,4 +1,4 @@
-import { IconDashboard } from '@markettor/icons'
+import { IconDashboard } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonCheckbox } from 'lib/lemon-ui/LemonCheckbox'
@@ -16,7 +16,7 @@ const meta: Meta = {
             description: {
                 component: `
 
-[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/MarketTor-Design-System-One?node-id=3139%3A1388)
+[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/ClairView-Design-System-One?node-id=3139%3A1388)
 
 Lemon Icons are generally [Material Icons](https://fonts.google.com/icons) with some matching in-house additions. 
 All should be based on a 24px (1.5rem) square viewbox, with icon contents fitting into a 20px (1.25rem) or smaller square. 

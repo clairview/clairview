@@ -1,4 +1,4 @@
-import { Webhook } from '@markettor/plugin-scaffold'
+import { Webhook } from '@clairview/plugin-scaffold'
 import { format } from 'util'
 
 import { PostIngestionEvent, Team } from '../../types'

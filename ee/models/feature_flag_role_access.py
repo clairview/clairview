@@ -3,7 +3,7 @@ from django.db import models
 
 class FeatureFlagRoleAccess(models.Model):
     feature_flag = models.ForeignKey(
-        "markettor.FeatureFlag",
+        "clairview.FeatureFlag",
         on_delete=models.CASCADE,
         related_name="access",
         related_query_name="access",

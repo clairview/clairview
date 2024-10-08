@@ -1,4 +1,4 @@
-import { IconTrending } from '@markettor/icons'
+import { IconTrending } from '@clairview/icons'
 import { connect, events, kea, key, path, props } from 'kea'
 import { Command, commandPaletteLogic } from 'lib/components/CommandPalette/commandPaletteLogic'
 import { dateMapping } from 'lib/utils'

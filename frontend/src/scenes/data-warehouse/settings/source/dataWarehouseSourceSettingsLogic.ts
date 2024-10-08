@@ -1,8 +1,8 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, afterMount, kea, key, listeners, path, props, reducers } from 'kea'
 import { loaders } from 'kea-loaders'
 import api from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { ExternalDataJob, ExternalDataSourceSchema, ExternalDataStripeSource } from '~/types'
 
@@ -136,7 +136,7 @@ export const dataWarehouseSourceSettingsLogic = kea<dataWarehouseSourceSettingsL
             try {
                 await api.externalDataSchemas.reload(schema.id)
 
-                markettor.capture('schema reloaded', { sourceType: clonedSource.source_type })
+                clairview.capture('schema reloaded', { sourceType: clonedSource.source_type })
             } catch (e: any) {
                 if (e.message) {
                     lemonToast.error(e.message)
@@ -157,7 +157,7 @@ export const dataWarehouseSourceSettingsLogic = kea<dataWarehouseSourceSettingsL
             try {
                 await api.externalDataSchemas.resync(schema.id)
 
-                markettor.capture('schema resynced', { sourceType: clonedSource.source_type })
+                clairview.capture('schema resynced', { sourceType: clonedSource.source_type })
             } catch (e: any) {
                 if (e.message) {
                     lemonToast.error(e.message)

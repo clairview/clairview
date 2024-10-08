@@ -1,4 +1,4 @@
-import { LemonButton, LemonTextAreaMarkdown } from '@markettor/lemon-ui'
+import { LemonButton, LemonTextAreaMarkdown } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { humanizeScope } from 'lib/components/ActivityLog/humanizeActivity'
 import { useEffect } from 'react'

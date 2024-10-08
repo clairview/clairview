@@ -7,20 +7,20 @@
             "id": 4,
             "plugin_type": "custom",
             "name": "Replicator",
-            "description": "Replicate MarketTor event stream in another MarketTor instance",
-            "url": "https://github.com/MarketTor/markettor-plugin-replicator",
+            "description": "Replicate ClairView event stream in another ClairView instance",
+            "url": "https://github.com/ClairView/clairview-plugin-replicator",
             "icon": null,
             "config_schema": [
                 {
                     "key": "host",
-                    "hint": "E.g. markettor.yourcompany.com",
+                    "hint": "E.g. clairview.yourcompany.com",
                     "name": "Host",
                     "type": "string",
                     "required": true
                 },
                 {
                     "key": "project_api_key",
-                    "hint": "Grab it from e.g. https://markettor.yourcompany.com/project/settings",
+                    "hint": "Grab it from e.g. https://clairview.yourcompany.com/project/settings",
                     "name": "Project API Key",
                     "type": "string",
                     "required": true
@@ -43,7 +43,7 @@
                 },
                 {
                     "key": "disable_geoip",
-                    "hint": "Add $disable_geoip so that the receiving MarketTor instance doesn't try to resolve the IP address.",
+                    "hint": "Add $disable_geoip so that the receiving ClairView instance doesn't try to resolve the IP address.",
                     "name": "Disable Geo IP?",
                     "type": "choice",
                     "choices": ["Yes", "No"],
@@ -64,8 +64,8 @@
             "id": 3,
             "plugin_type": "custom",
             "name": "GeoIP",
-            "description": "Enrich MarketTor events and persons with IP location data",
-            "url": "https://github.com/MarketTor/markettor-plugin-geoip",
+            "description": "Enrich ClairView events and persons with IP location data",
+            "url": "https://github.com/ClairView/clairview-plugin-geoip",
             "icon": null,
             "config_schema": [],
             "tag": "2dd67e1dec9c8b5febd7a6d9235c51072950cd37",
@@ -82,7 +82,7 @@
             "plugin_type": "custom",
             "name": "Customer.io",
             "description": "Send event data and emails into Customer.io.",
-            "url": "https://github.com/MarketTor/customerio-plugin",
+            "url": "https://github.com/ClairView/customerio-plugin",
             "icon": null,
             "config_schema": [
                 {
@@ -134,7 +134,7 @@
                 {
                     "key": "eventsToSend",
                     "hint": "If this is set, only the specified events (comma-separated) will be sent to Customer.io.",
-                    "name": "MarketTor Event Allowlist",
+                    "name": "ClairView Event Allowlist",
                     "type": "string"
                 }
             ],
@@ -152,7 +152,7 @@
             "plugin_type": "custom",
             "name": "BigQuery Export",
             "description": "Sends events to a BigQuery database on ingestion.",
-            "url": "https://github.com/MarketTor/bigquery-plugin",
+            "url": "https://github.com/ClairView/bigquery-plugin",
             "icon": null,
             "config_schema": [
                 {

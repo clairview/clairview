@@ -1,8 +1,8 @@
 from ee.api.test.base import APILicensedTest
 from ee.models.organization_resource_access import OrganizationResourceAccess
 from ee.models.role import Role, RoleMembership
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.organization import OrganizationMembership
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.organization import OrganizationMembership
 
 
 class TestFeatureFlagEnterpriseAPI(APILicensedTest):

@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import { captureException } from '@sentry/react'
 import { actions, afterMount, connect, kea, key, path, props, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'

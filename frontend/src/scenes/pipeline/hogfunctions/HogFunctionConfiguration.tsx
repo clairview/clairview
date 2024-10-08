@@ -1,4 +1,4 @@
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -12,7 +12,7 @@ import {
     LemonTextArea,
     Link,
     SpinnerOverlay,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { NotFound } from 'lib/components/NotFound'
@@ -380,7 +380,7 @@ export function HogFunctionConfiguration({ templateId, id }: { templateId?: stri
                                                         <span className="text-xs text-muted-alt">
                                                             This is the underlying Hog code that will run whenever the
                                                             filters match.{' '}
-                                                            <Link to="https://markettor.com/docs/hog">See the docs</Link>{' '}
+                                                            <Link to="https://clairview.com/docs/hog">See the docs</Link>{' '}
                                                             for more info
                                                         </span>
                                                         <CodeEditorResizeable

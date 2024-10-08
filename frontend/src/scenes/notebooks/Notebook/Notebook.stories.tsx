@@ -259,7 +259,7 @@ const meta: Meta = {
                                 uuid: '0188ea22-05ae-0000-6d0b-d47602552d2c',
                                 distinct_id: 'wnATPtp3kGKinrPUTgGGuR80MmuzrJLRwzGgtoJCt4V',
                                 first_name: 'Paul',
-                                email: 'paul@markettor.com',
+                                email: 'paul@clairview.com',
                                 is_email_verified: false,
                             },
                             last_modified_at: '2023-07-03T17:03:51.166530Z',
@@ -268,7 +268,7 @@ const meta: Meta = {
                                 uuid: '0188ea22-05ae-0000-6d0b-d47602552d2c',
                                 distinct_id: 'wnATPtp3kGKinrPUTgGGuR80MmuzrJLRwzGgtoJCt4V',
                                 first_name: 'Paul',
-                                email: 'paul@markettor.com',
+                                email: 'paul@clairview.com',
                                 is_email_verified: false,
                             },
                         },
@@ -295,13 +295,13 @@ const meta: Meta = {
                             start_url: 'http://localhost:8000/replay/recent',
                             person: {
                                 id: 1,
-                                name: 'paul@markettor.com',
+                                name: 'paul@clairview.com',
                                 distinct_ids: [
                                     'uLI7S0z6rWQIKAjgXhdUBplxPYymuQqxH5QbJKe2wqr',
                                     '018a8a51-a39c-78f9-a4e4-1183f059f7cc',
                                 ],
                                 properties: {
-                                    email: 'paul@markettor.com',
+                                    email: 'paul@clairview.com',
                                     $initial_os: 'Mac OS X',
                                     $geoip_latitude: -33.8715,
                                     $geoip_city_name: 'Sydney',

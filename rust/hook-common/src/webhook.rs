@@ -118,8 +118,8 @@ impl From<&HttpMethod> for http::Method {
 }
 
 /// `JobParameters` required for the `WebhookWorker` to execute a webhook.
-/// These parameters should match the exported Webhook interface that MarketTor plugins.
-/// implement. See: https://github.com/MarketTor/plugin-scaffold/blob/main/src/types.ts#L15.
+/// These parameters should match the exported Webhook interface that ClairView plugins.
+/// implement. See: https://github.com/ClairView/plugin-scaffold/blob/main/src/types.ts#L15.
 #[derive(Deserialize, Serialize, Debug, PartialEq, Clone)]
 pub struct WebhookJobParameters {
     pub body: String,

@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonInput, LemonSelect, LemonSelectOption } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonInput, LemonSelect, LemonSelectOption } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import { capitalizeFirstLetter, pluralize } from 'lib/utils'

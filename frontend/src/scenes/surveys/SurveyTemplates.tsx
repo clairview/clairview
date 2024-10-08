@@ -1,6 +1,6 @@
 import './SurveyTemplates.scss'
 
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'

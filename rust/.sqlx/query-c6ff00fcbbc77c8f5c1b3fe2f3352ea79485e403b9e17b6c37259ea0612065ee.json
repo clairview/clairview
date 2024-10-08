@@ -1,6 +1,6 @@
 {
     "db_name": "PostgreSQL",
-    "query": "SELECT group_type_index FROM markettor_grouptypemapping WHERE group_type = $1 AND team_id = $2",
+    "query": "SELECT group_type_index FROM clairview_grouptypemapping WHERE group_type = $1 AND team_id = $2",
     "describe": {
         "columns": [
             {

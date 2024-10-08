@@ -1,8 +1,8 @@
 import './InfiniteList.scss'
 import '../../lemon-ui/Popover/Popover.scss'
 
-import { IconArchive } from '@markettor/icons'
-import { LemonTag } from '@markettor/lemon-ui'
+import { IconArchive } from '@clairview/icons'
+import { LemonTag } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { ControlledDefinitionPopover } from 'lib/components/DefinitionPopover/DefinitionPopoverContents'

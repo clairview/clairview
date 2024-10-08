@@ -6,10 +6,10 @@ from django.utils import timezone
 from ee.billing.billing_manager import BillingManager
 from ee.billing.billing_types import Product
 from ee.models.license import License, LicenseManager
-from markettor.cloud_utils import TEST_clear_instance_license_cache
-from markettor.models.organization import OrganizationMembership
-from markettor.models.user import User
-from markettor.test.base import BaseTest
+from clairview.cloud_utils import TEST_clear_instance_license_cache
+from clairview.models.organization import OrganizationMembership
+from clairview.models.user import User
+from clairview.test.base import BaseTest
 
 
 def create_default_products_response(**kwargs) -> dict[str, list[Product]]:
@@ -20,8 +20,8 @@ def create_default_products_response(**kwargs) -> dict[str, list[Product]]:
                 headline="Product analytics with autocapture",
                 description="A comprehensive product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.",
                 usage_key="events",
-                image_url="https://markettor.com/images/products/product-analytics/product-analytics.png",
-                docs_url="https://markettor.com/docs/product-analytics",
+                image_url="https://clairview.com/images/products/product-analytics/product-analytics.png",
+                docs_url="https://clairview.com/docs/product-analytics",
                 type="product_analytics",
                 unit="event",
                 contact_support=False,
@@ -51,7 +51,7 @@ class TestBillingManager(BaseTest):
         BillingManager(license=None).get_billing(organization, plan_keys=None)
         assert billing_patch_request_mock.call_count == 1
         billing_patch_request_mock.assert_called_with(
-            "https://billing.markettor.com/api/products-v2", params={"plan": "standard"}, headers={}
+            "https://billing.clairview.com/api/products-v2", params={"plan": "standard"}, headers={}
         )
 
     @patch(

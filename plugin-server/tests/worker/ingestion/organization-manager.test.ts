@@ -33,7 +33,7 @@ describe('OrganizationManager()', () => {
             jest.spyOn(global.Date, 'now').mockImplementation(() => new Date('2020-02-27 11:00:25').getTime())
             await hub.db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                "UPDATE markettor_organization SET name = 'Updated Name!'",
+                "UPDATE clairview_organization SET name = 'Updated Name!'",
                 undefined,
                 'testTag'
             )
@@ -62,7 +62,7 @@ describe('OrganizationManager()', () => {
         beforeEach(async () => {
             await hub.db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `UPDATE markettor_organization
+                `UPDATE clairview_organization
                  SET available_product_features = array ['{"key": "some_feature", "name": "some_feature"}'::jsonb]`,
                 undefined,
                 ''

@@ -123,9 +123,9 @@ describe('lib/utils', () => {
 
     describe('isURL()', () => {
         it('recognizes URLs properly', () => {
-            expect(isURL('https://www.markettor.com')).toEqual(true)
-            expect(isURL('http://www.markettor.com')).toEqual(true)
-            expect(isURL('http://www.markettor.com:8000/images')).toEqual(true)
+            expect(isURL('https://www.clairview.com')).toEqual(true)
+            expect(isURL('http://www.clairview.com')).toEqual(true)
+            expect(isURL('http://www.clairview.com:8000/images')).toEqual(true)
             expect(isURL('http://localhost:8000/login?next=/insights')).toEqual(true)
             expect(isURL('http://localhost:8000/activity/explore?properties=%5B%5D')).toEqual(true)
             expect(isURL('https://apple.com/')).toEqual(true)
@@ -140,9 +140,9 @@ describe('lib/utils', () => {
 
         it('recognizes non-URLs properly', () => {
             expect(isURL('1234567890')).toEqual(false)
-            expect(isURL('www.markettor')).toEqual(false)
-            expect(isURL('-.markettor')).toEqual(false)
-            expect(isURL('markettor.3')).toEqual(false)
+            expect(isURL('www.clairview')).toEqual(false)
+            expect(isURL('-.clairview')).toEqual(false)
+            expect(isURL('clairview.3')).toEqual(false)
             expect(isURL(1)).toEqual(false)
             expect(isURL(true)).toEqual(false)
             expect(isURL(null)).toEqual(false)
@@ -158,9 +158,9 @@ describe('lib/utils', () => {
 
     describe('isExternalLink()', () => {
         it('recognizes external links properly', () => {
-            expect(isExternalLink('http://www.markettor.com')).toEqual(true)
-            expect(isExternalLink('https://www.markettor.com')).toEqual(true)
-            expect(isExternalLink('mailto:ben@markettor.com')).toEqual(true)
+            expect(isExternalLink('http://www.clairview.com')).toEqual(true)
+            expect(isExternalLink('https://www.clairview.com')).toEqual(true)
+            expect(isExternalLink('mailto:ben@clairview.com')).toEqual(true)
         })
 
         it('recognizes non-external links properly', () => {

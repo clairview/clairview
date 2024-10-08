@@ -1,11 +1,11 @@
 from prometheus_client import Histogram
 
-from markettor.clickhouse.client import sync_execute
-from markettor.models.team import Team
-from markettor.session_recordings.models.session_recording import SessionRecording
+from clairview.clickhouse.client import sync_execute
+from clairview.models.team import Team
+from clairview.session_recordings.models.session_recording import SessionRecording
 
 FIND_RECORDING_NEIGHBOURS_TIMING = Histogram(
-    "markettor_session_recordings_find_recording_neighbours",
+    "clairview_session_recordings_find_recording_neighbours",
     "Time spent finding the most similar recording embeddings for a single session",
 )
 

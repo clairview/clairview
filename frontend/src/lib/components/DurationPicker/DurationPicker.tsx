@@ -1,4 +1,4 @@
-import { LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useEffect, useState } from 'react'
 
 import { Duration, SmallTimeUnit } from '~/types'

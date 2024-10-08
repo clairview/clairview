@@ -11,7 +11,7 @@ function VueCreatePluginsFileSnippet(): JSX.Element {
         <CodeSnippet language={Language.Bash}>
             {`mkdir plugins #skip if you already have one
 cd plugins 
-touch markettor.js`}
+touch clairview.js`}
         </CodeSnippet>
     )
 }
@@ -21,12 +21,12 @@ function VuePluginsCodeSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.JavaScript}>
-            {`//./plugins/markettor.js
-import markettor from "markettor-js";
+            {`//./plugins/clairview.js
+import clairview from "clairview-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$markettor = markettor.init(
+    app.config.globalProperties.$clairview = clairview.init(
       '${currentTeam?.api_token}',
       {
         api_host: '${apiHostOrigin()}',
@@ -44,11 +44,11 @@ function VueActivatePluginSnippet(): JSX.Element {
             {`//main.js
 import { createApp } from 'vue'
 import App from './App.vue'
-import markettorPlugin from "./plugins/markettor"; //import the plugin. 
+import clairviewPlugin from "./plugins/clairview"; //import the plugin. 
 
 const app = createApp(App);
 
-app.use(markettorPlugin); //install the plugin
+app.use(clairviewPlugin); //install the plugin
 app.mount('#app')`}
         </CodeSnippet>
     )
@@ -58,18 +58,18 @@ export function SDKInstallVueInstructions(): JSX.Element {
     return (
         <>
             <p>
-                The below guide is for integrating using plugins in Vue versions 3 and above. For integrating MarketTor
+                The below guide is for integrating using plugins in Vue versions 3 and above. For integrating ClairView
                 using Provide/inject, Vue.prototype, or versions 2.7 and below, see our{' '}
-                <Link to="https://markettor.com/docs/libraries/vue-js">Vue docs</Link>
+                <Link to="https://clairview.com/docs/libraries/vue-js">Vue docs</Link>
             </p>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
             <h3>Create a plugin</h3>
             <p>
-                Create a new file <code>markettor.js</code> in your plugins directory:
+                Create a new file <code>clairview.js</code> in your plugins directory:
             </p>
             <VueCreatePluginsFileSnippet />
-            Add the following code to <code>markettor.js</code>:
+            Add the following code to <code>clairview.js</code>:
             <VuePluginsCodeSnippet />
             <h3>Activate your plugin</h3>
             <VueActivatePluginSnippet />

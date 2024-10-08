@@ -139,7 +139,7 @@ describe('hooks', () => {
                     ...hook,
                     target: 'http://127.0.0.1',
                 })
-            ).rejects.toThrow(new FetchError('Internal hostname', 'markettor-host-guard'))
+            ).rejects.toThrow(new FetchError('Internal hostname', 'clairview-host-guard'))
         })
     })
 })

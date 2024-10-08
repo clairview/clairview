@@ -6,10 +6,10 @@ from rest_framework.permissions import SAFE_METHODS, BasePermission
 from rest_framework.request import Request
 
 from ee.models.dashboard_privilege import DashboardPrivilege
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.models import Dashboard, User
-from markettor.user_permissions import UserPermissions, UserPermissionsSerializerMixin
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.models import Dashboard, User
+from clairview.user_permissions import UserPermissions, UserPermissionsSerializerMixin
 
 
 class CanEditDashboardCollaborator(BasePermission):

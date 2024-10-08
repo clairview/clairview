@@ -1,5 +1,5 @@
-import { IconWarning } from '@markettor/icons'
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { IconWarning } from '@clairview/icons'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useKeyboardHotkeys } from 'lib/hooks/useKeyboardHotkeys'
 import { IconOpenInNew } from 'lib/lemon-ui/icons'
@@ -107,7 +107,7 @@ export function InstanceConfigTab(): JSX.Element {
                     <div>
                         Changing these settings will take effect on your entire instance.{' '}
                         <Link
-                            to="https://markettor.com/docs/self-host/configure/instance-settings"
+                            to="https://clairview.com/docs/self-host/configure/instance-settings"
                             target="_blank"
                             targetBlankIcon
                         >
@@ -164,7 +164,7 @@ export function InstanceConfigTab(): JSX.Element {
                 <h3>Environment configuration</h3>
                 <div>
                     These settings can only be modified by environment variables.{' '}
-                    <Link to="https://markettor.com/docs/self-host/configure/environment-variables" target="_blank">
+                    <Link to="https://clairview.com/docs/self-host/configure/environment-variables" target="_blank">
                         Learn more <IconOpenInNew style={{ verticalAlign: 'middle' }} />
                     </Link>
                     .

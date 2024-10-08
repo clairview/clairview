@@ -17,9 +17,9 @@ import { torql } from '~/queries/utils'
 
 import type { versionCheckerLogicType } from './versionCheckerLogicType'
 
-// If you would like to deprecate all markettor-js versions older than a specific version
+// If you would like to deprecate all clairview-js versions older than a specific version
 // (i.e. after fixing an important bug) please edit
-// https://github.com/MarketTor/markettor-js/blob/main/deprecation.json
+// https://github.com/ClairView/clairview-js/blob/main/deprecation.json
 
 const CHECK_INTERVAL_MS = 1000 * 60 * 60 * 6 // 6 hour
 
@@ -65,12 +65,12 @@ export const versionCheckerLogic = kea<versionCheckerLogicType>([
                     // Make both requests simultaneously and don't return until both have finished, to avoid a flash
                     // of partial results in the UI.
                     const availableVersionsPromise: Promise<SemanticVersion[]> = fetch(
-                        'https://api.github.com/repos/markettor/markettor-js/tags'
+                        'https://api.github.com/repos/clairview/clairview-js/tags'
                     )
                         .then((r) => r.json())
                         .then((r) => r.map((x: any) => tryParseVersion(x.name)).filter(isNotNil))
                     const deprecationPromise: Promise<MarkettorJSDeprecation> = fetch(
-                        'https://raw.githubusercontent.com/MarketTor/markettor-js/main/deprecation.json'
+                        'https://raw.githubusercontent.com/ClairView/clairview-js/main/deprecation.json'
                     ).then((r) => r.json())
                     const settled = await Promise.allSettled([availableVersionsPromise, deprecationPromise])
                     const availableVersions = settled[0].status === 'fulfilled' ? settled[0].value : []

@@ -1,5 +1,5 @@
 import api from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { PropertyFilterType, PropertyOperator } from '~/types'
 
@@ -13,10 +13,10 @@ describe('API helper', () => {
         fakeFetch.mockResolvedValue({ ok: true, json: () => Promise.resolve(FAKE_FETCH_RESULT) })
         window.fetch = fakeFetch
 
-        jest.spyOn(markettor, 'capture').mockImplementation(() => {
+        jest.spyOn(clairview, 'capture').mockImplementation(() => {
             return undefined
         })
-        jest.spyOn(markettor, 'get_session_id').mockReturnValue('fake-session-id')
+        jest.spyOn(clairview, 'get_session_id').mockReturnValue('fake-session-id')
     })
 
     describe('events', () => {

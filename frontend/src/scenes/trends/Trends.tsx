@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { insightLogic } from 'scenes/insights/insightLogic'
 import { insightSceneLogic } from 'scenes/insights/insightSceneLogic'

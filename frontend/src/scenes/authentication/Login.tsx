@@ -1,6 +1,6 @@
 import './Login.scss'
 
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
@@ -25,8 +25,8 @@ export const ERROR_MESSAGES: Record<string, string | JSX.Element> = {
     invalid_sso_provider: (
         <>
             The SSO provider you specified is invalid. Visit{' '}
-            <Link to="https://markettor.com/sso" target="_blank">
-                https://markettor.com/sso
+            <Link to="https://clairview.com/sso" target="_blank">
+                https://clairview.com/sso
             </Link>{' '}
             for details.
         </>
@@ -35,8 +35,8 @@ export const ERROR_MESSAGES: Record<string, string | JSX.Element> = {
         <>
             Cannot login with SSO provider because the provider is not configured, or your instance does not have the
             required license. Please visit{' '}
-            <Link to="https://markettor.com/sso" target="_blank">
-                https://markettor.com/sso
+            <Link to="https://clairview.com/sso" target="_blank">
+                https://clairview.com/sso
             </Link>{' '}
             for details.
         </>
@@ -81,7 +81,7 @@ export function Login(): JSX.Element {
             message={
                 <>
                     Welcome to
-                    <br /> MarketTor{preflight?.cloud ? ' Cloud' : ''}!
+                    <br /> ClairView{preflight?.cloud ? ' Cloud' : ''}!
                 </>
             }
             footer={<SupportModalButton />}

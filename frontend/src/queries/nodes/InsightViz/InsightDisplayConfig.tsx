@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ChartFilter } from 'lib/components/ChartFilter'
 import { CompareFilter } from 'lib/components/CompareFilter/CompareFilter'
@@ -8,7 +8,7 @@ import { UnitPicker } from 'lib/components/UnitPicker/UnitPicker'
 import { NON_TIME_SERIES_DISPLAY_TYPES } from 'lib/constants'
 import { LemonMenu, LemonMenuItems } from 'lib/lemon-ui/LemonMenu'
 import { DEFAULT_DECIMAL_PLACES } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { ReactNode } from 'react'
 import { funnelDataLogic } from 'scenes/funnels/funnelDataLogic'
 import { axisLabel } from 'scenes/insights/aggregationAxisFormat'
@@ -206,7 +206,7 @@ function DecimalPrecisionInput(): JSX.Element {
     const { updateInsightFilter } = useActions(insightVizDataLogic(insightProps))
 
     const reportChange = useDebouncedCallback(() => {
-        markettor.capture('decimal places changed', {
+        clairview.capture('decimal places changed', {
             decimal_places: trendsFilter?.decimalPlaces,
         })
     }, 500)

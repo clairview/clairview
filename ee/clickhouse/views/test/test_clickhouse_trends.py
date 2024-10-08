@@ -11,31 +11,31 @@ from django.test import Client
 from freezegun import freeze_time
 
 from ee.api.test.base import LicensedTestMixin
-from markettor.api.test.test_cohort import create_cohort_ok
-from markettor.api.test.test_event_definition import (
+from clairview.api.test.test_cohort import create_cohort_ok
+from clairview.api.test.test_event_definition import (
     create_organization,
     create_team,
     create_user,
 )
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.instance_setting import set_instance_setting
-from markettor.models.team import Team
-from markettor.test.base import (
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.instance_setting import set_instance_setting
+from clairview.models.team import Team
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_person,
     also_test_with_materialized_columns,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import journeys_for, update_or_create_person
+from clairview.test.test_journeys import journeys_for, update_or_create_person
 
 
 @pytest.mark.django_db
 @pytest.mark.ee
 def test_includes_only_intervals_within_range(client: Client):
     """
-    This is the case highlighted by https://github.com/MarketTor/markettor/issues/2675
+    This is the case highlighted by https://github.com/ClairView/clairview/issues/2675
 
     Here the issue is that we request, for instance, 14 days as the
     date_from, display at weekly intervals but previously we
@@ -53,7 +53,7 @@ def test_includes_only_intervals_within_range(client: Client):
 
     #  I'm creating a cohort here so that I can use as a breakdown, just because
     #  this is what was used demonstrated in
-    #  https://github.com/MarketTor/markettor/issues/2675 but it might not be the
+    #  https://github.com/ClairView/clairview/issues/2675 but it might not be the
     #  simplest way to reproduce
 
     # "2021-09-19" is a sunday, i.e. beginning of week

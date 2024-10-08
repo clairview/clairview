@@ -1,4 +1,4 @@
-import { LemonCollapse, LemonModal, Link } from '@markettor/lemon-ui'
+import { LemonCollapse, LemonModal, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import EarlyAccessFeatureImage from 'public/early-access-feature-demo.png'
@@ -103,7 +103,7 @@ export function InstructionsModal({ onClose, visible, flag }: InstructionsModalP
 function FeatureEnrollInstructions({ flag }: { flag: string }): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript} wrap>
-            {`markettor.updateEarlyAccessFeatureEnrollment("${flag}", true)
+            {`clairview.updateEarlyAccessFeatureEnrollment("${flag}", true)
 `}
         </CodeSnippet>
     )
@@ -112,7 +112,7 @@ function FeatureEnrollInstructions({ flag }: { flag: string }): JSX.Element {
 function FeatureUnenrollInstructions({ flag }: { flag: string }): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript} wrap>
-            {`markettor.updateEarlyAccessFeatureEnrollment("${flag}", false)
+            {`clairview.updateEarlyAccessFeatureEnrollment("${flag}", false)
 `}
         </CodeSnippet>
     )
@@ -121,7 +121,7 @@ function FeatureUnenrollInstructions({ flag }: { flag: string }): JSX.Element {
 function RetrievePreviewsInstructions(): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript} wrap>
-            {`markettor.getEarlyAccessFeatures((previewItemData) => {
+            {`clairview.getEarlyAccessFeatures((previewItemData) => {
     // do something with early access feature
 })
 `}

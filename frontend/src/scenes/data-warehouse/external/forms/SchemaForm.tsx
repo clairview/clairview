@@ -1,4 +1,4 @@
-import { LemonButton, LemonCheckbox, LemonModal, LemonTable } from '@markettor/lemon-ui'
+import { LemonButton, LemonCheckbox, LemonModal, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { sourceWizardLogic } from '../../new/sourceWizardLogic'

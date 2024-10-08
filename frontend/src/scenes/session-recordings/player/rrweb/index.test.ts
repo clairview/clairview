@@ -5,13 +5,13 @@ describe('CorsPlugin', () => {
         expect(CorsPlugin._replaceJSUrl(jsUrl)).toEqual(`https://replay.ph-proxy.com/proxy?url=${jsUrl}`)
     })
     it.each([
-        `@font-face { font-display: fallback; font-family: "Roboto Condensed"; font-weight: 400; font-style: normal; src: url("https://markettor.com/assets/fonts/roboto/roboto_condensed_reg-webfont.woff2?11012022") format("woff2"), url("https://markettor.com/assets/fonts/roboto/roboto_condensed_reg-webfont.woff?11012022")`,
-        `url("https://app.markettor.com/fonts/my-font.woff2")`,
+        `@font-face { font-display: fallback; font-family: "Roboto Condensed"; font-weight: 400; font-style: normal; src: url("https://clairview.com/assets/fonts/roboto/roboto_condensed_reg-webfont.woff2?11012022") format("woff2"), url("https://clairview.com/assets/fonts/roboto/roboto_condensed_reg-webfont.woff?11012022")`,
+        `url("https://app.clairview.com/fonts/my-font.woff2")`,
     ])('should replace font urls in stylesheets', (content: string) => {
         expect(CorsPlugin._replaceFontCssUrls(content)).toMatchSnapshot()
     })
 
-    it.each(['https://app.markettor.com/fonts/my-font.woff2?t=1234', 'https://app.markettor.com/fonts/my-font.ttf'])(
+    it.each(['https://app.clairview.com/fonts/my-font.woff2?t=1234', 'https://app.clairview.com/fonts/my-font.ttf'])(
         'should replace font urls in links',
         (content: string) => {
             expect(CorsPlugin._replaceFontUrl(content)).toEqual(`https://replay.ph-proxy.com/proxy?url=${content}`)
@@ -19,9 +19,9 @@ describe('CorsPlugin', () => {
     )
 
     it.each([
-        'https://app.markettor.com/my-image.jpeg',
+        'https://app.clairview.com/my-image.jpeg',
         // ttf substring was matching in a previous version
-        'https://app-static.eu.markettor.com/static/index-EBVVDttf.css',
+        'https://app-static.eu.clairview.com/static/index-EBVVDttf.css',
     ])('should not replace non-font urls in links', (content: string) => {
         expect(CorsPlugin._replaceFontUrl(content)).toEqual(content)
     })
@@ -29,9 +29,9 @@ describe('CorsPlugin', () => {
     it('can replace a modulepreload js link', () => {
         const el = document.createElement('link')
         el.setAttribute('rel', 'modulepreload')
-        el.href = 'https://app.markettor.com/my-image.js'
+        el.href = 'https://app.clairview.com/my-image.js'
         CorsPlugin.onBuild?.(el, { id: 1, replayer: null as unknown as any })
-        expect(el.href).toEqual(`https://replay.ph-proxy.com/proxy?url=https://app.markettor.com/my-image.js`)
+        expect(el.href).toEqual(`https://replay.ph-proxy.com/proxy?url=https://app.clairview.com/my-image.js`)
     })
 })
 
@@ -71,7 +71,7 @@ describe('WindowTitlePlugin', () => {
                                                     {
                                                         id: 123456789,
                                                         type: 3,
-                                                        textContent: 'Recordings • MarketTor',
+                                                        textContent: 'Recordings • ClairView',
                                                     },
                                                 ],
                                             },
@@ -86,7 +86,7 @@ describe('WindowTitlePlugin', () => {
             true,
             { replayer: null as unknown as any }
         )
-        expect(mockCallback).toHaveBeenCalledWith('0191dd6c-cd35-71ad-9114-264ebef5ab38', 'Recordings • MarketTor')
+        expect(mockCallback).toHaveBeenCalledWith('0191dd6c-cd35-71ad-9114-264ebef5ab38', 'Recordings • ClairView')
 
         mockCallback.mockClear()
 
@@ -94,7 +94,7 @@ describe('WindowTitlePlugin', () => {
             {
                 type: 3,
                 windowId: '0191dd6c-cd35-71ad-9114-264ebef5ab38',
-                data: { texts: [{ id: 123, value: 'MarketTor • A new title' }] },
+                data: { texts: [{ id: 123, value: 'ClairView • A new title' }] },
             } as any,
             true,
             { replayer: null as unknown as any }
@@ -106,13 +106,13 @@ describe('WindowTitlePlugin', () => {
             {
                 type: 3,
                 windowId: '0191dd6c-cd35-71ad-9114-264ebef5ab38',
-                data: { source: 0, texts: [{ id: 123456789, value: 'MarketTor • A new title' }] },
+                data: { source: 0, texts: [{ id: 123456789, value: 'ClairView • A new title' }] },
             } as any,
             true,
             { replayer: null as unknown as any }
         )
         // callback for title node
-        expect(mockCallback).toHaveBeenCalledWith('0191dd6c-cd35-71ad-9114-264ebef5ab38', 'MarketTor • A new title')
+        expect(mockCallback).toHaveBeenCalledWith('0191dd6c-cd35-71ad-9114-264ebef5ab38', 'ClairView • A new title')
 
         // new full snapshot
         mockCallback.mockClear()
@@ -130,7 +130,7 @@ describe('WindowTitlePlugin', () => {
             {
                 type: 3,
                 windowId: '0191dd6c-cd35-71ad-9114-264ebef5ab38',
-                data: { source: 0, texts: [{ id: 123456789, value: 'MarketTor • A new title' }] },
+                data: { source: 0, texts: [{ id: 123456789, value: 'ClairView • A new title' }] },
             } as any,
             true,
             { replayer: null as unknown as any }
@@ -172,7 +172,7 @@ describe('WindowTitlePlugin', () => {
                                                 childNodes: [
                                                     {
                                                         type: 3,
-                                                        textContent: 'Recordings • MarketTor',
+                                                        textContent: 'Recordings • ClairView',
                                                     },
                                                 ],
                                             },

@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonButton, LemonSelect } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonButton, LemonSelect } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { getClampedExclusionStepRange } from 'scenes/funnels/funnelUtils'

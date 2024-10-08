@@ -33,13 +33,13 @@ export function Elements(): JSX.Element {
     return (
         <>
             <div
-                id="markettor-infowindow-container"
+                id="clairview-infowindow-container"
                 className="w-full h-full absolute top-0 left-0 pointer-events-none z-[2147483021]"
             >
                 <ElementInfoWindow />
             </div>
             <div
-                id="markettor-toolbar-elements"
+                id="clairview-toolbar-elements"
                 className="w-full h-full absolute top-0 pointer-events-none z-[2147483010]"
                 // eslint-disable-next-line react/forbid-dom-props
                 style={{

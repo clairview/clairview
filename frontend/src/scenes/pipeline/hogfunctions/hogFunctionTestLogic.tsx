@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, afterMount, connect, kea, key, listeners, path, props, reducers } from 'kea'
 import { forms } from 'kea-forms'
 import api from 'lib/api'

@@ -1,7 +1,7 @@
 import './FeatureFlag.scss'
 
-import { IconCollapse, IconExpand, IconPlus, IconTrash } from '@markettor/icons'
-import { LemonDialog, LemonSegmentedButton, LemonSkeleton, LemonSwitch } from '@markettor/lemon-ui'
+import { IconCollapse, IconExpand, IconPlus, IconTrash } from '@clairview/icons'
+import { LemonDialog, LemonSegmentedButton, LemonSkeleton, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form, Group } from 'kea-forms'
 import { router } from 'kea-router'
@@ -26,7 +26,7 @@ import { Lettermark, LettermarkColor } from 'lib/lemon-ui/Lettermark'
 import { Link } from 'lib/lemon-ui/Link'
 import { featureFlagLogic as enabledFeaturesLogic } from 'lib/logic/featureFlagLogic'
 import { alphabet, capitalizeFirstLetter } from 'lib/utils'
-import { MarketTorFeature } from 'markettor-js/react'
+import { ClairViewFeature } from 'clairview-js/react'
 import { useEffect, useState } from 'react'
 import { Dashboard } from 'scenes/dashboard/Dashboard'
 import { dashboardLogic } from 'scenes/dashboard/dashboardLogic'
@@ -202,9 +202,9 @@ export function FeatureFlag({ id }: { id?: string } = {}): JSX.Element {
             ),
             key: FeatureFlagsTab.Analysis,
             content: (
-                <MarketTorFeature flag={FEATURE_FLAGS.FF_DASHBOARD_TEMPLATES} match={true}>
+                <ClairViewFeature flag={FEATURE_FLAGS.FF_DASHBOARD_TEMPLATES} match={true}>
                     <AnalysisTab id={id} featureFlag={featureFlag} />
-                </MarketTorFeature>
+                </ClairViewFeature>
             ),
         })
     }
@@ -298,7 +298,7 @@ export function FeatureFlag({ id }: { id?: string } = {}): JSX.Element {
                                             <span className="text-warning">
                                                 <b>Warning! </b>Changing this key will
                                                 <Link
-                                                    to={`https://markettor.com/docs/features/feature-flags${UTM_TAGS}#feature-flag-persistence`}
+                                                    to={`https://clairview.com/docs/features/feature-flags${UTM_TAGS}#feature-flag-persistence`}
                                                     target="_blank"
                                                     targetBlankIcon
                                                 >
@@ -384,7 +384,7 @@ export function FeatureFlag({ id }: { id?: string } = {}): JSX.Element {
                                                 ensure that the flag value remains consistent for the same user.
                                                 Depending on your setup, this option might not always be suitable.{' '}
                                                 <Link
-                                                    to="https://markettor.com/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps"
+                                                    to="https://clairview.com/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps"
                                                     target="_blank"
                                                 >
                                                     Learn more
@@ -656,7 +656,7 @@ function UsageTab({ featureFlag }: { id: string; featureFlag: FeatureFlagType })
                     {!hasEnrichedAnalytics && !enrichAnalyticsNoticeAcknowledged && (
                         <LemonBanner type="info" className="mb-3" onClose={() => closeEnrichAnalyticsNotice()}>
                             Get richer insights automatically by{' '}
-                            <Link to="https://markettor.com/docs/libraries/js#enriched-analytics" target="_blank">
+                            <Link to="https://clairview.com/docs/libraries/js#enriched-analytics" target="_blank">
                                 enabling enriched analytics for flags{' '}
                             </Link>
                         </LemonBanner>

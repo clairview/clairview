@@ -2,7 +2,7 @@ import { actions, afterMount, beforeUnmount, connect, kea, listeners, path, redu
 import { windowValues } from 'kea-window-values'
 import { HedgehogActor } from 'lib/components/HedgehogBuddy/HedgehogBuddy'
 import { SPRITE_SIZE } from 'lib/components/HedgehogBuddy/sprites/sprites'
-import { MarketTorAppToolbarEvent } from 'lib/components/IframedToolbarBrowser/utils'
+import { ClairViewAppToolbarEvent } from 'lib/components/IframedToolbarBrowser/utils'
 
 import { actionsTabLogic } from '~/toolbar/actions/actionsTabLogic'
 import { elementsLogic } from '~/toolbar/elements/elementsLogic'
@@ -31,7 +31,7 @@ export const TOOLBAR_FIXED_POSITION_HITBOX = 100
 export const toolbarLogic = kea<toolbarLogicType>([
     path(['toolbar', 'bar', 'toolbarLogic']),
     connect(() => ({
-        values: [toolbarConfigLogic, ['markettor']],
+        values: [toolbarConfigLogic, ['clairview']],
         actions: [
             actionsTabLogic,
             [
@@ -404,26 +404,26 @@ export const toolbarLogic = kea<toolbarLogicType>([
             actions.setVisibleMenu('actions')
         },
         loadHeatmap: () => {
-            window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING }, '*')
+            window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING }, '*')
         },
         loadHeatmapSuccess: () => {
             // if embedded we need to signal start and finish of heatmap loading to the parent
-            window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED }, '*')
+            window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED }, '*')
         },
         loadHeatmapFailure: () => {
             // if embedded we need to signal start and finish of heatmap loading to the parent
-            window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED }, '*')
+            window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED }, '*')
         },
         actionCreatedSuccess: (action) => {
             // if embedded, we need to tell the parent window that a new action was created
-            window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_NEW_ACTION_CREATED, payload: action }, '*')
+            window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_NEW_ACTION_CREATED, payload: action }, '*')
         },
         maybeSendNavigationMessage: () => {
             const currentPath = window.location.pathname
             if (currentPath !== values.currentPathname) {
                 actions.setCurrentPathname(currentPath)
                 window.parent.postMessage(
-                    { type: MarketTorAppToolbarEvent.PH_TOOLBAR_NAVIGATED, payload: { path: currentPath } },
+                    { type: ClairViewAppToolbarEvent.PH_TOOLBAR_NAVIGATED, payload: { path: currentPath } },
                     '*'
                 )
             }
@@ -448,44 +448,44 @@ export const toolbarLogic = kea<toolbarLogicType>([
             actions.maybeSendNavigationMessage()
         }, 500)
 
-        // the toolbar can be run within the markettor parent app
+        // the toolbar can be run within the clairview parent app
         // if it is then it listens to parent messages
         const isInIframe = window !== window.parent
 
         cache.iframeEventListener = (e: MessageEvent): void => {
             // TODO: Probably need to have strict checks here
-            const type: MarketTorAppToolbarEvent = e?.data?.type
+            const type: ClairViewAppToolbarEvent = e?.data?.type
 
             if (!type || !type.startsWith('ph-')) {
                 return
             }
 
             switch (type) {
-                case MarketTorAppToolbarEvent.PH_APP_INIT:
+                case ClairViewAppToolbarEvent.PH_APP_INIT:
                     actions.setIsEmbeddedInApp(true)
                     actions.patchHeatmapFilters(e.data.payload.filters)
                     actions.setHeatmapColorPalette(e.data.payload.colorPalette)
                     actions.setHeatmapFixedPositionMode(e.data.payload.fixedPositionMode)
                     actions.setCommonFilters(e.data.payload.commonFilters)
                     actions.toggleClickmapsEnabled(false)
-                    window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_TOOLBAR_READY }, '*')
+                    window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_TOOLBAR_READY }, '*')
                     return
-                case MarketTorAppToolbarEvent.PH_HEATMAPS_CONFIG:
+                case ClairViewAppToolbarEvent.PH_HEATMAPS_CONFIG:
                     actions.enableHeatmap()
                     return
-                case MarketTorAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS:
+                case ClairViewAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS:
                     actions.patchHeatmapFilters(e.data.payload.filters)
                     return
-                case MarketTorAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE:
+                case ClairViewAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE:
                     actions.setHeatmapFixedPositionMode(e.data.payload.fixedPositionMode)
                     return
-                case MarketTorAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE:
+                case ClairViewAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE:
                     actions.setHeatmapColorPalette(e.data.payload.colorPalette)
                     return
-                case MarketTorAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS:
+                case ClairViewAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS:
                     actions.setCommonFilters(e.data.payload.commonFilters)
                     return
-                case MarketTorAppToolbarEvent.PH_ELEMENT_SELECTOR:
+                case ClairViewAppToolbarEvent.PH_ELEMENT_SELECTOR:
                     if (e.data.payload.enabled) {
                         actions.enableInspect()
                     } else {
@@ -493,11 +493,11 @@ export const toolbarLogic = kea<toolbarLogicType>([
                         actions.hideButtonActions()
                     }
                     return
-                case MarketTorAppToolbarEvent.PH_NEW_ACTION_NAME:
+                case ClairViewAppToolbarEvent.PH_NEW_ACTION_NAME:
                     actions.setAutomaticActionCreationEnabled(true, e.data.payload.name)
                     return
                 default:
-                    console.warn(`[MarketTor Toolbar] Received unknown parent window message: ${type}`)
+                    console.warn(`[ClairView Toolbar] Received unknown parent window message: ${type}`)
             }
         }
 
@@ -506,7 +506,7 @@ export const toolbarLogic = kea<toolbarLogicType>([
             // Post message up to parent in case we are embedded in an app
             // Tell the parent window that we are ready
             // we check if we're in an iframe before this setup to avoid logging warnings to the console
-            window.parent.postMessage({ type: MarketTorAppToolbarEvent.PH_TOOLBAR_INIT }, '*')
+            window.parent.postMessage({ type: ClairViewAppToolbarEvent.PH_TOOLBAR_INIT }, '*')
         }
     }),
     beforeUnmount(({ cache }) => {

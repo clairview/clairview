@@ -1,7 +1,7 @@
 import '../Experiment.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonTable, LemonTableColumns, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonTable, LemonTableColumns, Tooltip } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'
 import { LemonProgress } from 'lib/lemon-ui/LemonProgress'

@@ -1,5 +1,5 @@
-import { IconDownload, IconLock, IconRedo, IconTrash, IconUnlock } from '@markettor/icons'
-import { LemonBanner, LemonDialog, LemonDivider, LemonMenu, LemonTable, LemonTag, Tooltip } from '@markettor/lemon-ui'
+import { IconDownload, IconLock, IconRedo, IconTrash, IconUnlock } from '@clairview/icons'
+import { LemonBanner, LemonDialog, LemonDivider, LemonMenu, LemonTable, LemonTag, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonInput } from 'lib/lemon-ui/LemonInput'
@@ -212,7 +212,7 @@ function AppsTable({ plugins }: RenderAppsTable): JSX.Element {
                                             title={
                                                 <>
                                                     This app can currently be used by other organizations in this
-                                                    instance of MarketTor. This action will <b>disable and hide it</b> for
+                                                    instance of ClairView. This action will <b>disable and hide it</b> for
                                                     all organizations that do not have an existing pluginconfig.
                                                 </>
                                             }
@@ -231,7 +231,7 @@ function AppsTable({ plugins }: RenderAppsTable): JSX.Element {
                                             title={
                                                 <>
                                                     This action will mark this app as installed for{' '}
-                                                    <b>all organizations</b> in this instance of MarketTor.
+                                                    <b>all organizations</b> in this instance of ClairView.
                                                 </>
                                             }
                                         >
@@ -330,7 +330,7 @@ function OutOfSyncApps(): JSX.Element {
         <>
             <h2>Out-of-sync global apps</h2>
             <LemonBanner type="warning">
-                This MarketTor Cloud instance is currently out of sync with the GLOBAL_PLUGINS list.
+                This ClairView Cloud instance is currently out of sync with the GLOBAL_PLUGINS list.
             </LemonBanner>
             <MissingGlobalPlugins />
 
@@ -405,16 +405,16 @@ function MissingGlobalPlugins(): JSX.Element {
 }
 
 function InstallFromUrl(): JSX.Element {
-    // On cloud we only allow public MarketTor org repository plugins
+    // On cloud we only allow public ClairView org repository plugins
     // On self-hosted we allow any repo, could be private
     const { isCloudOrDev } = useValues(preflightLogic)
     const { pluginUrl } = useValues(appsManagementLogic)
     const { setPluginUrl, installPlugin } = useActions(appsManagementLogic)
 
-    const cloudRequiredPrefix = 'https://github.com/MarketTor/'
+    const cloudRequiredPrefix = 'https://github.com/ClairView/'
     let disabledReason = !pluginUrl ? 'Please enter a url' : undefined
     if (isCloudOrDev) {
-        disabledReason = !pluginUrl.startsWith(cloudRequiredPrefix) ? 'Please enter a MarketTor org repo url' : undefined
+        disabledReason = !pluginUrl.startsWith(cloudRequiredPrefix) ? 'Please enter a ClairView org repo url' : undefined
     }
 
     return (
@@ -423,7 +423,7 @@ function InstallFromUrl(): JSX.Element {
             <p>
                 {isCloudOrDev ? (
                     <>
-                        Only MarketTor organization repositories are allowed, i.e. starting with{' '}
+                        Only ClairView organization repositories are allowed, i.e. starting with{' '}
                         <Link to={cloudRequiredPrefix} target="blank">
                             {cloudRequiredPrefix}
                         </Link>{' '}
@@ -438,7 +438,7 @@ function InstallFromUrl(): JSX.Element {
                 <LemonInput
                     value={pluginUrl}
                     onChange={setPluginUrl}
-                    placeholder="https://github.com/MarketTor/markettor-hello-world-plugin"
+                    placeholder="https://github.com/ClairView/clairview-hello-world-plugin"
                     className="flex-1"
                 />
                 <LemonButton
@@ -466,7 +466,7 @@ function InstallLocalApp(): JSX.Element {
                     <LemonInput
                         value={localPluginPath}
                         onChange={setLocalPluginPath}
-                        placeholder="/var/markettor/apps/helloworldapp"
+                        placeholder="/var/clairview/apps/helloworldapp"
                         className="flex-1"
                     />
                     <LemonButton
@@ -498,7 +498,7 @@ function InstallSourceApp(): JSX.Element {
             <h3 className="mt-3">Install by writing source code</h3>
             <p>
                 To install a source app provide the name and start coding.
-                <Link to="https://markettor.com/docs/apps" target="_blank">
+                <Link to="https://clairview.com/docs/apps" target="_blank">
                     {' '}
                     Read the documentation for more information!
                 </Link>

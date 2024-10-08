@@ -2,7 +2,7 @@ import { mergeAttributes, Node, NodeViewProps } from '@tiptap/core'
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react'
 import { NotebookNodeType } from '~/types'
 import clsx from 'clsx'
-import { LemonButton, ProfilePicture, Tooltip } from '@markettor/lemon-ui'
+import { LemonButton, ProfilePicture, Tooltip } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { membersLogic } from 'scenes/organization/membersLogic'
 

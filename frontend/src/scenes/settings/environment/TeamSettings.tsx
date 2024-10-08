@@ -1,5 +1,5 @@
-import { urls } from '@markettor/apps-common'
-import { LemonButton, LemonDialog, LemonInput, LemonLabel, LemonSkeleton } from '@markettor/lemon-ui'
+import { urls } from '@clairview/apps-common'
+import { LemonButton, LemonDialog, LemonInput, LemonLabel, LemonSkeleton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
@@ -58,13 +58,13 @@ export function WebSnippet(): JSX.Element {
     return (
         <>
             <p>
-                MarketTor's configurable web snippet allows you to (optionally) autocapture events, record user sessions,
+                ClairView's configurable web snippet allows you to (optionally) autocapture events, record user sessions,
                 and more with no extra work. Place the following snippet in your website's HTML, ideally just above the{' '}
                 <code>{'</head>'}</code> tag.
             </p>
             <p>
                 For more guidance, including on identifying users,{' '}
-                <Link to="https://markettor.com/docs/libraries/js">see MarketTor Docs</Link>.
+                <Link to="https://clairview.com/docs/libraries/js">see ClairView Docs</Link>.
             </p>
             {currentTeamLoading && !currentTeam ? (
                 <div className="space-y-4">
@@ -86,9 +86,9 @@ export function Bookmarklet(): JSX.Element {
 
     return (
         <>
-            <p>Need to test MarketTor on a live site without changing any code?</p>
+            <p>Need to test ClairView on a live site without changing any code?</p>
             <p>
-                Just drag the bookmarklet below to your bookmarks bar, open the website you want to test MarketTor on and
+                Just drag the bookmarklet below to your bookmarks bar, open the website you want to test ClairView on and
                 click it. This will enable our tracking, on the currently loaded page only. The data will show up in
                 this {displayNoun}.
             </p>
@@ -132,7 +132,7 @@ export function TeamVariables(): JSX.Element {
                 </h3>
                 <p>
                     You can use this write-only key in any one of{' '}
-                    <Link to="https://markettor.com/docs/libraries">our libraries</Link>.
+                    <Link to="https://clairview.com/docs/libraries">our libraries</Link>.
                 </p>
                 <CodeSnippet
                     actions={
@@ -146,7 +146,7 @@ export function TeamVariables(): JSX.Element {
                 </CodeSnippet>
                 <p>
                     Write-only means it can only create new events. It can't read events or any of your other data
-                    stored with MarketTor, so it's safe to use in public apps.
+                    stored with ClairView, so it's safe to use in public apps.
                 </p>
             </div>
             <div className="flex-1">
@@ -155,7 +155,7 @@ export function TeamVariables(): JSX.Element {
                 </h3>
                 <p>
                     You can use this ID to reference your {displayNoun} in our{' '}
-                    <Link to="https://markettor.com/docs/api">API</Link>.
+                    <Link to="https://clairview.com/docs/api">API</Link>.
                 </p>
                 <CodeSnippet thing={`${displayNoun} ID`}>{String(currentTeam?.id || '')}</CodeSnippet>
             </div>
@@ -164,7 +164,7 @@ export function TeamVariables(): JSX.Element {
                     <h3 id="project-region" className="min-w-[25rem]">
                         {capitalizeFirstLetter(displayNoun)} region
                     </h3>
-                    <p>This is the region where your MarketTor data is hosted.</p>
+                    <p>This is the region where your ClairView data is hosted.</p>
                     <CodeSnippet thing={`${displayNoun} region`}>{`${region} Cloud`}</CodeSnippet>
                 </div>
             ) : null}
@@ -187,7 +187,7 @@ export function TeamTimezone(): JSX.Element {
     return (
         <>
             <p>
-                These settings affect how MarketTor displays, buckets, and filters time-series data. You may need to
+                These settings affect how ClairView displays, buckets, and filters time-series data. You may need to
                 refresh insights for new settings to apply.
             </p>
             <div className="space-y-2">

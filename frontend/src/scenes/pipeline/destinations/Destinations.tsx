@@ -1,4 +1,4 @@
-import { LemonTable, LemonTableColumn, LemonTag, Link, Tooltip } from '@markettor/lemon-ui'
+import { LemonTable, LemonTableColumn, LemonTag, Link, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
@@ -30,7 +30,7 @@ export function Destinations(): JSX.Element {
     return (
         <>
             <PageHeader
-                caption="Send your data in real time or in batches to destinations outside of MarketTor."
+                caption="Send your data in real time or in batches to destinations outside of ClairView."
                 buttons={<NewButton stage={PipelineStage.Destination} />}
             />
             <PayGateMini feature={AvailableFeature.DATA_PIPELINES} className="mb-2">
@@ -38,8 +38,8 @@ export function Destinations(): JSX.Element {
                     productName="Pipeline destinations"
                     thingName="destination"
                     productKey={ProductKey.PIPELINE_DESTINATIONS}
-                    description="Pipeline destinations allow you to export data outside of MarketTor, such as webhooks to Slack."
-                    docsURL="https://markettor.com/docs/cdp"
+                    description="Pipeline destinations allow you to export data outside of ClairView, such as webhooks to Slack."
+                    docsURL="https://clairview.com/docs/cdp"
                     actionElementOverride={<NewButton stage={PipelineStage.Destination} />}
                     isEmpty={destinations.length === 0 && !loading}
                 />

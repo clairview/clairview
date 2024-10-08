@@ -1,5 +1,5 @@
-from markettor.models.group.util import get_aggregation_target_field
-from markettor.queries.retention.retention_events_query import RetentionEventsQuery
+from clairview.models.group.util import get_aggregation_target_field
+from clairview.queries.retention.retention_events_query import RetentionEventsQuery
 
 
 class ClickhouseRetentionEventsQuery(RetentionEventsQuery):

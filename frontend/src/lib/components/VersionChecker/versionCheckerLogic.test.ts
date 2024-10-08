@@ -12,11 +12,11 @@ const useMockedVersions = (
 ): void => {
     useMocks({
         get: {
-            'https://api.github.com/repos/markettor/markettor-js/tags': () => [
+            'https://api.github.com/repos/clairview/clairview-js/tags': () => [
                 200,
                 githubVersions.map((x) => ({ name: x.version })),
             ],
-            'https://raw.githubusercontent.com/MarketTor/markettor-js/main/deprecation.json': () => [
+            'https://raw.githubusercontent.com/ClairView/clairview-js/main/deprecation.json': () => [
                 200,
                 {
                     deprecateBeforeVersion,

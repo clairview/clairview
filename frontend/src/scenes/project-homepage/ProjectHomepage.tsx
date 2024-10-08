@@ -1,7 +1,7 @@
 import './ProjectHomepage.scss'
 
-import { IconHome } from '@markettor/icons'
-import { Link } from '@markettor/lemon-ui'
+import { IconHome } from '@clairview/icons'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { SceneDashboardChoiceModal } from 'lib/components/SceneDashboardChoice/SceneDashboardChoiceModal'

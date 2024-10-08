@@ -1,5 +1,5 @@
-import { IconCalendar } from '@markettor/icons'
-import { LemonSelect, LemonSkeleton, Popover, SpinnerOverlay, Tooltip } from '@markettor/lemon-ui'
+import { IconCalendar } from '@clairview/icons'
+import { LemonSelect, LemonSkeleton, Popover, SpinnerOverlay, Tooltip } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { Chart, ChartDataset, ChartItem } from 'lib/Chart'
 import { getColorVar } from 'lib/colors'

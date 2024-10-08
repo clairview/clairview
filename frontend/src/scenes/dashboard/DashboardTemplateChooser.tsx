@@ -1,6 +1,6 @@
 import './DashboardTemplateChooser.scss'
 
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { FallbackCoverImage } from 'lib/components/FallbackCoverImage/FallbackCoverImage'

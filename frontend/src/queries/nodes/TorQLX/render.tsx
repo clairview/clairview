@@ -1,4 +1,4 @@
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { JSONViewer } from 'lib/components/JSONViewer'
 import { Sparkline } from 'lib/components/Sparkline'

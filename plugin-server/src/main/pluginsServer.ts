@@ -22,7 +22,7 @@ import { closeHub, createHub, createKafkaClient, createKafkaProducerWrapper } fr
 import { PostgresRouter } from '../utils/db/postgres'
 import { createRedisClient } from '../utils/db/redis'
 import { cancelAllScheduledJobs } from '../utils/node-schedule'
-import { markettor } from '../utils/markettor'
+import { clairview } from '../utils/clairview'
 import { PubSub } from '../utils/pubsub'
 import { status } from '../utils/status'
 import { delay } from '../utils/utils'
@@ -120,7 +120,7 @@ export async function startPluginsServer(
             pubSub?.stop(),
             graphileWorker?.stop(),
             ...services.map((service) => service.onShutdown()),
-            markettor.shutdownAsync(),
+            clairview.shutdownAsync(),
         ])
 
         if (piscina) {
@@ -517,10 +517,10 @@ const startPreflightSchedules = (hub: Hub) => {
     // These are used by the preflight checks in the Django app to determine if
     // the plugin-server is running.
     schedule.scheduleJob('*/5 * * * * *', async () => {
-        await hub.db.redisSet('@markettor-plugin-server/ping', new Date().toISOString(), 'preflightSchedules', 60, {
+        await hub.db.redisSet('@clairview-plugin-server/ping', new Date().toISOString(), 'preflightSchedules', 60, {
             jsonSerialize: false,
         })
-        await hub.db.redisSet('@markettor-plugin-server/version', version, 'preflightSchedules', undefined, {
+        await hub.db.redisSet('@clairview-plugin-server/version', version, 'preflightSchedules', undefined, {
             jsonSerialize: false,
         })
     })

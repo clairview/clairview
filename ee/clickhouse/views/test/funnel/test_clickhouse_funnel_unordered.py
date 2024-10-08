@@ -8,15 +8,15 @@ from ee.clickhouse.views.test.funnel.util import (
     get_funnel_actors_ok,
     get_funnel_ok,
 )
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.test.base import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 class ClickhouseTestUnorderedFunnelGroups(ClickhouseTestMixin, LicensedTestMixin, APIBaseTest):

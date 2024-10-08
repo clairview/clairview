@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { LemonButton, LemonTable, LemonTag, LemonTagType } from '@markettor/lemon-ui'
+import { TZLabel } from '@clairview/apps-common'
+import { LemonButton, LemonTable, LemonTag, LemonTagType } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { ExternalDataJob } from '~/types'

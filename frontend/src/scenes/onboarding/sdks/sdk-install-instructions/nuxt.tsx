@@ -16,8 +16,8 @@ function NuxtEnvVarsSnippet(): JSX.Element {
             {`export default defineNuxtConfig({
                 runtimeConfig: {
                   public: {
-                    markettorPublicKey: '${currentTeam?.api_token}',
-                    markettorHost: '${apiHostOrigin()}'
+                    clairviewPublicKey: '${currentTeam?.api_token}',
+                    clairviewHost: '${apiHostOrigin()}'
                   }
                 }
               })`}
@@ -31,19 +31,19 @@ function NuxtAppClientCodeSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript}>
             {`import { defineNuxtPlugin } from '#app'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const markettorClient = markettor.init(runtimeConfig.public.markettorPublicKey, {
-    api_host: runtimeConfig.public.markettorHost,
+  const clairviewClient = clairview.init(runtimeConfig.public.clairviewPublicKey, {
+    api_host: runtimeConfig.public.clairviewHost,
     ${
         isPersonProfilesDisabled
             ? ``
             : `person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well`
     }
     capture_pageview: false, // we add manual pageview capturing below
-    loaded: (markettor) => {
-      if (import.meta.env.MODE === 'development') markettor.debug();
+    loaded: (clairview) => {
+      if (import.meta.env.MODE === 'development') clairview.debug();
     }
   })
 
@@ -51,7 +51,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const router = useRouter();
   router.afterEach((to) => {
     nextTick(() => {
-      markettor.capture('$pageview', {
+      clairview.capture('$pageview', {
         current_url: to.fullPath
       });
     });
@@ -59,7 +59,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
   return {
     provide: {
-      markettor: () => markettorClient
+      clairview: () => clairviewClient
     }
   }
 })`}
@@ -72,19 +72,19 @@ export function SDKInstallNuxtJSInstructions(): JSX.Element {
         <>
             <p>
                 The below guide is for Nuxt v3.0 and above. For Nuxt v2.16 and below, see our{' '}
-                <Link to="https://markettor.com/docs/libraries/nuxt-js#nuxt-v216-and-below">Nuxt docs</Link>
+                <Link to="https://clairview.com/docs/libraries/nuxt-js#nuxt-v216-and-below">Nuxt docs</Link>
             </p>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
             <h3>Add environment variables</h3>
             <p>
-                Add your MarketTor API key and host to your <code>nuxt.config.js</code> file.
+                Add your ClairView API key and host to your <code>nuxt.config.js</code> file.
             </p>
             <NuxtEnvVarsSnippet />
 
             <h3>Create a plugin</h3>
             <p>
-                Create a new plugin by creating a new file <code>markettor.client.js</code> in your{' '}
+                Create a new plugin by creating a new file <code>clairview.client.js</code> in your{' '}
                 <Link to="https://nuxt.com/docs/guide/directory-structure/plugins" target="_blank">
                     plugins directory
                 </Link>

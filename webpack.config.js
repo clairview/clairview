@@ -53,11 +53,11 @@ function createEntry(entry) {
                 '~': path.resolve(__dirname, 'frontend', 'src'),
                 lib: path.resolve(__dirname, 'frontend', 'src', 'lib'),
                 scenes: path.resolve(__dirname, 'frontend', 'src', 'scenes'),
-                '@markettor/apps-common': path.resolve(__dirname, 'frontend', '@markettor', 'apps-common', 'src'),
-                '@markettor/lemon-ui': path.resolve(__dirname, 'frontend', '@markettor', 'lemon-ui', 'src'),
-                '@markettor/ee/exports': [
+                '@clairview/apps-common': path.resolve(__dirname, 'frontend', '@clairview', 'apps-common', 'src'),
+                '@clairview/lemon-ui': path.resolve(__dirname, 'frontend', '@clairview', 'lemon-ui', 'src'),
+                '@clairview/ee/exports': [
                     path.resolve(__dirname, 'ee', 'frontend', 'exports'),
-                    path.resolve(__dirname, 'frontend', '@markettor', 'ee', 'exports'),
+                    path.resolve(__dirname, 'frontend', '@clairview', 'ee', 'exports'),
                 ],
                 storybook: path.resolve(__dirname, '.storybook'),
                 types: path.resolve(__dirname, 'frontend', 'types'),
@@ -190,13 +190,13 @@ function createEntry(entry) {
                       // we need these only once per build
                       new HtmlWebpackPlugin({
                           alwaysWriteToDisk: true,
-                          title: 'MarketTor',
+                          title: 'ClairView',
                           template: path.join(__dirname, 'frontend', 'src', 'index.html'),
                       }),
 
                       new HtmlWebpackPlugin({
                           alwaysWriteToDisk: true,
-                          title: 'MarketTor',
+                          title: 'ClairView',
                           filename: 'layout.html',
                           inject: false,
                           template: path.join(__dirname, 'frontend', 'src', 'layout.ejs'),

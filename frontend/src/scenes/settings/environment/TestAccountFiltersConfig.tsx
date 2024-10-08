@@ -1,4 +1,4 @@
-import { LemonSwitch, Link } from '@markettor/lemon-ui'
+import { LemonSwitch, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'
 import { PROPERTY_FILTER_TYPE_TO_TAXONOMIC_FILTER_GROUP_TYPE } from 'lib/components/PropertyFilters/utils'
@@ -135,7 +135,7 @@ export function ProjectAccountFiltersSetting(): JSX.Element {
             <p>
                 These filters apply only to queries when the toggle is enabled. Adding filters here does not prevent
                 events or recordings being ingested.{' '}
-                <Link to="https://markettor.com/tutorials/filter-internal-users">Learn more in our docs</Link>.
+                <Link to="https://clairview.com/tutorials/filter-internal-users">Learn more in our docs</Link>.
             </p>
             <div className="mt-4">
                 <strong>Example filters</strong>

@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { entityFilterLogic } from 'scenes/insights/filters/ActionFilter/entityFilterLogic'
 import { renameModalLogic } from 'scenes/insights/filters/ActionFilter/renameModalLogic'

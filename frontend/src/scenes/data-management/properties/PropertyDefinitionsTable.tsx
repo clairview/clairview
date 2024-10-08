@@ -1,6 +1,6 @@
 import './PropertyDefinitionsTable.scss'
 
-import { LemonInput, LemonSelect, LemonTag, Link } from '@markettor/lemon-ui'
+import { LemonInput, LemonSelect, LemonTag, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ObjectTags } from 'lib/components/ObjectTags/ObjectTags'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'

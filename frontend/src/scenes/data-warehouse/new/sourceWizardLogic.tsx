@@ -1,9 +1,9 @@
-import { lemonToast, Link } from '@markettor/lemon-ui'
+import { lemonToast, Link } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, props, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
 import { router, urlToAction } from 'kea-router'
 import api from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { Scene } from 'scenes/sceneTypes'
 import { urls } from 'scenes/urls'
@@ -26,7 +26,7 @@ import type { sourceWizardLogicType } from './sourceWizardLogicType'
 
 const Caption = (): JSX.Element => (
     <>
-        Enter your Stripe credentials to automatically pull your Stripe data into the MarketTor Data warehouse.
+        Enter your Stripe credentials to automatically pull your Stripe data into the ClairView Data warehouse.
         <br />
         You can find your account ID{' '}
         <Link to="https://dashboard.stripe.com/settings/user" target="_blank">
@@ -73,7 +73,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
         name: 'Postgres',
         caption: (
             <>
-                Enter your Postgres credentials to automatically pull your Postgres data into the MarketTor Data
+                Enter your Postgres credentials to automatically pull your Postgres data into the ClairView Data
                 warehouse.
             </>
         ),
@@ -204,7 +204,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
         name: 'MySQL',
         caption: (
             <>
-                Enter your MySQL/MariaDB credentials to automatically pull your MySQL data into the MarketTor Data
+                Enter your MySQL/MariaDB credentials to automatically pull your MySQL data into the ClairView Data
                 warehouse.
             </>
         ),
@@ -337,7 +337,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
         caption: (
             <>
                 Enter your MS SQL Server/Azure SQL Server credentials to automatically pull your SQL data into the
-                MarketTor Data warehouse.
+                ClairView Data warehouse.
             </>
         ),
         fields: [
@@ -467,7 +467,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
         name: 'Snowflake',
         caption: (
             <>
-                Enter your Snowflake credentials to automatically pull your Snowflake data into the MarketTor Data
+                Enter your Snowflake credentials to automatically pull your Snowflake data into the ClairView Data
                 warehouse.
             </>
         ),
@@ -527,7 +527,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
         name: 'Zendesk',
         caption: (
             <>
-                Enter your Zendesk API key to automatically pull your Zendesk support data into the MarketTor Data
+                Enter your Zendesk API key to automatically pull your Zendesk support data into the ClairView Data
                 warehouse.
             </>
         ),
@@ -565,7 +565,7 @@ export const SOURCE_DETAILS: Record<ExternalDataSourceType, SourceConfig> = {
                 required: true,
             },
         ],
-        caption: 'Select an existing Salesforce account to link to MarketTor or create a new connection',
+        caption: 'Select an existing Salesforce account to link to ClairView or create a new connection',
     },
     Vitally: {
         name: 'Vitally',
@@ -981,7 +981,7 @@ export const sourceWizardLogic = kea<sourceWizardLogicType>([
                 }
 
                 if (currentStep === 4) {
-                    return "Sit tight as we import your data! After it's done, you will be able to query it in MarketTor."
+                    return "Sit tight as we import your data! After it's done, you will be able to query it in ClairView."
                 }
 
                 return ''
@@ -1015,7 +1015,7 @@ export const sourceWizardLogic = kea<sourceWizardLogicType>([
                 actions.submitSourceConnectionDetails()
             } else if (values.currentStep === 2 && values.isManualLinkFormVisible) {
                 dataWarehouseTableLogic.actions.submitTable()
-                markettor.capture('source created', { sourceType: 'Manual' })
+                clairview.capture('source created', { sourceType: 'Manual' })
             }
 
             if (values.currentStep === 3 && values.selectedConnector?.name) {
@@ -1032,7 +1032,7 @@ export const sourceWizardLogic = kea<sourceWizardLogicType>([
                 })
                 actions.setIsLoading(true)
                 actions.createSource()
-                markettor.capture('source created', { sourceType: values.selectedConnector.name })
+                clairview.capture('source created', { sourceType: values.selectedConnector.name })
             }
 
             if (values.currentStep === 4) {
@@ -1120,7 +1120,7 @@ export const sourceWizardLogic = kea<sourceWizardLogicType>([
                 lemonToast.error(e.data?.message ?? e.message)
 
                 if (((e.data?.message as string | undefined) ?? '').indexOf('Invalid credentials') != -1) {
-                    markettor.capture('warehouse credentials invalid', { sourceType: values.selectedConnector.name })
+                    clairview.capture('warehouse credentials invalid', { sourceType: values.selectedConnector.name })
                 }
             }
 

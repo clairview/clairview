@@ -6,7 +6,7 @@ import api from 'lib/api'
 import { DashboardCompatibleScenes } from 'lib/components/SceneDashboardChoice/sceneDashboardChoiceModalLogic'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
 import { getAppContext } from 'lib/utils/getAppContext'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { AvailableFeature, OrganizationBasicType, ProductKey, UserTheme, UserType } from '~/types'
 
@@ -111,7 +111,7 @@ export const userLogic = kea<userLogicType>([
     }),
     listeners(({ actions, values }) => ({
         logout: () => {
-            markettor.reset()
+            clairview.reset()
             window.location.href = '/logout'
         },
         loadUserSuccess: ({ user }) => {
@@ -122,19 +122,19 @@ export const userLogic = kea<userLogicType>([
                     id: user.uuid,
                 })
 
-                if (markettor) {
-                    markettor.identify(user.distinct_id)
-                    markettor.people.set({
+                if (clairview) {
+                    clairview.identify(user.distinct_id)
+                    clairview.people.set({
                         email: user.anonymize_data ? null : user.email,
                         realm: user.realm,
                     })
 
-                    markettor.register({
+                    clairview.register({
                         is_demo_project: user.team?.is_demo,
                     })
 
                     if (user.team) {
-                        markettor.group('project', user.team.uuid, {
+                        clairview.group('project', user.team.uuid, {
                             id: user.team.id,
                             uuid: user.team.uuid,
                             name: user.team.name,
@@ -146,7 +146,7 @@ export const userLogic = kea<userLogicType>([
                     }
 
                     if (user.organization) {
-                        markettor.group('organization', user.organization.id, {
+                        clairview.group('organization', user.organization.id, {
                             id: user.organization.id,
                             name: user.organization.name,
                             slug: user.organization.slug,
@@ -156,7 +156,7 @@ export const userLogic = kea<userLogicType>([
                         })
 
                         if (user.organization.customer_id) {
-                            markettor.group('customer', user.organization.customer_id)
+                            clairview.group('customer', user.organization.customer_id)
                         }
                     }
                 }
@@ -260,12 +260,12 @@ export const userLogic = kea<userLogicType>([
         }
     }),
     urlToAction(({ values }) => ({
-        '/year_in_markettor/2023': () => {
+        '/year_in_clairview/2023': () => {
             if (window.MARKETTOR_APP_CONTEXT?.year_in_hog_url) {
                 window.location.href = `${window.location.origin}${window.MARKETTOR_APP_CONTEXT.year_in_hog_url}`
             }
             if (values.user?.uuid) {
-                window.location.href = `${window.location.origin}/year_in_markettor/2023/${values.user?.uuid}`
+                window.location.href = `${window.location.origin}/year_in_clairview/2023/${values.user?.uuid}`
             }
         },
     })),

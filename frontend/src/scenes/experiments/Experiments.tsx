@@ -1,4 +1,4 @@
-import { LemonDialog, LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { LemonDialog, LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { ExperimentsHog } from 'lib/components/hedgehogs'
@@ -191,7 +191,7 @@ export function Experiments(): JSX.Element {
                     <>
                         <Link
                             data-attr="experiment-help"
-                            to="https://markettor.com/docs/experiments/installation?utm_medium=in-product&utm_campaign=new-experiment"
+                            to="https://clairview.com/docs/experiments/installation?utm_medium=in-product&utm_campaign=new-experiment"
                             target="_blank"
                         >
                             {' '}
@@ -217,7 +217,7 @@ export function Experiments(): JSX.Element {
                     productKey={ProductKey.EXPERIMENTS}
                     thingName="archived experiment"
                     description={EXPERIMENTS_PRODUCT_DESCRIPTION}
-                    docsURL="https://markettor.com/docs/experiments"
+                    docsURL="https://clairview.com/docs/experiments"
                     isEmpty={shouldShowEmptyState}
                 />
             ) : (
@@ -226,7 +226,7 @@ export function Experiments(): JSX.Element {
                     productKey={ProductKey.EXPERIMENTS}
                     thingName="experiment"
                     description={EXPERIMENTS_PRODUCT_DESCRIPTION}
-                    docsURL="https://markettor.com/docs/experiments"
+                    docsURL="https://clairview.com/docs/experiments"
                     action={() => router.actions.push(urls.experiment('new'))}
                     isEmpty={shouldShowEmptyState}
                     customHog={ExperimentsHog}

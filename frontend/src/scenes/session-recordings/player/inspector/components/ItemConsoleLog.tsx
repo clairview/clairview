@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { LemonLabel } from 'lib/lemon-ui/LemonLabel/LemonLabel'
 

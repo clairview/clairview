@@ -8,8 +8,8 @@ from pydantic import BaseModel, Field
 from ee.hogai.system_prompt import trends_system_prompt
 from ee.hogai.team_prompt import TeamPrompt
 from ee.hogai.trends_function import TrendsFunction
-from markettor.models.team.team import Team
-from markettor.schema import ExperimentalAITrendsQuery
+from clairview.models.team.team import Team
+from clairview.schema import ExperimentalAITrendsQuery
 
 
 class output_insight_schema(BaseModel):

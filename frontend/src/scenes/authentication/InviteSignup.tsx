@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider, LemonInput } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
@@ -39,15 +39,15 @@ function HelperLinks(): JSX.Element {
         <div className="font-bold text-center">
             <Link to="/">App Home</Link>
             <span className="mx-2">|</span>
-            <Link to={`https://markettor.com?${UTM_TAGS}&utm_message=invalid-invite`}>MarketTor Website</Link>
+            <Link to={`https://clairview.com?${UTM_TAGS}&utm_message=invalid-invite`}>ClairView Website</Link>
         </div>
     )
 }
 
-function BackToMarketTor(): JSX.Element {
+function BackToClairView(): JSX.Element {
     return (
         <LemonButton type="secondary" icon={<IconChevronLeft />} center fullWidth to={urls.default()}>
-            Go back to MarketTor
+            Go back to ClairView
         </LemonButton>
     )
 }
@@ -65,7 +65,7 @@ function ErrorView(): JSX.Element | null {
                     <b>ask them for a new invite</b>.
                 </>
             ),
-            actions: user ? <BackToMarketTor /> : <HelperLinks />,
+            actions: user ? <BackToClairView /> : <HelperLinks />,
         },
         [ErrorCodes.InvalidRecipient]: {
             title: "Oops! This invite link can't be used",
@@ -96,14 +96,14 @@ function ErrorView(): JSX.Element | null {
                     </div>
                 </>
             ),
-            actions: user ? <BackToMarketTor /> : <HelperLinks />,
+            actions: user ? <BackToClairView /> : <HelperLinks />,
         },
         [ErrorCodes.Unknown]: {
             title: 'Oops! We could not validate this invite link',
             detail: `${
                 error?.detail || ''
             } There was an issue with your invite link, please try again in a few seconds. If the problem persists, contact us.`,
-            actions: user ? <BackToMarketTor /> : <HelperLinks />,
+            actions: user ? <BackToClairView /> : <HelperLinks />,
         },
     }
 
@@ -136,7 +136,7 @@ function AuthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite }): 
             <div className="space-y-2">
                 <h2>You have been invited to join {invite.organization_name}</h2>
                 <div>
-                    You will accept the invite under your <b>existing MarketTor account</b> ({user?.email})
+                    You will accept the invite under your <b>existing ClairView account</b> ({user?.email})
                 </div>
                 {user && (
                     <div
@@ -168,7 +168,7 @@ function AuthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite }): 
                             </LemonButton>
                             <div className="mt-2">
                                 <LemonButton type="secondary" center fullWidth icon={<IconChevronLeft />} to="/">
-                                    Go back to MarketTor
+                                    Go back to ClairView
                                 </LemonButton>
                             </div>
                         </>
@@ -180,7 +180,7 @@ function AuthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite }): 
                             sideIcon={<IconChevronRight />}
                             onClick={() => (window.location.href = '/')}
                         >
-                            Go to MarketTor
+                            Go to ClairView
                         </LemonButton>
                     )}
                 </div>
@@ -200,7 +200,7 @@ function UnauthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite })
             message={
                 <>
                     Welcome to
-                    <br /> MarketTor{preflight?.cloud ? ' Cloud' : ''}!
+                    <br /> ClairView{preflight?.cloud ? ' Cloud' : ''}!
                 </>
             }
             leftContainerContent={
@@ -210,13 +210,13 @@ function UnauthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite })
                         <span className="text-4xl font-bold border-b border-dashed pb-2">
                             {invite?.organization_name || 'us'}
                         </span>
-                        <span>on MarketTor</span>
+                        <span>on ClairView</span>
                     </div>
                 </div>
             }
             footer={<SupportModalButton name={invite.first_name} email={invite.target_email} />}
         >
-            <h2 className="text-center">Create your MarketTor account</h2>
+            <h2 className="text-center">Create your ClairView account</h2>
             <Form logic={inviteSignupLogic} formKey="signup" className="space-y-4" enableFormOnSubmit>
                 <LemonField.Pure label="Email">
                     <LemonInput type="email" disabled value={invite?.target_email} />
@@ -270,11 +270,11 @@ function UnauthenticatedAcceptInvite({ invite }: { invite: PrevalidatedInvite })
             </div>
             <div className="mt-4 text-center text-muted">
                 By clicking continue you agree to our{' '}
-                <Link to="https://markettor.com/terms" target="_blank">
+                <Link to="https://clairview.com/terms" target="_blank">
                     Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link to="https://markettor.com/privacy" target="_blank">
+                <Link to="https://clairview.com/privacy" target="_blank">
                     Privacy Policy
                 </Link>
                 .

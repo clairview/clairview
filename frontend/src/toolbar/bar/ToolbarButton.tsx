@@ -1,6 +1,6 @@
 import './ToolbarButton.scss'
 
-import { Tooltip } from '@markettor/lemon-ui'
+import { Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { capitalizeFirstLetter } from 'lib/utils'

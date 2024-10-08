@@ -1,4 +1,4 @@
-import { IconClock, IconFilter, IconTrending } from '@markettor/icons'
+import { IconClock, IconFilter, IconTrending } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { LemonSelect } from 'lib/lemon-ui/LemonSelect'
 import { funnelDataLogic } from 'scenes/funnels/funnelDataLogic'

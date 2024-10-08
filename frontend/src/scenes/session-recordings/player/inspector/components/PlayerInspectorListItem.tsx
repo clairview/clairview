@@ -1,5 +1,5 @@
-import { IconDashboard, IconEye, IconGear, IconTerminal } from '@markettor/icons'
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { IconDashboard, IconEye, IconGear, IconTerminal } from '@clairview/icons'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { IconComment, IconOffline, IconUnverifiedEvent } from 'lib/lemon-ui/icons'

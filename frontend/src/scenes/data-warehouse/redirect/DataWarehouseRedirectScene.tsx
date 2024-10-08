@@ -1,4 +1,4 @@
-import { Spinner } from '@markettor/lemon-ui'
+import { Spinner } from '@clairview/lemon-ui'
 import { SceneExport } from 'scenes/sceneTypes'
 
 import { sourceWizardLogic } from '../new/sourceWizardLogic'

@@ -72,7 +72,7 @@ export async function fetchOrganization(
 ): Promise<RawOrganization | undefined> {
     const selectResult = await client.query<RawOrganization>(
         PostgresUse.COMMON_READ,
-        `SELECT * FROM markettor_organization WHERE id = $1`,
+        `SELECT * FROM clairview_organization WHERE id = $1`,
         [organizationId],
         'fetchOrganization'
     )

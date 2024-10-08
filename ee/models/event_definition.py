@@ -1,23 +1,23 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from markettor.models.event_definition import EventDefinition
+from clairview.models.event_definition import EventDefinition
 
 
 class EnterpriseEventDefinition(EventDefinition):
     owner = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         null=True,
         on_delete=models.SET_NULL,
         related_name="event_definitions",
     )
     description = models.TextField(blank=True, null=True, default="")
     updated_at = models.DateTimeField(auto_now=True)
-    updated_by = models.ForeignKey("markettor.User", null=True, on_delete=models.SET_NULL, blank=True)
+    updated_by = models.ForeignKey("clairview.User", null=True, on_delete=models.SET_NULL, blank=True)
     verified = models.BooleanField(default=False, blank=True)
     verified_at = models.DateTimeField(null=True, blank=True)
     verified_by = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         null=True,
         on_delete=models.SET_NULL,
         blank=True,

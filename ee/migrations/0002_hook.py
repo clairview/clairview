@@ -4,12 +4,12 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import markettor.models.utils
+import clairview.models.utils
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("markettor", "0082_personalapikey"),
+        ("clairview", "0082_personalapikey"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("ee", "0001_initial"),
     ]
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.CharField(
-                        default=markettor.models.utils.generate_random_token,
+                        default=clairview.models.utils.generate_random_token,
                         max_length=50,
                         primary_key=True,
                         serialize=False,
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="rest_hooks",
-                        to="markettor.Team",
+                        to="clairview.Team",
                     ),
                 ),
                 (

@@ -5,7 +5,7 @@ import { windowValues } from 'kea-window-values'
 import api from 'lib/api'
 import { FEATURE_FLAGS, RETENTION_FIRST_TIME, STALE_EVENT_SECONDS } from 'lib/constants'
 import { dayjs } from 'lib/dayjs'
-import { Link, MarketTorComDocsURL } from 'lib/lemon-ui/Link/Link'
+import { Link, ClairViewComDocsURL } from 'lib/lemon-ui/Link/Link'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { getDefaultInterval, isNotNil, updateDatesWithInterval } from 'lib/utils'
 import { errorTrackingQuery } from 'scenes/error-tracking/queries'
@@ -87,7 +87,7 @@ interface BaseTile {
 }
 
 export interface Docs {
-    docsUrl: MarketTorComDocsURL
+    docsUrl: ClairViewComDocsURL
     title: string
     description: string | JSX.Element
 }
@@ -192,8 +192,8 @@ export interface WebAnalyticsStatusCheck {
 }
 
 export const GEOIP_PLUGIN_URLS = [
-    'https://github.com/MarketTor/markettor-plugin-geoip',
-    'https://www.npmjs.com/package/@markettor/geoip-plugin',
+    'https://github.com/ClairView/clairview-plugin-geoip',
+    'https://www.npmjs.com/package/@clairview/geoip-plugin',
 ]
 
 export const WEB_ANALYTICS_DATA_COLLECTION_NODE_ID = 'web-analytics'
@@ -816,7 +816,7 @@ export const webAnalyticsLogic = kea<webAnalyticsLogicType>([
                                 {},
                                 {
                                     docs: {
-                                        docsUrl: 'https://markettor.com/docs/data/channel-type',
+                                        docsUrl: 'https://clairview.com/docs/data/channel-type',
                                         title: 'Channels',
                                         description: (
                                             <div>

@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { CLICK_OUTSIDE_BLOCK_CLASS } from 'lib/hooks/useOutsideClickHandler'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { CodeEditorInline } from 'lib/monaco/CodeEditorInline'
@@ -73,7 +73,7 @@ export function TorQLEditor({
             </LemonButton>
             <div className="flex mt-1 gap-1">
                 <div className={`w-full text-right select-none ${CLICK_OUTSIDE_BLOCK_CLASS}`}>
-                    <Link to="https://markettor.com/manual/torql" target="_blank">
+                    <Link to="https://clairview.com/manual/torql" target="_blank">
                         Learn more about TorQL
                     </Link>
                 </div>

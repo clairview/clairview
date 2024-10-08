@@ -56,7 +56,7 @@ const BasicTemplate: StoryFn<ToolbarStoryProps> = (props) => {
         dataAttributes: ['data-attr'],
         apiURL: '/',
         jsURL: 'http://localhost:8234/',
-        userEmail: 'foobar@markettor.com',
+        userEmail: 'foobar@clairview.com',
     }
     useToolbarStyles()
 

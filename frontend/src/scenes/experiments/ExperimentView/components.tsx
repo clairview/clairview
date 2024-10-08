@@ -1,6 +1,6 @@
 import '../Experiment.scss'
 
-import { IconArchive, IconCheck, IconFlask, IconX } from '@markettor/icons'
+import { IconArchive, IconCheck, IconFlask, IconX } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -13,7 +13,7 @@ import {
     LemonTagType,
     Link,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { AnimationType } from 'lib/animations/animations'
 import { Animation } from 'lib/components/Animation/Animation'
@@ -128,7 +128,7 @@ export function ResultsQuery({
 export function ExploreButton({ icon = <IconAreaChart /> }: { icon?: JSX.Element }): JSX.Element {
     const { experimentResults, experiment } = useValues(experimentLogic)
 
-    // keep in sync with https://github.com/MarketTor/markettor/blob/master/ee/clickhouse/queries/experiments/funnel_experiment_result.py#L71
+    // keep in sync with https://github.com/ClairView/clairview/blob/master/ee/clickhouse/queries/experiments/funnel_experiment_result.py#L71
     // :TRICKY: In the case of no results, we still want users to explore the query, so they can debug further.
     // This generates a close enough query that the backend would use to compute results.
     const filtersFromExperiment: Partial<FilterType> = {
@@ -655,7 +655,7 @@ export function ActionBanner(): JSX.Element {
         return (
             <LemonBanner type="info" className="mt-4">
                 Your experiment is in draft mode. You can edit your variants, adjust release conditions, and{' '}
-                <Link className="font-semibold" to="https://markettor.com/docs/experiments/testing-and-launching">
+                <Link className="font-semibold" to="https://clairview.com/docs/experiments/testing-and-launching">
                     test your feature flag
                 </Link>
                 . Once everything works as expected, you can launch your experiment. From that point, any new experiment

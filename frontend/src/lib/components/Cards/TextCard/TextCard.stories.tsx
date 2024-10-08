@@ -20,7 +20,7 @@ const makeTextTile = (body: string, color: InsightColor | null = null): Dashboar
                 uuid: 'a uuid',
                 distinct_id: 'another uuid',
                 first_name: 'paul',
-                email: 'paul@markettor.com',
+                email: 'paul@clairview.com',
             },
             last_modified_at: '2022-04-01 12:24:36',
         },

@@ -1,19 +1,19 @@
 from django.db import models
 
-from markettor.models.dashboard import Dashboard
-from markettor.models.utils import UUIDModel, sane_repr
+from clairview.models.dashboard import Dashboard
+from clairview.models.utils import UUIDModel, sane_repr
 
 
 # We call models that grant a user access to some resource (which isn't a grouping of users) a "privilege"
 class DashboardPrivilege(UUIDModel):
     dashboard = models.ForeignKey(
-        "markettor.Dashboard",
+        "clairview.Dashboard",
         on_delete=models.CASCADE,
         related_name="privileges",
         related_query_name="privilege",
     )
     user = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         on_delete=models.CASCADE,
         related_name="explicit_dashboard_privileges",
         related_query_name="explicit_dashboard_privilege",

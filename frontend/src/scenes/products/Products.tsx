@@ -1,5 +1,5 @@
-import * as Icons from '@markettor/icons'
-import { Link, Tooltip } from '@markettor/lemon-ui'
+import * as Icons from '@clairview/icons'
+import { Link, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'

@@ -52,19 +52,19 @@ const shouldForcePageLoad = (input: any): boolean => {
     return !!matches && matches[1] !== `${getCurrentTeamId()}`
 }
 
-const isMarketTorDomain = (url: string): boolean => {
-    return /^https:\/\/((www|app|eu)\.)?markettor\.com/.test(url)
+const isClairViewDomain = (url: string): boolean => {
+    return /^https:\/\/((www|app|eu)\.)?clairview\.com/.test(url)
 }
 
 const isDirectLink = (url: string): boolean => {
     return /^(mailto:|https?:\/\/|:\/\/)/.test(url)
 }
 
-const isMarketTorComDocs = (url: string): url is MarketTorComDocsURL => {
-    return /^https:\/\/(www\.)?markettor\.com\/docs/.test(url)
+const isClairViewComDocs = (url: string): url is ClairViewComDocsURL => {
+    return /^https:\/\/(www\.)?clairview\.com\/docs/.test(url)
 }
 
-export type MarketTorComDocsURL = `https://${'www.' | ''}markettor.com/docs/${string}`
+export type ClairViewComDocsURL = `https://${'www.' | ''}clairview.com/docs/${string}`
 
 /**
  * Link
@@ -110,7 +110,7 @@ export const Link: React.FC<LinkProps & React.RefAttributes<HTMLElement>> = Reac
 
             const mountedSidePanelLogic = sidePanelStateLogic.findMounted()
 
-            if (typeof to === 'string' && isMarketTorComDocs(to) && mountedSidePanelLogic) {
+            if (typeof to === 'string' && isClairViewComDocs(to) && mountedSidePanelLogic) {
                 // TRICKY: We do this instead of hooks as there is some weird cyclic issue in tests
                 const { sidePanelOpen } = mountedSidePanelLogic.values
                 const { openSidePanel } = mountedSidePanelLogic.actions
@@ -144,7 +144,7 @@ export const Link: React.FC<LinkProps & React.RefAttributes<HTMLElement>> = Reac
             }
         }
 
-        const rel = typeof to === 'string' && isMarketTorDomain(to) ? 'noopener' : 'noopener noreferrer'
+        const rel = typeof to === 'string' && isClairViewDomain(to) ? 'noopener' : 'noopener noreferrer'
         const href = to
             ? typeof to === 'string'
                 ? isDirectLink(to) || disableClientSideRouting

@@ -219,7 +219,7 @@ describe('transforms', () => {
 
             expect(() => {
                 transformCode(rawCode, hub, { 'node-fetch': { default: () => true } }, new Set())
-            }).toThrow("/index.ts: Cannot import 'kea'! This package is not provided by MarketTor in plugins.")
+            }).toThrow("/index.ts: Cannot import 'kea'! This package is not provided by ClairView in plugins.")
         })
 
         it('replaces requires', () => {
@@ -260,7 +260,7 @@ describe('transforms', () => {
 
             expect(() => {
                 transformCode(rawCode, hub, { 'node-fetch': { default: () => true } }, new Set())
-            }).toThrow("/index.ts: Cannot import 'kea'! This package is not provided by MarketTor in plugins.")
+            }).toThrow("/index.ts: Cannot import 'kea'! This package is not provided by ClairView in plugins.")
         })
     })
 })

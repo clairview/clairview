@@ -10,18 +10,18 @@
  * To test this locally, you can edit your /etc/hosts to add a subdomain redirect
  *
  * Add the following line to your host file:
- * 127.0.0.1 app.markettortest.com
+ * 127.0.0.1 app.clairviewtest.com
  *
  * Then set the following cookies locally:
- * document.cookie = 'ph_current_instance="https://eu.markettor.com"';
+ * document.cookie = 'ph_current_instance="https://eu.clairview.com"';
  * document.cookie = "is-logged-in=1";
  *
- * Then go to http://app.markettortest.com:8000/login?next=/apps
+ * Then go to http://app.clairviewtest.com:8000/login?next=/apps
  * And it will update the subdomain, taking you to the following link
- * http://eu.markettortest.com:8000/login?next=/apps
+ * http://eu.clairviewtest.com:8000/login?next=/apps
  */
 
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import { getCookie } from 'lib/api'
 
@@ -34,7 +34,7 @@ type Subdomain = 'eu' | 'us'
 
 export function cleanedCookieSubdomain(loggedInInstance: string | null): Subdomain | null {
     try {
-        // replace '"' as for some reason the cookie value is wrapped in quotes e.g. "https://eu.markettor.com"
+        // replace '"' as for some reason the cookie value is wrapped in quotes e.g. "https://eu.clairview.com"
         const url = loggedInInstance?.replace(/"/g, '')
         if (!url) {
             return null
@@ -42,9 +42,9 @@ export function cleanedCookieSubdomain(loggedInInstance: string | null): Subdoma
         // convert to URL, so that we can be sure we're dealing with a valid URL
         const hostname = new URL(url).hostname
         switch (hostname) {
-            case 'eu.markettor.com':
+            case 'eu.clairview.com':
                 return 'eu'
-            case 'us.markettor.com':
+            case 'us.clairview.com':
                 return 'us'
             default:
                 return null

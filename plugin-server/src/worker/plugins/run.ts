@@ -1,10 +1,10 @@
-import { PluginEvent, Webhook } from '@markettor/plugin-scaffold'
+import { PluginEvent, Webhook } from '@clairview/plugin-scaffold'
 
 import { Hub, PluginConfig, PluginMethodsConcrete, PluginTaskType, PostIngestionEvent } from '../../types'
 import { processError } from '../../utils/db/error'
 import {
     convertToOnEventPayload,
-    convertToMarketTorEvent,
+    convertToClairViewEvent,
     mutatePostIngestionEventWithElementsList,
 } from '../../utils/event'
 import { trackedFetch } from '../../utils/fetch'
@@ -13,7 +13,7 @@ import { IllegalOperationError } from '../../utils/utils'
 import { WebhookFormatter } from '../ingestion/webhook-formatter'
 import { pluginActionMsSummary } from '../metrics'
 
-const PLUGIN_URL_LEGACY_ACTION_WEBHOOK = 'https://github.com/MarketTor/legacy-action-webhook'
+const PLUGIN_URL_LEGACY_ACTION_WEBHOOK = 'https://github.com/ClairView/legacy-action-webhook'
 
 async function runSingleTeamPluginOnEvent(
     hub: Hub,
@@ -91,7 +91,7 @@ async function runSingleTeamPluginComposeWebhook(
     // 2. Send via Rusty-Hook if enabled.
     // 3. Send via `fetch` if Rusty-Hook is not enabled.
 
-    const event = convertToMarketTorEvent(postIngestionEvent)
+    const event = convertToClairViewEvent(postIngestionEvent)
     let maybeWebhook: Webhook | null = null
     try {
         if (pluginConfig.plugin?.url === PLUGIN_URL_LEGACY_ACTION_WEBHOOK) {

@@ -1,4 +1,4 @@
-import { IconPencil, IconPlus, IconTrash } from '@markettor/icons'
+import { IconPencil, IconPlus, IconTrash } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
@@ -60,7 +60,7 @@ function AuthorizedUrlForm({ actionId, type }: AuthorizedUrlListProps): JSX.Elem
             <LemonField name="url">
                 <LemonInput
                     autoFocus
-                    placeholder="Enter a URL or wildcard subdomain (e.g. https://*.markettor.com)"
+                    placeholder="Enter a URL or wildcard subdomain (e.g. https://*.clairview.com)"
                     data-attr="url-input"
                 />
             </LemonField>

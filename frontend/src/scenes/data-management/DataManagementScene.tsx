@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import { actions, connect, kea, path, reducers, selectors, useActions, useValues } from 'kea'
 import { actionToUrl, combineUrl, router, urlToAction } from 'kea-router'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
@@ -183,7 +183,7 @@ export function DataManagementScene(): JSX.Element {
     return (
         <>
             <PageHeader
-                caption="Use data management to organize events that come into MarketTor. Reduce noise, clarify usage, and help collaborators get the most value from your data."
+                caption="Use data management to organize events that come into ClairView. Reduce noise, clarify usage, and help collaborators get the most value from your data."
                 tabbedPage
                 buttons={<>{tabs[tab].buttons}</>}
             />

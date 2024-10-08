@@ -1,4 +1,4 @@
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 
 import { VizSpecificOptions } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'

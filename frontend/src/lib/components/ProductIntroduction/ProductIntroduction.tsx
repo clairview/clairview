@@ -1,4 +1,4 @@
-import { IconOpenSidebar, IconPlus, IconX } from '@markettor/icons'
+import { IconOpenSidebar, IconPlus, IconX } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { userLogic } from 'scenes/userLogic'

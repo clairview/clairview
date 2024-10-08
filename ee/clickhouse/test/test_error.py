@@ -1,7 +1,7 @@
 import pytest
 from clickhouse_driver.errors import ServerException
 
-from markettor.errors import wrap_query_error
+from clairview.errors import wrap_query_error
 
 
 @pytest.mark.parametrize(

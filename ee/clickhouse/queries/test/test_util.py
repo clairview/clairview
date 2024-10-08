@@ -3,13 +3,13 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from freezegun.api import freeze_time
 
-from markettor.client import sync_execute
-from markettor.torql.torql import TorQLContext
-from markettor.models.action import Action
-from markettor.models.cohort import Cohort
-from markettor.queries.breakdown_props import _parse_breakdown_cohorts
-from markettor.queries.util import get_earliest_timestamp
-from markettor.test.base import _create_event
+from clairview.client import sync_execute
+from clairview.torql.torql import TorQLContext
+from clairview.models.action import Action
+from clairview.models.cohort import Cohort
+from clairview.queries.breakdown_props import _parse_breakdown_cohorts
+from clairview.queries.util import get_earliest_timestamp
+from clairview.test.base import _create_event
 
 
 def test_get_earliest_timestamp(db, team):

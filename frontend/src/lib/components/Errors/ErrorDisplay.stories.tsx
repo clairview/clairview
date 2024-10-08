@@ -15,8 +15,8 @@ function errorProperties(properties: Record<string, any>): EventType['properties
         $os_version: '10.0',
         $browser: 'Chrome',
         $device_type: 'Desktop',
-        $current_url: 'https://app.markettor.com/home',
-        $host: 'app.markettor.com',
+        $current_url: 'https://app.clairview.com/home',
+        $host: 'app.clairview.com',
         $pathname: '/home',
         $browser_version: 113,
         $browser_language: 'es-ES',
@@ -37,12 +37,12 @@ function errorProperties(properties: Record<string, any>): EventType['properties
             project: '00000000-0000-0000-1847-88f0ffa23444',
             organization: '00000000-0000-0000-a050-5d4557279956',
             customer: 'the-customer',
-            instance: 'https://app.markettor.com',
+            instance: 'https://app.clairview.com',
         },
         $exception_message: 'ResizeObserver loop limit exceeded',
         $exception_type: 'Error',
         $exception_fingerprint: 'Error',
-        $exception_personURL: 'https://app.markettor.com/person/the-person-id',
+        $exception_personURL: 'https://app.clairview.com/person/the-person-id',
         $sentry_event_id: 'id-from-the-sentry-integration',
         $sentry_exception: {
             values: [
@@ -58,7 +58,7 @@ function errorProperties(properties: Record<string, any>): EventType['properties
                         frames: [
                             {
                                 colno: 0,
-                                filename: 'https://app.markettor.com/home',
+                                filename: 'https://app.clairview.com/home',
                                 function: '?',
                                 in_app: true,
                                 lineno: 0,
@@ -71,11 +71,11 @@ function errorProperties(properties: Record<string, any>): EventType['properties
         $sentry_exception_message: 'ResizeObserver loop limit exceeded',
         $sentry_exception_type: 'Error',
         $sentry_tags: {
-            'MarketTor Person URL': 'https://app.markettor.com/person/the-person-id',
-            'MarketTor Recording URL': 'https://app.markettor.com/replay/the-session-id?t=866',
+            'ClairView Person URL': 'https://app.clairview.com/person/the-person-id',
+            'ClairView Recording URL': 'https://app.clairview.com/replay/the-session-id?t=866',
         },
         $sentry_url:
-            'https://sentry.io/organizations/markettor/issues/?project=the-sentry-project-id&query=the-sentry-id',
+            'https://sentry.io/organizations/clairview/issues/?project=the-sentry-project-id&query=the-sentry-id',
         $session_id: 'the-session-id',
         $window_id: 'the-window-id',
         $pageview_id: 'the-pageview-id',
@@ -101,7 +101,7 @@ export function ResizeObserverLoopLimitExceeded(): JSX.Element {
             eventProperties={errorProperties({
                 $exception_message: 'ResizeObserver loop limit exceeded',
                 $exception_type: 'Error',
-                $exception_personURL: 'https://app.markettor.com/person/the-person-id',
+                $exception_personURL: 'https://app.clairview.com/person/the-person-id',
             })}
         />
     )
@@ -160,7 +160,7 @@ export function ChainedErrorStack(): JSX.Element {
                             frames: [
                                 {
                                     filename: 'example2.py',
-                                    abs_path: '/markettor-python/example2.py',
+                                    abs_path: '/clairview-python/example2.py',
                                     function: 'will_raise',
                                     module: '__main__',
                                     lineno: 33,
@@ -182,7 +182,7 @@ export function ChainedErrorStack(): JSX.Element {
                                 },
                                 {
                                     filename: 'example2.py',
-                                    abs_path: '/markettor-python/example2.py',
+                                    abs_path: '/clairview-python/example2.py',
                                     function: 'more_obfuscation',
                                     module: '__main__',
                                     lineno: 29,
@@ -213,7 +213,7 @@ export function ChainedErrorStack(): JSX.Element {
                             frames: [
                                 {
                                     filename: 'example2.py',
-                                    abs_path: '/Users/neilkakkar/Project/markettor-python/example2.py',
+                                    abs_path: '/Users/neilkakkar/Project/clairview-python/example2.py',
                                     function: '<module>',
                                     module: '__main__',
                                     lineno: 37,
@@ -229,13 +229,13 @@ export function ChainedErrorStack(): JSX.Element {
                                         'exit()',
                                         '',
                                         '',
-                                        '# print(markettor.get_all_flags("distinct_id_random_22"))',
+                                        '# print(clairview.get_all_flags("distinct_id_random_22"))',
                                         '# print(',
                                     ],
                                 },
                                 {
                                     filename: 'example2.py',
-                                    abs_path: '/Users/neilkakkar/Project/markettor-python/example2.py',
+                                    abs_path: '/Users/neilkakkar/Project/clairview-python/example2.py',
                                     function: 'will_raise',
                                     module: '__main__',
                                     lineno: 35,

@@ -6,7 +6,7 @@ import { downloadBlob, downloadExportedAsset, TriggerExportProps } from 'lib/com
 import { dayjs } from 'lib/dayjs'
 import { lemonToast } from 'lib/lemon-ui/LemonToast'
 import { delay } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { urls } from 'scenes/urls'
 
 import { sidePanelStateLogic } from '~/layout/navigation-3000/sidepanel/sidePanelStateLogic'
@@ -108,7 +108,7 @@ export const exportsLogic = kea<exportsLogicType>([
                                 actions.addFresh(updatedAsset)
                             }
                             trackingProperties.total_time_ms = performance.now() - startTime
-                            markettor.capture('export succeeded', trackingProperties)
+                            clairview.capture('export succeeded', trackingProperties)
 
                             resolve('Export complete')
                             return
@@ -129,7 +129,7 @@ export const exportsLogic = kea<exportsLogicType>([
                     }
                 } catch (e: any) {
                     trackingProperties.total_time_ms = performance.now() - startTime
-                    markettor.capture('export failed', trackingProperties)
+                    clairview.capture('export failed', trackingProperties)
                     reject(new Error(`Export failed: ${JSON.stringify(e.detail ?? e)}`))
                 }
             })

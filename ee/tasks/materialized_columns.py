@@ -5,8 +5,8 @@ from ee.clickhouse.materialized_columns.columns import (
     ColumnName,
     get_materialized_columns,
 )
-from markettor.client import sync_execute
-from markettor.settings import CLICKHOUSE_CLUSTER, CLICKHOUSE_DATABASE
+from clairview.client import sync_execute
+from clairview.settings import CLICKHOUSE_CLUSTER, CLICKHOUSE_DATABASE
 
 logger = get_task_logger(__name__)
 

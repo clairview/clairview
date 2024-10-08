@@ -1,10 +1,10 @@
-import { IconFlag } from '@markettor/icons'
+import { IconFlag } from '@clairview/icons'
 import { TitledSnack } from 'lib/components/TitledSnack'
 import { LemonDivider } from 'lib/lemon-ui/LemonDivider'
 import { LemonSwitch } from 'lib/lemon-ui/LemonSwitch'
 import { LemonTag } from 'lib/lemon-ui/LemonTag/LemonTag'
 import { Link } from 'lib/lemon-ui/Link'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useState } from 'react'
 
 import { EventType } from '~/types'
@@ -60,7 +60,7 @@ function StackTrace({ rawTrace, showAllFrames }: { rawTrace: string; showAllFram
         )
     } catch (e: any) {
         //very meta
-        markettor.capture('Cannot parse stack trace in Exception event', { tag: 'error-display-stack-trace', e })
+        clairview.capture('Cannot parse stack trace in Exception event', { tag: 'error-display-stack-trace', e })
         return <LemonTag type="caution">Error parsing stack trace</LemonTag>
     }
 }
@@ -214,7 +214,7 @@ export function ErrorDisplay({ eventProperties }: { eventProperties: EventType['
                                     Sentry
                                 </Link>
                             ) : (
-                                <>MarketTor</>
+                                <>ClairView</>
                             )}
                         </>
                     }

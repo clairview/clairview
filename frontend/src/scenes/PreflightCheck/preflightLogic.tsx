@@ -3,7 +3,7 @@ import { loaders } from 'kea-loaders'
 import { actionToUrl, router, urlToAction } from 'kea-router'
 import api from 'lib/api'
 import { getAppContext } from 'lib/utils/getAppContext'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { urls } from 'scenes/urls'
 
 import { PreflightStatus, Realm } from '~/types'
@@ -290,10 +290,10 @@ export const preflightLogic = kea<preflightLogicType>([
         },
         registerInstrumentationProps: async (_, breakpoint) => {
             await breakpoint(100)
-            if (markettor && values.preflight) {
+            if (clairview && values.preflight) {
                 const appContext = getAppContext()
 
-                markettor.register({
+                clairview.register({
                     realm: values.realm,
                     email_service_available: values.preflight.email_service_available,
                     slack_service_available: values.preflight.slack_service?.available,
@@ -301,7 +301,7 @@ export const preflightLogic = kea<preflightLogicType>([
                 })
 
                 if (values.preflight.site_url) {
-                    markettor.group('instance', values.preflight.site_url, {
+                    clairview.group('instance', values.preflight.site_url, {
                         site_url: values.preflight.site_url,
                     })
                 }

@@ -3,8 +3,8 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models.organization_resource_access import OrganizationResourceAccess
-from markettor.models.organization import Organization, OrganizationMembership
-from markettor.test.base import QueryMatchingTest, snapshot_postgres_queries, FuzzyInt
+from clairview.models.organization import Organization, OrganizationMembership
+from clairview.test.base import QueryMatchingTest, snapshot_postgres_queries, FuzzyInt
 
 
 class TestOrganizationResourceAccessAPI(APILicensedTest, QueryMatchingTest):

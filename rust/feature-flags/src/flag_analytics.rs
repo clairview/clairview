@@ -9,9 +9,9 @@ const CACHE_BUCKET_SIZE: u64 = 60 * 2; // duration in seconds
 
 pub fn get_team_request_key(team_id: i32, request_type: FlagRequestType) -> String {
     match request_type {
-        FlagRequestType::Decide => format!("markettor:decide_requests:{}", team_id),
+        FlagRequestType::Decide => format!("clairview:decide_requests:{}", team_id),
         FlagRequestType::LocalEvaluation => {
-            format!("markettor:local_evaluation_requests:{}", team_id)
+            format!("clairview:local_evaluation_requests:{}", team_id)
         }
     }
 }
@@ -43,11 +43,11 @@ mod tests {
     async fn test_get_team_request_key() {
         assert_eq!(
             get_team_request_key(123, FlagRequestType::Decide),
-            "markettor:decide_requests:123"
+            "clairview:decide_requests:123"
         );
         assert_eq!(
             get_team_request_key(456, FlagRequestType::LocalEvaluation),
-            "markettor:local_evaluation_requests:456"
+            "clairview:local_evaluation_requests:456"
         );
     }
 

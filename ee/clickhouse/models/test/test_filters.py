@@ -1,20 +1,20 @@
 import json
 from typing import Optional
 
-from markettor.client import query_with_columns, sync_execute
-from markettor.constants import FILTER_TEST_ACCOUNTS
-from markettor.models import Element, Organization, Person, Team
-from markettor.models.cohort import Cohort
-from markettor.models.event.sql import GET_EVENTS_WITH_PROPERTIES
-from markettor.models.event.util import ClickhouseEventSerializer
-from markettor.models.filters import Filter
-from markettor.models.filters.retention_filter import RetentionFilter
-from markettor.models.filters.test.test_filter import TestFilter as PGTestFilters
-from markettor.models.filters.test.test_filter import property_to_Q_test_factory
-from markettor.models.property.util import parse_prop_grouped_clauses
-from markettor.queries.util import PersonPropertiesMode
-from markettor.test.base import ClickhouseTestMixin, _create_event, _create_person
-from markettor.test.test_journeys import journeys_for
+from clairview.client import query_with_columns, sync_execute
+from clairview.constants import FILTER_TEST_ACCOUNTS
+from clairview.models import Element, Organization, Person, Team
+from clairview.models.cohort import Cohort
+from clairview.models.event.sql import GET_EVENTS_WITH_PROPERTIES
+from clairview.models.event.util import ClickhouseEventSerializer
+from clairview.models.filters import Filter
+from clairview.models.filters.retention_filter import RetentionFilter
+from clairview.models.filters.test.test_filter import TestFilter as PGTestFilters
+from clairview.models.filters.test.test_filter import property_to_Q_test_factory
+from clairview.models.property.util import parse_prop_grouped_clauses
+from clairview.queries.util import PersonPropertiesMode
+from clairview.test.base import ClickhouseTestMixin, _create_event, _create_person
+from clairview.test.test_journeys import journeys_for
 
 
 def _filter_events(filter: Filter, team: Team, order_by: Optional[str] = None):
@@ -1044,7 +1044,7 @@ class TestFiltering(ClickhouseTestMixin, property_to_Q_test_factory(_filter_pers
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["team_member"],
-            properties={"email": "test@markettor.com"},
+            properties={"email": "test@clairview.com"},
         )
         _create_person(
             team_id=self.team.pk,
@@ -1054,7 +1054,7 @@ class TestFiltering(ClickhouseTestMixin, property_to_Q_test_factory(_filter_pers
         self.team.test_account_filters = [
             {
                 "key": "email",
-                "value": "@markettor.com",
+                "value": "@clairview.com",
                 "operator": "not_icontains",
                 "type": "person",
             }
@@ -1093,13 +1093,13 @@ class TestFiltering(ClickhouseTestMixin, property_to_Q_test_factory(_filter_pers
         _create_person(
             team_id=self.team.pk,
             distinct_ids=["person5"],
-            properties={"email": "test@markettor.com", "name": "test", "age": "50"},
+            properties={"email": "test@clairview.com", "name": "test", "age": "50"},
         )
 
         self.team.test_account_filters = [
             {
                 "key": "email",
-                "value": "@markettor.com",
+                "value": "@clairview.com",
                 "operator": "not_icontains",
                 "type": "person",
             }

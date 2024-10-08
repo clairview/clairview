@@ -7,9 +7,9 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models.license import License
-from markettor.models import Team, User
-from markettor.models.organization import Organization, OrganizationMembership
-from markettor.tasks.tasks import sync_all_organization_available_product_features
+from clairview.models import Team, User
+from clairview.models.organization import Organization, OrganizationMembership
+from clairview.tasks.tasks import sync_all_organization_available_product_features
 
 
 class TestOrganizationEnterpriseAPI(APILicensedTest):
@@ -28,7 +28,7 @@ class TestOrganizationEnterpriseAPI(APILicensedTest):
             OrganizationMembership.Level.OWNER,
         )
 
-    @patch("markettor.models.utils.generate_random_short_suffix", return_value="YYYY")
+    @patch("clairview.models.utils.generate_random_short_suffix", return_value="YYYY")
     def test_create_two_similarly_named_organizations(self, mock_choice):
         response = self.client.post(
             "/api/organizations/",
@@ -56,8 +56,8 @@ class TestOrganizationEnterpriseAPI(APILicensedTest):
             response.json(),
         )
 
-    @patch("markettor.api.organization.delete_bulky_postgres_data")
-    @patch("markettoranalytics.capture")
+    @patch("clairview.api.organization.delete_bulky_postgres_data")
+    @patch("clairviewanalytics.capture")
     def test_delete_second_managed_organization(self, mock_capture, mock_delete_bulky_postgres_data):
         organization, _, team = Organization.objects.bootstrap(self.user, name="X")
         organization_props = organization.get_analytics_metadata()
@@ -76,7 +76,7 @@ class TestOrganizationEnterpriseAPI(APILicensedTest):
         )
         mock_delete_bulky_postgres_data.assert_called_once_with(team_ids=[team.id])
 
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     def test_delete_last_organization(self, mock_capture):
         org_id = self.organization.id
         organization_props = self.organization.get_analytics_metadata()

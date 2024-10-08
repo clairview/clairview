@@ -30,7 +30,7 @@ export function getInitialCode(name: string, kind: SourcePluginKind): Record<str
                     null,
                     4
                 ),
-                'index.ts': `// Learn more about plugins at: https://markettor.com/docs/apps/build
+                'index.ts': `// Learn more about plugins at: https://clairview.com/docs/apps/build
 
 // Processes each event, optionally dropping it
 export function processEvent(event, { config }) {
@@ -67,7 +67,7 @@ export function setupPlugin (meta) {
                     null,
                     4
                 ),
-                'index.ts': `// Learn more about plugins at: https://markettor.com/docs/apps/build
+                'index.ts': `// Learn more about plugins at: https://clairview.com/docs/apps/build
 
 // Processes each event, optionally modify it
 export function processEvent(event, { config }) {
@@ -102,10 +102,10 @@ export function setupPlugin (meta) {
                     null,
                     4
                 ),
-                'index.ts': `// Learn more about plugins at: https://markettor.com/docs/apps/build
-import { MarketTorEvent, Webhook } from '@markettor/plugin-scaffold'
+                'index.ts': `// Learn more about plugins at: https://clairview.com/docs/apps/build
+import { ClairViewEvent, Webhook } from '@clairview/plugin-scaffold'
 
-export function composeWebhook(event: MarketTorEvent, { config }: any): Webhook {
+export function composeWebhook(event: ClairViewEvent, { config }: any): Webhook {
     return {
         url: config.url,
         body: JSON.stringify(event),
@@ -138,7 +138,7 @@ export function composeWebhook(event: MarketTorEvent, { config }: any): Webhook 
                     null,
                     4
                 ),
-                'site.ts': `export function inject({ config, markettor }) {\n    console.log('Hello from MarketTor-JS')\n}\n"`,
+                'site.ts': `export function inject({ config, clairview }) {\n    console.log('Hello from ClairView-JS')\n}\n"`,
             }
         case SourcePluginKind.Frontend:
             return {

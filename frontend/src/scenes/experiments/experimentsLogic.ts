@@ -1,4 +1,4 @@
-import { LemonTagType } from '@markettor/lemon-ui'
+import { LemonTagType } from '@clairview/lemon-ui'
 import Fuse from 'fuse.js'
 import { actions, connect, events, kea, path, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'

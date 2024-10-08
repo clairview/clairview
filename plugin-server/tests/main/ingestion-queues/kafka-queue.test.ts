@@ -7,7 +7,7 @@ import { LogLevel, PluginsServerConfig } from '../../../src/types'
 import { Hub } from '../../../src/types'
 import { UUIDT } from '../../../src/utils/utils'
 import { makePiscina } from '../../../src/worker/piscina'
-import { createMarkettor, DummyMarketTor } from '../../../src/worker/vm/extensions/markettor'
+import { createMarkettor, DummyClairView } from '../../../src/worker/vm/extensions/clairview'
 import { writeToFile } from '../../../src/worker/vm/extensions/test-utils'
 import { delayUntilEventIngested, resetTestDatabaseClickhouse } from '../../helpers/clickhouse'
 import { resetKafka } from '../../helpers/kafka'
@@ -29,7 +29,7 @@ const extraServerConfig: Partial<PluginsServerConfig> = {
 describe.skip('IngestionConsumer', () => {
     let hub: Hub
     let stopServer: () => Promise<void>
-    let markettor: DummyMarketTor
+    let clairview: DummyClairView
     let pluginServer: ServerInstance
 
     beforeAll(async () => {
@@ -43,7 +43,7 @@ describe.skip('IngestionConsumer', () => {
         pluginServer = await startPluginsServer(extraServerConfig, makePiscina)
         hub = pluginServer.hub
         stopServer = pluginServer.stop
-        markettor = createMarkettor(hub, pluginConfig39)
+        clairview = createMarkettor(hub, pluginConfig39)
     })
 
     afterEach(async () => {
@@ -55,7 +55,7 @@ describe.skip('IngestionConsumer', () => {
 
         const uuid = new UUIDT().toString()
 
-        await markettor.capture('custom event', { name: 'haha', uuid, distinct_id: 'some_id' })
+        await clairview.capture('custom event', { name: 'haha', uuid, distinct_id: 'some_id' })
 
         await delayUntilEventIngested(() => hub.db.fetchEvents())
 

@@ -6,7 +6,7 @@ import { FEATURE_FLAGS, TeamMembershipLevel } from 'lib/constants'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { addProjectIdIfMissing, removeProjectIdIfPresent } from 'lib/utils/router-utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { emptySceneParams, preloadedScenes, redirects, routes, sceneConfigurations } from 'scenes/scenes'
 import { LoadedScene, Params, Scene, SceneConfig, SceneExport, SceneParams } from 'scenes/sceneTypes'
 import { urls } from 'scenes/urls'
@@ -149,7 +149,7 @@ export const sceneLogic = kea<sceneLogicType>([
     }),
     listeners(({ values, actions, props, selectors }) => ({
         setScene: ({ scene, scrollToTop }, _, __, previousState) => {
-            markettor.capture('$pageview')
+            clairview.capture('$pageview')
 
             // if we clicked on a link, scroll to top
             const previousScene = selectors.scene(previousState)
@@ -178,7 +178,7 @@ export const sceneLogic = kea<sceneLogicType>([
                 router.actions.replace(urls.signup())
                 return
             }
-            if (scene === Scene.MoveToMarketTorCloud && preflight?.cloud) {
+            if (scene === Scene.MoveToClairViewCloud && preflight?.cloud) {
                 router.actions.replace(urls.projectHomepage())
                 return
             }
@@ -259,7 +259,7 @@ export const sceneLogic = kea<sceneLogicType>([
                             // cloud mode? What is the experience for self-hosted?
                         ) {
                             // TODO: remove after PRODUCT_INTRO_PAGES experiment is complete
-                            markettor.capture('should view onboarding product intro', {
+                            clairview.capture('should view onboarding product intro', {
                                 did_view_intro: values.featureFlags[FEATURE_FLAGS.PRODUCT_INTRO_PAGES] === 'test',
                                 product_key: productKeyFromUrl,
                                 is_onboarding_first_product: !teamLogic.values.hasOnboardedAnyProduct,

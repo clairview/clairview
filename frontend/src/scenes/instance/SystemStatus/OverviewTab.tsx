@@ -1,4 +1,4 @@
-import { LemonTable } from '@markettor/lemon-ui'
+import { LemonTable } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { IconOpenInNew } from 'lib/lemon-ui/icons'
 import { Link } from 'lib/lemon-ui/Link'

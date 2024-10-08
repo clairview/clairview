@@ -1,4 +1,4 @@
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

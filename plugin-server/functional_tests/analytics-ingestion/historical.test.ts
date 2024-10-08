@@ -23,7 +23,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         properties: {
             distinct_id: distinctId,
             $group_type: 'organization',
-            $group_key: 'markettor',
+            $group_key: 'clairview',
             $group_set: {
                 prop: 'value',
             },
@@ -39,7 +39,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         event: 'custom event',
         properties: {
             name: 'haha',
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         },
         topic: HISTORICAL_TOPIC,
     })
@@ -48,7 +48,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         const [event] = await fetchEvents(teamId, firstEventUuid)
         expect(event).toEqual(
             expect.objectContaining({
-                $group_0: 'markettor',
+                $group_0: 'clairview',
             })
         )
     })
@@ -62,7 +62,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         properties: {
             distinct_id: distinctId,
             $group_type: 'organization',
-            $group_key: 'markettor',
+            $group_key: 'clairview',
             $group_set: {
                 prop: 'updated value',
             },
@@ -78,7 +78,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         event: 'custom event',
         properties: {
             name: 'haha',
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         },
         topic: HISTORICAL_TOPIC,
     })
@@ -86,7 +86,7 @@ test(`event ingestion: can ingest into the historical topic`, async () => {
         const [event] = await fetchEvents(teamId, secondEventUuid)
         expect(event).toEqual(
             expect.objectContaining({
-                $group_0: 'markettor',
+                $group_0: 'clairview',
             })
         )
     })

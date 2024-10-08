@@ -1,4 +1,4 @@
-import { calculateCost, convertHogToJS, exec, ExecOptions, ExecResult } from '@markettor/hogvm'
+import { calculateCost, convertHogToJS, exec, ExecOptions, ExecResult } from '@clairview/hogvm'
 import crypto from 'crypto'
 import { DateTime } from 'luxon'
 import { Histogram } from 'prom-client'
@@ -200,7 +200,7 @@ export class HogExecutor {
         const result: HogFunctionInvocationResult = {
             invocation,
             finished: false,
-            capturedMarketTorEvents: [],
+            capturedClairViewEvents: [],
             logs: [],
         }
 
@@ -314,7 +314,7 @@ export class HogExecutor {
                                 throw new Error("[HogFunction] - marketTorCapture call missing 'event' property")
                             }
 
-                            if (result.capturedMarketTorEvents!.length > 0) {
+                            if (result.capturedClairViewEvents!.length > 0) {
                                 throw new Error(
                                     'marketTorCapture was called more than once. Only one call is allowed per function'
                                 )
@@ -330,7 +330,7 @@ export class HogExecutor {
                                 return
                             }
 
-                            result.capturedMarketTorEvents!.push({
+                            result.capturedClairViewEvents!.push({
                                 team_id: invocation.teamId,
                                 timestamp: DateTime.utc().toISO(),
                                 distinct_id: event.distinct_id || invocation.globals.event.distinct_id,

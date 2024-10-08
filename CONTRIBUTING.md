@@ -1,4 +1,4 @@
-There are many ways to contribute to MarketTor. We want to help developers know exactly how users are interacting with their stuff, in a way that doesn't send data to 3rd parties.
+There are many ways to contribute to ClairView. We want to help developers know exactly how users are interacting with their stuff, in a way that doesn't send data to 3rd parties.
 
 # Creating a PR
 
@@ -6,7 +6,7 @@ Just create a new pull request if you want to make an update.
 
 We recommend you create an issue if one doesn't already exist, and continue the conversation on the issue to get more info/alignment on what to build.
 
-For more information on how we review PRs, please refer to our [handbook](https://markettor.com/handbook/engineering/how-we-review).
+For more information on how we review PRs, please refer to our [handbook](https://clairview.com/handbook/engineering/how-we-review).
 
 # Issues
 

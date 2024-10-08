@@ -9,7 +9,7 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
-type MarketTorEventWrapper struct {
+type ClairViewEventWrapper struct {
 	Uuid       string `json:"uuid"`
 	DistinctId string `json:"distinct_id"`
 	Ip         string `json:"ip"`
@@ -17,7 +17,7 @@ type MarketTorEventWrapper struct {
 	Token      string `json:"token"`
 }
 
-type MarketTorEvent struct {
+type ClairViewEvent struct {
 	Token      string                 `json:"api_key,omitempty"`
 	Event      string                 `json:"event"`
 	Properties map[string]interface{} `json:"properties"`
@@ -40,15 +40,15 @@ type KafkaConsumer interface {
 	Close()
 }
 
-type MarketTorKafkaConsumer struct {
+type ClairViewKafkaConsumer struct {
 	consumer     KafkaConsumerInterface
 	topic        string
 	geolocator   GeoLocator
-	outgoingChan chan MarketTorEvent
-	statsChan    chan MarketTorEvent
+	outgoingChan chan ClairViewEvent
+	statsChan    chan ClairViewEvent
 }
 
-func NewMarketTorKafkaConsumer(brokers string, securityProtocol string, groupID string, topic string, geolocator GeoLocator, outgoingChan chan MarketTorEvent, statsChan chan MarketTorEvent) (*MarketTorKafkaConsumer, error) {
+func NewClairViewKafkaConsumer(brokers string, securityProtocol string, groupID string, topic string, geolocator GeoLocator, outgoingChan chan ClairViewEvent, statsChan chan ClairViewEvent) (*ClairViewKafkaConsumer, error) {
 	config := &kafka.ConfigMap{
 		"bootstrap.servers":  brokers,
 		"group.id":           groupID,
@@ -62,7 +62,7 @@ func NewMarketTorKafkaConsumer(brokers string, securityProtocol string, groupID 
 		return nil, err
 	}
 
-	return &MarketTorKafkaConsumer{
+	return &ClairViewKafkaConsumer{
 		consumer:     consumer,
 		topic:        topic,
 		geolocator:   geolocator,
@@ -71,7 +71,7 @@ func NewMarketTorKafkaConsumer(brokers string, securityProtocol string, groupID 
 	}, nil
 }
 
-func (c *MarketTorKafkaConsumer) Consume() {
+func (c *ClairViewKafkaConsumer) Consume() {
 	err := c.consumer.SubscribeTopics([]string{c.topic}, nil)
 	if err != nil {
 		sentry.CaptureException(err)
@@ -85,14 +85,14 @@ func (c *MarketTorKafkaConsumer) Consume() {
 			sentry.CaptureException(err)
 		}
 
-		var wrapperMessage MarketTorEventWrapper
+		var wrapperMessage ClairViewEventWrapper
 		err = json.Unmarshal(msg.Value, &wrapperMessage)
 		if err != nil {
 			log.Printf("Error decoding JSON: %v", err)
 			log.Printf("Data: %s", string(msg.Value))
 		}
 
-		phEvent := MarketTorEvent{
+		phEvent := ClairViewEvent{
 			Timestamp:  time.Now().UTC().Format("2006-01-02T15:04:05.000Z"),
 			Token:      "",
 			Event:      "",
@@ -145,6 +145,6 @@ func (c *MarketTorKafkaConsumer) Consume() {
 	}
 }
 
-func (c *MarketTorKafkaConsumer) Close() {
+func (c *ClairViewKafkaConsumer) Close() {
 	c.consumer.Close()
 }

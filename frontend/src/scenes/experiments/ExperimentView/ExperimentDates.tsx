@@ -1,5 +1,5 @@
-import { IconPencil } from '@markettor/icons'
-import { LemonButton, LemonCalendarSelectInput } from '@markettor/lemon-ui'
+import { IconPencil } from '@clairview/icons'
+import { LemonButton, LemonCalendarSelectInput } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { TZLabel } from 'lib/components/TZLabel'

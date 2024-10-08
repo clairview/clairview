@@ -5,12 +5,12 @@ from unittest.mock import patch
 from django.core.cache import cache
 from rest_framework import status
 
-from markettor.constants import FUNNEL_PATH_AFTER_STEP, INSIGHT_FUNNELS, INSIGHT_PATHS
-from markettor.models.cohort import Cohort
-from markettor.models.instance_setting import get_instance_setting
-from markettor.models.person import Person
-from markettor.tasks.calculate_cohort import insert_cohort_from_insight_filter
-from markettor.test.base import (
+from clairview.constants import FUNNEL_PATH_AFTER_STEP, INSIGHT_FUNNELS, INSIGHT_PATHS
+from clairview.models.cohort import Cohort
+from clairview.models.instance_setting import get_instance_setting
+from clairview.models.person import Person
+from clairview.tasks.calculate_cohort import insert_cohort_from_insight_filter
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -71,7 +71,7 @@ class TestPathPerson(ClickhouseTestMixin, APIBaseTest):
         self.assertTrue("id" in first_person and "name" in first_person and "distinct_ids" in first_person)
         self.assertEqual(5, j["results"][0]["count"])
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_paths_cohort(self, _insert_cohort_from_insight_filter):
         self._create_sample_data(5)
 
@@ -171,7 +171,7 @@ class TestPathPerson(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(5, len(people))
         self.assertEqual(None, j["next"])
 
-    @patch("markettor.models.person.util.delete_person")
+    @patch("clairview.models.person.util.delete_person")
     def test_basic_pagination_with_deleted(self, delete_person_patch):
         if not get_instance_setting("PERSON_ON_EVENTS_ENABLED"):
             return

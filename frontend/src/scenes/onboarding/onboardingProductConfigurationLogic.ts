@@ -1,4 +1,4 @@
-import { LemonSelectOptions } from '@markettor/lemon-ui'
+import { LemonSelectOptions } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, reducers } from 'kea'
 import { teamLogic } from 'scenes/teamLogic'
 

@@ -1,8 +1,8 @@
 /*
 Scene to request a password reset email.
 */
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput, Link } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { router } from 'kea-router'
@@ -69,7 +69,7 @@ function EmailUnavailable(): JSX.Element {
                     <ul>
                         <li>
                             Password reset is unavailable because email service is not configured.{' '}
-                            <Link to="https://markettor.com/docs/self-host/configure/email?utm_medium=in-product&utm_campaign=password-reset">
+                            <Link to="https://clairview.com/docs/self-host/configure/email?utm_medium=in-product&utm_campaign=password-reset">
                                 Read the docs
                             </Link>{' '}
                             on how to set this up.

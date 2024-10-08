@@ -38,7 +38,7 @@ describe('sql', () => {
         expect(rows1).toEqual(rowsExpected)
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            "update markettor_team set plugins_opt_in='f'",
+            "update clairview_team set plugins_opt_in='f'",
             undefined,
             'testTag'
         )
@@ -80,13 +80,13 @@ describe('sql', () => {
                 plugin_type: 'custom',
                 public_jobs: null,
                 source__plugin_json:
-                    '{"name":"markettor-maxmind-plugin","description":"just for testing","url":"http://example.com/plugin","config":{},"main":"index.js"}',
+                    '{"name":"clairview-maxmind-plugin","description":"just for testing","url":"http://example.com/plugin","config":{},"main":"index.js"}',
                 source__index_ts: 'const processEvent = event => event',
                 source__frontend_tsx: null,
                 source__site_ts: null,
                 tag: '0.0.2',
                 updated_at: expect.any(String),
-                url: 'https://www.npmjs.com/package/markettor-maxmind-plugin',
+                url: 'https://www.npmjs.com/package/clairview-maxmind-plugin',
                 capabilities: {},
             },
         ]
@@ -95,7 +95,7 @@ describe('sql', () => {
         expect(rows1).toEqual(rowsExpected)
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            "update markettor_team set plugins_opt_in='f'",
+            "update clairview_team set plugins_opt_in='f'",
             undefined,
             'testTag'
         )
@@ -110,7 +110,7 @@ describe('sql', () => {
             await disablePlugin(hub, 39)
             expect(hub.db.postgres.query).toHaveBeenCalledWith(
                 PostgresUse.COMMON_WRITE,
-                `UPDATE markettor_pluginconfig SET enabled='f' WHERE id=$1 AND enabled='t'`,
+                `UPDATE clairview_pluginconfig SET enabled='f' WHERE id=$1 AND enabled='t'`,
                 [39],
                 'disablePlugin'
             )

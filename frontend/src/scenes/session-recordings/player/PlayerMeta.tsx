@@ -1,6 +1,6 @@
 import './PlayerMeta.scss'
 
-import { LemonBanner, LemonSelect, LemonSelectOption, Link } from '@markettor/lemon-ui'
+import { LemonBanner, LemonSelect, LemonSelectOption, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
@@ -67,7 +67,7 @@ function PlayerWarningsRow(): JSX.Element | null {
                 type="error"
                 action={{
                     children: 'Learn more',
-                    to: 'https://markettor.com/docs/session-replay/troubleshooting#message-too-large-warning',
+                    to: 'https://clairview.com/docs/session-replay/troubleshooting#message-too-large-warning',
                     targetBlank: true,
                 }}
             >
@@ -138,8 +138,8 @@ export function PlayerMeta(): JSX.Element {
             <div className="PlayerMeta">
                 <div className="flex justify-between items-center m-2">
                     {!whitelabel ? (
-                        <Tooltip title="Powered by MarketTor" placement="right">
-                            <Link to="https://markettor.com" className="flex items-center" target="blank">
+                        <Tooltip title="Powered by ClairView" placement="right">
+                            <Link to="https://clairview.com" className="flex items-center" target="blank">
                                 <Logo />
                             </Link>
                         </Tooltip>

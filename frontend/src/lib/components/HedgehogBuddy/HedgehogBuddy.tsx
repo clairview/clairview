@@ -1,6 +1,6 @@
 import './HedgehogBuddy.scss'
 
-import { lemonToast, ProfilePicture } from '@markettor/lemon-ui'
+import { lemonToast, ProfilePicture } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
@@ -126,7 +126,7 @@ export class HedgehogActor {
     }
 
     private log(message: string, ...args: any[]): void {
-        if ((window as any)._markettorDebugHedgehog) {
+        if ((window as any)._clairviewDebugHedgehog) {
             // eslint-disable-next-line no-console
             console.log(`[HedgehogActor] ${message}`, ...args)
         }
@@ -338,7 +338,7 @@ export class HedgehogActor {
             this.xVelocity = 0
         }
 
-        if ((window as any)._markettorDebugHedgehog) {
+        if ((window as any)._clairviewDebugHedgehog) {
             const duration =
                 this.mainAnimation.iterations !== null
                     ? this.mainAnimation.iterations * spriteInfo.frames * (1000 / FPS)
@@ -855,7 +855,7 @@ export class HedgehogActor {
                 </div>
                 {this.renderRope()}
 
-                {(window as any)._markettorDebugHedgehog && (
+                {(window as any)._clairviewDebugHedgehog && (
                     <>
                         {[this.element && elementToBox(this.element), this.ground && elementToBox(this.ground)].map(
                             (box, i) => {

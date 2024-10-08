@@ -8,7 +8,7 @@ import { LemonTextArea, LemonTextAreaProps } from 'lib/lemon-ui/LemonTextArea/Le
 import { lemonToast } from 'lib/lemon-ui/LemonToast'
 import { Link } from 'lib/lemon-ui/Link'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import React, { useRef, useState } from 'react'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 
@@ -22,10 +22,10 @@ export const LemonTextAreaMarkdown = React.forwardRef<HTMLTextAreaElement, Lemon
         const { setFilesToUpload, filesToUpload, uploading } = useUploadFiles({
             onUpload: (url, fileName) => {
                 onChange?.(value + `\n\n![${fileName}](${url})`)
-                markettor.capture('markdown image uploaded', { name: fileName })
+                clairview.capture('markdown image uploaded', { name: fileName })
             },
             onError: (detail) => {
-                markettor.capture('markdown image upload failed', { error: detail })
+                clairview.capture('markdown image upload failed', { error: detail })
                 lemonToast.error(`Error uploading image: ${detail}`)
             },
         })

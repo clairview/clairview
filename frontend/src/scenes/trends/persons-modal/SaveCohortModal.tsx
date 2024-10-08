@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal } from '@clairview/lemon-ui'
 import { useState } from 'react'
 
 interface Props {

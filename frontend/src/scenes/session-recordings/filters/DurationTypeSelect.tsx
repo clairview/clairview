@@ -1,10 +1,10 @@
-import { LemonSelect } from '@markettor/lemon-ui'
-import markettor from 'markettor-js'
+import { LemonSelect } from '@clairview/lemon-ui'
+import clairview from 'clairview-js'
 
 import { DurationType } from '~/types'
 
 interface DurationTypeFilterProps {
-    // what to call this when reporting analytics to MarketTor
+    // what to call this when reporting analytics to ClairView
     onChangeEventDescription?: string
     onChange: (newFilter: DurationType) => void
     value?: DurationType
@@ -19,7 +19,7 @@ export function DurationTypeSelect({
         <LemonSelect
             data-attr="duration-type-selector"
             onChange={(v) => {
-                markettor.capture(onChangeEventDescription || 'session recording duration type filter changed', {
+                clairview.capture(onChangeEventDescription || 'session recording duration type filter changed', {
                     durationChoice: v,
                 })
                 onChange((v || 'all') as DurationType)

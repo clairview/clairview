@@ -1,4 +1,4 @@
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 import { capitalizeFirstLetter } from 'lib/utils'
 
 import { HogFunctionTemplateStatus } from '~/types'

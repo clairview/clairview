@@ -1,4 +1,4 @@
-import { LemonDropdown, LemonTag, LemonTagProps } from '@markettor/lemon-ui'
+import { LemonDropdown, LemonTag, LemonTagProps } from '@clairview/lemon-ui'
 
 import { HogFunctionType, HogWatcherState } from '~/types'
 

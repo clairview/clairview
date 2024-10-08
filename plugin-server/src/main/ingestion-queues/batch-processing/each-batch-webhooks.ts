@@ -173,7 +173,7 @@ async function addGroupPropertiesToPostIngestionEvent(
                 continue
             }
 
-            const queryString = `SELECT group_properties FROM markettor_group WHERE team_id = $1 AND group_type_index = $2 AND group_key = $3`
+            const queryString = `SELECT group_properties FROM clairview_group WHERE team_id = $1 AND group_type_index = $2 AND group_key = $3`
 
             const selectResult: QueryResult = await postgres.query(
                 PostgresUse.COMMON_READ,

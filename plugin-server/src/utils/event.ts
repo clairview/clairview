@@ -1,4 +1,4 @@
-import { PluginEvent, MarketTorEvent, ProcessedPluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent, ClairViewEvent, ProcessedPluginEvent } from '@clairview/plugin-scaffold'
 import { Message } from 'node-rdkafka'
 import { Counter } from 'prom-client'
 
@@ -102,7 +102,7 @@ export function parseRawClickHouseEvent(rawEvent: RawClickHouseEvent): ClickHous
             : null,
     }
 }
-export function convertToMarketTorEvent(event: PostIngestionEvent): MarketTorEvent {
+export function convertToClairViewEvent(event: PostIngestionEvent): ClairViewEvent {
     return {
         uuid: event.eventUuid,
         event: event.event!,

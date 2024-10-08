@@ -5,7 +5,7 @@ declare global {
     namespace Cypress {
         interface Chainable {
             /**
-             * Custom command to login to MarketTor
+             * Custom command to login to ClairView
              */
             login(): Chainable<Element>
 

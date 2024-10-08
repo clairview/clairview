@@ -1,7 +1,7 @@
 import './ConditionalFormattingTab.scss'
 
-import { IconPlusSmall, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonCollapse, LemonInput, LemonSelect, LemonTag, Popover } from '@markettor/lemon-ui'
+import { IconPlusSmall, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonCollapse, LemonInput, LemonSelect, LemonTag, Popover } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { SeriesGlyph } from 'lib/components/SeriesGlyph'
 import { hexToRGBA, lightenDarkenColor, RGBToHex, RGBToRGBA } from 'lib/utils'

@@ -17,9 +17,9 @@ from social_core.backends.saml import (
 from social_core.exceptions import AuthFailed, AuthMissingParameter
 from social_django.utils import load_backend, load_strategy
 
-from markettor.constants import AvailableFeature
-from markettor.models.organization import OrganizationMembership
-from markettor.models.organization_domain import OrganizationDomain
+from clairview.constants import AvailableFeature
+from clairview.models.organization import OrganizationMembership
+from clairview.models.organization_domain import OrganizationDomain
 
 
 @api_view(["GET"])

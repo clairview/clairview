@@ -1,6 +1,6 @@
 import './Spinner.scss'
 
-import { IconPencil } from '@markettor/icons'
+import { IconPencil } from '@clairview/icons'
 import { twJoin, twMerge } from 'tailwind-merge'
 
 export interface SpinnerProps {

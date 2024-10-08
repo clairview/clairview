@@ -2,10 +2,10 @@ import uuid
 from datetime import datetime
 from typing import Optional
 
-from markettor.kafka_client.client import ClickhouseProducer
-from markettor.kafka_client.topics import KAFKA_PERFORMANCE_EVENTS
-from markettor.models.performance.sql import PERFORMANCE_EVENT_DATA_TABLE
-from markettor.utils import cast_timestamp_or_now
+from clairview.kafka_client.client import ClickhouseProducer
+from clairview.kafka_client.topics import KAFKA_PERFORMANCE_EVENTS
+from clairview.models.performance.sql import PERFORMANCE_EVENT_DATA_TABLE
+from clairview.utils import cast_timestamp_or_now
 
 
 def create_performance_event(
@@ -13,7 +13,7 @@ def create_performance_event(
     distinct_id: str,
     session_id: str,
     window_id: str = "window_1",
-    current_url: str = "https://markettor.com",
+    current_url: str = "https://clairview.com",
     timestamp: Optional[datetime] = None,
     entry_type="resource",
     **kwargs,
@@ -30,7 +30,7 @@ def create_performance_event(
         "current_url": current_url,
         "timestamp": timestamp_str,
         "entry_type": entry_type,
-        "name": "https://markettor.com/static/js/1.0.0/MarketTor.js",
+        "name": "https://clairview.com/static/js/1.0.0/ClairView.js",
     }
 
     data.update(kwargs)

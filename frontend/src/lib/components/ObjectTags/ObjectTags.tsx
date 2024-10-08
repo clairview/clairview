@@ -1,5 +1,5 @@
-import { IconPencil, IconPlus } from '@markettor/icons'
-import { LemonInputSelect, LemonTag, LemonTagType } from '@markettor/lemon-ui'
+import { IconPencil, IconPlus } from '@clairview/icons'
+import { LemonInputSelect, LemonTag, LemonTagType } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { objectTagsLogic } from 'lib/components/ObjectTags/objectTagsLogic'

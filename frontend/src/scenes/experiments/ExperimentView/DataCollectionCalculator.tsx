@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonBanner, LemonInput, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonBanner, LemonInput, Link, Tooltip } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { LemonSlider } from 'lib/lemon-ui/LemonSlider'
 import { humanFriendlyNumber } from 'lib/utils'
@@ -150,7 +150,7 @@ export function DataCollectionCalculator({ experimentId }: ExperimentCalculatorP
                                     </div>
                                     <div>
                                         Read more in the{' '}
-                                        <Link to="https://markettor.com/docs/experiments/sample-size-running-time#minimum-detectable-effect-mde">
+                                        <Link to="https://clairview.com/docs/experiments/sample-size-running-time#minimum-detectable-effect-mde">
                                             documentation.
                                         </Link>
                                     </div>

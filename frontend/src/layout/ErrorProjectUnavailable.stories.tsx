@@ -49,8 +49,8 @@ export const AccessRevoked = (): JSX.Element => {
             '/api/users/@me/': () => [
                 200,
                 {
-                    email: 'test@markettor.com',
-                    first_name: 'Test MarketTor',
+                    email: 'test@clairview.com',
+                    first_name: 'Test ClairView',
                     organization: {
                         name: 'Test org',
                         teams: [],
@@ -84,8 +84,8 @@ export const NoSelectableProjects = (): JSX.Element => {
             '/api/users/@me/': () => [
                 200,
                 {
-                    email: 'test@markettor.com',
-                    first_name: 'Test MarketTor',
+                    email: 'test@clairview.com',
+                    first_name: 'Test ClairView',
                     organization: {
                         name: 'Test org',
                         teams: [],

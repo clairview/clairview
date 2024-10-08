@@ -1,7 +1,7 @@
 import './LemonInput.scss'
 
 import { useMergeRefs } from '@floating-ui/react'
-import { IconEye, IconSearch, IconX } from '@markettor/icons'
+import { IconEye, IconSearch, IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { IconEyeHidden } from 'lib/lemon-ui/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

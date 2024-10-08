@@ -1,4 +1,4 @@
-import { LemonTag, LemonTagProps } from '@markettor/lemon-ui'
+import { LemonTag, LemonTagProps } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { HoqQLPropertyInfo } from 'lib/components/HoqQLPropertyInfo'
 import { PROPERTY_FILTER_TYPE_TO_TAXONOMIC_FILTER_GROUP_TYPE } from 'lib/components/PropertyFilters/utils'

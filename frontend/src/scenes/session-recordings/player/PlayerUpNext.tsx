@@ -1,6 +1,6 @@
 import './PlayerUpNext.scss'
 
-import { IconPlay } from '@markettor/icons'
+import { IconPlay } from '@clairview/icons'
 import clsx from 'clsx'
 import { BuiltLogic, useActions, useValues } from 'kea'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'

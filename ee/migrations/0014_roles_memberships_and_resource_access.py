@@ -4,12 +4,12 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import markettor.models.utils
+import clairview.models.utils
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("markettor", "0280_fix_async_deletion_team"),
+        ("clairview", "0280_fix_async_deletion_team"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("ee", "0013_silence_deprecated_tags_warnings"),
     ]
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.UUIDField(
-                        default=markettor.models.utils.UUIDT,
+                        default=clairview.models.utils.UUIDT,
                         editable=False,
                         primary_key=True,
                         serialize=False,
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="roles",
                         related_query_name="role",
-                        to="markettor.organization",
+                        to="clairview.organization",
                     ),
                 ),
             ],
@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.UUIDField(
-                        default=markettor.models.utils.UUIDT,
+                        default=clairview.models.utils.UUIDT,
                         editable=False,
                         primary_key=True,
                         serialize=False,
@@ -140,7 +140,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="resource_access",
-                        to="markettor.organization",
+                        to="clairview.organization",
                     ),
                 ),
             ],
@@ -165,7 +165,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="access",
                         related_query_name="access",
-                        to="markettor.featureflag",
+                        to="clairview.featureflag",
                     ),
                 ),
                 (

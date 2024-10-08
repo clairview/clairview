@@ -1,7 +1,7 @@
 import pytest
 
 from ee.models.event_definition import EnterpriseEventDefinition
-from markettor.test.base import BaseTest
+from clairview.test.base import BaseTest
 
 
 class TestEventDefinition(BaseTest):

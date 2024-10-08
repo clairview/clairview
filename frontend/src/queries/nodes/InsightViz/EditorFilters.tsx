@@ -1,7 +1,7 @@
 import './EditorFilters.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonBanner, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonBanner, Link, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { NON_BREAKDOWN_DISPLAY_TYPES } from 'lib/constants'
@@ -222,7 +222,7 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
                                               </ul>
                                               <div>
                                                   Read more in the{' '}
-                                                  <Link to="https://markettor.com/docs/product-analytics/funnels#attribution-types">
+                                                  <Link to="https://clairview.com/docs/product-analytics/funnels#attribution-types">
                                                       documentation.
                                                   </Link>
                                               </div>
@@ -324,7 +324,7 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
                     <LemonBanner type="info" className="mt-2">
                         When using sessions and session properties, events without session IDs will be excluded from the
                         set of results.{' '}
-                        <Link to="https://markettor.com/docs/user-guides/sessions">Learn more about sessions.</Link>
+                        <Link to="https://clairview.com/docs/user-guides/sessions">Learn more about sessions.</Link>
                     </LemonBanner>
                 ) : null}
             </div>

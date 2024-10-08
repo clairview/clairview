@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonDivider, LemonModal, Link } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonDivider, LemonModal, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { usersLemonSelectOptions } from 'lib/components/UserSelectItem'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -75,7 +75,7 @@ export function StaffUsersTab(): JSX.Element {
                 Users who have permissions to manage instance-wide settings. Staff user permissions are set at the{' '}
                 <b>instance-level and are independent of any organization or project permissions.</b>{' '}
                 <Link
-                    to="https://markettor.com/docs/self-host/configure/instance-settings#staff-users"
+                    to="https://clairview.com/docs/self-host/configure/instance-settings#staff-users"
                     target="_blank"
                     targetBlankIcon
                 >

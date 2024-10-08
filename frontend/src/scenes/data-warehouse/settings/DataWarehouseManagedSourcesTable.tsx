@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { LemonButton, LemonDialog, LemonTable, LemonTag, Link, Spinner, Tooltip } from '@markettor/lemon-ui'
+import { TZLabel } from '@clairview/apps-common'
+import { LemonButton, LemonDialog, LemonTable, LemonTag, Link, Spinner, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { More } from 'lib/lemon-ui/LemonButton/More'
 import { LemonTableLink } from 'lib/lemon-ui/LemonTable/LemonTableLink'
@@ -163,10 +163,10 @@ export function DataWarehouseManagedSourcesTable(): JSX.Element {
 
 export function getDataWarehouseSourceUrl(service: string): string {
     if (manualLinkSources.includes(service)) {
-        return 'https://markettor.com/docs/data-warehouse/setup#step-1-creating-a-bucket-in-s3'
+        return 'https://clairview.com/docs/data-warehouse/setup#step-1-creating-a-bucket-in-s3'
     }
 
-    return `https://markettor.com/docs/data-warehouse/setup#${service.toLowerCase()}`
+    return `https://clairview.com/docs/data-warehouse/setup#${service.toLowerCase()}`
 }
 
 export function RenderDataWarehouseSourceIcon({

@@ -40,7 +40,7 @@ import {
     IconUserPaths,
     IconWarning,
     IconX,
-} from '@markettor/icons'
+} from '@clairview/icons'
 import { Parser } from 'expr-eval'
 import Fuse from 'fuse.js'
 import { actions, connect, events, kea, listeners, path, reducers, selectors } from 'kea'
@@ -52,7 +52,7 @@ import { ProfilePicture } from 'lib/lemon-ui/ProfilePicture'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { isMobile, isURL, uniqueBy } from 'lib/utils'
 import { copyToClipboard } from 'lib/utils/copyToClipboard'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { newDashboardLogic } from 'scenes/dashboard/newDashboardLogic'
 import { insightTypeURL } from 'scenes/insights/utils'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
@@ -341,11 +341,11 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
     }),
     listeners(({ actions, values }) => ({
         showPalette: () => {
-            markettor.capture('palette shown', { isMobile: isMobile() })
+            clairview.capture('palette shown', { isMobile: isMobile() })
         },
         togglePalette: () => {
             if (values.isPaletteShown) {
-                markettor.capture('palette shown', { isMobile: isMobile() })
+                clairview.capture('palette shown', { isMobile: isMobile() })
             }
         },
         executeResult: ({ result }: { result: CommandResult }) => {
@@ -364,7 +364,7 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
             const { resolver, ...cleanedCommand } = cleanedResult.source
             cleanedResult.source = cleanedCommand
             cleanedResult.isMobile = isMobile()
-            markettor.capture('palette command executed', cleanedResult)
+            clairview.capture('palette command executed', cleanedResult)
         },
         deregisterScope: ({ scope }) => {
             for (const command of Object.values(values.commandRegistrations)) {
@@ -679,7 +679,7 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                     icon: IconRewindPlay,
                     display: 'Debug: Copy the session recording link to clipboard',
                     executor: () => {
-                        const url = markettor.get_session_replay_url({ withTimestamp: true, timestampLookBack: 30 })
+                        const url = clairview.get_session_replay_url({ withTimestamp: true, timestampLookBack: 30 })
                         void copyToClipboard(url, 'Current session recording link to clipboard')
                     },
                 },
@@ -742,10 +742,10 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                         )
                         results.push({
                             icon: IconExternal,
-                            display: 'Open MarketTor Docs',
+                            display: 'Open ClairView Docs',
                             synonyms: ['technical documentation'],
                             executor: () => {
-                                open('https://markettor.com/docs')
+                                open('https://clairview.com/docs')
                             },
                         })
                         return results
@@ -787,12 +787,12 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                 resolver: {
                     icon: IconThoughtBubble,
                     display: 'Share Feedback',
-                    synonyms: ['send opinion', 'ask question', 'message markettor', 'github issue'],
+                    synonyms: ['send opinion', 'ask question', 'message clairview', 'github issue'],
                     executor: () => ({
                         scope: 'Sharing Feedback',
                         resolver: [
                             {
-                                display: 'Send Message Directly to MarketTor',
+                                display: 'Send Message Directly to ClairView',
                                 icon: IconThoughtBubble,
                                 executor: () => ({
                                     instruction: "What's on your mind?",
@@ -803,7 +803,7 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                                         executor: !argument?.length
                                             ? undefined
                                             : () => {
-                                                  markettor.capture('palette feedback', { message: argument })
+                                                  clairview.capture('palette feedback', { message: argument })
                                                   return {
                                                       resolver: {
                                                           icon: IconCheck,
@@ -819,7 +819,7 @@ export const commandPaletteLogic = kea<commandPaletteLogicType>([
                                 icon: IconGithub,
                                 display: 'Create GitHub Issue',
                                 executor: () => {
-                                    open('https://github.com/MarketTor/markettor/issues/new/choose')
+                                    open('https://github.com/ClairView/clairview/issues/new/choose')
                                 },
                             },
                         ],

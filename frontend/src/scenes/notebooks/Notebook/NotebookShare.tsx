@@ -1,10 +1,10 @@
-import { IconCopy } from '@markettor/icons'
-import { LemonBanner, LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { IconCopy } from '@clairview/icons'
+import { LemonBanner, LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { LemonDialog } from 'lib/lemon-ui/LemonDialog'
 import { base64Encode } from 'lib/utils'
 import { copyToClipboard } from 'lib/utils/copyToClipboard'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useState } from 'react'
 import { urls } from 'scenes/urls'
 
@@ -22,7 +22,7 @@ export function NotebookShare({ shortId }: NotebookShareProps): JSX.Element {
     const [interestTracked, setInterestTracked] = useState(false)
 
     const trackInterest = (): void => {
-        markettor.capture('pressed interested in notebook sharing', { url: notebookUrl })
+        clairview.capture('pressed interested in notebook sharing', { url: notebookUrl })
     }
 
     return (
@@ -32,7 +32,7 @@ export function NotebookShare({ shortId }: NotebookShareProps): JSX.Element {
                 <>
                     <p>
                         <b>Click the button below</b> to copy a direct link to this Notebook. Make sure the person you
-                        share it with has access to this MarketTor project.
+                        share it with has access to this ClairView project.
                     </p>
                     <LemonButton
                         type="secondary"

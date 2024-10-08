@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { Link } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import { humanFriendlyDuration, percentage } from 'lib/utils'

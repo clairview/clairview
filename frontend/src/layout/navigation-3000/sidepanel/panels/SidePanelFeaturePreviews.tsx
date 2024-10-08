@@ -1,4 +1,4 @@
-import { LemonBanner } from '@markettor/lemon-ui'
+import { LemonBanner } from '@clairview/lemon-ui'
 
 import { FeaturePreviews } from '~/layout/FeaturePreviews/FeaturePreviews'
 

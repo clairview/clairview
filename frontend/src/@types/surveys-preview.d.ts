@@ -1,1 +1,1 @@
-declare module 'markettor-js/dist/surveys-preview'
+declare module 'clairview-js/dist/surveys-preview'

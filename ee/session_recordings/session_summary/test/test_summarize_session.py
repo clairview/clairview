@@ -9,7 +9,7 @@ from ee.session_recordings.session_summary.summarize_session import (
     collapse_sequence_of_events,
     SessionSummaryPromptData,
 )
-from markettor.test.base import BaseTest
+from clairview.test.base import BaseTest
 
 
 class TestSummarizeSessions(BaseTest):

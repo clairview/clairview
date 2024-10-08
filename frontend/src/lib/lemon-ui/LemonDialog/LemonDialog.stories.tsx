@@ -1,4 +1,4 @@
-import { LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonInput, Link } from '@clairview/lemon-ui'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 
@@ -33,7 +33,7 @@ const meta: Meta<typeof LemonDialog> = {
         docs: {
             description: {
                 component: `
-[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/MarketTor-Design-System-One?node-id=3139%3A1388)
+[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/ClairView-Design-System-One?node-id=3139%3A1388)
                 
 Dialogs are blocking prompts that force a user decision or action. 
 When a dialog presents a desctructive choice, the actions should align with that destructive / warning color palette options.
@@ -79,7 +79,7 @@ Customised.args = {
         <>
             This action cannot be undone. If you opt to delete the organization and its corresponding events, the events
             will not be immediately removed. Instead these events will be deleted on a set schedule during non-peak
-            usage times. <Link to="https://markettor.com">Learn more</Link>
+            usage times. <Link to="https://clairview.com">Learn more</Link>
         </>
     ),
     primaryButton: {

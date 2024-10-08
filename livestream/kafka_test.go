@@ -7,22 +7,22 @@ import (
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/MarketTor/markettor/livestream/mocks"
+	"github.com/ClairView/clairview/livestream/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
-func TestMarketTorKafkaConsumer_Consume(t *testing.T) {
+func TestClairViewKafkaConsumer_Consume(t *testing.T) {
 	// Create mock objects
 	mockConsumer := new(mocks.KafkaConsumerInterface)
 	mockGeoLocator := new(mocks.GeoLocator)
 
 	// Create channels
-	outgoingChan := make(chan MarketTorEvent, 1)
-	statsChan := make(chan MarketTorEvent, 1)
+	outgoingChan := make(chan ClairViewEvent, 1)
+	statsChan := make(chan ClairViewEvent, 1)
 
-	// Create MarketTorKafkaConsumer
-	consumer := &MarketTorKafkaConsumer{
+	// Create ClairViewKafkaConsumer
+	consumer := &ClairViewKafkaConsumer{
 		consumer:     mockConsumer,
 		topic:        "test-topic",
 		geolocator:   mockGeoLocator,
@@ -34,7 +34,7 @@ func TestMarketTorKafkaConsumer_Consume(t *testing.T) {
 	mockConsumer.On("SubscribeTopics", []string{"test-topic"}, mock.AnythingOfType("kafka.RebalanceCb")).Return(nil)
 
 	// Create a test message
-	testWrapper := MarketTorEventWrapper{
+	testWrapper := ClairViewEventWrapper{
 		Uuid:       "test-uuid",
 		DistinctId: "test-distinct-id",
 		Ip:         "192.0.2.1",
@@ -84,9 +84,9 @@ func TestMarketTorKafkaConsumer_Consume(t *testing.T) {
 	mockGeoLocator.AssertExpectations(t)
 }
 
-func TestMarketTorKafkaConsumer_Close(t *testing.T) {
+func TestClairViewKafkaConsumer_Close(t *testing.T) {
 	mockConsumer := new(mocks.KafkaConsumerInterface)
-	consumer := &MarketTorKafkaConsumer{
+	consumer := &ClairViewKafkaConsumer{
 		consumer: mockConsumer,
 	}
 

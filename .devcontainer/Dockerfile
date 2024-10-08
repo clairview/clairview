@@ -32,7 +32,7 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends \
     # Add in useful db debugging tools
     "postgresql-client=13+*" \
-    # needed for markettor to run
+    # needed for clairview to run
     netcat brotli curl \
     && rm -rf /var/lib/apt/lists/*
 

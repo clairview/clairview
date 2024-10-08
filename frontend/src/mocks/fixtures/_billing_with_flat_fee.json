@@ -86,7 +86,7 @@
         {
             "key": "zapier",
             "name": "Zapier",
-            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
             "unit": null,
             "limit": null,
             "note": null
@@ -270,7 +270,7 @@
         {
             "key": "subscriptions",
             "name": "Insight & dashboard subscriptions",
-            "description": "Create a subscription for any insight or dashboard in MarketTor to receive regular reports with their updates.",
+            "description": "Create a subscription for any insight or dashboard in ClairView to receive regular reports with their updates.",
             "unit": null,
             "limit": null,
             "note": null
@@ -342,7 +342,7 @@
         {
             "key": "team_members",
             "name": "Team members",
-            "description": "MarketTor doesn't charge per seat add your entire team!",
+            "description": "ClairView doesn't charge per seat add your entire team!",
             "unit": null,
             "limit": null,
             "note": "Unlimited"
@@ -350,7 +350,7 @@
         {
             "key": "organizations_projects",
             "name": "Projects",
-            "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+            "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
             "unit": null,
             "limit": null,
             "note": "Unlimited"
@@ -374,7 +374,7 @@
         {
             "key": "social_sso",
             "name": "SSO via Google, Github, or Gitlab",
-            "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+            "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
             "unit": null,
             "limit": null,
             "note": null
@@ -382,7 +382,7 @@
         {
             "key": "sso_enforcement",
             "name": "Enforce SSO login",
-            "description": "Users can only sign up and log in to your MarketTor organization with your specified SSO provider.",
+            "description": "Users can only sign up and log in to your ClairView organization with your specified SSO provider.",
             "unit": null,
             "limit": null,
             "note": null
@@ -390,7 +390,7 @@
         {
             "key": "white_labelling",
             "name": "White labeling",
-            "description": "Use your own branding in your MarketTor organization.",
+            "description": "Use your own branding in your ClairView organization.",
             "unit": null,
             "limit": null,
             "note": null
@@ -398,7 +398,7 @@
         {
             "key": "community_support",
             "name": "Community support",
-            "description": "Get help from other users and MarketTor team members in our Community forums.",
+            "description": "Get help from other users and ClairView team members in our Community forums.",
             "unit": null,
             "limit": null,
             "note": null
@@ -406,7 +406,7 @@
         {
             "key": "dedicated_support",
             "name": "Slack (dedicated channel)",
-            "description": "Get help directly from our support team in a dedicated Slack channel shared between you and the MarketTor team.",
+            "description": "Get help directly from our support team in a dedicated Slack channel shared between you and the ClairView team.",
             "unit": null,
             "limit": null,
             "note": "$2k/month spend or above"
@@ -444,9 +444,9 @@
             "description": "Trends, funnels, path analysis, CDP + more.",
             "price_description": null,
             "usage_key": "events",
-            "image_url": "https://markettor.com/images/product/product-icons/product-analytics.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/product-analytics.svg",
             "icon_key": "IconGraph",
-            "docs_url": "https://markettor.com/docs/product-analytics",
+            "docs_url": "https://clairview.com/docs/product-analytics",
             "subscribed": true,
             "plans": [],
             "type": "product_analytics",
@@ -505,9 +505,9 @@
                     "name": "Group analytics",
                     "description": "Associate events with a group or entity - such as a company, community, or project. Analyze these events as if they were sent by that entity itself. Great for B2B, marketplaces, and more.",
                     "price_description": null,
-                    "image_url": "https://markettor.com/images/product/product-icons/group-analytics.svg",
+                    "image_url": "https://clairview.com/images/product/product-icons/group-analytics.svg",
                     "icon_key": "IconPeople",
-                    "docs_url": "https://markettor.com/docs/product-analytics/group-analytics",
+                    "docs_url": "https://clairview.com/docs/product-analytics/group-analytics",
                     "type": "group_analytics",
                     "tiers": [],
                     "tiered": false,
@@ -531,9 +531,9 @@
             "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
             "price_description": null,
             "usage_key": "recordings",
-            "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
             "icon_key": "IconRewindPlay",
-            "docs_url": "https://markettor.com/docs/session-replay",
+            "docs_url": "https://clairview.com/docs/session-replay",
             "subscribed": true,
             "plans": [
                 {
@@ -541,8 +541,8 @@
                     "product_key": "session_replay",
                     "name": "Session replay",
                     "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
-                    "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
-                    "docs_url": "https://markettor.com/docs/session-replay",
+                    "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
+                    "docs_url": "https://clairview.com/docs/session-replay",
                     "note": null,
                     "unit": "recording",
                     "free_allocation": 15000,
@@ -573,8 +573,8 @@
                     "product_key": "session_replay",
                     "name": "Session replay",
                     "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
-                    "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
-                    "docs_url": "https://markettor.com/docs/session-replay",
+                    "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
+                    "docs_url": "https://clairview.com/docs/session-replay",
                     "note": null,
                     "unit": "recording",
                     "free_allocation": null,
@@ -732,9 +732,9 @@
             "description": "Safely roll out new features and run experiments on changes.",
             "price_description": null,
             "usage_key": "feature_flag_requests",
-            "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
             "icon_key": "IconToggle",
-            "docs_url": "https://markettor.com/docs/feature-flags",
+            "docs_url": "https://clairview.com/docs/feature-flags",
             "subscribed": false,
             "plans": [
                 {
@@ -742,8 +742,8 @@
                     "product_key": "feature_flags",
                     "name": "Feature flags & A/B testing",
                     "description": "Safely roll out new features and run experiments on changes.",
-                    "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
-                    "docs_url": "https://markettor.com/docs/feature-flags",
+                    "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
+                    "docs_url": "https://clairview.com/docs/feature-flags",
                     "note": null,
                     "unit": "request",
                     "free_allocation": 10000000,
@@ -822,8 +822,8 @@
                     "product_key": "feature_flags",
                     "name": "Feature flags & A/B testing",
                     "description": "Safely roll out new features and run experiments on changes.",
-                    "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
-                    "docs_url": "https://markettor.com/docs/feature-flags",
+                    "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
+                    "docs_url": "https://clairview.com/docs/feature-flags",
                     "note": null,
                     "unit": "request",
                     "free_allocation": null,
@@ -997,9 +997,9 @@
             "description": "Collect feedback from your users. Multiple choice, rating, open text, and more.",
             "price_description": null,
             "usage_key": "survey_responses",
-            "image_url": "https://markettor.com/images/product/product-icons/surveys.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/surveys.svg",
             "icon_key": "IconMessage",
-            "docs_url": "https://markettor.com/docs/surveys",
+            "docs_url": "https://clairview.com/docs/surveys",
             "subscribed": false,
             "plans": [
                 {
@@ -1007,8 +1007,8 @@
                     "product_key": "surveys",
                     "name": "Surveys",
                     "description": "Collect feedback from your users. Multiple choice, rating, open text, and more.",
-                    "image_url": "https://markettor.com/images/product/product-icons/surveys.svg",
-                    "docs_url": "https://markettor.com/docs/surveys",
+                    "image_url": "https://clairview.com/images/product/product-icons/surveys.svg",
+                    "docs_url": "https://clairview.com/docs/surveys",
                     "note": null,
                     "unit": "survey response",
                     "free_allocation": 1000,
@@ -1095,8 +1095,8 @@
                     "product_key": "surveys",
                     "name": "Surveys",
                     "description": "Collect feedback from your users. Multiple choice, rating, open text, and more.",
-                    "image_url": "https://markettor.com/images/product/product-icons/surveys.svg",
-                    "docs_url": "https://markettor.com/docs/surveys",
+                    "image_url": "https://clairview.com/images/product/product-icons/surveys.svg",
+                    "docs_url": "https://clairview.com/docs/surveys",
                     "note": null,
                     "unit": "survey response",
                     "free_allocation": null,
@@ -1244,21 +1244,21 @@
         },
         {
             "name": "Integrations + CDP",
-            "description": "Connect MarketTor to your favorite tools.",
+            "description": "Connect ClairView to your favorite tools.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
             "icon_key": "IconBolt",
-            "docs_url": "https://markettor.com/docs/apps",
+            "docs_url": "https://clairview.com/docs/apps",
             "subscribed": null,
             "plans": [
                 {
                     "plan_key": "free-20230117",
                     "product_key": "integrations",
                     "name": "Integrations + CDP",
-                    "description": "Connect MarketTor to your favorite tools.",
-                    "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
-                    "docs_url": "https://markettor.com/docs/apps",
+                    "description": "Connect ClairView to your favorite tools.",
+                    "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
+                    "docs_url": "https://clairview.com/docs/apps",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -1266,7 +1266,7 @@
                         {
                             "key": "zapier",
                             "name": "Zapier",
-                            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1312,9 +1312,9 @@
                     "plan_key": "paid-20230117",
                     "product_key": "integrations",
                     "name": "Integrations + CDP",
-                    "description": "Connect MarketTor to your favorite tools.",
-                    "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
-                    "docs_url": "https://markettor.com/docs/apps",
+                    "description": "Connect ClairView to your favorite tools.",
+                    "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
+                    "docs_url": "https://clairview.com/docs/apps",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -1322,7 +1322,7 @@
                         {
                             "key": "zapier",
                             "name": "Zapier",
-                            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1396,9 +1396,9 @@
             "description": "SSO, permission management, and support.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/platform.svg",
+            "image_url": "https://clairview.com/images/product/product-icons/platform.svg",
             "icon_key": "IconStack",
-            "docs_url": "https://markettor.com/docs",
+            "docs_url": "https://clairview.com/docs",
             "subscribed": null,
             "plans": [],
             "type": "platform_and_support",

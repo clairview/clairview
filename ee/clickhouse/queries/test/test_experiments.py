@@ -8,7 +8,7 @@ from ee.clickhouse.queries.experiments.trend_experiment_result import (
 )
 from rest_framework.exceptions import ValidationError
 
-from markettor.constants import ExperimentNoResultsErrorKeys
+from clairview.constants import ExperimentNoResultsErrorKeys
 
 
 class TestFunnelExperiments(unittest.TestCase):

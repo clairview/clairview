@@ -1,10 +1,10 @@
 import { Monaco } from '@monaco-editor/react'
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, props, reducers, selectors } from 'kea'
 import { router, urlToAction } from 'kea-router'
 import api from 'lib/api'
 import { editor } from 'monaco-editor'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { databaseTableListLogic } from 'scenes/data-management/database/databaseTableListLogic'
 import { urls } from 'scenes/urls'
 
@@ -30,7 +30,7 @@ export const dataWarehouseSceneLogic = kea<dataWarehouseSceneLogicType>([
     connect(() => ({
         values: [
             databaseTableListLogic,
-            ['database', 'markettorTables', 'dataWarehouseTables', 'databaseLoading', 'views', 'viewsMapById'],
+            ['database', 'clairviewTables', 'dataWarehouseTables', 'databaseLoading', 'views', 'viewsMapById'],
             dataWarehouseViewsLogic,
             ['dataWarehouseSavedQueryMapById', 'dataWarehouseSavedQueriesLoading'],
         ],
@@ -242,7 +242,7 @@ export const dataWarehouseSceneLogic = kea<dataWarehouseSceneLogicType>([
                 actions.loadDatabase()
 
                 if (values.selectedRow) {
-                    markettor.capture('source schema saved', {
+                    clairview.capture('source schema saved', {
                         name: values.selectedRow.name,
                         tableType: values.selectedRow.type,
                     })
@@ -272,7 +272,7 @@ export const dataWarehouseSceneLogic = kea<dataWarehouseSceneLogicType>([
         },
         toggleSchemaModal: () => {
             if (values.schemaModalIsOpen && values.selectedRow) {
-                markettor.capture('source schema viewed', {
+                clairview.capture('source schema viewed', {
                     name: values.selectedRow.name,
                     tableType: values.selectedRow.type,
                 })

@@ -33,7 +33,7 @@
                      WHERE team_id = 2
                      GROUP BY id
                      HAVING is_deleted = 0)
-                  WHERE has(['1@markettor.com'], replaceRegexpAll(JSONExtractRaw(properties, 'email'), '^"|"$', '')) ) ))
+                  WHERE has(['1@clairview.com'], replaceRegexpAll(JSONExtractRaw(properties, 'email'), '^"|"$', '')) ) ))
          OR (distinct_id IN
                (SELECT distinct_id
                 FROM
@@ -53,7 +53,7 @@
                         WHERE team_id = 2
                         GROUP BY id
                         HAVING is_deleted = 0)
-                     WHERE has(['2@markettor.com'], replaceRegexpAll(JSONExtractRaw(properties, 'email'), '^"|"$', '')) ) )))
+                     WHERE has(['2@clairview.com'], replaceRegexpAll(JSONExtractRaw(properties, 'email'), '^"|"$', '')) ) )))
   '''
 # ---
 # name: test_parse_groups_persons_edge_case_with_single_filter
@@ -62,7 +62,7 @@
     dict({
       'kglobalperson_0': 'email',
       'vglobalperson_0': list([
-        '1@markettor.com',
+        '1@clairview.com',
       ]),
     }),
   )
@@ -102,7 +102,7 @@
       'vglobal_0': list([
         'value',
       ]),
-      'vglobalperson_1': '%markettor%',
+      'vglobalperson_1': '%clairview%',
     }),
   )
 # ---
@@ -115,7 +115,7 @@
       'vglobal_0': list([
         'value',
       ]),
-      'vglobalperson_1': '%markettor%',
+      'vglobalperson_1': '%clairview%',
     }),
   )
 # ---
@@ -128,7 +128,7 @@
       'vglobal_0': list([
         'value',
       ]),
-      'vpersonquery_global_1': '%markettor%',
+      'vpersonquery_global_1': '%clairview%',
     }),
   )
 # ---

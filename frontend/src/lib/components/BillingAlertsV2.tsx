@@ -33,7 +33,7 @@ export function BillingAlertsV2(): JSX.Element | null {
         ? billingAlert.action
         : billingAlert.contactSupport
         ? {
-              to: 'mailto:sales@markettor.com',
+              to: 'mailto:sales@clairview.com',
               children: billingAlert.buttonCTA || 'Contact support',
               onClick: () => reportBillingAlertActionClicked(billingAlert),
           }

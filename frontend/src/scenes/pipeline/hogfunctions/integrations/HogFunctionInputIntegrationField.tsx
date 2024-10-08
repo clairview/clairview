@@ -1,4 +1,4 @@
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { integrationsLogic } from 'lib/integrations/integrationsLogic'
 import { SlackChannelPicker } from 'lib/integrations/SlackIntegrationHelpers'

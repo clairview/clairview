@@ -3,16 +3,16 @@ from typing import Optional, Union
 from ee.clickhouse.materialized_columns.columns import ColumnName
 from ee.clickhouse.queries.column_optimizer import EnterpriseColumnOptimizer
 from ee.clickhouse.queries.groups_join_query import GroupsJoinQuery
-from markettor.models.filters.filter import Filter
-from markettor.models.filters.path_filter import PathFilter
-from markettor.models.filters.properties_timeline_filter import PropertiesTimelineFilter
-from markettor.models.filters.retention_filter import RetentionFilter
-from markettor.models.filters.session_recordings_filter import SessionRecordingsFilter
-from markettor.models.filters.stickiness_filter import StickinessFilter
-from markettor.models.property import PropertyName
-from markettor.models.team import Team
-from markettor.queries.event_query.event_query import EventQuery
-from markettor.schema import PersonsOnEventsMode
+from clairview.models.filters.filter import Filter
+from clairview.models.filters.path_filter import PathFilter
+from clairview.models.filters.properties_timeline_filter import PropertiesTimelineFilter
+from clairview.models.filters.retention_filter import RetentionFilter
+from clairview.models.filters.session_recordings_filter import SessionRecordingsFilter
+from clairview.models.filters.stickiness_filter import StickinessFilter
+from clairview.models.property import PropertyName
+from clairview.models.team import Team
+from clairview.queries.event_query.event_query import EventQuery
+from clairview.schema import PersonsOnEventsMode
 
 
 class EnterpriseEventQuery(EventQuery):

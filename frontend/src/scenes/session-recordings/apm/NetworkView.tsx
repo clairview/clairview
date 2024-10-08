@@ -1,6 +1,6 @@
 import './NetworkView.scss'
 
-import { LemonTable, Link } from '@markettor/lemon-ui'
+import { LemonTable, Link } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
 import { IconChevronLeft, IconChevronRight } from 'lib/lemon-ui/icons'

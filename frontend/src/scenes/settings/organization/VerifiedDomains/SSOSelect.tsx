@@ -1,4 +1,4 @@
-import { LemonSelect, LemonSelectOptions } from '@markettor/lemon-ui'
+import { LemonSelect, LemonSelectOptions } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { SocialLoginIcon } from 'lib/components/SocialLoginButton/SocialLoginIcon'
 import { SSO_PROVIDER_NAMES } from 'lib/constants'

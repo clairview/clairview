@@ -49,7 +49,7 @@ describe('ActionManager', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_action SET slack_message_format='test' WHERE id = $1`,
+            `UPDATE clairview_action SET slack_message_format='test' WHERE id = $1`,
             [ACTION_ID],
             'testKey'
         )
@@ -116,7 +116,7 @@ describe('ActionManager', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_action
+            `UPDATE clairview_action
              SET deleted = TRUE
              WHERE id = $1`,
             [ACTION_ID],

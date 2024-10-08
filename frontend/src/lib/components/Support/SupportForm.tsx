@@ -1,4 +1,4 @@
-import { IconBug, IconInfo, IconQuestion } from '@markettor/icons'
+import { IconBug, IconInfo, IconQuestion } from '@clairview/icons'
 import {
     LemonInput,
     LemonSegmentedButton,
@@ -6,7 +6,7 @@ import {
     lemonToast,
     Link,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { useUploadFiles } from 'lib/hooks/useUploadFiles'
@@ -146,7 +146,7 @@ export function SupportForm(): JSX.Element | null {
                             </span>
                         </Tooltip>
                     </label>
-                    <Link target="_blank" to="https://markettor.com/docs/support-options#severity-levels">
+                    <Link target="_blank" to="https://clairview.com/docs/support-options#severity-levels">
                         Definitions
                     </Link>
                 </div>

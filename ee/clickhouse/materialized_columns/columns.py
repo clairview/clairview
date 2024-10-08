@@ -5,13 +5,13 @@ from typing import Literal, Union, cast
 from clickhouse_driver.errors import ServerException
 from django.utils.timezone import now
 
-from markettor.cache_utils import cache_for
-from markettor.clickhouse.kafka_engine import trim_quotes_expr
-from markettor.client import sync_execute
-from markettor.models.instance_setting import get_instance_setting
-from markettor.models.property import PropertyName, TableColumn, TableWithProperties
-from markettor.models.utils import generate_random_short_suffix
-from markettor.settings import CLICKHOUSE_CLUSTER, CLICKHOUSE_DATABASE, TEST
+from clairview.cache_utils import cache_for
+from clairview.clickhouse.kafka_engine import trim_quotes_expr
+from clairview.client import sync_execute
+from clairview.models.instance_setting import get_instance_setting
+from clairview.models.property import PropertyName, TableColumn, TableWithProperties
+from clairview.models.utils import generate_random_short_suffix
+from clairview.settings import CLICKHOUSE_CLUSTER, CLICKHOUSE_DATABASE, TEST
 
 ColumnName = str
 DEFAULT_TABLE_COLUMN: Literal["properties"] = "properties"

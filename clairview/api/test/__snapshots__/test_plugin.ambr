@@ -1,0 +1,710 @@
+# serializer version: 1
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.1
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.10
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.11
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_plugin"
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.12
+  '''
+  SELECT "clairview_plugin"."id",
+         "clairview_plugin"."organization_id",
+         "clairview_plugin"."plugin_type",
+         "clairview_plugin"."is_global",
+         "clairview_plugin"."is_preinstalled",
+         "clairview_plugin"."is_stateless",
+         "clairview_plugin"."name",
+         "clairview_plugin"."description",
+         "clairview_plugin"."url",
+         "clairview_plugin"."icon",
+         "clairview_plugin"."config_schema",
+         "clairview_plugin"."tag",
+         "clairview_plugin"."archive",
+         "clairview_plugin"."latest_tag",
+         "clairview_plugin"."latest_tag_checked_at",
+         "clairview_plugin"."capabilities",
+         "clairview_plugin"."metrics",
+         "clairview_plugin"."public_jobs",
+         "clairview_plugin"."error",
+         "clairview_plugin"."from_json",
+         "clairview_plugin"."from_web",
+         "clairview_plugin"."source",
+         "clairview_plugin"."created_at",
+         "clairview_plugin"."updated_at",
+         "clairview_plugin"."log_level",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_plugin"
+  LEFT OUTER JOIN "clairview_organization" ON ("clairview_plugin"."organization_id" = "clairview_organization"."id")
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  LIMIT 100
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.13
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.14
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.15
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.16
+  '''
+  SELECT 1 AS "a"
+  FROM "clairview_organizationmembership"
+  WHERE ("clairview_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "clairview_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.17
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.18
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_plugin"
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.19
+  '''
+  SELECT "clairview_plugin"."id",
+         "clairview_plugin"."organization_id",
+         "clairview_plugin"."plugin_type",
+         "clairview_plugin"."is_global",
+         "clairview_plugin"."is_preinstalled",
+         "clairview_plugin"."is_stateless",
+         "clairview_plugin"."name",
+         "clairview_plugin"."description",
+         "clairview_plugin"."url",
+         "clairview_plugin"."icon",
+         "clairview_plugin"."config_schema",
+         "clairview_plugin"."tag",
+         "clairview_plugin"."archive",
+         "clairview_plugin"."latest_tag",
+         "clairview_plugin"."latest_tag_checked_at",
+         "clairview_plugin"."capabilities",
+         "clairview_plugin"."metrics",
+         "clairview_plugin"."public_jobs",
+         "clairview_plugin"."error",
+         "clairview_plugin"."from_json",
+         "clairview_plugin"."from_web",
+         "clairview_plugin"."source",
+         "clairview_plugin"."created_at",
+         "clairview_plugin"."updated_at",
+         "clairview_plugin"."log_level",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_plugin"
+  LEFT OUTER JOIN "clairview_organization" ON ("clairview_plugin"."organization_id" = "clairview_organization"."id")
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  LIMIT 100
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.2
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.20
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.21
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.22
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.23
+  '''
+  SELECT 1 AS "a"
+  FROM "clairview_organizationmembership"
+  WHERE ("clairview_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "clairview_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.24
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.25
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_plugin"
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.26
+  '''
+  SELECT "clairview_plugin"."id",
+         "clairview_plugin"."organization_id",
+         "clairview_plugin"."plugin_type",
+         "clairview_plugin"."is_global",
+         "clairview_plugin"."is_preinstalled",
+         "clairview_plugin"."is_stateless",
+         "clairview_plugin"."name",
+         "clairview_plugin"."description",
+         "clairview_plugin"."url",
+         "clairview_plugin"."icon",
+         "clairview_plugin"."config_schema",
+         "clairview_plugin"."tag",
+         "clairview_plugin"."archive",
+         "clairview_plugin"."latest_tag",
+         "clairview_plugin"."latest_tag_checked_at",
+         "clairview_plugin"."capabilities",
+         "clairview_plugin"."metrics",
+         "clairview_plugin"."public_jobs",
+         "clairview_plugin"."error",
+         "clairview_plugin"."from_json",
+         "clairview_plugin"."from_web",
+         "clairview_plugin"."source",
+         "clairview_plugin"."created_at",
+         "clairview_plugin"."updated_at",
+         "clairview_plugin"."log_level",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_plugin"
+  LEFT OUTER JOIN "clairview_organization" ON ("clairview_plugin"."organization_id" = "clairview_organization"."id")
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  LIMIT 100
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.3
+  '''
+  SELECT 1 AS "a"
+  FROM "clairview_organizationmembership"
+  WHERE ("clairview_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "clairview_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.4
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.5
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_plugin"
+  WHERE ("clairview_plugin"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         OR "clairview_plugin"."is_global"
+         OR "clairview_plugin"."id" IN
+           (SELECT U0."plugin_id"
+            FROM "clairview_pluginconfig" U0
+            INNER JOIN "clairview_team" U1 ON (U0."team_id" = U1."id")
+            WHERE (NOT U0."deleted"
+                   AND U1."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid)))
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.6
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.7
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.8
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestPluginAPI.test_listing_plugins_is_not_nplus1.9
+  '''
+  SELECT 1 AS "a"
+  FROM "clairview_organizationmembership"
+  WHERE ("clairview_organizationmembership"."organization_id" = '00000000-0000-0000-0000-000000000000'::uuid
+         AND "clairview_organizationmembership"."user_id" = 2)
+  LIMIT 1
+  '''
+# ---

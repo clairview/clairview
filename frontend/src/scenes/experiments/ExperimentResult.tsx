@@ -1,7 +1,7 @@
 import './Experiment.scss'
 
-import { IconArchive } from '@markettor/icons'
-import { LemonTable } from '@markettor/lemon-ui'
+import { IconArchive } from '@clairview/icons'
+import { LemonTable } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'
 import { FunnelLayout } from 'lib/constants'

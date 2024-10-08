@@ -1,13 +1,13 @@
-import markettoranalytics
+import clairviewanalytics
 import requests
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
 from django.utils.timezone import now
 
 from ee.models.license import License
-from markettor.client import sync_execute
-from markettor.models import User
-from markettor.settings import SITE_URL
+from clairview.client import sync_execute
+from clairview.models import User
+from clairview.settings import SITE_URL
 
 
 def send_license_usage():
@@ -30,7 +30,7 @@ def send_license_usage():
             {"date_from": date_from, "date_to": date_to},
         )[0][0]
         response = requests.post(
-            "https://license.markettor.com/licenses/usage",
+            "https://license.clairview.com/licenses/usage",
             data={
                 "date": date_from.strftime("%Y-%m-%d"),
                 "key": license.key,
@@ -50,7 +50,7 @@ def send_license_usage():
             license.save()
 
         if not response.ok:
-            markettoranalytics.capture(
+            clairviewanalytics.capture(
                 user.distinct_id,  # type: ignore
                 "send license usage data error",
                 {
@@ -68,7 +68,7 @@ def send_license_usage():
             response.raise_for_status()
             return
         else:
-            markettoranalytics.capture(
+            clairviewanalytics.capture(
                 user.distinct_id,  # type: ignore
                 "send license usage data",
                 {
@@ -84,7 +84,7 @@ def send_license_usage():
             )
     except Exception as err:
         try:
-            markettoranalytics.capture(
+            clairviewanalytics.capture(
                 user.distinct_id,  # type: ignore
                 "send license usage data error",
                 {
@@ -99,5 +99,5 @@ def send_license_usage():
             )
             raise err
         except:
-            # If the markettoranalytics call errors, just throw the original error rather than that error
+            # If the clairviewanalytics call errors, just throw the original error rather than that error
             raise err

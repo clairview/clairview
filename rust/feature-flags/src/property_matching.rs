@@ -244,7 +244,7 @@ fn is_truthy_property_value(value: &Value) -> bool {
     false
 }
 
-/// Copy of https://github.com/MarketTor/markettor/blob/master/markettor/queries/test/test_base.py#L35
+/// Copy of https://github.com/ClairView/clairview/blob/master/clairview/queries/test/test_base.py#L35
 /// with some modifications to match Rust's behavior
 /// and to test the match_property function
 #[cfg(test)]

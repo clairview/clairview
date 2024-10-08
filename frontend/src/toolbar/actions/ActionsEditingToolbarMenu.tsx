@@ -1,5 +1,5 @@
-import { IconPencil, IconPlus, IconSearch, IconTrash } from '@markettor/icons'
-import { LemonDivider, LemonTag } from '@markettor/lemon-ui'
+import { IconPencil, IconPlus, IconSearch, IconTrash } from '@clairview/icons'
+import { LemonDivider, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Field, Form, Group } from 'kea-forms'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

@@ -9,24 +9,24 @@ from ee.clickhouse.materialized_columns.analyze import (
 )
 from ee.clickhouse.queries.stickiness import ClickhouseStickiness
 from ee.clickhouse.queries.funnels.funnel_correlation import FunnelCorrelation
-from markettor.queries.funnels import ClickhouseFunnel
-from markettor.queries.property_values import (
+from clairview.queries.funnels import ClickhouseFunnel
+from clairview.queries.property_values import (
     get_property_values_for_key,
     get_person_property_values_for_key,
 )
-from markettor.queries.trends.trends import Trends
-from markettor.queries.session_recordings.session_recording_list import (
+from clairview.queries.trends.trends import Trends
+from clairview.queries.session_recordings.session_recording_list import (
     SessionRecordingList,
 )
 from ee.clickhouse.queries.retention import ClickhouseRetention
-from markettor.queries.util import get_earliest_timestamp
-from markettor.models import Action, Cohort, Team, Organization
-from markettor.models.filters.retention_filter import RetentionFilter
-from markettor.models.filters.session_recordings_filter import SessionRecordingsFilter
-from markettor.models.filters.stickiness_filter import StickinessFilter
-from markettor.models.filters.filter import Filter
-from markettor.models.property import PropertyName, TableWithProperties
-from markettor.constants import FunnelCorrelationType
+from clairview.queries.util import get_earliest_timestamp
+from clairview.models import Action, Cohort, Team, Organization
+from clairview.models.filters.retention_filter import RetentionFilter
+from clairview.models.filters.session_recordings_filter import SessionRecordingsFilter
+from clairview.models.filters.stickiness_filter import StickinessFilter
+from clairview.models.filters.filter import Filter
+from clairview.models.property import PropertyName, TableWithProperties
+from clairview.constants import FunnelCorrelationType
 
 MATERIALIZED_PROPERTIES: list[tuple[TableWithProperties, PropertyName]] = [
     ("events", "$host"),

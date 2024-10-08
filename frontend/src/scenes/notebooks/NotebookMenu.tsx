@@ -1,7 +1,7 @@
 import './NotebookScene.scss'
 
-import { IconClock, IconDownload, IconEllipsis, IconShare, IconTrash } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconClock, IconDownload, IconEllipsis, IconShare, IconTrash } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { LemonMenu } from 'lib/lemon-ui/LemonMenu'

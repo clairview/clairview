@@ -1,10 +1,10 @@
 from ee.api.test.test_team import team_enterprise_api_test_factory
-from markettor.api.test.test_team import EnvironmentToProjectRewriteClient
-from markettor.models.organization import Organization, OrganizationMembership
-from markettor.models.project import Project
-from markettor.models.team.team import Team
-from markettor.models.user import User
-from markettor.test.base import FuzzyInt
+from clairview.api.test.test_team import EnvironmentToProjectRewriteClient
+from clairview.models.organization import Organization, OrganizationMembership
+from clairview.models.project import Project
+from clairview.models.team.team import Team
+from clairview.models.user import User
+from clairview.test.base import FuzzyInt
 
 
 class TestProjectEnterpriseAPI(team_enterprise_api_test_factory()):
@@ -90,7 +90,7 @@ class TestProjectEnterpriseAPI(team_enterprise_api_test_factory()):
         assert response.json() == self.permission_denied_response("Your organization access level is insufficient.")
 
     def test_user_that_does_not_belong_to_an_org_cannot_create_a_projec(self):
-        user = User.objects.create(email="no_org@markettor.com")
+        user = User.objects.create(email="no_org@clairview.com")
         self.client.force_login(user)
 
         response = self.client.post("/api/projects/", {"name": "Test"})

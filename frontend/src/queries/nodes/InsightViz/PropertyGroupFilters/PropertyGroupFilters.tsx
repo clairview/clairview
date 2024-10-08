@@ -1,7 +1,7 @@
 import './PropertyGroupFilters.scss'
 
-import { IconCopy, IconPlusSmall, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { IconCopy, IconPlusSmall, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'
 import { isPropertyGroupFilterLike } from 'lib/components/PropertyFilters/utils'

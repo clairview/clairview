@@ -1,5 +1,5 @@
-import { IconArrowRight } from '@markettor/icons'
-import { LemonBanner, LemonButton, LemonSelect, LemonTag } from '@markettor/lemon-ui'
+import { IconArrowRight } from '@clairview/icons'
+import { LemonBanner, LemonButton, LemonSelect, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { OrganizationMembershipLevel } from 'lib/constants'
 import { IconSync } from 'lib/lemon-ui/icons'

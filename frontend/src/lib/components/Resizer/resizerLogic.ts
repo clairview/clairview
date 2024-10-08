@@ -1,5 +1,5 @@
 import { actions, beforeUnmount, kea, key, listeners, path, props, reducers, selectors } from 'kea'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import type { resizerLogicType } from './resizerLogicType'
 
@@ -134,7 +134,7 @@ export const resizerLogic = kea<resizerLogicType>([
                             actions.setDesiredSize(event.desiredSize)
                         }
 
-                        markettor.capture('element resized', {
+                        clairview.capture('element resized', {
                             key: props.logicKey,
                             newWidth: event.desiredSize,
                             originalWidth: originContainerBounds.width,

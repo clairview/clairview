@@ -41,7 +41,7 @@ export function RecentPersons(): JSX.Element {
                 title: 'There are no newly seen people',
                 description: 'Learn more about identifying people and ingesting data in the documentation.',
                 buttonText: 'Documentation',
-                buttonTo: 'https://markettor.com/docs/product-analytics/identify',
+                buttonTo: 'https://clairview.com/docs/product-analytics/identify',
             }}
             items={persons.slice(0, 5)}
             renderRow={(person: PersonType, index) => <PersonRow key={index} person={person} />}

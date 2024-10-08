@@ -13,11 +13,11 @@ from ee.clickhouse.views.test.funnel.util import (
     get_funnel_correlation_ok,
     get_people_for_correlation_ok,
 )
-from markettor.constants import FunnelCorrelationType
-from markettor.models.element import Element
-from markettor.models.team import Team
-from markettor.test.base import BaseTest, _create_event, _create_person
-from markettor.test.test_journeys import journeys_for
+from clairview.constants import FunnelCorrelationType
+from clairview.models.element import Element
+from clairview.models.team import Team
+from clairview.test.base import BaseTest, _create_event, _create_person
+from clairview.test.test_journeys import journeys_for
 
 
 @pytest.mark.clickhouse_only

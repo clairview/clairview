@@ -1,4 +1,4 @@
-import ClickHouse from '@markettor/clickhouse'
+import ClickHouse from '@clairview/clickhouse'
 import { makeWorkerUtils, WorkerUtils } from 'graphile-worker'
 import Redis from 'ioredis'
 import parsePrometheusTextFormat from 'parse-prometheus-text-format'
@@ -129,7 +129,7 @@ export const createPluginAttachment = async ({
     contents: string
     client?: PoolClient
 }) => {
-    return await insertRow(postgres, 'markettor_pluginattachment', {
+    return await insertRow(postgres, 'clairview_pluginattachment', {
         team_id: teamId,
         plugin_config_id: pluginConfigId,
         key: key,
@@ -141,7 +141,7 @@ export const createPluginAttachment = async ({
 }
 
 export const createPlugin = async (plugin: Omit<Plugin, 'id'>) => {
-    return await insertRow(postgres, 'markettor_plugin', {
+    return await insertRow(postgres, 'clairview_plugin', {
         ...plugin,
         config_schema: {},
         from_json: false,
@@ -157,7 +157,7 @@ export const createPluginConfig = async (
     pluginConfig: Omit<PluginConfig, 'id' | 'created_at' | 'enabled' | 'order'>,
     enabled = true
 ) => {
-    return await insertRow(postgres, 'markettor_pluginconfig', {
+    return await insertRow(postgres, 'clairview_pluginconfig', {
         ...pluginConfig,
         config: pluginConfig.config ?? {},
         created_at: new Date().toISOString(),
@@ -171,7 +171,7 @@ export const getPluginConfig = async (teamId: number, pluginId: number) => {
     const queryResult = (await postgres.query(
         PostgresUse.COMMON_WRITE,
         `SELECT *
-         FROM markettor_pluginconfig
+         FROM clairview_pluginconfig
          WHERE team_id = $1
            AND id = $2`,
         [teamId, pluginId],
@@ -187,7 +187,7 @@ export const updatePluginConfig = async (
 ) => {
     await postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_pluginconfig SET config = $1, updated_at = $2 WHERE id = $3 AND team_id = $4`,
+        `UPDATE clairview_pluginconfig SET config = $1, updated_at = $2 WHERE id = $3 AND team_id = $4`,
         [pluginConfig.config ?? {}, pluginConfig.updated_at, pluginConfigId, teamId],
         'updatePluginConfig'
     )
@@ -215,7 +215,7 @@ export const createAndReloadPluginConfig = async (teamId: number, pluginId: numb
 export const disablePluginConfig = async (teamId: number, pluginConfigId: number) => {
     await postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_pluginconfig
+        `UPDATE clairview_pluginconfig
          SET enabled = false
          WHERE id = $1
            AND team_id = $2`,
@@ -227,7 +227,7 @@ export const disablePluginConfig = async (teamId: number, pluginConfigId: number
 export const enablePluginConfig = async (teamId: number, pluginConfigId: number) => {
     await postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_pluginconfig
+        `UPDATE clairview_pluginconfig
          SET enabled = true
          WHERE id = $1
            AND team_id = $2`,
@@ -315,7 +315,7 @@ export const createGroupType = async (teamId: number, index: number, groupType: 
     await postgres.query(
         PostgresUse.COMMON_WRITE,
         `
-        INSERT INTO markettor_grouptypemapping (team_id, group_type, group_type_index)
+        INSERT INTO clairview_grouptypemapping (team_id, group_type, group_type_index)
         VALUES ($1, $2, $3)
         `,
         [teamId, groupType, index],
@@ -332,7 +332,7 @@ export const createGroup = async (
     await postgres.query(
         PostgresUse.COMMON_WRITE,
         `
-            INSERT INTO markettor_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
+            INSERT INTO clairview_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             `,
         [
@@ -353,7 +353,7 @@ export const fetchPostgresPersons = async (teamId: number) => {
     const { rows } = await postgres.query(
         PostgresUse.COMMON_WRITE,
         `SELECT *
-         FROM markettor_person
+         FROM clairview_person
          WHERE team_id = $1`,
         [teamId],
         'fetchPostgresPersons'
@@ -400,7 +400,7 @@ export const fetchPluginAppMetrics = async (pluginConfigId: number) => {
 
 export const createOrganization = async (organizationProperties = {}) => {
     const organizationId = new UUIDT().toString()
-    await insertRow(postgres, 'markettor_organization', {
+    await insertRow(postgres, 'clairview_organization', {
         id: organizationId,
         name: 'TEST ORG',
         plugins_access_level: 9,
@@ -455,7 +455,7 @@ export const createOrganizationRaw = async (organizationProperties = {}) => {
 
     await postgres.query(
         PostgresUse.COMMON_WRITE,
-        `INSERT into markettor_organization
+        `INSERT into clairview_organization
         (${keys})
         VALUES (${values})
         `,
@@ -472,14 +472,14 @@ export const createTeam = async (
     sessionRecordingOptIn = true
 ) => {
     const id = Math.round(Math.random() * 1000000000)
-    await insertRow(postgres, 'markettor_project', {
+    await insertRow(postgres, 'clairview_project', {
         // Every team (aka environment) must be a child of a project
         id,
         organization_id: organizationId,
         name: 'TEST PROJECT',
         created_at: new Date().toISOString(),
     })
-    await insertRow(postgres, 'markettor_team', {
+    await insertRow(postgres, 'clairview_team', {
         id,
         organization_id: organizationId,
         project_id: id,
@@ -512,12 +512,12 @@ export const createTeam = async (
 }
 
 export const createAction = async (action: Omit<RawAction, 'id'>) => {
-    const actionRow = await insertRow(postgres, 'markettor_action', action)
+    const actionRow = await insertRow(postgres, 'clairview_action', action)
     return actionRow
 }
 
 export const createUser = async (teamId: number, email: string) => {
-    return await insertRow(postgres, 'markettor_user', {
+    return await insertRow(postgres, 'clairview_user', {
         password: 'abc',
         email,
         first_name: '',
@@ -549,7 +549,7 @@ export const getPropertyDefinitions = async (teamId: number) => {
     const { rows } = await postgres.query(
         PostgresUse.COMMON_WRITE,
         `SELECT *
-         FROM markettor_propertydefinition
+         FROM clairview_propertydefinition
          WHERE team_id = $1`,
         [teamId],
         'getPropertyDefinitions'

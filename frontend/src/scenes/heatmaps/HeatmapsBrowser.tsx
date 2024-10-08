@@ -1,5 +1,5 @@
-import { IconCollapse, IconGear } from '@markettor/icons'
-import { LemonBanner, LemonButton, LemonInputSelect, LemonSkeleton, Spinner, Tooltip } from '@markettor/lemon-ui'
+import { IconCollapse, IconGear } from '@clairview/icons'
+import { LemonBanner, LemonButton, LemonInputSelect, LemonSkeleton, Spinner, Tooltip } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { appEditorUrl, AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
@@ -85,7 +85,7 @@ function HeatmapsBrowserIntro(): JSX.Element {
                         </p>
                         <p>
                             You can also view heatmaps for any page on your website by entering the URL above. As long
-                            as the page has the MarketTor Toolbar installed, and can be loaded in an iframe, you can view
+                            as the page has the ClairView Toolbar installed, and can be loaded in an iframe, you can view
                             heatmaps for it.
                         </p>
                     </div>

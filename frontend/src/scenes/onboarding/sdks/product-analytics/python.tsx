@@ -4,7 +4,7 @@ import { SDKInstallPythonInstructions } from '../sdk-install-instructions'
 import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 
 function PythonCaptureSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Python}>markettor.capture('test-id', 'test-event')</CodeSnippet>
+    return <CodeSnippet language={Language.Python}>clairview.capture('test-id', 'test-event')</CodeSnippet>
 }
 
 export function ProductAnalyticsPythonInstructions(): JSX.Element {

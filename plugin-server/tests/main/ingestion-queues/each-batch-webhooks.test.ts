@@ -16,7 +16,7 @@ const clickhouseEvent: RawClickHouseEvent = {
     properties: JSON.stringify({
         $ip: '127.0.0.1',
         $groups: {
-            organization: 'org_markettor',
+            organization: 'org_clairview',
         },
     }),
     uuid: 'uuid1',
@@ -41,21 +41,21 @@ describe('eachMessageWebhooksHandlers', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
+            `UPDATE clairview_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
             [],
             'testTag'
         )
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
             `
-            INSERT INTO markettor_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
+            INSERT INTO clairview_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             `,
             [
                 2,
-                'org_markettor',
+                'org_clairview',
                 0,
-                JSON.stringify({ name: 'MarketTor' }),
+                JSON.stringify({ name: 'ClairView' }),
                 new Date().toISOString(),
                 JSON.stringify({}),
                 JSON.stringify({}),
@@ -65,7 +65,7 @@ describe('eachMessageWebhooksHandlers', () => {
         )
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
+            `UPDATE clairview_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
             [],
             'testTag'
         )
@@ -158,9 +158,9 @@ describe('eachMessageWebhooksHandlers', () => {
               "groups": Object {
                 "organization": Object {
                   "index": 0,
-                  "key": "org_markettor",
+                  "key": "org_clairview",
                   "properties": Object {
-                    "name": "MarketTor",
+                    "name": "ClairView",
                   },
                   "type": "organization",
                 },
@@ -170,7 +170,7 @@ describe('eachMessageWebhooksHandlers', () => {
               "person_properties": Object {},
               "properties": Object {
                 "$groups": Object {
-                  "organization": "org_markettor",
+                  "organization": "org_clairview",
                 },
                 "$ip": "127.0.0.1",
               },
@@ -182,7 +182,7 @@ describe('eachMessageWebhooksHandlers', () => {
         expect(postWebhookSpy).toHaveBeenCalledTimes(1)
         expect(JSON.parse(postWebhookSpy.mock.calls[0][0].webhook.body)).toMatchInlineSnapshot(`
             Object {
-              "text": "[Test Action](/project/2/action/1) was triggered by [my\\\\_id](/project/2/person/my\\\\_id) in organization [MarketTor](/project/2/groups/0/org\\\\_markettor)",
+              "text": "[Test Action](/project/2/action/1) was triggered by [my\\\\_id](/project/2/person/my\\\\_id) in organization [ClairView](/project/2/groups/0/org\\\\_clairview)",
             }
         `)
     })

@@ -1,20 +1,20 @@
 from typing import Optional
 
 from rest_framework import request, response
-from markettor.api.utils import action
+from clairview.api.utils import action
 
 from ee.clickhouse.queries.funnels.funnel_correlation_persons import (
     FunnelCorrelationActors,
 )
-from markettor.api.person import PersonViewSet
-from markettor.constants import (
+from clairview.api.person import PersonViewSet
+from clairview.constants import (
     FUNNEL_CORRELATION_PERSON_LIMIT,
     FUNNEL_CORRELATION_PERSON_OFFSET,
     INSIGHT_FUNNELS,
 )
-from markettor.decorators import cached_by_filters
-from markettor.models import Filter
-from markettor.utils import format_query_params_absolute_url
+from clairview.decorators import cached_by_filters
+from clairview.models import Filter
+from clairview.utils import format_query_params_absolute_url
 
 
 class EnterprisePersonViewSet(PersonViewSet):

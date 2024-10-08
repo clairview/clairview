@@ -1,4 +1,4 @@
-import { LemonButton, LemonCheckbox, LemonInput, LemonSelect, LemonTextArea } from '@markettor/lemon-ui'
+import { LemonButton, LemonCheckbox, LemonInput, LemonSelect, LemonTextArea } from '@clairview/lemon-ui'
 import { Meta } from '@storybook/react'
 import { kea, path, useAllValues } from 'kea'
 import { Form, forms } from 'kea-forms'
@@ -14,7 +14,7 @@ const meta: Meta<typeof LemonField> = {
             description: {
                 component: `
 
-[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/MarketTor-Design-System-One?node-id=3139%3A1388)
+[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/ClairView-Design-System-One?node-id=3139%3A1388)
 
 Fields are a wrapping component that take care of rendering a label, input and error messages in a standard format.
 

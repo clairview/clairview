@@ -1,4 +1,4 @@
-import { CacheOptions } from '@markettor/plugin-scaffold'
+import { CacheOptions } from '@clairview/plugin-scaffold'
 
 import { PluginsServerConfig, RedisPool } from '../../types'
 import { instrumentQuery } from '../metrics'
@@ -9,7 +9,7 @@ import { timeoutGuard } from './utils'
 const CELERY_DEFAULT_QUEUE = 'celery'
 
 /**
- * NOTE: We sometimes need to trigger flows in the main markettor app from the plugin server.
+ * NOTE: We sometimes need to trigger flows in the main clairview app from the plugin server.
  * This has been done by celery and continues to do so. At some point we should consider an alternative
  * such as a shared message bus or an internal HTTP API.
  */
@@ -17,7 +17,7 @@ export class Celery {
     private redisPool: RedisPool
 
     constructor(config: PluginsServerConfig) {
-        this.redisPool = createRedisPool(config, 'markettor')
+        this.redisPool = createRedisPool(config, 'clairview')
     }
 
     private redisLPush(key: string, value: unknown, options: CacheOptions = {}): Promise<number> {

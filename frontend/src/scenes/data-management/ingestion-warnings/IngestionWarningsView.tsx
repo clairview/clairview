@@ -109,7 +109,7 @@ const WARNING_TYPE_RENDERER = {
                     {details.timestamp ? <li>Client provided timestamp: {details.timestamp}</li> : ''}
                     {details.sentAt ? <li>Client provided sent_at: {details.sentAt}</li> : ''}
                     {details.offset ? <li>Client provided time offset: {details.offset}</li> : ''}
-                    <li>MarketTor server capture time: {details.now}</li>
+                    <li>ClairView server capture time: {details.now}</li>
                 </ul>
             </>
         )
@@ -252,7 +252,7 @@ export function IngestionWarningsView(): JSX.Element {
                                         <>
                                             {type} (
                                             <Link
-                                                to={`https://markettor.com/manual/data-management#${type
+                                                to={`https://clairview.com/manual/data-management#${type
                                                     .toLowerCase()
                                                     .replace(',', '')
                                                     .split(' ')
@@ -309,7 +309,7 @@ export function IngestionWarningsView(): JSX.Element {
                     productKey={ProductKey.INGESTION_WARNINGS}
                     isEmpty={true}
                     description="Nice! You've had no ingestion warnings in the past 30 days. If we detect any issues with your data, we'll show them here."
-                    docsURL="https://markettor.com/docs/data/data-management#ingestion-warnings"
+                    docsURL="https://clairview.com/docs/data/data-management#ingestion-warnings"
                     customHog={ReadingHog}
                 />
             )}

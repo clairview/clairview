@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { apiHostOrigin } from 'lib/utils/apiHost'
@@ -14,7 +14,7 @@ export function ProductAnalyticsHeliconeInstructions(): JSX.Element {
                 <Link to="https://helicone.ai/" target="_blank">
                     Helicone
                 </Link>{' '}
-                supports most popular LLM models and you can bring your Helicone data into MarketTor for analysis. To get
+                supports most popular LLM models and you can bring your Helicone data into ClairView for analysis. To get
                 started:
             </p>
             <ol className="space-y-4">
@@ -34,7 +34,7 @@ export function ProductAnalyticsHeliconeInstructions(): JSX.Element {
                         Helicone-Auth header
                     </Link>{' '}
                     when installing Helicone, add two new headers
-                    <strong> Helicone-Markettor-Key</strong> and <strong>Helicone-Markettor-Host</strong> with your MarketTor
+                    <strong> Helicone-Markettor-Key</strong> and <strong>Helicone-Markettor-Host</strong> with your ClairView
                     details:
                     <CodeSnippet language={Language.Python}>
                         {`# Example for adding it to OpenAI in Python
@@ -52,7 +52,7 @@ default_headers= {
                     </CodeSnippet>
                 </li>
             </ol>
-            <p>Helicone events will now be exported into MarketTor as soon as they're available.</p>
+            <p>Helicone events will now be exported into ClairView as soon as they're available.</p>
         </>
     )
 }

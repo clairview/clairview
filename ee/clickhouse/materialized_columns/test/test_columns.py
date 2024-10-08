@@ -9,12 +9,12 @@ from ee.clickhouse.materialized_columns.columns import (
     get_materialized_columns,
     materialize,
 )
-from markettor.client import sync_execute
-from markettor.conftest import create_clickhouse_tables
-from markettor.constants import GROUP_TYPES_LIMIT
-from markettor.models.event.sql import EVENTS_DATA_TABLE
-from markettor.settings import CLICKHOUSE_DATABASE
-from markettor.test.base import BaseTest, ClickhouseTestMixin, _create_event
+from clairview.client import sync_execute
+from clairview.conftest import create_clickhouse_tables
+from clairview.constants import GROUP_TYPES_LIMIT
+from clairview.models.event.sql import EVENTS_DATA_TABLE
+from clairview.settings import CLICKHOUSE_DATABASE
+from clairview.test.base import BaseTest, ClickhouseTestMixin, _create_event
 
 EVENTS_TABLE_DEFAULT_MATERIALIZED_COLUMNS = [f"$group_{i}" for i in range(GROUP_TYPES_LIMIT)] + [
     "$session_id",

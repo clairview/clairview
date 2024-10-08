@@ -10,13 +10,13 @@ export function WebAnalyticsRNInstructions(): JSX.Element {
             <h3 className="mt-4">Optional: Send a manual event</h3>
             <p>Our package will autocapture events for you, but you can manually define events, too!</p>
             <CodeSnippet language={Language.JSX}>{`// With hooks
-import { useMarketTor } from 'markettor-react-native'
+import { useClairView } from 'clairview-react-native'
 
 const MyComponent = () => {
-    const markettor = useMarketTor()
+    const clairview = useClairView()
 
     useEffect(() => {
-        markettor.capture("MyComponent loaded", { foo: "bar" })
+        clairview.capture("MyComponent loaded", { foo: "bar" })
     }, [])
 }
         `}</CodeSnippet>

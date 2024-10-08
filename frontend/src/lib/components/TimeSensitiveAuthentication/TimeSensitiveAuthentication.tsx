@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal, SpinnerOverlay } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal, SpinnerOverlay } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonField } from 'lib/lemon-ui/LemonField'
@@ -53,7 +53,7 @@ export function TimeSensitiveAuthenticationModal(): JSX.Element {
                 ) : undefined
             }
         >
-            <p>You are accessing a sensitive part of MarketTor. For your security we require you to re-authenticate.</p>
+            <p>You are accessing a sensitive part of ClairView. For your security we require you to re-authenticate.</p>
 
             {showPassword ? (
                 <Form

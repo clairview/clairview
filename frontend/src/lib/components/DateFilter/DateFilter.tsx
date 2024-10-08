@@ -1,6 +1,6 @@
 import { Placement } from '@floating-ui/react'
-import { IconCalendar } from '@markettor/icons'
-import { LemonButton, LemonButtonProps, LemonDivider, Popover } from '@markettor/lemon-ui'
+import { IconCalendar } from '@clairview/icons'
+import { LemonButton, LemonButtonProps, LemonDivider, Popover } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import {

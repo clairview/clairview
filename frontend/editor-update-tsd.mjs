@@ -20,8 +20,8 @@ export function writeSourceCodeEditorTypes() {
         '@types/react/index.d.ts': readFile('../node_modules/@types/react/index.d.ts'),
         '@types/react/global.d.ts': readFile('../node_modules/@types/react/global.d.ts'),
         '@types/kea/index.d.ts': readFile('../node_modules/kea/lib/index.d.ts'),
-        '@markettor/apps-common/index.d.ts': readFile('./@markettor/apps-common/dist/index.d.ts'),
-        '@markettor/lemon-ui/index.d.ts': readFile('./@markettor/lemon-ui/dist/index.d.ts'),
+        '@clairview/apps-common/index.d.ts': readFile('./@clairview/apps-common/dist/index.d.ts'),
+        '@clairview/lemon-ui/index.d.ts': readFile('./@clairview/lemon-ui/dist/index.d.ts'),
     }
     const packagesJsonFile = path.resolve(__dirname, './src/scenes/plugins/source/types/packages.json')
     fse.mkdirpSync(path.dirname(packagesJsonFile))

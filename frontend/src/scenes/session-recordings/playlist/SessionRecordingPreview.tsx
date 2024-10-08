@@ -1,4 +1,4 @@
-import { IconBug, IconCursorClick, IconKeyboard, IconLive, IconPinFilled } from '@markettor/icons'
+import { IconBug, IconCursorClick, IconKeyboard, IconLive, IconPinFilled } from '@clairview/icons'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { PropertyIcon } from 'lib/components/PropertyIcon'

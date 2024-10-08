@@ -11,15 +11,15 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.api.test.fixtures.available_product_features import AVAILABLE_PRODUCT_FEATURES
-from markettor.models import SessionRecording, SessionRecordingPlaylistItem
-from markettor.models.user import User
-from markettor.session_recordings.models.session_recording_playlist import (
+from clairview.models import SessionRecording, SessionRecordingPlaylistItem
+from clairview.models.user import User
+from clairview.session_recordings.models.session_recording_playlist import (
     SessionRecordingPlaylist,
 )
-from markettor.session_recordings.queries.test.session_replay_sql import (
+from clairview.session_recordings.queries.test.session_replay_sql import (
     produce_replay_summary,
 )
-from markettor.settings import (
+from clairview.settings import (
     OBJECT_STORAGE_ACCESS_KEY_ID,
     OBJECT_STORAGE_BUCKET,
     OBJECT_STORAGE_ENDPOINT,
@@ -137,7 +137,7 @@ class TestSessionRecordingPlaylist(APILicensedTest):
         assert response.json()["pinned"]
 
     def test_filters_based_on_params(self):
-        other_user = User.objects.create_and_join(self.organization, "other@markettor.com", "password")
+        other_user = User.objects.create_and_join(self.organization, "other@clairview.com", "password")
         playlist1 = SessionRecordingPlaylist.objects.create(team=self.team, name="playlist", created_by=self.user)
         playlist2 = SessionRecordingPlaylist.objects.create(team=self.team, pinned=True, created_by=self.user)
         playlist3 = SessionRecordingPlaylist.objects.create(team=self.team, name="my playlist", created_by=other_user)

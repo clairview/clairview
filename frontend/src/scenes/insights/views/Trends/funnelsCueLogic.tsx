@@ -1,7 +1,7 @@
 import { actions, connect, events, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { insightUsageLogic } from 'scenes/insights/insightUsageLogic'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'
 import { keyForInsightLogicProps } from 'scenes/insights/sharedUtils'
@@ -49,8 +49,8 @@ export const funnelsCueLogic = kea<funnelsCueLogicType>([
     }),
     listeners(({ actions, values }) => ({
         optOut: async ({ userOptedOut }) => {
-            markettor.capture('funnel cue 7301 - terminated', { user_opted_out: userOptedOut })
-            markettor.people.set({ funnels_cue_3701_opt_out: true })
+            clairview.capture('funnel cue 7301 - terminated', { user_opted_out: userOptedOut })
+            clairview.people.set({ funnels_cue_3701_opt_out: true })
             // funnels_cue_3701_opt_out -> will add the user to a FF that will permanently exclude the user
             actions.setPermanentOptOut()
         },
@@ -62,7 +62,7 @@ export const funnelsCueLogic = kea<funnelsCueLogicType>([
             if (!values.isFirstLoad && isTrendsQuery(query?.source) && (query.source.series || []).length >= 3) {
                 actions.setShouldShow(true)
                 !values.permanentOptOut &&
-                    markettor.capture('funnel cue 7301 - shown', { step_count: query.source.series.length })
+                    clairview.capture('funnel cue 7301 - shown', { step_count: query.source.series.length })
             } else if (values.shown && isFunnelsQuery(query?.source)) {
                 actions.optOut(false)
             } else {

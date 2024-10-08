@@ -1,9 +1,9 @@
-import { LemonDivider, LemonSwitch, LemonTag, LemonTextArea, Link } from '@markettor/lemon-ui'
+import { LemonDivider, LemonSwitch, LemonTag, LemonTextArea, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import { SupportedWebVitalsMetrics } from 'markettor-js'
+import { SupportedWebVitalsMetrics } from 'clairview-js'
 import { teamLogic } from 'scenes/teamLogic'
 import { userLogic } from 'scenes/userLogic'
 
@@ -68,14 +68,14 @@ export function AutocaptureSettings(): JSX.Element {
             </p>
             <p>
                 Autocapture is also available for React Native, where it has to be{' '}
-                <Link to="https://markettor.com/docs/libraries/react-native#autocapture" target="_blank">
+                <Link to="https://clairview.com/docs/libraries/react-native#autocapture" target="_blank">
                     configured directly in code
                 </Link>
                 .
             </p>
             <div className="space-y-2">
                 <LemonSwitch
-                    id="markettor-autocapture-switch"
+                    id="clairview-autocapture-switch"
                     onChange={(checked) => {
                         updateCurrentTeam({
                             autocapture_opt_out: !checked,
@@ -104,7 +104,7 @@ export function ExceptionAutocaptureSettings(): JSX.Element {
     return (
         <>
             <LemonSwitch
-                id="markettor-autocapture-exceptions-switch"
+                id="clairview-autocapture-exceptions-switch"
                 onChange={(checked) => {
                     updateCurrentTeam({
                         autocapture_exceptions_opt_in: checked,
@@ -133,7 +133,7 @@ export function ExceptionAutocaptureSettings(): JSX.Element {
             </p>
             <p>Only up to 300 characters of config are allowed here.</p>
             <LemonTextArea
-                id="markettor-autocapture-exceptions-dropped"
+                id="clairview-autocapture-exceptions-dropped"
                 value={errorsToIgnoreRules}
                 onChange={setErrorsToIgnoreRules}
                 disabled={!currentTeam?.autocapture_exceptions_opt_in}
@@ -153,15 +153,15 @@ export function WebVitalsAutocaptureSettings(): JSX.Element {
     return (
         <>
             <p>
-                Since markettor-js version 1.141.2 you can enable{' '}
+                Since clairview-js version 1.141.2 you can enable{' '}
                 <Link to="https://github.com/GoogleChrome/web-vitals" target="_blank">
                     Google Chrome's web vitals
                 </Link>{' '}
                 collection. Web vitals events can be used in insights, and when web vitals capture is enabled it is used
-                to enhance other parts of MarketTor like web analytics and session replay.
+                to enhance other parts of ClairView like web analytics and session replay.
             </p>
             <LemonSwitch
-                id="markettor-autocapture-web-vitals-switch"
+                id="clairview-autocapture-web-vitals-switch"
                 onChange={(checked) => {
                     updateCurrentTeam({
                         autocapture_web_vitals_opt_in: checked,

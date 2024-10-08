@@ -1,6 +1,6 @@
 import './ErrorTracking.scss'
 
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { base64Decode } from 'lib/utils'

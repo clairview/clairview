@@ -1,4 +1,4 @@
-import { LemonButton, ProfilePicture } from '@markettor/lemon-ui'
+import { LemonButton, ProfilePicture } from '@clairview/lemon-ui'
 import { Extension } from '@tiptap/core'
 import { PluginKey } from '@tiptap/pm/state'
 import { ReactRenderer } from '@tiptap/react'

@@ -7,7 +7,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'Ben',
             last_name: 'White',
-            email: 'ben@markettor.com',
+            email: 'ben@clairview.com',
         },
         unread: false,
         is_system: false,
@@ -16,7 +16,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         scope: ActivityScope.TEAM,
         detail: {
             merge: null,
-            name: '🦔 MarketTor App + Website',
+            name: '🦔 ClairView App + Website',
             type: undefined,
             changes: [
                 {
@@ -42,7 +42,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'Paul',
             last_name: "D'Ambra",
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_system: false,
@@ -51,7 +51,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         scope: ActivityScope.TEAM,
         detail: {
             merge: null,
-            name: '🦔 MarketTor App + Website',
+            name: '🦔 ClairView App + Website',
             type: undefined,
             changes: [
                 {
@@ -77,7 +77,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'sdavasdadadsadas',
             last_name: '',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_staff: false,
@@ -107,7 +107,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'sdavasdadadsadas',
             last_name: '',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_staff: false,
@@ -137,7 +137,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'sdavasdadadsadas',
             last_name: '',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_staff: false,
@@ -169,7 +169,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'sdavasdadadsadas',
             last_name: '',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_staff: false,
@@ -199,7 +199,7 @@ export const teamActivityResponseJson: ActivityLogItem[] = [
         user: {
             first_name: 'sdavasdadadsadas',
             last_name: '',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
         unread: false,
         is_staff: false,
@@ -231,7 +231,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Neil',
-            email: 'neil@markettor.com',
+            email: 'neil@clairview.com',
         },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
@@ -284,7 +284,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-20T15:26:58.006900Z',
     },
     {
-        user: { first_name: 'Paul', email: 'paul@markettor.com' },
+        user: { first_name: 'Paul', email: 'paul@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1353',
@@ -436,7 +436,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-20T15:26:13.314035Z',
     },
     {
-        user: { first_name: 'Alex Kim', email: 'alex@markettor.com' },
+        user: { first_name: 'Alex Kim', email: 'alex@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1474',
@@ -477,7 +477,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-19T16:58:47.747634Z',
     },
     {
-        user: { first_name: 'Alex Kim', email: 'alex@markettor.com' },
+        user: { first_name: 'Alex Kim', email: 'alex@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1474',
@@ -532,7 +532,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:58:55.792014Z',
     },
     {
-        user: { first_name: 'Neil', email: 'neil@markettor.com' },
+        user: { first_name: 'Neil', email: 'neil@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1846',
@@ -547,7 +547,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:50:25.894422Z',
     },
     {
-        user: { first_name: 'Neil', email: 'neil@markettor.com' },
+        user: { first_name: 'Neil', email: 'neil@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1846',
@@ -562,7 +562,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:50:25.894422Z',
     },
     {
-        user: { first_name: 'Neil', email: 'neil@markettor.com' },
+        user: { first_name: 'Neil', email: 'neil@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1846',
@@ -583,7 +583,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:50:25.894422Z',
     },
     {
-        user: { first_name: 'Neil', email: 'neil@markettor.com' },
+        user: { first_name: 'Neil', email: 'neil@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1846',
@@ -604,7 +604,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:50:25.894422Z',
     },
     {
-        user: { first_name: 'Neil', email: 'neil@markettor.com' },
+        user: { first_name: 'Neil', email: 'neil@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1846',
@@ -625,7 +625,7 @@ export const featureFlagsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-03-21T15:50:25.894422Z',
     },
     {
-        user: { first_name: 'Paul', email: 'paul@markettor.com' },
+        user: { first_name: 'Paul', email: 'paul@clairview.com' },
         activity: 'created',
         scope: ActivityScope.FEATURE_FLAG,
         item_id: '1825',
@@ -868,7 +868,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Employee 427',
-            email: 'test@markettor.com',
+            email: 'test@clairview.com',
         },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
@@ -937,7 +937,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Cory',
-            email: 'cory@markettor.com',
+            email: 'cory@clairview.com',
         },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
@@ -1000,7 +1000,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2023-04-20T18:35:14.033429Z',
     },
     {
-        user: { first_name: 'Cameron', email: 'cameron@markettor.com' },
+        user: { first_name: 'Cameron', email: 'cameron@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1040,7 +1040,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2023-07-03T15:54:15.604336Z',
     },
     {
-        user: { first_name: 'Cameron', email: 'cameron@markettor.com' },
+        user: { first_name: 'Cameron', email: 'cameron@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1062,7 +1062,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-05-03T15:27:20.265216Z',
     },
     {
-        user: { first_name: 'Michael', email: 'michael@markettor.com' },
+        user: { first_name: 'Michael', email: 'michael@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1084,7 +1084,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-05-03T15:27:14.031192Z',
     },
     {
-        user: { first_name: 'Michael', email: 'michael@markettor.com' },
+        user: { first_name: 'Michael', email: 'michael@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1106,7 +1106,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-05-03T15:27:14.031192Z',
     },
     {
-        user: { first_name: 'Michael', email: 'michael@markettor.com' },
+        user: { first_name: 'Michael', email: 'michael@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1128,7 +1128,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-05-03T15:27:14.031192Z',
     },
     {
-        user: { first_name: 'Michael', email: 'michael@markettor.com' },
+        user: { first_name: 'Michael', email: 'michael@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1152,7 +1152,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Ben',
-            email: 'ben@markettor.com',
+            email: 'ben@clairview.com',
         },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
@@ -1177,7 +1177,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Ben',
-            email: 'ben@markettor.com',
+            email: 'ben@clairview.com',
         },
         activity: 'exported',
         scope: ActivityScope.INSIGHT,
@@ -1200,7 +1200,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
         created_at: '2022-06-24T14:53:24.194502Z',
     },
     {
-        user: { first_name: 'Paul', email: 'paul@markettor.com' },
+        user: { first_name: 'Paul', email: 'paul@clairview.com' },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,
         item_id: '738061',
@@ -1310,7 +1310,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
     {
         user: {
             first_name: 'Ben',
-            email: 'ben@markettor.com',
+            email: 'ben@clairview.com',
         },
         activity: 'updated',
         scope: ActivityScope.INSIGHT,

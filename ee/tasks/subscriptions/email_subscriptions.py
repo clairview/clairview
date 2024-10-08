@@ -4,10 +4,10 @@ from typing import Optional
 import structlog
 
 from ee.tasks.subscriptions.subscription_utils import UTM_TAGS_BASE
-from markettor.email import EmailMessage
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.subscription import Subscription, get_unsubscribe_token
-from markettor.utils import absolute_uri
+from clairview.email import EmailMessage
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.subscription import Subscription, get_unsubscribe_token
+from clairview.utils import absolute_uri
 
 logger = structlog.get_logger(__name__)
 
@@ -25,14 +25,14 @@ def send_email_subscription_report(
     is_invite = invite_message is not None
     self_invite = inviter.email == email
 
-    subject = "MarketTor Report"
+    subject = "ClairView Report"
     invite_summary = None
 
     resource_info = subscription.resource_info
     if not resource_info:
         raise NotImplementedError("This type of subscription resource is not supported")
 
-    subject = f"MarketTor {resource_info.kind} report - {resource_info.name}"
+    subject = f"ClairView {resource_info.kind} report - {resource_info.name}"
     campaign_key = f"{resource_info.kind.lower()}_subscription_report_{subscription.next_delivery_date.isoformat()}"
 
     unsubscribe_url = absolute_uri(f"/unsubscribe?token={get_unsubscribe_token(subscription, email)}&{utm_tags}")
@@ -40,9 +40,9 @@ def send_email_subscription_report(
     if is_invite:
         invite_summary = f"This subscription is { subscription.summary }. The next subscription will be sent on { subscription.next_delivery_date.strftime('%A %B %d, %Y')}"
         if self_invite:
-            subject = f"You have been subscribed to a MarketTor {resource_info.kind}"
+            subject = f"You have been subscribed to a ClairView {resource_info.kind}"
         else:
-            subject = f"{inviter.first_name or 'Someone'} subscribed you to a MarketTor {resource_info.kind}"
+            subject = f"{inviter.first_name or 'Someone'} subscribed you to a ClairView {resource_info.kind}"
         campaign_key = f"{resource_info.kind.lower()}_subscription_new_{uuid.uuid4()}"
 
     message = EmailMessage(

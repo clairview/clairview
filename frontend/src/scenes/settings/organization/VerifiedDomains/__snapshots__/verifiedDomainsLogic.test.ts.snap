@@ -41,8 +41,8 @@ exports[`verifiedDomainsLogic values has proper defaults 1`] = `
         "anonymize_ips": false,
         "api_token": "default-team-api-token",
         "app_urls": [
-          "https://markettor.com/",
-          "https://app.markettor.com",
+          "https://clairview.com/",
+          "https://app.clairview.com",
         ],
         "autocapture_exceptions_errors_to_ignore": [],
         "autocapture_exceptions_opt_in": false,
@@ -90,7 +90,7 @@ exports[`verifiedDomainsLogic values has proper defaults 1`] = `
         "primary_dashboard": 1,
         "project_id": 997,
         "recording_domains": [
-          "https://recordings.markettor.com/",
+          "https://recordings.clairview.com/",
         ],
         "session_recording_linked_flag": null,
         "session_recording_minimum_duration_milliseconds": null,
@@ -107,7 +107,7 @@ exports[`verifiedDomainsLogic values has proper defaults 1`] = `
             "key": "email",
             "operator": "not_icontains",
             "type": "person",
-            "value": "markettor.com",
+            "value": "clairview.com",
           },
         ],
         "test_account_filters_default_checked": false,
@@ -141,7 +141,7 @@ exports[`verifiedDomainsLogic values has proper defaults 1`] = `
   "updatingDomainLoading": false,
   "verifiedDomains": [
     {
-      "domain": "my.markettor.com",
+      "domain": "my.clairview.com",
       "id": "8db3b0c2-a0ab-490a-9037-14f3358a81bc",
       "is_verified": true,
       "jit_provisioning_enabled": true,
@@ -149,7 +149,7 @@ exports[`verifiedDomainsLogic values has proper defaults 1`] = `
       "verified_at": "2022-01-01T23:59:59",
     },
     {
-      "domain": "temp.markettor.com",
+      "domain": "temp.clairview.com",
       "id": "id_will_be_deleted",
       "is_verified": false,
       "jit_provisioning_enabled": false,

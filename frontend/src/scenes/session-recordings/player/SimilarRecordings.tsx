@@ -1,4 +1,4 @@
-import { LemonButton, Spinner } from '@markettor/lemon-ui'
+import { LemonButton, Spinner } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { urls } from 'scenes/urls'
 

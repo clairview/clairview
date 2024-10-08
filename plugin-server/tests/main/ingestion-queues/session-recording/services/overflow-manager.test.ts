@@ -7,7 +7,7 @@ import { closeHub, createHub } from '../../../../../src/utils/db/hub'
 jest.mock('../../../../../src/utils/status')
 jest.mock('../../../../../src/kafka/producer')
 
-const CAPTURE_OVERFLOW_REDIS_KEY = '@markettor/capture-overflow/replay'
+const CAPTURE_OVERFLOW_REDIS_KEY = '@clairview/capture-overflow/replay'
 
 describe('overflow manager', () => {
     let hub: Hub

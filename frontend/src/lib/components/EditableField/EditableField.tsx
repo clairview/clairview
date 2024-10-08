@@ -1,6 +1,6 @@
 import './EditableField.scss'
 
-import { IconPencil } from '@markettor/icons'
+import { IconPencil } from '@clairview/icons'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { useResizeObserver } from 'lib/hooks/useResizeObserver'

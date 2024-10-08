@@ -8,7 +8,7 @@ import { teamLogic } from 'scenes/teamLogic'
 export function JSInstallSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Bash}>
-            {['npm install markettor-js', '# OR', 'yarn add markettor-js', '# OR', 'pnpm add markettor-js'].join('\n')}
+            {['npm install clairview-js', '# OR', 'yarn add clairview-js', '# OR', 'pnpm add clairview-js'].join('\n')}
         </CodeSnippet>
     )
 }
@@ -21,9 +21,9 @@ export function JSSetupSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript}>
             {[
-                "import markettor from 'markettor-js'",
+                "import clairview from 'clairview-js'",
                 '',
-                `markettor.init('${currentTeam?.api_token}',`,
+                `clairview.init('${currentTeam?.api_token}',`,
                 `    {`,
                 `        api_host: '${apiHostOrigin()}',`,
                 isPersonProfilesDisabled

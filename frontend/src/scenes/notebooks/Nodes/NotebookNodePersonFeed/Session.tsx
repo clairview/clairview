@@ -1,5 +1,5 @@
-import { IconCollapse, IconExpand, IconRewindPlay } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconCollapse, IconExpand, IconRewindPlay } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { humanFriendlyDetailedTime, humanFriendlyDuration } from 'lib/utils'

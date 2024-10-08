@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconInfo, IconWarning, IconX } from '@markettor/icons'
-import markettor from 'markettor-js'
+import { IconCheckCircle, IconInfo, IconWarning, IconX } from '@clairview/icons'
+import clairview from 'clairview-js'
 import { toast, ToastContentProps as ToastifyRenderProps, ToastOptions } from 'react-toastify'
 
 import { IconErrorOutline } from '../icons'
@@ -31,7 +31,7 @@ interface ToastOptionsWithButton extends ToastOptions {
 export const GET_HELP_BUTTON: ToastButton = {
     label: 'Get help',
     action: () => {
-        window.open('https://markettor.com/support?utm_medium=in-product&utm_campaign=error-toast', '_blank')
+        window.open('https://clairview.com/support?utm_medium=in-product&utm_campaign=error-toast', '_blank')
     },
 }
 
@@ -85,7 +85,7 @@ export const lemonToast = {
         })
     },
     warning(message: string | JSX.Element, { button, ...toastOptions }: ToastOptionsWithButton = {}): void {
-        markettor.capture('toast warning', {
+        clairview.capture('toast warning', {
             message: String(message),
             button: button?.label,
             toastId: toastOptions.toastId,
@@ -97,10 +97,10 @@ export const lemonToast = {
         })
     },
     error(message: string | JSX.Element, { button, ...toastOptions }: ToastOptionsWithButton = {}): void {
-        // when used inside the markettor toolbar, `markettor.capture` isn't loaded
+        // when used inside the clairview toolbar, `clairview.capture` isn't loaded
         // check if the function is available before calling it.
-        if (markettor.capture) {
-            markettor.capture('toast error', {
+        if (clairview.capture) {
+            clairview.capture('toast error', {
                 message: String(message),
                 button: button?.label,
                 toastId: toastOptions.toastId,

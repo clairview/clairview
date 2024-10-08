@@ -1,4 +1,4 @@
-import { lemonToast, Spinner } from '@markettor/lemon-ui'
+import { lemonToast, Spinner } from '@clairview/lemon-ui'
 import { actions, connect, events, kea, listeners, path, reducers, selectors } from 'kea'
 import { router } from 'kea-router'
 import { liveEventsHostOrigin } from 'lib/utils/apiHost'

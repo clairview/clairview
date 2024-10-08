@@ -1,4 +1,4 @@
-import { PluginEvent, MarketTorEvent, ProcessedPluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent, ClairViewEvent, ProcessedPluginEvent } from '@clairview/plugin-scaffold'
 import { captureException } from '@sentry/node'
 
 import { Hub, PluginConfig, PluginError, PluginLogEntrySource, PluginLogEntryType } from '../../types'
@@ -29,7 +29,7 @@ export async function processError(
     server: Hub,
     pluginConfig: PluginConfig | null,
     error: Error | string,
-    event?: PluginEvent | ProcessedPluginEvent | MarketTorEvent | null
+    event?: PluginEvent | ProcessedPluginEvent | ClairViewEvent | null
 ): Promise<void> {
     if (!pluginConfig) {
         captureException(new Error('Tried to process error for nonexistent plugin config!'), {
@@ -39,7 +39,7 @@ export async function processError(
     }
 
     if (error instanceof DependencyUnavailableError) {
-        // For errors relating to MarketTor dependencies that are unavailable,
+        // For errors relating to ClairView dependencies that are unavailable,
         // e.g. Postgres, Kafka, Redis, we don't want to log the error to Sentry
         // but rather bubble this up the stack for someone else to decide on
         // what to do with it.

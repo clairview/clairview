@@ -18,7 +18,7 @@ export const pluginContentMapping: PluginContentMapping = {
     GeoIP: {
         title: 'Capture location information',
         description:
-            'Enrich MarketTor events and persons with IP location data. This is useful for understanding where your users are coming from. This setting can be found under data pipeline.',
+            'Enrich ClairView events and persons with IP location data. This is useful for understanding where your users are coming from. This setting can be found under data pipeline.',
         productOnboardingDenyList: [ProductKey.SESSION_REPLAY],
     },
 }

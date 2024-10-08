@@ -1,8 +1,8 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
-import defaultLogo from 'public/markettor-logo.svg'
-import cloudLogo from 'public/markettor-logo-cloud.svg'
-import demoLogo from 'public/markettor-logo-demo.svg'
+import defaultLogo from 'public/clairview-logo.svg'
+import cloudLogo from 'public/clairview-logo-cloud.svg'
+import demoLogo from 'public/clairview-logo-demo.svg'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 
 export function WelcomeLogo({ view }: { view?: string }): JSX.Element {
@@ -10,10 +10,10 @@ export function WelcomeLogo({ view }: { view?: string }): JSX.Element {
     const { preflight } = useValues(preflightLogic)
 
     return (
-        <Link to={`https://markettor.com?${UTM_TAGS}`} className="flex flex-col items-center mb-8">
+        <Link to={`https://clairview.com?${UTM_TAGS}`} className="flex flex-col items-center mb-8">
             <img
                 src={preflight?.demo ? demoLogo : preflight?.cloud ? cloudLogo : defaultLogo}
-                alt={`MarketTor${preflight?.cloud ? ' Cloud' : ''}`}
+                alt={`ClairView${preflight?.cloud ? ' Cloud' : ''}`}
                 className="h-6"
             />
         </Link>

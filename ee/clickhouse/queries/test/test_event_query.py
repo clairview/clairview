@@ -1,17 +1,17 @@
 from freezegun import freeze_time
 
 from ee.clickhouse.materialized_columns.columns import materialize
-from markettor.client import sync_execute
-from markettor.models import Action
-from markettor.models.cohort import Cohort
-from markettor.models.element import Element
-from markettor.models.entity import Entity
-from markettor.models.filters import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.person import Person
-from markettor.queries.trends.trends_event_query import TrendsEventQuery
-from markettor.test.base import (
+from clairview.client import sync_execute
+from clairview.models import Action
+from clairview.models.cohort import Cohort
+from clairview.models.element import Element
+from clairview.models.entity import Entity
+from clairview.models.filters import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.person import Person
+from clairview.queries.trends.trends_event_query import TrendsEventQuery
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -80,7 +80,7 @@ class TestEventQuery(ClickhouseTestMixin, APIBaseTest):
                 "properties": [
                     {
                         "key": "email",
-                        "value": "@markettor.com",
+                        "value": "@clairview.com",
                         "operator": "not_icontains",
                         "type": "person",
                     },
@@ -100,7 +100,7 @@ class TestEventQuery(ClickhouseTestMixin, APIBaseTest):
                 "properties": [
                     {
                         "key": "email",
-                        "value": "@markettor.com",
+                        "value": "@clairview.com",
                         "operator": "not_icontains",
                         "type": "person",
                     },

@@ -139,7 +139,7 @@ impl GroupTypeMappingCache {
 
         let query = r#"
             SELECT group_type, group_type_index 
-            FROM markettor_grouptypemapping
+            FROM clairview_grouptypemapping
             WHERE team_id = $1
         "#;
 
@@ -994,19 +994,19 @@ async fn fetch_and_locally_cache_all_properties(
 
     let query = r#"
         SELECT 
-            (SELECT "markettor_person"."properties"
-             FROM "markettor_person"
-             INNER JOIN "markettor_persondistinctid"
-             ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
-             WHERE ("markettor_persondistinctid"."distinct_id" = $1
-                    AND "markettor_persondistinctid"."team_id" = $2
-                    AND "markettor_person"."team_id" = $2)
+            (SELECT "clairview_person"."properties"
+             FROM "clairview_person"
+             INNER JOIN "clairview_persondistinctid"
+             ON ("clairview_person"."id" = "clairview_persondistinctid"."person_id")
+             WHERE ("clairview_persondistinctid"."distinct_id" = $1
+                    AND "clairview_persondistinctid"."team_id" = $2
+                    AND "clairview_person"."team_id" = $2)
              LIMIT 1) as person_properties,
             
-            (SELECT json_object_agg("markettor_group"."group_type_index", "markettor_group"."group_properties")
-             FROM "markettor_group"
-             WHERE ("markettor_group"."team_id" = $2
-                    AND "markettor_group"."group_type_index" = ANY($3))) as group_properties
+            (SELECT json_object_agg("clairview_group"."group_type_index", "clairview_group"."group_properties")
+             FROM "clairview_group"
+             WHERE ("clairview_group"."team_id" = $2
+                    AND "clairview_group"."group_type_index" = ANY($3))) as group_properties
     "#;
 
     let group_type_indexes_vec: Vec<GroupTypeIndex> = group_type_indexes.iter().cloned().collect();
@@ -1065,12 +1065,12 @@ async fn fetch_person_properties_from_db(
     let mut conn = postgres_reader.as_ref().get_connection().await?;
 
     let query = r#"
-        SELECT "markettor_person"."properties" as person_properties
-        FROM "markettor_person"
-        INNER JOIN "markettor_persondistinctid" ON ("markettor_person"."id" = "markettor_persondistinctid"."person_id")
-        WHERE ("markettor_persondistinctid"."distinct_id" = $1
-                AND "markettor_persondistinctid"."team_id" = $2
-                AND "markettor_person"."team_id" = $2)
+        SELECT "clairview_person"."properties" as person_properties
+        FROM "clairview_person"
+        INNER JOIN "clairview_persondistinctid" ON ("clairview_person"."id" = "clairview_persondistinctid"."person_id")
+        WHERE ("clairview_persondistinctid"."distinct_id" = $1
+                AND "clairview_persondistinctid"."team_id" = $2
+                AND "clairview_person"."team_id" = $2)
         LIMIT 1
     "#;
 
@@ -1100,10 +1100,10 @@ async fn fetch_group_properties_from_db(
     let mut conn = postgres_reader.as_ref().get_connection().await?;
 
     let query = r#"
-        SELECT "markettor_group"."group_properties"
-        FROM "markettor_group"
-        WHERE ("markettor_group"."team_id" = $1
-                AND "markettor_group"."group_type_index" = $2)
+        SELECT "clairview_group"."group_properties"
+        FROM "clairview_group"
+        WHERE ("clairview_group"."team_id" = $1
+                AND "clairview_group"."group_type_index" = $2)
         LIMIT 1
     "#;
 
@@ -1129,7 +1129,7 @@ fn locally_computable_property_overrides(
     property_filters: &[PropertyFilter],
 ) -> Option<HashMap<String, Value>> {
     property_overrides.as_ref().and_then(|overrides| {
-        // TODO handle note from Neil: https://github.com/MarketTor/markettor/pull/24589#discussion_r1735828561
+        // TODO handle note from Neil: https://github.com/ClairView/clairview/pull/24589#discussion_r1735828561
         // TL;DR – we'll need to handle cohort properties at the DB level, i.e. we'll need to adjust the cohort query
         // to account for if a given person is an element of the cohort X, Y, Z, etc
         let should_prefer_overrides = property_filters
@@ -1164,7 +1164,7 @@ async fn get_feature_flag_hash_key_overrides(
 
     let person_and_distinct_id_query = r#"
             SELECT person_id, distinct_id 
-            FROM markettor_persondistinctid
+            FROM clairview_persondistinctid
             WHERE team_id = $1 AND distinct_id = ANY($2)
         "#;
 
@@ -1181,7 +1181,7 @@ async fn get_feature_flag_hash_key_overrides(
     // Get hash key overrides
     let hash_key_override_query = r#"
             SELECT feature_flag_key, hash_key, person_id 
-            FROM markettor_featureflaghashkeyoverride
+            FROM clairview_featureflaghashkeyoverride
             WHERE team_id = $1 AND person_id = ANY($2)
         "#;
 
@@ -1224,21 +1224,21 @@ async fn set_feature_flag_hash_key_overrides(
 
         let query = r#"
             WITH target_person_ids AS (
-                SELECT team_id, person_id FROM markettor_persondistinctid WHERE team_id = $1 AND
+                SELECT team_id, person_id FROM clairview_persondistinctid WHERE team_id = $1 AND
                 distinct_id = ANY($2)
             ),
             existing_overrides AS (
-                SELECT team_id, person_id, feature_flag_key, hash_key FROM markettor_featureflaghashkeyoverride
+                SELECT team_id, person_id, feature_flag_key, hash_key FROM clairview_featureflaghashkeyoverride
                 WHERE team_id = $1 AND person_id IN (SELECT person_id FROM target_person_ids)
             ),
             flags_to_override AS (
-                SELECT key FROM markettor_featureflag WHERE team_id = $1 AND ensure_experience_continuity = TRUE AND active = TRUE AND deleted = FALSE
+                SELECT key FROM clairview_featureflag WHERE team_id = $1 AND ensure_experience_continuity = TRUE AND active = TRUE AND deleted = FALSE
                 AND key NOT IN (SELECT feature_flag_key FROM existing_overrides)
             )
-            INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+            INSERT INTO clairview_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
                 SELECT team_id, person_id, key, $3
                 FROM flags_to_override, target_person_ids
-                WHERE EXISTS (SELECT 1 FROM markettor_person WHERE id = person_id AND team_id = $1)
+                WHERE EXISTS (SELECT 1 FROM clairview_person WHERE id = person_id AND team_id = $1)
             ON CONFLICT DO NOTHING
         "#;
 
@@ -1300,16 +1300,16 @@ async fn should_write_hash_key_override(
     let query = r#"
         WITH target_person_ids AS (
             SELECT team_id, person_id 
-            FROM markettor_persondistinctid
+            FROM clairview_persondistinctid
             WHERE team_id = $1 AND distinct_id = ANY($2)
         ),
         existing_overrides AS (
             SELECT team_id, person_id, feature_flag_key, hash_key 
-            FROM markettor_featureflaghashkeyoverride
+            FROM clairview_featureflaghashkeyoverride
             WHERE team_id = $1 AND person_id IN (SELECT person_id FROM target_person_ids)
         )
         SELECT key 
-        FROM markettor_featureflag
+        FROM clairview_featureflag
         WHERE team_id = $1 
             AND ensure_experience_continuity = TRUE 
             AND active = TRUE 
@@ -2721,7 +2721,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("fake@markettor.com"),
+                            value: json!("fake@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,
@@ -2732,7 +2732,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("test@markettor.com"),
+                            value: json!("test@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,
@@ -2770,7 +2770,7 @@ mod tests {
             postgres_reader.clone(),
             team.id,
             "test_id".to_string(),
-            Some(json!({"email": "test@markettor.com", "is_enabled": true})),
+            Some(json!({"email": "test@clairview.com", "is_enabled": true})),
         )
         .await
         .unwrap();
@@ -2835,7 +2835,7 @@ mod tests {
             postgres_reader.clone(),
             team.id,
             "test_id".to_string(),
-            Some(json!({"email": "test@markettor.com", "is_enabled": "true"})),
+            Some(json!({"email": "test@clairview.com", "is_enabled": "true"})),
         )
         .await
         .unwrap();
@@ -2850,7 +2850,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("fake@markettor.com"),
+                            value: json!("fake@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,
@@ -2861,7 +2861,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("test@markettor.com"),
+                            value: json!("test@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,
@@ -2924,7 +2924,7 @@ mod tests {
             postgres_reader.clone(),
             team.id,
             "test_id".to_string(),
-            Some(json!({"email": "test@markettor.com", "is_enabled": true})),
+            Some(json!({"email": "test@clairview.com", "is_enabled": true})),
         )
         .await
         .unwrap();
@@ -2939,7 +2939,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("fake@markettor.com"),
+                            value: json!("fake@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,
@@ -2950,7 +2950,7 @@ mod tests {
                     FlagGroupType {
                         properties: Some(vec![PropertyFilter {
                             key: "email".to_string(),
-                            value: json!("test@markettor.com"),
+                            value: json!("test@clairview.com"),
                             operator: Some(OperatorType::Exact),
                             prop_type: "person".to_string(),
                             group_type_index: None,

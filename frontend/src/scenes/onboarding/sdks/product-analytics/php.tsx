@@ -6,7 +6,7 @@ import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 function PHPCaptureSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.PHP}>
-            {"MarketTor::capture(array(\n    'distinctId' => 'test-user',\n    'event' => 'test-event'\n));"}
+            {"ClairView::capture(array(\n    'distinctId' => 'test-user',\n    'event' => 'test-event'\n));"}
         </CodeSnippet>
     )
 }

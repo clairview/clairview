@@ -1,4 +1,4 @@
-import { LemonLabel } from '@markettor/lemon-ui'
+import { LemonLabel } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useEffect } from 'react'
 import { ActionFilter } from 'scenes/insights/filters/ActionFilter/ActionFilter'

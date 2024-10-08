@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import SignupReferralSource from 'lib/components/SignupReferralSource'
@@ -60,11 +60,11 @@ export function SignupPanel2(): JSX.Element | null {
 
             <div className="text-center text-muted-alt">
                 By {!preflight?.demo ? 'creating an account' : 'entering the demo environment'}, you agree to our{' '}
-                <Link to={`https://markettor.com/terms?${UTM_TAGS}`} target="_blank">
+                <Link to={`https://clairview.com/terms?${UTM_TAGS}`} target="_blank">
                     Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link to={`https://markettor.com/privacy?${UTM_TAGS}`} target="_blank">
+                <Link to={`https://clairview.com/privacy?${UTM_TAGS}`} target="_blank">
                     Privacy Policy
                 </Link>
                 .

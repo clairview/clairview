@@ -1,5 +1,5 @@
-import { IconBug } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconBug } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { supportLogic } from 'lib/components/Support/supportLogic'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'

@@ -66,11 +66,11 @@ The three pages below are must-reads though. They're key to writing production-r
 1. If you now run tests, the locally-built version of `torql_parser` will be used:
 
     ```bash
-    pytest markettor/torql/
+    pytest clairview/torql/
     ```
 
 ## How to install dependencies on Ubuntu
 
 Antlr runtime provided in Ubuntu packages might be of an older version, which results in compilation errors.
 
-In that case run commands from [this step](https://github.com/MarketTor/markettor/blob/4fba6a63e351131fdb27b85e7ba436446fdb3093/.github/actions/run-backend-tests/action.yml#L100).
+In that case run commands from [this step](https://github.com/ClairView/clairview/blob/4fba6a63e351131fdb27b85e7ba436446fdb3093/.github/actions/run-backend-tests/action.yml#L100).

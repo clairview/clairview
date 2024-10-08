@@ -6,21 +6,21 @@ export const ifFossIt = !eeFolderExists ? it : it.skip
 export const ifEeDescribe = eeFolderExists ? describe : describe.skip
 export const ifFossDescribe = !eeFolderExists ? describe : describe.skip
 
-import markettorEE from '@markettor/ee/exports'
+import clairviewEE from '@clairview/ee/exports'
 
-import { MarketTorEE } from '../../@markettor/ee/types'
+import { ClairViewEE } from '../../@clairview/ee/types'
 
 describe('ee importing', () => {
-    let markettorEEModule: MarketTorEE
+    let clairviewEEModule: ClairViewEE
 
     beforeEach(async () => {
-        markettorEEModule = await markettorEE()
+        clairviewEEModule = await clairviewEE()
     })
     ifEeIt('should import actual ee code', () => {
-        expect(markettorEEModule.enabled).toBe(true)
+        expect(clairviewEEModule.enabled).toBe(true)
     })
 
     ifFossIt('should import actual ee code', () => {
-        expect(markettorEEModule.enabled).toBe(false)
+        expect(clairviewEEModule.enabled).toBe(false)
     })
 })

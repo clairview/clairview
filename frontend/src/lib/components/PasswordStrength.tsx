@@ -1,4 +1,4 @@
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { LemonProgress } from 'lib/lemon-ui/LemonProgress'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import zxcvbn from 'zxcvbn'

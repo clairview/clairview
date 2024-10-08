@@ -24,7 +24,7 @@ from .session_recordings import session_recording_playlist
 
 
 def extend_api_router() -> None:
-    from markettor.api import (
+    from clairview.api import (
         router as root_router,
         register_grandfathered_environment_nested_viewset,
         projects_router,

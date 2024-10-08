@@ -1,6 +1,6 @@
 {
-    "name": "MarketTor",
-    "short_name": "MarketTor",
+    "name": "ClairView",
+    "short_name": "ClairView",
     "icons": [
         {
             "src": "/static/icons/android-chrome-192x192.png?v=2023-07-07",

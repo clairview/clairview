@@ -4,12 +4,12 @@
         "paths": {
             "lib/*": ["src/lib/*"],
             "scenes/*": ["src/scenes/*"],
-            "@markettor/apps-common": ["@markettor/apps-common/src/index"],
-            "@markettor/apps-common/*": ["@markettor/apps-common/src/*"],
-            "@markettor/lemon-ui": ["@markettor/lemon-ui/src/index"],
-            "@markettor/lemon-ui/*": ["@markettor/lemon-ui/src/*"],
+            "@clairview/apps-common": ["@clairview/apps-common/src/index"],
+            "@clairview/apps-common/*": ["@clairview/apps-common/src/*"],
+            "@clairview/lemon-ui": ["@clairview/lemon-ui/src/index"],
+            "@clairview/lemon-ui/*": ["@clairview/lemon-ui/src/*"],
             "storybook/*": ["../.storybook/*"],
-            "@markettor/ee/exports": ["../ee/exports", "@markettor/ee/exports"],
+            "@clairview/ee/exports": ["../ee/exports", "@clairview/ee/exports"],
             "~/*": ["src/*"],
             "public/*": ["public/*"]
         },

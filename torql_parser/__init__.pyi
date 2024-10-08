@@ -1,5 +1,5 @@
-from markettor.torql.ast import SelectQuery, SelectUnionQuery, Program
-from markettor.torql.base import AST
+from clairview.torql.ast import SelectQuery, SelectUnionQuery, Program
+from clairview.torql.base import AST
 
 def parse_expr(expr: str, /, *, is_internal: bool = False) -> AST:
     """Parse the TorQL expression string into an AST.

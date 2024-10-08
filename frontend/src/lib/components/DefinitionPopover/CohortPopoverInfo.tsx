@@ -1,4 +1,4 @@
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { DefinitionPopover } from 'lib/components/DefinitionPopover/DefinitionPopover'
 import {

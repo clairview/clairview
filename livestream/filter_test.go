@@ -13,7 +13,7 @@ import (
 func TestNewFilter(t *testing.T) {
 	subChan := make(chan Subscription)
 	unSubChan := make(chan Subscription)
-	inboundChan := make(chan MarketTorEvent)
+	inboundChan := make(chan ClairViewEvent)
 
 	filter := NewFilter(subChan, unSubChan, inboundChan)
 
@@ -51,7 +51,7 @@ func TestUuidFromDistinctId(t *testing.T) {
 }
 
 func TestConvertToResponseGeoEvent(t *testing.T) {
-	event := MarketTorEvent{
+	event := ClairViewEvent{
 		Lat: 40.7128,
 		Lng: -74.0060,
 	}
@@ -63,9 +63,9 @@ func TestConvertToResponseGeoEvent(t *testing.T) {
 	assert.Equal(t, uint(1), result.Count)
 }
 
-func TestConvertToResponseMarketTorEvent(t *testing.T) {
+func TestConvertToResponseClairViewEvent(t *testing.T) {
 	timestamp := "2023-01-01T00:00:00Z"
-	event := MarketTorEvent{
+	event := ClairViewEvent{
 		Uuid:       "123",
 		Timestamp:  timestamp,
 		DistinctId: "user1",
@@ -73,7 +73,7 @@ func TestConvertToResponseMarketTorEvent(t *testing.T) {
 		Properties: map[string]interface{}{"url": "https://example.com"},
 	}
 
-	result := convertToResponseMarketTorEvent(event, 1)
+	result := convertToResponseClairViewEvent(event, 1)
 
 	assert.Equal(t, "123", result.Uuid)
 	assert.Equal(t, "2023-01-01T00:00:00Z", result.Timestamp)
@@ -86,7 +86,7 @@ func TestConvertToResponseMarketTorEvent(t *testing.T) {
 func TestFilterRun(t *testing.T) {
 	subChan := make(chan Subscription)
 	unSubChan := make(chan Subscription)
-	inboundChan := make(chan MarketTorEvent)
+	inboundChan := make(chan ClairViewEvent)
 
 	filter := NewFilter(subChan, unSubChan, inboundChan)
 
@@ -110,7 +110,7 @@ func TestFilterRun(t *testing.T) {
 
 	// Test event filtering
 	timestamp := "2023-01-01T00:00:00Z"
-	event := MarketTorEvent{
+	event := ClairViewEvent{
 		Uuid:       "123",
 		Timestamp:  timestamp,
 		DistinctId: "user1",
@@ -123,7 +123,7 @@ func TestFilterRun(t *testing.T) {
 	// Wait for event to be processed
 	select {
 	case receivedEvent := <-eventChan:
-		responseEvent, ok := receivedEvent.(ResponseMarketTorEvent)
+		responseEvent, ok := receivedEvent.(ResponseClairViewEvent)
 		require.True(t, ok)
 		assert.Equal(t, "123", responseEvent.Uuid)
 		assert.Equal(t, "user1", responseEvent.DistinctId)
@@ -144,7 +144,7 @@ func TestFilterRun(t *testing.T) {
 func TestFilterRunWithGeoEvent(t *testing.T) {
 	subChan := make(chan Subscription)
 	unSubChan := make(chan Subscription)
-	inboundChan := make(chan MarketTorEvent)
+	inboundChan := make(chan ClairViewEvent)
 
 	filter := NewFilter(subChan, unSubChan, inboundChan)
 
@@ -165,7 +165,7 @@ func TestFilterRunWithGeoEvent(t *testing.T) {
 	time.Sleep(10 * time.Millisecond)
 
 	// Test geo event filtering
-	event := MarketTorEvent{
+	event := ClairViewEvent{
 		Lat: 40.7128,
 		Lng: -74.0060,
 	}

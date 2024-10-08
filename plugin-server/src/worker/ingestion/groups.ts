@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 
 import { TeamId } from '../../types'
 import { GroupTypeManager } from './group-type-manager'

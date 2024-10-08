@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { Editor as TTEditor } from '@tiptap/core'
 import ExtensionDocument from '@tiptap/extension-document'
 import { FloatingMenu } from '@tiptap/extension-floating-menu'
@@ -9,7 +9,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useActions, useMountedLogic, useValues } from 'kea'
 import { sampleOne } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useCallback, useMemo, useRef } from 'react'
 
 import { NotebookNodeType } from '~/types'
@@ -138,7 +138,7 @@ export function Editor(): JSX.Element {
                     const properties = event.dataTransfer.getData('properties')
 
                     if (text.indexOf(window.location.origin) === 0 || node) {
-                        // MarketTor link - ensure this gets input as a proper link
+                        // ClairView link - ensure this gets input as a proper link
                         const coordinates = view.posAtCoords({ left: event.clientX, top: event.clientY })
 
                         if (!coordinates) {
@@ -153,8 +153,8 @@ export function Editor(): JSX.Element {
                                 .insertContent({ type: node, attrs: JSON.parse(properties) })
                                 .run()
 
-                            // We report this case, the pasted version is handled by the markettorNodePasteRule
-                            markettor.capture('notebook node dropped', { node_type: node })
+                            // We report this case, the pasted version is handled by the clairviewNodePasteRule
+                            clairview.capture('notebook node dropped', { node_type: node })
                         } else {
                             editor?.chain().focus().setTextSelection(coordinates.pos).run()
                             view.pasteText(text)
@@ -189,7 +189,7 @@ export function Editor(): JSX.Element {
                         }
 
                         editor.chain().focus().setTextSelection(coordinates.pos).insertContent(contentToAdd).run()
-                        markettor.capture('notebook files dropped', {
+                        clairview.capture('notebook files dropped', {
                             file_types: fileList.map((x) => x.type),
                         })
 
@@ -222,7 +222,7 @@ export function Editor(): JSX.Element {
                     }
 
                     editor.chain().focus().insertContent(contentToAdd).run()
-                    markettor.capture('notebook files pasted', {
+                    clairview.capture('notebook files pasted', {
                         file_types: fileList.map((x) => x.type),
                     })
 

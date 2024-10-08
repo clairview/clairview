@@ -7,11 +7,11 @@ import { CommonFilters, HeatmapFilters, HeatmapFixedPositionMode } from 'lib/com
 import {
     calculateViewportRange,
     DEFAULT_HEATMAP_FILTERS,
-    MarketTorAppToolbarEvent,
+    ClairViewAppToolbarEvent,
 } from 'lib/components/IframedToolbarBrowser/utils'
 import { LemonBannerProps } from 'lib/lemon-ui/LemonBanner'
 import { objectsEqual } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { RefObject } from 'react'
 
 import { TorQLQuery, NodeKind } from '~/queries/schema'
@@ -43,7 +43,7 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
         setBrowserSearch: (searchTerm: string) => ({ searchTerm }),
         setBrowserUrl: (url: string | null) => ({ url }),
         onIframeLoad: true,
-        sendToolbarMessage: (type: MarketTorAppToolbarEvent, payload?: Record<string, any>) => ({
+        sendToolbarMessage: (type: ClairViewAppToolbarEvent, payload?: Record<string, any>) => ({
             type,
             payload,
         }),
@@ -235,23 +235,23 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
         },
 
         patchHeatmapFilters: ({ filters }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS, { filters })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS, { filters })
         },
 
         setHeatmapFixedPositionMode: ({ mode }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE, {
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE, {
                 fixedPositionMode: mode,
             })
         },
 
         setHeatmapColorPalette: ({ Palette }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE, {
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE, {
                 colorPalette: Palette,
             })
         },
 
         setCommonFilters: ({ filters }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS, { commonFilters: filters })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS, { commonFilters: filters })
         },
 
         onIframeLoad: () => {
@@ -260,19 +260,19 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
             // but there's no slam dunk way to do that
 
             const init = (): void => {
-                actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_APP_INIT, {
+                actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_APP_INIT, {
                     filters: values.heatmapFilters,
                     colorPalette: values.heatmapColorPalette,
                     fixedPositionMode: values.heatmapFixedPositionMode,
                     commonFilters: values.commonFilters,
                 })
-                actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_CONFIG, {
+                actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_CONFIG, {
                     enabled: true,
                 })
             }
 
             const onIframeMessage = (e: MessageEvent): void => {
-                const type: MarketTorAppToolbarEvent = e?.data?.type
+                const type: ClairViewAppToolbarEvent = e?.data?.type
 
                 if (!type || !type.startsWith('ph-')) {
                     return
@@ -287,10 +287,10 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
                 }
 
                 switch (type) {
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_INIT:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_INIT:
                         return init()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_READY:
-                        markettor.capture('in-app heatmap frame loaded', {
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_READY:
+                        clairview.capture('in-app heatmap frame loaded', {
                             inapp_heatmap_page_url_visited: values.browserUrl,
                             inapp_heatmap_filters: values.heatmapFilters,
                             inapp_heatmap_color_palette: values.heatmapColorPalette,
@@ -298,18 +298,18 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
                         })
                         // reset loading tracking - if we're e.g. slow this will avoid a flash of warning message
                         return actions.startTrackingLoading()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING:
                         return actions.startTrackingLoading()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED:
-                        markettor.capture('in-app heatmap loaded', {
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED:
+                        clairview.capture('in-app heatmap loaded', {
                             inapp_heatmap_page_url_visited: values.browserUrl,
                             inapp_heatmap_filters: values.heatmapFilters,
                             inapp_heatmap_color_palette: values.heatmapColorPalette,
                             inapp_heatmap_fixed_position_mode: values.heatmapFixedPositionMode,
                         })
                         return actions.stopTrackingLoading()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED:
-                        markettor.capture('in-app heatmap failed', {
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED:
+                        clairview.capture('in-app heatmap failed', {
                             inapp_heatmap_page_url_visited: values.browserUrl,
                             inapp_heatmap_filters: values.heatmapFilters,
                             inapp_heatmap_color_palette: values.heatmapColorPalette,
@@ -319,7 +319,7 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
                         actions.setIframeBanner({ level: 'error', message: 'The heatmap failed to load.' })
                         return
                     default:
-                        console.warn(`[MarketTor Heatmaps] Received unknown child window message: ${type}`)
+                        console.warn(`[ClairView Heatmaps] Received unknown child window message: ${type}`)
                 }
             }
 

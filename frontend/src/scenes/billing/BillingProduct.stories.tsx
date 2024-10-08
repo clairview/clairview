@@ -71,10 +71,10 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
         description: 'Import external data and query it alongside your analytics data.',
         price_description: null,
         usage_key: 'rows_synced',
-        image_url: 'https://markettor.com/images/product/product-icons/data-warehouse.svg',
+        image_url: 'https://clairview.com/images/product/product-icons/data-warehouse.svg',
         screenshot_url: null,
         icon_key: 'IconBuilding',
-        docs_url: 'https://markettor.com/docs/data-warehouse',
+        docs_url: 'https://clairview.com/docs/data-warehouse',
         subscribed: false,
         plans: [
             {
@@ -82,8 +82,8 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
                 product_key: 'data_warehouse',
                 name: 'Free (beta)',
                 description: 'Import external data and query it alongside your analytics data.',
-                image_url: 'https://markettor.com/images/product/product-icons/data-warehouse.svg',
-                docs_url: 'https://markettor.com/docs/data-warehouse',
+                image_url: 'https://clairview.com/images/product/product-icons/data-warehouse.svg',
+                docs_url: 'https://clairview.com/docs/data-warehouse',
                 note: null,
                 unit: 'row',
                 flat_rate: false,
@@ -121,7 +121,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
                         key: 'data_warehouse_joins',
                         name: 'Cross-source joins',
                         description:
-                            'Join data from any source, including your MarketTor analytics data, to easily get the answers you need.',
+                            'Join data from any source, including your ClairView analytics data, to easily get the answers you need.',
                         unit: null,
                         limit: null,
                         note: null,
@@ -130,7 +130,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
                     {
                         key: 'data_warehouse_unified_querying',
                         name: 'Unified querying',
-                        description: 'Query all your business and product data directly inside MarketTor.',
+                        description: 'Query all your business and product data directly inside ClairView.',
                         unit: null,
                         limit: null,
                         note: null,
@@ -140,7 +140,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
                         key: 'data_warehouse_insights_visualization',
                         name: 'Data visualization',
                         description:
-                            'Create insights from the data you import and add them to your MarketTor dashboards.',
+                            'Create insights from the data you import and add them to your ClairView dashboards.',
                         unit: null,
                         limit: null,
                         note: null,
@@ -220,7 +220,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
                 key: 'data_warehouse_joins',
                 name: 'Cross-source joins',
                 description:
-                    'Join data from any source, including your MarketTor analytics data, to easily get the answers you need.',
+                    'Join data from any source, including your ClairView analytics data, to easily get the answers you need.',
                 images: null,
                 icon_key: null,
                 type: null,
@@ -228,7 +228,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
             {
                 key: 'data_warehouse_unified_querying',
                 name: 'Unified querying',
-                description: 'Query all your business and product data directly inside MarketTor.',
+                description: 'Query all your business and product data directly inside ClairView.',
                 images: null,
                 icon_key: null,
                 type: null,
@@ -236,7 +236,7 @@ export const BillingProductTemporarilyFree = (): JSX.Element => {
             {
                 key: 'data_warehouse_insights_visualization',
                 name: 'Data visualization',
-                description: 'Create insights from the data you import and add them to your MarketTor dashboards.',
+                description: 'Create insights from the data you import and add them to your ClairView dashboards.',
                 images: null,
                 icon_key: null,
                 type: null,

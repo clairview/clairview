@@ -9,7 +9,7 @@ describe('Redirect to other subdomain if logged in', () => {
 
         cy.visit(`/login?next=${redirect_path}`)
 
-        cy.setCookie('ph_current_instance', `"eu.markettor.com"`)
+        cy.setCookie('ph_current_instance', `"eu.clairview.com"`)
         cy.setCookie('is-logged-in', '1')
         cy.reload()
 
@@ -29,7 +29,7 @@ describe('Redirect to other subdomain if logged in', () => {
 
         cy.visit(`/login?next=${redirect_path}`)
 
-        cy.setCookie('ph_current_instance', `"us.markettor.com"`)
+        cy.setCookie('ph_current_instance', `"us.clairview.com"`)
         cy.setCookie('is-logged-in', '1')
         cy.reload()
 

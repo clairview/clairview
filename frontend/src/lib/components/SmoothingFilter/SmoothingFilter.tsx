@@ -1,5 +1,5 @@
-import { IconPulse } from '@markettor/icons'
-import { LemonSelect } from '@markettor/lemon-ui'
+import { IconPulse } from '@clairview/icons'
+import { LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { insightLogic } from 'scenes/insights/insightLogic'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'

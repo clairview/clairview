@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconFeedback } from 'lib/lemon-ui/icons'
 import { funnelDataLogic } from 'scenes/funnels/funnelDataLogic'

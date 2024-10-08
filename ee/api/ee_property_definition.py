@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from django.utils import timezone
 from ee.models.property_definition import EnterprisePropertyDefinition
-from markettor.api.shared import UserBasicSerializer
-from markettor.api.tagged_item import TaggedItemSerializerMixin
-from markettor.models import PropertyDefinition
-from markettor.models.activity_logging.activity_log import (
+from clairview.api.shared import UserBasicSerializer
+from clairview.api.tagged_item import TaggedItemSerializerMixin
+from clairview.models import PropertyDefinition
+from clairview.models.activity_logging.activity_log import (
     dict_changes_between,
     log_activity,
     Detail,

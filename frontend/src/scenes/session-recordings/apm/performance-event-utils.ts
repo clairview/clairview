@@ -1,11 +1,11 @@
 import { eventWithTime } from '@rrweb/types'
 import { getSeriesBackgroundColor, getSeriesColor } from 'lib/colors'
 import { humanizeBytes } from 'lib/utils'
-import { CapturedNetworkRequest } from 'markettor-js'
+import { CapturedNetworkRequest } from 'clairview-js'
 
 import { PerformanceEvent } from '~/types'
 
-const NETWORK_PLUGIN_NAME = 'markettor/network@1'
+const NETWORK_PLUGIN_NAME = 'clairview/network@1'
 const RRWEB_NETWORK_PLUGIN_NAME = 'rrweb/network@1'
 
 export const PerformanceEventReverseMapping: { [key: number]: keyof PerformanceEvent } = {
@@ -224,9 +224,9 @@ export function mapRRWebNetworkRequest(
 }
 
 export function getPerformanceEvents(snapshotsByWindowId: Record<string, eventWithTime[]>): PerformanceEvent[] {
-    // we only support rrweb/network@1 events or markettor/network@1 events in any one recording
+    // we only support rrweb/network@1 events or clairview/network@1 events in any one recording
     // apart from during testing, where we might have both
-    // if we have both, we only display markettor/network@1 events
+    // if we have both, we only display clairview/network@1 events
     const events: PerformanceEvent[] = []
     const rrwebEvents: PerformanceEvent[] = []
 

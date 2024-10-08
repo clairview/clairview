@@ -1,4 +1,4 @@
-import { LemonSelect } from '@markettor/lemon-ui'
+import { LemonSelect } from '@clairview/lemon-ui'
 
 import { Survey, SurveyType } from '~/types'
 

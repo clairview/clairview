@@ -1,5 +1,5 @@
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton, LemonInput, LemonTag } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton, LemonInput, LemonTag } from '@clairview/lemon-ui'
 import algoliasearch from 'algoliasearch/lite'
 import { useActions } from 'kea'
 import { useEffect, useRef, useState } from 'react'
@@ -19,7 +19,7 @@ const rowRenderer = ({ key, index, style, hits, activeOption }: any): JSX.Elemen
         <li key={key} style={style} role="listitem" tabIndex={-1} className="p-1 border-b last:border-b-0">
             <LemonButton
                 active={activeOption === index}
-                to={`https://markettor.com/${slug}`}
+                to={`https://clairview.com/${slug}`}
                 className="[&_>span>span]:flex-col [&_>span>span]:items-start [&_>span>span]:space-y-1"
             >
                 <span>
@@ -165,7 +165,7 @@ const Search = (): JSX.Element => {
         switch (e.key) {
             case 'Enter': {
                 if (activeOption !== undefined) {
-                    openSidePanel(SidePanelTab.Docs, `https://markettor.com/${hits[activeOption].slug}`)
+                    openSidePanel(SidePanelTab.Docs, `https://clairview.com/${hits[activeOption].slug}`)
                 }
                 break
             }
@@ -261,7 +261,7 @@ const Search = (): JSX.Element => {
 
 export default function AlgoliaSearch(): JSX.Element {
     return (
-        <InstantSearch searchClient={searchClient} indexName="prod_markettor_com">
+        <InstantSearch searchClient={searchClient} indexName="prod_clairview_com">
             <Search />
         </InstantSearch>
     )

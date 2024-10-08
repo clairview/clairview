@@ -1,5 +1,5 @@
-import { IconPencil, IconSearch } from '@markettor/icons'
-import { LemonModal } from '@markettor/lemon-ui'
+import { IconPencil, IconSearch } from '@clairview/icons'
+import { LemonModal } from '@clairview/lemon-ui'
 import { router } from 'kea-router'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'

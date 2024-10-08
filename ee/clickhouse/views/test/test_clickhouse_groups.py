@@ -3,12 +3,12 @@ from uuid import UUID
 
 from freezegun.api import freeze_time
 
-from markettor.models import GroupTypeMapping, Person
-from markettor.models.group.util import create_group
-from markettor.models.organization import Organization
-from markettor.models.sharing_configuration import SharingConfiguration
-from markettor.models.team.team import Team
-from markettor.test.base import (
+from clairview.models import GroupTypeMapping, Person
+from clairview.models.group.util import create_group
+from clairview.models.organization import Organization
+from clairview.models.sharing_configuration import SharingConfiguration
+from clairview.models.team.team import Team
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,

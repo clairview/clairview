@@ -4,19 +4,19 @@ from typing import Optional, Union
 
 from django.utils.timezone import now
 
-from markettor.client import sync_execute
-from markettor.models import Team
-from markettor.models.filters.utils import validate_group_type_index
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.property import GroupTypeIndex
-from markettor.queries.actor_base_query import (
+from clairview.client import sync_execute
+from clairview.models import Team
+from clairview.models.filters.utils import validate_group_type_index
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.property import GroupTypeIndex
+from clairview.queries.actor_base_query import (
     SerializedActor,
     SerializedGroup,
     SerializedPerson,
     get_groups,
     get_serialized_people,
 )
-from markettor.queries.person_distinct_id_query import get_team_distinct_ids_query
+from clairview.queries.person_distinct_id_query import get_team_distinct_ids_query
 
 
 class RelatedActorsQuery:

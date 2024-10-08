@@ -1,4 +1,4 @@
-import { IconLive } from '@markettor/icons'
+import { IconLive } from '@clairview/icons'
 import { useValues } from 'kea'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import { humanFriendlyLargeNumber, humanFriendlyNumber } from 'lib/utils'

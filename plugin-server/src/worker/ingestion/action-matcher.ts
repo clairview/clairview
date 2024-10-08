@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import { captureException } from '@sentry/node'
 import escapeStringRegexp from 'escape-string-regexp'
 import equal from 'fast-deep-equal'
@@ -61,7 +61,7 @@ export function castingCompare(
     // Do null transformation first
     // Clickhouse treats the string "null" as null, while here we treat them as different values
     // Thus, this check special cases the string "null" to be equal to the null value
-    // See more: https://github.com/MarketTor/markettor/issues/12893
+    // See more: https://github.com/ClairView/clairview/issues/12893
     if (a === null) {
         a = 'null'
     }
@@ -399,12 +399,12 @@ export class ActionMatcher {
             PostgresUse.COMMON_READ,
             `
         SELECT count(1) AS count
-        FROM markettor_cohortpeople
-        JOIN markettor_cohort ON (markettor_cohort.id = markettor_cohortpeople.cohort_id)
-        JOIN (SELECT * FROM markettor_person where team_id = $3) AS markettor_person_in_team ON (markettor_cohortpeople.person_id = markettor_person_in_team.id)
+        FROM clairview_cohortpeople
+        JOIN clairview_cohort ON (clairview_cohort.id = clairview_cohortpeople.cohort_id)
+        JOIN (SELECT * FROM clairview_person where team_id = $3) AS clairview_person_in_team ON (clairview_cohortpeople.person_id = clairview_person_in_team.id)
         WHERE cohort_id=$1
-          AND markettor_person_in_team.uuid=$2
-          AND markettor_cohortpeople.version IS NOT DISTINCT FROM markettor_cohort.version
+          AND clairview_person_in_team.uuid=$2
+          AND clairview_cohortpeople.version IS NOT DISTINCT FROM clairview_cohort.version
         `,
             [cohortId, personUuid, teamId],
             'doesPersonBelongToCohort'

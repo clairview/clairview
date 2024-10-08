@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import * as Sentry from '@sentry/node'
 import { randomBytes } from 'crypto'
 import { DateTime } from 'luxon'
@@ -168,7 +168,7 @@ export class UUID {
  *
  * Loosely based on [Segment's KSUID](https://github.com/segmentio/ksuid) and
  * on [Twitter's snowflake ID](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.html).
- * Ported from the MarketTor Django app.
+ * Ported from the ClairView Django app.
  */
 export class UUIDT extends UUID {
     static currentSeriesPerMs: Map<number, number> = new Map()
@@ -541,23 +541,23 @@ export async function sleep(ms: number): Promise<void> {
 // Values of the $lib property that have been seen in the wild
 export const KNOWN_LIB_VALUES = new Set([
     'web',
-    'markettor-python',
+    'clairview-python',
     '',
     'js',
-    'markettor-node',
-    'markettor-react-native',
-    'markettor-ruby',
-    'markettor-ios',
-    'markettor-android',
+    'clairview-node',
+    'clairview-react-native',
+    'clairview-ruby',
+    'clairview-ios',
+    'clairview-android',
     'Segment',
-    'markettor-go',
+    'clairview-go',
     'analytics-node',
     'RudderLabs JavaScript SDK',
     'mobile',
-    'markettor-php',
+    'clairview-php',
     'zapier',
     'Webflow',
-    'markettor-flutter',
+    'clairview-flutter',
     'com.rudderstack.android.sdk.core',
     'rudder-analytics-python',
     'rudder-ios-library',
@@ -579,11 +579,11 @@ export const KNOWN_LIB_VALUES = new Set([
     'Product',
     'com.rudderstack.android.sdk',
     'net-gibraltar',
-    'markettor-java',
+    'clairview-java',
     'rudderanalytics-ruby',
     'GSHEETS_AIRBYTE',
-    'markettor-plugin-server',
-    'DotMarketTor',
+    'clairview-plugin-server',
+    'DotClairView',
     'analytics-go',
     'serverless',
     'wordpress',

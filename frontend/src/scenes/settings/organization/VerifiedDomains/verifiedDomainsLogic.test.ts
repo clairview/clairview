@@ -23,7 +23,7 @@ describe('verifiedDomainsLogic', () => {
                     results: [
                         {
                             id: '8db3b0c2-a0ab-490a-9037-14f3358a81bc',
-                            domain: 'my.markettor.com',
+                            domain: 'my.clairview.com',
                             jit_provisioning_enabled: true,
                             sso_enforcement: 'google-oauth2',
                             is_verified: true,
@@ -31,7 +31,7 @@ describe('verifiedDomainsLogic', () => {
                         },
                         {
                             id: 'id_will_be_deleted',
-                            domain: 'temp.markettor.com',
+                            domain: 'temp.clairview.com',
                             jit_provisioning_enabled: false,
                             sso_enforcement: '',
                             is_verified: false,
@@ -43,7 +43,7 @@ describe('verifiedDomainsLogic', () => {
             post: {
                 '/api/organizations/:organization/domains/': {
                     id: '14f3358a-a0ab-490a-9037-81a0abc',
-                    domain: 'new.markettor.com',
+                    domain: 'new.clairview.com',
                     jit_provisioning_enabled: false,
                     sso_enforcement: '',
                     is_verified: false,
@@ -92,11 +92,11 @@ describe('verifiedDomainsLogic', () => {
 
         it('creates domain correctly', async () => {
             await expectLogic(logic).toFinishAllListeners()
-            logic.actions.addVerifiedDomain('new.markettor.com')
+            logic.actions.addVerifiedDomain('new.clairview.com')
             await expectLogic(logic).toFinishAllListeners()
             const { verifiedDomains } = logic.values
             expect(verifiedDomains.length).toEqual(3)
-            expect(verifiedDomains[0].domain).toEqual('new.markettor.com') // added at the top
+            expect(verifiedDomains[0].domain).toEqual('new.clairview.com') // added at the top
         })
 
         it('deletes domain correctly', async () => {

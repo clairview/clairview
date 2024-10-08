@@ -1,7 +1,7 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { EarlyAccessFeatureStage, EarlyAccessFeatureType, NotebookNodeType } from '~/types'
 import { BindLogic, useActions, useValues } from 'kea'
-import { LemonDivider, LemonTag } from '@markettor/lemon-ui'
+import { LemonDivider, LemonTag } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -14,7 +14,7 @@ import { PersonList } from 'scenes/early-access-features/EarlyAccessFeature'
 import { buildFlagContent } from './NotebookNodeFlag'
 import { useEffect } from 'react'
 import { NotFound } from 'lib/components/NotFound'
-import { IconFlag, IconRocket } from '@markettor/icons'
+import { IconFlag, IconRocket } from '@clairview/icons'
 
 const Component = ({ attributes }: NotebookNodeProps<NotebookNodeEarlyAccessAttributes>): JSX.Element => {
     const { id } = attributes
@@ -118,7 +118,7 @@ type NotebookNodeEarlyAccessAttributes = {
     id: EarlyAccessFeatureLogicProps['id']
 }
 
-export const NotebookNodeEarlyAccessFeature = createMarketTorWidgetNode<NotebookNodeEarlyAccessAttributes>({
+export const NotebookNodeEarlyAccessFeature = createClairViewWidgetNode<NotebookNodeEarlyAccessAttributes>({
     nodeType: NotebookNodeType.EarlyAccessFeature,
     titlePlaceholder: 'Early Access Management',
     Component,

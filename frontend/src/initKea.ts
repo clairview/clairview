@@ -120,7 +120,7 @@ export function initKea({ routerHistory, routerLocation, beforePlugins }: InitKe
 
     if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
         // eslint-disable-next-line no-console
-        console.log('NB Redux Dev Tools are disabled on MarketTor. See: https://github.com/MarketTor/markettor/issues/17482')
+        console.log('NB Redux Dev Tools are disabled on ClairView. See: https://github.com/ClairView/clairview/issues/17482')
     }
 
     resetContext({

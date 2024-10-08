@@ -1,4 +1,4 @@
-import { LemonBanner, LemonDialog } from '@markettor/lemon-ui'
+import { LemonBanner, LemonDialog } from '@clairview/lemon-ui'
 import { actions, afterMount, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
 import { loaders } from 'kea-loaders'
@@ -13,7 +13,7 @@ import { OrganizationBasicType, PersonalAPIKeyType, TeamBasicType } from '~/type
 
 import type { personalAPIKeysLogicType } from './personalAPIKeysLogicType'
 
-export const MAX_API_KEYS_PER_USER = 10 // Same as in markettor/api/personal_api_key.py
+export const MAX_API_KEYS_PER_USER = 10 // Same as in clairview/api/personal_api_key.py
 
 export const API_KEY_SCOPE_PRESETS = [
     { value: 'local_evaluation', label: 'Local feature flag evaluation', scopes: ['feature_flag:read'] },

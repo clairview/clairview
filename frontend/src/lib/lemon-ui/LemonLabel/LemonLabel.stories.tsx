@@ -1,4 +1,4 @@
-import { LemonModal } from '@markettor/lemon-ui'
+import { LemonModal } from '@clairview/lemon-ui'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
@@ -13,7 +13,7 @@ const meta: Meta<typeof LemonLabel> = {
             description: {
                 component: `
 
-[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/MarketTor-Design-System-One?node-id=3139%3A1388)
+[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/ClairView-Design-System-One?node-id=3139%3A1388)
 
 Lemon Labels provide common styling and options for labeling form elements. They can be used directly but most commonly should be used via the \`Field\` component.
 

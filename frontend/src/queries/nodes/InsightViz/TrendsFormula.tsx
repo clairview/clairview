@@ -1,4 +1,4 @@
-import { LemonInput } from '@markettor/lemon-ui'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useEffect, useState } from 'react'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'

@@ -1,4 +1,4 @@
-import { IconGear } from '@markettor/icons'
+import { IconGear } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { IntervalFilterStandalone } from 'lib/components/IntervalFilter'
 import { ProductIntroduction } from 'lib/components/ProductIntroduction/ProductIntroduction'
@@ -495,7 +495,7 @@ export const WebGoalsTile = ({
                 thingName="action"
                 isEmpty={true}
                 description="Use actions to combine events that you want to have tracked together or to make detailed Autocapture events easier to reuse."
-                docsURL="https://markettor.com/docs/data/actions"
+                docsURL="https://clairview.com/docs/data/actions"
                 actionElementOverride={
                     <NewActionButton onSelectOption={() => updateHasSeenProductIntroFor(ProductKey.ACTIONS, true)} />
                 }

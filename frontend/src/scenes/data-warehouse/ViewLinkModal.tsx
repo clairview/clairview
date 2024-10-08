@@ -1,6 +1,6 @@
 import './ViewLinkModal.scss'
 
-import { IconCollapse, IconExpand } from '@markettor/icons'
+import { IconCollapse, IconExpand } from '@clairview/icons'
 import {
     LemonButton,
     LemonDivider,
@@ -9,7 +9,7 @@ import {
     LemonModal,
     LemonSelect,
     LemonTag,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'

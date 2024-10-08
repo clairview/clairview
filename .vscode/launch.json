@@ -26,7 +26,7 @@
             },
             "env": {
                 "LOCAL_HTTPS": "1",
-                "JS_URL": "https://secure.markettor.dev"
+                "JS_URL": "https://secure.clairview.dev"
             }
         },
         {
@@ -39,14 +39,14 @@
             "django": true,
             "env": {
                 "PYTHONUNBUFFERED": "1",
-                "DJANGO_SETTINGS_MODULE": "markettor.settings",
+                "DJANGO_SETTINGS_MODULE": "clairview.settings",
                 "DEBUG": "1",
                 "CLICKHOUSE_SECURE": "False",
                 "KAFKA_HOSTS": "localhost",
-                "DATABASE_URL": "postgres://markettor:markettor@localhost:5432/markettor",
+                "DATABASE_URL": "postgres://clairview:clairview@localhost:5432/clairview",
                 "SKIP_SERVICE_VERSION_REQUIREMENTS": "1",
                 "PRINT_SQL": "1",
-                "BILLING_SERVICE_URL": "https://billing.dev.markettor.dev",
+                "BILLING_SERVICE_URL": "https://billing.dev.clairview.dev",
                 "CLOUD_DEPLOYMENT": "dev"
             },
             "envFile": "${workspaceFolder}/.env",
@@ -66,11 +66,11 @@
             "django": true,
             "env": {
                 "PYTHONUNBUFFERED": "1",
-                "DJANGO_SETTINGS_MODULE": "markettor.settings",
+                "DJANGO_SETTINGS_MODULE": "clairview.settings",
                 "DEBUG": "1",
                 "CLICKHOUSE_SECURE": "False",
                 "KAFKA_HOSTS": "localhost",
-                "DATABASE_URL": "postgres://markettor:markettor@localhost:5432/markettor",
+                "DATABASE_URL": "postgres://clairview:clairview@localhost:5432/clairview",
                 "SKIP_SERVICE_VERSION_REQUIREMENTS": "1",
                 "PRINT_SQL": "1",
                 "BILLING_SERVICE_URL": "http://localhost:8100/",
@@ -89,7 +89,7 @@
             "justMyCode": true,
             "autoReload": {
                 "enable": true,
-                "include": ["markettor/**/*.py"]
+                "include": ["clairview/**/*.py"]
             },
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
@@ -99,7 +99,7 @@
             "env": {
                 "SKIP_ASYNC_MIGRATIONS_SETUP": "0",
                 "DEBUG": "1",
-                "BILLING_SERVICE_URL": "https://billing.dev.markettor.dev",
+                "BILLING_SERVICE_URL": "https://billing.dev.clairview.dev",
                 "SKIP_SERVICE_VERSION_REQUIREMENTS": "1"
             },
             "presentation": {
@@ -114,7 +114,7 @@
             "cwd": "${workspaceFolder}/plugin-server",
             "env": {
                 "CLICKHOUSE_SECURE": "False",
-                "DATABASE_URL": "postgres://markettor:markettor@localhost:5432/markettor",
+                "DATABASE_URL": "postgres://clairview:clairview@localhost:5432/clairview",
                 "KAFKA_HOSTS": "localhost:9092",
                 "WORKER_CONCURRENCY": "2",
                 "OBJECT_STORAGE_ENABLED": "True",
@@ -136,11 +136,11 @@
             "django": true,
             "env": {
                 "PYTHONUNBUFFERED": "1",
-                "DJANGO_SETTINGS_MODULE": "markettor.settings",
+                "DJANGO_SETTINGS_MODULE": "clairview.settings",
                 "DEBUG": "1",
                 "CLICKHOUSE_SECURE": "False",
                 "KAFKA_HOSTS": "localhost",
-                "DATABASE_URL": "postgres://markettor:markettor@localhost:5432/markettor",
+                "DATABASE_URL": "postgres://clairview:clairview@localhost:5432/clairview",
                 "SKIP_SERVICE_VERSION_REQUIREMENTS": "1",
                 "PRINT_SQL": "1"
             },
@@ -163,7 +163,7 @@
             "name": "(lldb) Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "/Users/twixes/.pyenv/versions/3.10.10/envs/markettor-3.10/bin/python",
+            "program": "/Users/twixes/.pyenv/versions/3.10.10/envs/clairview-3.10/bin/python",
             "MIMode": "lldb"
         },
         {
@@ -187,7 +187,7 @@
     ],
     "compounds": [
         {
-            "name": "MarketTor",
+            "name": "ClairView",
             "configurations": ["Backend", "Celery Threaded Pool", "Frontend", "Plugin Server", "Temporal Worker"],
             "stopAll": true,
             "presentation": {
@@ -196,7 +196,7 @@
             }
         },
         {
-            "name": "MarketTor (local billing)",
+            "name": "ClairView (local billing)",
             "configurations": [
                 "Backend (with local billing)",
                 "Celery Threaded Pool",
@@ -211,7 +211,7 @@
             }
         },
         {
-            "name": "MarketTor (https)",
+            "name": "ClairView (https)",
             "configurations": [
                 "Backend",
                 "Celery Threaded Pool",

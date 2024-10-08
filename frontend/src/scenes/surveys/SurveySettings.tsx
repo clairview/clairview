@@ -1,4 +1,4 @@
-import { LemonSwitch, Link } from '@markettor/lemon-ui'
+import { LemonSwitch, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonDialog } from 'lib/lemon-ui/LemonDialog'
 import { teamLogic } from 'scenes/teamLogic'
@@ -31,16 +31,16 @@ export function SurveySettings({ inModal = false }: SurveySettingsProps): JSX.El
 
                 <p>
                     Please note your website needs to have the{' '}
-                    <Link to={urls.settings('project', 'snippet')}>MarketTor snippet</Link> or at least version 1.81.1 of{' '}
+                    <Link to={urls.settings('project', 'snippet')}>ClairView snippet</Link> or at least version 1.81.1 of{' '}
                     <Link
-                        to="https://markettor.com/docs/libraries/js?utm_campaign=surveys&utm_medium=in-product"
+                        to="https://clairview.com/docs/libraries/js?utm_campaign=surveys&utm_medium=in-product"
                         target="_blank"
                     >
-                        markettor-js
+                        clairview-js
                     </Link>{' '}
                     directly installed. For more details, check out our{' '}
                     <Link
-                        to="https://markettor.com/docs/surveys/installation?utm_campaign=surveys&utm_medium=in-product"
+                        to="https://clairview.com/docs/surveys/installation?utm_campaign=surveys&utm_medium=in-product"
                         target="_blank"
                     >
                         docs

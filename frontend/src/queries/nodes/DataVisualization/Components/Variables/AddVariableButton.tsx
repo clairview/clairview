@@ -1,5 +1,5 @@
-import { IconPlus } from '@markettor/icons'
-import { LemonButton, LemonMenu } from '@markettor/lemon-ui'
+import { IconPlus } from '@clairview/icons'
+import { LemonButton, LemonMenu } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'

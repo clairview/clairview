@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
@@ -33,7 +33,7 @@ export function ConfigureSAMLModal(): JSX.Element {
                 </LemonModal.Header>
                 <LemonModal.Content className="space-y-2">
                     <p>
-                        <Link to="https://markettor.com/docs/data/sso#setting-up-saml" target="_blank" targetBlankIcon>
+                        <Link to="https://clairview.com/docs/data/sso#setting-up-saml" target="_blank" targetBlankIcon>
                             Read the docs
                         </Link>
                     </p>

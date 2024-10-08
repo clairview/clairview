@@ -2,13 +2,13 @@ import openai
 
 from prometheus_client import Histogram
 
-from markettor.api.activity_log import ServerTimingsGathered
-from markettor.models import User, Team
-from markettor.session_recordings.models.session_recording import SessionRecording
+from clairview.api.activity_log import ServerTimingsGathered
+from clairview.models import User, Team
+from clairview.session_recordings.models.session_recording import SessionRecording
 
-from markettor.session_recordings.queries.session_replay_events import SessionReplayEvents
+from clairview.session_recordings.queries.session_replay_events import SessionReplayEvents
 
-from markettor.utils import get_instance_region
+from clairview.utils import get_instance_region
 
 from ee.session_recordings.ai.utils import (
     SessionSummaryPromptData,
@@ -19,7 +19,7 @@ from ee.session_recordings.ai.utils import (
 )
 
 TOKENS_IN_PROMPT_HISTOGRAM = Histogram(
-    "markettor_session_summary_tokens_in_prompt_histogram",
+    "clairview_session_summary_tokens_in_prompt_histogram",
     "histogram of the number of tokens in the prompt used to generate a session summary",
     buckets=[
         0,
@@ -96,7 +96,7 @@ def summarize_recording(recording: SessionRecording, user: User, team: Team):
                 {
                     "role": "system",
                     "content": """
-            Session Replay is MarketTor's tool to record visits to web sites and apps.
+            Session Replay is ClairView's tool to record visits to web sites and apps.
             We also gather events that occur like mouse clicks and key presses.
             You write two or three sentence concise and simple summaries of those sessions based on a prompt.
             You are more likely to mention errors or things that look like business success such as checkout events.
@@ -111,7 +111,7 @@ def summarize_recording(recording: SessionRecording, user: User, team: Team):
                 {
                     "role": "user",
                     "content": f"""
-            URLs associated with the events can be found in this mapping {prompt_data.url_mapping}. You never refer to URLs by their placeholder. Always refer to the URL with the simplest version e.g. markettor.com or markettor.com/replay
+            URLs associated with the events can be found in this mapping {prompt_data.url_mapping}. You never refer to URLs by their placeholder. Always refer to the URL with the simplest version e.g. clairview.com or clairview.com/replay
             """,
                 },
                 {

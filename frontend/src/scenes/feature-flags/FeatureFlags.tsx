@@ -1,5 +1,5 @@
-import { IconLock } from '@markettor/icons'
-import { LemonDialog, LemonInput, LemonSelect, LemonTag } from '@markettor/lemon-ui'
+import { IconLock } from '@clairview/icons'
+import { LemonDialog, LemonInput, LemonSelect, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
@@ -270,7 +270,7 @@ export function OverViewTab({
                 productKey={ProductKey.FEATURE_FLAGS}
                 thingName="feature flag"
                 description="Use feature flags to safely deploy and roll back new features in an easy-to-manage way. Roll variants out to certain groups, a percentage of users, or everyone all at once."
-                docsURL="https://markettor.com/docs/feature-flags/manual"
+                docsURL="https://clairview.com/docs/feature-flags/manual"
                 action={() => router.actions.push(urls.featureFlag('new'))}
                 isEmpty={shouldShowEmptyState}
                 customHog={FeatureFlagHog}

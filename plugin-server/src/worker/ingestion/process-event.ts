@@ -1,5 +1,5 @@
-import ClickHouse from '@markettor/clickhouse'
-import { PluginEvent, Properties } from '@markettor/plugin-scaffold'
+import ClickHouse from '@clairview/clickhouse'
+import { PluginEvent, Properties } from '@clairview/plugin-scaffold'
 import * as Sentry from '@sentry/node'
 import { DateTime } from 'luxon'
 import { Counter, Summary } from 'prom-client'
@@ -116,7 +116,7 @@ export class EventsProcessor {
         /*
         We're deprecating $elements in favor of $elements_chain, which doesn't require extra
         processing on the ingestion side and is the way we store elements in ClickHouse.
-        As part of that we'll move markettor-js to send us $elements_chain as string directly,
+        As part of that we'll move clairview-js to send us $elements_chain as string directly,
         but we still need to support the old way of sending $elements and converting them
         to $elements_chain, while everyone hasn't upgraded.
         */

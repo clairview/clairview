@@ -1,4 +1,4 @@
-import { IconCodeInsert, IconCopy } from '@markettor/icons'
+import { IconCodeInsert, IconCopy } from '@clairview/icons'
 import { ChartConfiguration, ChartDataset } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100'

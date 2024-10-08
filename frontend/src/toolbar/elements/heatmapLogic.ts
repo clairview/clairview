@@ -1,4 +1,4 @@
-import { LemonSelectOption } from '@markettor/lemon-ui'
+import { LemonSelectOption } from '@clairview/lemon-ui'
 import { actions, afterMount, beforeUnmount, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import { encodeParams } from 'kea-router'
@@ -17,7 +17,7 @@ import {
 import { calculateViewportRange, DEFAULT_HEATMAP_FILTERS } from 'lib/components/IframedToolbarBrowser/utils'
 import { dateFilterToText } from 'lib/utils'
 import { createVersionChecker } from 'lib/utils/semver'
-import { MarketTor } from 'markettor-js'
+import { ClairView } from 'clairview-js'
 import { collectAllElementsDeep, querySelectorAllDeep } from 'query-selector-shadow-dom'
 
 import { currentPageLogic } from '~/toolbar/stats/currentPageLogic'
@@ -47,7 +47,7 @@ export const HEATMAP_COLOR_PALETTE_OPTIONS: LemonSelectOption<string>[] = [
 export const heatmapLogic = kea<heatmapLogicType>([
     path(['toolbar', 'elements', 'heatmapLogic']),
     connect({
-        values: [currentPageLogic, ['href', 'wildcardHref'], toolbarConfigLogic, ['markettor']],
+        values: [currentPageLogic, ['href', 'wildcardHref'], toolbarConfigLogic, ['clairview']],
         actions: [currentPageLogic, ['setHref', 'setWildcardHref']],
     }),
     actions({
@@ -436,19 +436,19 @@ export const heatmapLogic = kea<heatmapLogicType>([
         ],
 
         scrollDepthMarkettorJsError: [
-            (s) => [s.markettor],
-            (markettor: MarketTor): 'version' | 'disabled' | null => {
-                const markettorVersion =
-                    markettor?.version ??
-                    markettor?._calculate_event_properties('test', {}, new Date())?.['$lib_version'] ??
+            (s) => [s.clairview],
+            (clairview: ClairView): 'version' | 'disabled' | null => {
+                const clairviewVersion =
+                    clairview?.version ??
+                    clairview?._calculate_event_properties('test', {}, new Date())?.['$lib_version'] ??
                     '0.0.0'
 
-                if (!(markettor as any)?.scrollManager?.scrollY) {
+                if (!(clairview as any)?.scrollManager?.scrollY) {
                     return 'version'
                 }
 
-                const isSupported = doesVersionSupportScrollDepth(markettorVersion)
-                const isDisabled = markettor?.config.disable_scroll_properties
+                const isSupported = doesVersionSupportScrollDepth(clairviewVersion)
+                const isDisabled = clairview?.config.disable_scroll_properties
 
                 return !isSupported ? 'version' : isDisabled ? 'disabled' : null
             },
@@ -611,7 +611,7 @@ export const heatmapLogic = kea<heatmapLogicType>([
         window.addEventListener('keyup', cache.keyUpListener)
 
         cache.scrollCheckTimer = setInterval(() => {
-            const scrollY = values.markettor?.scrollManager?.scrollY() ?? 0
+            const scrollY = values.clairview?.scrollManager?.scrollY() ?? 0
             if (values.heatmapScrollY !== scrollY) {
                 actions.setHeatmapScrollY(scrollY)
             }

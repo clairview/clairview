@@ -2,7 +2,7 @@ import fetch, { Headers, Response } from 'node-fetch'
 
 import { Hub, PluginConfig } from '../../../types'
 
-const DEFAULT_API_HOST = 'https://app.markettor.com'
+const DEFAULT_API_HOST = 'https://app.clairview.com'
 
 interface ApiMethodOptions {
     headers?: Headers

@@ -1,22 +1,22 @@
 import '~/styles'
 import './styles.scss'
 
-import type { MarketTor } from 'markettor-js'
+import type { ClairView } from 'clairview-js'
 import { createRoot } from 'react-dom/client'
 
 import { initKea } from '~/initKea'
 import { ToolbarApp } from '~/toolbar/ToolbarApp'
 import { ToolbarParams } from '~/types'
-;(window as any)['ph_load_toolbar'] = function (toolbarParams: ToolbarParams, markettor: MarketTor) {
+;(window as any)['ph_load_toolbar'] = function (toolbarParams: ToolbarParams, clairview: ClairView) {
     initKea()
     const container = document.createElement('div')
     const root = createRoot(container)
 
     document.body.appendChild(container)
 
-    if (!markettor) {
+    if (!clairview) {
         console.warn(
-            '⚠️⚠️⚠️ Loaded toolbar via old version of markettor-js that does not support feature flags. Please upgrade! ⚠️⚠️⚠️'
+            '⚠️⚠️⚠️ Loaded toolbar via old version of clairview-js that does not support feature flags. Please upgrade! ⚠️⚠️⚠️'
         )
     }
 
@@ -25,7 +25,7 @@ import { ToolbarParams } from '~/types'
             {...toolbarParams}
             actionId={parseInt(String(toolbarParams.actionId))}
             jsURL={toolbarParams.jsURL || toolbarParams.apiURL}
-            markettor={markettor}
+            clairview={clairview}
         />
     )
 }

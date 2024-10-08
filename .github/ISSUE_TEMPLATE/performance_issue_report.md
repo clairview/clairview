@@ -1,6 +1,6 @@
 ---
 name: Performance issue report
-about: Long response times, high resource usage? Ensuring MarketTor's scalable is our top priority
+about: Long response times, high resource usage? Ensuring ClairView's scalable is our top priority
 labels: performance
 ---
 
@@ -16,11 +16,11 @@ labels: performance
 
 ## Environment
 
-- [ ] MarketTor Cloud
-- [ ] MarketTor self-hosted with Kubernetes (deprecated, see ["Sunsetting Kubernetes support"](https://markettor.com/blog/sunsetting-helm-support-markettor)), version/commit: [please provide]
+- [ ] ClairView Cloud
+- [ ] ClairView self-hosted with Kubernetes (deprecated, see ["Sunsetting Kubernetes support"](https://clairview.com/blog/sunsetting-helm-support-clairview)), version/commit: [please provide]
 
 ## Additional context
 
 
 
-#### *Thank you* for your performance issue report – we want MarketTor to go supersonic!
+#### *Thank you* for your performance issue report – we want ClairView to go supersonic!

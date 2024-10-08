@@ -10,7 +10,7 @@ import type { eventDebugMenuLogicType } from './eventDebugMenuLogicType'
 export const eventDebugMenuLogic = kea<eventDebugMenuLogicType>([
     path(['toolbar', 'debug', 'eventDebugMenuLogic']),
     connect(() => ({
-        values: [toolbarConfigLogic, ['markettor']],
+        values: [toolbarConfigLogic, ['clairview']],
     })),
     actions({
         addEvent: (event: EventType) => ({ event }),
@@ -103,7 +103,7 @@ export const eventDebugMenuLogic = kea<eventDebugMenuLogicType>([
         ],
     }),
     afterMount(({ values, actions }) => {
-        values.markettor?.on('eventCaptured', (e) => {
+        values.clairview?.on('eventCaptured', (e) => {
             actions.addEvent(e)
         })
     }),

@@ -1,4 +1,4 @@
-import { LemonInput, LemonSelect, Link } from '@markettor/lemon-ui'
+import { LemonInput, LemonSelect, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonField } from 'lib/lemon-ui/LemonField'

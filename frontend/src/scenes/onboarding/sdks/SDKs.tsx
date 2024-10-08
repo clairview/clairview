@@ -1,5 +1,5 @@
-import { IconArrowLeft, IconArrowRight, IconCheck } from '@markettor/icons'
-import { LemonButton, LemonCard, LemonDivider, LemonSelect, Spinner } from '@markettor/lemon-ui'
+import { IconArrowLeft, IconArrowRight, IconCheck } from '@clairview/icons'
+import { LemonButton, LemonCard, LemonDivider, LemonSelect, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useInterval } from 'lib/hooks/useInterval'
 import { useWindowSize } from 'lib/hooks/useWindowSize'

@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { eventDroppedCounter } from '../../../main/ingestion-queues/metrics'
 import { PipelineEvent } from '../../../types'

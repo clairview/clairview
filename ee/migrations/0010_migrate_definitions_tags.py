@@ -13,7 +13,7 @@ def reverse(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ("ee", "0009_deprecated_old_tags"),
-        ("markettor", "0213_deprecated_old_tags"),
+        ("clairview", "0213_deprecated_old_tags"),
     ]
 
     operations = [

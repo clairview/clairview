@@ -9,7 +9,7 @@ describe('Billing Upgrade CTA', () => {
         cy.visit('/organization/billing')
         cy.get('[data-attr=billing-page-core-upgrade-cta] .LemonButton__content').should('have.text', 'Upgrade now')
         cy.window().then((win) => {
-            const events = (win as any)._cypress_markettor_captures
+            const events = (win as any)._cypress_clairview_captures
 
             const matchingEvents = events.filter((event) => event.event === 'billing CTA shown')
             // One for each product card

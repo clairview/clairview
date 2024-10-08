@@ -50,14 +50,14 @@ describe('toolbar featureFlagsLogic', () => {
         })
     })
 
-    it('uses markettor client values if present', async () => {
+    it('uses clairview client values if present', async () => {
         const flags = {
             'flag 1': false,
             'flag 2': true,
             'flag 3': 'value',
         }
         await expectLogic(logic, () => {
-            logic.actions.setFeatureFlagValueFromMarketTorClient(Object.keys(flags), flags)
+            logic.actions.setFeatureFlagValueFromClairViewClient(Object.keys(flags), flags)
         }).toMatchValues({
             userFlags: featureFlags,
             searchTerm: '',

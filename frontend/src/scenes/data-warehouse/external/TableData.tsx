@@ -1,5 +1,5 @@
-import { IconDatabase } from '@markettor/icons'
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { IconDatabase } from '@clairview/icons'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { capitalizeFirstLetter } from 'kea-forms'
 import { humanFriendlyDetailedTime } from 'lib/utils'

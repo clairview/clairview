@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BurningMoneyHog } from 'lib/components/hedgehogs'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -129,7 +129,7 @@ export const CreditCTAHero = (): JSX.Element | null => {
                                     </p>
                                     <LemonButton
                                         type="primary"
-                                        to="mailto:sales@markettor.com?subject=Let's talk enterprise!"
+                                        to="mailto:sales@clairview.com?subject=Let's talk enterprise!"
                                     >
                                         Talk to sales
                                     </LemonButton>

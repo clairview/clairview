@@ -1,4 +1,4 @@
-import { LemonButton, Link, Spinner } from '@markettor/lemon-ui'
+import { LemonButton, Link, Spinner } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { insightLogic } from 'scenes/insights/insightLogic'
@@ -51,12 +51,12 @@ export function DataWarehouseExternalScene(): JSX.Element {
                 }
                 caption={
                     <div>
-                        Explore all your data in MarketTor with{' '}
-                        <Link to="https://markettor.com/manual/torql" target="_blank">
+                        Explore all your data in ClairView with{' '}
+                        <Link to="https://clairview.com/manual/torql" target="_blank">
                             TorQL
                         </Link>
-                        . Connect your own tables from S3 to query data from outside MarketTor.{' '}
-                        <Link to="https://markettor.com/docs/data/data-warehouse">Learn more</Link>
+                        . Connect your own tables from S3 to query data from outside ClairView.{' '}
+                        <Link to="https://clairview.com/docs/data/data-warehouse">Learn more</Link>
                     </div>
                 }
             />

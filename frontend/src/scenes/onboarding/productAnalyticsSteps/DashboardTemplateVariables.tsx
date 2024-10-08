@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconInfo, IconTarget, IconTrash } from '@markettor/icons'
-import { LemonBanner, LemonButton, LemonCollapse, LemonInput, LemonLabel, LemonMenu, Spinner } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconInfo, IconTarget, IconTrash } from '@clairview/icons'
+import { LemonBanner, LemonButton, LemonCollapse, LemonInput, LemonLabel, LemonMenu, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { iframedToolbarBrowserLogic } from 'lib/components/IframedToolbarBrowser/iframedToolbarBrowserLogic'
 import { useEffect } from 'react'

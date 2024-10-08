@@ -1,4 +1,4 @@
-import { IconCheckCircle } from '@markettor/icons'
+import { IconCheckCircle } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonTable } from 'lib/lemon-ui/LemonTable'

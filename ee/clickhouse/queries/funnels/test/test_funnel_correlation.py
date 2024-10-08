@@ -10,14 +10,14 @@ from ee.clickhouse.queries.funnels.funnel_correlation import (
 from ee.clickhouse.queries.funnels.funnel_correlation_persons import (
     FunnelCorrelationActors,
 )
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.action import Action
-from markettor.models.element import Element
-from markettor.models.filters import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.instance_setting import override_instance_config
-from markettor.test.base import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.action import Action
+from clairview.models.element import Element
+from clairview.models.filters import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.instance_setting import override_instance_config
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -27,7 +27,7 @@ from markettor.test.base import (
     snapshot_clickhouse_queries,
     also_test_with_person_on_events_v2,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 def _create_action(**kwargs):

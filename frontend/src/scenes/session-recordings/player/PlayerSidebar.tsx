@@ -1,5 +1,5 @@
-import { IconBottomPanel, IconSidePanel, IconX } from '@markettor/icons'
-import { LemonButton, LemonTabs } from '@markettor/lemon-ui'
+import { IconBottomPanel, IconSidePanel, IconX } from '@clairview/icons'
+import { LemonButton, LemonTabs } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Resizer } from 'lib/components/Resizer/Resizer'

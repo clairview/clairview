@@ -1,4 +1,4 @@
-import { LemonCheckbox, LemonInput } from '@markettor/lemon-ui'
+import { LemonCheckbox, LemonInput } from '@clairview/lemon-ui'
 import { LemonTag } from 'lib/lemon-ui/LemonTag/LemonTag'
 
 import { MetricValue } from './RenderMetricValue'

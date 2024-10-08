@@ -2,7 +2,7 @@ import { actions, connect, kea, listeners, path, reducers, selectors } from 'kea
 import { forms } from 'kea-forms'
 import { subscriptions } from 'kea-subscriptions'
 import api from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { databaseTableListLogic } from 'scenes/data-management/database/databaseTableListLogic'
 
 import { DataWarehouseViewLink } from '~/types'
@@ -143,7 +143,7 @@ export const viewLinkLogic = kea<viewLinkLogicType>([
 
                         actions.loadDatabase()
 
-                        markettor.capture('join updated')
+                        clairview.capture('join updated')
                     } catch (error: any) {
                         actions.setError(error.detail)
                     }
@@ -163,7 +163,7 @@ export const viewLinkLogic = kea<viewLinkLogicType>([
 
                         actions.loadDatabase()
 
-                        markettor.capture('join created')
+                        clairview.capture('join created')
                     } catch (error: any) {
                         actions.setError(error.detail)
                     }

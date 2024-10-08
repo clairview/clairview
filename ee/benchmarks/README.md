@@ -1,12 +1,12 @@
 # Clickhouse query benchmarks
 
-This is the benchmark suite for MarketTor clickhouse queries. It tracks performance improvements to clickhouse queries over time.
+This is the benchmark suite for ClairView clickhouse queries. It tracks performance improvements to clickhouse queries over time.
 
 The benchmarks are run using [airspeed velocity](https://asv.readthedocs.io/).
 
 To get stable results over time, a stable clickhouse node which has been pre-filled with data is used to run against.
 
-Historical benchmark results can be found in https://github.com/MarketTor/benchmark-results.
+Historical benchmark results can be found in https://github.com/ClairView/benchmark-results.
 
 # FAQ
 
@@ -33,13 +33,13 @@ These benchmarks are mostly run in CI for:
 - master branch
 - PRs labeled with `performance`
 
-To run the all the benchmarks locally, [get access to the clickhouse node](https://github.com/MarketTor/vpc/blob/main/client_values/benchmarking/values.yaml) and:
+To run the all the benchmarks locally, [get access to the clickhouse node](https://github.com/ClairView/vpc/blob/main/client_values/benchmarking/values.yaml) and:
 
 ```bash
 # Set up machine
 asv machine --machine ci-benchmarks --config ee/benchmarks/asv.conf.json
 # Replace X with appropriate credentials
-CLICKHOUSE_HOST=X CLICKHOUSE_USER=X CLICKHOUSE_PASSWORD=X CLICKHOUSE_DATABASE=markettor asv run --config ee/benchmarks/asv.conf.json
+CLICKHOUSE_HOST=X CLICKHOUSE_USER=X CLICKHOUSE_PASSWORD=X CLICKHOUSE_DATABASE=clairview asv run --config ee/benchmarks/asv.conf.json
 ```
 
 You'll probably want to be running one test, with quick iteration. Running e.g.:
@@ -58,8 +58,8 @@ Edit the `benchmarks.py` file as needed. Use `@benchmark_clickhouse` decorator t
 
 ## Backfilling benchmarks
 
-- Clone `https://github.com/MarketTor/benchmark-results` locally under ee/benchmarks/results
-- Run something like `CLICKHOUSE_HOST=X CLICKHOUSE_USER=X CLICKHOUSE_PASSWORD=X CLICKHOUSE_DATABASE=markettor asv run --config ee/benchmarks/asv.conf.json --date-period 4d master~500..`
+- Clone `https://github.com/ClairView/benchmark-results` locally under ee/benchmarks/results
+- Run something like `CLICKHOUSE_HOST=X CLICKHOUSE_USER=X CLICKHOUSE_PASSWORD=X CLICKHOUSE_DATABASE=clairview asv run --config ee/benchmarks/asv.conf.json --date-period 4d master~500..`
 - Run `asv publish` and commit the changes to benchmark-results repo
 
 If you have questions, use benchmark.yml github action as a guide.

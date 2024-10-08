@@ -1,4 +1,4 @@
-import { IconBadge, IconBolt, IconCursor, IconEye, IconLeave, IconList, IconLogomark } from '@markettor/icons'
+import { IconBadge, IconBolt, IconCursor, IconEye, IconLeave, IconList, IconLogomark } from '@clairview/icons'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
 import { IconSelectAll } from 'lib/lemon-ui/icons'
@@ -12,7 +12,7 @@ import { EventDefinition, PropertyDefinition } from '~/types'
 export function getPropertyDefinitionIcon(definition: PropertyDefinition): JSX.Element {
     if (CORE_FILTER_DEFINITIONS_BY_GROUP.event_properties[definition.name]) {
         return (
-            <Tooltip title="MarketTor event property">
+            <Tooltip title="ClairView event property">
                 <IconList className="taxonomy-icon taxonomy-icon-muted" />
             </Tooltip>
         )
@@ -42,7 +42,7 @@ export function getEventDefinitionIcon(definition: EventDefinition & { value?: s
     }
     if (definition.name === '$pageleave') {
         return (
-            <Tooltip title="MarketTor event">
+            <Tooltip title="ClairView event">
                 <IconLeave className="taxonomy-icon taxonomy-icon-ph taxonomy-icon-muted" />
             </Tooltip>
         )
@@ -59,7 +59,7 @@ export function getEventDefinitionIcon(definition: EventDefinition & { value?: s
     }
     if (definition.name && !!CORE_FILTER_DEFINITIONS_BY_GROUP.events[definition.name]) {
         return (
-            <Tooltip title="MarketTor event">
+            <Tooltip title="ClairView event">
                 <IconLogomark className="taxonomy-icon taxonomy-icon-muted" />
             </Tooltip>
         )
@@ -106,7 +106,7 @@ export function DefinitionHeader({
                         <>
                             <Tooltip
                                 title={`${
-                                    CORE_FILTER_DEFINITIONS_BY_GROUP.events[definition.name] ? 'MarketTor' : 'Verified'
+                                    CORE_FILTER_DEFINITIONS_BY_GROUP.events[definition.name] ? 'ClairView' : 'Verified'
                                 } event`}
                             >
                                 <IconBadge className=" text-success text-xl" />
@@ -114,7 +114,7 @@ export function DefinitionHeader({
                         </>
                     )}
                     {!!CORE_FILTER_DEFINITIONS_BY_GROUP.events[definition.name] && (
-                        <Tooltip title="MarketTor event">
+                        <Tooltip title="ClairView event">
                             <IconBadge className="text-success text-xl" />
                         </Tooltip>
                     )}

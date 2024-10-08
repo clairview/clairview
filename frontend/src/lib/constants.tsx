@@ -1,4 +1,4 @@
-import { LemonSelectOptions } from '@markettor/lemon-ui'
+import { LemonSelectOptions } from '@clairview/lemon-ui'
 
 import { ChartDisplayCategory, ChartDisplayType, Region, SSOProvider } from '../types'
 
@@ -50,7 +50,7 @@ export enum TeamMembershipLevel {
 
 export type EitherMembershipLevel = OrganizationMembershipLevel | TeamMembershipLevel
 
-/** See markettor/api/organization.py for details. */
+/** See clairview/api/organization.py for details. */
 export enum PluginsAccessLevel {
     None = 0,
     Config = 3,
@@ -148,12 +148,12 @@ export const FEATURE_FLAGS = {
     QUERY_RUNNING_TIME: 'query_running_time', // owner: @mariusandra
     QUERY_TIMINGS: 'query-timings', // owner: @mariusandra
     QUERY_ASYNC: 'query-async', // owner: @webjunkie
-    MARKETTOR_3000_NAV: 'markettor-3000-nav', // owner: @Twixes
+    MARKETTOR_3000_NAV: 'clairview-3000-nav', // owner: @Twixes
     HEDGEHOG_MODE: 'hedgehog-mode', // owner: @benjackwhite
     HEDGEHOG_MODE_DEBUG: 'hedgehog-mode-debug', // owner: @benjackwhite
     HIGH_FREQUENCY_BATCH_EXPORTS: 'high-frequency-batch-exports', // owner: @tomasfarias
     PERSON_BATCH_EXPORTS: 'person-batch-exports', // owner: @tomasfarias
-    // owner: #team-replay, only to be enabled for MarketTor team testing
+    // owner: #team-replay, only to be enabled for ClairView team testing
     EXCEPTION_AUTOCAPTURE: 'exception-autocapture',
     FF_DASHBOARD_TEMPLATES: 'ff-dashboard-templates', // owner: @EDsCODE
     ARTIFICIAL_HOG: 'artificial-hog', // owner: @Twixes
@@ -207,7 +207,7 @@ export const FEATURE_FLAGS = {
     FIRST_TIME_FOR_USER_MATH: 'first-time-for-user-math', // owner: @skoob13 #team-product-analytics
     MULTITAB_EDITOR: 'multitab-editor', // owner: @EDsCODE #team-data-warehouse
     WEB_ANALYTICS_REPLAY: 'web-analytics-replay', // owner: @robbie-c
-    BATCH_EXPORTS_MARKETTOR_HTTP: 'markettor-http-batch-exports',
+    BATCH_EXPORTS_MARKETTOR_HTTP: 'clairview-http-batch-exports',
     EXPERIMENT_MAKE_DECISION: 'experiment-make-decision', // owner: @jurajmajerik #team-feature-success
     PURCHASE_CREDITS: 'purchase-credits', // owner: @zach
     DATA_MODELING: 'data-modeling', // owner: @EDsCODE #team-data-warehouse
@@ -256,8 +256,8 @@ export const DOMAIN_REGEX = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/
 export const SECURE_URL_REGEX = /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=]+$/gi
 
 export const CLOUD_HOSTNAMES = {
-    [Region.US]: 'us.markettor.com',
-    [Region.EU]: 'eu.markettor.com',
+    [Region.US]: 'us.clairview.com',
+    [Region.EU]: 'eu.clairview.com',
 }
 
 export const SESSION_RECORDINGS_PLAYLIST_FREE_COUNT = 5

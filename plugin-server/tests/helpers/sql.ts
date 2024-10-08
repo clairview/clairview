@@ -56,7 +56,7 @@ export async function resetTestDatabase(
     const teamIdToCreate = teamIds[0]
     await createUserTeamAndOrganization(db, teamIdToCreate)
     if (withExtendedTestData) {
-        await insertRow(db, 'markettor_action', {
+        await insertRow(db, 'clairview_action', {
             id: teamIdToCreate + 67,
             team_id: teamIdToCreate,
             name: 'Test Action',
@@ -85,13 +85,13 @@ export async function resetTestDatabase(
             ],
         } as RawAction)
         for (const plugin of mocks.pluginRows.concat(extraRows.plugins ?? [])) {
-            await insertRow(db, 'markettor_plugin', plugin)
+            await insertRow(db, 'clairview_plugin', plugin)
         }
         for (const pluginConfig of mocks.pluginConfigRows.concat(extraRows.pluginConfigs ?? [])) {
-            await insertRow(db, 'markettor_pluginconfig', pluginConfig)
+            await insertRow(db, 'clairview_pluginconfig', pluginConfig)
         }
         for (const pluginAttachment of mocks.pluginAttachmentRows.concat(extraRows.pluginAttachments ?? [])) {
-            await insertRow(db, 'markettor_pluginattachment', pluginAttachment)
+            await insertRow(db, 'clairview_pluginattachment', pluginAttachment)
         }
     }
     await db.end()
@@ -128,7 +128,7 @@ export async function insertRow(db: PostgresRouter, table: string, objectProvide
         const dependentQueries: Promise<void>[] = []
         if (source__plugin_json) {
             dependentQueries.push(
-                insertRow(db, 'markettor_pluginsourcefile', {
+                insertRow(db, 'clairview_pluginsourcefile', {
                     id: new UUIDT().toString(),
                     filename: 'plugin.json',
                     source: source__plugin_json,
@@ -140,7 +140,7 @@ export async function insertRow(db: PostgresRouter, table: string, objectProvide
         }
         if (source__index_ts) {
             dependentQueries.push(
-                insertRow(db, 'markettor_pluginsourcefile', {
+                insertRow(db, 'clairview_pluginsourcefile', {
                     id: new UUIDT().toString(),
                     filename: 'index.ts',
                     source: source__index_ts,
@@ -152,7 +152,7 @@ export async function insertRow(db: PostgresRouter, table: string, objectProvide
         }
         if (source__frontend_tsx) {
             dependentQueries.push(
-                insertRow(db, 'markettor_pluginsourcefile', {
+                insertRow(db, 'clairview_pluginsourcefile', {
                     id: new UUIDT().toString(),
                     filename: 'frontend.tsx',
                     source: source__frontend_tsx,
@@ -164,7 +164,7 @@ export async function insertRow(db: PostgresRouter, table: string, objectProvide
         }
         if (source__site_ts) {
             dependentQueries.push(
-                insertRow(db, 'markettor_pluginsourcefile', {
+                insertRow(db, 'clairview_pluginsourcefile', {
                     id: new UUIDT().toString(),
                     filename: 'site.ts',
                     source: source__site_ts,
@@ -190,20 +190,20 @@ export async function createUserTeamAndOrganization(
     organizationId: string = commonOrganizationId,
     organizationMembershipId: string = commonOrganizationMembershipId
 ): Promise<void> {
-    await insertRow(db, 'markettor_user', {
+    await insertRow(db, 'clairview_user', {
         id: userId,
         uuid: userUuid,
         password: 'gibberish',
         first_name: 'PluginTest',
         last_name: 'User',
-        email: `test${userId}@markettor.com`,
+        email: `test${userId}@clairview.com`,
         distinct_id: `plugin_test_user_distinct_id_${userId}`,
         is_staff: false,
         is_active: false,
         date_joined: new Date().toISOString(),
         events_column_config: { active: 'DEFAULT' },
     })
-    await insertRow(db, 'markettor_organization', {
+    await insertRow(db, 'clairview_organization', {
         id: organizationId,
         name: 'TEST ORG',
         plugins_access_level: 9,
@@ -217,7 +217,7 @@ export async function createUserTeamAndOrganization(
         is_member_join_email_enabled: false,
         slug: Math.round(Math.random() * 10000),
     } as RawOrganization)
-    await insertRow(db, 'markettor_organizationmembership', {
+    await insertRow(db, 'clairview_organizationmembership', {
         id: organizationMembershipId,
         organization_id: organizationId,
         user_id: userId,
@@ -225,13 +225,13 @@ export async function createUserTeamAndOrganization(
         joined_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
     })
-    await insertRow(db, 'markettor_project', {
+    await insertRow(db, 'clairview_project', {
         id: teamId,
         organization_id: organizationId,
         name: 'TEST PROJECT',
         created_at: new Date().toISOString(),
     })
-    await insertRow(db, 'markettor_team', {
+    await insertRow(db, 'clairview_team', {
         id: teamId,
         project_id: teamId,
         organization_id: organizationId,
@@ -265,7 +265,7 @@ export async function getTeams(hub: Hub): Promise<Team[]> {
     return (
         await hub.db.postgres.query(
             PostgresUse.COMMON_READ,
-            'SELECT * FROM markettor_team ORDER BY id',
+            'SELECT * FROM clairview_team ORDER BY id',
             undefined,
             'fetchAllTeams'
         )
@@ -277,7 +277,7 @@ export async function getFirstTeam(hub: Hub): Promise<Team> {
 }
 
 export const createPlugin = async (pg: PostgresRouter, plugin: Omit<Plugin, 'id'>) => {
-    return await insertRow(pg, 'markettor_plugin', {
+    return await insertRow(pg, 'clairview_plugin', {
         ...plugin,
         config_schema: {},
         from_json: false,
@@ -293,7 +293,7 @@ export const createPluginConfig = async (
     pg: PostgresRouter,
     pluginConfig: Omit<PluginConfig, 'id' | 'created_at' | 'enabled' | 'order' | 'config'>
 ) => {
-    return await insertRow(pg, 'markettor_pluginconfig', {
+    return await insertRow(pg, 'clairview_pluginconfig', {
         ...pluginConfig,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -305,7 +305,7 @@ export const createPluginConfig = async (
 
 export const createOrganization = async (pg: PostgresRouter) => {
     const organizationId = new UUIDT().toString()
-    await insertRow(pg, 'markettor_organization', {
+    await insertRow(pg, 'clairview_organization', {
         id: organizationId,
         name: 'TEST ORG',
         plugins_access_level: 9,
@@ -325,14 +325,14 @@ export const createOrganization = async (pg: PostgresRouter) => {
 export const createTeam = async (pg: PostgresRouter, organizationId: string, token?: string) => {
     // KLUDGE: auto increment IDs can be racy in tests so we ensure IDs don't clash
     const id = Math.round(Math.random() * 1000000000)
-    await insertRow(pg, 'markettor_project', {
+    await insertRow(pg, 'clairview_project', {
         // Every team (aka environment) must be a child of a project
         id,
         organization_id: organizationId,
         name: 'TEST PROJECT',
         created_at: new Date().toISOString(),
     })
-    await insertRow(pg, 'markettor_team', {
+    await insertRow(pg, 'clairview_team', {
         id,
         organization_id: organizationId,
         project_id: id,
@@ -365,12 +365,12 @@ export const createTeam = async (pg: PostgresRouter, organizationId: string, tok
 
 export const createUser = async (pg: PostgresRouter, distinctId: string) => {
     const uuid = new UUIDT().toString()
-    const user = await insertRow(pg, 'markettor_user', {
+    const user = await insertRow(pg, 'clairview_user', {
         uuid: uuid,
         password: 'gibberish',
         first_name: 'PluginTest',
         last_name: 'User',
-        email: `test${uuid}@markettor.com`,
+        email: `test${uuid}@clairview.com`,
         distinct_id: distinctId,
         is_staff: false,
         is_active: false,
@@ -382,7 +382,7 @@ export const createUser = async (pg: PostgresRouter, distinctId: string) => {
 
 export const createOrganizationMembership = async (pg: PostgresRouter, organizationId: string, userId: number) => {
     const membershipId = new UUIDT().toString()
-    const membership = await insertRow(pg, 'markettor_organizationmembership', {
+    const membership = await insertRow(pg, 'clairview_organizationmembership', {
         id: membershipId,
         organization_id: organizationId,
         user_id: userId,
@@ -394,7 +394,7 @@ export const createOrganizationMembership = async (pg: PostgresRouter, organizat
 }
 
 export async function fetchPostgresPersons(db: DB, teamId: number) {
-    const query = `SELECT * FROM markettor_person WHERE team_id = ${teamId} ORDER BY id`
+    const query = `SELECT * FROM clairview_person WHERE team_id = ${teamId} ORDER BY id`
     return (await db.postgres.query(PostgresUse.COMMON_READ, query, undefined, 'persons')).rows.map(
         // NOTE: we map to update some values here to maintain
         // compatibility with `hub.db.fetchPersons`.

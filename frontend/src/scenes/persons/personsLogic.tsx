@@ -226,8 +226,8 @@ export const personsLogic = kea<personsLogicType>([
             () => [(_, props) => props.cohort],
             (cohort: PersonsLogicProps['cohort']) =>
                 cohort
-                    ? 'https://markettor.com/docs/api/cohorts#get-api-projects-project_id-cohorts-id-persons'
-                    : 'https://markettor.com/docs/api/persons',
+                    ? 'https://clairview.com/docs/api/cohorts#get-api-projects-project_id-cohorts-id-persons'
+                    : 'https://clairview.com/docs/api/persons',
         ],
         cohortId: [() => [(_, props) => props.cohort], (cohort: PersonsLogicProps['cohort']) => cohort],
         currentTab: [(s) => [s.activeTab, s.defaultTab], (activeTab, defaultTab) => activeTab || defaultTab],

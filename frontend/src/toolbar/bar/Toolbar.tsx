@@ -12,7 +12,7 @@ import {
     IconTestTube,
     IconToggle,
     IconX,
-} from '@markettor/icons'
+} from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { useKeyboardHotkeys } from 'lib/hooks/useKeyboardHotkeys'
@@ -33,7 +33,7 @@ import { useToolbarFeatureFlag } from '~/toolbar/toolbarMarkettorJS'
 import { HedgehogMenu } from '../hedgehog/HedgehogMenu'
 import { ToolbarButton } from './ToolbarButton'
 
-const HELP_URL = 'https://markettor.com/docs/user-guides/toolbar?utm_medium=in-product&utm_campaign=toolbar-help-button'
+const HELP_URL = 'https://clairview.com/docs/user-guides/toolbar?utm_medium=in-product&utm_campaign=toolbar-help-button'
 
 function MoreMenu(): JSX.Element {
     const { hedgehogMode, theme } = useValues(toolbarLogic)
@@ -206,8 +206,8 @@ export function Toolbar(): JSX.Element | null {
             >
                 <ToolbarButton
                     onClick={isAuthenticated ? toggleMinimized : authenticate}
-                    title={isAuthenticated ? 'Minimize' : 'Authenticate the MarketTor Toolbar'}
-                    titleMinimized={isAuthenticated ? 'Expand the toolbar' : 'Authenticate the MarketTor Toolbar'}
+                    title={isAuthenticated ? 'Minimize' : 'Authenticate the ClairView Toolbar'}
+                    titleMinimized={isAuthenticated ? 'Expand the toolbar' : 'Authenticate the ClairView Toolbar'}
                 >
                     <IconLogomark />
                 </ToolbarButton>

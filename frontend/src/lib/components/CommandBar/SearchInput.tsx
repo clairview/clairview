@@ -1,4 +1,4 @@
-import { LemonInput } from '@markettor/lemon-ui'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { forwardRef, Ref } from 'react'
 import { teamLogic } from 'scenes/teamLogic'

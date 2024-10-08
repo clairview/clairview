@@ -1,4 +1,4 @@
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
 import { pluralize } from 'lib/utils'

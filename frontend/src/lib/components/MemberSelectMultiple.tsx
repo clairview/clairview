@@ -1,4 +1,4 @@
-import { LemonInputSelect } from '@markettor/lemon-ui'
+import { LemonInputSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { fullName } from 'lib/utils'
 import { useEffect } from 'react'

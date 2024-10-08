@@ -1,4 +1,4 @@
-from markettor.queries.paths.paths_event_query import PathEventQuery
+from clairview.queries.paths.paths_event_query import PathEventQuery
 
 
 class ClickhousePathEventQuery(PathEventQuery):

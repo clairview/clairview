@@ -1,11 +1,11 @@
 #
 # `docker-compose` file used ONLY for hobby deployments.
 #
-# Please take a look at https://markettor.com/docs/self-host/deploy/hobby
+# Please take a look at https://clairview.com/docs/self-host/deploy/hobby
 # for more info.
 #
-# MarketTor has sunset support for self-hosted K8s deployments.
-# See: https://markettor.com/blog/sunsetting-helm-support-markettor
+# ClairView has sunset support for self-hosted K8s deployments.
+# See: https://clairview.com/blog/sunsetting-helm-support-clairview
 #
 
 services:
@@ -35,7 +35,7 @@ services:
     clickhouse:
         #
         # Note: please keep the default version in sync across
-        #       `markettor` and the `charts-clickhouse` repos
+        #       `clairview` and the `charts-clickhouse` repos
         #
         extends:
             file: docker-compose.base.yml
@@ -45,10 +45,10 @@ services:
             - kafka
             - zookeeper
         volumes:
-            - ./markettor/markettor/idl:/idl
-            - ./markettor/docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-            - ./markettor/docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
-            - ./markettor/docker/clickhouse/users.xml:/etc/clickhouse-server/users.xml
+            - ./clairview/clairview/idl:/idl
+            - ./clairview/docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+            - ./clairview/docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
+            - ./clairview/docker/clickhouse/users.xml:/etc/clickhouse-server/users.xml
             - clickhouse-data:/var/lib/clickhouse
     zookeeper:
         extends:
@@ -174,7 +174,7 @@ services:
         ports:
             - 7233:7233
         volumes:
-            - ./markettor/docker/temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
+            - ./clairview/docker/temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
     elasticsearch:
         extends:
             file: docker-compose.base.yml

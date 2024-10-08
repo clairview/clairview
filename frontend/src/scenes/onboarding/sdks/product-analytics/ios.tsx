@@ -7,7 +7,7 @@ import { AdvertiseMobileReplay } from '../session-replay/SessionReplaySDKInstruc
 import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 
 function IOSCaptureSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Swift}>{`MarketTorSDK.shared.capture("Test Event")`}</CodeSnippet>
+    return <CodeSnippet language={Language.Swift}>{`ClairViewSDK.shared.capture("Test Event")`}</CodeSnippet>
 }
 
 export function ProductAnalyticsIOSInstructions(): JSX.Element {

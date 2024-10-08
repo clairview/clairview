@@ -281,7 +281,7 @@ export function insightActivityDescriber(logItem: ActivityLogItem, asNotificatio
         return {
             description: (
                 <>
-                    <strong>MarketTor</strong> exported {asNotification ? 'your' : 'the'} insight: {logItem.detail.name}{' '}
+                    <strong>ClairView</strong> exported {asNotification ? 'your' : 'the'} insight: {logItem.detail.name}{' '}
                     as an image for the shared insight link.
                 </>
             ),

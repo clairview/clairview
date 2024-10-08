@@ -4,12 +4,12 @@ from typing import Literal, Optional, Union, cast
 from jsonschema import ValidationError
 
 from ee.clickhouse.queries.paths.paths_event_query import ClickhousePathEventQuery
-from markettor.constants import FUNNEL_PATH_BETWEEN_STEPS
-from markettor.models import Filter
-from markettor.models.filters.path_filter import PathFilter
-from markettor.models.team.team import Team
-from markettor.queries.funnels.funnel_persons import ClickhouseFunnelActors
-from markettor.queries.paths.paths import Paths
+from clairview.constants import FUNNEL_PATH_BETWEEN_STEPS
+from clairview.models import Filter
+from clairview.models.filters.path_filter import PathFilter
+from clairview.models.team.team import Team
+from clairview.queries.funnels.funnel_persons import ClickhouseFunnelActors
+from clairview.queries.paths.paths import Paths
 
 
 class ClickhousePaths(Paths):

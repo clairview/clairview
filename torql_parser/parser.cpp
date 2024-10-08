@@ -2815,15 +2815,15 @@ static PyMethodDef parser_methods[] = {
 
 static int parser_modexec(PyObject* module) {
   parser_state* state = get_module_state(module);
-  state->ast_module = PyImport_ImportModule("markettor.torql.ast");
+  state->ast_module = PyImport_ImportModule("clairview.torql.ast");
   if (!state->ast_module) {
     return -1;
   }
-  state->base_module = PyImport_ImportModule("markettor.torql.base");
+  state->base_module = PyImport_ImportModule("clairview.torql.base");
   if (!state->base_module) {
     return -1;
   }
-  state->errors_module = PyImport_ImportModule("markettor.torql.errors");
+  state->errors_module = PyImport_ImportModule("clairview.torql.errors");
   if (!state->errors_module) {
     return -1;
   }

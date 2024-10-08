@@ -4,16 +4,16 @@ from unittest.mock import patch
 
 from freezegun import freeze_time
 
-from markettor.client import sync_execute
-from markettor.models.cohort import Cohort
-from markettor.models.person import Person
-from markettor.tasks.calculate_cohort import insert_cohort_from_insight_filter
-from markettor.tasks.test.test_calculate_cohort import calculate_cohort_test_factory
-from markettor.test.base import ClickhouseTestMixin, _create_event, _create_person
+from clairview.client import sync_execute
+from clairview.models.cohort import Cohort
+from clairview.models.person import Person
+from clairview.tasks.calculate_cohort import insert_cohort_from_insight_filter
+from clairview.tasks.test.test_calculate_cohort import calculate_cohort_test_factory
+from clairview.test.base import ClickhouseTestMixin, _create_event, _create_person
 
 
 class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_factory(_create_event, _create_person)):  # type: ignore
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_stickiness_cohort(self, _insert_cohort_from_insight_filter):
         _create_person(team_id=self.team.pk, distinct_ids=["blabla"])
         _create_event(
@@ -79,7 +79,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
         self.assertEqual(people.count(), 1)
         self.assertEqual(cohort.count, 1)
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_trends_cohort(self, _insert_cohort_from_insight_filter):
         _create_person(team_id=self.team.pk, distinct_ids=["blabla"])
         with freeze_time("2021-01-01 00:06:34"):
@@ -165,7 +165,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
         )
         self.assertEqual(cohort.count, 1)
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_trends_cohort_arg_test(self, _insert_cohort_from_insight_filter):
         # prior to 8124, subtitute parameters was called on insight cohorting which caused '%' in LIKE arguments to be interepreted as a missing parameter
 
@@ -175,7 +175,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                 team=self.team,
                 event="$pageview",
                 distinct_id="blabla",
-                properties={"$domain": "https://app.markettor.com/123"},
+                properties={"$domain": "https://app.clairview.com/123"},
                 timestamp="2021-01-01T12:00:00Z",
             )
 
@@ -184,7 +184,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                 team=self.team,
                 event="$pageview",
                 distinct_id="blabla",
-                properties={"$domain": "https://app.markettor.com/123"},
+                properties={"$domain": "https://app.clairview.com/123"},
                 timestamp="2021-01-01T12:00:00Z",
             )
 
@@ -201,7 +201,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                 [
                     {
                         "key": "$domain",
-                        "value": "app.markettor.com",
+                        "value": "app.clairview.com",
                         "operator": "icontains",
                         "type": "event",
                     }
@@ -226,7 +226,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                 "entity_type": "events",
                 "insight": "TRENDS",
                 "interval": "day",
-                "properties": '[{"key": "$domain", "value": "app.markettor.com", "operator": "icontains", "type": "event"}]',
+                "properties": '[{"key": "$domain", "value": "app.clairview.com", "operator": "icontains", "type": "event"}]',
             },
         )
         insert_cohort_from_insight_filter(
@@ -251,7 +251,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                 "properties": [
                     {
                         "key": "$domain",
-                        "value": "app.markettor.com",
+                        "value": "app.clairview.com",
                         "operator": "icontains",
                         "type": "event",
                     }
@@ -283,7 +283,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
         )
         self.assertEqual(cohort.count, 1)
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_funnels_cohort(self, _insert_cohort_from_insight_filter):
         _create_person(team_id=self.team.pk, distinct_ids=["blabla"])
         with freeze_time("2021-01-01 00:06:34"):
@@ -367,7 +367,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
         self.assertEqual(people.count(), 1)
         self.assertEqual(cohort.count, 1)
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_lifecycle_cohort(self, _insert_cohort_from_insight_filter):
         def _create_events(data, event="$pageview"):
             person_result = []
@@ -379,7 +379,7 @@ class TestClickhouseCalculateCohort(ClickhouseTestMixin, calculate_cohort_test_f
                             distinct_ids=[id],
                             properties={
                                 "name": id,
-                                **({"email": "test@markettor.com"} if id == "p1" else {}),
+                                **({"email": "test@clairview.com"} if id == "p1" else {}),
                             },
                         )
                     )

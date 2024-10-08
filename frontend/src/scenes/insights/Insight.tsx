@@ -1,4 +1,4 @@
-import { LemonBanner, LemonButton } from '@markettor/lemon-ui'
+import { LemonBanner, LemonButton } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useMountedLogic, useValues } from 'kea'
 import { DebugCHQueries } from 'lib/components/CommandPalette/DebugCHQueries'
 import { isObject } from 'lib/utils'

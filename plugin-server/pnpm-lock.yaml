@@ -40,16 +40,16 @@ dependencies:
   '@maxmind/geoip2-node':
     specifier: ^3.4.0
     version: 3.5.0
-  '@markettor/clickhouse':
+  '@clairview/clickhouse':
     specifier: ^1.7.0
     version: 1.7.0
-  '@markettor/cyclotron':
+  '@clairview/cyclotron':
     specifier: file:../rust/cyclotron-node
     version: file:../rust/cyclotron-node
-  '@markettor/hogvm':
+  '@clairview/hogvm':
     specifier: ^1.0.54
     version: 1.0.54(luxon@3.4.4)
-  '@markettor/plugin-scaffold':
+  '@clairview/plugin-scaffold':
     specifier: 1.4.4
     version: 1.4.4
   '@sentry/node':
@@ -133,7 +133,7 @@ dependencies:
   pino:
     specifier: ^8.6.0
     version: 8.11.0
-  markettor-node:
+  clairview-node:
     specifier: 2.0.2
     version: 2.0.2
   pretty-bytes:
@@ -3114,12 +3114,12 @@ packages:
     dev: false
     optional: true
 
-  /@markettor/clickhouse@1.7.0:
+  /@clairview/clickhouse@1.7.0:
     resolution: {integrity: sha512-B8hZ8Dh2EoJoDb7Gx38ylBQM92oON/X2IxXCb7BfYStk3m17nStcAyaCsc2zbvxC0fFfTMU8lFRiFSEJmijkyg==}
     engines: {node: '>=12'}
     dev: false
 
-  /@markettor/hogvm@1.0.54(luxon@3.4.4):
+  /@clairview/hogvm@1.0.54(luxon@3.4.4):
     resolution: {integrity: sha512-vHYdiFcIvJ3CxYd/8rSZoUk8ZkeHETGb1dbBhURLejxp9dMyWC1qJnmcIlkH/vsbed/4hVUtFMqtp4bnQSmi2g==}
     peerDependencies:
       luxon: ^3.4.4
@@ -3127,7 +3127,7 @@ packages:
       luxon: 3.4.4
     dev: false
 
-  /@markettor/plugin-scaffold@1.4.4:
+  /@clairview/plugin-scaffold@1.4.4:
     resolution: {integrity: sha512-3z1ENm1Ys5lEQil0H7TVOqHvD24+ydiZFk5hggpbHRx1iOxAK+Eu5qFyAROwPUcCo7NOYjmH2xL1C4B1vaHilg==}
     dependencies:
       '@maxmind/geoip2-node': 3.5.0
@@ -8958,7 +8958,7 @@ packages:
     dependencies:
       xtend: 4.0.2
 
-  /markettor-node@2.0.2:
+  /clairview-node@2.0.2:
     resolution: {integrity: sha512-lB7y5znEGHhL6CP+Xwq4v+js4x0oGqyJXwZM2SXPXakZzPq+UQo/HLYZCOnsCpk8DnXLZOKjut9vYLqkTCjGJQ==}
     engines: {node: '>=10'}
     dependencies:
@@ -10742,6 +10742,6 @@ packages:
 
   file:../rust/cyclotron-node:
     resolution: {directory: ../rust/cyclotron-node, type: directory}
-    name: '@markettor/cyclotron'
+    name: '@clairview/cyclotron'
     version: 0.1.6
     dev: false

@@ -76,7 +76,7 @@ export function appEditorUrl(
     appUrl: string,
     options?: { actionId?: number | null; userIntent?: ToolbarUserIntent }
 ): string {
-    // See https://github.com/MarketTor/markettor-js/blob/f7119c/src/extensions/toolbar.ts#L52 for where these params
+    // See https://github.com/ClairView/clairview-js/blob/f7119c/src/extensions/toolbar.ts#L52 for where these params
     // are passed. `appUrl` is an extra `redirect_to_site` param.
     const params: ToolbarParams & { appUrl: string } = {
         userIntent: options?.userIntent ?? (options?.actionId ? 'edit-action' : 'add-action'),

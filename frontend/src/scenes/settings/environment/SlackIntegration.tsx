@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import api from 'lib/api'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
@@ -13,7 +13,7 @@ import { userLogic } from 'scenes/userLogic'
 // Modified version of https://app.slack.com/app-settings/TSS5W8YQZ/A03KWE2FJJ2/app-manifest to match current instance
 const getSlackAppManifest = (): any => ({
     display_information: {
-        name: 'MarketTor',
+        name: 'ClairView',
         description: 'Product Insights right where you need them',
         background_color: '#f54e00',
     },
@@ -24,7 +24,7 @@ const getSlackAppManifest = (): any => ({
             messages_tab_read_only_enabled: true,
         },
         bot_user: {
-            display_name: 'MarketTor',
+            display_name: 'ClairView',
             always_online: false,
         },
         unfurl_domains: [window.location.hostname],
@@ -56,7 +56,7 @@ export function SlackIntegration(): JSX.Element {
         LemonDialog.open({
             title: `Do you want to disconnect from Slack?`,
             description:
-                'This cannot be undone. MarketTor resources configured to use this Slack workspace will remain but will stop working.',
+                'This cannot be undone. ClairView resources configured to use this Slack workspace will remain but will stop working.',
             primaryButton: {
                 children: 'Yes, disconnect',
                 status: 'danger',
@@ -78,7 +78,7 @@ export function SlackIntegration(): JSX.Element {
                 Integrate with Slack directly to get more advanced options such as{' '}
                 <b>subscribing to an Insight or Dashboard</b> for regular reports to Slack channels of your choice.
                 Guidance on integrating with Slack available{' '}
-                <Link to="https://markettor.com/docs/product-analytics/subscriptions#slack-subscriptions">
+                <Link to="https://clairview.com/docs/product-analytics/subscriptions#slack-subscriptions">
                     in our docs
                 </Link>
                 .
@@ -148,7 +148,7 @@ export function SlackIntegration(): JSX.Element {
                         )
                     ) : (
                         <p className="text-muted">
-                            This MarketTor instance is not configured for Slack. Please contact the instance owner to
+                            This ClairView instance is not configured for Slack. Please contact the instance owner to
                             configure it.
                         </p>
                     )}

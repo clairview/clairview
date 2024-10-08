@@ -1,6 +1,6 @@
 import './Cohorts.scss'
 
-import { LemonInput } from '@markettor/lemon-ui'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { combineUrl, router } from 'kea-router'
 import { ListHog } from 'lib/components/hedgehogs'
@@ -59,7 +59,7 @@ export function Cohorts(): JSX.Element {
         {
             title: 'Last calculated',
             tooltip:
-                'MarketTor calculates what users belong to each cohort. This is then used when filtering on cohorts in the Trends page etc. Calculating happens every 24 hours, or whenever a cohort is updated',
+                'ClairView calculates what users belong to each cohort. This is then used when filtering on cohorts in the Trends page etc. Calculating happens every 24 hours, or whenever a cohort is updated',
             render: function RenderCalculation(_: any, cohort: CohortType) {
                 if (cohort.is_static) {
                     return <>N/A</>
@@ -143,7 +143,7 @@ export function Cohorts(): JSX.Element {
                 thingName="cohort"
                 description="Use cohorts to group people together, such as users who used your app in the last week, or people who viewed the signup page but didn’t convert."
                 isEmpty={cohorts?.length == 0 && !cohortsLoading}
-                docsURL="https://markettor.com/docs/data/cohorts"
+                docsURL="https://clairview.com/docs/data/cohorts"
                 action={() => router.actions.push(urls.cohort('new'))}
                 customHog={ListHog}
             />

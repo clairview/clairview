@@ -1,4 +1,4 @@
-import { IconGear, IconPlus } from '@markettor/icons'
+import { IconGear, IconPlus } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
@@ -100,7 +100,7 @@ export function ProjectNotice(): JSX.Element | null {
             closeable: true,
         },
         invite_teammates: {
-            message: 'Get more out of MarketTor by inviting your team for free',
+            message: 'Get more out of ClairView by inviting your team for free',
             action: {
                 'data-attr': 'invite-warning-cta',
                 onClick: showInviteModal,
@@ -137,7 +137,7 @@ export function ProjectNotice(): JSX.Element | null {
             },
         },
         internet_connection_issue: {
-            message: 'MarketTor is having trouble connecting to the server. Please check your connection.',
+            message: 'ClairView is having trouble connecting to the server. Please check your connection.',
             type: 'warning',
             action: {
                 'data-attr': 'reload-page',

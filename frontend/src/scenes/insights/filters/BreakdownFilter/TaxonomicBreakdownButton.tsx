@@ -1,5 +1,5 @@
-import { IconPlusSmall } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconPlusSmall } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
 import { useState } from 'react'

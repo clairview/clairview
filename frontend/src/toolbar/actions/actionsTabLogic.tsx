@@ -235,7 +235,7 @@ export const actionsTabLogic = kea<actionsTabLogicType>([
                 if (!values.automaticActionCreationEnabled) {
                     lemonToast.success('Action saved', {
                         button: {
-                            label: 'Open in MarketTor',
+                            label: 'Open in ClairView',
                             action: () => window.open(`${apiURL}${urls.action(response.id)}`, '_blank'),
                         },
                     })

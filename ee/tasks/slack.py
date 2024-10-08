@@ -6,9 +6,9 @@ import structlog
 from django.conf import settings
 
 from ee.tasks.subscriptions.subscription_utils import generate_assets
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.integration import Integration, SlackIntegration
-from markettor.models.sharing_configuration import SharingConfiguration
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.integration import Integration, SlackIntegration
+from clairview.models.sharing_configuration import SharingConfiguration
 
 logger = structlog.get_logger(__name__)
 
@@ -57,7 +57,7 @@ def _handle_slack_event(event_payload: Any) -> None:
 
             team_id = sharing_config.team_id
 
-            # Now we try and get the SlackIntegration for the specificed MarketTor team and Slack Team
+            # Now we try and get the SlackIntegration for the specificed ClairView team and Slack Team
             try:
                 integration = Integration.objects.get(kind="slack", team=team_id, config__team__id=slack_team_id)
                 slack_integration = SlackIntegration(integration)

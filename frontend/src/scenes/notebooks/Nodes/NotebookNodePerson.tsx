@@ -1,9 +1,9 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType, PropertyDefinitionType } from '~/types'
 import { useActions, useValues } from 'kea'
-import { LemonDivider, Tooltip } from '@markettor/lemon-ui'
+import { LemonDivider, Tooltip } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
-import { PersonIcon, TZLabel } from '@markettor/apps-common'
+import { PersonIcon, TZLabel } from '@clairview/apps-common'
 import { personLogic } from 'scenes/persons/personLogic'
 import { PropertiesTable } from 'lib/components/PropertiesTable'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
@@ -151,7 +151,7 @@ type NotebookNodePersonAttributes = {
     id: string
 }
 
-export const NotebookNodePerson = createMarketTorWidgetNode<NotebookNodePersonAttributes>({
+export const NotebookNodePerson = createClairViewWidgetNode<NotebookNodePersonAttributes>({
     nodeType: NotebookNodeType.Person,
     titlePlaceholder: 'Person',
     Component,

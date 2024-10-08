@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 
 export const URL_MATCHING_HINTS = {
     exact: undefined,

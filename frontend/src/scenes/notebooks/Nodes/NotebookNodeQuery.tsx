@@ -1,13 +1,13 @@
 import { Query } from '~/queries/Query/Query'
 import { DataTableNode, InsightQueryNode, InsightVizNode, NodeKind, QuerySchema } from '~/queries/schema'
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { InsightLogicProps, InsightShortId, NotebookNodeType } from '~/types'
 import { useActions, useMountedLogic, useValues } from 'kea'
 import { useEffect, useMemo } from 'react'
 import { notebookNodeLogic } from './notebookNodeLogic'
 import { NotebookNodeProps, NotebookNodeAttributeProperties } from '../Notebook/utils'
 import { containsTorQLQuery, isTorQLQuery, isInsightVizNode, isNodeWithSource } from '~/queries/utils'
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 
 import { insightDataLogic } from 'scenes/insights/insightDataLogic'
@@ -214,7 +214,7 @@ export const Settings = ({
     )
 }
 
-export const NotebookNodeQuery = createMarketTorWidgetNode<NotebookNodeQueryAttributes>({
+export const NotebookNodeQuery = createClairViewWidgetNode<NotebookNodeQueryAttributes>({
     nodeType: NotebookNodeType.Query,
     titlePlaceholder: 'Query',
     Component,

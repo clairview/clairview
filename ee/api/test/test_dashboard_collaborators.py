@@ -2,7 +2,7 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models.dashboard_privilege import DashboardPrivilege
-from markettor.models import Dashboard, OrganizationMembership, User
+from clairview.models import Dashboard, OrganizationMembership, User
 
 
 class TestDashboardCollaboratorsAPI(APILicensedTest):

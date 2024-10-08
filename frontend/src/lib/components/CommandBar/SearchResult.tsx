@@ -1,4 +1,4 @@
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { capitalizeFirstLetter } from 'lib/utils'

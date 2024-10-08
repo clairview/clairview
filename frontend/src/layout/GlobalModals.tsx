@@ -1,4 +1,4 @@
-import { LemonModal } from '@markettor/lemon-ui'
+import { LemonModal } from '@clairview/lemon-ui'
 import { actions, kea, path, reducers, useActions, useValues } from 'kea'
 import { ConfirmUpgradeModal } from 'lib/components/ConfirmUpgradeModal/ConfirmUpgradeModal'
 import { HedgehogBuddyWithLogic } from 'lib/components/HedgehogBuddy/HedgehogBuddyWithLogic'

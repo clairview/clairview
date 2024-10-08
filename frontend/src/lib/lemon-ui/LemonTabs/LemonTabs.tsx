@@ -1,6 +1,6 @@
 import './LemonTabs.scss'
 
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import clsx from 'clsx'
 
 import { useSliderPositioning } from '../hooks'

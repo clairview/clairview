@@ -1,4 +1,4 @@
-import { IconPause, IconPlay } from '@markettor/icons'
+import { IconPause, IconPlay } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { IconFullScreen, IconSync } from 'lib/lemon-ui/icons'

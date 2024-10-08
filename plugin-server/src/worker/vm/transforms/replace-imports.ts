@@ -13,7 +13,7 @@ export const replaceImports: PluginGen =
 
                     if (typeof imports[importSource] === 'undefined') {
                         throw new Error(
-                            `Cannot import '${importSource}'! This package is not provided by MarketTor in plugins.`
+                            `Cannot import '${importSource}'! This package is not provided by ClairView in plugins.`
                         )
                     }
 
@@ -61,7 +61,7 @@ export const replaceImports: PluginGen =
 
                         if (typeof imports[importSource] === 'undefined') {
                             throw new Error(
-                                `Cannot import '${importSource}'! This package is not provided by MarketTor in plugins.`
+                                `Cannot import '${importSource}'! This package is not provided by ClairView in plugins.`
                             )
                         }
 

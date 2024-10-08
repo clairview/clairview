@@ -7,7 +7,7 @@ import { AdvertiseMobileReplay } from '../session-replay/SessionReplaySDKInstruc
 import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 
 function AndroidCaptureSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Kotlin}>{`MarketTor.capture(event = "test-event")`}</CodeSnippet>
+    return <CodeSnippet language={Language.Kotlin}>{`ClairView.capture(event = "test-event")`}</CodeSnippet>
 }
 
 export function ProductAnalyticsAndroidInstructions(): JSX.Element {

@@ -1,5 +1,5 @@
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BillingUpgradeCTA } from 'lib/components/BillingUpgradeCTA'
 import { StarHog } from 'lib/components/hedgehogs'

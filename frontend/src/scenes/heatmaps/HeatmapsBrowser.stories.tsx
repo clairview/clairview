@@ -71,7 +71,7 @@ export function HeatmapsBrowserWithUnauthorizedPageSelected(): JSX.Element {
 export function HeatmapsBrowserWithPageSelected(): JSX.Element {
     useEffect(() => {
         router.actions.push(
-            urls.heatmaps('pageURL=https://markettor.com&heatmapPalette=red&heatmapFilters={"type"%3A"mousemove"}')
+            urls.heatmaps('pageURL=https://clairview.com&heatmapPalette=red&heatmapFilters={"type"%3A"mousemove"}')
         )
     }, [])
     return <App />

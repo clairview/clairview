@@ -1,4 +1,4 @@
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 
 export const OperandTag = ({ operand }: { operand: 'and' | 'or' }): JSX.Element => {
     return (

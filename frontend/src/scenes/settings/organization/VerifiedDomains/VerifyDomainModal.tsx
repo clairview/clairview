@@ -10,7 +10,7 @@ import { verifiedDomainsLogic } from './verifiedDomainsLogic'
 export function VerifyDomainModal(): JSX.Element {
     const { domainBeingVerified, updatingDomainLoading } = useValues(verifiedDomainsLogic)
     const { setVerifyModal, verifyDomain } = useActions(verifiedDomainsLogic)
-    const challengeName = `_markettor-challenge.${domainBeingVerified?.domain}.`
+    const challengeName = `_clairview-challenge.${domainBeingVerified?.domain}.`
 
     return (
         <LemonModal

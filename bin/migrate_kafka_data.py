@@ -5,14 +5,14 @@
 # has suffered some catastrophic failure that causes us to migrate to a new
 # cluster. The old cluster may well come back up, and in which case we would
 # want to ensure that if there is any data in the old cluster that wasn't
-# consumed by the MarketTor app when it was pointing at it, then that data is
+# consumed by the ClairView app when it was pointing at it, then that data is
 # transferred to the new cluster.
 #
 # We do not make any attempt at validation, so it's important to ensure that you
 # move data to and from the corresponding topics.
 #
 # We also do not validate that you use the correct consumer group ID, so it's
-# important that you use the same consumer group ID that the MarketTor app is
+# important that you use the same consumer group ID that the ClairView app is
 # using when consuming from the old cluster, otherwise you risk migrating data
 # that has already been consumed.
 #

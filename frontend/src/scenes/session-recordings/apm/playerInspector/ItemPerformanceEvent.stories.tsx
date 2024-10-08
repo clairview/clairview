@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react'
 import { LemonDivider } from 'lib/lemon-ui/LemonDivider'
-import { CapturedNetworkRequest } from 'markettor-js'
+import { CapturedNetworkRequest } from 'clairview-js'
 import { mapRRWebNetworkRequest } from 'scenes/session-recordings/apm/performance-event-utils'
 import {
     BodyDisplay,
@@ -56,7 +56,7 @@ const exampleWithPerformanceObserverValues = mapRRWebNetworkRequest(
         firstInterimResponseStart: 0,
         initiatorType: 'fetch',
         method: 'GET',
-        name: 'https://markettor.com/api/signup-count',
+        name: 'https://clairview.com/api/signup-count',
         nextHopProtocol: 'h2',
         redirectEnd: 0,
         redirectStart: 0,
@@ -142,7 +142,7 @@ export function InitialBodyDisplay(): JSX.Element {
         <BodyDisplay
             content={undefined}
             headers={undefined}
-            emptyMessage="Response captured before MarketTor was initialized"
+            emptyMessage="Response captured before ClairView was initialized"
         />
     )
 }

@@ -7,7 +7,7 @@ from ee.clickhouse.materialized_columns.analyze import (
     materialize_properties_task,
 )
 from ee.clickhouse.materialized_columns.columns import DEFAULT_TABLE_COLUMN
-from markettor.settings import (
+from clairview.settings import (
     MATERIALIZE_COLUMNS_ANALYSIS_PERIOD_HOURS,
     MATERIALIZE_COLUMNS_BACKFILL_PERIOD_DAYS,
     MATERIALIZE_COLUMNS_MAX_AT_ONCE,

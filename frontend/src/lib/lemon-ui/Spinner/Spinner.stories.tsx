@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { Meta } from '@storybook/react'
 
 import { Spinner, SpinnerOverlay } from './Spinner'

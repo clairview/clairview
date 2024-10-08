@@ -8,8 +8,8 @@ from typing import Any, Optional
 from unittest.mock import patch
 
 from ee.billing.quota_limiting import QuotaResource
-from markettor.settings.data_stores import KAFKA_EVENTS_PLUGIN_INGESTION
-from markettor.test.base import APIBaseTest
+from clairview.settings.data_stores import KAFKA_EVENTS_PLUGIN_INGESTION
+from clairview.test.base import APIBaseTest
 
 
 def mocked_get_ingest_context_from_token(_: Any) -> None:
@@ -74,7 +74,7 @@ class TestCaptureAPI(APIBaseTest):
 
         return event, capture_recording_response
 
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_produce_to_kafka(self, kafka_produce):
         response = self.client.post(
             "/track/",
@@ -143,7 +143,7 @@ class TestCaptureAPI(APIBaseTest):
         self.assertEqual(type(kafka_produce_call1["data"]["uuid"]), str)
         self.assertEqual(type(kafka_produce_call2["data"]["uuid"]), str)
 
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_capture_event_with_uuid_in_payload(self, kafka_produce):
         response = self.client.post(
             "/track/",
@@ -172,7 +172,7 @@ class TestCaptureAPI(APIBaseTest):
         self.assertEqual(event_data["event"], "event1")
         self.assertEqual(kafka_produce_call["data"]["uuid"], "017d37c1-f285-0000-0e8b-e02d131925dc")
 
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_kafka_connection_error(self, kafka_produce):
         kafka_produce.side_effect = NoBrokersAvailable()
         response = self.client.post(
@@ -204,7 +204,7 @@ class TestCaptureAPI(APIBaseTest):
             },
         )
 
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_partition_key_override(self, kafka_produce):
         default_partition_key = f"{self.team.api_token}:id1"
 
@@ -260,7 +260,7 @@ class TestCaptureAPI(APIBaseTest):
             self.assertEqual(kafka_produce_call["key"], None)
 
     @patch("ee.billing.quota_limiting.list_limited_team_attributes")
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_quota_limited_recordings_return_retry_after_header_when_enabled(
         self, _kafka_produce, _fake_token_limiting
     ) -> None:
@@ -277,7 +277,7 @@ class TestCaptureAPI(APIBaseTest):
             assert json_data.get("quota_limited", None) == ["recordings"]
 
     @patch("ee.billing.quota_limiting.list_limited_team_attributes")
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_quota_limited_recordings_do_not_return_retry_after_header_when_disabled(
         self, _kafka_produce, _fake_token_limiting
     ) -> None:
@@ -294,7 +294,7 @@ class TestCaptureAPI(APIBaseTest):
             assert "quota_limited" not in json_data
 
     @patch("ee.billing.quota_limiting.list_limited_team_attributes")
-    @patch("markettor.kafka_client.client._KafkaProducer.produce")
+    @patch("clairview.kafka_client.client._KafkaProducer.produce")
     def test_quota_limited_events_do_not_return_retry_after_header(self, _kafka_produce, _fake_token_limiting) -> None:
         with self.settings(QUOTA_LIMITING_ENABLED=True):
 

@@ -240,7 +240,7 @@ export const defaultSurveyTemplates = [
         questions: [
             {
                 type: SurveyQuestionType.SingleChoice,
-                question: 'How would you feel if you could no longer use MarketTor?',
+                question: 'How would you feel if you could no longer use ClairView?',
                 choices: ['Not disappointed', 'Somewhat disappointed', 'Very disappointed'],
             },
         ],
@@ -252,7 +252,7 @@ export const defaultSurveyTemplates = [
         questions: [
             {
                 type: SurveyQuestionType.Rating,
-                question: 'How satisfied are you with MarketTor surveys?',
+                question: 'How satisfied are you with ClairView surveys?',
                 description: '',
                 descriptionContentType: 'text' as SurveyQuestionDescriptionContentType,
                 display: 'emoji',
@@ -270,7 +270,7 @@ export const defaultSurveyTemplates = [
         questions: [
             {
                 type: SurveyQuestionType.Rating,
-                question: 'MarketTor made it easy for me to resolve my issue',
+                question: 'ClairView made it easy for me to resolve my issue',
                 description: '',
                 descriptionContentType: 'text' as SurveyQuestionDescriptionContentType,
                 display: 'number',

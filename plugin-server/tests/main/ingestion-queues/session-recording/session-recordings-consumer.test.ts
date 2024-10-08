@@ -13,8 +13,8 @@ import { deleteKeysWithPrefix } from '../../../helpers/redis'
 import { getFirstTeam, resetTestDatabase } from '../../../helpers/sql'
 import { createIncomingRecordingMessage, createKafkaMessage, createTP } from './fixtures'
 
-const SESSION_RECORDING_REDIS_PREFIX = '@markettor-tests/replay/'
-const CAPTURE_OVERFLOW_REDIS_KEY = '@markettor/capture-overflow/replay'
+const SESSION_RECORDING_REDIS_PREFIX = '@clairview-tests/replay/'
+const CAPTURE_OVERFLOW_REDIS_KEY = '@clairview/capture-overflow/replay'
 
 const config: PluginsServerConfig = {
     ...defaultConfig,
@@ -219,7 +219,7 @@ describe.each([[true], [false]])('ingester with consumeOverflow=%p', (consumeOve
             expect(ingester.sessions['1-session_id_2']).toBeDefined()
         })
 
-        // This test is flaky and no-one has time to look into it https://markettor.slack.com/archives/C0460HY55M0/p1696437876690329
+        // This test is flaky and no-one has time to look into it https://clairview.slack.com/archives/C0460HY55M0/p1696437876690329
         it.skip('destroys a session manager if finished', async () => {
             const sessionId = `destroys-a-session-manager-if-finished-${randomUUID()}`
             const event = createIncomingRecordingMessage({

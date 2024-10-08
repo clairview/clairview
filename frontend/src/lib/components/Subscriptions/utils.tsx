@@ -1,5 +1,5 @@
-import { IconLetter } from '@markettor/icons'
-import { LemonSelectOptions } from '@markettor/lemon-ui'
+import { IconLetter } from '@clairview/icons'
+import { LemonSelectOptions } from '@clairview/lemon-ui'
 import { IconSlack } from 'lib/lemon-ui/icons'
 import { range } from 'lib/utils'
 import { urls } from 'scenes/urls'

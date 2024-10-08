@@ -1,5 +1,5 @@
-import { IconGear } from '@markettor/icons'
-import { LemonButton, Link, Spinner } from '@markettor/lemon-ui'
+import { IconGear } from '@clairview/icons'
+import { LemonButton, Link, Spinner } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { EmptyMessage } from 'lib/components/EmptyMessage/EmptyMessage'
 import { Playlist, PlaylistSection } from 'lib/components/Playlist/Playlist'
@@ -141,7 +141,7 @@ export function SessionRecordingsPlaylist(props: SessionRecordingPlaylistLogicPr
                                     title="No recording selected"
                                     description="Please select a recording from the list on the left"
                                     buttonText="Learn more about recordings"
-                                    buttonTo="https://markettor.com/docs/user-guides/recordings"
+                                    buttonTo="https://clairview.com/docs/user-guides/recordings"
                                 />
                             </div>
                         )
@@ -197,11 +197,11 @@ function UnusableEventsWarning(props: { unusableEventsInFilter: string[] }): JSX
             <p>
                 Events have to have a <PropertyKeyInfo value="$session_id" /> to be used to filter recordings. This is
                 added automatically by{' '}
-                <Link to="https://markettor.com/docs/libraries/js" target="_blank">
+                <Link to="https://clairview.com/docs/libraries/js" target="_blank">
                     the Web SDK
                 </Link>
                 ,{' '}
-                <Link to="https://markettor.com/docs/libraries/android" target="_blank">
+                <Link to="https://clairview.com/docs/libraries/android" target="_blank">
                     the Android SDK
                 </Link>
             </p>

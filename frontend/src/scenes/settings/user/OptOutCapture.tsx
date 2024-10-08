@@ -1,4 +1,4 @@
-import { LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { userLogic } from 'scenes/userLogic'
 
@@ -9,8 +9,8 @@ export function OptOutCapture(): JSX.Element {
     return (
         <div>
             <p>
-                MarketTor uses MarketTor (unsurprisingly!) to capture information about how people are using the product. We
-                believe that product analytics is crucial to making MarketTor the most useful it can be, for everyone.
+                ClairView uses ClairView (unsurprisingly!) to capture information about how people are using the product. We
+                believe that product analytics is crucial to making ClairView the most useful it can be, for everyone.
             </p>
             <p>
                 We also understand there are many reasons why people don't want to or aren't allowed to send this usage

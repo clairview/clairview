@@ -255,7 +255,7 @@ export function CodeEditor({
                 if (onPressCmdEnter) {
                     monacoDisposables.current.push(
                         editor.addAction({
-                            id: 'saveAndRunMarketTor',
+                            id: 'saveAndRunClairView',
                             label: 'Save and run query',
                             keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
                             run: () => {

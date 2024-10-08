@@ -1,4 +1,4 @@
-import { IconFlag } from '@markettor/icons'
+import { IconFlag } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { getSeriesColor } from 'lib/colors'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'

@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton, LemonInput, LemonSegmentedButton, Link } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, LemonInput, LemonSegmentedButton, Link } from '@clairview/lemon-ui'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
 import { OperandTag } from 'lib/components/PropertyFilters/components/OperandTag'
@@ -15,7 +15,7 @@ import { ActionStepStringMatching, ActionStepType } from '~/types'
 
 import { LemonEventName } from './EventName'
 
-const learnMoreLink = 'https://markettor.com/docs/user-guides/actions?utm_medium=in-product&utm_campaign=action-page'
+const learnMoreLink = 'https://clairview.com/docs/user-guides/actions?utm_medium=in-product&utm_campaign=action-page'
 
 interface Props {
     step: ActionStepType
@@ -74,7 +74,7 @@ export function ActionStep({ step, actionId, isOnlyStep, index, identifier, onDe
                         />
 
                         <small>
-                            <Link to="https://markettor.com/docs/libraries" target="_blank">
+                            <Link to="https://clairview.com/docs/libraries" target="_blank">
                                 See documentation
                             </Link>{' '}
                             on how to send custom events in lots of languages.
@@ -117,7 +117,7 @@ export function ActionStep({ step, actionId, isOnlyStep, index, identifier, onDe
 }
 
 /**
- * There are several issues with how autocapture actions are matched. See https://github.com/MarketTor/markettor/issues/7333
+ * There are several issues with how autocapture actions are matched. See https://github.com/ClairView/clairview/issues/7333
  *
  * Until they are fixed this validator can be used to guide users to working solutions
  */
@@ -125,7 +125,7 @@ const validateSelector = (val: string, selectorPrompts: (s: JSX.Element | null) 
     if (val.includes('#')) {
         selectorPrompts(
             <>
-                MarketTor actions don't support the <code>#example</code> syntax.
+                ClairView actions don't support the <code>#example</code> syntax.
                 <br />
                 Use the equivalent <code>[id="example"]</code> instead.
             </>

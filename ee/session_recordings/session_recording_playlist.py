@@ -7,35 +7,35 @@ from django.utils.timezone import now
 from django_filters.rest_framework import DjangoFilterBackend
 from loginas.utils import is_impersonated_session
 from rest_framework import request, response, serializers, viewsets
-from markettor.api.utils import action
+from clairview.api.utils import action
 from rest_framework.exceptions import PermissionDenied
 
-from markettor.api.forbid_destroy_model import ForbidDestroyModel
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.constants import SESSION_RECORDINGS_FILTER_IDS, AvailableFeature
-from markettor.models import (
+from clairview.api.forbid_destroy_model import ForbidDestroyModel
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.constants import SESSION_RECORDINGS_FILTER_IDS, AvailableFeature
+from clairview.models import (
     SessionRecording,
     SessionRecordingPlaylist,
     SessionRecordingPlaylistItem,
     Team,
     User,
 )
-from markettor.models.activity_logging.activity_log import (
+from clairview.models.activity_logging.activity_log import (
     Change,
     Detail,
     changes_between,
     log_activity,
 )
-from markettor.models.filters.session_recordings_filter import SessionRecordingsFilter
-from markettor.models.team.team import check_is_feature_available_for_team
-from markettor.models.utils import UUIDT
-from markettor.rate_limit import (
+from clairview.models.filters.session_recordings_filter import SessionRecordingsFilter
+from clairview.models.team.team import check_is_feature_available_for_team
+from clairview.models.utils import UUIDT
+from clairview.rate_limit import (
     ClickHouseBurstRateThrottle,
     ClickHouseSustainedRateThrottle,
 )
-from markettor.session_recordings.session_recording_api import list_recordings_response
-from markettor.utils import relative_date_parse
+from clairview.session_recordings.session_recording_api import list_recordings_response
+from clairview.utils import relative_date_parse
 
 logger = structlog.get_logger(__name__)
 

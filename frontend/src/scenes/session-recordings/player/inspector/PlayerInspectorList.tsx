@@ -1,6 +1,6 @@
 import './PlayerInspectorList.scss'
 
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { range } from 'd3'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
@@ -43,7 +43,7 @@ function EmptyNetworkTab({
             <PayGateMini
                 feature={AvailableFeature.RECORDINGS_PERFORMANCE}
                 className="py-8"
-                docsLink="https://markettor.com/docs/user-guides/recordings"
+                docsLink="https://clairview.com/docs/user-guides/recordings"
             />
         </div>
     ) : !captureNetworkLogOptIn ? (
@@ -69,7 +69,7 @@ function EmptyNetworkTab({
                 <h4 className="text-xl font-medium">Network recording</h4>
                 <p className="text-muted text-center">
                     Network capture is not supported when replay is running on localhost.{' '}
-                    <Link to="https://markettor.com/docs/session-replay/network-recording">Learn more in our docs </Link>.
+                    <Link to="https://clairview.com/docs/session-replay/network-recording">Learn more in our docs </Link>.
                 </p>
             </div>
         </>

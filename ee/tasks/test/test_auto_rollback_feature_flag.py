@@ -7,8 +7,8 @@ from ee.tasks.auto_rollback_feature_flag import (
     check_condition,
     check_feature_flag_rollback_conditions,
 )
-from markettor.models.feature_flag import FeatureFlag
-from markettor.test.base import APIBaseTest, ClickhouseTestMixin, _create_event
+from clairview.models.feature_flag import FeatureFlag
+from clairview.test.base import APIBaseTest, ClickhouseTestMixin, _create_event
 
 
 class AutoRollbackTest(ClickhouseTestMixin, APIBaseTest):

@@ -1,4 +1,4 @@
-import { LemonButton, LemonCheckbox, LemonDialog, LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { LemonButton, LemonCheckbox, LemonDialog, LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'
@@ -133,7 +133,7 @@ export function Customization({ appearance, surveyQuestionItem, onAppearanceChan
                     <LemonCheckbox
                         label={
                             <div className="flex items-center">
-                                <span>Hide MarketTor branding</span>
+                                <span>Hide ClairView branding</span>
                             </div>
                         }
                         onChange={(checked) =>

@@ -55,7 +55,7 @@ export function HogQueryEditor(props: HogQueryEditorProps): JSX.Element {
                             onMount={(editor, monaco) => {
                                 monacoDisposables.current.push(
                                     editor.addAction({
-                                        id: 'saveAndRunMarketTor',
+                                        id: 'saveAndRunClairView',
                                         label: 'Save and run query',
                                         keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
                                         run: () => saveQuery(),

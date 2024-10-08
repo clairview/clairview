@@ -1,4 +1,4 @@
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { UNSUBSCRIBE_SURVEY_ID } from 'lib/constants'
 
@@ -20,17 +20,17 @@ export const UnsubscribeCard = ({ product }: { product: BillingProductV2Type }):
                 <p className="">
                     Need to control your costs? Learn about ways to{' '}
                     <Link
-                        to="https://markettor.com/docs/billing/estimating-usage-costs#how-to-reduce-your-markettor-costs?utm_source=app-unsubscribe"
+                        to="https://clairview.com/docs/billing/estimating-usage-costs#how-to-reduce-your-clairview-costs?utm_source=app-unsubscribe"
                         target="_blank"
                     >
                         reduce your bill
                     </Link>{' '}
                     or{' '}
-                    <Link to="mailto:sales@markettor.com?subject=Help%20reducing%20MarketTor%20bill" target="_blank">
+                    <Link to="mailto:sales@clairview.com?subject=Help%20reducing%20ClairView%20bill" target="_blank">
                         chat with support.
                     </Link>{' '}
                     Check out more about our pricing on our{' '}
-                    <Link to="https://markettor.com/pricing" target="_blank">
+                    <Link to="https://clairview.com/pricing" target="_blank">
                         pricing page
                     </Link>
                     .

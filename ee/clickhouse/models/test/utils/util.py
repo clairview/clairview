@@ -1,6 +1,6 @@
 from time import sleep, time
 
-from markettor.client import sync_execute
+from clairview.client import sync_execute
 
 
 # this normally is unnecessary as CH is fast to consume from Kafka when testing

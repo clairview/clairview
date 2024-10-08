@@ -24,7 +24,7 @@ const MOCK_ACTION: ActionType = {
             text_matching: null,
             href: null,
             href_matching: 'contains',
-            url: 'markettor.com/pricing',
+            url: 'clairview.com/pricing',
             url_matching: 'contains',
         },
         {

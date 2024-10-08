@@ -1,5 +1,5 @@
-import { IconCopy } from '@markettor/icons'
-import { lemonToast } from '@markettor/lemon-ui'
+import { IconCopy } from '@clairview/icons'
+import { lemonToast } from '@clairview/lemon-ui'
 
 export async function copyToClipboard(value: string, description: string = 'text'): Promise<boolean> {
     if (!navigator.clipboard) {

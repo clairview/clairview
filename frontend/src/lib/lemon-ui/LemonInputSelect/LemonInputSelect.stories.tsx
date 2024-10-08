@@ -36,16 +36,16 @@ const meta: Meta<typeof LemonInputSelect> = {
                     <ProfilePicture
                         user={{
                             first_name: x,
-                            email: `${x}@markettor.com`,
+                            email: `${x}@clairview.com`,
                         }}
                         size="sm"
                     />
                     <span>
-                        {capitalizeFirstLetter(x)} <b>{`<${x}@markettor.com>`}</b>
+                        {capitalizeFirstLetter(x)} <b>{`<${x}@clairview.com>`}</b>
                     </span>
                 </span>
             ),
-            label: `${capitalizeFirstLetter(x)} <${x}@markettor.com>`,
+            label: `${capitalizeFirstLetter(x)} <${x}@clairview.com>`,
         })),
     },
     tags: ['autodocs'],
@@ -76,17 +76,17 @@ MultipleSelectWithCustom.args = {
     allowCustomValues: true,
     options: [
         {
-            key: 'http://markettor.com/docs',
-            label: 'http://markettor.com/docs',
+            key: 'http://clairview.com/docs',
+            label: 'http://clairview.com/docs',
         },
         {
-            key: 'http://markettor.com/pricing',
-            label: 'http://markettor.com/pricing',
+            key: 'http://clairview.com/pricing',
+            label: 'http://clairview.com/pricing',
         },
 
         {
-            key: 'http://markettor.com/products',
-            label: 'http://markettor.com/products',
+            key: 'http://clairview.com/products',
+            label: 'http://clairview.com/products',
         },
     ],
 }

@@ -72,7 +72,7 @@ describe('Hog Executor', () => {
             const invocation = createInvocation(hogFunction)
             const result = executor.execute(invocation)
             expect(result).toEqual({
-                capturedMarketTorEvents: [],
+                capturedClairViewEvents: [],
                 invocation: {
                     id: expect.any(String),
                     teamId: 1,
@@ -139,7 +139,7 @@ describe('Hog Executor', () => {
             expect(result.invocation).toMatchObject({
                 queue: 'fetch',
                 queueParameters: {
-                    url: 'https://example.com/markettor-webhook',
+                    url: 'https://example.com/clairview-webhook',
                     method: 'POST',
                     headers: { version: 'v=1.2.3' },
                 },
@@ -162,7 +162,7 @@ describe('Hog Executor', () => {
                     id: 'uuid',
                     name: 'test',
                     url: 'http://localhost:8000/persons/1',
-                    properties: { email: 'test@markettor.com' },
+                    properties: { email: 'test@clairview.com' },
                 },
                 event_url: 'http://localhost:8000/events/1-test',
             })
@@ -235,7 +235,7 @@ describe('Hog Executor', () => {
                     event: {
                         event: '$pageview',
                         properties: {
-                            $current_url: 'https://markettor.com',
+                            $current_url: 'https://clairview.com',
                         },
                     } as any,
                 })
@@ -260,7 +260,7 @@ describe('Hog Executor', () => {
                     event: {
                         event: '$pageview',
                         properties: {
-                            $current_url: 'https://markettor.com',
+                            $current_url: 'https://clairview.com',
                         },
                     } as any,
                 })
@@ -497,16 +497,16 @@ describe('Hog Executor', () => {
         })
     })
 
-    describe('markettorCaptue', () => {
+    describe('clairviewCaptue', () => {
         it('captures events', () => {
             const fn = createHogFunction({
-                ...HOG_EXAMPLES.markettor_capture,
+                ...HOG_EXAMPLES.clairview_capture,
                 ...HOG_INPUTS_EXAMPLES.simple_fetch,
                 ...HOG_FILTERS_EXAMPLES.no_filters,
             })
 
             const result = executor.execute(createInvocation(fn))
-            expect(result?.capturedMarketTorEvents).toEqual([
+            expect(result?.capturedClairViewEvents).toEqual([
                 {
                     distinct_id: 'distinct_id',
                     event: 'test (copy)',
@@ -519,9 +519,9 @@ describe('Hog Executor', () => {
             ])
         })
 
-        it('ignores events that have already used their markettorCapture', () => {
+        it('ignores events that have already used their clairviewCapture', () => {
             const fn = createHogFunction({
-                ...HOG_EXAMPLES.markettor_capture,
+                ...HOG_EXAMPLES.clairview_capture,
                 ...HOG_INPUTS_EXAMPLES.simple_fetch,
                 ...HOG_FILTERS_EXAMPLES.no_filters,
             })
@@ -535,7 +535,7 @@ describe('Hog Executor', () => {
                 },
             } as any)
             const result = executor.execute(createInvocation(fn, globals))
-            expect(result?.capturedMarketTorEvents).toEqual([])
+            expect(result?.capturedClairViewEvents).toEqual([])
             expect(result?.logs[1].message).toMatchInlineSnapshot(
                 `"marketTorCapture was called from an event that already executed this function. To prevent infinite loops, the event was not captured."`
             )

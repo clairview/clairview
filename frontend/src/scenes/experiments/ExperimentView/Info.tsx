@@ -1,7 +1,7 @@
 import '../Experiment.scss'
 
-import { IconWarning } from '@markettor/icons'
-import { Link, ProfilePicture, Tooltip } from '@markettor/lemon-ui'
+import { IconWarning } from '@clairview/icons'
+import { Link, ProfilePicture, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
 import { EditableField } from 'lib/components/EditableField/EditableField'

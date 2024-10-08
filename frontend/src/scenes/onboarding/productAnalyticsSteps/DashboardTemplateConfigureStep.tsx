@@ -1,4 +1,4 @@
-import { IconArrowRight, IconCheckCircle } from '@markettor/icons'
+import { IconArrowRight, IconCheckCircle } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -8,7 +8,7 @@ import {
     LemonSkeleton,
     Link,
     Spinner,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { authorizedUrlListLogic, AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
 import { StarHog } from 'lib/components/hedgehogs'
@@ -129,7 +129,7 @@ export const SiteChooser = (): JSX.Element => {
                             <p>
                                 Not seeing the site you want? Try clikcing around on your site to trigger a few events.
                                 If you haven't yet,{' '}
-                                <Link onClick={() => setStepKey(OnboardingStepKey.INSTALL)}>install markettor-js</Link> or
+                                <Link onClick={() => setStepKey(OnboardingStepKey.INSTALL)}>install clairview-js</Link> or
                                 the HTML snippet wherever you want to track events, then come back here.
                             </p>
                             {isCloud && (
@@ -160,13 +160,13 @@ export const SiteChooser = (): JSX.Element => {
                                 Hm, it looks like you haven't ingested any events from a website yet. To select actions
                                 from your site, head back to the{' '}
                                 <Link onClick={() => setStepKey(OnboardingStepKey.INSTALL)}>install step</Link> to
-                                install markettor-js in your frontend.
+                                install clairview-js in your frontend.
                             </p>
                             <p className="text-muted">
                                 You can still create a dashboard using custom event names, though it's not quite as fun.
                             </p>
                             <LemonButton onClick={() => setStepKey(OnboardingStepKey.INSTALL)} type="primary">
-                                Install markettor-js
+                                Install clairview-js
                             </LemonButton>
                         </>
                     )}
@@ -267,8 +267,8 @@ export const OnboardingDashboardTemplateConfigureStep = ({
                             <p>
                                 For each action below, select an element on your site that indicates when that action is
                                 taken, or enter a custom event name that you'll send using{' '}
-                                <Link to="https://markettor.com/docs/product-analytics/capture-events">
-                                    <code>markettor.capture()</code>
+                                <Link to="https://clairview.com/docs/product-analytics/capture-events">
+                                    <code>clairview.capture()</code>
                                 </Link>{' '}
                                 (no need to send it now) .
                             </p>

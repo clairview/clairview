@@ -1,4 +1,4 @@
-import { IconServer } from '@markettor/icons'
+import { IconServer } from '@clairview/icons'
 import { actions, BuiltLogic, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { combineUrl } from 'kea-router'
 import { infiniteListLogic } from 'lib/components/TaxonomicFilter/infiniteListLogic'
@@ -52,7 +52,7 @@ import type { taxonomicFilterLogicType } from './taxonomicFilterLogicType'
 export const eventTaxonomicGroupProps: Pick<TaxonomicFilterGroup, 'getPopoverHeader' | 'getIcon'> = {
     getPopoverHeader: (eventDefinition: EventDefinition): string => {
         if (CORE_FILTER_DEFINITIONS_BY_GROUP.events[eventDefinition.name]) {
-            return 'MarketTor event'
+            return 'ClairView event'
         }
         return `${eventDefinition.verified ? 'Verified' : 'Unverified'} event`
     },
@@ -64,7 +64,7 @@ export const propertyTaxonomicGroupProps = (
 ): Pick<TaxonomicFilterGroup, 'getPopoverHeader' | 'getIcon'> => ({
     getPopoverHeader: (propertyDefinition: PropertyDefinition): string => {
         if (verified || !!CORE_FILTER_DEFINITIONS_BY_GROUP.event_properties[propertyDefinition.name]) {
-            return 'MarketTor property'
+            return 'ClairView property'
         }
         return 'Property'
     },

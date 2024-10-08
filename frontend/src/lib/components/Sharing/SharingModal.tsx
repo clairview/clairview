@@ -1,7 +1,7 @@
 import './SharingModal.scss'
 
-import { IconCollapse, IconExpand, IconInfo, IconLock } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonModal, LemonSkeleton, LemonSwitch } from '@markettor/lemon-ui'
+import { IconCollapse, IconExpand, IconInfo, IconLock } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonModal, LemonSkeleton, LemonSwitch } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
@@ -164,7 +164,7 @@ export function SharingModalContent({
                                                     bordered
                                                     label={
                                                         <div className="flex items-center">
-                                                            <span>Show MarketTor branding</span>
+                                                            <span>Show ClairView branding</span>
                                                             {!whitelabelAvailable && (
                                                                 <Tooltip title="This is a premium feature, click to learn more.">
                                                                     <IconLock className="ml-1.5 text-muted text-lg" />

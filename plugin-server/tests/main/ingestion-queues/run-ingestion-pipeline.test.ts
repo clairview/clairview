@@ -41,7 +41,7 @@ describe('workerTasks.runEventPipeline()', () => {
 
     test('throws DependencyUnavailableError on postgres errors', async () => {
         const errorMessage =
-            'connection to server at "markettor-pgbouncer" (171.20.65.128), port 6543 failed: server closed the connection unexpectedly'
+            'connection to server at "clairview-pgbouncer" (171.20.65.128), port 6543 failed: server closed the connection unexpectedly'
         const organizationId = await createOrganization(hub.postgres)
         const teamId = await createTeam(hub.postgres, organizationId)
 

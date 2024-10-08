@@ -1,18 +1,18 @@
 from typing import Any, cast
 
-from markettor.constants import PropertyOperatorType
-from markettor.models.cohort.util import get_count_operator
-from markettor.models.filters.mixins.utils import cached_property
-from markettor.models.property.property import Property, PropertyGroup
-from markettor.queries.foss_cohort_query import (
+from clairview.constants import PropertyOperatorType
+from clairview.models.cohort.util import get_count_operator
+from clairview.models.filters.mixins.utils import cached_property
+from clairview.models.property.property import Property, PropertyGroup
+from clairview.queries.foss_cohort_query import (
     FOSSCohortQuery,
     parse_and_validate_positive_integer,
     validate_entity,
     validate_interval,
     validate_seq_date_more_recent_than_date,
 )
-from markettor.queries.util import PersonPropertiesMode
-from markettor.schema import PersonsOnEventsMode
+from clairview.queries.util import PersonPropertiesMode
+from clairview.schema import PersonsOnEventsMode
 
 
 def check_negation_clause(prop: PropertyGroup) -> tuple[bool, bool]:

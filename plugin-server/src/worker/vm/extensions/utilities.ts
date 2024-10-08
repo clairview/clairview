@@ -1,4 +1,4 @@
-import { CursorUtils, UtilsExtension } from '@markettor/plugin-scaffold'
+import { CursorUtils, UtilsExtension } from '@clairview/plugin-scaffold'
 
 import { Hub } from '../../../types'
 import { postgresIncrement, postgresSetOnce } from '../utils'

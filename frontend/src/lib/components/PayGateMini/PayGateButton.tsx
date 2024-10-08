@@ -1,4 +1,4 @@
-import { LemonButton, LemonButtonProps } from '@markettor/lemon-ui'
+import { LemonButton, LemonButtonProps } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { useMemo } from 'react'
 import { urls } from 'scenes/urls'
@@ -19,9 +19,9 @@ export const PayGateButton = ({ feature, currentUsage, ...buttonProps }: PayGate
         } else if (gateVariant === 'add-card') {
             return `/organization/billing${scrollToProduct ? `?products=${productWithFeature?.type}` : ''}`
         } else if (gateVariant === 'contact-sales') {
-            return `mailto:sales@markettor.com?subject=Inquiring about ${featureInfo?.name}`
+            return `mailto:sales@clairview.com?subject=Inquiring about ${featureInfo?.name}`
         } else if (gateVariant === 'move-to-cloud') {
-            return 'https://us.markettor.com/signup?utm_medium=in-product&utm_campaign=move-to-cloud'
+            return 'https://us.clairview.com/signup?utm_medium=in-product&utm_campaign=move-to-cloud'
         }
         return undefined
     }, [gateVariant, isAddonProduct, productWithFeature, featureInfo, scrollToProduct])
@@ -32,7 +32,7 @@ export const PayGateButton = ({ feature, currentUsage, ...buttonProps }: PayGate
         } else if (gateVariant === 'contact-sales') {
             return 'Contact sales'
         }
-        return 'Move to MarketTor Cloud'
+        return 'Move to ClairView Cloud'
     }, [gateVariant])
 
     return (

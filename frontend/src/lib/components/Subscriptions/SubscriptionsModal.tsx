@@ -1,4 +1,4 @@
-import { LemonButton, LemonButtonWithDropdown } from '@markettor/lemon-ui'
+import { LemonButton, LemonButtonWithDropdown } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { LemonModal } from 'lib/lemon-ui/LemonModal'
@@ -33,7 +33,7 @@ export function SubscriptionsModal(props: SubscriptionsModalProps): JSX.Element 
                 feature={AvailableFeature.SUBSCRIPTIONS}
                 background={false}
                 className="py-8"
-                docsLink="https://markettor.com/docs/user-guides/subscriptions"
+                docsLink="https://clairview.com/docs/user-guides/subscriptions"
             >
                 {!subscriptionId ? (
                     <ManageSubscriptions

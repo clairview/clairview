@@ -1,7 +1,7 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType } from '~/types'
 import { BindLogic, useActions, useValues } from 'kea'
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -16,7 +16,7 @@ import { funnelDataLogic } from 'scenes/funnels/funnelDataLogic'
 import { trendsDataLogic } from 'scenes/trends/trendsDataLogic'
 import { ExperimentResult } from 'scenes/experiments/ExperimentResult'
 import { NotFound } from 'lib/components/NotFound'
-import { IconFlag, IconFlask } from '@markettor/icons'
+import { IconFlag, IconFlask } from '@clairview/icons'
 import { ResultsTag, StatusTag } from 'scenes/experiments/ExperimentView/components'
 
 const Component = ({ attributes }: NotebookNodeProps<NotebookNodeExperimentAttributes>): JSX.Element => {
@@ -116,7 +116,7 @@ type NotebookNodeExperimentAttributes = {
     id: number
 }
 
-export const NotebookNodeExperiment = createMarketTorWidgetNode<NotebookNodeExperimentAttributes>({
+export const NotebookNodeExperiment = createClairViewWidgetNode<NotebookNodeExperimentAttributes>({
     nodeType: NotebookNodeType.Experiment,
     titlePlaceholder: 'Experiment',
     Component,

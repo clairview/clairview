@@ -2,20 +2,20 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/docker-existing-docker-compose
 // If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-    "name": "MarketTor codespaces development environment",
+    "name": "ClairView codespaces development environment",
     "build": {
         "dockerfile": "Dockerfile",
         "context": "../",
-        "cacheFrom": "ghcr.io/markettor/markettor/codespaces:master"
+        "cacheFrom": "ghcr.io/clairview/clairview/codespaces:master"
     },
     "remoteUser": "vscode",
     "remoteEnv": {
         "DEBUG": "1",
-        "DATABASE_URL": "postgres://markettor:markettor@localhost:5432/markettor",
+        "DATABASE_URL": "postgres://clairview:clairview@localhost:5432/clairview",
         "KAFKA_ENABLED": "true",
         "KAFKA_HOSTS": "kafka:9092",
         "CLICKHOUST_HOST": "localhost",
-        "CLICKHOUSE_DATABASE": "markettor_test",
+        "CLICKHOUSE_DATABASE": "clairview_test",
         "CLICKHOUSE_VERIFY": "False",
         "REDIS_URL": "redis://localhost:6379",
         "SECRET_KEY": "<randomly generated secret key>"
@@ -31,7 +31,7 @@
         "--add-host",
         "kafka:127.0.0.1"
     ],
-    "workspaceFolder": "/workspaces/markettor",
+    "workspaceFolder": "/workspaces/clairview",
     // Set *default* container specific settings.json values on container create.
     "settings": {
         /*

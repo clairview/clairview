@@ -1,6 +1,6 @@
 import './Setup2FA.scss'
 
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'

@@ -11,8 +11,8 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models.license import License
-from markettor.models.organization import Organization
-from markettor.models.team import Team
+from clairview.models.organization import Organization
+from clairview.models.team import Team
 
 
 class TestLicenseAPI(APILicensedTest):

@@ -77,7 +77,7 @@ export enum Scene {
     Products = 'Products',
     Onboarding = 'Onboarding',
     Settings = 'Settings',
-    MoveToMarketTorCloud = 'MoveToMarketTorCloud',
+    MoveToClairViewCloud = 'MoveToClairViewCloud',
     Heatmaps = 'Heatmaps',
     SessionAttributionExplorer = 'SessionAttributionExplorer',
 }
@@ -115,9 +115,9 @@ export interface Params {
 export interface SceneConfig {
     /** Custom name for the scene */
     name?: string
-    /** Route should only be accessed when logged out (N.B. should be added to markettor/urls.py too) */
+    /** Route should only be accessed when logged out (N.B. should be added to clairview/urls.py too) */
     onlyUnauthenticated?: boolean
-    /** Route **can** be accessed when logged out (i.e. can be accessed when logged in too; should be added to markettor/urls.py too) */
+    /** Route **can** be accessed when logged out (i.e. can be accessed when logged in too; should be added to clairview/urls.py too) */
     allowUnauthenticated?: boolean
     /**
      * If `app`, navigation is shown, and the scene has default padding.

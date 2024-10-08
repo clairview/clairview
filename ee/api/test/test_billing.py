@@ -19,13 +19,13 @@ from ee.billing.billing_types import (
 )
 from ee.billing.test.test_billing_manager import create_default_products_response
 from ee.models.license import License
-from markettor.cloud_utils import (
+from clairview.cloud_utils import (
     TEST_clear_instance_license_cache,
     get_cached_instance_license,
 )
-from markettor.models.organization import OrganizationMembership
-from markettor.models.team import Team
-from markettor.test.base import APIBaseTest, _create_event, flush_persons_and_events
+from clairview.models.organization import OrganizationMembership
+from clairview.models.team import Team
+from clairview.test.base import APIBaseTest, _create_event, flush_persons_and_events
 
 
 def create_billing_response(**kwargs) -> dict[str, Any]:
@@ -71,7 +71,7 @@ def create_billing_customer(**kwargs) -> CustomerInfo:
                 description="Product Analytics, event pipelines, data warehousing",
                 price_description=None,
                 type="product_analytics",
-                image_url="https://markettor.com/static/images/product-os.png",
+                image_url="https://clairview.com/static/images/product-os.png",
                 free_allocation=10000,
                 tiers=[
                     {
@@ -101,7 +101,7 @@ def create_billing_customer(**kwargs) -> CustomerInfo:
                         description="Test Addon",
                         price_description=None,
                         type="addon",
-                        image_url="https://markettor.com/static/images/product-os.png",
+                        image_url="https://clairview.com/static/images/product-os.png",
                         free_allocation=10000,
                         tiers=[
                             {
@@ -160,7 +160,7 @@ def create_billing_products_response(**kwargs) -> dict[str, list[CustomerProduct
                 description="Product Analytics, event pipelines, data warehousing",
                 price_description=None,
                 type="events",
-                image_url="https://markettor.com/static/images/product-os.png",
+                image_url="https://clairview.com/static/images/product-os.png",
                 free_allocation=10000,
                 tiers=[
                     {
@@ -189,7 +189,7 @@ def create_billing_products_response(**kwargs) -> dict[str, list[CustomerProduct
                         "description": "Test Addon",
                         "free_allocation": 10000,
                         "has_exceeded_limit": False,
-                        "image_url": "https://markettor.com/static/images/product-os.png",
+                        "image_url": "https://clairview.com/static/images/product-os.png",
                         "name": "Addon",
                         "percentage_usage": 0,
                         "price_description": None,
@@ -312,12 +312,12 @@ class TestBillingAPI(APILicensedTest):
             token,
             secret,
             algorithms=["HS256"],
-            audience="markettor:license-key",
+            audience="clairview:license-key",
             options={"verify_aud": True},
         )
 
         assert decoded_token == {
-            "aud": "markettor:license-key",
+            "aud": "clairview:license-key",
             "exp": 1640996100,
             "id": self.license.key.split("::")[0],
             "organization_id": str(self.organization.id),
@@ -368,7 +368,7 @@ class TestBillingAPI(APILicensedTest):
                     "description": "Product Analytics, event pipelines, data warehousing",
                     "price_description": None,
                     "type": "product_analytics",
-                    "image_url": "https://markettor.com/static/images/product-os.png",
+                    "image_url": "https://clairview.com/static/images/product-os.png",
                     "free_allocation": 10000,
                     "tiers": [
                         {
@@ -399,7 +399,7 @@ class TestBillingAPI(APILicensedTest):
                             "description": "Test Addon",
                             "free_allocation": 10000,
                             "has_exceeded_limit": False,
-                            "image_url": "https://markettor.com/static/images/product-os.png",
+                            "image_url": "https://clairview.com/static/images/product-os.png",
                             "name": "Addon",
                             "percentage_usage": 0,
                             "price_description": None,
@@ -504,7 +504,7 @@ class TestBillingAPI(APILicensedTest):
                     "tiered": True,
                     "unit_amount_usd": "0.00",
                     "usage_limit": None,
-                    "image_url": "https://markettor.com/static/images/product-os.png",
+                    "image_url": "https://clairview.com/static/images/product-os.png",
                     "percentage_usage": 0,
                     "usage_key": "events",
                     "addons": [
@@ -514,7 +514,7 @@ class TestBillingAPI(APILicensedTest):
                             "description": "Test Addon",
                             "free_allocation": 10000,
                             "has_exceeded_limit": False,
-                            "image_url": "https://markettor.com/static/images/product-os.png",
+                            "image_url": "https://clairview.com/static/images/product-os.png",
                             "name": "Addon",
                             "percentage_usage": 0,
                             "price_description": None,

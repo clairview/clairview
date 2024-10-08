@@ -1,6 +1,6 @@
 import './UnsubscribeSurveyModal.scss'
 
-import { LemonBanner, LemonButton, LemonCheckbox, LemonLabel, LemonModal, LemonTextArea, Link } from '@markettor/lemon-ui'
+import { LemonBanner, LemonButton, LemonCheckbox, LemonLabel, LemonModal, LemonTextArea, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { BillingProductV2AddonType, BillingProductV2Type } from '~/types'
@@ -129,7 +129,7 @@ export const UnsubscribeSurveyModal = ({
 
                 <LemonTextArea
                     data-attr="unsubscribe-reason-survey-textarea"
-                    placeholder="Share your feedback here so we can improve MarketTor!"
+                    placeholder="Share your feedback here so we can improve ClairView!"
                     value={surveyResponse['$survey_response']}
                     onChange={(value) => {
                         setSurveyResponse('$survey_response', value)
@@ -140,7 +140,7 @@ export const UnsubscribeSurveyModal = ({
                     <p>
                         {'Are you looking to control your costs? Learn about ways to '}
                         <Link
-                            to="https://markettor.com/docs/billing/estimating-usage-costs#how-to-reduce-your-markettor-costs"
+                            to="https://clairview.com/docs/billing/estimating-usage-costs#how-to-reduce-your-clairview-costs"
                             target="_blank"
                             onClick={() => {
                                 reportSurveyDismissed(surveyID)
@@ -150,7 +150,7 @@ export const UnsubscribeSurveyModal = ({
                         </Link>
                         {`${product.type !== 'session_replay' ? ' or ' : ', '}`}
                         <Link
-                            to="mailto:sales@markettor.com?subject=Help%20reducing%20MarketTor%20bill"
+                            to="mailto:sales@clairview.com?subject=Help%20reducing%20ClairView%20bill"
                             target="_blank"
                             onClick={() => {
                                 reportSurveyDismissed(surveyID)
@@ -162,7 +162,7 @@ export const UnsubscribeSurveyModal = ({
                             <>
                                 {', or '}
                                 <Link
-                                    to="mailto:sales@markettor.com?subject=Joining%session%replay%controls%20beta"
+                                    to="mailto:sales@clairview.com?subject=Joining%session%replay%controls%20beta"
                                     target="_blank"
                                     onClick={() => {
                                         reportSurveyDismissed(surveyID)

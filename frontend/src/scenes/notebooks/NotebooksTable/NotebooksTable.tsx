@@ -1,5 +1,5 @@
-import { IconEllipsis, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonInput, LemonTag } from '@markettor/lemon-ui'
+import { IconEllipsis, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonInput, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { MemberSelect } from 'lib/components/MemberSelect'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
@@ -102,7 +102,7 @@ export function NotebooksTable(): JSX.Element {
                 dismissKey="notebooks-preview-banner"
             >
                 <b>Welcome to Notebooks</b> - a great way to bring Insights, Replays, Feature Flags and many more
-                MarketTor products together into one place.
+                ClairView products together into one place.
             </LemonBanner>
             <div className="flex justify-between gap-2 flex-wrap">
                 <LemonInput

@@ -4,10 +4,10 @@ import pytest
 from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
-from markettor.models.dashboard import Dashboard
-from markettor.models.filters.filter import Filter
-from markettor.models.insight import Insight
-from markettor.models.subscription import Subscription
+from clairview.models.dashboard import Dashboard
+from clairview.models.filters.filter import Filter
+from clairview.models.insight import Insight
+from clairview.models.subscription import Subscription
 
 
 @patch("ee.api.subscription.subscriptions")
@@ -36,7 +36,7 @@ class TestSubscription(APILicensedTest):
         payload = {
             "insight": self.insight.id,
             "target_type": "email",
-            "target_value": "test@markettor.com",
+            "target_value": "test@clairview.com",
             "frequency": "weekly",
             "interval": 1,
             "start_date": "2022-01-01T00:00:00",
@@ -64,7 +64,7 @@ class TestSubscription(APILicensedTest):
             "dashboard": None,
             "insight": self.insight.id,
             "target_type": "email",
-            "target_value": "test@markettor.com",
+            "target_value": "test@clairview.com",
             "frequency": "weekly",
             "interval": 1,
             "byweekday": None,
@@ -102,13 +102,13 @@ class TestSubscription(APILicensedTest):
         response = self.client.patch(
             f"/api/projects/{self.team.id}/subscriptions/{data['id']}",
             {
-                "target_value": "test@markettor.com,new_user@markettor.com",
+                "target_value": "test@clairview.com,new_user@clairview.com",
                 "invite_message": "hi new user",
             },
         )
         updated_data = response.json()
-        assert updated_data["target_value"] == "test@markettor.com,new_user@markettor.com"
+        assert updated_data["target_value"] == "test@clairview.com,new_user@clairview.com"
 
         mock_subscription_tasks.handle_subscription_value_change.delay.assert_called_once_with(
-            data["id"], "test@markettor.com", "hi new user"
+            data["id"], "test@clairview.com", "hi new user"
         )

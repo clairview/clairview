@@ -11,8 +11,8 @@ import {
     IconReceipt,
     IconServer,
     IconShieldLock,
-} from '@markettor/icons'
-import { LemonButtonPropsBase } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonButtonPropsBase } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -249,7 +249,7 @@ export function AccountPopoverOverlay(): JSX.Element {
             <AccountPopoverSection>
                 <ThemeSwitcher fullWidth type="tertiary" />
                 <LemonButton
-                    to="https://markettor.com/changelog"
+                    to="https://clairview.com/changelog"
                     onClick={(e) => {
                         closeAccountPopover()
                         if (!mobileLayout) {
@@ -276,12 +276,12 @@ export function AccountPopoverOverlay(): JSX.Element {
                 <AccountPopoverSection>
                     <LemonButton
                         onClick={closeAccountPopover}
-                        to={urls.moveToMarketTorCloud()}
+                        to={urls.moveToClairViewCloud()}
                         icon={<IconConfetti />}
                         fullWidth
                         data-attr="top-menu-item-upgrade-to-cloud"
                     >
-                        Try MarketTor Cloud
+                        Try ClairView Cloud
                     </LemonButton>
                 </AccountPopoverSection>
             )}

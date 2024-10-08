@@ -1,4 +1,4 @@
-import { LemonBanner, LemonCheckbox, LemonInput, LemonSelect, SpinnerOverlay } from '@markettor/lemon-ui'
+import { LemonBanner, LemonCheckbox, LemonInput, LemonSelect, SpinnerOverlay } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form, Group } from 'kea-forms'
 import { AlertStateIndicator } from 'lib/components/Alerts/views/ManageAlertsModal'

@@ -26,19 +26,19 @@ function NextPagesRouterCodeSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript}>
             {`// pages/_app.js
-import markettor from "markettor-js"
-import { MarketTorProvider } from 'markettor-js/react'
+import clairview from "clairview-js"
+import { ClairViewProvider } from 'clairview-js/react'
 
 if (typeof window !== 'undefined') { // checks that we are client-side
-  markettor.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
+  clairview.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
     api_host: process.env.NEXT_PUBLIC_MARKETTOR_HOST || '${apiHostOrigin()}',
     ${
         isPersonProfilesDisabled
             ? ``
             : `person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well`
     }
-    loaded: (markettor) => {
-      if (process.env.NODE_ENV === 'development') markettor.debug() // debug mode in development
+    loaded: (clairview) => {
+      if (process.env.NODE_ENV === 'development') clairview.debug() // debug mode in development
     },
   })
 }
@@ -48,9 +48,9 @@ export default function App(
 ) {
     return (
         <>
-            <MarketTorProvider client={markettor}>
+            <ClairViewProvider client={clairview}>
                 <Component {...pageProps} />
-            </MarketTorProvider>
+            </ClairViewProvider>
         </>
     )
 }`}
@@ -65,11 +65,11 @@ function NextAppRouterCodeSnippet(): JSX.Element {
         <CodeSnippet language={Language.JavaScript}>
             {`// app/providers.js
 'use client'
-import markettor from 'markettor-js'
-import { MarketTorProvider } from 'markettor-js/react'
+import clairview from 'clairview-js'
+import { ClairViewProvider } from 'clairview-js/react'
 
 if (typeof window !== 'undefined') {
-  markettor.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
+  clairview.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
     api_host: process.env.NEXT_PUBLIC_MARKETTOR_HOST,
     ${
         isPersonProfilesDisabled
@@ -78,8 +78,8 @@ if (typeof window !== 'undefined') {
     }
   })
 }
-export function CSMarketTorProvider({ children }) {
-    return <MarketTorProvider client={markettor}>{children}</MarketTorProvider>
+export function CSClairViewProvider({ children }) {
+    return <ClairViewProvider client={clairview}>{children}</ClairViewProvider>
 }`}
         </CodeSnippet>
     )
@@ -90,14 +90,14 @@ function NextAppRouterLayoutSnippet(): JSX.Element {
         <CodeSnippet language={Language.JavaScript}>
             {`// app/layout.js
 import './globals.css'
-import { CSMarketTorProvider } from './providers'
+import { CSClairViewProvider } from './providers'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <CSMarketTorProvider>
+      <CSClairViewProvider>
         <body>{children}</body>
-      </CSMarketTorProvider>
+      </CSClairViewProvider>
     </html>
   )
 }`}
@@ -108,7 +108,7 @@ export default function RootLayout({ children }) {
 export function SDKInstallNextJSInstructions(): JSX.Element {
     return (
         <>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
             <h3>Add environment variables</h3>
             <p>
@@ -125,7 +125,7 @@ export function SDKInstallNextJSInstructions(): JSX.Element {
             <h4>With App router</h4>
             <p>
                 If your Next.js app to uses the <Link to="https://nextjs.org/docs/app">app router</Link>, you can
-                integrate MarketTor by creating a providers file in your app folder. This is because the markettor-js
+                integrate ClairView by creating a providers file in your app folder. This is because the clairview-js
                 library needs to be initialized on the client-side using the Next.js{' '}
                 <Link to="https://nextjs.org/docs/getting-started/react-essentials#client-components" target="_blank">
                     <code>'use client'</code> directive
@@ -141,7 +141,7 @@ export function SDKInstallNextJSInstructions(): JSX.Element {
             <h4>With Pages router</h4>
             <p>
                 If your Next.js app uses the <Link to="https://nextjs.org/docs/pages">pages router</Link>, you can
-                integrate MarketTor at the root of your app (pages/_app.js).
+                integrate ClairView at the root of your app (pages/_app.js).
             </p>
             <NextPagesRouterCodeSnippet />
         </>

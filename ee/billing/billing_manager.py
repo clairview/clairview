@@ -17,9 +17,9 @@ from ee.billing.billing_types import BillingStatus
 from ee.billing.quota_limiting import set_org_usage_summary, sync_org_quota_limits
 from ee.models import License
 from ee.settings import BILLING_SERVICE_URL
-from markettor.cloud_utils import get_cached_instance_license
-from markettor.models import Organization
-from markettor.models.organization import OrganizationMembership, OrganizationUsageInfo
+from clairview.cloud_utils import get_cached_instance_license
+from clairview.models import Organization
+from clairview.models.organization import OrganizationMembership, OrganizationUsageInfo
 
 logger = structlog.get_logger(__name__)
 
@@ -41,7 +41,7 @@ def build_billing_token(license: License, organization: Organization):
             "id": license_id,
             "organization_id": str(organization.id),
             "organization_name": organization.name,
-            "aud": "markettor:license-key",
+            "aud": "clairview:license-key",
         },
         license_secret,
         algorithm="HS256",

@@ -64,17 +64,17 @@ export const databaseTableListLogic = kea<databaseTableListLogicType>([
                 }, {} as Record<string, DatabaseSchemaTable>)
             },
         ],
-        markettorTables: [
+        clairviewTables: [
             (s) => [s.database],
             (database): DatabaseSchemaTable[] => {
                 if (!database || !database.tables) {
                     return []
                 }
 
-                return Object.values(database.tables).filter((n) => n.type === 'markettor')
+                return Object.values(database.tables).filter((n) => n.type === 'clairview')
             },
         ],
-        markettorTablesMap: [
+        clairviewTablesMap: [
             (s) => [s.database],
             (database): Record<string, DatabaseSchemaTable> => {
                 if (!database || !database.tables) {
@@ -82,7 +82,7 @@ export const databaseTableListLogic = kea<databaseTableListLogicType>([
                 }
 
                 return Object.values(database.tables)
-                    .filter((n) => n.type === 'markettor')
+                    .filter((n) => n.type === 'clairview')
                     .reduce((acc, cur) => {
                         acc[cur.name] = database.tables[cur.name]
                         return acc

@@ -1,6 +1,6 @@
 import './CardMeta.scss'
 
-import { IconPieChart } from '@markettor/icons'
+import { IconPieChart } from '@clairview/icons'
 import clsx from 'clsx'
 import { useResizeObserver } from 'lib/hooks/useResizeObserver'
 import { IconRefresh, IconSubtitles, IconSubtitlesOff } from 'lib/lemon-ui/icons'

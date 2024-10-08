@@ -1,5 +1,5 @@
-import { IconPlus } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconPlus } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useState } from 'react'
 
 import { SlashCommandsPopover } from '../Notebook/SlashCommands'

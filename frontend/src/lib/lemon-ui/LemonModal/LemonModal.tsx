@@ -1,6 +1,6 @@
 import './LemonModal.scss'
 
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { useFloatingContainer } from 'lib/hooks/useFloatingContainerContext'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -166,7 +166,7 @@ export function LemonModal({
             {modalContent}
         </div>
     ) : (
-        // eslint-disable-next-line markettor/warn-elements
+        // eslint-disable-next-line clairview/warn-elements
         <Modal
             isOpen={isOpen}
             onRequestClose={(e) => {

@@ -1,7 +1,7 @@
 import { GroupTypeIndex, GroupTypeToColumnIndex, Team, TeamId } from '../../types'
 import { PostgresRouter, PostgresUse } from '../../utils/db/postgres'
 import { timeoutGuard } from '../../utils/db/utils'
-import { captureTeamEvent } from '../../utils/markettor'
+import { captureTeamEvent } from '../../utils/clairview'
 import { getByAge } from '../../utils/utils'
 import { TeamManager } from './team-manager'
 
@@ -27,7 +27,7 @@ export class GroupTypeManager {
         try {
             const { rows } = await this.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `SELECT * FROM markettor_grouptypemapping WHERE team_id = $1`,
+                `SELECT * FROM clairview_grouptypemapping WHERE team_id = $1`,
                 [teamId],
                 'fetchGroupTypes'
             )
@@ -81,14 +81,14 @@ export class GroupTypeManager {
             PostgresUse.COMMON_WRITE,
             `
             WITH insert_result AS (
-                INSERT INTO markettor_grouptypemapping (team_id, group_type, group_type_index)
+                INSERT INTO clairview_grouptypemapping (team_id, group_type, group_type_index)
                 VALUES ($1, $2, $3)
                 ON CONFLICT DO NOTHING
                 RETURNING group_type_index
             )
             SELECT group_type_index, 1 AS is_insert  FROM insert_result
             UNION
-            SELECT group_type_index, 0 AS is_insert FROM markettor_grouptypemapping WHERE team_id = $1 AND group_type = $2;
+            SELECT group_type_index, 0 AS is_insert FROM clairview_grouptypemapping WHERE team_id = $1 AND group_type = $2;
             `,
             [teamId, groupType, index],
             'insertGroupType'

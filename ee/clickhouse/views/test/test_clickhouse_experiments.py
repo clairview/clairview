@@ -5,12 +5,12 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from dateutil import parser
-from markettor.constants import ExperimentSignificanceCode
-from markettor.models.action.action import Action
-from markettor.models.cohort.cohort import Cohort
-from markettor.models.experiment import Experiment
-from markettor.models.feature_flag import FeatureFlag, get_feature_flags_for_team_in_cache
-from markettor.test.base import (
+from clairview.constants import ExperimentSignificanceCode
+from clairview.models.action.action import Action
+from clairview.models.cohort.cohort import Cohort
+from clairview.models.experiment import Experiment
+from clairview.models.feature_flag import FeatureFlag, get_feature_flags_for_team_in_cache
+from clairview.test.base import (
     ClickhouseTestMixin,
     _create_event,
     _create_person,
@@ -19,7 +19,7 @@ from markettor.test.base import (
     snapshot_clickhouse_queries,
     FuzzyInt,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 class TestExperimentCRUD(APILicensedTest):
@@ -1625,7 +1625,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
                         "event": "$autocapture",
                         "timestamp": datetime.now() - timedelta(days=2),
                         "properties": {
-                            "$current_url": "https://markettor.com/feedback/1234"
+                            "$current_url": "https://clairview.com/feedback/1234"
                         },  # can't match because clashing current_url filters
                     },
                 ],

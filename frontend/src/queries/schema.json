@@ -3735,7 +3735,7 @@
             "required": ["fields", "id", "name", "query", "type"],
             "type": "object"
         },
-        "DatabaseSchemaMarketTorTable": {
+        "DatabaseSchemaClairViewTable": {
             "additionalProperties": false,
             "properties": {
                 "fields": {
@@ -3751,7 +3751,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "const": "markettor",
+                    "const": "clairview",
                     "type": "string"
                 }
             },
@@ -3839,7 +3839,7 @@
         "DatabaseSchemaTable": {
             "anyOf": [
                 {
-                    "$ref": "#/definitions/DatabaseSchemaMarketTorTable"
+                    "$ref": "#/definitions/DatabaseSchemaClairViewTable"
                 },
                 {
                     "$ref": "#/definitions/DatabaseSchemaDataWarehouseTable"
@@ -3871,7 +3871,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "enum": ["markettor", "data_warehouse", "view", "batch_export", "materialized_view"],
+                    "enum": ["clairview", "data_warehouse", "view", "batch_export", "materialized_view"],
                     "type": "string"
                 }
             },
@@ -6954,7 +6954,7 @@
             "type": "string"
         },
         "NodeKind": {
-            "description": "MarketTor Query Schema definition.\n\nThis file acts as the source of truth for:\n\n- frontend/src/queries/schema.json   - generated from typescript via \"pnpm run schema:build:json\"\n\n- markettor/schema.py   - generated from json the above json via \"pnpm run schema:build:python\"",
+            "description": "ClairView Query Schema definition.\n\nThis file acts as the source of truth for:\n\n- frontend/src/queries/schema.json   - generated from typescript via \"pnpm run schema:build:json\"\n\n- clairview/schema.py   - generated from json the above json via \"pnpm run schema:build:python\"",
             "enum": [
                 "EventsNode",
                 "ActionsNode",
@@ -7465,7 +7465,7 @@
                 },
                 "query": {
                     "$ref": "#/definitions/QuerySchema",
-                    "description": "Submit a JSON string representing a query for MarketTor data analysis, for example a TorQL query.\n\nExample payload:\n\n```\n\n{\"query\": {\"kind\": \"TorQLQuery\", \"query\": \"select * from events limit 100\"}}\n\n```\n\nFor more details on TorQL queries, see the [MarketTor TorQL documentation](/docs/torql#api-access)."
+                    "description": "Submit a JSON string representing a query for ClairView data analysis, for example a TorQL query.\n\nExample payload:\n\n```\n\n{\"query\": {\"kind\": \"TorQLQuery\", \"query\": \"select * from events limit 100\"}}\n\n```\n\nFor more details on TorQL queries, see the [ClairView TorQL documentation](/docs/torql#api-access)."
                 },
                 "refresh": {
                     "$ref": "#/definitions/RefreshType",

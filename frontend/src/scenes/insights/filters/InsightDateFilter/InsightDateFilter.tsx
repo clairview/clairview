@@ -1,5 +1,5 @@
-import { IconCalendar, IconInfo } from '@markettor/icons'
-import { Tooltip } from '@markettor/lemon-ui'
+import { IconCalendar, IconInfo } from '@clairview/icons'
+import { Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
 import { dateMapping } from 'lib/utils'

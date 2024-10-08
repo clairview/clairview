@@ -2,10 +2,10 @@
 # docker-compose file used ONLY for local development.
 # This file is the same as `docker-compose.dev.yml` except it boots the services in containers instead of you running them locally
 # For more info, see:
-# https://markettor.com/handbook/engineering/developing-locally
+# https://clairview.com/handbook/engineering/developing-locally
 #
-# MarketTor has sunset support for self-hosted K8s deployments.
-# See: https://markettor.com/blog/sunsetting-helm-support-markettor
+# ClairView has sunset support for self-hosted K8s deployments.
+# See: https://clairview.com/blog/sunsetting-helm-support-clairview
 #
 
 services:
@@ -43,12 +43,12 @@ services:
             - '9440:9440'
             - '9009:9009'
         volumes:
-            - ./markettor/idl:/idl
+            - ./clairview/idl:/idl
             - ./docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
             - ./docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
             - ./docker/clickhouse/users-dev.xml:/etc/clickhouse-server/users.xml
             - ./docker/clickhouse/user_defined_function.xml:/etc/clickhouse-server/user_defined_function.xml
-            - ./markettor/user_scripts:/var/lib/clickhouse/user_scripts
+            - ./clairview/user_scripts:/var/lib/clickhouse/user_scripts
         depends_on:
             - kafka
             - zookeeper
@@ -97,7 +97,7 @@ services:
             service: worker
         build: .
         volumes:
-            - .:/app/markettor
+            - .:/app/clairview
         environment:
             - DEBUG=1
             - PLUGIN_SERVER_IDLE=1
@@ -111,7 +111,7 @@ services:
         build: .
         command: ./bin/docker-server-unit
         volumes:
-            - .:/app/markettor
+            - .:/app/clairview
         environment:
             - DEBUG=1
             - OBJECT_STORAGE_ENDPOINT=http://objectstorage:19000
@@ -156,7 +156,7 @@ services:
             service: plugins
         build: .
         volumes:
-            - .:/app/markettor
+            - .:/app/clairview
         environment:
             - DOCKER=1
         depends_on:
@@ -172,7 +172,7 @@ services:
             service: migrate
         build: .
         volumes:
-            - .:/app/markettor
+            - .:/app/clairview
         environment:
             - DEBUG=1
 
@@ -212,7 +212,7 @@ services:
             service: temporal-django-worker
         build: .
         volumes:
-            - .:/app/markettor
+            - .:/app/clairview
         depends_on:
             - db
             - redis

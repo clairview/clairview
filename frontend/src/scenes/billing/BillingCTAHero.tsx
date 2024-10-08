@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BillingUpgradeCTA } from 'lib/components/BillingUpgradeCTA'
 import { BlushingHog } from 'lib/components/hedgehogs'
@@ -23,7 +23,7 @@ export const BillingCTAHero = ({ product }: { product: BillingProductV2Type }): 
                 <h1 className="mb-0">Get the whole hog.</h1>
                 <h1 className="text-danger">Only pay for what you use.</h1>
                 <div className="mt-2 mb-0 max-w-xl">
-                    <p>MarketTor comes with all product features on every plan.</p>
+                    <p>ClairView comes with all product features on every plan.</p>
                     <p>
                         Add your credit card to remove usage limits and unlock all platform features. Set billing limits
                         as low as $0 to control your spend.

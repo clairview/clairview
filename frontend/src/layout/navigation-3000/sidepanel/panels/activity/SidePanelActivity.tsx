@@ -1,4 +1,4 @@
-import { IconNotification } from '@markettor/icons'
+import { IconNotification } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -9,7 +9,7 @@ import {
     LemonTabs,
     Link,
     Spinner,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ActivityLogRow } from 'lib/components/ActivityLog/ActivityLog'
 import { humanizeScope } from 'lib/components/ActivityLog/humanizeActivity'
@@ -155,7 +155,7 @@ export const SidePanelActivity = (): JSX.Element => {
                                     Notifications shows you changes others make to{' '}
                                     <Link to={urls.savedInsights('history')}>Insights</Link> and{' '}
                                     <Link to={urls.featureFlags('history')}>Feature Flags</Link> that you created. Come
-                                    join <Link to="https://markettor.com/community">our community forum</Link> and tell us
+                                    join <Link to="https://clairview.com/community">our community forum</Link> and tell us
                                     what else should be here!
                                 </LemonBanner>
 

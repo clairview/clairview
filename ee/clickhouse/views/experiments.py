@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.request import Request
 from rest_framework.response import Response
 from statshog.defaults.django import statsd
-import markettoranalytics
+import clairviewanalytics
 
 from ee.clickhouse.queries.experiments.funnel_experiment_result import (
     ClickhouseFunnelExperimentResult,
@@ -19,17 +19,17 @@ from ee.clickhouse.queries.experiments.trend_experiment_result import (
     ClickhouseTrendExperimentResult,
 )
 from ee.clickhouse.queries.experiments.utils import requires_flag_warning
-from markettor.api.cohort import CohortSerializer
-from markettor.api.feature_flag import FeatureFlagSerializer, MinimalFeatureFlagSerializer
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.api.utils import action
-from markettor.caching.insight_cache import update_cached_state
-from markettor.clickhouse.query_tagging import tag_queries
-from markettor.constants import INSIGHT_TRENDS
-from markettor.models.experiment import Experiment
-from markettor.models.filters.filter import Filter
-from markettor.utils import generate_cache_key, get_safe_cache
+from clairview.api.cohort import CohortSerializer
+from clairview.api.feature_flag import FeatureFlagSerializer, MinimalFeatureFlagSerializer
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.api.utils import action
+from clairview.caching.insight_cache import update_cached_state
+from clairview.clickhouse.query_tagging import tag_queries
+from clairview.constants import INSIGHT_TRENDS
+from clairview.models.experiment import Experiment
+from clairview.models.filters.filter import Filter
+from clairview.utils import generate_cache_key, get_safe_cache
 
 EXPERIMENT_RESULTS_CACHE_DEFAULT_TTL = 60 * 60  # 1 hour
 
@@ -112,13 +112,13 @@ def _experiment_results_cached(
     if cached_result_package and cached_result_package.get("result") and not refresh:
         cached_result_package["is_cached"] = True
         statsd.incr(
-            "markettor_cached_function_cache_hit",
+            "clairview_cached_function_cache_hit",
             tags={"route": "/projects/:id/experiments/:experiment_id/results"},
         )
         return cached_result_package
 
     statsd.incr(
-        "markettor_cached_function_cache_miss",
+        "clairview_cached_function_cache_miss",
         tags={"route": "/projects/:id/experiments/:experiment_id/results"},
     )
 
@@ -128,7 +128,7 @@ def _experiment_results_cached(
     fresh_result_package = {"result": result, "last_refresh": now(), "is_cached": False}
 
     # Event to detect experiment significance flip-flopping
-    markettoranalytics.capture(
+    clairviewanalytics.capture(
         experiment.created_by.email,
         "experiment result calculated",
         properties={

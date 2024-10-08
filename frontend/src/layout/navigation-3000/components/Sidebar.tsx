@@ -1,5 +1,5 @@
-import { IconSearch, IconX } from '@markettor/icons'
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { IconSearch, IconX } from '@clairview/icons'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { LogicWrapper, useActions, useValues } from 'kea'
 import { Spinner } from 'lib/lemon-ui/Spinner'

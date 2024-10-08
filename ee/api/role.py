@@ -7,12 +7,12 @@ from rest_framework.permissions import SAFE_METHODS, BasePermission
 from ee.models.feature_flag_role_access import FeatureFlagRoleAccess
 from ee.models.organization_resource_access import OrganizationResourceAccess
 from ee.models.role import Role, RoleMembership
-from markettor.api.organization_member import OrganizationMemberSerializer
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.models import OrganizationMembership
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.user import User
+from clairview.api.organization_member import OrganizationMemberSerializer
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.models import OrganizationMembership
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.user import User
 
 
 class RolePermissions(BasePermission):

@@ -1,4 +1,4 @@
-import { LemonSelect, LemonSelectProps } from '@markettor/lemon-ui'
+import { LemonSelect, LemonSelectProps } from '@clairview/lemon-ui'
 import { dayjs } from 'lib/dayjs'
 import {
     allOperatorsMapping,

@@ -9,7 +9,7 @@ describe('Surveys', () => {
     it('shows get started state on first load', () => {
         // load an empty page
         cy.get('h1').should('contain', 'Surveys')
-        cy.title().should('equal', 'Surveys • MarketTor')
+        cy.title().should('equal', 'Surveys • ClairView')
 
         cy.contains('Create your first survey').should('exist')
 
@@ -47,7 +47,7 @@ describe('Surveys', () => {
     it('creates a new survey', () => {
         // load an empty page
         cy.get('h1').should('contain', 'Surveys')
-        cy.title().should('equal', 'Surveys • MarketTor')
+        cy.title().should('equal', 'Surveys • ClairView')
 
         // click via top right button
         cy.get('[data-attr="new-survey"]').click()
@@ -293,7 +293,7 @@ describe('Surveys', () => {
             ]
 
             cy.get('h1').should('contain', 'Surveys')
-            cy.title().should('equal', 'Surveys • MarketTor')
+            cy.title().should('equal', 'Surveys • ClairView')
 
             cy.get('[data-attr="new-survey"]').click()
             cy.get('[data-attr="new-blank-survey"]').click()

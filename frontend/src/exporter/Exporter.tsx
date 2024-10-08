@@ -32,7 +32,7 @@ export function Exporter(props: ExportedData): JSX.Element {
     useEffect(() => {
         // NOTE: For embedded views we emit an event to indicate the content width / height to allow the parent to correctly resize
         // NOTE: We post the window name to allow the parent to identify the iframe
-        window.parent?.postMessage({ event: 'markettor:dimensions', name: window.name, height, width }, '*')
+        window.parent?.postMessage({ event: 'clairview:dimensions', name: window.name, height, width }, '*')
     }, [height, width])
 
     useThemedHtml(false)
@@ -50,7 +50,7 @@ export function Exporter(props: ExportedData): JSX.Element {
                 type === ExportType.Scene ? (
                     <div className="SharedDashboard-header">
                         <Link
-                            to="https://markettor.com?utm_medium=in-product&utm_campaign=shared-dashboard"
+                            to="https://clairview.com?utm_medium=in-product&utm_campaign=shared-dashboard"
                             target="_blank"
                         >
                             <Logo className="text-lg" />
@@ -64,7 +64,7 @@ export function Exporter(props: ExportedData): JSX.Element {
                         <span className="SharedDashboard-header-team">{currentTeam?.name}</span>
                     </div>
                 ) : type === ExportType.Embed ? (
-                    <Link to="https://markettor.com?utm_medium=in-product&utm_campaign=shared-dashboard" target="_blank">
+                    <Link to="https://clairview.com?utm_medium=in-product&utm_campaign=shared-dashboard" target="_blank">
                         <Logo className="text-lg" />
                     </Link>
                 ) : type === ExportType.Image ? (
@@ -99,10 +99,10 @@ export function Exporter(props: ExportedData): JSX.Element {
                     <div>
                         Made with{' '}
                         <Link
-                            to="https://markettor.com?utm_medium=in-product&utm_campaign=shared-dashboard"
+                            to="https://clairview.com?utm_medium=in-product&utm_campaign=shared-dashboard"
                             target="_blank"
                         >
-                            MarketTor — open-source product analytics
+                            ClairView — open-source product analytics
                         </Link>
                     </div>
                 </div>

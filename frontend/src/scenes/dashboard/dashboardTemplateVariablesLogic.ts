@@ -1,6 +1,6 @@
 import { actions, connect, kea, listeners, path, props, propsChanged, reducers, selectors } from 'kea'
 import { iframedToolbarBrowserLogic } from 'lib/components/IframedToolbarBrowser/iframedToolbarBrowserLogic'
-import { MarketTorAppToolbarEvent } from 'lib/components/IframedToolbarBrowser/utils'
+import { ClairViewAppToolbarEvent } from 'lib/components/IframedToolbarBrowser/utils'
 import { isEmptyObject } from 'lib/utils'
 
 import {
@@ -212,7 +212,7 @@ export const dashboardTemplateVariablesLogic = kea<dashboardTemplateVariablesLog
             actions.setIsCurrentlySelectingElement(false)
         },
         toolbarMessageReceived: ({ type, payload }) => {
-            if (type === MarketTorAppToolbarEvent.PH_NEW_ACTION_CREATED) {
+            if (type === ClairViewAppToolbarEvent.PH_NEW_ACTION_CREATED) {
                 actions.setVariableFromAction(payload.action.name, payload.action as ActionType)
                 actions.disableElementSelector()
             }

@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 import { DateTime } from 'luxon'
 import fetch from 'node-fetch'
 
@@ -138,7 +138,7 @@ describe('Event Pipeline integration test', () => {
     it('fires a webhook', async () => {
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
+            `UPDATE clairview_team SET slack_incoming_webhook = 'https://webhook.example.com/'`,
             [],
             'testTag'
         )
@@ -175,7 +175,7 @@ describe('Event Pipeline integration test', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_organization
+            `UPDATE clairview_organization
                 SET available_product_features = array ['{"key": "zapier", "name": "zapier"}'::jsonb]`,
             [],
             'testTag'

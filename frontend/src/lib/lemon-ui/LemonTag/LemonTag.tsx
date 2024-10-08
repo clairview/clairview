@@ -1,6 +1,6 @@
 import './LemonTag.scss'
 
-import { IconEllipsis, IconX } from '@markettor/icons'
+import { IconEllipsis, IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { LemonButton, LemonButtonWithDropdown } from 'lib/lemon-ui/LemonButton'
 import { LemonButtonDropdown } from 'lib/lemon-ui/LemonButton'

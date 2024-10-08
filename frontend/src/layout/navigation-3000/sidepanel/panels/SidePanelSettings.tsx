@@ -1,5 +1,5 @@
-import { IconExternal } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconExternal } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useEffect } from 'react'
 import { Settings } from 'scenes/settings/Settings'

@@ -1,4 +1,4 @@
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { CodeEditor } from 'lib/monaco/CodeEditor'
 

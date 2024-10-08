@@ -1,5 +1,5 @@
-import { LemonInputProps, LemonTableColumns } from '@markettor/lemon-ui'
-import { PluginConfigSchema } from '@markettor/plugin-scaffold'
+import { LemonInputProps, LemonTableColumns } from '@clairview/lemon-ui'
+import { PluginConfigSchema } from '@clairview/plugin-scaffold'
 import { eventWithTime } from '@rrweb/types'
 import { ChartDataset, ChartType, InteractionItem } from 'chart.js'
 import { LogicWrapper } from 'kea'
@@ -22,7 +22,7 @@ import {
 } from 'lib/constants'
 import { Dayjs, dayjs } from 'lib/dayjs'
 import { PopoverProps } from 'lib/lemon-ui/Popover/Popover'
-import type { MarketTor, SupportedWebVitalsMetrics } from 'markettor-js'
+import type { ClairView, SupportedWebVitalsMetrics } from 'clairview-js'
 import { Layout } from 'react-grid-layout'
 import { LogLevel } from 'rrweb'
 import { BehavioralFilterKey, BehavioralFilterType } from 'scenes/cohorts/CohortFilters/types'
@@ -74,7 +74,7 @@ export enum AvailableFeature {
     REPLAY_FILTER_PERSON_PROPERTIES = 'replay_filter_person_properties',
     REPLAY_FILTER_EVENTS = 'replay_filter_events',
     REPLAY_DOM_EXPLORER = 'replay_dom_explorer',
-    WORKS_WITH_MARKETTOR_JS = 'works_with_markettor_js',
+    WORKS_WITH_MARKETTOR_JS = 'works_with_clairview_js',
     REPLAY_AUTOMATIC_PLAYLISTS = 'replay_automatic_playlists',
     GROUP_ANALYTICS = 'group_analytics',
     SURVEYS_UNLIMITED_SURVEYS = 'surveys_unlimited_surveys',
@@ -601,11 +601,11 @@ export type ToolbarUserIntent = 'add-action' | 'edit-action' | 'heatmaps' | 'add
 export type ToolbarSource = 'url' | 'localstorage'
 export type ToolbarVersion = 'toolbar'
 
-/* sync with markettor-js */
+/* sync with clairview-js */
 export interface ToolbarParams {
     apiURL?: string
     jsURL?: string
-    token?: string /** public markettor-js token */
+    token?: string /** public clairview-js token */
     temporaryToken?: string /** private temporary user token */
     actionId?: number
     userIntent?: ToolbarUserIntent
@@ -619,7 +619,7 @@ export interface ToolbarParams {
 }
 
 export interface ToolbarProps extends ToolbarParams {
-    markettor?: MarketTor
+    clairview?: ClairView
     disableExternalStyles?: boolean
 }
 
@@ -934,7 +934,7 @@ export interface SessionPlayerSnapshotData {
     snapshots?: RecordingSnapshot[]
     sources?: SessionRecordingSnapshotSource[]
     blob_keys?: string[]
-    // used for a debug signal only for MarketTor team, controlled by a feature flag
+    // used for a debug signal only for ClairView team, controlled by a feature flag
     // DO NOT RELY ON THIS FOR NON DEBUG PURPOSES
     untransformed_snapshots?: RecordingSnapshot[]
 }
@@ -1129,7 +1129,7 @@ export interface PersonListParams {
     search?: string
     cohort?: number
     distinct_id?: string
-    include_total?: boolean // MarketTor 3000-only
+    include_total?: boolean // ClairView 3000-only
 }
 
 export type SearchableEntity =
@@ -1210,7 +1210,7 @@ export interface CohortGroupType {
     name?: string
 }
 
-// Synced with `markettor/models/property.py`
+// Synced with `clairview/models/property.py`
 export interface CohortCriteriaType {
     id: string // Criteria filter id
     key: string
@@ -1279,7 +1279,7 @@ export interface SavedFunnel extends InsightHistory {
 
 export type BinCountValue = number | typeof BIN_COUNT_AUTO
 
-// https://github.com/MarketTor/markettor/blob/master/markettor/constants.py#L106
+// https://github.com/ClairView/clairview/blob/master/clairview/constants.py#L106
 export enum StepOrderValue {
     STRICT = 'strict',
     UNORDERED = 'unordered',
@@ -2542,7 +2542,7 @@ export interface FunnelConversionWindow {
     funnelWindowInterval: number
 }
 
-// https://github.com/MarketTor/markettor/blob/master/markettor/models/filters/mixins/funnel.py#L100
+// https://github.com/ClairView/clairview/blob/master/clairview/models/filters/mixins/funnel.py#L100
 export enum FunnelConversionWindowTimeUnit {
     Second = 'second',
     Minute = 'minute',
@@ -3016,7 +3016,7 @@ export interface PreflightStatus {
     initiated: boolean
     /** Org creation is allowed on Cloud OR initiated self-hosted organizations with a license and MULTI_ORG_ENABLED. */
     can_create_org: boolean
-    /** Whether this is MarketTor Cloud. */
+    /** Whether this is ClairView Cloud. */
     cloud: boolean
     /** Whether this is a managed demo environment. */
     demo: boolean
@@ -3039,7 +3039,7 @@ export interface PreflightStatus {
             client_id?: string
         }
     }
-    /** Whether MarketTor is running in DEBUG mode. */
+    /** Whether ClairView is running in DEBUG mode. */
     is_debug?: boolean
     licensed_users_available?: number | null
     openai_available?: boolean
@@ -3639,7 +3639,7 @@ export type Duration = {
 export enum EventDefinitionType {
     Event = 'event',
     EventCustom = 'event_custom',
-    EventMarketTor = 'event_markettor',
+    EventClairView = 'event_clairview',
 }
 
 export type IntegrationKind = 'slack' | 'salesforce' | 'hubspot' | 'google-pubsub' | 'google-cloud-storage'
@@ -3807,7 +3807,7 @@ export type PromptFlag = {
     tooltipCSS?: Partial<CSSStyleDeclaration>
 }
 
-// Should be kept in sync with "markettor/models/activity_logging/activity_log.py"
+// Should be kept in sync with "clairview/models/activity_logging/activity_log.py"
 export enum ActivityScope {
     FEATURE_FLAG = 'FeatureFlag',
     PERSON = 'Person',

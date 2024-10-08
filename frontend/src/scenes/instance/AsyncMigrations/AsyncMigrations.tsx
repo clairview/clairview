@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { IconPlayCircle, IconRefresh, IconReplay } from 'lib/lemon-ui/icons'
@@ -69,7 +69,7 @@ export function AsyncMigrations(): JSX.Element {
         title: 'Migration',
         render: function Render(_, asyncMigration: AsyncMigration): JSX.Element {
             const link =
-                'https://github.com/MarketTor/markettor/blob/master/markettor/async_migrations/migrations/' +
+                'https://github.com/ClairView/clairview/blob/master/clairview/async_migrations/migrations/' +
                 asyncMigration.name +
                 '.py'
             return <LemonTableLink to={link} title={asyncMigration.name} description={asyncMigration.description} />
@@ -199,15 +199,15 @@ export function AsyncMigrations(): JSX.Element {
     }
 
     const minVersionColumn: AsyncMigrationColumnType = {
-        title: 'Minimum MarketTor version',
+        title: 'Minimum ClairView version',
         render: function Render(_, asyncMigration: AsyncMigration): JSX.Element {
-            return <div>{asyncMigration.markettor_min_version}</div>
+            return <div>{asyncMigration.clairview_min_version}</div>
         },
     }
     const maxVersionColumn: AsyncMigrationColumnType = {
-        title: 'Maximum MarketTor version',
+        title: 'Maximum ClairView version',
         render: function Render(_, asyncMigration: AsyncMigration): JSX.Element {
-            return <div>{asyncMigration.markettor_max_version}</div>
+            return <div>{asyncMigration.clairview_max_version}</div>
         },
     }
 
@@ -265,7 +265,7 @@ export function AsyncMigrations(): JSX.Element {
                                 <p>Manage async migrations in your instance.</p>
                                 <p>
                                     Read about async migrations on our{' '}
-                                    <Link to="https://markettor.com/docs/self-host/configure/async-migrations/overview">
+                                    <Link to="https://clairview.com/docs/self-host/configure/async-migrations/overview">
                                         dedicated docs page
                                     </Link>
                                     .
@@ -322,7 +322,7 @@ export function AsyncMigrations(): JSX.Element {
                             </p>
                             <p>
                                 If you're an admin and don't have access, set <code>is_staff=true</code> for your user
-                                on the PostgreSQL <code>markettor_user</code> table.
+                                on the PostgreSQL <code>clairview_user</code> table.
                             </p>
                         </>
                     }

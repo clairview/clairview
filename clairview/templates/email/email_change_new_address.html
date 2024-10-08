@@ -1,0 +1,5 @@
+{% extends "email/base.html" %} {% load clairview_assets %} {% load clairview_filters %}
+{% block heading %}This is your new ClairView account email{% endblock %}
+{% block section %}
+<p>Hey, {{ user_name }}! Just letting you know that your ClairView account email has been successfully changed from {{ old_address }} to {{ new_address }}.</p>
+{% endblock %}

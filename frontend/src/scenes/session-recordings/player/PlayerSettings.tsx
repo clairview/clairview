@@ -1,5 +1,5 @@
-import { IconEllipsis, IconFastForward } from '@markettor/icons'
-import { LemonButton, LemonMenu, LemonSelect, LemonSwitch } from '@markettor/lemon-ui'
+import { IconEllipsis, IconFastForward } from '@clairview/icons'
+import { LemonButton, LemonMenu, LemonSelect, LemonSwitch } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 

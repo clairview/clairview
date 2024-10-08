@@ -281,7 +281,7 @@ describe('runComposeWebhook', () => {
         }
     })
 
-    it('calls composeWebhook with MarketTorEvent format', async () => {
+    it('calls composeWebhook with ClairViewEvent format', async () => {
         await runComposeWebhook(mockHub as Hub, createEvent())
 
         expect(composeWebhook).toHaveBeenCalledTimes(1)

@@ -1,7 +1,7 @@
 import './CohortCriteriaRowBuilder.scss'
 
-import { IconCopy, IconTrash } from '@markettor/icons'
-import { LemonDivider } from '@markettor/lemon-ui'
+import { IconCopy, IconTrash } from '@clairview/icons'
+import { LemonDivider } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions } from 'kea'
 import { Field as KeaField } from 'kea-forms'

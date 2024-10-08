@@ -1,4 +1,4 @@
-import { LemonDivider, Link } from '@markettor/lemon-ui'
+import { LemonDivider, Link } from '@clairview/lemon-ui'
 
 import { InviteMembersButton } from '~/layout/navigation/TopBar/AccountPopover'
 
@@ -8,39 +8,39 @@ import { OnboardingStep } from './OnboardingStep'
 const proxyDocs = [
     {
         title: 'AWS CloudFront',
-        link: 'https://markettor.com/docs/advanced/proxy/cloudfront',
+        link: 'https://clairview.com/docs/advanced/proxy/cloudfront',
     },
     {
         title: 'Caddy',
-        link: 'https://markettor.com/docs/advanced/proxy/caddy',
+        link: 'https://clairview.com/docs/advanced/proxy/caddy',
     },
     {
         title: 'Cloudflare',
-        link: 'https://markettor.com/docs/advanced/proxy/cloudflare',
+        link: 'https://clairview.com/docs/advanced/proxy/cloudflare',
     },
     {
         title: 'Kubernetes Ingress Controller',
-        link: 'https://markettor.com/docs/advanced/proxy/kubernetes-ingress-controller',
+        link: 'https://clairview.com/docs/advanced/proxy/kubernetes-ingress-controller',
     },
     {
         title: 'Netlify',
-        link: 'https://markettor.com/docs/advanced/proxy/netlify',
+        link: 'https://clairview.com/docs/advanced/proxy/netlify',
     },
     {
         title: 'Next.js rewrites',
-        link: 'https://markettor.com/docs/advanced/proxy/nextjs',
+        link: 'https://clairview.com/docs/advanced/proxy/nextjs',
     },
     {
         title: 'Next.js middleware',
-        link: 'https://markettor.com/docs/advanced/proxy/nextjs-middleware',
+        link: 'https://clairview.com/docs/advanced/proxy/nextjs-middleware',
     },
     {
         title: 'Vercel',
-        link: 'https://markettor.com/docs/advanced/proxy/vercel',
+        link: 'https://clairview.com/docs/advanced/proxy/vercel',
     },
     {
         title: 'Nuxt',
-        link: 'https://markettor.com/docs/advanced/proxy/nuxt',
+        link: 'https://clairview.com/docs/advanced/proxy/nuxt',
     },
 ]
 
@@ -48,15 +48,15 @@ export const OnboardingReverseProxy = ({ stepKey }: { stepKey: OnboardingStepKey
     return (
         <OnboardingStep title="Reverse proxy (optional)" stepKey={stepKey} showSkip>
             <div className="mb-6 mt-6">
-                <p>A reverse proxy allows you to send events to MarketTor Cloud using your own domain.</p>
+                <p>A reverse proxy allows you to send events to ClairView Cloud using your own domain.</p>
                 <p>
                     This means that events are sent from your own domain and are less likely to be intercepted by
-                    tracking blockers. You'll be able to capture more usage data without having to self-host MarketTor.
+                    tracking blockers. You'll be able to capture more usage data without having to self-host ClairView.
                 </p>
                 <p>
                     Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you
-                    choose (like <span className="font-mono break-keep">e.yourdomain.com</span>) to MarketTor. It is best
-                    practice to use a subdomain that does not include markettor, analytics, tracking, or other similar
+                    choose (like <span className="font-mono break-keep">e.yourdomain.com</span>) to ClairView. It is best
+                    practice to use a subdomain that does not include clairview, analytics, tracking, or other similar
                     words.
                 </p>
                 <h3>Documentation</h3>

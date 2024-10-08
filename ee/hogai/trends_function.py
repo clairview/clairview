@@ -3,8 +3,8 @@ from functools import cached_property
 from typing import Any
 
 from ee.hogai.team_prompt import TeamPrompt
-from markettor.models.property_definition import PropertyDefinition
-from markettor.schema import ExperimentalAITrendsQuery
+from clairview.models.property_definition import PropertyDefinition
+from clairview.schema import ExperimentalAITrendsQuery
 
 
 class TrendsFunction:

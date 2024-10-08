@@ -4,13 +4,13 @@ from freezegun import freeze_time
 
 from ee.tasks.subscriptions.email_subscriptions import send_email_subscription_report
 from ee.tasks.test.subscriptions.subscriptions_test_factory import create_subscription
-from markettor.models.dashboard import Dashboard
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.models.instance_setting import set_instance_setting
-from markettor.models.subscription import Subscription
-from markettor.tasks.test.utils_email_tests import mock_email_messages
-from markettor.test.base import APIBaseTest
+from clairview.models.dashboard import Dashboard
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.models.instance_setting import set_instance_setting
+from clairview.models.subscription import Subscription
+from clairview.tasks.test.utils_email_tests import mock_email_messages
+from clairview.test.base import APIBaseTest
 
 
 def mock_ee_email_messages(MockEmailMessage: MagicMock):
@@ -38,7 +38,7 @@ class TestEmailSubscriptionsTasks(APIBaseTest):
     def test_subscription_delivery(self, MockEmailMessage: MagicMock) -> None:
         mocked_email_messages = mock_ee_email_messages(MockEmailMessage)
 
-        send_email_subscription_report("test1@markettor.com", self.subscription, [self.asset])
+        send_email_subscription_report("test1@clairview.com", self.subscription, [self.asset])
 
         assert len(mocked_email_messages) == 1
         assert mocked_email_messages[0].send.call_count == 1
@@ -49,7 +49,7 @@ class TestEmailSubscriptionsTasks(APIBaseTest):
         mocked_email_messages = mock_ee_email_messages(MockEmailMessage)
 
         send_email_subscription_report(
-            "test1@markettor.com",
+            "test1@clairview.com",
             self.subscription,
             [self.asset],
             invite_message="My invite message",
@@ -59,7 +59,7 @@ class TestEmailSubscriptionsTasks(APIBaseTest):
         assert mocked_email_messages[0].send.call_count == 1
 
         assert f"has subscribed you" in mocked_email_messages[0].html_body
-        assert "Someone subscribed you to a MarketTor Insight" == mocked_email_messages[0].subject
+        assert "Someone subscribed you to a ClairView Insight" == mocked_email_messages[0].subject
         assert "This subscription is sent every day. The next subscription will be sent on Wednesday February 02, 2022"
         assert "My invite message" in mocked_email_messages[0].html_body
 
@@ -76,7 +76,7 @@ class TestEmailSubscriptionsTasks(APIBaseTest):
         assert len(mocked_email_messages) == 1
         assert mocked_email_messages[0].send.call_count == 1
         assert "You have been subscribed" in mocked_email_messages[0].html_body
-        assert "You have been subscribed to a MarketTor Insight" == mocked_email_messages[0].subject
+        assert "You have been subscribed to a ClairView Insight" == mocked_email_messages[0].subject
 
     def test_sends_dashboard_subscription(self, MockEmailMessage: MagicMock) -> None:
         mocked_email_messages = mock_ee_email_messages(MockEmailMessage)
@@ -94,5 +94,5 @@ class TestEmailSubscriptionsTasks(APIBaseTest):
         assert len(mocked_email_messages) == 1
         assert mocked_email_messages[0].send.call_count == 1
         assert "You have been subscribed" in mocked_email_messages[0].html_body
-        assert "You have been subscribed to a MarketTor Dashboard" == mocked_email_messages[0].subject
+        assert "You have been subscribed to a ClairView Dashboard" == mocked_email_messages[0].subject
         assert f"SHOWING 1 OF 10 DASHBOARD INSIGHTS" in mocked_email_messages[0].html_body

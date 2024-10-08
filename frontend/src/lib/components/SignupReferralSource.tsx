@@ -1,4 +1,4 @@
-import { LemonInput } from '@markettor/lemon-ui'
+import { LemonInput } from '@clairview/lemon-ui'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 
 export default function SignupReferralSource({ disabled }: { disabled: boolean }): JSX.Element {

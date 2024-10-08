@@ -20,7 +20,7 @@ Cypress.on('window:before:load', (win) => {
     cy.spy(win.console, 'error')
     cy.spy(win.console, 'warn')
 
-    win._cypress_markettor_captures = []
+    win._cypress_clairview_captures = []
 })
 
 Cypress.on('window:load', (win) => {
@@ -96,7 +96,7 @@ beforeEach(() => {
     )
 
     // un-intercepted sometimes this doesn't work and the page gets stuck on the SpinnerOverlay
-    cy.intercept(/app.markettor.com\/api\/projects\/@current\/feature_flags\/my_flags.*/, (req) => req.reply([]))
+    cy.intercept(/app.clairview.com\/api\/projects\/@current\/feature_flags\/my_flags.*/, (req) => req.reply([]))
     cy.intercept('https://www.gravatar.com/avatar/**', (req) =>
         req.reply({ statusCode: 404, body: 'Cypress forced 404' })
     )
@@ -104,7 +104,7 @@ beforeEach(() => {
     cy.intercept('GET', /\/api\/projects\/\d+\/insights\/?\?/).as('getInsights')
 
     cy.request('POST', '/api/login/', {
-        email: 'test@markettor.com',
+        email: 'test@clairview.com',
         password: '12345678',
     })
 
@@ -126,7 +126,7 @@ afterEach(function () {
 
     if (E2E_TESTING) {
         cy.window().then((win) => {
-            ;(win as any).markettor?.capture(event, { state, duration })
+            ;(win as any).clairview?.capture(event, { state, duration })
         })
     }
 })

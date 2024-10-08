@@ -21,7 +21,7 @@ export const NotebookMarkLink = Mark.create({
     },
 
     renderHTML({ HTMLAttributes }) {
-        const target = isMarketTorLink(HTMLAttributes.href) ? undefined : '_blank'
+        const target = isClairViewLink(HTMLAttributes.href) ? undefined : '_blank'
         return ['a', mergeAttributes(HTMLAttributes, { target }), 0]
     },
 
@@ -59,7 +59,7 @@ export const NotebookMarkLink = Mark.create({
     },
 })
 
-const isMarketTorLink = (href: string): boolean => {
+const isClairViewLink = (href: string): boolean => {
     try {
         const url = new URL(href, window.location.origin)
         return url.origin === window.location.origin

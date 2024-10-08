@@ -18,7 +18,7 @@ import {
     UTM_TAGS,
 } from './FeatureFlagSnippets'
 
-const DOC_BASE_URL = 'https://markettor.com/docs/'
+const DOC_BASE_URL = 'https://clairview.com/docs/'
 export const FF_ANCHOR = '#feature-flags'
 export const PAYLOADS_ANCHOR = '#feature-flag-payloads'
 export const LOCAL_EVAL_ANCHOR = '#local-evaluation'

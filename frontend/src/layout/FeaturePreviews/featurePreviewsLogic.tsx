@@ -3,7 +3,7 @@ import { loaders } from 'kea-loaders'
 import { supportLogic } from 'lib/components/Support/supportLogic'
 import { FeatureFlagKey } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
-import { EarlyAccessFeature, markettor } from 'markettor-js'
+import { EarlyAccessFeature, clairview } from 'clairview-js'
 import { userLogic } from 'scenes/userLogic'
 
 import type { featurePreviewsLogicType } from './featurePreviewsLogicType'
@@ -34,7 +34,7 @@ export const featurePreviewsLogic = kea<featurePreviewsLogicType>([
             {
                 loadEarlyAccessFeatures: async () => {
                     return await new Promise((resolve) =>
-                        markettor.getEarlyAccessFeatures((features) => resolve(features), true)
+                        clairview.getEarlyAccessFeatures((features) => resolve(features), true)
                     )
                 },
             },
@@ -71,7 +71,7 @@ export const featurePreviewsLogic = kea<featurePreviewsLogicType>([
     }),
     listeners(() => ({
         updateEarlyAccessFeatureEnrollment: ({ flagKey, enabled }) => {
-            markettor.updateEarlyAccessFeatureEnrollment(flagKey, enabled)
+            clairview.updateEarlyAccessFeatureEnrollment(flagKey, enabled)
         },
     })),
     selectors({

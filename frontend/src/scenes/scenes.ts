@@ -377,8 +377,8 @@ export const sceneConfigurations: Record<Scene, SceneConfig> = {
         projectBased: true,
         name: 'Settings',
     },
-    [Scene.MoveToMarketTorCloud]: {
-        name: 'Move to MarketTor Cloud',
+    [Scene.MoveToClairViewCloud]: {
+        name: 'Move to ClairView Cloud',
         hideProjectNotice: true,
     },
     [Scene.Heatmaps]: {
@@ -567,7 +567,7 @@ export const routes: Record<string, Scene> = {
     [urls.notebooks()]: Scene.Notebooks,
     [urls.canvas()]: Scene.Canvas,
     [urls.settings(':section' as any)]: Scene.Settings,
-    [urls.moveToMarketTorCloud()]: Scene.MoveToMarketTorCloud,
+    [urls.moveToClairViewCloud()]: Scene.MoveToClairViewCloud,
     [urls.heatmaps()]: Scene.Heatmaps,
     [urls.sessionAttributionExplorer()]: Scene.SessionAttributionExplorer,
 }

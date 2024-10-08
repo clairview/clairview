@@ -1,6 +1,6 @@
 import * as pubsub from '@google-cloud/pubsub'
 import * as gcs from '@google-cloud/storage'
-import * as scaffold from '@markettor/plugin-scaffold'
+import * as scaffold from '@clairview/plugin-scaffold'
 import * as AWS from 'aws-sdk'
 import crypto from 'crypto'
 import * as genericPool from 'generic-pool'
@@ -19,7 +19,7 @@ export const AVAILABLE_IMPORTS = {
         : {}),
     '@google-cloud/pubsub': pubsub,
     '@google-cloud/storage': gcs,
-    '@markettor/plugin-scaffold': scaffold,
+    '@clairview/plugin-scaffold': scaffold,
     'aws-sdk': AWS,
     'generic-pool': genericPool,
     'node-fetch': trackedFetch,

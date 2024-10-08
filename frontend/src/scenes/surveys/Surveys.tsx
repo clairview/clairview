@@ -1,4 +1,4 @@
-import { IconGear } from '@markettor/icons'
+import { IconGear } from '@clairview/icons'
 import {
     LemonButton,
     LemonDialog,
@@ -10,7 +10,7 @@ import {
     LemonTagType,
     Link,
     Spinner,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
@@ -92,7 +92,7 @@ export function Surveys(): JSX.Element {
                         Check out our
                         <Link
                             data-attr="survey-help"
-                            to="https://markettor.com/docs/surveys?utm_medium=in-product&utm_campaign=new-survey"
+                            to="https://clairview.com/docs/surveys?utm_medium=in-product&utm_campaign=new-survey"
                             target="_blank"
                         >
                             {' '}

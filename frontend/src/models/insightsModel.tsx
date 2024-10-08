@@ -1,4 +1,4 @@
-import { LemonDialog, LemonInput } from '@markettor/lemon-ui'
+import { LemonDialog, LemonInput } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'

@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { useEffect, useState } from 'react'
@@ -52,7 +52,7 @@ export function ErrorProjectUnavailable(): JSX.Element {
                 </>
             ) : (
                 <>
-                    <h1>Welcome to {user?.organization?.name} on MarketTor</h1>
+                    <h1>Welcome to {user?.organization?.name} on ClairView</h1>
                     <p>You do not have access to any projects in this organization. You can {listOptions()}.</p>
                 </>
             )}

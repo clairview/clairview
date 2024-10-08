@@ -1,5 +1,5 @@
-import { IconPerson } from '@markettor/icons'
-import { LemonButton, LemonButtonProps, ProfilePicture } from '@markettor/lemon-ui'
+import { IconPerson } from '@clairview/icons'
+import { LemonButton, LemonButtonProps, ProfilePicture } from '@clairview/lemon-ui'
 import { MemberSelect } from 'lib/components/MemberSelect'
 import { fullName } from 'lib/utils'
 

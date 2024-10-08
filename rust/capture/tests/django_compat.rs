@@ -188,7 +188,7 @@ async fn it_matches_django_capture_behaviour() -> anyhow::Result<()> {
                 let mut expected_props: Value =
                     serde_json::from_str(expected_data.as_str().expect("not str"))?;
                 if let Some(object) = expected_props.as_object_mut() {
-                    // toplevel fields added by markettor-node that plugin-server will ignore anyway
+                    // toplevel fields added by clairview-node that plugin-server will ignore anyway
                     object.remove("type");
                     object.remove("library");
                     object.remove("library_version");

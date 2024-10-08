@@ -5,9 +5,9 @@ import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 
 function DjangoCaptureSnippet(): JSX.Element {
     return (
-        <CodeSnippet language={Language.Python}>{`import markettor
+        <CodeSnippet language={Language.Python}>{`import clairview
     
-markettor.capture('test-id', 'test-event')`}</CodeSnippet>
+clairview.capture('test-id', 'test-event')`}</CodeSnippet>
     )
 }
 

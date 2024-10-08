@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonInput, LemonSelect, LemonSnack, LemonTable, LemonTag, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonInput, LemonSelect, LemonSnack, LemonTable, LemonTag, Link, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonTableColumns } from 'lib/lemon-ui/LemonTable'
 import { LemonTableLink } from 'lib/lemon-ui/LemonTable/LemonTableLink'
@@ -105,7 +105,7 @@ export function RelatedFeatureFlags({ distinctId, groups }: Props): JSX.Element 
                                     If you are using local flag evaluation, you must ensure that you provide any person
                                     properties, groups, or group properties used to evaluate the release conditions of
                                     the flag. Read more in the{' '}
-                                    <Link to="https://markettor.com/docs/feature-flags/local-evaluation#step-3-evaluate-your-feature-flag">
+                                    <Link to="https://clairview.com/docs/feature-flags/local-evaluation#step-3-evaluate-your-feature-flag">
                                         documentation.
                                     </Link>
                                 </div>

@@ -1,12 +1,12 @@
 import { NotebookType, UserBasicType } from '~/types'
 
 const TEMPLATE_USERS: Record<string, UserBasicType> = {
-    markettor: {
+    clairview: {
         id: 1,
-        uuid: 'markettor@markettor.com',
+        uuid: 'clairview@clairview.com',
         distinct_id: '1',
-        first_name: 'MarketTor',
-        email: 'markettor@markettor.com',
+        first_name: 'ClairView',
+        email: 'clairview@clairview.com',
     },
 }
 
@@ -17,8 +17,8 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
         title: 'Introducing Notebooks! 🥳',
         created_at: '2023-06-02T00:00:00Z',
         last_modified_at: '2023-06-02T00:00:00Z',
-        created_by: TEMPLATE_USERS.markettor,
-        last_modified_by: TEMPLATE_USERS.markettor,
+        created_by: TEMPLATE_USERS.clairview,
+        last_modified_by: TEMPLATE_USERS.clairview,
         version: 1,
         content: {
             type: 'doc',
@@ -40,7 +40,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                     content: [
                         {
                             type: 'text',
-                            text: 'Notebooks are a powerful way to collate, analyze, and share MarketTor data with others:',
+                            text: 'Notebooks are a powerful way to collate, analyze, and share ClairView data with others:',
                         },
                     ],
                 },
@@ -313,7 +313,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                         __init: null,
                         children: null,
                         file: null,
-                        src: 'https://us.markettor.com/uploaded_media/018c494d-132b-0000-2004-8861f35c13b5',
+                        src: 'https://us.clairview.com/uploaded_media/018c494d-132b-0000-2004-8861f35c13b5',
                     },
                 },
                 {
@@ -332,7 +332,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                     type: 'ph-embed',
                     attrs: {
                         height: 508,
-                        title: 'MarketTor youtube video',
+                        title: 'ClairView youtube video',
                         nodeId: '421818d3-65c7-4a14-a22e-924e8c4ee04f',
                         __init: null,
                         children: null,
@@ -356,7 +356,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                     content: [
                         {
                             type: 'text',
-                            text: 'Adding MarketTor data to notebooks',
+                            text: 'Adding ClairView data to notebooks',
                         },
                     ],
                 },
@@ -365,7 +365,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                     content: [
                         {
                             type: 'text',
-                            text: 'The real power of Notebooks comes from pulling various MarketTor resources into the document.',
+                            text: 'The real power of Notebooks comes from pulling various ClairView resources into the document.',
                         },
                     ],
                 },
@@ -507,7 +507,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                     content: [
                         {
                             type: 'text',
-                            text: 'You can also drag and drop MarketTor elements into a notebook pinned to the sidebar, such as:',
+                            text: 'You can also drag and drop ClairView elements into a notebook pinned to the sidebar, such as:',
                         },
                         {
                             type: 'hardBreak',
@@ -643,7 +643,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                         __init: null,
                         children: null,
                         file: null,
-                        src: 'https://us.markettor.com/uploaded_media/018c496c-d79a-0000-bbc8-fdb0c77ec46f',
+                        src: 'https://us.clairview.com/uploaded_media/018c496c-d79a-0000-bbc8-fdb0c77ec46f',
                     },
                 },
                 {
@@ -688,7 +688,7 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                                 {
                                     type: 'link',
                                     attrs: {
-                                        href: 'https://github.com/MarketTor/markettor/issues/15680 ',
+                                        href: 'https://github.com/ClairView/clairview/issues/15680 ',
                                     },
                                 },
                                 {
@@ -724,14 +724,14 @@ export const LOCAL_NOTEBOOK_TEMPLATES: NotebookType[] = [
                                 {
                                     type: 'link',
                                     attrs: {
-                                        href: 'https://markettor.com/blog/markettor-as-a-dev-tool',
+                                        href: 'https://clairview.com/blog/clairview-as-a-dev-tool',
                                     },
                                 },
                                 {
                                     type: 'bold',
                                 },
                             ],
-                            text: 'What if MarketTor looked like a dev tool?',
+                            text: 'What if ClairView looked like a dev tool?',
                         },
                     ],
                 },

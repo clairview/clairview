@@ -15,7 +15,7 @@ export const plugin60: Plugin = {
     plugin_type: 'custom',
     name: 'test-maxmind-plugin',
     description: 'Ingest GeoIP data via MaxMind',
-    url: 'https://www.npmjs.com/package/markettor-maxmind-plugin',
+    url: 'https://www.npmjs.com/package/clairview-maxmind-plugin',
     config_schema: {},
     tag: '0.0.2',
     error: undefined,
@@ -81,7 +81,7 @@ function mockSourceFileFields(
 
 export const mockPluginWithSourceFiles = (indexJs: string, pluginJson?: string): Plugin => ({
     ...plugin60,
-    ...mockSourceFileFields('markettor-maxmind-plugin', { indexJs, pluginJson }),
+    ...mockSourceFileFields('clairview-maxmind-plugin', { indexJs, pluginJson }),
 })
 
 export const makePluginObjects = (
@@ -106,7 +106,7 @@ export function mockPluginTempFolder(indexJs: string, pluginJson?: string): [Plu
         path.join(folder, 'plugin.json'),
         pluginJson ||
             JSON.stringify({
-                name: 'markettor-maxmind-plugin',
+                name: 'clairview-maxmind-plugin',
                 description: 'just for testing',
                 url: 'http://example.com/plugin',
                 config: {},
@@ -132,7 +132,7 @@ export const plugin70 = {
     id: 70,
     ...mockSourceFileFields('test-plugin', {
         indexJs: `
-            import { RetryError } from '@markettor/plugin-scaffold'
+            import { RetryError } from '@clairview/plugin-scaffold'
             export function setupPlugin () { throw new RetryError('I always fail!') }
             export function processEvent (event) { return event }`,
     }),

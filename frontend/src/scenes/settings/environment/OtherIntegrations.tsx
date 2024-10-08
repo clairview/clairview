@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonButton, LemonSkeleton } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonButton, LemonSkeleton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { integrationsLogic } from 'lib/integrations/integrationsLogic'
 import { IntegrationView } from 'lib/integrations/IntegrationView'
@@ -17,7 +17,7 @@ export function OtherIntegrations(): JSX.Element {
         LemonDialog.open({
             title: `Do you want to disconnect from this ${integration.kind} integration?`,
             description:
-                'This cannot be undone. MarketTor resources configured to use this integration will remain but will stop working.',
+                'This cannot be undone. ClairView resources configured to use this integration will remain but will stop working.',
             primaryButton: {
                 children: 'Yes, disconnect',
                 status: 'danger',

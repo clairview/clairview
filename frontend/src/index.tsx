@@ -1,16 +1,16 @@
 import '~/styles'
 
 import { getContext } from 'kea'
-import markettor from 'markettor-js'
-import { MarketTorProvider } from 'markettor-js/react'
+import clairview from 'clairview-js'
+import { ClairViewProvider } from 'clairview-js/react'
 import { createRoot } from 'react-dom/client'
 import { App } from 'scenes/App'
 
 import { initKea } from './initKea'
 import { ErrorBoundary } from './layout/ErrorBoundary'
-import { loadMarketTorJS } from './loadMarketTorJS'
+import { loadClairViewJS } from './loadClairViewJS'
 
-loadMarketTorJS()
+loadClairViewJS()
 initKea()
 
 // Expose `window.getReduxState()` to make snapshots to storybook easy
@@ -28,13 +28,13 @@ function renderApp(): void {
     if (root) {
         createRoot(root).render(
             <ErrorBoundary>
-                <MarketTorProvider client={markettor}>
+                <ClairViewProvider client={clairview}>
                     <App />
-                </MarketTorProvider>
+                </ClairViewProvider>
             </ErrorBoundary>
         )
     } else {
-        console.error('Attempted, but could not render MarketTor app because <div id="root" /> is not found.')
+        console.error('Attempted, but could not render ClairView app because <div id="root" /> is not found.')
     }
 }
 

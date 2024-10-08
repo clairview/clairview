@@ -1,5 +1,5 @@
 import type { Monaco } from '@monaco-editor/react'
-import { LemonDialog, LemonInput } from '@markettor/lemon-ui'
+import { LemonDialog, LemonInput } from '@clairview/lemon-ui'
 import { actions, connect, kea, key, listeners, path, props, propsChanged, reducers, selectors } from 'kea'
 import { combineUrl, router } from 'kea-router'
 import api from 'lib/api'
@@ -101,7 +101,7 @@ export const torQLQueryEditorLogic = kea<torQLQueryEditorLogicType>([
         draftFromPrompt: async () => {
             if (!values.aiAvailable) {
                 throw new Error(
-                    'To use AI features, configure environment variable OPENAI_API_KEY for this instance of MarketTor'
+                    'To use AI features, configure environment variable OPENAI_API_KEY for this instance of ClairView'
                 )
             }
             try {

@@ -6,12 +6,12 @@ from rest_framework.response import Response
 
 from ee.models.hook import Hook, HOOK_EVENTS
 from django.conf import settings
-from markettor.api.hog_function import HogFunctionSerializer
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.models.hog_functions.hog_function import HogFunction
-from markettor.models.team.team import Team
-from markettor.models.user import User
-from markettor.cdp.templates.zapier.template_zapier import template as template_zapier
+from clairview.api.hog_function import HogFunctionSerializer
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.models.hog_functions.hog_function import HogFunction
+from clairview.models.team.team import Team
+from clairview.models.user import User
+from clairview.cdp.templates.zapier.template_zapier import template as template_zapier
 
 
 def hog_functions_enabled(team: Team) -> bool:

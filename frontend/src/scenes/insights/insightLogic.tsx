@@ -1,4 +1,4 @@
-import { LemonDialog, LemonInput } from '@markettor/lemon-ui'
+import { LemonDialog, LemonInput } from '@clairview/lemon-ui'
 import { actions, connect, events, kea, key, listeners, LogicWrapper, path, props, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import { router } from 'kea-router'

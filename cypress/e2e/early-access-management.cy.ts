@@ -6,7 +6,7 @@ describe('Early Access Management', () => {
     it('Early access feature new and list', () => {
         // load an empty early access feature page
         cy.get('h1').should('contain', 'Early access features')
-        cy.title().should('equal', 'Early access features • MarketTor')
+        cy.title().should('equal', 'Early access features • ClairView')
         cy.contains('Create your first feature').should('exist')
         cy.get('[data-attr="product-introduction-docs-link"]').should('contain', 'Learn more')
 

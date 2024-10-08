@@ -1,4 +1,4 @@
-import { GeoIPExtension } from '@markettor/plugin-scaffold'
+import { GeoIPExtension } from '@clairview/plugin-scaffold'
 
 import { Hub } from '../../../types'
 import { status } from '../../../utils/status'

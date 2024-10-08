@@ -4,24 +4,24 @@ from django.db.models.query import QuerySet
 from rest_framework.exceptions import ValidationError
 
 from ee.clickhouse.queries.funnels.funnel_correlation import FunnelCorrelation
-from markettor.constants import (
+from clairview.constants import (
     FUNNEL_CORRELATION_PERSON_LIMIT,
     FunnelCorrelationType,
     PropertyOperatorType,
 )
-from markettor.models import Person
-from markettor.models.entity import Entity
-from markettor.models.filters.filter import Filter
-from markettor.models.filters.mixins.utils import cached_property
-from markettor.models.group import Group
-from markettor.models.team import Team
-from markettor.queries.actor_base_query import (
+from clairview.models import Person
+from clairview.models.entity import Entity
+from clairview.models.filters.filter import Filter
+from clairview.models.filters.mixins.utils import cached_property
+from clairview.models.group import Group
+from clairview.models.team import Team
+from clairview.queries.actor_base_query import (
     ActorBaseQuery,
     SerializedGroup,
     SerializedPerson,
 )
-from markettor.queries.funnels.funnel_event_query import FunnelEventQuery
-from markettor.queries.util import get_person_properties_mode
+from clairview.queries.funnels.funnel_event_query import FunnelEventQuery
+from clairview.queries.util import get_person_properties_mode
 
 
 class FunnelCorrelationActors(ActorBaseQuery):

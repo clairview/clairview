@@ -20,7 +20,7 @@ export interface LemonCheckboxProps {
     fullWidth?: boolean
     size?: 'small' | 'medium'
     bordered?: boolean
-    /** @deprecated See https://github.com/MarketTor/markettor/pull/9357#pullrequestreview-933783868. */
+    /** @deprecated See https://github.com/ClairView/clairview/pull/9357#pullrequestreview-933783868. */
     color?: string
     dataAttr?: string
 }

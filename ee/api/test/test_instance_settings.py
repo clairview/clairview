@@ -1,12 +1,12 @@
-# TODO: Once Clickhouse is moved out of EE, move test cases to markettor/api/test/test_instance_settings.py
+# TODO: Once Clickhouse is moved out of EE, move test cases to clairview/api/test/test_instance_settings.py
 from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
-from markettor.client import sync_execute
-from markettor.models.instance_setting import get_instance_setting
-from markettor.models.performance.sql import PERFORMANCE_EVENT_DATA_TABLE
-from markettor.settings.data_stores import CLICKHOUSE_DATABASE
-from markettor.test.base import ClickhouseTestMixin, snapshot_clickhouse_alter_queries
+from clairview.client import sync_execute
+from clairview.models.instance_setting import get_instance_setting
+from clairview.models.performance.sql import PERFORMANCE_EVENT_DATA_TABLE
+from clairview.settings.data_stores import CLICKHOUSE_DATABASE
+from clairview.test.base import ClickhouseTestMixin, snapshot_clickhouse_alter_queries
 
 
 class TestInstanceSettings(ClickhouseTestMixin, APILicensedTest):

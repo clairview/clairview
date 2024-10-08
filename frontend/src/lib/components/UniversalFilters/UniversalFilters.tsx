@@ -1,5 +1,5 @@
-import { IconPlusSmall } from '@markettor/icons'
-import { LemonButton, LemonButtonProps, LemonDropdown, Popover } from '@markettor/lemon-ui'
+import { IconPlusSmall } from '@clairview/icons'
+import { LemonButton, LemonButtonProps, LemonDropdown, Popover } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { useState } from 'react'
 

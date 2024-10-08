@@ -6,10 +6,10 @@ from rest_framework import status
 from ee.api.test.base import APILicensedTest
 from ee.models.explicit_team_membership import ExplicitTeamMembership
 from ee.models.license import License
-from markettor.models import OrganizationMembership
-from markettor.models.dashboard import Dashboard
-from markettor.models.sharing_configuration import SharingConfiguration
-from markettor.models.user import User
+from clairview.models import OrganizationMembership
+from clairview.models.dashboard import Dashboard
+from clairview.models.sharing_configuration import SharingConfiguration
+from clairview.models.user import User
 
 
 class TestDashboardEnterpriseAPI(APILicensedTest):
@@ -281,7 +281,7 @@ class TestDashboardEnterpriseAPI(APILicensedTest):
         self.team.save()
 
         user_without_collaboration = User.objects.create_and_join(
-            self.organization, "no-collaboration-feature@markettor.com", None
+            self.organization, "no-collaboration-feature@clairview.com", None
         )
         self.client.force_login(user_without_collaboration)
 

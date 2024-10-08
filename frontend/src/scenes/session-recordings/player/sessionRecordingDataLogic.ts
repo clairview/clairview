@@ -1,4 +1,4 @@
-import markettorEE from '@markettor/ee/exports'
+import clairviewEE from '@clairview/ee/exports'
 import { customEvent, EventType, eventWithTime, fullSnapshotEvent, IncrementalSource } from '@rrweb/types'
 import { captureException } from '@sentry/react'
 import { gunzipSync, strFromU8, strToU8 } from 'fflate'
@@ -25,8 +25,8 @@ import { featureFlagLogic, FeatureFlagsSet } from 'lib/logic/featureFlagLogic'
 import { isObject } from 'lib/utils'
 import { chainToElements } from 'lib/utils/elements-chain'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
-import { compressedEventWithTime } from 'markettor-js/lib/src/extensions/replay/sessionrecording'
+import clairview from 'clairview-js'
+import { compressedEventWithTime } from 'clairview-js/lib/src/extensions/replay/sessionrecording'
 import { RecordingComment } from 'scenes/session-recordings/player/inspector/playerInspectorLogic'
 
 import { TorQLQuery, NodeKind } from '~/queries/schema'
@@ -52,7 +52,7 @@ import {
     SnapshotSourceType,
 } from '~/types'
 
-import { MarketTorEE } from '../../../../@markettor/ee/types'
+import { ClairViewEE } from '../../../../@clairview/ee/types'
 import { ExportedSessionRecordingFileV2 } from '../file-playback/types'
 import type { sessionRecordingDataLogicType } from './sessionRecordingDataLogicType'
 import { createSegments, mapSnapshotsToWindowId } from './utils/segmenter'
@@ -61,7 +61,7 @@ const IS_TEST_MODE = process.env.NODE_ENV === 'test'
 const BUFFER_MS = 60000 // +- before and after start and end of a recording to query for.
 const DEFAULT_REALTIME_POLLING_MILLIS = 3000
 
-let marketTorEEModule: MarketTorEE
+let marketTorEEModule: ClairViewEE
 
 function isRecordingSnapshot(x: unknown): x is RecordingSnapshot {
     return typeof x === 'object' && x !== null && 'type' in x && 'timestamp' in x
@@ -168,7 +168,7 @@ function decompressEvent(ev: unknown): unknown {
                     }
                 }
             } else {
-                markettor.captureException(new Error('Unknown compressed event version'), {
+                clairview.captureException(new Error('Unknown compressed event version'), {
                     feature: 'session-recording-compressed-event-decompression',
                     compressedEvent: ev,
                     compressionVersion: ev.cv,
@@ -179,7 +179,7 @@ function decompressEvent(ev: unknown): unknown {
         }
         return ev
     } catch (e) {
-        markettor.captureException((e as Error) || new Error('Could not decompress event'), {
+        clairview.captureException((e as Error) || new Error('Could not decompress event'), {
             feature: 'session-recording-compressed-event-decompression',
             compressedEvent: ev,
         })
@@ -208,7 +208,7 @@ export const parseEncodedSnapshots = async (
     withMobileTransformer: boolean = true
 ): Promise<RecordingSnapshot[]> => {
     if (!marketTorEEModule) {
-        marketTorEEModule = await markettorEE()
+        marketTorEEModule = await clairviewEE()
     }
 
     const lineCount = items.length
@@ -255,7 +255,7 @@ export const parseEncodedSnapshots = async (
             unparseableLinesCount: unparseableLines.length,
             exampleLines: unparseableLines.slice(0, 3),
         }
-        markettor.capture('session recording had unparseable lines', {
+        clairview.capture('session recording had unparseable lines', {
             ...extra,
             feature: 'session-recording-snapshot-processing',
         })
@@ -598,7 +598,7 @@ export const sessionRecordingDataLogic = kea<sessionRecordingDataLogicType>([
                         // but in the same time range
                         // these are probably e.g. backend events for the session
                         // but with no session id
-                        // since markettor-js must always add session id we can also
+                        // since clairview-js must always add session id we can also
                         // take advantage of lib being materialized and further filter
                         makeEventsQuery(null, values.sessionPlayerMetaData?.distinct_id || null, start, end, [
                             {
@@ -772,7 +772,7 @@ export const sessionRecordingDataLogic = kea<sessionRecordingDataLogicType>([
 
             if (!snapshots.length && sources?.length === 1) {
                 // We got only a single source to load, loaded it successfully, but it had no snapshots.
-                markettor.capture('recording_snapshots_v2_empty_response', {
+                clairview.capture('recording_snapshots_v2_empty_response', {
                     source: sources[0],
                 })
             } else if (!cache.firstPaintDuration) {
@@ -1079,11 +1079,11 @@ export const sessionRecordingDataLogic = kea<sessionRecordingDataLogicType>([
 
                 if (everyWindowMissingFullSnapshot) {
                     // video is definitely unplayable
-                    markettor.capture('recording_has_no_full_snapshot', {
+                    clairview.capture('recording_has_no_full_snapshot', {
                         sessionId: sessionRecordingId,
                     })
                 } else if (anyWindowMissingFullSnapshot) {
-                    markettor.capture('recording_window_missing_full_snapshot', {
+                    clairview.capture('recording_window_missing_full_snapshot', {
                         sessionId: sessionRecordingId,
                     })
                 }

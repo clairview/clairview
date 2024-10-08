@@ -12,13 +12,13 @@ from rest_framework.status import (
 
 from ee.api.test.base import APILicensedTest
 from ee.models.explicit_team_membership import ExplicitTeamMembership
-from markettor.models.dashboard import Dashboard
-from markettor.models.organization import Organization, OrganizationMembership
-from markettor.models.project import Project
-from markettor.models.team import Team
-from markettor.models.team.team_caching import get_team_in_cache
-from markettor.models.user import User
-from markettor.test.base import FuzzyInt
+from clairview.models.dashboard import Dashboard
+from clairview.models.organization import Organization, OrganizationMembership
+from clairview.models.project import Project
+from clairview.models.team import Team
+from clairview.models.team.team_caching import get_team_in_cache
+from clairview.models.user import User
+from clairview.test.base import FuzzyInt
 
 
 def team_enterprise_api_test_factory():  # type: ignore
@@ -62,7 +62,7 @@ def team_enterprise_api_test_factory():  # type: ignore
                 ),
             )
 
-        @patch("markettor.demo.matrix.manager.MatrixManager.run_on_team")  # We don't actually need demo data, it's slow
+        @patch("clairview.demo.matrix.manager.MatrixManager.run_on_team")  # We don't actually need demo data, it's slow
         def test_create_demo_team(self, *args):
             self.organization_membership.level = OrganizationMembership.Level.ADMIN
             self.organization_membership.save()
@@ -81,7 +81,7 @@ def team_enterprise_api_test_factory():  # type: ignore
             )
             self.assertEqual(self.organization.teams.count(), 2)
 
-        @patch("markettor.demo.matrix.manager.MatrixManager.run_on_team")  # We don't actually need demo data, it's slow
+        @patch("clairview.demo.matrix.manager.MatrixManager.run_on_team")  # We don't actually need demo data, it's slow
         def test_create_two_demo_teams(self, *args):
             self.organization_membership.level = OrganizationMembership.Level.ADMIN
             self.organization_membership.save()
@@ -107,7 +107,7 @@ def team_enterprise_api_test_factory():  # type: ignore
                     "attr": None,
                     "type": "authentication_error",
                     "code": "permission_denied",
-                    "detail": "You must upgrade your MarketTor plan to be able to create and manage multiple projects or environments.",
+                    "detail": "You must upgrade your ClairView plan to be able to create and manage multiple projects or environments.",
                 },
                 response_2_data,
             )
@@ -473,7 +473,7 @@ def team_enterprise_api_test_factory():  # type: ignore
                         "item_id": str(team_id),
                         "scope": "Team",
                         "user": {
-                            "email": "user1@markettor.com",
+                            "email": "user1@clairview.com",
                             "first_name": "",
                         },
                     },

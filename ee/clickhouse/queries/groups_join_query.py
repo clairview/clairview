@@ -1,14 +1,14 @@
 from typing import Optional, Union
 
 from ee.clickhouse.queries.column_optimizer import EnterpriseColumnOptimizer
-from markettor.models import Filter
-from markettor.models.filters.path_filter import PathFilter
-from markettor.models.filters.retention_filter import RetentionFilter
-from markettor.models.filters.stickiness_filter import StickinessFilter
-from markettor.models.filters.utils import GroupTypeIndex
-from markettor.models.property.util import parse_prop_grouped_clauses
-from markettor.queries.util import PersonPropertiesMode, alias_poe_mode_for_legacy
-from markettor.schema import PersonsOnEventsMode
+from clairview.models import Filter
+from clairview.models.filters.path_filter import PathFilter
+from clairview.models.filters.retention_filter import RetentionFilter
+from clairview.models.filters.stickiness_filter import StickinessFilter
+from clairview.models.filters.utils import GroupTypeIndex
+from clairview.models.property.util import parse_prop_grouped_clauses
+from clairview.queries.util import PersonPropertiesMode, alias_poe_mode_for_legacy
+from clairview.schema import PersonsOnEventsMode
 
 
 class GroupsJoinQuery:

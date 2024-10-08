@@ -1,4 +1,4 @@
-import { LemonButton, LemonTable, LemonTableColumns } from '@markettor/lemon-ui'
+import { LemonButton, LemonTable, LemonTableColumns } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LOGS_PORTION_LIMIT } from 'lib/constants'
 import { dayjs } from 'lib/dayjs'

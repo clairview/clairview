@@ -31,8 +31,8 @@ use crate::redis::Client;
 /// However, ideally we should not allow requests from some pods but 429 from others.
 
 // todo: fetch from env
-pub const QUOTA_LIMITER_CACHE_KEY: &str = "@markettor/quota-limits/";
-pub const OVERFLOW_LIMITER_CACHE_KEY: &str = "@markettor/capture-overflow/";
+pub const QUOTA_LIMITER_CACHE_KEY: &str = "@clairview/quota-limits/";
+pub const OVERFLOW_LIMITER_CACHE_KEY: &str = "@clairview/capture-overflow/";
 
 #[derive(Debug)]
 pub enum QuotaResource {
@@ -157,7 +157,7 @@ mod tests {
     #[tokio::test]
     async fn test_dynamic_limited() {
         let client = MockRedisClient::new().zrangebyscore_ret(
-            "@markettor/capture-overflow/replay",
+            "@clairview/capture-overflow/replay",
             vec![String::from("banana")],
         );
         let client = Arc::new(client);
@@ -179,7 +179,7 @@ mod tests {
     #[tokio::test]
     async fn test_custom_key_prefix() {
         let client = MockRedisClient::new().zrangebyscore_ret(
-            "prefix//@markettor/quota-limits/events",
+            "prefix//@clairview/quota-limits/events",
             vec![String::from("banana")],
         );
         let client = Arc::new(client);

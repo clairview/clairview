@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { apiHostOrigin } from 'lib/utils/apiHost'
@@ -14,7 +14,7 @@ export function ProductAnalyticsLangfuseInstructions(): JSX.Element {
                 <Link to="https://langfuse.com/" target="_blank">
                     Langfuse
                 </Link>{' '}
-                supports most popular LLM models and you can bring your Langfuse data into MarketTor for analysis. To get
+                supports most popular LLM models and you can bring your Langfuse data into ClairView for analysis. To get
                 started:
             </p>
             <ol className="space-y-4">
@@ -31,14 +31,14 @@ export function ProductAnalyticsLangfuseInstructions(): JSX.Element {
                         Langfuse dashboard
                     </Link>
                     , click on <strong>Settings</strong> and scroll down to the <strong>Integrations</strong> section to
-                    find the MarketTor integration.
+                    find the ClairView integration.
                 </li>
                 <li>
-                    Click <strong>Configure</strong> and paste in your MarketTor project API key:
+                    Click <strong>Configure</strong> and paste in your ClairView project API key:
                     <CodeSnippet language={Language.JavaScript}>{currentTeam?.api_token}</CodeSnippet>
                 </li>
                 <li>
-                    Paste in your MarketTor host:
+                    Paste in your ClairView host:
                     <CodeSnippet language={Language.JavaScript}>{apiHostOrigin()}</CodeSnippet>
                 </li>
                 <li>
@@ -46,8 +46,8 @@ export function ProductAnalyticsLangfuseInstructions(): JSX.Element {
                 </li>
             </ol>
             <p>
-                Langfuse will now begin exporting your data into MarketTor. Note that Langfuse batch exports your data
-                into MarketTor once a day, so it can take up to 24 hours for your Langfuse data to appear in MarketTor.
+                Langfuse will now begin exporting your data into ClairView. Note that Langfuse batch exports your data
+                into ClairView once a day, so it can take up to 24 hours for your Langfuse data to appear in ClairView.
             </p>
         </>
     )

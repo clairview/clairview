@@ -1,4 +1,4 @@
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Sparkline, SparklineTimeSeries } from 'lib/components/Sparkline'
 import { useEffect } from 'react'

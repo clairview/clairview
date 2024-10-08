@@ -8,10 +8,10 @@ from ee.clickhouse.queries.experiments.trend_experiment_result import (
     uses_math_aggregation_by_user_or_property_value,
 )
 
-from markettor.constants import INSIGHT_FUNNELS, INSIGHT_TRENDS
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.filters.filter import Filter
-from markettor.models.team import Team
+from clairview.constants import INSIGHT_FUNNELS, INSIGHT_TRENDS
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.filters.filter import Filter
+from clairview.models.team import Team
 
 
 class ClickhouseSecondaryExperimentResult:

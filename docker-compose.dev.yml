@@ -1,10 +1,10 @@
 #
 # docker-compose file used ONLY for local development.
 # For more info, see:
-# https://markettor.com/handbook/engineering/developing-locally
+# https://clairview.com/handbook/engineering/developing-locally
 #
-# MarketTor has sunset support for self-hosted K8s deployments.
-# See: https://markettor.com/blog/sunsetting-helm-support-markettor
+# ClairView has sunset support for self-hosted K8s deployments.
+# See: https://clairview.com/blog/sunsetting-helm-support-clairview
 #
 
 services:
@@ -64,12 +64,12 @@ services:
             # this new entrypoint file is to fix a bug detailed here https://github.com/ClickHouse/ClickHouse/pull/59991
             # revert this when we upgrade clickhouse
             - ./docker/clickhouse/entrypoint.sh:/entrypoint.sh
-            - ./markettor/idl:/idl
+            - ./clairview/idl:/idl
             - ./docker/clickhouse/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
             - ./docker/clickhouse/config.xml:/etc/clickhouse-server/config.xml
             - ./docker/clickhouse/users-dev.xml:/etc/clickhouse-server/users.xml
             - ./docker/clickhouse/user_defined_function.xml:/etc/clickhouse-server/user_defined_function.xml
-            - ./markettor/user_scripts:/var/lib/clickhouse/user_scripts
+            - ./clairview/user_scripts:/var/lib/clickhouse/user_scripts
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         depends_on:

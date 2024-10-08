@@ -3,8 +3,8 @@ import './EditSurvey.scss'
 import { DraggableSyntheticListeners } from '@dnd-kit/core'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { IconPlusSmall, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonDialog, LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { IconPlusSmall, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonDialog, LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Group } from 'kea-forms'
 import { SortableDragIcon } from 'lib/lemon-ui/icons'
@@ -212,7 +212,7 @@ export function SurveyEditQuestionGroup({ index, question }: { index: number; qu
                 )}
                 {question.type === SurveyQuestionType.Link && (
                     <LemonField name="link" label="Link" info="Make sure to include https:// in the url.">
-                        <LemonInput value={question.link || ''} placeholder="https://markettor.com" />
+                        <LemonInput value={question.link || ''} placeholder="https://clairview.com" />
                     </LemonField>
                 )}
                 {question.type === SurveyQuestionType.Rating && (

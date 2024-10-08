@@ -2,8 +2,8 @@ import './EditSurvey.scss'
 
 import { DndContext } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { IconInfo } from '@markettor/icons'
-import { IconLock, IconPlus, IconTrash } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
+import { IconLock, IconPlus, IconTrash } from '@clairview/icons'
 import {
     LemonButton,
     LemonCheckbox,
@@ -15,7 +15,7 @@ import {
     LemonTag,
     LemonTextArea,
     Link,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { EventSelect } from 'lib/components/EventSelect/EventSelect'
 import { FlagSelector } from 'lib/components/FlagSelector'
@@ -129,7 +129,7 @@ export default function SurveyEdit(): JSX.Element {
                                                     active={value === SurveyType.Popover}
                                                     onClick={() => onChange(SurveyType.Popover)}
                                                     title="Popover"
-                                                    description="Automatically appears when MarketTor JS is installed"
+                                                    description="Automatically appears when ClairView JS is installed"
                                                     value={SurveyType.Popover}
                                                 >
                                                     <div className="scale-[0.8] absolute -top-4 -left-4">
@@ -140,7 +140,7 @@ export default function SurveyEdit(): JSX.Element {
                                                     active={value === SurveyType.API}
                                                     onClick={() => onChange(SurveyType.API)}
                                                     title="API"
-                                                    description="Use the MarketTor API to show/hide your survey programmatically"
+                                                    description="Use the ClairView API to show/hide your survey programmatically"
                                                     value={SurveyType.API}
                                                 >
                                                     <div className="absolute left-4 w-[350px]">
@@ -550,7 +550,7 @@ export default function SurveyEdit(): JSX.Element {
                                                         <LemonField.Pure
                                                             label="URL targeting"
                                                             error={urlMatchTypeValidationError}
-                                                            info="Targeting by regex or exact match requires at least version 1.82 of markettor-js"
+                                                            info="Targeting by regex or exact match requires at least version 1.82 of clairview-js"
                                                         >
                                                             <div className="flex flex-row gap-2 items-center">
                                                                 URL
@@ -578,7 +578,7 @@ export default function SurveyEdit(): JSX.Element {
                                                                     onChange={(urlVal) =>
                                                                         onChange({ ...value, url: urlVal })
                                                                     }
-                                                                    placeholder="ex: https://app.markettor.com"
+                                                                    placeholder="ex: https://app.clairview.com"
                                                                     fullWidth
                                                                 />
                                                             </div>

@@ -7,7 +7,7 @@ from typing import Any
 import pytest
 
 from ee.api.test.base import APILicensedTest
-from markettor.models.instance_setting import set_instance_setting
+from clairview.models.instance_setting import set_instance_setting
 
 
 @pytest.mark.skip_on_multitenancy

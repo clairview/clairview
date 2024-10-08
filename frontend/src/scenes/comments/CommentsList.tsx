@@ -1,4 +1,4 @@
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { PhonePairHogs } from 'lib/components/hedgehogs'
 import { useEffect } from 'react'

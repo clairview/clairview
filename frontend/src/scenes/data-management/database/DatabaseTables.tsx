@@ -1,4 +1,4 @@
-import { LemonButton, LemonDropdown, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonDropdown, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonTable, LemonTableColumns } from 'lib/lemon-ui/LemonTable'
 import { LemonTag } from 'lib/lemon-ui/LemonTag/LemonTag'
@@ -117,7 +117,7 @@ export function DatabaseTables<T extends DatabaseSchemaTable>({
                                                   >
                                                       {obj.type === 'data_warehouse' && obj.source
                                                           ? obj.source.source_type
-                                                          : 'MarketTor'}
+                                                          : 'ClairView'}
                                                   </LemonTag>
                                               </span>
                                           </LemonDropdown>

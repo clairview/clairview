@@ -1,5 +1,5 @@
-import { IconInfo, IconPlus } from '@markettor/icons'
-import { LemonBanner, LemonCheckbox, LemonDialog, LemonTextArea } from '@markettor/lemon-ui'
+import { IconInfo, IconPlus } from '@clairview/icons'
+import { LemonBanner, LemonCheckbox, LemonDialog, LemonTextArea } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { router } from 'kea-router'
@@ -159,7 +159,7 @@ export function ActionEdit({ action: loadedAction, id }: ActionEditLogicProps): 
                     <h2 className="subtitle">Match groups</h2>
                     <p>
                         Your action will be triggered whenever <b>any of your match groups</b> are received.
-                        <Link to="https://markettor.com/docs/features/actions" target="_blank">
+                        <Link to="https://clairview.com/docs/features/actions" target="_blank">
                             <IconInfo className="ml-1 text-muted text-xl" />
                         </Link>
                     </p>
@@ -281,12 +281,12 @@ export function ActionEdit({ action: loadedAction, id }: ActionEditLogicProps): 
                                                         disabled={!slackEnabled || !action.post_to_slack}
                                                         data-attr="edit-slack-message-format"
                                                         maxLength={
-                                                            1200 /** Must be same as in markettor/models/action/action.py */
+                                                            1200 /** Must be same as in clairview/models/action/action.py */
                                                         }
                                                     />
                                                     <small>
                                                         <Link
-                                                            to="https://markettor.com/docs/webhooks#message-formatting"
+                                                            to="https://clairview.com/docs/webhooks#message-formatting"
                                                             target="_blank"
                                                         >
                                                             See documentation on how to format webhook messages.

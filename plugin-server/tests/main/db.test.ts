@@ -42,7 +42,7 @@ describe('DB', () => {
 
     describe('fetchAllActionsGroupedByTeam() and fetchAction()', () => {
         const insertAction = async (action: Partial<RawAction> = {}) => {
-            await insertRow(hub.db.postgres, 'markettor_action', {
+            await insertRow(hub.db.postgres, 'clairview_action', {
                 id: 69,
                 team_id: 2,
                 name: 'Test Action',
@@ -147,7 +147,7 @@ describe('DB', () => {
         })
 
         it('returns actions with correct `ee_hook`', async () => {
-            await runPGQuery('UPDATE markettor_action SET post_to_slack = false')
+            await runPGQuery('UPDATE clairview_action SET post_to_slack = false')
             await insertRow(hub.db.postgres, 'ee_hook', {
                 id: 'abc',
                 team_id: 2,
@@ -194,7 +194,7 @@ describe('DB', () => {
         })
 
         it('does not return actions that dont match conditions', async () => {
-            await runPGQuery('UPDATE markettor_action SET post_to_slack = false')
+            await runPGQuery('UPDATE clairview_action SET post_to_slack = false')
 
             const result = await db.fetchAllActionsGroupedByTeam()
             expect(result).toEqual({})
@@ -203,7 +203,7 @@ describe('DB', () => {
         })
 
         it('does not return actions which are deleted', async () => {
-            await runPGQuery('UPDATE markettor_action SET deleted = true')
+            await runPGQuery('UPDATE clairview_action SET deleted = true')
 
             const result = await db.fetchAllActionsGroupedByTeam()
             expect(result).toEqual({})
@@ -212,7 +212,7 @@ describe('DB', () => {
         })
 
         it('does not return actions with incorrect ee_hook', async () => {
-            await runPGQuery('UPDATE markettor_action SET post_to_slack = false')
+            await runPGQuery('UPDATE clairview_action SET post_to_slack = false')
             await insertRow(hub.db.postgres, 'ee_hook', {
                 id: 'abc',
                 team_id: 2,
@@ -250,7 +250,7 @@ describe('DB', () => {
             })
 
             it('does not blow up', async () => {
-                await runPGQuery('UPDATE markettor_action SET post_to_slack = false')
+                await runPGQuery('UPDATE clairview_action SET post_to_slack = false')
 
                 const result = await db.fetchAllActionsGroupedByTeam()
                 expect(result).toEqual({})
@@ -262,7 +262,7 @@ describe('DB', () => {
     async function fetchPersonByPersonId(teamId: number, personId: number): Promise<Person | undefined> {
         const selectResult = await db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `SELECT * FROM markettor_person WHERE team_id = $1 AND id = $2`,
+            `SELECT * FROM clairview_person WHERE team_id = $1 AND id = $2`,
             [teamId, personId],
             'fetchPersonByPersonId'
         )
@@ -279,7 +279,7 @@ describe('DB', () => {
 
         const result = await db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            'SELECT id FROM markettor_personlessdistinctid WHERE team_id = $1 AND distinct_id = $2',
+            'SELECT id FROM clairview_personlessdistinctid WHERE team_id = $1 AND distinct_id = $2',
             [team.id, 'addPersonlessDistinctId'],
             'addPersonlessDistinctId'
         )
@@ -574,7 +574,7 @@ describe('DB', () => {
                     { prop: PropertyUpdateOperation.Set },
                     1
                 )
-            ).rejects.toEqual(new RaceConditionError('Parallel markettor_group inserts, retry'))
+            ).rejects.toEqual(new RaceConditionError('Parallel clairview_group inserts, retry'))
         })
 
         it('handles updates', async () => {
@@ -619,7 +619,7 @@ describe('DB', () => {
 
     describe('addOrUpdatePublicJob', () => {
         it('updates the column if the job name is new', async () => {
-            await insertRow(db.postgres, 'markettor_plugin', { ...plugin60, id: 88 })
+            await insertRow(db.postgres, 'clairview_plugin', { ...plugin60, id: 88 })
 
             const jobName = 'newJob'
             const jobPayload = { foo: 'string' }
@@ -627,7 +627,7 @@ describe('DB', () => {
             const publicJobs = (
                 await db.postgres.query(
                     PostgresUse.COMMON_WRITE,
-                    'SELECT public_jobs FROM markettor_plugin WHERE id = $1',
+                    'SELECT public_jobs FROM clairview_plugin WHERE id = $1',
                     [88],
                     'testPublicJob1'
                 )
@@ -637,7 +637,7 @@ describe('DB', () => {
         })
 
         it('updates the column if the job payload is new', async () => {
-            await insertRow(db.postgres, 'markettor_plugin', { ...plugin60, id: 88, public_jobs: { foo: 'number' } })
+            await insertRow(db.postgres, 'clairview_plugin', { ...plugin60, id: 88, public_jobs: { foo: 'number' } })
 
             const jobName = 'newJob'
             const jobPayload = { foo: 'string' }
@@ -645,7 +645,7 @@ describe('DB', () => {
             const publicJobs = (
                 await db.postgres.query(
                     PostgresUse.COMMON_WRITE,
-                    'SELECT public_jobs FROM markettor_plugin WHERE id = $1',
+                    'SELECT public_jobs FROM clairview_plugin WHERE id = $1',
                     [88],
                     'testPublicJob1'
                 )
@@ -663,7 +663,7 @@ describe('DB', () => {
             team = await getFirstTeam(hub)
             const plug = await db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                'INSERT INTO markettor_plugin (name, organization_id, config_schema, from_json, from_web, is_global, is_preinstalled, is_stateless, created_at, capabilities) values($1, $2, $3, false, false, false, false, false, $4, $5) RETURNING id',
+                'INSERT INTO clairview_plugin (name, organization_id, config_schema, from_json, from_web, is_global, is_preinstalled, is_stateless, created_at, capabilities) values($1, $2, $3, false, false, false, false, false, $4, $5) RETURNING id',
                 ['My Plug', team.organization_id, [], new Date(), {}],
                 ''
             )
@@ -676,7 +676,7 @@ describe('DB', () => {
 
             await db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                'INSERT INTO markettor_pluginsourcefile (id, plugin_id, filename, source) values($1, $2, $3, $4)',
+                'INSERT INTO clairview_pluginsourcefile (id, plugin_id, filename, source) values($1, $2, $3, $4)',
                 [new UUIDT().toString(), plugin, 'index.ts', 'USE THE SOURCE'],
                 ''
             )
@@ -694,7 +694,7 @@ describe('DB', () => {
         async function getAllHashKeyOverrides(): Promise<any> {
             const result = await db.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                'SELECT feature_flag_key, hash_key, person_id FROM markettor_featureflaghashkeyoverride',
+                'SELECT feature_flag_key, hash_key, person_id FROM clairview_featureflaghashkeyoverride',
                 [],
                 ''
             )
@@ -734,13 +734,13 @@ describe('DB', () => {
         })
 
         it('updates all valid keys when target person had no overrides', async () => {
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: sourcePersonID,
                 feature_flag_key: 'aloha',
                 hash_key: 'override_value_for_aloha',
             })
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: sourcePersonID,
                 feature_flag_key: 'beta-feature',
@@ -769,19 +769,19 @@ describe('DB', () => {
         })
 
         it('updates all valid keys when conflicts with target person', async () => {
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: sourcePersonID,
                 feature_flag_key: 'aloha',
                 hash_key: 'override_value_for_aloha',
             })
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: sourcePersonID,
                 feature_flag_key: 'beta-feature',
                 hash_key: 'override_value_for_beta_feature',
             })
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: targetPersonID,
                 feature_flag_key: 'beta-feature',
@@ -810,13 +810,13 @@ describe('DB', () => {
         })
 
         it('updates nothing when target person overrides exist', async () => {
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: targetPersonID,
                 feature_flag_key: 'aloha',
                 hash_key: 'override_value_for_aloha',
             })
-            await insertRow(db.postgres, 'markettor_featureflaghashkeyoverride', {
+            await insertRow(db.postgres, 'clairview_featureflaghashkeyoverride', {
                 team_id: team.id,
                 person_id: targetPersonID,
                 feature_flag_key: 'beta-feature',
@@ -904,7 +904,7 @@ describe('DB', () => {
 describe('PostgresRouter()', () => {
     test('throws DependencyUnavailableError on postgres errors', async () => {
         const errorMessage =
-            'connection to server at "markettor-pgbouncer" (171.20.65.128), port 6543 failed: server closed the connection unexpectedly'
+            'connection to server at "clairview-pgbouncer" (171.20.65.128), port 6543 failed: server closed the connection unexpectedly'
         const pgQueryMock = jest.spyOn(Pool.prototype, 'query').mockImplementation(() => {
             return Promise.reject(new Error(errorMessage))
         })

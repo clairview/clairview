@@ -72,7 +72,7 @@ export const appScenes: Record<Scene, () => any> = {
     [Scene.Products]: () => import('./products/Products'),
     [Scene.Onboarding]: () => import('./onboarding/Onboarding'),
     [Scene.Settings]: () => import('./settings/SettingsScene'),
-    [Scene.MoveToMarketTorCloud]: () => import('./moveToMarketTorCloud/MoveToMarketTorCloud'),
+    [Scene.MoveToClairViewCloud]: () => import('./moveToClairViewCloud/MoveToClairViewCloud'),
     [Scene.Heatmaps]: () => import('./heatmaps/HeatmapsScene'),
     [Scene.SessionAttributionExplorer]: () =>
         import('scenes/web-analytics/SessionAttributionExplorer/SessionAttributionExplorerScene'),

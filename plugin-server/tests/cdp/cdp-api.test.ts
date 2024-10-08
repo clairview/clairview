@@ -109,7 +109,7 @@ describe('CDP API', () => {
                 name: 'Jane Doe',
                 url: 'https://example.com/person/123',
                 properties: {
-                    email: 'example@markettor.com',
+                    email: 'example@clairview.com',
                 },
             },
             event: {

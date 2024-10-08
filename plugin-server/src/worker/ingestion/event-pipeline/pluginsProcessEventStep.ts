@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { runInstrumentedFunction } from '../../../main/utils'
 import { runProcessEvent } from '../../plugins/run'

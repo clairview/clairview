@@ -21,9 +21,9 @@ export function Sources(): JSX.Element {
                         productName="Data Warehouse Source"
                         productKey={ProductKey.DATA_WAREHOUSE}
                         thingName="data source"
-                        description="Use data warehouse sources to import data from your external data into MarketTor."
+                        description="Use data warehouse sources to import data from your external data into ClairView."
                         isEmpty={dataWarehouseSources.results.length === 0 && !dataWarehouseSourcesLoading}
-                        docsURL="https://markettor.com/docs/data-warehouse"
+                        docsURL="https://clairview.com/docs/data-warehouse"
                         actionElementOverride={<NewButton stage={PipelineStage.Source} />}
                     />
                 ) : null}
@@ -31,14 +31,14 @@ export function Sources(): JSX.Element {
                 <div>
                     <h2>Managed sources</h2>
                     <p>
-                        MarketTor can connect to external sources and automatically import data from them into the MarketTor
+                        ClairView can connect to external sources and automatically import data from them into the ClairView
                         data warehouse
                     </p>
                     <DataWarehouseManagedSourcesTable />
                 </div>
                 <div>
                     <h2>Self managed sources</h2>
-                    <p>Connect to your own data sources, making them queryable in MarketTor</p>
+                    <p>Connect to your own data sources, making them queryable in ClairView</p>
                     <DataWarehouseSelfManagedSourcesTable />
                 </div>
             </div>

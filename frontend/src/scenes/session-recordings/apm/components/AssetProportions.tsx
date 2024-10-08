@@ -1,4 +1,4 @@
-import { Tooltip } from '@markettor/lemon-ui'
+import { Tooltip } from '@clairview/lemon-ui'
 import { useResizeBreakpoints } from 'lib/hooks/useResizeObserver'
 import { humanizeBytes } from 'lib/utils'
 import { assetTypeToColor } from 'scenes/session-recordings/apm/performance-event-utils'

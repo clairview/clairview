@@ -5,8 +5,8 @@ from freezegun import freeze_time
 from ee.api.test.base import LicensedTestMixin
 from ee.models.license import License
 from ee.tasks.send_license_usage import send_license_usage
-from markettor.models.team import Team
-from markettor.test.base import (
+from clairview.models.team import Team
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseDestroyTablesMixin,
     _create_event,
@@ -16,7 +16,7 @@ from markettor.test.base import (
 
 class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIBaseTest):
     @freeze_time("2021-10-10T23:01:00Z")
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     @patch("requests.post")
     def test_send_license_usage(self, mock_post, mock_capture):
         self.license.key = "legacy-key"
@@ -66,7 +66,7 @@ class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIB
 
         send_license_usage()
         mock_post.assert_called_once_with(
-            "https://license.markettor.com/licenses/usage",
+            "https://license.clairview.com/licenses/usage",
             data={"date": "2021-10-09", "key": self.license.key, "events_count": 3},
         )
         mock_capture.assert_called_once_with(
@@ -83,7 +83,7 @@ class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIB
         self.assertEqual(License.objects.get().valid_until.isoformat(), "2021-11-10T23:01:00+00:00")
 
     @freeze_time("2021-10-10T23:01:00Z")
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     @patch("ee.tasks.send_license_usage.sync_execute", side_effect=Exception())
     def test_send_license_error(self, mock_post, mock_capture):
         self.license.key = "legacy-key"
@@ -137,7 +137,7 @@ class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIB
         )
 
     @freeze_time("2021-10-10T23:01:00Z")
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     @patch("requests.post")
     def test_send_license_usage_already_sent(self, mock_post, mock_capture):
         self.license.key = "legacy-key"
@@ -193,7 +193,7 @@ class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIB
         mock_capture.assert_not_called()
 
     @freeze_time("2021-10-10T23:01:00Z")
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     @patch("requests.post")
     def test_send_license_not_found(self, mock_post, mock_capture):
         self.license.key = "legacy-key"
@@ -263,7 +263,7 @@ class SendLicenseUsageTest(LicensedTestMixin, ClickhouseDestroyTablesMixin, APIB
         self.assertEqual(License.objects.get().valid_until.isoformat(), "2021-10-10T22:01:00+00:00")
 
     @freeze_time("2021-10-10T23:01:00Z")
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     @patch("requests.post")
     def test_send_license_not_triggered_for_v2_licenses(self, mock_post, mock_capture):
         self.license.key = "billing-service::v2-key"

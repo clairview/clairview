@@ -1,4 +1,4 @@
-import { Spinner } from '@markettor/lemon-ui'
+import { Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FEATURE_FLAGS, SESSION_REPLAY_MINIMUM_DURATION_OPTIONS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'

@@ -1,4 +1,4 @@
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { InfiniteList } from 'lib/components/TaxonomicFilter/InfiniteList'

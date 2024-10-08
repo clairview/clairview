@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Link } from 'lib/lemon-ui/Link'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
@@ -143,7 +143,7 @@ export function RetentionSummary({ insightProps }: EditorFilterProps): JSX.Eleme
                 <p className="text-muted mt-4">
                     Want to learn more about retention?{' '}
                     <Link
-                        to="https://markettor.com/docs/features/retention?utm_campaign=learn-more-horizontal&utm_medium=in-product"
+                        to="https://clairview.com/docs/features/retention?utm_campaign=learn-more-horizontal&utm_medium=in-product"
                         target="_blank"
                         className="inline-flex items-center"
                     >

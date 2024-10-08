@@ -1,4 +1,4 @@
-import { PluginConfigSchema } from '@markettor/plugin-scaffold'
+import { PluginConfigSchema } from '@clairview/plugin-scaffold'
 
 import { Hub, PluginCapabilities, PluginConfig, PluginLogLevel } from '../../../types'
 import { upsertInlinePlugin } from '../../../utils/db/sql'
@@ -48,7 +48,7 @@ export const INLINE_PLUGIN_MAP: Record<InlinePluginId, RegisteredInlinePlugin> =
     'inline://semver-flattener': {
         constructor: (hub: Hub, config: PluginConfig) => new SemverFlattener(hub, config),
         description: {
-            name: 'markettor-semver-flattener',
+            name: 'clairview-semver-flattener',
             description:
                 'Processes specified properties to flatten sematic versions. Assumes any property contains a string which matches [the SemVer specification](https://semver.org/#backusnaur-form-grammar-for-valid-semver-versions)',
             is_global: true,

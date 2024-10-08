@@ -1,11 +1,11 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, beforeUnmount, BuiltLogic, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import { router, urlToAction } from 'kea-router'
 import { subscriptions } from 'kea-subscriptions'
 import api from 'lib/api'
 import { base64Decode, base64Encode, downloadFile, slugify } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { commentsLogic } from 'scenes/comments/commentsLogic'
 import {
     buildTimestampCommentContent,
@@ -318,7 +318,7 @@ export const notebookLogic = kea<notebookLogicType>([
                         title: values.title,
                     })
 
-                    markettor.capture(`notebook duplicated`, {
+                    clairview.capture(`notebook duplicated`, {
                         short_id: response.short_id,
                     })
 
@@ -540,7 +540,7 @@ export const notebookLogic = kea<notebookLogicType>([
                 )
             }
 
-            markettor.capture('notebook content changed', {
+            clairview.capture('notebook content changed', {
                 short_id: values.notebook?.short_id,
             })
 

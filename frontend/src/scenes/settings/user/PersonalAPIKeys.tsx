@@ -1,5 +1,5 @@
-import { IconWarning } from '@markettor/icons'
-import { IconEllipsis, IconInfo, IconPlus } from '@markettor/icons'
+import { IconWarning } from '@clairview/icons'
+import { IconEllipsis, IconInfo, IconPlus } from '@clairview/icons'
 import {
     LemonBanner,
     LemonDialog,
@@ -14,7 +14,7 @@ import {
     LemonTag,
     Link,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
@@ -476,13 +476,13 @@ export function PersonalAPIKeys(): JSX.Element {
             <p>
                 These keys allow full access to your personal account through the API, as if you were logged in. You can
                 also use them in integrations, such as{' '}
-                <Link to="https://zapier.com/apps/markettor/">our premium Zapier one</Link>.
+                <Link to="https://zapier.com/apps/clairview/">our premium Zapier one</Link>.
                 <br />
                 Try not to keep disused keys around. If you have any suspicion that one of these may be compromised,
                 delete it and use a new one.
                 <br />
-                <Link to="https://markettor.com/docs/api/overview#authentication">
-                    More about API authentication in MarketTor Docs.
+                <Link to="https://clairview.com/docs/api/overview#authentication">
+                    More about API authentication in ClairView Docs.
                 </Link>
             </p>
             <LemonButton

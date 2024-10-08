@@ -1,4 +1,4 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType } from '~/types'
 import { useActions, useValues } from 'kea'
 import { FeatureFlagLogicProps, featureFlagLogic } from 'scenes/feature-flags/featureFlagLogic'
@@ -32,7 +32,7 @@ type NotebookNodeFlagCodeExampleAttributes = {
     id: FeatureFlagLogicProps['id']
 }
 
-export const NotebookNodeFlagCodeExample = createMarketTorWidgetNode<NotebookNodeFlagCodeExampleAttributes>({
+export const NotebookNodeFlagCodeExample = createClairViewWidgetNode<NotebookNodeFlagCodeExampleAttributes>({
     nodeType: NotebookNodeType.FeatureFlagCodeExample,
     titlePlaceholder: 'Feature flag code example',
     Component,

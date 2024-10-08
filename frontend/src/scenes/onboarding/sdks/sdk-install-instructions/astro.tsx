@@ -1,12 +1,12 @@
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { useJsSnippet } from 'lib/components/JSSnippet'
 
-function CreateMarketTorAstroFileSnippet(): JSX.Element {
+function CreateClairViewAstroFileSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Bash}>
             {`cd ./src/components 
 # or 'cd ./src && mkdir components && cd ./components' if your components folder doesn't exist 
-touch markettor.astro`}
+touch clairview.astro`}
         </CodeSnippet>
     )
 }
@@ -29,12 +29,12 @@ ${jsSnippetScriptTag}
 export function SDKInstallAstroInstructions(): JSX.Element {
     return (
         <>
-            <h3>Install the MarketTor web snippet</h3>
+            <h3>Install the ClairView web snippet</h3>
             <p>
-                In your <code>src/components</code> folder, create a <code>markettor.astro</code> file:
+                In your <code>src/components</code> folder, create a <code>clairview.astro</code> file:
             </p>
-            <CreateMarketTorAstroFileSnippet />
-            <p>In this file, add your MarketTor web snippet:</p>
+            <CreateClairViewAstroFileSnippet />
+            <p>In this file, add your ClairView web snippet:</p>
             <AstroSetupSnippet />
         </>
     )

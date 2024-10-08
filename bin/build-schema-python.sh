@@ -7,24 +7,24 @@ datamodel-codegen \
     --class-name='SchemaRoot' --collapse-root-models --target-python-version 3.11 --disable-timestamp \
     --use-one-literal-as-default --use-default --use-default-kwarg --use-subclass-enum \
     --input frontend/src/queries/schema.json --input-file-type jsonschema \
-    --output markettor/schema.py --output-model-type pydantic_v2.BaseModel \
+    --output clairview/schema.py --output-model-type pydantic_v2.BaseModel \
     --custom-file-header "# mypy: disable-error-code=\"assignment\"" \
     --set-default-enum-member --capitalise-enum-members \
     --wrap-string-literal
 
 # Format schema.py
-ruff format markettor/schema.py
+ruff format clairview/schema.py
 
 # Check schema.py and autofix
-ruff check --fix markettor/schema.py
+ruff check --fix clairview/schema.py
 
 # Replace class Foo(str, Enum) with class Foo(StrEnum) for proper handling in format strings in python 3.11
 # Remove this when https://github.com/koxudaxi/datamodel-code-generator/issues/1313 is resolved
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # sed needs `-i` to be followed by `''` on macOS
-    sed -i '' -e 's/str, Enum/StrEnum/g' markettor/schema.py
-    sed -i '' 's/from enum import Enum/from enum import Enum, StrEnum/g' markettor/schema.py
+    sed -i '' -e 's/str, Enum/StrEnum/g' clairview/schema.py
+    sed -i '' 's/from enum import Enum/from enum import Enum, StrEnum/g' clairview/schema.py
 else
-    sed -i -e 's/str, Enum/StrEnum/g' markettor/schema.py
-    sed -i 's/from enum import Enum/from enum import Enum, StrEnum/g' markettor/schema.py
+    sed -i -e 's/str, Enum/StrEnum/g' clairview/schema.py
+    sed -i 's/from enum import Enum/from enum import Enum, StrEnum/g' clairview/schema.py
 fi

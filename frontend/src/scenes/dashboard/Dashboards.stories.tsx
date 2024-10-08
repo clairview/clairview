@@ -109,7 +109,7 @@ export const NewSelectVariables = (): JSX.Element => {
                 },
             ],
             tags: [],
-            image_url: 'https://markettor.com/static/5e5cf65347bfb25f1dfc9792b18e87cb/6b063/markettor-bye-kubernetes.png',
+            image_url: 'https://clairview.com/static/5e5cf65347bfb25f1dfc9792b18e87cb/6b063/clairview-bye-kubernetes.png',
         })
     }, [])
     return <App />

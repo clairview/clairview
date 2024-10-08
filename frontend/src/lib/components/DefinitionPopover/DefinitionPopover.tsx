@@ -1,6 +1,6 @@
 import './DefinitionPopover.scss'
 
-import { LemonDivider, ProfilePicture } from '@markettor/lemon-ui'
+import { LemonDivider, ProfilePicture } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { definitionPopoverLogic, DefinitionPopoverState } from 'lib/components/DefinitionPopover/definitionPopoverLogic'

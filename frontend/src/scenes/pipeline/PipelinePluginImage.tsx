@@ -1,4 +1,4 @@
-import { IconTerminal } from '@markettor/icons'
+import { IconTerminal } from '@clairview/icons'
 import { parseGithubRepoURL } from 'lib/utils'
 import imgPluginDefault from 'public/plugin-default.svg'
 import IconTransformationSemverFlattener from 'public/transformations/semver-flattener.png'

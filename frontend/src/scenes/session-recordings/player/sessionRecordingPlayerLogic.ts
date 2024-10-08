@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { customEvent, EventType, eventWithTime, IncrementalSource } from '@rrweb/types'
 import { captureException } from '@sentry/react'
 import {
@@ -23,7 +23,7 @@ import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { clamp, downloadFile } from 'lib/utils'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { wrapConsole } from 'lib/utils/wrapConsole'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { RefObject } from 'react'
 import { Replayer } from 'rrweb'
 import { playerConfig, ReplayPlugin } from 'rrweb/typings/types'
@@ -561,8 +561,8 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
                 extra,
                 tags: { feature: 'replayer error swallowed' },
             })
-            if (markettor.config.debug) {
-                markettor.capture('replayer error swallowed', extra)
+            if (clairview.config.debug) {
+                clairview.capture('replayer error swallowed', extra)
             }
             actions.fingerprintReported(fingerprint)
         },
@@ -571,7 +571,7 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
             // then we skip ahead a little to get past the blockage
             // this is a KLUDGE to get around what might be a bug in rrweb
             values.player?.replayer?.play(rrWebPlayerTime + skip)
-            markettor.capture('stuck session player skipped forward', {
+            clairview.capture('stuck session player skipped forward', {
                 sessionId: values.sessionRecordingId,
                 rrWebTime: rrWebPlayerTime,
             })
@@ -768,13 +768,13 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
 
         loadSnapshotsForSourceFailure: () => {
             if (Object.keys(values.sessionPlayerData.snapshotsByWindowId).length === 0) {
-                console.error('MarketTor Recording Playback Error: No snapshots loaded')
+                console.error('ClairView Recording Playback Error: No snapshots loaded')
                 actions.setErrorPlayerState(true)
             }
         },
         loadSnapshotSourcesFailure: () => {
             if (Object.keys(values.sessionPlayerData.snapshotsByWindowId).length === 0) {
-                console.error('MarketTor Recording Playback Error: No snapshots loaded')
+                console.error('ClairView Recording Playback Error: No snapshots loaded')
                 actions.setErrorPlayerState(true)
             }
         },
@@ -1010,7 +1010,7 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
                 openBillingPopupModal({
                     title: 'Unlock recording exports',
                     description:
-                        'Export recordings to a file that can be stored wherever you like and loaded back into MarketTor for playback at any time.',
+                        'Export recordings to a file that can be stored wherever you like and loaded back into ClairView for playback at any time.',
                 })
                 return
             }
@@ -1088,7 +1088,7 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
         },
 
         reportMessageTooLargeWarningSeen: async ({ sessionRecordingId }) => {
-            markettor.capture('message too large warning seen', { sessionRecordingId })
+            clairview.capture('message too large warning seen', { sessionRecordingId })
         },
     })),
 
@@ -1156,7 +1156,7 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
             // as a starting and very loose measure of engagement, we count clicks
             engagement_score: values.clickCount,
         }
-        markettor.capture(
+        clairview.capture(
             playTimeMs === 0 ? 'recording viewed with no playtime summary' : 'recording viewed summary',
             summaryAnalytics
         )
@@ -1167,7 +1167,7 @@ export const sessionRecordingPlayerLogic = kea<sessionRecordingPlayerLogicType>(
         cache.debug = (...args: any[]) => {
             if (cache.debugging) {
                 // eslint-disable-next-line no-console
-                console.log('[⏯️ MarketTor Replayer]', ...args)
+                console.log('[⏯️ ClairView Replayer]', ...args)
             }
         }
         ;(window as any).__debug_player = () => {
@@ -1206,8 +1206,8 @@ export const getCurrentPlayerTime = (logicProps: SessionRecordingPlayerLogicProp
 export const manageConsoleWarns = (cache: any, onIncrement: (count: number) => void): (() => void) => {
     // NOTE: RRWeb can log _alot_ of warnings, so we debounce the count otherwise we just end up making the performance worse
     // We also don't log the warnings directly. Sometimes the sheer size of messages and warnings can cause the browser to crash deserializing it all
-    ;(window as any).__markettor_player_warnings = []
-    const warnings: any[][] = (window as any).__markettor_player_warnings
+    ;(window as any).__clairview_player_warnings = []
+    const warnings: any[][] = (window as any).__clairview_player_warnings
 
     let counter = 0
 
@@ -1225,7 +1225,7 @@ export const manageConsoleWarns = (cache: any, onIncrement: (count: number) => v
                 onIncrement(warnings.length)
 
                 actualConsoleWarn(
-                    `[MarketTor Replayer] ${counter} warnings (window.__markettor_player_warnings to safely log them)`
+                    `[ClairView Replayer] ${counter} warnings (window.__clairview_player_warnings to safely log them)`
                 )
                 counter = 0
             }, 1000)

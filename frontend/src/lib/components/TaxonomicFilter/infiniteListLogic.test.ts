@@ -381,7 +381,7 @@ describe('infiniteListLogic', () => {
         })
     })
 
-    it('searches autocapture elements using markettor property', async () => {
+    it('searches autocapture elements using clairview property', async () => {
         const logicWithProps = infiniteListLogic({
             taxonomicFilterLogicKey: 'test-element-list',
             listGroupType: TaxonomicFilterGroupType.Elements,

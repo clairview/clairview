@@ -1,6 +1,6 @@
 import './CohortCriteriaGroups.scss'
 
-import { IconCopy, IconPlusSmall, IconTrash } from '@markettor/icons'
+import { IconCopy, IconPlusSmall, IconTrash } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Group } from 'kea-forms'

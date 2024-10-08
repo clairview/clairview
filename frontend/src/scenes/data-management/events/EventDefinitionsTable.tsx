@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonSelect, LemonSelectOptions, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonSelect, LemonSelectOptions, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ObjectTags } from 'lib/components/ObjectTags/ObjectTags'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
@@ -24,9 +24,9 @@ const eventTypeOptions: LemonSelectOptions<EventDefinitionType> = [
         'data-attr': 'event-type-option-event-custom',
     },
     {
-        value: EventDefinitionType.EventMarketTor,
-        label: 'MarketTor events',
-        'data-attr': 'event-type-option-event-markettor',
+        value: EventDefinitionType.EventClairView,
+        label: 'ClairView events',
+        'data-attr': 'event-type-option-event-clairview',
     },
 ]
 
@@ -125,8 +125,8 @@ export function EventDefinitionsTable(): JSX.Element {
                 Looking for{' '}
                 {filters.event_type === 'event_custom'
                     ? 'custom '
-                    : filters.event_type === 'event_markettor'
-                    ? 'MarketTor '
+                    : filters.event_type === 'event_clairview'
+                    ? 'ClairView '
                     : ''}
                 event usage statistics?{' '}
                 <Link
@@ -136,7 +136,7 @@ export function EventDefinitionsTable(): JSX.Element {
                             'WHERE {filters}\n' +
                             (filters.event_type === 'event_custom'
                                 ? "AND event NOT LIKE '$%'\n"
-                                : filters.event_type === 'event_markettor'
+                                : filters.event_type === 'event_clairview'
                                 ? "AND event LIKE '$%'\n"
                                 : '') +
                             'GROUP BY event\n' +

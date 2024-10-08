@@ -1,7 +1,7 @@
 import './Experiment.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonSelect, Link } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonSelect, Link } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
 import { EXPERIMENT_DEFAULT_DURATION } from 'lib/constants'
@@ -187,7 +187,7 @@ export function AttributionSelect({ insightProps }: EditorFilterProps): JSX.Elem
                             </ul>
                             <div>
                                 Read more in the{' '}
-                                <Link to="https://markettor.com/docs/product-analytics/funnels#attribution-types">
+                                <Link to="https://clairview.com/docs/product-analytics/funnels#attribution-types">
                                     documentation.
                                 </Link>
                             </div>

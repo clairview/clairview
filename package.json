@@ -1,23 +1,23 @@
 {
-    "name": "markettor",
+    "name": "clairview",
     "description": "",
     "version": "0.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/MarketTor/markettor.git"
+        "url": "https://github.com/ClairView/clairview.git"
     },
     "author": "Clairview Inc.",
     "bugs": {
-        "url": "https://github.com/MarketTor/markettor/issues"
+        "url": "https://github.com/ClairView/clairview/issues"
     },
-    "homepage": "https://github.com/MarketTor/markettor#readme",
+    "homepage": "https://github.com/ClairView/clairview#readme",
     "license": "MIT",
     "engines": {
         "node": ">=18 <19"
     },
     "packageManager": "pnpm@8.10.5",
     "scripts": {
-        "copy-scripts": "mkdir -p frontend/dist/ && ./bin/copy-markettor-js",
+        "copy-scripts": "mkdir -p frontend/dist/ && ./bin/copy-clairview-js",
         "test": "pnpm test:unit && pnpm test:visual",
         "test:unit": "jest --testPathPattern=frontend/",
         "jest": "jest",
@@ -36,11 +36,11 @@
         "schema:build:json": "ts-node bin/build-schema-json.mjs && prettier --write frontend/src/queries/schema.json",
         "schema:build:python": "bash bin/build-schema-python.sh",
         "grammar:build": "npm run grammar:build:python && npm run grammar:build:cpp",
-        "grammar:build:python": "cd markettor/torql/grammar && antlr -Dlanguage=Python3 TorQLLexer.g4 && antlr -visitor -no-listener -Dlanguage=Python3 TorQLParser.g4",
-        "grammar:build:cpp": "cd markettor/torql/grammar && antlr -o ../../../torql_parser -Dlanguage=Cpp TorQLLexer.g4 && antlr -o ../../../torql_parser -visitor -no-listener -Dlanguage=Cpp TorQLParser.g4",
+        "grammar:build:python": "cd clairview/torql/grammar && antlr -Dlanguage=Python3 TorQLLexer.g4 && antlr -visitor -no-listener -Dlanguage=Python3 TorQLParser.g4",
+        "grammar:build:cpp": "cd clairview/torql/grammar && antlr -o ../../../torql_parser -Dlanguage=Cpp TorQLLexer.g4 && antlr -o ../../../torql_parser -visitor -no-listener -Dlanguage=Cpp TorQLParser.g4",
         "packages:build": "pnpm packages:build:apps-common && pnpm packages:build:lemon-ui",
-        "packages:build:apps-common": "cd frontend/@markettor/apps-common && pnpm i && pnpm build",
-        "packages:build:lemon-ui": "cd frontend/@markettor/lemon-ui && pnpm i && pnpm build",
+        "packages:build:apps-common": "cd frontend/@clairview/apps-common && pnpm i && pnpm build",
+        "packages:build:lemon-ui": "cd frontend/@clairview/lemon-ui && pnpm i && pnpm build",
         "editor:update-tsd": "pnpm packages:build && node frontend/editor-update-tsd.mjs",
         "prettier": "prettier --write \"./**/*.{js,mjs,ts,tsx,json,yaml,yml,css,scss}\"",
         "prettier:check": "prettier --check \"frontend/**/*.{js,mjs,ts,tsx,json,yaml,yml,css,scss}\"",
@@ -63,7 +63,7 @@
         "mobile-replay:mobile:schema:build:json": "ts-json-schema-generator -f tsconfig.json --path 'ee/frontend/mobile-replay/mobile.types.ts' --type 'mobileEventWithTime' --expose all --no-top-ref --out ee/frontend/mobile-replay/schema/mobile/rr-mobile-schema.json && prettier --write ee/frontend/mobile-replay/schema/mobile/rr-mobile-schema.json",
         "mobile-replay:schema:build:json": "pnpm mobile-replay:web:schema:build:json && pnpm mobile-replay:mobile:schema:build:json",
         "visualize-toolbar-bundle": "pnpm exec esbuild-visualizer --metadata ./toolbar-esbuild-meta.json --filename=toolbar-esbuild-bundle-visualization.html",
-        "mypy-baseline-sync": "mypy -p markettor | mypy-baseline sync"
+        "mypy-baseline-sync": "mypy -p clairview | mypy-baseline sync"
     },
     "dependencies": {
         "@babel/runtime": "^7.24.0",
@@ -76,9 +76,9 @@
         "@medv/finder": "^3.1.0",
         "@microlink/react-json-view": "^1.21.3",
         "@monaco-editor/react": "4.6.0",
-        "@markettor/hogvm": "^1.0.54",
-        "@markettor/icons": "0.8.1",
-        "@markettor/plugin-scaffold": "^1.4.4",
+        "@clairview/hogvm": "^1.0.54",
+        "@clairview/icons": "0.8.1",
+        "@clairview/plugin-scaffold": "^1.4.4",
         "@react-hook/size": "^2.1.2",
         "@rrweb/types": "2.0.0-alpha.13",
         "@sentry/react": "7.112.1",
@@ -150,8 +150,8 @@
         "pmtiles": "^2.11.0",
         "postcss": "^8.4.31",
         "postcss-preset-env": "^9.3.0",
-        "markettor-js": "1.166.0",
-        "markettor-js-lite": "3.0.0",
+        "clairview-js": "1.166.0",
+        "clairview-js-lite": "3.0.0",
         "prettier": "^2.8.8",
         "prop-types": "^15.7.2",
         "protomaps-themes-base": "2.0.0-alpha.1",
@@ -265,7 +265,7 @@
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-import": "^2.29.0",
         "eslint-plugin-jest": "^28.6.0",
-        "eslint-plugin-markettor": "link:./eslint-rules",
+        "eslint-plugin-clairview": "link:./eslint-rules",
         "eslint-plugin-react": "^7.33.2",
         "eslint-plugin-react-hooks": "^4.6.2",
         "eslint-plugin-simple-import-sort": "^10.0.0",
@@ -351,7 +351,7 @@
             "pnpm --dir plugin-server exec eslint --fix",
             "pnpm --dir plugin-server exec prettier --write"
         ],
-        "!(markettor/torql/grammar/*)*.{py,pyi}": [
+        "!(clairview/torql/grammar/*)*.{py,pyi}": [
             "ruff check --fix",
             "ruff format"
         ]

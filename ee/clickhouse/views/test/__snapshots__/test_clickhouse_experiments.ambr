@@ -1,7 +1,7 @@
 # serializer version: 1
 # name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -108,7 +108,7 @@
 # ---
 # name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_and_events_out_of_time_range_timezones
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -215,7 +215,7 @@
 # ---
 # name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_for_three_test_variants
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -322,7 +322,7 @@
 # ---
 # name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_torql_aggregation
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -429,7 +429,7 @@
 # ---
 # name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -487,7 +487,7 @@
                     day_start
            UNION ALL SELECT count(*) as total,
                             toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) as day_start,
-                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_clairview_breakdown_other_$$') as breakdown_value
            FROM events e
            WHERE e.team_id = 2
              AND event = '$pageview'
@@ -561,7 +561,7 @@
                      min(timestamp) as timestamp,
                      breakdown_value
               FROM
-                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_clairview_breakdown_other_$$') as breakdown_value
                  FROM events e
                  INNER JOIN
                    (SELECT distinct_id,
@@ -592,7 +592,7 @@
 # ---
 # name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_for_three_test_variants
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -648,7 +648,7 @@
                     day_start
            UNION ALL SELECT count(*) as total,
                             toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) as day_start,
-                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['control', 'test_1', 'test_2']), (['control', 'test_1', 'test_2']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['control', 'test_1', 'test_2']), (['control', 'test_1', 'test_2']), '$$_clairview_breakdown_other_$$') as breakdown_value
            FROM events e
            WHERE e.team_id = 2
              AND event = '$pageview1'
@@ -694,7 +694,7 @@
 # ---
 # name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_out_of_timerange_timezone
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -750,7 +750,7 @@
                     day_start
            UNION ALL SELECT count(*) as total,
                             toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'US/Pacific')) as day_start,
-                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_clairview_breakdown_other_$$') as breakdown_value
            FROM events e
            WHERE e.team_id = 2
              AND event = '$pageview'
@@ -820,7 +820,7 @@
                      min(timestamp) as timestamp,
                      breakdown_value
               FROM
-                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_clairview_breakdown_other_$$') as breakdown_value
                  FROM events e
                  INNER JOIN
                    (SELECT distinct_id,
@@ -849,7 +849,7 @@
 # ---
 # name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter
   '''
-  /* user_id:0 celery:markettor.tasks.tasks.sync_insight_caching_state */
+  /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
          date_diff('second', max(timestamp), now()) AS age
   FROM events
@@ -906,7 +906,7 @@
                     day_start
            UNION ALL SELECT count(*) as total,
                             toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) as day_start,
-                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                            transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['test', 'control']), (['test', 'control']), '$$_clairview_breakdown_other_$$') as breakdown_value
            FROM events e
            WHERE e.team_id = 2
              AND event = '$pageview'
@@ -977,7 +977,7 @@
                      min(timestamp) as timestamp,
                      breakdown_value
               FROM
-                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_markettor_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_markettor_breakdown_other_$$') as breakdown_value
+                (SELECT pdi.person_id as person_id, timestamp, transform(ifNull(nullIf(replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', ''), ''), '$$_clairview_breakdown_null_$$'), (['control', 'test']), (['control', 'test']), '$$_clairview_breakdown_other_$$') as breakdown_value
                  FROM events e
                  INNER JOIN
                    (SELECT distinct_id,
@@ -1041,7 +1041,7 @@
 # ---
 # name: TestExperimentAuxiliaryEndpoints.test_create_exposure_cohort_for_experiment_with_custom_action_filters_exposure.1
   '''
-  /* user_id:0 cohort_calculation:markettor.tasks.calculate_cohort.calculate_cohort_ch */
+  /* user_id:0 cohort_calculation:clairview.tasks.calculate_cohort.calculate_cohort_ch */
   INSERT INTO cohortpeople
   SELECT id,
          2 as cohort_id,

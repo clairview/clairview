@@ -1,7 +1,7 @@
 import unittest
 
-from markettor.models.filters import Filter
-from markettor.queries.property_optimizer import PropertyOptimizer
+from clairview.models.filters import Filter
+from clairview.queries.property_optimizer import PropertyOptimizer
 
 PROPERTIES_OF_ALL_TYPES = [
     {"key": "event_prop", "value": ["foo", "bar"], "type": "event"},

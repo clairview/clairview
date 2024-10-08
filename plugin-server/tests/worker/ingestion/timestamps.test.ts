@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { UUIDT } from '../../../src/utils/utils'
 import { parseDate, parseEventTimestamp } from '../../../src/worker/ingestion/timestamps'

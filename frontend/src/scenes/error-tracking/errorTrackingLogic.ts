@@ -1,4 +1,4 @@
-import type { LemonSegmentedButtonOption } from '@markettor/lemon-ui'
+import type { LemonSegmentedButtonOption } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { UniversalFiltersGroup } from 'lib/components/UniversalFilters/UniversalFilters'
 import { FEATURE_FLAGS } from 'lib/constants'

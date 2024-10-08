@@ -71,24 +71,24 @@ export async function raiseIfUserProvidedUrlUnsafe(url: string): Promise<void> {
     try {
         parsedUrl = new URL(url)
     } catch (err) {
-        throw new FetchError('Invalid URL', 'markettor-host-guard')
+        throw new FetchError('Invalid URL', 'clairview-host-guard')
     }
     if (!parsedUrl.hostname) {
-        throw new FetchError('No hostname', 'markettor-host-guard')
+        throw new FetchError('No hostname', 'clairview-host-guard')
     }
     if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
-        throw new FetchError('Scheme must be either HTTP or HTTPS', 'markettor-host-guard')
+        throw new FetchError('Scheme must be either HTTP or HTTPS', 'clairview-host-guard')
     }
     let addrinfo: LookupAddress[]
     try {
         addrinfo = await dns.lookup(parsedUrl.hostname, { all: true })
     } catch (err) {
-        throw new FetchError('Invalid hostname', 'markettor-host-guard')
+        throw new FetchError('Invalid hostname', 'clairview-host-guard')
     }
     for (const { address } of addrinfo) {
         // Prevent addressing internal services
         if (ipaddr.parse(address).range() !== 'unicast') {
-            throw new FetchError('Internal hostname', 'markettor-host-guard')
+            throw new FetchError('Internal hostname', 'clairview-host-guard')
         }
     }
 }

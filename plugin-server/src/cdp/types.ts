@@ -1,4 +1,4 @@
-import { VMState } from '@markettor/hogvm'
+import { VMState } from '@clairview/hogvm'
 import { DateTime } from 'luxon'
 
 import {
@@ -210,7 +210,7 @@ export type HogFunctionInvocationResult = {
     error?: any
     // asyncFunctionRequest?: HogFunctionAsyncFunctionRequest
     logs: LogEntry[]
-    capturedMarketTorEvents?: HogFunctionCapturedEvent[]
+    capturedClairViewEvents?: HogFunctionCapturedEvent[]
 }
 
 export type HogFunctionInvocationAsyncRequest = {

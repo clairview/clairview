@@ -26,7 +26,7 @@ export function ToolbarApp(props: ToolbarProps = {}): JSX.Element {
                   const styleLink = document.createElement('link')
                   styleLink.rel = 'stylesheet'
                   styleLink.type = 'text/css'
-                  // toolbar.js is served from the MarketTor CDN, this has a TTL of 24 hours.
+                  // toolbar.js is served from the ClairView CDN, this has a TTL of 24 hours.
                   // the toolbar asset includes a rotating "token" that is valid for 5 minutes.
                   const fiveMinutesInMillis = 5 * 60 * 1000
                   // this ensures that we bust the cache periodically
@@ -36,14 +36,14 @@ export function ToolbarApp(props: ToolbarProps = {}): JSX.Element {
                   styleLink.onload = () => setDidLoadStyles(true)
                   const shadowRoot =
                       shadowRef.current?.shadowRoot || window.document.getElementById(TOOLBAR_ID)?.shadowRoot
-                  shadowRoot?.getElementById('markettor-toolbar-styles')?.appendChild(styleLink)
+                  shadowRoot?.getElementById('clairview-toolbar-styles')?.appendChild(styleLink)
               }
     )
 
     return (
         <>
             <root.div id={TOOLBAR_ID} className="ph-no-capture" ref={shadowRef}>
-                <div id="markettor-toolbar-styles" />
+                <div id="clairview-toolbar-styles" />
                 {didRender && (didLoadStyles || props.disableExternalStyles) ? <ToolbarContainer /> : null}
                 <ToastContainer
                     autoClose={60000}

@@ -1,4 +1,4 @@
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconRefresh } from 'lib/lemon-ui/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -8,7 +8,7 @@ import { userLogic } from 'scenes/userLogic'
 
 import { deadLetterQueueLogic } from './deadLetterQueueLogic'
 
-// keep in sync with markettor/api/dead_letter_queue.py
+// keep in sync with clairview/api/dead_letter_queue.py
 const ROWS_LIMIT = 10
 
 export function MetricsTab(): JSX.Element {

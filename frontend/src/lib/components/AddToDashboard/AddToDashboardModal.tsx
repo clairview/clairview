@@ -1,4 +1,4 @@
-import { IconHome } from '@markettor/icons'
+import { IconHome } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { addToDashboardModalLogic } from 'lib/components/AddToDashboard/addToDashboardModalLogic'

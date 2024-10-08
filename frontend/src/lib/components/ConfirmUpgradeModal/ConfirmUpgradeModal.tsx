@@ -1,5 +1,5 @@
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton, LemonModal, Tooltip } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton, LemonModal, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useMemo } from 'react'
 import { getProration } from 'scenes/billing/billing-utils'

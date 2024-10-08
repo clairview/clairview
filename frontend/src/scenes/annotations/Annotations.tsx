@@ -1,5 +1,5 @@
-import { IconPencil } from '@markettor/icons'
-import { Link } from '@markettor/lemon-ui'
+import { IconPencil } from '@clairview/icons'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { MicrophoneHog } from 'lib/components/hedgehogs'
 import { ProductIntroduction } from 'lib/components/ProductIntroduction/ProductIntroduction'
@@ -133,7 +133,7 @@ export function Annotations(): JSX.Element {
                         productKey={ProductKey.ANNOTATIONS}
                         thingName="annotation"
                         description="Annotations allow you to mark when certain changes happened so you can easily see how they impacted your metrics."
-                        docsURL="https://markettor.com/docs/data/annotations"
+                        docsURL="https://clairview.com/docs/data/annotations"
                         action={() => openModalToCreateAnnotation()}
                         isEmpty={annotations.length === 0 && !annotationsLoading}
                         customHog={MicrophoneHog}

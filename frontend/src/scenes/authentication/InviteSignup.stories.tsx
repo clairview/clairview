@@ -25,9 +25,9 @@ const meta: Meta = {
                     200,
                     {
                         id: '1234',
-                        target_email: 'b*@markettor.com',
+                        target_email: 'b*@clairview.com',
                         first_name: 'Jane Doe',
-                        organization_name: 'MarketTor',
+                        organization_name: 'ClairView',
                     },
                 ],
             },
@@ -123,7 +123,7 @@ export const LoggedIn = (): JSX.Element => {
             '/api/users/@me': () => [
                 200,
                 {
-                    email: 'ben@markettor.com',
+                    email: 'ben@clairview.com',
                     first_name: 'Ben White',
                     organization: {
                         name: 'Other org',
@@ -151,7 +151,7 @@ export const LoggedInWrongUser = (): JSX.Element => {
             '/api/users/@me': () => [
                 200,
                 {
-                    email: 'ben@markettor.com',
+                    email: 'ben@clairview.com',
                     first_name: 'Ben White',
                     organization: {
                         name: 'Other org',

@@ -1,4 +1,4 @@
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import { dayjs } from 'lib/dayjs'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { formatDate, formatDateRange } from 'lib/utils'

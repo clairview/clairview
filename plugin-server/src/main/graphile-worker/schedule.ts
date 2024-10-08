@@ -84,7 +84,7 @@ export async function runScheduledTasks(
                 scheduledTaskCounter.labels({ status: 'completed', task: taskType }).inc()
             } catch (error) {
                 if (error instanceof DependencyUnavailableError) {
-                    // For errors relating to MarketTor dependencies that are unavailable,
+                    // For errors relating to ClairView dependencies that are unavailable,
                     // e.g. Postgres, Kafka, Redis, we don't want to log the error to Sentry
                     // but rather bubble this up the stack for someone else to decide on
                     // what to do with it.

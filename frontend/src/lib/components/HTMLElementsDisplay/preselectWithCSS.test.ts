@@ -403,7 +403,7 @@ describe('can preselect selectors for editing', () => {
 
     /**
      * regression test for the case where if all selectors match the pre-selctor will run for eternity
-     * see: https://markettorhelp.zendesk.com/agent/tickets/2945
+     * see: https://clairviewhelp.zendesk.com/agent/tickets/2945
      * */
     test('it does not run for eternity when all selectors match', () => {
         const selector =

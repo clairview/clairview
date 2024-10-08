@@ -1,5 +1,5 @@
-import { IconEllipsis, IconGear } from '@markettor/icons'
-import { LemonButton, LemonMenu } from '@markettor/lemon-ui'
+import { IconEllipsis, IconGear } from '@clairview/icons'
+import { LemonButton, LemonMenu } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { authorizedUrlListLogic, AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'

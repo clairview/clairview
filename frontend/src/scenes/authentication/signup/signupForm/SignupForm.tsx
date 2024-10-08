@@ -1,5 +1,5 @@
-import { IconArrowLeft } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconArrowLeft } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
 import { SpinnerOverlay } from 'lib/lemon-ui/Spinner/Spinner'
@@ -36,7 +36,7 @@ export function SignupForm(): JSX.Element | null {
         <div className="space-y-2">
             <h2>
                 {preflight?.demo
-                    ? 'Explore MarketTor yourself'
+                    ? 'Explore ClairView yourself'
                     : panel === 0
                     ? 'Get started'
                     : 'Tell us a bit about yourself'}

@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { LemonSnack, Popover } from '@markettor/lemon-ui'
+import { LemonSnack, Popover } from '@clairview/lemon-ui'
 import { midEllipsis } from 'lib/utils'
 import { useState } from 'react'
 

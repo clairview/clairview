@@ -4,7 +4,7 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 
 function DjangoInstallSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Bash}>pip install markettor</CodeSnippet>
+    return <CodeSnippet language={Language.Bash}>pip install clairview</CodeSnippet>
 }
 
 function DjangoAppConfigSnippet(): JSX.Element {
@@ -13,13 +13,13 @@ function DjangoAppConfigSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Python}>
             {`from django.apps import AppConfig
-import markettor
+import clairview
 
 class YourAppConfig(AppConfig):
     name = "your_app_name"
     def ready(self):
-        markettor.api_key = '${currentTeam?.api_token}'
-        markettor.host = '${apiHostOrigin()}'`}
+        clairview.api_key = '${currentTeam?.api_token}'
+        clairview.host = '${apiHostOrigin()}'`}
         </CodeSnippet>
     )
 }
@@ -42,7 +42,7 @@ export function SDKInstallDjangoInstructions(): JSX.Element {
             <DjangoInstallSnippet />
             <h3>Configure</h3>
             <p>
-                Set the MarketTor API key and host in your <code>AppConfig</code> in <code>apps.py</code> so that's it's
+                Set the ClairView API key and host in your <code>AppConfig</code> in <code>apps.py</code> so that's it's
                 available everywhere:
             </p>
             <DjangoAppConfigSnippet />

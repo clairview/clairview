@@ -1,5 +1,5 @@
-import { IconPlus } from '@markettor/icons'
-import { LemonButton, LemonModal, LemonSelect, LemonSelectOption } from '@markettor/lemon-ui'
+import { IconPlus } from '@clairview/icons'
+import { LemonButton, LemonModal, LemonSelect, LemonSelectOption } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'

@@ -7,11 +7,11 @@ from ee.tasks.subscriptions.subscription_utils import (
     generate_assets,
 )
 from ee.tasks.test.subscriptions.subscriptions_test_factory import create_subscription
-from markettor.models.dashboard import Dashboard
-from markettor.models.dashboard_tile import DashboardTile
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.test.base import APIBaseTest
+from clairview.models.dashboard import Dashboard
+from clairview.models.dashboard_tile import DashboardTile
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.test.base import APIBaseTest
 
 
 @patch("ee.tasks.subscriptions.subscription_utils.chain")

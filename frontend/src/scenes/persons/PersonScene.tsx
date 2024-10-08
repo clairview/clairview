@@ -1,5 +1,5 @@
-import { IconChevronDown, IconCopy, IconInfo } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonMenu, LemonSelect, LemonTag, Link } from '@markettor/lemon-ui'
+import { IconChevronDown, IconCopy, IconInfo } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonMenu, LemonSelect, LemonTag, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
@@ -78,7 +78,7 @@ function PersonCaption({ person }: { person: PersonType }): JSX.Element {
             </div>
             <div>
                 <span className="text-muted">Merge restrictions:</span> {person.is_identified ? 'applied' : 'none'}
-                <Link to="https://markettor.com/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user">
+                <Link to="https://clairview.com/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user">
                     <Tooltip
                         title={
                             <>
@@ -281,7 +281,7 @@ export function PersonScene(): JSX.Element | null {
                                                           <div>
                                                               This option may depend on your specific setup and isn't
                                                               always suitable. Read more in the{' '}
-                                                              <Link to="https://markettor.com/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps">
+                                                              <Link to="https://clairview.com/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps">
                                                                   documentation.
                                                               </Link>
                                                           </div>
@@ -316,7 +316,7 @@ export function PersonScene(): JSX.Element | null {
                                 id={person.id}
                                 caption={
                                     <LemonBanner type="info">
-                                        This page only shows changes made by users in the MarketTor site. Automatic
+                                        This page only shows changes made by users in the ClairView site. Automatic
                                         changes from the API aren't shown here.
                                     </LemonBanner>
                                 }

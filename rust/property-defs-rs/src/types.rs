@@ -290,7 +290,7 @@ fn detect_property_type(key: &str, value: &Value) -> Option<PropertyValueType> {
         // utm_ prefixed properties should always be detected as strings.
         // Sometimes the first value sent looks like a number, event though
         // subsequent values are not. See
-        // https://github.com/MarketTor/markettor/issues/12529 for more context.
+        // https://github.com/ClairView/clairview/issues/12529 for more context.
         return Some(PropertyValueType::String);
     }
     if key.starts_with("$feature/") {
@@ -419,9 +419,9 @@ impl EventDefinition {
     {
         sqlx::query!(
             r#"
-            INSERT INTO markettor_eventdefinition (id, name, volume_30_day, query_usage_30_day, team_id, last_seen_at, created_at)
+            INSERT INTO clairview_eventdefinition (id, name, volume_30_day, query_usage_30_day, team_id, last_seen_at, created_at)
             VALUES ($1, $2, NULL, NULL, $3, $4, NOW()) ON CONFLICT
-            ON CONSTRAINT markettor_eventdefinition_team_id_name_80fa0b87_uniq
+            ON CONSTRAINT clairview_eventdefinition_team_id_name_80fa0b87_uniq
             DO UPDATE SET last_seen_at = $4
         "#,
             Uuid::now_v7(),
@@ -462,10 +462,10 @@ impl PropertyDefinition {
 
         sqlx::query!(
             r#"
-            INSERT INTO markettor_propertydefinition (id, name, type, group_type_index, is_numerical, volume_30_day, query_usage_30_day, team_id, property_type)
+            INSERT INTO clairview_propertydefinition (id, name, type, group_type_index, is_numerical, volume_30_day, query_usage_30_day, team_id, property_type)
             VALUES ($1, $2, $3, $4, $5, NULL, NULL, $6, $7)
             ON CONFLICT (team_id, name, type, coalesce(group_type_index, -1))
-            DO UPDATE SET property_type=EXCLUDED.property_type WHERE markettor_propertydefinition.property_type IS NULL
+            DO UPDATE SET property_type=EXCLUDED.property_type WHERE clairview_propertydefinition.property_type IS NULL
         "#,
             Uuid::now_v7(),
             self.name,
@@ -484,7 +484,7 @@ impl EventProperty {
         E: Executor<'c, Database = Postgres>,
     {
         sqlx::query!(
-            r#"INSERT INTO markettor_eventproperty (event, property, team_id) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING"#,
+            r#"INSERT INTO clairview_eventproperty (event, property, team_id) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING"#,
             self.event,
             self.property,
             self.team_id

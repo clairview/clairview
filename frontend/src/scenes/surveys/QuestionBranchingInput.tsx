@@ -1,6 +1,6 @@
 import './EditSurvey.scss'
 
-import { LemonDialog, LemonSelect } from '@markettor/lemon-ui'
+import { LemonDialog, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { truncate } from 'lib/utils'

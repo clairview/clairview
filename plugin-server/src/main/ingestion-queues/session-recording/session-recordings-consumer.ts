@@ -48,7 +48,7 @@ const KAFKA_CONSUMER_GROUP_ID = 'session-recordings-blob'
 const KAFKA_CONSUMER_GROUP_ID_OVERFLOW = 'session-recordings-blob-overflow'
 const KAFKA_CONSUMER_SESSION_TIMEOUT_MS = 90_000
 const SHUTDOWN_FLUSH_TIMEOUT_MS = 30000
-const CAPTURE_OVERFLOW_REDIS_KEY = '@markettor/capture-overflow/replay'
+const CAPTURE_OVERFLOW_REDIS_KEY = '@clairview/capture-overflow/replay'
 
 const gaugeSessionsHandled = new Gauge({
     name: 'recording_blob_ingestion_session_manager_count',

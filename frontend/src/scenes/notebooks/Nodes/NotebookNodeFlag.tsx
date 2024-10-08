@@ -1,10 +1,10 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType } from '~/types'
 import { BindLogic, useActions, useValues } from 'kea'
 import { featureFlagLogic, FeatureFlagLogicProps } from 'scenes/feature-flags/featureFlagLogic'
 import { IconRecording, IconSurveys } from 'lib/lemon-ui/icons'
 import clsx from 'clsx'
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -17,7 +17,7 @@ import { notebookNodeFlagLogic } from './NotebookNodeFlagLogic'
 import { buildSurveyContent } from './NotebookNodeSurvey'
 import { useEffect } from 'react'
 import { NotFound } from 'lib/components/NotFound'
-import { IconFlag, IconRocket } from '@markettor/icons'
+import { IconFlag, IconRocket } from '@clairview/icons'
 
 const Component = ({ attributes }: NotebookNodeProps<NotebookNodeFlagAttributes>): JSX.Element => {
     const { id } = attributes
@@ -139,7 +139,7 @@ type NotebookNodeFlagAttributes = {
     id: FeatureFlagLogicProps['id']
 }
 
-export const NotebookNodeFlag = createMarketTorWidgetNode<NotebookNodeFlagAttributes>({
+export const NotebookNodeFlag = createClairViewWidgetNode<NotebookNodeFlagAttributes>({
     nodeType: NotebookNodeType.FeatureFlag,
     titlePlaceholder: 'Feature flag',
     Component,

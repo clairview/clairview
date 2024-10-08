@@ -1,13 +1,13 @@
 import dataclasses
 
-from markettor.client import sync_execute
-from markettor.torql.bytecode import create_bytecode
-from markettor.torql.torql import TorQLContext
-from markettor.torql.property import action_to_expr
-from markettor.models.action import Action
-from markettor.models.action.util import filter_event, format_action_filter
-from markettor.models.test.test_event_model import filter_by_actions_factory
-from markettor.test.base import (
+from clairview.client import sync_execute
+from clairview.torql.bytecode import create_bytecode
+from clairview.torql.torql import TorQLContext
+from clairview.torql.property import action_to_expr
+from clairview.models.action import Action
+from clairview.models.action.util import filter_event, format_action_filter
+from clairview.models.test.test_event_model import filter_by_actions_factory
+from clairview.test.base import (
     BaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -60,21 +60,21 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_event(
             event="$pageview",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_event(
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/1234"},
+            properties={"$current_url": "https://clairview.com/feedback/1234"},
         )
 
         action1 = Action.objects.create(
@@ -83,7 +83,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$autocapture",
-                    "url": "https://markettor.com/feedback/123",
+                    "url": "https://clairview.com/feedback/123",
                     "url_matching": "exact",
                 }
             ],
@@ -104,21 +104,21 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123?vip=1"},
+            properties={"$current_url": "https://clairview.com/feedback/123?vip=1"},
         )
 
         second_match_uuid = _create_event(
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123?vip=1"},
+            properties={"$current_url": "https://clairview.com/feedback/123?vip=1"},
         )
 
         _create_event(
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123?vip=0"},
+            properties={"$current_url": "https://clairview.com/feedback/123?vip=0"},
         )
 
         action1 = Action.objects.create(
@@ -127,7 +127,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$autocapture",
-                    "url": "https://markettor.com/feedback/123?vip=1",
+                    "url": "https://clairview.com/feedback/123?vip=1",
                     "url_matching": "exact",
                 }
             ],
@@ -148,27 +148,27 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_event(
             event="$pageview",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_event(
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/1234"},
+            properties={"$current_url": "https://clairview.com/feedback/1234"},
         )
 
         action1 = Action.objects.create(
             team=self.team,
             name="action1",
-            steps_json=[{"event": "$autocapture", "url": "https://markettor.com/feedback/123"}],
+            steps_json=[{"event": "$autocapture", "url": "https://clairview.com/feedback/123"}],
         )
         query, params = filter_event(action1.steps[0])
 
@@ -181,7 +181,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
         )
 
         _create_event(
@@ -195,7 +195,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             event="$autocapture",
             team=self.team,
             distinct_id="whatever",
-            properties={"$current_url": "https://markettor.com/feedback/1234"},
+            properties={"$current_url": "https://clairview.com/feedback/1234"},
         )
 
         action1 = Action.objects.create(

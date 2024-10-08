@@ -1,7 +1,7 @@
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
 import { SpinnerOverlay } from 'lib/lemon-ui/Spinner'
 import { ReactEventHandler, useEffect, useMemo, useState } from 'react'
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType } from '~/types'
 import { uploadFile } from 'lib/hooks/useUploadFiles'
 import { NotebookNodeProps } from '../Notebook/utils'
@@ -79,7 +79,7 @@ type NotebookNodeImageAttributes = {
     src?: string
 }
 
-export const NotebookNodeImage = createMarketTorWidgetNode<NotebookNodeImageAttributes>({
+export const NotebookNodeImage = createClairViewWidgetNode<NotebookNodeImageAttributes>({
     nodeType: NotebookNodeType.Image,
     titlePlaceholder: 'Image',
     Component,

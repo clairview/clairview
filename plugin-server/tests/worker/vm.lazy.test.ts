@@ -1,4 +1,4 @@
-import { RetryError } from '@markettor/plugin-scaffold'
+import { RetryError } from '@clairview/plugin-scaffold'
 
 import { PluginLogEntrySource, PluginLogEntryType, PluginTaskType } from '../../src/types'
 import { status } from '../../src/utils/status'
@@ -247,7 +247,7 @@ describe('LazyPluginVM', () => {
 
             // An email to project members about the failure is queued
             expect(mockServer.celery.applyAsync).toHaveBeenCalledWith(
-                'markettor.tasks.plugin_server.fatal_plugin_error',
+                'clairview.tasks.plugin_server.fatal_plugin_error',
                 [pluginConfig39.id, null, 'RetryError (attempt 5/5)', false]
             )
         })

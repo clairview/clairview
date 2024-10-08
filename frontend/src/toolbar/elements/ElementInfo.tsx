@@ -1,5 +1,5 @@
-import { IconCalendar, IconPlus } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconCalendar, IconPlus } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { ActionsListView } from '~/toolbar/actions/ActionsListView'

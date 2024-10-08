@@ -46,7 +46,7 @@ module.exports = {
         'cypress',
         '@typescript-eslint',
         'compat',
-        'markettor',
+        'clairview',
         'simple-import-sort',
         'import',
         'unused-imports',
@@ -127,12 +127,12 @@ module.exports = {
                     {
                         propName: 'style',
                         message:
-                            'style should be avoided in favor of utility CSS classes - see https://storybook.markettor.net/?path=/docs/lemon-ui-utilities--overview',
+                            'style should be avoided in favor of utility CSS classes - see https://storybook.clairview.net/?path=/docs/lemon-ui-utilities--overview',
                     },
                 ],
             },
         ],
-        'markettor/warn-elements': [
+        'clairview/warn-elements': [
             'warn',
             {
                 forbid: [
@@ -267,7 +267,7 @@ module.exports = {
                         target: './frontend/**',
                         from: './ee/frontend/**',
                         message:
-                            "EE licensed TypeScript should only be accessed via the markettorEE objects. Use `import markettorEE from '@markettor/ee/exports'`",
+                            "EE licensed TypeScript should only be accessed via the clairviewEE objects. Use `import clairviewEE from '@clairview/ee/exports'`",
                     },
                 ],
             },

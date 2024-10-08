@@ -5,7 +5,7 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 
 function FlutterInstallSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.YAML}>markettor_flutter: ^4.0.0</CodeSnippet>
+    return <CodeSnippet language={Language.YAML}>clairview_flutter: ^4.0.0</CodeSnippet>
 }
 
 function FlutterAndroidSetupSnippet(): JSX.Element {
@@ -14,11 +14,11 @@ function FlutterAndroidSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.XML}>
-            {'<application>\n\t<activity>\n\t\t[...]\n\t</activity>\n\t<meta-data android:name="com.markettor.markettor.API_KEY" android:value="' +
+            {'<application>\n\t<activity>\n\t\t[...]\n\t</activity>\n\t<meta-data android:name="com.clairview.clairview.API_KEY" android:value="' +
                 currentTeam?.api_token +
-                '" />\n\t<meta-data android:name="com.markettor.markettor.MARKETTOR_HOST" android:value="' +
+                '" />\n\t<meta-data android:name="com.clairview.clairview.MARKETTOR_HOST" android:value="' +
                 url +
-                '" />\n\t<meta-data android:name="com.markettor.markettor.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />\n\t<meta-data android:name="com.markettor.markettor.DEBUG" android:value="true" />\n</application>'}
+                '" />\n\t<meta-data android:name="com.clairview.clairview.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />\n\t<meta-data android:name="com.clairview.clairview.DEBUG" android:value="true" />\n</application>'}
         </CodeSnippet>
     )
 }
@@ -29,11 +29,11 @@ function FlutterIOSSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.XML}>
-            {'<dict>\n\t[...]\n\t<key>com.markettor.markettor.API_KEY</key>\n\t<string>' +
+            {'<dict>\n\t[...]\n\t<key>com.clairview.clairview.API_KEY</key>\n\t<string>' +
                 currentTeam?.api_token +
-                '</string>\n\t<key>com.markettor.markettor.MARKETTOR_HOST</key>\n\t<string>' +
+                '</string>\n\t<key>com.clairview.clairview.MARKETTOR_HOST</key>\n\t<string>' +
                 url +
-                '</string>\n\t<key>com.markettor.markettor.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>\n\t<true/>\n\t[...]\n</dict>'}
+                '</string>\n\t<key>com.clairview.clairview.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>\n\t<true/>\n\t[...]\n</dict>'}
         </CodeSnippet>
     )
 }

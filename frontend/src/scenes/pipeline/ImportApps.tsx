@@ -1,4 +1,4 @@
-import { LemonTable, LemonTableColumn } from '@markettor/lemon-ui'
+import { LemonTable, LemonTableColumn } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { More } from 'lib/lemon-ui/LemonButton/More'
 import { LemonMenuOverlay } from 'lib/lemon-ui/LemonMenu/LemonMenu'

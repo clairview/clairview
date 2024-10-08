@@ -1,5 +1,5 @@
-import { IconLock } from '@markettor/icons'
-import { IconPencil } from '@markettor/icons'
+import { IconLock } from '@clairview/icons'
+import { IconPencil } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -11,8 +11,8 @@ import {
     LemonTextArea,
     SpinnerOverlay,
     Tooltip,
-} from '@markettor/lemon-ui'
-import { PluginConfigSchema } from '@markettor/plugin-scaffold/src/types'
+} from '@clairview/lemon-ui'
+import { PluginConfigSchema } from '@clairview/plugin-scaffold/src/types'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { NotFound } from 'lib/components/NotFound'
@@ -306,7 +306,7 @@ function PluginField({
         <strong className="text-danger">
             Unknown field type "<code>{fieldConfig.type}</code>".
             <br />
-            You may need to upgrade MarketTor!
+            You may need to upgrade ClairView!
         </strong>
     )
 }

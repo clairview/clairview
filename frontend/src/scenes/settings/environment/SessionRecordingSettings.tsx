@@ -1,4 +1,4 @@
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -10,7 +10,7 @@ import {
     LemonTag,
     Link,
     Spinner,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
@@ -101,9 +101,9 @@ function PayloadWarning(): JSX.Element {
             </p>{' '}
             <p>
                 If they could contain sensitive data, you should provide a function to mask the data when you initialise
-                MarketTor.{' '}
+                ClairView.{' '}
                 <Link
-                    to="https://markettor.com/docs/session-replay/network-recording#sensitive-information"
+                    to="https://clairview.com/docs/session-replay/network-recording#sensitive-information"
                     target="blank"
                 >
                     Learn how to mask header and body values in our docs
@@ -137,7 +137,7 @@ export function NetworkCaptureSettings(): JSX.Element {
                 <p>
                     When network capture is enabled, we always capture network timings. Use these switches to choose
                     whether to also capture headers and payloads of requests.{' '}
-                    <Link to="https://markettor.com/docs/session-replay/network-recording" target="blank">
+                    <Link to="https://clairview.com/docs/session-replay/network-recording" target="blank">
                         Learn how to mask header and payload values in our docs
                     </Link>
                 </p>
@@ -321,7 +321,7 @@ function LinkedFlagSelector(): JSX.Element | null {
                         <p>
                             Alternatively, you can link to a specific variant of the flag, and recordings will only
                             start when the user has that specific variant enabled. Variant targeting support requires
-                            markettor-js v1.110.0 or greater
+                            clairview-js v1.110.0 or greater
                         </p>
                     </>
                 )}
@@ -344,10 +344,10 @@ export function ReplayCostControl(): JSX.Element | null {
         <PayGateMini feature={AvailableFeature.SESSION_REPLAY_SAMPLING}>
             <>
                 <p>
-                    MarketTor offers several tools to let you control the number of recordings you collect and which users
+                    ClairView offers several tools to let you control the number of recordings you collect and which users
                     you collect recordings for.{' '}
                     <Link
-                        to="https://markettor.com/docs/session-replay/how-to-control-which-sessions-you-record"
+                        to="https://clairview.com/docs/session-replay/how-to-control-which-sessions-you-record"
                         target="blank"
                     >
                         Learn more in our docs.
@@ -657,7 +657,7 @@ export function ReplayGeneral(): JSX.Element {
                 <p>
                     Watch recordings of how users interact with your web app to see what can be improved.{' '}
                     <Link
-                        to="https://markettor.com/docs/user-guides/recordings?utm_campaign=session-recording&utm_medium=in-product"
+                        to="https://clairview.com/docs/user-guides/recordings?utm_campaign=session-recording&utm_medium=in-product"
                         target="_blank"
                     >
                         Check out our docs

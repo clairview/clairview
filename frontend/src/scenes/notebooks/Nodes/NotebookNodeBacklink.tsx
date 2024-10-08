@@ -1,12 +1,12 @@
 import { mergeAttributes, Node, NodeViewProps } from '@tiptap/core'
 import { NodeViewWrapper, ReactNodeViewRenderer } from '@tiptap/react'
 import { NotebookNodeType, NotebookTarget, QueryBasedInsightModel } from '~/types'
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { IconCohort } from 'lib/lemon-ui/icons'
 import { urls } from 'scenes/urls'
 import clsx from 'clsx'
 import { router } from 'kea-router'
-import { markettorNodePasteRule } from './utils'
+import { clairviewNodePasteRule } from './utils'
 import api from 'lib/api'
 import { useValues } from 'kea'
 import { notebookLogic } from '../Notebook/notebookLogic'
@@ -24,7 +24,7 @@ import {
     IconPerson,
     IconPlaylist,
     IconRewindPlay,
-} from '@markettor/icons'
+} from '@clairview/icons'
 import { useEffect } from 'react'
 
 type BackLinkMapper = {
@@ -214,7 +214,7 @@ export const NotebookNodeBacklink = Node.create({
 
     addPasteRules() {
         return [
-            markettorNodePasteRule({
+            clairviewNodePasteRule({
                 find: '(.+)',
                 editor: this.editor,
                 type: this.type,

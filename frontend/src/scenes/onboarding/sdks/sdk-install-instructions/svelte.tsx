@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -15,13 +15,13 @@ function SvelteAppClientCodeSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.JavaScript}>
-            {`import markettor from 'markettor-js'
+            {`import clairview from 'clairview-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
 
   if (browser) {
-    markettor.init(
+    clairview.init(
       '${currentTeam?.api_token}',
       { 
         api_host: '${apiHostOrigin()}',
@@ -42,7 +42,7 @@ export const load = async () => {
 export function SDKInstallSvelteJSInstructions(): JSX.Element {
     return (
         <>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
 
             <h3>Initialize</h3>
@@ -52,7 +52,7 @@ export function SDKInstallSvelteJSInstructions(): JSX.Element {
                     layout
                 </Link>{' '}
                 already, create a new file called <code>+layout.js</code> in your <code>src/routes</code> folder. In
-                this file, check the environment is the browser, and initialize MarketTor if so:
+                this file, check the environment is the browser, and initialize ClairView if so:
             </p>
             <SvelteAppClientCodeSnippet />
         </>

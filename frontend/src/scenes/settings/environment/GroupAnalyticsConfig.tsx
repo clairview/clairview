@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { groupsAccessLogic, GroupsAccessStatus } from 'lib/introductions/groupsAccessLogic'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
@@ -75,7 +75,7 @@ export function GroupAnalyticsConfig(): JSX.Element | null {
                 <LemonBanner type="info" className="mb-4">
                     Group types will show up here after you send your first event associated with a group. Take a look
                     at{' '}
-                    <Link to="https://markettor.com/manual/group-analytics" target="_blank">
+                    <Link to="https://clairview.com/manual/group-analytics" target="_blank">
                         this guide
                     </Link>
                     for more information on getting started.

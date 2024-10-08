@@ -3,7 +3,7 @@ import './ActionFilterRow.scss'
 import { DraggableSyntheticListeners } from '@dnd-kit/core'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { IconCopy, IconEllipsis, IconFilter, IconPencil, IconTrash, IconWarning } from '@markettor/icons'
+import { IconCopy, IconEllipsis, IconFilter, IconPencil, IconTrash, IconWarning } from '@clairview/icons'
 import {
     LemonBadge,
     LemonCheckbox,
@@ -12,7 +12,7 @@ import {
     LemonSelect,
     LemonSelectOption,
     LemonSelectOptions,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { BuiltLogic, useActions, useValues } from 'kea'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'
 import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'

@@ -6,7 +6,7 @@ use crate::{api::FlagError, database::Client as DatabaseClient, redis::Client as
 
 // TRICKY: This cache data is coming from django-redis. If it ever goes out of sync, we'll bork.
 // TODO: Add integration tests across repos to ensure this doesn't happen.
-pub const TEAM_TOKEN_CACHE_PREFIX: &str = "markettor:1:team_token:";
+pub const TEAM_TOKEN_CACHE_PREFIX: &str = "clairview:1:team_token:";
 
 #[derive(Clone, Debug, Deserialize, Serialize, sqlx::FromRow)]
 pub struct Team {
@@ -78,7 +78,7 @@ impl Team {
     ) -> Result<Team, FlagError> {
         let mut conn = client.get_connection().await?;
 
-        let query = "SELECT id, name, api_token FROM markettor_team WHERE api_token = $1";
+        let query = "SELECT id, name, api_token FROM clairview_team WHERE api_token = $1";
         let row = sqlx::query_as::<_, Team>(query)
             .bind(&token)
             .fetch_one(&mut *conn)

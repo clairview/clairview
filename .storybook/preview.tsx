@@ -2,7 +2,7 @@ import '~/styles'
 import type { Meta, Parameters, Preview } from '@storybook/react'
 import { Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks'
 import { worker } from '~/mocks/browser'
-import { loadMarketTorJS } from '~/loadMarketTorJS'
+import { loadClairViewJS } from '~/loadClairViewJS'
 import { withKea } from './decorators/withKea'
 import { withMockDate } from './decorators/withMockDate'
 import { defaultMocks } from '~/mocks/handlers'
@@ -33,11 +33,11 @@ const setupMsw = () => {
 setupMsw()
 
 const setupMarkettorJs = () => {
-    // Make sure we don't hit production markettor. We want to control requests to,
+    // Make sure we don't hit production clairview. We want to control requests to,
     // e.g. `/decide/` for feature flags
     window.JS_MARKETTOR_HOST = apiHostOrigin()
 
-    loadMarketTorJS()
+    loadClairViewJS()
 }
 setupMarkettorJs()
 

@@ -13,7 +13,7 @@ import type { SharedListMiniFilter } from 'scenes/session-recordings/player/play
 
 import { SessionRecordingPlayerTab } from '~/types'
 
-const MarketTorMobileEvents = [
+const ClairViewMobileEvents = [
     'Deep Link Opened',
     'Application Opened',
     'Application Backgrounded',
@@ -22,12 +22,12 @@ const MarketTorMobileEvents = [
     'Application Became Active',
 ]
 
-function isMarketTorMobileEvent(item: InspectorListItem): boolean {
-    return isEvent(item) && MarketTorMobileEvents.includes(item.data.event)
+function isClairViewMobileEvent(item: InspectorListItem): boolean {
+    return isEvent(item) && ClairViewMobileEvents.includes(item.data.event)
 }
 
-function isMarketTorEvent(item: InspectorListItem): boolean {
-    return (isEvent(item) && item.data.event.startsWith('$')) || isMarketTorMobileEvent(item)
+function isClairViewEvent(item: InspectorListItem): boolean {
+    return (isEvent(item) && item.data.event.startsWith('$')) || isClairViewMobileEvent(item)
 }
 
 function isNetworkEvent(item: InspectorListItem): item is InspectorListItemPerformance {
@@ -123,7 +123,7 @@ export function filterInspectorListItems({
                         isNavigationEvent(item) ||
                         isNetworkError(item) ||
                         isSlowNetwork(item) ||
-                        isMarketTorMobileEvent(item) ||
+                        isClairViewMobileEvent(item) ||
                         isPageviewOrScreen(item) ||
                         isAutocapture(item))) ||
                 isComment(item)
@@ -140,8 +140,8 @@ export function filterInspectorListItems({
             }
             return (
                 !!miniFiltersByKey['events-all']?.enabled ||
-                (!!miniFiltersByKey['events-markettor']?.enabled && isMarketTorEvent(item)) ||
-                (!!miniFiltersByKey['events-custom']?.enabled && !isMarketTorEvent(item)) ||
+                (!!miniFiltersByKey['events-clairview']?.enabled && isClairViewEvent(item)) ||
+                (!!miniFiltersByKey['events-custom']?.enabled && !isClairViewEvent(item)) ||
                 (!!miniFiltersByKey['events-pageview']?.enabled &&
                     ['$pageview', '$screen'].includes(item.data.event)) ||
                 (!!miniFiltersByKey['events-autocapture']?.enabled && item.data.event === '$autocapture') ||

@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconWarning, IconX } from '@markettor/icons'
-import { LemonCollapse, LemonModal, LemonTag, Link } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconWarning, IconX } from '@clairview/icons'
+import { LemonCollapse, LemonModal, LemonTag, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { BillingUpgradeCTA } from 'lib/components/BillingUpgradeCTA'
@@ -168,7 +168,7 @@ export const AllProductsPlanComparison = ({
                 <BillingUpgradeCTA
                     to={
                         plan.contact_support
-                            ? 'mailto:sales@markettor.com?subject=Enterprise%20plan%20request'
+                            ? 'mailto:sales@clairview.com?subject=Enterprise%20plan%20request'
                             : i < currentPlanIndex
                             ? undefined // Downgrade action handled in onClick
                             : getUpgradeProductLink({

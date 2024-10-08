@@ -1,7 +1,7 @@
 import './PropertiesTable.scss'
 
-import { IconPencil, IconTrash, IconWarning } from '@markettor/icons'
-import { LemonCheckbox, LemonDialog, LemonInput, LemonMenu, LemonTag, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconPencil, IconTrash, IconWarning } from '@clairview/icons'
+import { LemonCheckbox, LemonDialog, LemonInput, LemonMenu, LemonTag, Link, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { combineUrl } from 'kea-router'
@@ -71,7 +71,7 @@ function ValueDisplay({
     const { describeProperty } = useValues(propertyDefinitionsModel)
 
     const [editing, setEditing] = useState(false)
-    // Can edit if a key and edit callback is set, the property is custom (i.e. not MarketTor), and the value is in the root of the object (i.e. no nested objects)
+    // Can edit if a key and edit callback is set, the property is custom (i.e. not ClairView), and the value is in the root of the object (i.e. no nested objects)
     const canEdit = rootKey && !PROPERTY_KEYS.includes(rootKey) && (!nestingLevel || nestingLevel <= 1) && onEdit
 
     const textBasedTypes = ['string', 'number', 'bigint'] // Values that are edited with a text box
@@ -183,7 +183,7 @@ interface PropertiesTableType extends BasePropertyType {
     embedded?: boolean
     onDelete?: (key: string) => void
     className?: string
-    /* only event types are detected and so describe-able. see https://github.com/MarketTor/markettor/issues/9245 */
+    /* only event types are detected and so describe-able. see https://github.com/ClairView/clairview/issues/9245 */
     useDetectedPropertyType?: boolean
     tableProps?: Partial<LemonTableProps<Record<string, any>>>
     highlightedKeys?: string[]
@@ -207,8 +207,8 @@ export function PropertiesTable({
     type,
 }: PropertiesTableType): JSX.Element {
     const [searchTerm, setSearchTerm] = useState('')
-    const { hideMarketTorPropertiesInTable } = useValues(userPreferencesLogic)
-    const { setHideMarketTorPropertiesInTable } = useActions(userPreferencesLogic)
+    const { hideClairViewPropertiesInTable } = useValues(userPreferencesLogic)
+    const { setHideClairViewPropertiesInTable } = useActions(userPreferencesLogic)
 
     const objectProperties = useMemo(() => {
         if (!properties || Array.isArray(properties)) {
@@ -227,7 +227,7 @@ export function PropertiesTable({
             })
         }
 
-        if (filterable && hideMarketTorPropertiesInTable) {
+        if (filterable && hideClairViewPropertiesInTable) {
             entries = entries.filter(([key]) => !key.startsWith('$') && !PROPERTY_KEYS.includes(key))
         }
 
@@ -256,7 +256,7 @@ export function PropertiesTable({
             })
         }
         return entries
-    }, [properties, sortProperties, searchTerm, hideMarketTorPropertiesInTable])
+    }, [properties, sortProperties, searchTerm, hideClairViewPropertiesInTable])
 
     if (Array.isArray(properties)) {
         return (
@@ -394,10 +394,10 @@ export function PropertiesTable({
 
                             {filterable && (
                                 <LemonCheckbox
-                                    checked={hideMarketTorPropertiesInTable}
-                                    label="Hide MarketTor properties"
+                                    checked={hideClairViewPropertiesInTable}
+                                    label="Hide ClairView properties"
                                     bordered
-                                    onChange={setHideMarketTorPropertiesInTable}
+                                    onChange={setHideClairViewPropertiesInTable}
                                 />
                             )}
                         </span>
@@ -415,14 +415,14 @@ export function PropertiesTable({
                     className={className}
                     emptyState={
                         <>
-                            {hideMarketTorPropertiesInTable || searchTerm ? (
+                            {hideClairViewPropertiesInTable || searchTerm ? (
                                 <span className="flex gap-2">
                                     <span>No properties found</span>
                                     <LemonButton
                                         noPadding
                                         onClick={() => {
                                             setSearchTerm('')
-                                            setHideMarketTorPropertiesInTable(false)
+                                            setHideClairViewPropertiesInTable(false)
                                         }}
                                     >
                                         Clear filters

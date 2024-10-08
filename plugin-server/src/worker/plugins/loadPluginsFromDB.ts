@@ -1,4 +1,4 @@
-import { PluginAttachment } from '@markettor/plugin-scaffold'
+import { PluginAttachment } from '@clairview/plugin-scaffold'
 import { Summary } from 'prom-client'
 
 import { Hub, Plugin, PluginConfig, PluginConfigId, PluginId, PluginMethod, TeamId } from '../../types'

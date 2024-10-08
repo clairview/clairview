@@ -7,29 +7,29 @@ from freezegun.api import freeze_time
 from rest_framework.exceptions import ValidationError
 
 from ee.clickhouse.materialized_columns.columns import materialize
-from markettor.client import sync_execute
-from markettor.constants import PropertyOperatorType
-from markettor.models.cohort import Cohort
-from markettor.models.element import Element
-from markettor.models.filters import Filter
-from markettor.models.instance_setting import (
+from clairview.client import sync_execute
+from clairview.constants import PropertyOperatorType
+from clairview.models.cohort import Cohort
+from clairview.models.element import Element
+from clairview.models.filters import Filter
+from clairview.models.instance_setting import (
     get_instance_setting,
 )
-from markettor.models.organization import Organization
-from markettor.models.property import Property, TableWithProperties
-from markettor.models.property.util import (
+from clairview.models.organization import Organization
+from clairview.models.property import Property, TableWithProperties
+from clairview.models.property.util import (
     PropertyGroup,
     get_property_string_expr,
     get_single_or_multi_property_string_expr,
     parse_prop_grouped_clauses,
     prop_filter_json_extract,
 )
-from markettor.models.team import Team
-from markettor.queries.person_distinct_id_query import get_team_distinct_ids_query
-from markettor.queries.person_query import PersonQuery
-from markettor.queries.property_optimizer import PropertyOptimizer
-from markettor.queries.util import PersonPropertiesMode
-from markettor.test.base import (
+from clairview.models.team import Team
+from clairview.queries.person_distinct_id_query import get_team_distinct_ids_query
+from clairview.queries.person_query import PersonQuery
+from clairview.queries.property_optimizer import PropertyOptimizer
+from clairview.queries.util import PersonPropertiesMode
+from clairview.test.base import (
     BaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -60,13 +60,13 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
         _create_person(
             distinct_ids=["some_other_id"],
             team_id=self.team.pk,
-            properties={"email": "another@markettor.com"},
+            properties={"email": "another@clairview.com"},
         )
 
         _create_person(
             distinct_ids=["some_id"],
             team_id=self.team.pk,
-            properties={"email": "test@markettor.com"},
+            properties={"email": "test@clairview.com"},
         )
 
         _create_event(
@@ -76,7 +76,7 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
             properties={"attr": "some_val"},
         )
 
-        filter = Filter(data={"properties": [{"key": "email", "value": "test@markettor.com", "type": "person"}]})
+        filter = Filter(data={"properties": [{"key": "email", "value": "test@clairview.com", "type": "person"}]})
         self.assertEqual(len(self._run_query(filter)), 1)
 
     def test_prop_event(self):
@@ -704,18 +704,18 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
         _create_person(
             distinct_ids=["some_id"],
             team_id=self.team.pk,
-            properties={"email": "1@markettor.com"},
+            properties={"email": "1@clairview.com"},
         )
 
         _create_person(
             distinct_ids=["some_other_id"],
             team_id=self.team.pk,
-            properties={"email": "2@markettor.com"},
+            properties={"email": "2@clairview.com"},
         )
         _create_person(
             distinct_ids=["some_other_random_id"],
             team_id=self.team.pk,
-            properties={"email": "X@markettor.com"},
+            properties={"email": "X@clairview.com"},
         )
 
         _create_event(
@@ -750,7 +750,7 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
                                 {
                                     "key": "email",
                                     "type": "person",
-                                    "value": "1@markettor.com",
+                                    "value": "1@clairview.com",
                                 }
                             ],
                         },
@@ -760,7 +760,7 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
                                 {
                                     "key": "email",
                                     "type": "person",
-                                    "value": "2@markettor.com",
+                                    "value": "2@clairview.com",
                                 }
                             ],
                         },
@@ -852,7 +852,7 @@ class TestPropDenormalized(ClickhouseTestMixin, BaseTest):
         _create_person(
             distinct_ids=["some_id"],
             team_id=self.team.pk,
-            properties={"email": "test@markettor.com"},
+            properties={"email": "test@clairview.com"},
         )
         _create_event(event="$pageview", team=self.team, distinct_id="some_id")
 
@@ -864,7 +864,7 @@ class TestPropDenormalized(ClickhouseTestMixin, BaseTest):
                     {
                         "key": "email",
                         "type": "person",
-                        "value": "markettor",
+                        "value": "clairview",
                         "operator": "icontains",
                     }
                 ]
@@ -878,7 +878,7 @@ class TestPropDenormalized(ClickhouseTestMixin, BaseTest):
                     {
                         "key": "email",
                         "type": "person",
-                        "value": "markettor",
+                        "value": "clairview",
                         "operator": "not_icontains",
                     }
                 ]
@@ -1046,7 +1046,7 @@ def test_parse_prop_clauses_defaults(snapshot):
                 {
                     "key": "email",
                     "type": "person",
-                    "value": "markettor",
+                    "value": "clairview",
                     "operator": "icontains",
                 },
             ]
@@ -1111,7 +1111,7 @@ def test_parse_prop_clauses_precalculated_cohort(snapshot):
     )
 
 
-# Regression test for: https://github.com/MarketTor/markettor/pull/9283
+# Regression test for: https://github.com/ClairView/clairview/pull/9283
 @pytest.mark.django_db
 def test_parse_prop_clauses_funnel_step_element_prepend_regression(snapshot):
     filter = Filter(
@@ -1145,7 +1145,7 @@ def test_parse_groups_persons_edge_case_with_single_filter(snapshot):
         data={
             "properties": {
                 "type": "OR",
-                "values": [{"key": "email", "type": "person", "value": "1@markettor.com"}],
+                "values": [{"key": "email", "type": "person", "value": "1@clairview.com"}],
             }
         }
     )
@@ -1241,7 +1241,7 @@ def test_breakdown_query_expression_materialised(
     expected_with: str,
     expected_without: str,
 ):
-    from markettor.models.team import util
+    from clairview.models.team import util
 
     util.can_enable_actor_on_events = True
 
@@ -1274,8 +1274,8 @@ def test_events(db, team) -> list[UUID]:
             event="$pageview",
             team=team,
             distinct_id="whatever",
-            properties={"email": "test@markettor.com"},
-            group2_properties={"email": "test@markettor.com"},
+            properties={"email": "test@clairview.com"},
+            group2_properties={"email": "test@clairview.com"},
         ),
         _create_event(
             event="$pageview",
@@ -1494,8 +1494,8 @@ def clean_up_materialised_columns():
 
 
 TEST_PROPERTIES = [
-    pytest.param(Property(key="email", value="test@markettor.com"), [0]),
-    pytest.param(Property(key="email", value="test@markettor.com", operator="exact"), [0]),
+    pytest.param(Property(key="email", value="test@clairview.com"), [0]),
+    pytest.param(Property(key="email", value="test@clairview.com", operator="exact"), [0]),
     pytest.param(
         Property(
             key="email",
@@ -1510,14 +1510,14 @@ TEST_PROPERTIES = [
         id="matching a number only matches event index 4 from test_events",
     ),
     pytest.param(
-        Property(key="email", value="test@markettor.com", operator="is_not"),
+        Property(key="email", value="test@clairview.com", operator="is_not"),
         range(1, 27),
         id="matching on email is not a value matches all but the first event from test_events",
     ),
     pytest.param(
         Property(
             key="email",
-            value=["test@markettor.com", "mongo@example.com"],
+            value=["test@clairview.com", "mongo@example.com"],
             operator="is_not",
         ),
         range(2, 27),

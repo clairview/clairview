@@ -1,5 +1,5 @@
 name: Feature request
-description: 'Suggest a feature for MarketTor'
+description: 'Suggest a feature for ClairView'
 labels: ['enhancement, feature']
 body:
     - type: textarea
@@ -14,7 +14,7 @@ body:
       id: debug-info
       attributes:
           label: Debug info
-          value: "- [ ] MarketTor Cloud, Debug information: [please copy/paste from https://us.markettor.com/settings/project-details#variables]\n- [ ] MarketTor Hobby self-hosted with `docker compose`, version/commit: [please provide]\n- [ ] MarketTor self-hosted with Kubernetes (deprecated, see [`Sunsetting Kubernetes support`](https://markettor.com/blog/sunsetting-helm-support-markettor)), version/commit: [please provide]\n"
+          value: "- [ ] ClairView Cloud, Debug information: [please copy/paste from https://us.clairview.com/settings/project-details#variables]\n- [ ] ClairView Hobby self-hosted with `docker compose`, version/commit: [please provide]\n- [ ] ClairView self-hosted with Kubernetes (deprecated, see [`Sunsetting Kubernetes support`](https://clairview.com/blog/sunsetting-helm-support-clairview)), version/commit: [please provide]\n"
           render: shell
 
     - type: markdown

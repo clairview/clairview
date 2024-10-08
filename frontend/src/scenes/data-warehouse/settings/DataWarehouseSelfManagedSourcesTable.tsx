@@ -1,4 +1,4 @@
-import { LemonButton, LemonDialog, LemonTable } from '@markettor/lemon-ui'
+import { LemonButton, LemonDialog, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { DatabaseSchemaDataWarehouseTable } from '~/queries/schema'

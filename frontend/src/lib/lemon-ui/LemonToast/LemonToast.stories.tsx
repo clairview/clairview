@@ -76,7 +76,7 @@ export const BillingError: Story = {
             {
                 type: 'error',
                 message:
-                    'Load experiment failed: This feature is part of the premium MarketTor offering. To use it, subscribe to MarketTor Cloud with a generous free tier: https://app.markettor.com/organization/billing',
+                    'Load experiment failed: This feature is part of the premium ClairView offering. To use it, subscribe to ClairView Cloud with a generous free tier: https://app.clairview.com/organization/billing',
             },
         ],
     },

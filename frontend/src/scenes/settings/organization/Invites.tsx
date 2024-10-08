@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonTag } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
 import { OrganizationMembershipLevel } from 'lib/constants'

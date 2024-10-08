@@ -1,7 +1,7 @@
 import './HelpButton.scss'
 
 import { Placement } from '@floating-ui/react'
-import { IconBug, IconChevronDown, IconDocument, IconQuestion, IconSupport } from '@markettor/icons'
+import { IconBug, IconChevronDown, IconDocument, IconQuestion, IconSupport } from '@clairview/icons'
 import clsx from 'clsx'
 import { actions, connect, kea, key, listeners, path, props, reducers, useActions, useValues } from 'kea'
 import { IconFeedback, IconQuestionAnswer } from 'lib/lemon-ui/icons'
@@ -60,7 +60,7 @@ export interface HelpButtonProps {
     customKey?: string
     /** Whether the component should be an inline element as opposed to a block element. */
     inline?: boolean
-    /** Whether only options abount contact with MarketTor should be shown (e.g. leaving docs out). */
+    /** Whether only options abount contact with ClairView should be shown (e.g. leaving docs out). */
     contactOnly?: boolean
 }
 
@@ -96,7 +96,7 @@ export function HelpButton({
                                     reportHelpButtonUsed(HelpType.Slack)
                                     hideHelp()
                                 },
-                                to: `https://markettor.com/questions${HELP_UTM_TAGS}`,
+                                to: `https://clairview.com/questions${HELP_UTM_TAGS}`,
                                 targetBlank: true,
                             },
                             {
@@ -137,7 +137,7 @@ export function HelpButton({
                                     reportHelpButtonUsed(HelpType.Docs)
                                     hideHelp()
                                 },
-                                to: `https://markettor.com/docs${HELP_UTM_TAGS}`,
+                                to: `https://clairview.com/docs${HELP_UTM_TAGS}`,
                                 targetBlank: true,
                             },
                         ],

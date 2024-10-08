@@ -26,7 +26,7 @@ use crate::{
 };
 
 /// Flexible endpoint that targets wide compatibility with the wide range of requests
-/// currently processed by markettor-events (analytics events capture). Replay is out
+/// currently processed by clairview-events (analytics events capture). Replay is out
 /// of scope and should be processed on a separate endpoint.
 ///
 /// Because it must accommodate several shapes, it is inefficient in places. A v1

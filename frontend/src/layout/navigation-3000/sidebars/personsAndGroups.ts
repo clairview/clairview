@@ -1,4 +1,4 @@
-import { urls } from '@markettor/apps-common'
+import { urls } from '@clairview/apps-common'
 import { afterMount, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { combineUrl } from 'kea-router'
 import { subscriptions } from 'kea-subscriptions'

@@ -2,13 +2,13 @@
 !bin
 !requirements.txt
 !requirements-dev.txt
-!markettor
+!clairview
 !plugin-server
 !staticfiles
 !manage.py
 !gunicorn.config.py
 !babel.config.js
-!markettor.json
+!clairview.json
 !package.json
 !pnpm-lock.yaml
 !webpack.config.js
@@ -17,7 +17,7 @@
 !.kearc
 !.storybook
 !tsconfig.json
-!frontend/@markettor
+!frontend/@clairview
 !frontend/src
 !frontend/types
 !frontend/public

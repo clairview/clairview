@@ -2,19 +2,19 @@ import uuid
 
 from django.test import override_settings
 
-from markettor.models.filters.retention_filter import RetentionFilter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.instance_setting import override_instance_config
-from markettor.models.person import Person
-from markettor.queries.retention import Retention
-from markettor.queries.test.test_retention import (
+from clairview.models.filters.retention_filter import RetentionFilter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.instance_setting import override_instance_config
+from clairview.models.person import Person
+from clairview.queries.retention import Retention
+from clairview.queries.test.test_retention import (
     _create_event,
     _create_events,
     _date,
     pluck,
 )
-from markettor.test.base import (
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     create_person_id_override_by_distinct_id,
@@ -505,7 +505,7 @@ class TestClickhouseRetention(ClickhouseTestMixin, APIBaseTest):
 
     @snapshot_clickhouse_queries
     def test_groups_in_period_person_on_events(self):
-        from markettor.models.team import util
+        from clairview.models.team import util
 
         util.can_enable_actor_on_events = True
         self._create_groups_and_events()

@@ -1,4 +1,4 @@
-// Keep this in sync with markettor/kafka_client/topics.py
+// Keep this in sync with clairview/kafka_client/topics.py
 
 import { isTestEnv } from '../utils/env-utils'
 

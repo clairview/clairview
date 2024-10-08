@@ -4,7 +4,7 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 
 function GoInstallSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Bash}>go get "github.com/MarketTor/markettor-go"</CodeSnippet>
+    return <CodeSnippet language={Language.Bash}>go get "github.com/ClairView/clairview-go"</CodeSnippet>
 }
 
 function GoSetupSnippet(): JSX.Element {
@@ -14,10 +14,10 @@ function GoSetupSnippet(): JSX.Element {
         <CodeSnippet language={Language.Go}>
             {`package main
 import (
-    "github.com/MarketTor/markettor-go"
+    "github.com/ClairView/clairview-go"
 )
 func main() {
-    client, _ := markettor.NewWithConfig("${currentTeam?.api_token}", markettor.Config{Endpoint: "${apiHostOrigin()}"})
+    client, _ := clairview.NewWithConfig("${currentTeam?.api_token}", clairview.Config{Endpoint: "${apiHostOrigin()}"})
     defer client.Close()
 }`}
         </CodeSnippet>

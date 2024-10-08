@@ -1,4 +1,4 @@
-import { RetryError } from '@markettor/plugin-scaffold'
+import { RetryError } from '@clairview/plugin-scaffold'
 import equal from 'fast-deep-equal'
 import { Counter, Summary } from 'prom-client'
 import { VM } from 'vm2'
@@ -242,7 +242,7 @@ export class LazyPluginVM implements PluginInstance {
                 const team = await this.hub.teamManager.fetchTeam(this.pluginConfig.team_id)
                 // There's a single team with replication for the same api key from US to EU
                 // otherwise we're just checking that token differs to better safeguard against forwarding
-                const isAllowed = team?.uuid == '017955d2-b09f-0000-ec00-2116c7e8a605' && host == 'eu.markettor.com'
+                const isAllowed = team?.uuid == '017955d2-b09f-0000-ec00-2116c7e8a605' && host == 'eu.clairview.com'
                 if (!isAllowed && team?.api_token.trim() == apiKey.trim()) {
                     throw Error('Self replication is not allowed')
                 }
@@ -317,7 +317,7 @@ export class LazyPluginVM implements PluginInstance {
         await processError(this.hub, this.pluginConfig, error)
         // Temp disabled on 26/09/24, due to customer issue. TODO - we should actually disable in the case of bad plugin configs, assuming we revisit this before throwing the whole plugin concept out
         // await disablePlugin(this.hub, this.pluginConfig.id)
-        await this.hub.celery.applyAsync('markettor.tasks.plugin_server.fatal_plugin_error', [
+        await this.hub.celery.applyAsync('clairview.tasks.plugin_server.fatal_plugin_error', [
             this.pluginConfig.id,
             // Using the `updated_at` field for email campaign idempotency. It's safer to provide it to the task
             // from here, because the value DB may change in the DB while the task is queued.

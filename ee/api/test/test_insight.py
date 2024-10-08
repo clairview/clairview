@@ -8,16 +8,16 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models import ExplicitTeamMembership, DashboardPrivilege
-from markettor.api.test.dashboards import DashboardAPI
-from markettor.models import (
+from clairview.api.test.dashboards import DashboardAPI
+from clairview.models import (
     Dashboard,
     DashboardTile,
     Insight,
     OrganizationMembership,
     User,
 )
-from markettor.test.base import FuzzyInt, snapshot_postgres_queries
-from markettor.test.db_context_capturing import capture_db_queries
+from clairview.test.base import FuzzyInt, snapshot_postgres_queries
+from clairview.test.db_context_capturing import capture_db_queries
 
 
 class TestInsightEnterpriseAPI(APILicensedTest):
@@ -70,7 +70,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
             insight_id=insight_id,
             expected=[
                 {
-                    "user": {"first_name": "", "email": "user1@markettor.com"},
+                    "user": {"first_name": "", "email": "user1@clairview.com"},
                     "activity": "created",
                     "scope": "Insight",
                     "item_id": str(insight_id),
@@ -84,7 +84,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
                     "created_at": "2012-01-14T03:21:34Z",
                 },
                 {
-                    "user": {"first_name": "", "email": "user1@markettor.com"},
+                    "user": {"first_name": "", "email": "user1@clairview.com"},
                     "activity": "updated",
                     "scope": "Insight",
                     "item_id": str(insight_id),
@@ -106,7 +106,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
                     "created_at": "2012-01-14T03:21:34Z",
                 },
                 {
-                    "user": {"first_name": "", "email": "user1@markettor.com"},
+                    "user": {"first_name": "", "email": "user1@clairview.com"},
                     "activity": "updated",
                     "scope": "Insight",
                     "item_id": str(insight_id),
@@ -164,7 +164,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
                 insight_id,
                 [
                     {
-                        "user": {"first_name": "", "email": "user1@markettor.com"},
+                        "user": {"first_name": "", "email": "user1@clairview.com"},
                         "activity": "updated",
                         "scope": "Insight",
                         "item_id": str(insight_id),
@@ -193,7 +193,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
                         "created_at": "2012-01-14T03:31:34Z",
                     },
                     {
-                        "user": {"first_name": "", "email": "user1@markettor.com"},
+                        "user": {"first_name": "", "email": "user1@clairview.com"},
                         "activity": "created",
                         "scope": "Insight",
                         "item_id": str(insight_id),
@@ -222,7 +222,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
 
         user_with_permissions = User.objects.create_and_join(
             organization=self.organization,
-            email="with_access_user@markettor.com",
+            email="with_access_user@clairview.com",
             password=None,
         )
 
@@ -402,7 +402,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
         # user with no permissions on the dashboard cannot add insight to it
         user_without_permissions = User.objects.create_and_join(
             organization=self.organization,
-            email="no_access_user@markettor.com",
+            email="no_access_user@clairview.com",
             password=None,
         )
         self.client.force_login(user_without_permissions)
@@ -433,7 +433,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
         # an admin user has implicit permissions on the dashboard and can add the insight to it
         admin = User.objects.create_and_join(
             organization=self.organization,
-            email="team2@markettor.com",
+            email="team2@clairview.com",
             password=None,
             level=OrganizationMembership.Level.ADMIN,
         )
@@ -551,7 +551,7 @@ class TestInsightEnterpriseAPI(APILicensedTest):
             queries = []
 
             for i in range(5):
-                user = User.objects.create(email=f"testuser{i}@markettor.com")
+                user = User.objects.create(email=f"testuser{i}@clairview.com")
                 OrganizationMembership.objects.create(user=user, organization=self.organization)
                 dashboard = Dashboard.objects.create(name=f"Dashboard {i}", team=self.team)
 

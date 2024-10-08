@@ -1,4 +1,4 @@
-import { LemonCalendarSelectInput } from '@markettor/lemon-ui'
+import { LemonCalendarSelectInput } from '@clairview/lemon-ui'
 import { PropertyValueProps } from 'lib/components/PropertyFilters/components/PropertyValue'
 import { dayjs } from 'lib/dayjs'
 import { isOperatorDate } from 'lib/utils'

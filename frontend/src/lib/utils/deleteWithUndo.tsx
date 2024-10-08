@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import api from 'lib/api'
 
 import { QueryBasedInsightModel } from '~/types'

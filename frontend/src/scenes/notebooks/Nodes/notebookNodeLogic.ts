@@ -24,7 +24,7 @@ import {
     NotebookNodeSettings,
 } from '../Notebook/utils'
 import { NotebookNodeResource, NotebookNodeType } from '~/types'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { NotebookNodeMessages, NotebookNodeMessagesListeners } from './messaging/notebook-node-messages'
 
 export type NotebookNodeLogicProps = {
@@ -261,7 +261,7 @@ export const notebookNodeLogic = kea<notebookNodeLogicType>([
 
         setExpanded: ({ expanded }) => {
             if (expanded) {
-                markettor.capture('notebook node expanded', {
+                clairview.capture('notebook node expanded', {
                     node_type: props.nodeType,
                     short_id: props.notebookLogic.props.shortId,
                 })

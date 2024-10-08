@@ -1,4 +1,4 @@
-import { urls } from '@markettor/apps-common'
+import { urls } from '@clairview/apps-common'
 import Fuse from 'fuse.js'
 import { connect, kea, path, selectors } from 'kea'
 import { subscriptions } from 'kea-subscriptions'

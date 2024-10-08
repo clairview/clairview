@@ -13,9 +13,9 @@ from ee.session_recordings.ai.embeddings_runner import (
     SessionEventsEmbeddingsPreparation,
 )
 from ee.session_recordings.ai.error_clustering import error_clustering
-from markettor import settings
-from markettor.models import Team
-from markettor.tasks.utils import CeleryQueue
+from clairview import settings
+from clairview.models import Team
+from clairview.tasks.utils import CeleryQueue
 from django.core.cache import cache
 
 logger = structlog.get_logger(__name__)

@@ -4,21 +4,21 @@ from django.test.client import Client
 from freezegun.api import freeze_time
 
 from ee.clickhouse.queries.stickiness import ClickhouseStickiness
-from markettor.api.test.test_stickiness import (
+from clairview.api.test.test_stickiness import (
     get_stickiness_time_series_ok,
     stickiness_test_factory,
 )
-from markettor.models.action import Action
-from markettor.models.filters.stickiness_filter import StickinessFilter
-from markettor.models.group.util import create_group
-from markettor.queries.util import get_earliest_timestamp
-from markettor.test.base import (
+from clairview.models.action import Action
+from clairview.models.filters.stickiness_filter import StickinessFilter
+from clairview.models.group.util import create_group
+from clairview.queries.util import get_earliest_timestamp
+from clairview.test.base import (
     ClickhouseTestMixin,
     _create_event,
     _create_person,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 def _create_action(**kwargs):

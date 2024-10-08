@@ -25,7 +25,7 @@ func newStatsKeeper() *Stats {
 	}
 }
 
-func (ts *Stats) keepStats(statsChan chan MarketTorEvent) {
+func (ts *Stats) keepStats(statsChan chan ClairViewEvent) {
 	log.Println("starting stats keeper...")
 
 	for event := range statsChan {

@@ -1,6 +1,6 @@
 import './ToolbarLaunch.scss'
 
-import { IconFlag, IconSearch } from '@markettor/icons'
+import { IconFlag, IconSearch } from '@clairview/icons'
 import { AuthorizedUrlList } from 'lib/components/AuthorizedUrlList/AuthorizedUrlList'
 import { AuthorizedUrlListType } from 'lib/components/AuthorizedUrlList/authorizedUrlListLogic'
 import { PageHeader } from 'lib/components/PageHeader'
@@ -40,7 +40,7 @@ function ToolbarLaunch(): JSX.Element {
 
     return (
         <div className="toolbar-launch-page">
-            <PageHeader caption="The toolbar launches MarketTor right in your app or website." />
+            <PageHeader caption="The toolbar launches ClairView right in your app or website." />
             <LemonDivider />
 
             <h2 className="subtitle" id="urls">
@@ -48,13 +48,13 @@ function ToolbarLaunch(): JSX.Element {
             </h2>
             <p>
                 Click on the URL to launch the toolbar.{' '}
-                {window.location.host.includes('.markettor.com') && 'Remember to disable your adblocker.'}
+                {window.location.host.includes('.clairview.com') && 'Remember to disable your adblocker.'}
             </p>
             <AuthorizedUrlList type={AuthorizedUrlListType.TOOLBAR_URLS} addText="Add authorized URL" />
 
             <div className="footer-caption text-muted mt-4 text-center">
                 Make sure you're using the <Link to={`${urls.settings('project')}#snippet`}>HTML snippet</Link> or the
-                latest <code>markettor-js</code> version.
+                latest <code>clairview-js</code> version.
             </div>
 
             <div className="feature-highlight-list mt-8 mx-auto mb-0 flex flex-wrap items-center justify-center">

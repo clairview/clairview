@@ -31,8 +31,8 @@ export type AccessoryInfo = {
     group: (typeof accessoryGroups)[number]
 }
 
-// If loaded via the toolbar the root domain won't be app.markettor.com and so the assets won't load
-// Simple workaround is we detect if the domain is localhost and if not we just use https://us.markettor.com
+// If loaded via the toolbar the root domain won't be app.clairview.com and so the assets won't load
+// Simple workaround is we detect if the domain is localhost and if not we just use https://us.clairview.com
 const baseSpritePath = (): string => {
     let path = `/static/hedgehog/sprites`
     const toolbarAPIUrl = toolbarConfigLogic.findMounted()?.values.apiURL
@@ -40,7 +40,7 @@ const baseSpritePath = (): string => {
     if (inStorybook()) {
         // Nothing to do
     } else if (window.location.hostname !== 'localhost') {
-        path = `https://us.markettor.com${path}`
+        path = `https://us.clairview.com${path}`
     } else if (toolbarAPIUrl) {
         path = `${toolbarAPIUrl}${path}`
     }

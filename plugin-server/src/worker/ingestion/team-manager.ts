@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import LRU from 'lru-cache'
 
 import { ONE_MINUTE } from '../../config/constants'
@@ -6,7 +6,7 @@ import { TeamIDWithConfig } from '../../main/ingestion-queues/session-recording/
 import { PipelineEvent, PluginsServerConfig, Team, TeamId } from '../../types'
 import { PostgresRouter, PostgresUse } from '../../utils/db/postgres'
 import { timeoutGuard } from '../../utils/db/utils'
-import { markettor } from '../../utils/markettor'
+import { clairview } from '../../utils/clairview'
 
 export class TeamManager {
     postgres: PostgresRouter
@@ -108,7 +108,7 @@ export class TeamManager {
         if (team && !team.ingested_event) {
             await this.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `UPDATE markettor_team SET ingested_event = $1 WHERE id = $2`,
+                `UPDATE clairview_team SET ingested_event = $1 WHERE id = $2`,
                 [true, team.id],
                 'setTeamIngestedEvent'
             )
@@ -122,13 +122,13 @@ export class TeamManager {
             // First event for the team captured - we fire this because comms and others rely on this event for onboarding flows in downstream systems (e.g. customer.io)
             const organizationMembers = await this.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                'SELECT distinct_id FROM markettor_user JOIN markettor_organizationmembership ON markettor_user.id = markettor_organizationmembership.user_id WHERE organization_id = $1',
+                'SELECT distinct_id FROM clairview_user JOIN clairview_organizationmembership ON clairview_user.id = clairview_organizationmembership.user_id WHERE organization_id = $1',
                 [team.organization_id],
-                'markettor_organizationmembership'
+                'clairview_organizationmembership'
             )
             const distinctIds: { distinct_id: string }[] = organizationMembers.rows
             for (const { distinct_id } of distinctIds) {
-                markettor.capture({
+                clairview.capture({
                     distinctId: distinct_id,
                     event: 'first team event ingested',
                     properties: {
@@ -165,7 +165,7 @@ export async function fetchTeam(client: PostgresRouter, teamId: Team['id']): Pro
                 ingested_event,
                 person_display_name_properties,
                 test_account_filters
-            FROM markettor_team
+            FROM clairview_team
             WHERE id = $1
             `,
         [teamId],
@@ -190,7 +190,7 @@ export async function fetchTeamByToken(client: PostgresRouter, token: string): P
                 heatmaps_opt_in,
                 ingested_event,
                 test_account_filters
-            FROM markettor_team
+            FROM clairview_team
             WHERE api_token = $1
             LIMIT 1
                 `,
@@ -205,7 +205,7 @@ export async function fetchTeamTokensWithRecordings(client: PostgresRouter): Pro
         PostgresUse.COMMON_READ,
         `
             SELECT id, api_token, capture_console_log_opt_in
-            FROM markettor_team
+            FROM clairview_team
             WHERE session_recording_opt_in = true
         `,
         [],

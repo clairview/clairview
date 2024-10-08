@@ -222,7 +222,7 @@ export const urls = {
     notebooks: (): string => '/notebooks',
     notebook: (shortId: string): string => `/notebooks/${shortId}`,
     canvas: (): string => `/canvas`,
-    moveToMarketTorCloud: (): string => '/move-to-cloud',
+    moveToClairViewCloud: (): string => '/move-to-cloud',
     heatmaps: (params?: string): string =>
         `/heatmaps${params ? `?${params.startsWith('?') ? params.slice(1) : params}` : ''}`,
     alert: (alertId: string): string => `/insights?tab=alerts&alert_id=${alertId}`,

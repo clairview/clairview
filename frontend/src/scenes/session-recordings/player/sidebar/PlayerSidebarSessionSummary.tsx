@@ -1,4 +1,4 @@
-import { IconMagicWand, IconThumbsDown, IconThumbsUp } from '@markettor/icons'
+import { IconMagicWand, IconThumbsDown, IconThumbsUp } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { FlaggedFeature } from 'lib/components/FlaggedFeature'
 import { FEATURE_FLAGS } from 'lib/constants'

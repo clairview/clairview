@@ -10,10 +10,10 @@ from prometheus_client import Histogram, Counter
 from structlog import get_logger
 from openai import OpenAI
 
-from markettor.models import Team
-from markettor.clickhouse.client import sync_execute
+from clairview.models import Team
+from clairview.clickhouse.client import sync_execute
 
-from markettor.session_recordings.queries.session_replay_events import SessionReplayEvents
+from clairview.session_recordings.queries.session_replay_events import SessionReplayEvents
 from ee.session_recordings.ai.utils import (
     SessionSummaryPromptData,
     simplify_window_id,
@@ -38,51 +38,51 @@ def get_encoding() -> tiktoken.Encoding:
 MAX_TOKENS_FOR_MODEL = 8191
 
 RECORDING_EMBEDDING_TOKEN_COUNT = Histogram(
-    "markettor_session_recordings_recording_embedding_token_count",
+    "clairview_session_recordings_recording_embedding_token_count",
     "Token count for individual recordings generated during embedding",
     buckets=[0, 100, 500, 1000, 2000, 3000, 4000, 5000, 6000, 8000, 10000],
     labelnames=["source_type"],
 )
 
 GENERATE_RECORDING_EMBEDDING_TIMING = Histogram(
-    "markettor_session_recordings_generate_recording_embedding",
+    "clairview_session_recordings_generate_recording_embedding",
     "Time spent generating recording embeddings for a single session",
     buckets=[0.1, 0.2, 0.3, 0.4, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20],
     labelnames=["source_type"],
 )
 
 SESSION_EMBEDDINGS_GENERATED = Counter(
-    "markettor_session_recordings_embeddings_generated",
+    "clairview_session_recordings_embeddings_generated",
     "Number of session embeddings generated",
     labelnames=["source_type"],
 )
 
 SESSION_EMBEDDINGS_FAILED = Counter(
-    "markettor_session_recordings_embeddings_failed",
+    "clairview_session_recordings_embeddings_failed",
     "Instance of an embedding request to open AI (and its surrounding work) failing and being swallowed",
     labelnames=["source_type"],
 )
 
 SESSION_EMBEDDINGS_FATAL_FAILED = Counter(
-    "markettor_session_recordings_embeddings_fatal_failed",
+    "clairview_session_recordings_embeddings_fatal_failed",
     "Instance of the embeddings task failing and raising an exception",
     labelnames=["source_type"],
 )
 
 SESSION_EMBEDDINGS_WRITTEN_TO_CLICKHOUSE = Counter(
-    "markettor_session_recordings_embeddings_written_to_clickhouse",
+    "clairview_session_recordings_embeddings_written_to_clickhouse",
     "Number of session embeddings written to Clickhouse",
     labelnames=["source_type"],
 )
 
 SESSION_SKIPPED_WHEN_GENERATING_EMBEDDINGS = Counter(
-    "markettor_session_recordings_skipped_when_generating_embeddings",
+    "clairview_session_recordings_skipped_when_generating_embeddings",
     "Number of sessions skipped when generating embeddings",
     labelnames=["source_type", "reason"],
 )
 
 SESSION_EMBEDDINGS_FAILED_TO_CLICKHOUSE = Counter(
-    "markettor_session_recordings_embeddings_failed_to_clickhouse",
+    "clairview_session_recordings_embeddings_failed_to_clickhouse",
     "Number of session embeddings failed to Clickhouse",
     labelnames=["source_type"],
 )

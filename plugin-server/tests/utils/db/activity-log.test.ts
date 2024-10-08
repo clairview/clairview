@@ -35,7 +35,7 @@ describe('createPluginActivityLog()', () => {
     async function fetchPluginActivityLogs(hub: Hub): Promise<Array<ActivityLog>> {
         const result = await hub.db.postgres.query<ActivityLog>(
             PostgresUse.COMMON_READ,
-            `SELECT * FROM markettor_activitylog`,
+            `SELECT * FROM clairview_activitylog`,
             [],
             'fetchPluginActivityLogs'
         )

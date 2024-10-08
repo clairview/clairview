@@ -13,7 +13,7 @@ describe('migrate()', () => {
                 {
                     type: 'ph-query',
                     attrs: {
-                        query: '{"kind":"InsightVizNode","source":{"kind":"TrendsQuery","properties":{"type":"AND","values":[{"type":"AND","values":[]}]},"filterTestAccounts":true,"dateRange":{"date_to":null,"date_from":"-90d"},"series":[{"kind":"EventsNode","event":"$pageview","name":"$pageview","properties":[{"key":"$referring_domain","type":"event","value":"google|duckduckgo|brave|bing","operator":"regex"},{"key":"utm_source","type":"event","value":"is_not_set","operator":"is_not_set"},{"key":"$host","type":"event","value":["markettor.com"],"operator":"exact"}],"math":"dau"}],"interval":"week","breakdown":{"breakdown_type":"event","breakdown":"$referring_domain"},"trendsFilter":{"compare":true,"display":"ActionsBar"}}}',
+                        query: '{"kind":"InsightVizNode","source":{"kind":"TrendsQuery","properties":{"type":"AND","values":[{"type":"AND","values":[]}]},"filterTestAccounts":true,"dateRange":{"date_to":null,"date_from":"-90d"},"series":[{"kind":"EventsNode","event":"$pageview","name":"$pageview","properties":[{"key":"$referring_domain","type":"event","value":"google|duckduckgo|brave|bing","operator":"regex"},{"key":"utm_source","type":"event","value":"is_not_set","operator":"is_not_set"},{"key":"$host","type":"event","value":["clairview.com"],"operator":"exact"}],"math":"dau"}],"interval":"week","breakdown":{"breakdown_type":"event","breakdown":"$referring_domain"},"trendsFilter":{"compare":true,"display":"ActionsBar"}}}',
                         title: 'SEO trend last 90 days',
                         __init: null,
                         height: null,
@@ -51,7 +51,7 @@ describe('migrate()', () => {
                                                 value: 'is_not_set',
                                                 operator: 'is_not_set',
                                             },
-                                            { key: '$host', type: 'event', value: ['markettor.com'], operator: 'exact' },
+                                            { key: '$host', type: 'event', value: ['clairview.com'], operator: 'exact' },
                                         ],
                                         math: 'dau',
                                     },
@@ -293,7 +293,7 @@ describe('migrate()', () => {
                                             {
                                                 key: '$current_url',
                                                 type: 'event',
-                                                value: 'https://(app|eu).markettor.com',
+                                                value: 'https://(app|eu).clairview.com',
                                                 operator: 'regex',
                                             },
                                         ],
@@ -301,7 +301,7 @@ describe('migrate()', () => {
                                 ],
                                 interval: 'day',
                                 breakdown: {
-                                    breakdown: '$feature/markettor-3000',
+                                    breakdown: '$feature/clairview-3000',
                                     breakdown_type: 'event',
                                 },
                                 trendsFilter: {
@@ -337,7 +337,7 @@ describe('migrate()', () => {
                                             {
                                                 key: '$current_url',
                                                 type: 'event',
-                                                value: 'https://(app|eu).markettor.com',
+                                                value: 'https://(app|eu).clairview.com',
                                                 operator: 'regex',
                                             },
                                         ],
@@ -345,7 +345,7 @@ describe('migrate()', () => {
                                 ],
                                 interval: 'day',
                                 breakdownFilter: {
-                                    breakdown: '$feature/markettor-3000',
+                                    breakdown: '$feature/clairview-3000',
                                     breakdown_type: 'event',
                                 },
                                 trendsFilter: {
@@ -396,7 +396,7 @@ describe('migrate()', () => {
                                             {
                                                 key: '$host',
                                                 type: 'event',
-                                                value: ['markettor.com'],
+                                                value: ['clairview.com'],
                                                 operator: 'exact',
                                             },
                                         ],
@@ -455,7 +455,7 @@ describe('migrate()', () => {
                                             {
                                                 key: '$host',
                                                 type: 'event',
-                                                value: ['markettor.com'],
+                                                value: ['clairview.com'],
                                                 operator: 'exact',
                                             },
                                         ],
@@ -500,7 +500,7 @@ describe('migrate()', () => {
                                 pathsFilter: {
                                     edge_limit: 20,
                                     step_limit: 9,
-                                    start_point: 'https://markettor.com/blog/best-mixpanel-alternatives',
+                                    start_point: 'https://clairview.com/blog/best-mixpanel-alternatives',
                                     include_event_types: ['$pageview'],
                                 },
                                 filterTestAccounts: true,
@@ -527,7 +527,7 @@ describe('migrate()', () => {
                                 pathsFilter: {
                                     edgeLimit: 20,
                                     stepLimit: 9,
-                                    startPoint: 'https://markettor.com/blog/best-mixpanel-alternatives',
+                                    startPoint: 'https://clairview.com/blog/best-mixpanel-alternatives',
                                     includeEventTypes: ['$pageview'],
                                 },
                                 filterTestAccounts: true,
@@ -635,7 +635,7 @@ describe('migrate()', () => {
                                                 {
                                                     key: 'email',
                                                     type: 'event',
-                                                    value: 'markettor.com',
+                                                    value: 'clairview.com',
                                                     operator: 'not_icontains',
                                                 },
                                                 {
@@ -765,7 +765,7 @@ describe('migrate()', () => {
                                                 {
                                                     key: 'email',
                                                     type: 'event',
-                                                    value: 'markettor.com',
+                                                    value: 'clairview.com',
                                                     operator: 'not_icontains',
                                                 },
                                                 {

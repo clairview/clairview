@@ -1,4 +1,4 @@
-import { IconGear, IconSearch, IconToolbar, IconWarning } from '@markettor/icons'
+import { IconGear, IconSearch, IconToolbar, IconWarning } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { commandBarLogic } from 'lib/components/CommandBar/commandBarLogic'

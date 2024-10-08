@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import { useValues } from 'kea'
 import { HeatmapFilters, HeatmapFixedPositionMode } from 'lib/components/heatmaps/types'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -20,10 +20,10 @@ const ScrollDepthJSWarning = (): JSX.Element | null => {
     return (
         <p className="my-2 bg-danger-highlight border border-danger rounded p-2">
             {scrollDepthMarkettorJsError === 'version' ? (
-                <>This feature requires a newer version of markettor-js</>
+                <>This feature requires a newer version of clairview-js</>
             ) : scrollDepthMarkettorJsError === 'disabled' ? (
                 <>
-                    Your markettor-js config has <i>disable_scroll_properties</i> set - these properties are required for
+                    Your clairview-js config has <i>disable_scroll_properties</i> set - these properties are required for
                     scroll depth calculations to work.
                 </>
             ) : null}
@@ -201,7 +201,7 @@ export const HeatmapsSettings = ({
                     title="Fixed positioning calculation"
                     info={
                         <>
-                            MarketTor JS will attempt to detect fixed elements such as headers or modals and will
+                            ClairView JS will attempt to detect fixed elements such as headers or modals and will
                             therefore show those heatmap areas, ignoring the scroll value.
                             <br />
                             You can choose to show these areas as fixed, include them with scrolled data or hide them

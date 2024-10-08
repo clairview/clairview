@@ -1,4 +1,4 @@
-import { LemonInput, LemonSelect } from '@markettor/lemon-ui'
+import { LemonInput, LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
 import { MemberSelect } from 'lib/components/MemberSelect'

@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold/src/types'
+import { PluginEvent } from '@clairview/plugin-scaffold/src/types'
 
 import { Hub, LogLevel } from '../../src/types'
 import { closeHub, createHub } from '../../src/utils/db/hub'

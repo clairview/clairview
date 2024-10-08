@@ -1,6 +1,6 @@
 import '../Experiment.scss'
 
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { ExperimentImplementationDetails } from '../ExperimentImplementationDetails'

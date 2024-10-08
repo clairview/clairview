@@ -1,5 +1,5 @@
-import { IconGear, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonModal, LemonTable } from '@markettor/lemon-ui'
+import { IconGear, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonModal, LemonTable } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { TitleWithIcon } from 'lib/components/TitleWithIcon'
 import { LemonInputSelect, LemonInputSelectOption } from 'lib/lemon-ui/LemonInputSelect/LemonInputSelect'

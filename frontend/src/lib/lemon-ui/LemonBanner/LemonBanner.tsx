@@ -1,6 +1,6 @@
 import './LemonBanner.scss'
 
-import { IconInfo, IconWarning, IconX } from '@markettor/icons'
+import { IconInfo, IconWarning, IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { LemonButton, SideAction } from 'lib/lemon-ui/LemonButton'

@@ -8,13 +8,13 @@ from rest_framework import status
 
 from ee.models.event_definition import EnterpriseEventDefinition
 from ee.models.license import License, LicenseManager
-from markettor.api.test.test_event_definition import capture_event, EventData
-from markettor.api.test.test_team import create_team
-from markettor.api.test.test_user import create_user
-from markettor.models import Tag, ActivityLog, Team, User
-from markettor.models.event_definition import EventDefinition
-from markettor.test.base import APIBaseTest
-from markettor.api.test.test_organization import create_organization
+from clairview.api.test.test_event_definition import capture_event, EventData
+from clairview.api.test.test_team import create_team
+from clairview.api.test.test_user import create_user
+from clairview.models import Tag, ActivityLog, Team, User
+from clairview.models.event_definition import EventDefinition
+from clairview.test.base import APIBaseTest
+from clairview.api.test.test_organization import create_organization
 
 
 @freeze_time("2020-01-02")

@@ -9,13 +9,13 @@ import {
     IconSupport,
     IconTrending,
     IconUpload,
-} from '@markettor/icons'
-import { LemonButton, Link } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { ExperimentsHog } from 'lib/components/hedgehogs'
 import { SceneExport } from 'scenes/sceneTypes'
 
 export const scene: SceneExport = {
-    component: MoveToMarketTorCloud,
+    component: MoveToClairViewCloud,
 }
 
 type CloudFeature = {
@@ -41,23 +41,23 @@ const CLOUD_FEATURES: CloudFeature[] = [
         description:
             "We've done this before. It's just a few clicks to get your data moving from self-hosted to Cloud.",
         icon: <IconUpload />,
-        link: 'https://markettor.com/docs/migrate/migrate-to-cloud',
+        link: 'https://clairview.com/docs/migrate/migrate-to-cloud',
     },
     {
         name: 'Auto-scaling',
         description:
-            'As your product grows, so does your data. MarketTor Cloud scales for you, so you never have to worry about spikes or downtime.',
+            'As your product grows, so does your data. ClairView Cloud scales for you, so you never have to worry about spikes or downtime.',
         icon: <IconTrending />,
     },
     {
         name: 'Highly available',
-        description: 'MarketTor Cloud is highly available, so you can rest easy knowing your data is always accessible.',
+        description: 'ClairView Cloud is highly available, so you can rest easy knowing your data is always accessible.',
         icon: <IconBolt />,
     },
     {
         name: 'Automatic upgrades',
         description:
-            'MarketTor Cloud is always up to date with the latest features and security updates - no upgrades required.',
+            'ClairView Cloud is always up to date with the latest features and security updates - no upgrades required.',
         icon: <IconUpload />,
     },
     {
@@ -68,22 +68,22 @@ const CLOUD_FEATURES: CloudFeature[] = [
     {
         name: 'Access to all features',
         description:
-            'Group analytics, data pipelines, experiments, and other premium features are only available on MarketTor Cloud.',
+            'Group analytics, data pipelines, experiments, and other premium features are only available on ClairView Cloud.',
         icon: <IconFeatures />,
-        link: 'https://markettor.com/pricing',
+        link: 'https://clairview.com/pricing',
     },
     {
         name: 'World-class support',
         description:
-            'MarketTor Cloud customers get access to our world-class support team, not just the community forum.',
+            'ClairView Cloud customers get access to our world-class support team, not just the community forum.',
         icon: <IconSupport />,
-        link: 'https://markettor.com/handbook/growth/customer-support',
+        link: 'https://clairview.com/handbook/growth/customer-support',
     },
     {
         name: 'SOC 2 compliant',
         description: "We're SOC-2 compliant, so you can rest easy knowing your data is secure.",
         icon: <IconPrivacy />,
-        link: 'https://markettor.com/handbook/company/security',
+        link: 'https://clairview.com/handbook/company/security',
     },
     {
         name: 'HIPAA compliant',
@@ -92,27 +92,27 @@ const CLOUD_FEATURES: CloudFeature[] = [
     },
 ]
 
-export function MoveToMarketTorCloud(): JSX.Element {
+export function MoveToClairViewCloud(): JSX.Element {
     return (
         <div className="-m-4">
             <header className="bg-primary-alt-highlight border-b border-t border-border flex justify-center p-8">
                 <div className="grid md:grid-cols-2 items-center gap-8 w-full max-w-screen-xl">
                     <div className="">
-                        <h2 className="text-2xl font-bold">MarketTor Cloud</h2>
+                        <h2 className="text-2xl font-bold">ClairView Cloud</h2>
                         <h3 className="text-4xl font-bold tracking-tight">
                             We handle the infra. You focus on your product.
                         </h3>
                         <p>
-                            Hosting MarketTor is no easy feat. It takes a lot of domain knowledge to get it right -
+                            Hosting ClairView is no easy feat. It takes a lot of domain knowledge to get it right -
                             especially at scale. Let us handle the hosting, so you can focus on building your product.
                         </p>
                         <div className="flex">
                             <LemonButton
-                                to="https://us.markettor.com/signup?utm_medium=in-product&utm_campaign=move-to-cloud"
+                                to="https://us.clairview.com/signup?utm_medium=in-product&utm_campaign=move-to-cloud"
                                 type="primary"
                                 status="alt"
                             >
-                                Move to MarketTor Cloud
+                                Move to ClairView Cloud
                             </LemonButton>
                         </div>
                     </div>

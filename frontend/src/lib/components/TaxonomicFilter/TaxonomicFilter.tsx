@@ -1,6 +1,6 @@
 import './TaxonomicFilter.scss'
 
-import { IconKeyboard } from '@markettor/icons'
+import { IconKeyboard } from '@clairview/icons'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import {

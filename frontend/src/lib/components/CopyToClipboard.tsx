@@ -1,4 +1,4 @@
-import { IconCopy } from '@markettor/icons'
+import { IconCopy } from '@clairview/icons'
 import clsx from 'clsx'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'

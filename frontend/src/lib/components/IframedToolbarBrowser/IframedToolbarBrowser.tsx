@@ -1,4 +1,4 @@
-import { LemonBanner, Spinner } from '@markettor/lemon-ui'
+import { LemonBanner, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useEffect } from 'react'
 import useResizeObserver from 'use-resize-observer'

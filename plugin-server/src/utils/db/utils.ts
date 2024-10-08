@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import * as Sentry from '@sentry/node'
 import { ProducerRecord } from 'kafkajs'
 import { Counter } from 'prom-client'
@@ -52,7 +52,7 @@ export function timeoutGuard(
 }
 // When changing this set, make sure you also make the same changes in:
 // - taxonomy.tsx (CAMPAIGN_PROPERTIES)
-// - markettor-js event-utils.ts (CAMPAIGN_PARAMS)
+// - clairview-js event-utils.ts (CAMPAIGN_PARAMS)
 export const campaignParams = new Set([
     'utm_source',
     'utm_medium',
@@ -130,7 +130,7 @@ export function personInitialAndUTMProperties(properties: Properties): Propertie
 
     if (propertiesCopy.$os_name) {
         // For the purposes of $initial properties, $os_name is treated as a fallback alias of $os, starting August 2024
-        // It's as special case due to _some_ SDKs using $os_name: https://github.com/MarketTor/markettor-js-lite/issues/244
+        // It's as special case due to _some_ SDKs using $os_name: https://github.com/ClairView/clairview-js-lite/issues/244
         propertiesCopy.$os ??= propertiesCopy.$os_name
         propertiesCopy.$set.$os ??= propertiesCopy.$os_name
         propertiesCopy.$set_once.$initial_os ??= propertiesCopy.$os_name
@@ -145,7 +145,7 @@ export function personInitialAndUTMProperties(properties: Properties): Propertie
 export function hasDifferenceWithProposedNewNormalisationMode(properties: Properties): boolean {
     // this functions checks if there would be a difference in the properties if we strip the initial campaign params
     // when any $set_once initial eventToPersonProperties are present. This will often return true for events from
-    // markettor-js, but it is unknown if this will be the case for other SDKs.
+    // clairview-js, but it is unknown if this will be the case for other SDKs.
     if (
         !properties.$set_once ||
         !Object.keys(properties.$set_once).some((key) => initialEventToPersonProperties.has(key))
@@ -188,7 +188,7 @@ export function generateKafkaPersonUpdateMessage(person: InternalPerson, isDelet
                     team_id: person.team_id,
                     is_identified: Number(person.is_identified),
                     is_deleted: Number(isDeleted),
-                    version: person.version + (isDeleted ? 100 : 0), // keep in sync with delete_person in markettor/models/person/util.py
+                    version: person.version + (isDeleted ? 100 : 0), // keep in sync with delete_person in clairview/models/person/util.py
                 } as Omit<ClickHousePerson, 'timestamp'>),
             },
         ],
@@ -215,7 +215,7 @@ export function shouldStoreLog(pluginLogLevel: PluginLogLevel, type: PluginLogEn
     }
 }
 
-// keep in sync with markettor/markettor/api/utils.py::safe_clickhouse_string
+// keep in sync with clairview/clairview/api/utils.py::safe_clickhouse_string
 export function safeClickhouseString(str: string): string {
     // character is a surrogate
     return str.replace(/[\ud800-\udfff]/gu, (match) => {

@@ -1,6 +1,6 @@
 import './FilterRow.scss'
 
-import { IconPlus, IconTrash, IconX } from '@markettor/icons'
+import { IconPlus, IconTrash, IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { isValidPropertyFilter } from 'lib/components/PropertyFilters/utils'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

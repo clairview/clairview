@@ -1,4 +1,4 @@
-import { LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { teamLogic } from 'scenes/teamLogic'
@@ -22,7 +22,7 @@ export function HeatmapsSettings(): JSX.Element {
             </p>
             <div className="space-y-2">
                 <LemonSwitch
-                    id="markettor-heatmaps-switch"
+                    id="clairview-heatmaps-switch"
                     onChange={(checked) => {
                         updateCurrentTeam({
                             heatmaps_opt_in: checked,

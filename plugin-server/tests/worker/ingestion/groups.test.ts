@@ -24,7 +24,7 @@ describe('addGroupProperties()', () => {
         const properties = {
             foo: 'bar',
             $groups: {
-                organization: 'MarketTor',
+                organization: 'ClairView',
                 project: 'web',
                 foobar: 'afsafa',
             },
@@ -33,11 +33,11 @@ describe('addGroupProperties()', () => {
         expect(await addGroupProperties(2, properties, mockGroupTypeManager)).toEqual({
             foo: 'bar',
             $groups: {
-                organization: 'MarketTor',
+                organization: 'ClairView',
                 project: 'web',
                 foobar: 'afsafa',
             },
-            $group_0: 'MarketTor',
+            $group_0: 'ClairView',
             $group_1: 'web',
         })
 

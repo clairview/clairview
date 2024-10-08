@@ -3,7 +3,7 @@ import { actions, connect, kea, listeners, path, reducers, selectors } from 'kea
 import { loaders } from 'kea-loaders'
 import { encodeParams } from 'kea-router'
 import { permanentlyMount } from 'lib/utils/kea-logic-builders'
-import type { MarketTor } from 'markettor-js'
+import type { ClairView } from 'clairview-js'
 
 import { toolbarConfigLogic, toolbarFetch } from '~/toolbar/toolbarConfigLogic'
 import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
@@ -14,11 +14,11 @@ import type { flagsToolbarLogicType } from './flagsToolbarLogicType'
 export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
     path(['toolbar', 'flags', 'flagsToolbarLogic']),
     connect(() => ({
-        values: [toolbarConfigLogic, ['markettor']],
+        values: [toolbarConfigLogic, ['clairview']],
     })),
     actions({
         getUserFlags: true,
-        setFeatureFlagValueFromMarketTorClient: (flags: string[], variants: Record<string, string | boolean>) => ({
+        setFeatureFlagValueFromClairViewClient: (flags: string[], variants: Record<string, string | boolean>) => ({
             flags,
             variants,
         }),
@@ -34,7 +34,7 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
             {
                 getUserFlags: async (_, breakpoint) => {
                     const params = {
-                        groups: getGroups(values.markettor),
+                        groups: getGroups(values.clairview),
                     }
                     const response = await toolbarFetch(
                         `/api/projects/@current/feature_flags/my_flags${encodeParams(params, '?')}`
@@ -62,10 +62,10 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
                 setSearchTerm: (_, { searchTerm }) => searchTerm,
             },
         ],
-        markettorClientFlagValues: [
+        clairviewClientFlagValues: [
             {} as Record<string, string | boolean>,
             {
-                setFeatureFlagValueFromMarketTorClient: (_, { variants }) => {
+                setFeatureFlagValueFromClairViewClient: (_, { variants }) => {
                     return variants
                 },
             },
@@ -73,15 +73,15 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
     }),
     selectors({
         userFlagsWithOverrideInfo: [
-            (s) => [s.userFlags, s.localOverrides, s.markettorClientFlagValues],
-            (userFlags, localOverrides, markettorClientFlagValues) => {
+            (s) => [s.userFlags, s.localOverrides, s.clairviewClientFlagValues],
+            (userFlags, localOverrides, clairviewClientFlagValues) => {
                 return userFlags.map((flag) => {
                     const hasVariants = (flag.feature_flag.filters?.multivariate?.variants?.length || 0) > 0
 
                     const currentValue =
                         flag.feature_flag.key in localOverrides
                             ? localOverrides[flag.feature_flag.key]
-                            : markettorClientFlagValues[flag.feature_flag.key] ?? flag.value
+                            : clairviewClientFlagValues[flag.feature_flag.key] ?? flag.value
 
                     return {
                         ...flag,
@@ -109,43 +109,43 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
     }),
     listeners(({ actions, values }) => ({
         checkLocalOverrides: () => {
-            const clientMarketTor = values.markettor
-            if (clientMarketTor) {
-                const locallyOverrideFeatureFlags = clientMarketTor.get_property('$override_feature_flags') || {}
+            const clientClairView = values.clairview
+            if (clientClairView) {
+                const locallyOverrideFeatureFlags = clientClairView.get_property('$override_feature_flags') || {}
                 actions.storeLocalOverrides(locallyOverrideFeatureFlags)
             }
         },
         setOverriddenUserFlag: ({ flagKey, overrideValue }) => {
-            const clientMarketTor = values.markettor
-            if (clientMarketTor) {
-                clientMarketTor.featureFlags.override({ ...values.localOverrides, [flagKey]: overrideValue })
+            const clientClairView = values.clairview
+            if (clientClairView) {
+                clientClairView.featureFlags.override({ ...values.localOverrides, [flagKey]: overrideValue })
                 toolbarMarkettorJS.capture('toolbar feature flag overridden')
                 actions.checkLocalOverrides()
-                clientMarketTor.featureFlags.reloadFeatureFlags()
+                clientClairView.featureFlags.reloadFeatureFlags()
             }
         },
         deleteOverriddenUserFlag: ({ flagKey }) => {
-            const clientMarketTor = values.markettor
-            if (clientMarketTor) {
+            const clientClairView = values.clairview
+            if (clientClairView) {
                 const updatedFlags = { ...values.localOverrides }
                 delete updatedFlags[flagKey]
                 if (Object.keys(updatedFlags).length > 0) {
-                    clientMarketTor.featureFlags.override({ ...updatedFlags })
+                    clientClairView.featureFlags.override({ ...updatedFlags })
                 } else {
-                    clientMarketTor.featureFlags.override(false)
+                    clientClairView.featureFlags.override(false)
                 }
                 toolbarMarkettorJS.capture('toolbar feature flag override removed')
                 actions.checkLocalOverrides()
-                clientMarketTor.featureFlags.reloadFeatureFlags()
+                clientClairView.featureFlags.reloadFeatureFlags()
             }
         },
     })),
     permanentlyMount(),
 ])
 
-function getGroups(markettorInstance: MarketTor | null): Record<string, any> {
+function getGroups(clairviewInstance: ClairView | null): Record<string, any> {
     try {
-        return markettorInstance?.getGroups() || {}
+        return clairviewInstance?.getGroups() || {}
     } catch {
         return {}
     }

@@ -1,4 +1,4 @@
-import { LemonButton, Tooltip } from '@markettor/lemon-ui'
+import { LemonButton, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'

@@ -47,7 +47,7 @@ export function getEventsQueriesForTeam(team: Partial<TeamType>): Record<string,
     const projectDefault = getDefaultEventsQueryForTeam(team)
     return {
         ...(projectDefault ? { 'Project default view': projectDefault } : {}),
-        'MarketTor default view': getDefaultEventsSceneQuery().source as EventsQuery,
+        'ClairView default view': getDefaultEventsSceneQuery().source as EventsQuery,
         'Event counts view': {
             kind: NodeKind.EventsQuery,
             select: ['event', 'count()'],

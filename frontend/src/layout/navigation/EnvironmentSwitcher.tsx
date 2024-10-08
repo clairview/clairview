@@ -1,5 +1,5 @@
-import { IconGear, IconPlus } from '@markettor/icons'
-import { LemonTag, Spinner } from '@markettor/lemon-ui'
+import { IconGear, IconPlus } from '@clairview/icons'
+import { LemonTag, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'

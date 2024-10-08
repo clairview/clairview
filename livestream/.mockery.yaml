@@ -6,7 +6,7 @@ outpkg: '{{.PackageName}}'
 filename: '{{.InterfaceName}}.go'
 all: True
 packages:
-    github.com/MarketTor/markettor/livestream:
+    github.com/ClairView/clairview/livestream:
         config:
             recursive: True
             outpkg: mocks

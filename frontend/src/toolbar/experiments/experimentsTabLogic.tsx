@@ -166,7 +166,7 @@ export const experimentsTabLogic = kea<experimentsTabLogicType>([
 
                     lemonToast.success('Experiment saved', {
                         button: {
-                            label: 'Open in MarketTor',
+                            label: 'Open in ClairView',
                             action: () => window.open(`${apiURL}${urls.experiment(response.id)}`, '_blank'),
                         },
                     })

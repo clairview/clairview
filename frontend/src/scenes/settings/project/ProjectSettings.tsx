@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useState } from 'react'
 import { projectLogic } from 'scenes/projectLogic'

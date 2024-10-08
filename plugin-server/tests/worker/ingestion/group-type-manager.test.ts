@@ -1,11 +1,11 @@
 import { Hub } from '../../../src/types'
 import { closeHub, createHub } from '../../../src/utils/db/hub'
-import { captureTeamEvent } from '../../../src/utils/markettor'
+import { captureTeamEvent } from '../../../src/utils/clairview'
 import { GroupTypeManager } from '../../../src/worker/ingestion/group-type-manager'
 import { resetTestDatabase } from '../../helpers/sql'
 
 jest.mock('../../../src/utils/status')
-jest.mock('../../../src/utils/markettor', () => ({
+jest.mock('../../../src/utils/clairview', () => ({
     captureTeamEvent: jest.fn(),
 }))
 

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/MarketTor/markettor/livestream/mocks"
+	"github.com/ClairView/clairview/livestream/mocks"
 	"github.com/stretchr/testify/assert"
 )
 

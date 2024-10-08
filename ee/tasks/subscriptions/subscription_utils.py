@@ -5,17 +5,17 @@ import structlog
 from celery import chain
 from prometheus_client import Histogram
 
-from markettor.models.dashboard_tile import get_tiles_ordered_by_position
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.models.sharing_configuration import SharingConfiguration
-from markettor.models.subscription import Subscription
-from markettor.tasks import exporter
-from markettor.utils import wait_for_parallel_celery_group
+from clairview.models.dashboard_tile import get_tiles_ordered_by_position
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.models.sharing_configuration import SharingConfiguration
+from clairview.models.subscription import Subscription
+from clairview.tasks import exporter
+from clairview.utils import wait_for_parallel_celery_group
 
 logger = structlog.get_logger(__name__)
 
-UTM_TAGS_BASE = "utm_source=markettor&utm_campaign=subscription_report"
+UTM_TAGS_BASE = "utm_source=clairview&utm_campaign=subscription_report"
 DEFAULT_MAX_ASSET_COUNT = 6
 
 SUBSCRIPTION_ASSET_GENERATION_TIMER = Histogram(

@@ -4,7 +4,7 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 
 function LaravelConfigSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Bash}>composer require markettor/markettor-php</CodeSnippet>
+    return <CodeSnippet language={Language.Bash}>composer require clairview/clairview-php</CodeSnippet>
 }
 
 function LaravelInstallSnippet(): JSX.Element {
@@ -17,13 +17,13 @@ function LaravelInstallSnippet(): JSX.Element {
 namespace App\\Providers;
 
 use Illuminate\\Support\\ServiceProvider;
-use MarketTor\\MarketTor;
+use ClairView\\ClairView;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        MarketTor::init(
+        ClairView::init(
             '${currentTeam?.api_token}',
             [
                 'host' => '${apiHostOrigin()}'
@@ -43,7 +43,7 @@ export function SDKInstallLaravelInstructions(): JSX.Element {
             <LaravelConfigSnippet />
             <h3>Configure</h3>
             <p>
-                Initialize MarketTor in the <code>boot</code> method of <code>app/Providers/AppServiceProvider.php</code>
+                Initialize ClairView in the <code>boot</code> method of <code>app/Providers/AppServiceProvider.php</code>
             </p>
             <LaravelInstallSnippet />
         </>

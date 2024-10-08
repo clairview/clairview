@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { AnimatedCollapsible } from 'lib/components/AnimatedCollapsible'

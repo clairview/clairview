@@ -1,6 +1,6 @@
 import './PersonsModal.scss'
 
-import { IconCollapse, IconExpand } from '@markettor/icons'
+import { IconCollapse, IconExpand } from '@clairview/icons'
 import {
     LemonBadge,
     LemonBanner,
@@ -12,7 +12,7 @@ import {
     LemonSelect,
     LemonSkeleton,
     Link,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { CopyToClipboardInline } from 'lib/components/CopyToClipboard'
 import { exportsLogic } from 'lib/components/ExportButton/exportsLogic'
@@ -490,7 +490,7 @@ export function MissingPersonsAlert({
         <LemonBanner type="info" className="mb-2">
             {missingActorsCount} {missingActorsCount > 1 ? `${actorLabel.plural} are` : `${actorLabel.singular} is`} not
             shown because they've been merged with those listed, or deleted.{' '}
-            <Link to="https://markettor.com/docs/how-markettor-works/queries#insights-counting-unique-persons">
+            <Link to="https://clairview.com/docs/how-clairview-works/queries#insights-counting-unique-persons">
                 Learn more.
             </Link>
         </LemonBanner>

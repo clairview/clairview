@@ -1,4 +1,4 @@
-import { Tooltip } from '@markettor/lemon-ui'
+import { Tooltip } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, props, reducers, selectors } from 'kea'
 import { subscriptions } from 'kea-subscriptions'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -212,7 +212,7 @@ export const breadcrumbsLogic = kea<breadcrumbsLogicType>([
                         .filter((breadcrumb) => !!breadcrumb.name)
                         .map((breadcrumb) => breadcrumb.name as string)
                         .reverse(),
-                    preflight?.demo ? 'MarketTor Demo' : 'MarketTor',
+                    preflight?.demo ? 'ClairView Demo' : 'ClairView',
                 ].join(' • '),
         ],
     })),

@@ -1,16 +1,16 @@
 import { ReaderModel } from '@maxmind/geoip2-node'
-import ClickHouse from '@markettor/clickhouse'
+import ClickHouse from '@clairview/clickhouse'
 import {
     Element,
     PluginAttachment,
     PluginConfigSchema,
     PluginEvent,
     PluginSettings,
-    MarketTorEvent,
+    ClairViewEvent,
     ProcessedPluginEvent,
     Properties,
     Webhook,
-} from '@markettor/plugin-scaffold'
+} from '@clairview/plugin-scaffold'
 import { Pool as GenericPool } from 'generic-pool'
 import { Redis } from 'ioredis'
 import { BatchConsumer } from 'kafka/batch-consumer'
@@ -36,7 +36,7 @@ import { PluginsApiKeyManager } from './worker/vm/extensions/helpers/api-key-man
 import { RootAccessManager } from './worker/vm/extensions/helpers/root-acess-manager'
 import { PluginInstance } from './worker/vm/lazy'
 
-export { Element } from '@markettor/plugin-scaffold' // Re-export Element from scaffolding, for backwards compat.
+export { Element } from '@clairview/plugin-scaffold' // Re-export Element from scaffolding, for backwards compat.
 
 type Brand<K, T> = K & { __brand: T }
 
@@ -159,7 +159,7 @@ export interface PluginsServerConfig extends CdpConfig {
     // Redis params for the ingestion services
     INGESTION_REDIS_HOST: string
     INGESTION_REDIS_PORT: number
-    // Redis params for the core markettor (django+celery) services
+    // Redis params for the core clairview (django+celery) services
     MARKETTOR_REDIS_PASSWORD: string
     MARKETTOR_REDIS_HOST: string
     MARKETTOR_REDIS_PORT: number
@@ -237,7 +237,7 @@ export interface PluginsServerConfig extends CdpConfig {
     USE_KAFKA_FOR_SCHEDULED_TASKS: boolean // distribute scheduled tasks across the scheduler workers
     EVENT_OVERFLOW_BUCKET_CAPACITY: number
     EVENT_OVERFLOW_BUCKET_REPLENISH_RATE: number
-    /** Label of the MarketTor Cloud environment. Null if not running MarketTor Cloud. @example 'US' */
+    /** Label of the ClairView Cloud environment. Null if not running ClairView Cloud. @example 'US' */
     CLOUD_DEPLOYMENT: string | null
     EXTERNAL_REQUEST_TIMEOUT_MS: number
     DROP_EVENTS_BY_TOKEN_DISTINCT_ID: string
@@ -467,7 +467,7 @@ export interface PluginConfig {
     instance?: PluginInstance | null
     created_at: string
     updated_at?: string
-    // We're migrating to a new functions that take MarketTorEvent instead of PluginEvent
+    // We're migrating to a new functions that take ClairViewEvent instead of PluginEvent
     // we'll need to know which method this plugin is using to call it the right way
     // undefined for old plugins with multiple or deprecated methods
     method?: PluginMethod
@@ -487,7 +487,7 @@ export interface PluginError {
     time: string
     name?: string
     stack?: string
-    event?: PluginEvent | ProcessedPluginEvent | MarketTorEvent | null
+    event?: PluginEvent | ProcessedPluginEvent | ClairViewEvent | null
 }
 
 export interface PluginAttachmentDB {
@@ -553,7 +553,7 @@ export type PluginMethods = {
     teardownPlugin?: () => Promise<void>
     getSettings?: () => PluginSettings
     onEvent?: (event: ProcessedPluginEvent) => Promise<void>
-    composeWebhook?: (event: MarketTorEvent) => Webhook | null
+    composeWebhook?: (event: ClairViewEvent) => Webhook | null
     processEvent?: (event: PluginEvent) => Promise<PluginEvent>
 }
 
@@ -917,7 +917,7 @@ export interface Hook {
     updated: string
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export enum PropertyOperator {
     Exact = 'exact',
     IsNot = 'is_not',
@@ -933,24 +933,24 @@ export enum PropertyOperator {
     IsDateAfter = 'is_date_after',
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 interface PropertyFilterBase {
     key: string
     value?: string | number | Array<string | number> | null
     label?: string
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export interface PropertyFilterWithOperator extends PropertyFilterBase {
     operator?: PropertyOperator
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export interface EventPropertyFilter extends PropertyFilterWithOperator {
     type: 'event'
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export interface PersonPropertyFilter extends PropertyFilterWithOperator {
     type: 'person'
 }
@@ -963,21 +963,21 @@ export interface DataWarehousePersonPropertyFilter extends PropertyFilterWithOpe
     type: 'data_warehouse_person_property'
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export interface ElementPropertyFilter extends PropertyFilterWithOperator {
     type: 'element'
     key: 'tag_name' | 'text' | 'href' | 'selector'
     value: string | string[]
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export interface CohortPropertyFilter extends PropertyFilterBase {
     type: 'cohort'
     key: 'id'
     value: number | string
 }
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export type PropertyFilter =
     | EventPropertyFilter
     | PersonPropertyFilter
@@ -986,7 +986,7 @@ export type PropertyFilter =
     | DataWarehousePropertyFilter
     | DataWarehousePersonPropertyFilter
 
-/** Sync with markettor/frontend/src/types.ts */
+/** Sync with clairview/frontend/src/types.ts */
 export enum StringMatching {
     Contains = 'contains',
     Regex = 'regex',

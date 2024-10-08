@@ -1,6 +1,6 @@
 import './Settings.scss'
 
-import { LemonBanner, LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonBanner, LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { NotFound } from 'lib/components/NotFound'

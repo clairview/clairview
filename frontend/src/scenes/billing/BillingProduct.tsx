@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconChevronDown, IconDocument, IconInfo, IconPlus } from '@markettor/icons'
-import { LemonButton, LemonTag, Link } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconChevronDown, IconDocument, IconInfo, IconPlus } from '@clairview/icons'
+import { LemonButton, LemonTag, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { BillingUpgradeCTA } from 'lib/components/BillingUpgradeCTA'
@@ -131,7 +131,7 @@ export const BillingProduct = ({ product }: { product: BillingProductV2Type }): 
                                     {product.subscribed && <p className="m-0">Need to manage your plan?</p>}
                                     <LemonButton
                                         type="primary"
-                                        to="mailto:sales@markettor.com?subject=Enterprise%20plan%20request"
+                                        to="mailto:sales@clairview.com?subject=Enterprise%20plan%20request"
                                     >
                                         Get in touch
                                     </LemonButton>
@@ -143,7 +143,7 @@ export const BillingProduct = ({ product }: { product: BillingProductV2Type }): 
                                             <>
                                                 <LemonButton
                                                     fullWidth
-                                                    to="https://markettor.com/docs/billing/estimating-usage-costs#how-to-reduce-your-markettor-costs"
+                                                    to="https://clairview.com/docs/billing/estimating-usage-costs#how-to-reduce-your-clairview-costs"
                                                 >
                                                     Learn how to reduce your bill
                                                 </LemonButton>
@@ -161,7 +161,7 @@ export const BillingProduct = ({ product }: { product: BillingProductV2Type }): 
                                                     ) : (
                                                         <LemonButton
                                                             fullWidth
-                                                            to="mailto:sales@markettor.com?subject=Custom%20plan%20unsubscribe%20request"
+                                                            to="mailto:sales@clairview.com?subject=Custom%20plan%20unsubscribe%20request"
                                                         >
                                                             Contact support to unsubscribe
                                                         </LemonButton>
@@ -195,7 +195,7 @@ export const BillingProduct = ({ product }: { product: BillingProductV2Type }): 
                                 <p className="m-0">
                                     Need additional platform and support (aka enterprise) features like <b>SAML SSO</b>,{' '}
                                     <b>advanced permissioning</b>, and more?{' '}
-                                    <Link to="mailto:sales@markettor.com?subject=Enterprise%20plan%20request">
+                                    <Link to="mailto:sales@clairview.com?subject=Enterprise%20plan%20request">
                                         Get in touch
                                     </Link>{' '}
                                     for a quick chat.
@@ -449,7 +449,7 @@ export const BillingProduct = ({ product }: { product: BillingProductV2Type }): 
                                     {upgradePlan.contact_support ? (
                                         <LemonButton
                                             type="primary"
-                                            to="mailto:sales@markettor.com?subject=Enterprise%20plan%20request"
+                                            to="mailto:sales@clairview.com?subject=Enterprise%20plan%20request"
                                         >
                                             Get in touch
                                         </LemonButton>
@@ -506,7 +506,7 @@ export const FeatureFlagUsageNotice = ({ product }: { product: BillingProductV2T
         <p className="mt-4 ml-0 text-sm text-muted italic">
             <IconInfo className="mr-1" />
             Questions? Here's{' '}
-            <Link to="https://markettor.com/docs/feature-flags/common-questions#billing--usage" className="italic">
+            <Link to="https://clairview.com/docs/feature-flags/common-questions#billing--usage" className="italic">
                 how we calculate usage
             </Link>{' '}
             for feature flags.

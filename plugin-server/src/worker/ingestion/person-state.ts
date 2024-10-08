@@ -1,4 +1,4 @@
-import { PluginEvent, Properties } from '@markettor/plugin-scaffold'
+import { PluginEvent, Properties } from '@clairview/plugin-scaffold'
 import * as Sentry from '@sentry/node'
 import { ProducerRecord } from 'kafkajs'
 import LRU from 'lru-cache'
@@ -55,7 +55,7 @@ const BARE_CASE_INSENSITIVE_ILLEGAL_IDS = [
     'false',
 ]
 
-// Tracks whether we know we've already inserted a `markettor_personlessdistinctid` for the given
+// Tracks whether we know we've already inserted a `clairview_personlessdistinctid` for the given
 // (team_id, distinct_id) pair. If we have, then we can skip the INSERT attempt.
 // TODO: Move this out of module scope, we don't currently have a clean place (outside of the Hub)
 // to stash longer lived objects like caches. For now it's not important.
@@ -123,7 +123,7 @@ export class PersonState {
             let existingPerson = await this.db.fetchPerson(this.teamId, this.distinctId, { useReadReplica: true })
 
             if (!existingPerson) {
-                // See the comment in `mergeDistinctIds`. We are inserting a row into `markettor_personlessdistinctid`
+                // See the comment in `mergeDistinctIds`. We are inserting a row into `clairview_personlessdistinctid`
                 // to note that this Distinct ID has been used in "personless" mode. This is necessary
                 // so that later, during a merge, we can decide whether we need to write out an override
                 // or not.
@@ -137,7 +137,7 @@ export class PersonState {
                     PERSONLESS_DISTINCT_ID_INSERTED_CACHE.set(personlessDistinctIdCacheKey, true)
 
                     if (personIsMerged) {
-                        // If `personIsMerged` comes back `true`, it means the `markettor_personlessdistinctid`
+                        // If `personIsMerged` comes back `true`, it means the `clairview_personlessdistinctid`
                         // has been updated by a merge (either since we called `fetchPerson` above, plus
                         // replication lag). We need to check `fetchPerson` again (this time using the leader)
                         // so that we properly associate this event with the Person we got merged into.
@@ -445,7 +445,7 @@ export class PersonState {
         teamId: number,
         timestamp: DateTime
     ): Promise<[InternalPerson | undefined, Promise<void>]> {
-        // No reason to alias person against itself. Done by markettor-node when updating user properties
+        // No reason to alias person against itself. Done by clairview-node when updating user properties
         if (mergeIntoDistinctId === otherPersonDistinctId) {
             return [undefined, Promise.resolve()]
         }
@@ -496,24 +496,24 @@ export class PersonState {
 
         // A note about the `distinctIdVersion` logic you'll find below:
         //
-        // Historically, we always INSERT-ed new `markettor_persondistinctid` rows with `version=0`.
+        // Historically, we always INSERT-ed new `clairview_persondistinctid` rows with `version=0`.
         // Overrides are only created when the version is > 0, see:
-        //   https://github.com/MarketTor/markettor/blob/92e17ce307a577c4233d4ab252eebc6c2207a5ee/markettor/models/person/sql.py#L269-L287
+        //   https://github.com/ClairView/clairview/blob/92e17ce307a577c4233d4ab252eebc6c2207a5ee/clairview/models/person/sql.py#L269-L287
         //
         // With the addition of optional person profile processing, we are no longer creating
-        // `markettor_persondistinctid` and `markettor_person` rows when $process_person_profile=false.
+        // `clairview_persondistinctid` and `clairview_person` rows when $process_person_profile=false.
         // This means that at merge time, it's possible this `distinct_id` and its deterministically
         // generated `person.uuid` has already been used for events in ClickHouse, but they have no
-        // corresponding rows in the `markettor_persondistinctid` or `markettor_person` tables.
+        // corresponding rows in the `clairview_persondistinctid` or `clairview_person` tables.
         //
-        // For this reason, $process_person_profile=false write to the `markettor_personlessdistinctid`
+        // For this reason, $process_person_profile=false write to the `clairview_personlessdistinctid`
         // table just to note that a given Distinct ID was used for "personless" mode. Then, during
         // our merges transactions below, we do two things:
-        //   1. We check whether a row exists in `markettor_personlessdistinctid` for that Distinct ID,
-        //      if so, we need to write out `markettor_persondistinctid` rows with `version=1` so that
+        //   1. We check whether a row exists in `clairview_personlessdistinctid` for that Distinct ID,
+        //      if so, we need to write out `clairview_persondistinctid` rows with `version=1` so that
         //      an override is created in ClickHouse which will associate the old "personless" events
         //      with the Person UUID they were merged into.
-        //   2. We insert and/or update the `markettor_personlessdistinctid` ourselves, to mark that
+        //   2. We insert and/or update the `clairview_personlessdistinctid` ourselves, to mark that
         //      the Distinct ID has been merged. This is important so that an event being processed
         //      concurrently for that Distinct ID doesn't emit an event and _miss_ that a different
         //      Person UUID needs to be used now. (See the `processPerson` code in `update` for more.)

@@ -1,5 +1,5 @@
-import { IconOpenSidebar } from '@markettor/icons'
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { IconOpenSidebar } from '@clairview/icons'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 
 import { AvailableFeature } from '~/types'
@@ -9,7 +9,7 @@ export function GroupsIntroduction(): JSX.Element {
         <PayGateMini
             feature={AvailableFeature.GROUP_ANALYTICS}
             className="py-8"
-            docsLink="https://markettor.com/docs/user-guides/group-analytics"
+            docsLink="https://clairview.com/docs/user-guides/group-analytics"
         >
             <div className="flex flex-col items-center mt-4 justify-center text-center border rounded-lg py-8 min-h-56">
                 <h2 className="mb-2 text-2xl font-semibold">You're almost done!</h2>
@@ -17,7 +17,7 @@ export function GroupsIntroduction(): JSX.Element {
                 <div className="w-80 max-w-[90%] mt-4">
                     <LemonButton
                         type="primary"
-                        to={`https://markettor.com/docs/user-guides/group-analytics?utm_medium=in-product&utm_campaign=${AvailableFeature.GROUP_ANALYTICS}-upgrade-learn-more`}
+                        to={`https://clairview.com/docs/user-guides/group-analytics?utm_medium=in-product&utm_campaign=${AvailableFeature.GROUP_ANALYTICS}-upgrade-learn-more`}
                         targetBlank
                         center
                         data-attr={`${AvailableFeature.GROUP_ANALYTICS}-learn-more`}
@@ -47,7 +47,7 @@ export function GroupIntroductionFooter({ needsUpgrade }: { needsUpgrade: boolea
                     or{' '}
                     <Link
                         className="font-medium"
-                        to="https://markettor.com/docs/user-guides/group-analytics?utm_medium=in-product&utm_campaign=group-analytics-learn-more"
+                        to="https://clairview.com/docs/user-guides/group-analytics?utm_medium=in-product&utm_campaign=group-analytics-learn-more"
                         target="_blank"
                         data-attr="group-analytics-learn-more"
                     >
@@ -60,7 +60,7 @@ export function GroupIntroductionFooter({ needsUpgrade }: { needsUpgrade: boolea
                     You can now use Group Analytics. See{' '}
                     <Link
                         className="font-medium"
-                        to="https://markettor.com/manual/group-analytics?utm_medium=in-product&utm_campaign=group-analytics-get-started"
+                        to="https://clairview.com/manual/group-analytics?utm_medium=in-product&utm_campaign=group-analytics-get-started"
                         target="_blank"
                         data-attr="group-analytics-get-started"
                     >

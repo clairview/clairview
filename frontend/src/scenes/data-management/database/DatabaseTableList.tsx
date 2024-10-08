@@ -1,4 +1,4 @@
-import { LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonInput, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { DatabaseTablesContainer } from 'scenes/data-management/database/DatabaseTables'
 
@@ -16,7 +16,7 @@ export function DatabaseTableList(): JSX.Element {
             <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
                     These are the database tables you can query under SQL insights with{' '}
-                    <Link to="https://markettor.com/manual/torql" target="_blank">
+                    <Link to="https://clairview.com/manual/torql" target="_blank">
                         TorQL
                     </Link>
                     .

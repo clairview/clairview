@@ -1,8 +1,8 @@
 from ee.clickhouse.queries.stickiness.stickiness_event_query import (
     ClickhouseStickinessEventsQuery,
 )
-from markettor.models.filters.mixins.utils import cached_property
-from markettor.queries.stickiness.stickiness_actors import StickinessActors
+from clairview.models.filters.mixins.utils import cached_property
+from clairview.queries.stickiness.stickiness_actors import StickinessActors
 
 
 class ClickhouseStickinessActors(StickinessActors):

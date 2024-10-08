@@ -4,10 +4,10 @@ import { CommonFilters, HeatmapFilters, HeatmapFixedPositionMode } from 'lib/com
 import {
     calculateViewportRange,
     DEFAULT_HEATMAP_FILTERS,
-    MarketTorAppToolbarEvent,
+    ClairViewAppToolbarEvent,
 } from 'lib/components/IframedToolbarBrowser/utils'
 import { LemonBannerProps } from 'lib/lemon-ui/LemonBanner'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { RefObject } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
@@ -62,7 +62,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
         setBrowserUrl: (url: string | null) => ({ url }),
         setProposedBrowserUrl: (url: string | null) => ({ url }),
         onIframeLoad: true,
-        sendToolbarMessage: (type: MarketTorAppToolbarEvent, payload?: Record<string, any>) => ({
+        sendToolbarMessage: (type: ClairViewAppToolbarEvent, payload?: Record<string, any>) => ({
             type,
             payload,
         }),
@@ -79,7 +79,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
         enableElementSelector: true,
         disableElementSelector: true,
         setNewActionName: (name: string | null) => ({ name }),
-        toolbarMessageReceived: (type: MarketTorAppToolbarEvent, payload: Record<string, any>) => ({ type, payload }),
+        toolbarMessageReceived: (type: ClairViewAppToolbarEvent, payload: Record<string, any>) => ({ type, payload }),
         setCurrentPath: (path: string) => ({ path }),
         setInitialPath: (path: string) => ({ path }),
     }),
@@ -221,34 +221,34 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
         },
         // heatmaps
         patchHeatmapFilters: ({ filters }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS, { filters })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_PATCH_HEATMAP_FILTERS, { filters })
         },
 
         setHeatmapFixedPositionMode: ({ mode }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE, {
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_FIXED_POSITION_MODE, {
                 fixedPositionMode: mode,
             })
         },
 
         setHeatmapColorPalette: ({ Palette }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE, {
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_COLOR_PALETTE, {
                 colorPalette: Palette,
             })
         },
 
         setCommonFilters: ({ filters }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS, { commonFilters: filters })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_COMMON_FILTERS, { commonFilters: filters })
         },
 
         // actions
         enableElementSelector: () => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_ELEMENT_SELECTOR, { enabled: true })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_ELEMENT_SELECTOR, { enabled: true })
         },
         disableElementSelector: () => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_ELEMENT_SELECTOR, { enabled: false })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_ELEMENT_SELECTOR, { enabled: false })
         },
         setNewActionName: ({ name }) => {
-            actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_NEW_ACTION_NAME, { name })
+            actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_NEW_ACTION_NAME, { name })
         },
 
         onIframeLoad: () => {
@@ -257,7 +257,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
             // but there's no slam dunk way to do that
 
             const init = (): void => {
-                actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_APP_INIT, {
+                actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_APP_INIT, {
                     filters: values.heatmapFilters,
                     colorPalette: values.heatmapColorPalette,
                     fixedPositionMode: values.heatmapFixedPositionMode,
@@ -265,7 +265,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
                 })
                 switch (props.userIntent) {
                     case 'heatmaps':
-                        actions.sendToolbarMessage(MarketTorAppToolbarEvent.PH_HEATMAPS_CONFIG, {
+                        actions.sendToolbarMessage(ClairViewAppToolbarEvent.PH_HEATMAPS_CONFIG, {
                             enabled: true,
                         })
                         break
@@ -273,7 +273,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
             }
 
             const onIframeMessage = (e: MessageEvent): void => {
-                const type: MarketTorAppToolbarEvent = e?.data?.type
+                const type: ClairViewAppToolbarEvent = e?.data?.type
                 const payload = e?.data?.payload
 
                 actions.toolbarMessageReceived(type, payload)
@@ -291,11 +291,11 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
                 }
 
                 switch (type) {
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_INIT:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_INIT:
                         return init()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_READY:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_READY:
                         if (props.userIntent === 'heatmaps') {
-                            markettor.capture('in-app heatmap frame loaded', {
+                            clairview.capture('in-app heatmap frame loaded', {
                                 inapp_heatmap_page_url_visited: values.browserUrl,
                                 inapp_heatmap_filters: values.heatmapFilters,
                                 inapp_heatmap_color_palette: values.heatmapColorPalette,
@@ -305,18 +305,18 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
                             return actions.startTrackingLoading()
                         }
                         return
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADING:
                         return actions.startTrackingLoading()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED:
-                        markettor.capture('in-app heatmap loaded', {
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_LOADED:
+                        clairview.capture('in-app heatmap loaded', {
                             inapp_heatmap_page_url_visited: values.browserUrl,
                             inapp_heatmap_filters: values.heatmapFilters,
                             inapp_heatmap_color_palette: values.heatmapColorPalette,
                             inapp_heatmap_fixed_position_mode: values.heatmapFixedPositionMode,
                         })
                         return actions.stopTrackingLoading()
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED:
-                        markettor.capture('in-app heatmap failed', {
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_HEATMAP_FAILED:
+                        clairview.capture('in-app heatmap failed', {
                             inapp_heatmap_page_url_visited: values.browserUrl,
                             inapp_heatmap_filters: values.heatmapFilters,
                             inapp_heatmap_color_palette: values.heatmapColorPalette,
@@ -325,15 +325,15 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
                         actions.stopTrackingLoading()
                         actions.setIframeBanner({ level: 'error', message: 'The heatmap failed to load.' })
                         return
-                    case MarketTorAppToolbarEvent.PH_NEW_ACTION_CREATED:
+                    case ClairViewAppToolbarEvent.PH_NEW_ACTION_CREATED:
                         actions.setNewActionName(null)
                         actions.disableElementSelector()
                         return
-                    case MarketTorAppToolbarEvent.PH_TOOLBAR_NAVIGATED:
+                    case ClairViewAppToolbarEvent.PH_TOOLBAR_NAVIGATED:
                         // remove leading / from path
                         return actions.setCurrentPath(payload.path.replace(/^\/+/, ''))
                     default:
-                        console.warn(`[MarketTor Heatmaps] Received unknown child window message: ${type}`)
+                        console.warn(`[ClairView Heatmaps] Received unknown child window message: ${type}`)
                 }
             }
 
@@ -368,7 +368,7 @@ export const iframedToolbarBrowserLogic = kea<iframedToolbarBrowserLogicType>([
             clearTimeout(cache.warnTimeout)
         },
         setIframeBanner: ({ banner }) => {
-            markettor.capture('in-app iFrame banner set', {
+            clairview.capture('in-app iFrame banner set', {
                 level: banner?.level,
                 message: banner?.message,
             })

@@ -1,4 +1,4 @@
-import { LemonButton, LemonButtonProps } from '@markettor/lemon-ui'
+import { LemonButton, LemonButtonProps } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconDocumentExpand } from 'lib/lemon-ui/icons'
 import { Spinner } from 'lib/lemon-ui/Spinner'
@@ -21,12 +21,12 @@ const syncStatusMap: Record<NotebookSyncStatus, { content: React.ReactNode; tool
                 Saving <Spinner textColored />
             </>
         ),
-        tooltip: 'The changes are being saved to MarketTor.',
+        tooltip: 'The changes are being saved to ClairView.',
     },
     unsaved: {
         content: 'Edited',
         tooltip:
-            'You have made changes that are saved to your browser. These will be persisted to MarketTor periodically.',
+            'You have made changes that are saved to your browser. These will be persisted to ClairView periodically.',
     },
     local: {
         content: 'Local',

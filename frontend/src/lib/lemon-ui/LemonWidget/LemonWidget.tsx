@@ -1,6 +1,6 @@
 import './LemonWidget.scss'
 
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import clsx from 'clsx'
 
 import { LemonButton } from '../LemonButton'

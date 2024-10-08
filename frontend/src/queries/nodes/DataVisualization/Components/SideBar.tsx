@@ -1,6 +1,6 @@
 import './SideBar.scss'
 
-import { LemonTab, LemonTabs } from '@markettor/lemon-ui'
+import { LemonTab, LemonTabs } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { ChartDisplayType } from '~/types'

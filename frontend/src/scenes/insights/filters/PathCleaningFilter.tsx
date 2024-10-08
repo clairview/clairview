@@ -1,5 +1,5 @@
-import { IconGear } from '@markettor/icons'
-import { LemonButton, LemonSwitch } from '@markettor/lemon-ui'
+import { IconGear } from '@clairview/icons'
+import { LemonButton, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PathCleanFilters } from 'lib/components/PathCleanFilters/PathCleanFilters'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'

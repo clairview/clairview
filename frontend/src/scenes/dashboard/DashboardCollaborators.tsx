@@ -1,4 +1,4 @@
-import { IconLock, IconTrash, IconUnlock } from '@markettor/icons'
+import { IconLock, IconTrash, IconUnlock } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 import { usersLemonSelectOptions } from 'lib/components/UserSelectItem'

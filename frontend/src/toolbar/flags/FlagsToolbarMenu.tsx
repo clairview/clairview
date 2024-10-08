@@ -22,12 +22,12 @@ export const FlagsToolbarMenu = (): JSX.Element => {
         deleteOverriddenUserFlag,
         getUserFlags,
         checkLocalOverrides,
-        setFeatureFlagValueFromMarketTorClient,
+        setFeatureFlagValueFromClairViewClient,
     } = useActions(flagsToolbarLogic)
-    const { apiURL, markettor: markettorClient } = useValues(toolbarConfigLogic)
+    const { apiURL, clairview: clairviewClient } = useValues(toolbarConfigLogic)
 
     useEffect(() => {
-        markettorClient?.onFeatureFlags(setFeatureFlagValueFromMarketTorClient)
+        clairviewClient?.onFeatureFlags(setFeatureFlagValueFromClairViewClient)
         getUserFlags()
         checkLocalOverrides()
     }, [])

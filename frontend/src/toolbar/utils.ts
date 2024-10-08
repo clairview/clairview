@@ -52,7 +52,7 @@ export function elementToQuery(element: HTMLElement, dataAttributes: string[]): 
             seedMinLength: 5, // include several selectors e.g. prefer .project-homepage > .project-header > .project-title over .project-title
             attr: (name) => {
                 // preference to data attributes if they exist
-                // that aren't in the MarketTor preferred list - they were returned early above
+                // that aren't in the ClairView preferred list - they were returned early above
                 return name.startsWith('data-')
             },
         })

@@ -1,7 +1,7 @@
 import pytest
 
 from ee.models.property_definition import EnterprisePropertyDefinition
-from markettor.test.base import BaseTest
+from clairview.test.base import BaseTest
 
 
 class TestPropertyDefinition(BaseTest):

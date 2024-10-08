@@ -3,14 +3,14 @@ from unittest.mock import MagicMock, patch
 from freezegun import freeze_time
 
 from ee.tasks.slack import handle_slack_event
-from markettor import settings
-from markettor.models.dashboard import Dashboard
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.models.integration import Integration
-from markettor.models.sharing_configuration import SharingConfiguration
-from markettor.models.subscription import Subscription
-from markettor.test.base import APIBaseTest
+from clairview import settings
+from clairview.models.dashboard import Dashboard
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.models.integration import Integration
+from clairview.models.sharing_configuration import SharingConfiguration
+from clairview.models.subscription import Subscription
+from clairview.test.base import APIBaseTest
 
 
 def create_mock_unfurl_event(team_id: str, links: list[str]):
@@ -27,7 +27,7 @@ def create_mock_unfurl_event(team_id: str, links: list[str]):
             "unfurl_id": "C123456.123456789.987501.1b90fa1278528ce6e2f6c5c2bfa1abc9a41d57d02b29d173f40399c9ffdecf4b",
             "event_ts": "123456621.1855",
             "source": "conversations_history",
-            "links": [{"domain": "app.markettor.com", "url": link} for link in links],
+            "links": [{"domain": "app.clairview.com", "url": link} for link in links],
         },
         "type": "event_callback",
         "authed_users": ["UXXXXXXX1", "UXXXXXXX2"],

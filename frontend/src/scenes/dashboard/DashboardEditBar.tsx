@@ -1,4 +1,4 @@
-import { IconCalendar } from '@markettor/icons'
+import { IconCalendar } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'

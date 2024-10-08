@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonInput } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { usersLemonSelectOptions } from 'lib/components/UserSelectItem'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

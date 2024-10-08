@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import equal from 'fast-deep-equal'
 import { actions, afterMount, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
@@ -9,7 +9,7 @@ import api from 'lib/api'
 import { dayjs } from 'lib/dayjs'
 import { uuid } from 'lib/utils'
 import { deleteWithUndo } from 'lib/utils/deleteWithUndo'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { asDisplay } from 'scenes/persons/person-utils'
 import { teamLogic } from 'scenes/teamLogic'
 import { urls } from 'scenes/urls'
@@ -266,7 +266,7 @@ export const hogFunctionConfigurationLogic = kea<hogFunctionConfigurationLogicTy
                         ? await api.hogFunctions.update(props.id, configuration)
                         : await api.hogFunctions.create(configuration)
 
-                    markettor.capture('hog function saved', {
+                    clairview.capture('hog function saved', {
                         id: res.id,
                         template_id: res.template?.id,
                         template_name: res.template?.name,
@@ -514,7 +514,7 @@ export const hogFunctionConfigurationLogic = kea<hogFunctionConfigurationLogicTy
                     person: {
                         id: personId,
                         properties: {
-                            email: 'example@markettor.com',
+                            email: 'example@clairview.com',
                         },
                         name: 'Example person',
                         url: `${window.location.origin}/person/${personId}`,

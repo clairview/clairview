@@ -5,9 +5,9 @@ from django.db import models
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
-from markettor.models.signals import mutable_receiver
-from markettor.models.utils import generate_random_token
-from markettor.redis import get_client
+from clairview.models.signals import mutable_receiver
+from clairview.models.utils import generate_random_token
+from clairview.redis import get_client
 
 
 HOOK_EVENTS = ["action_performed"]
@@ -15,8 +15,8 @@ HOOK_EVENTS = ["action_performed"]
 
 class Hook(models.Model):
     id = models.CharField(primary_key=True, max_length=50, default=generate_random_token)
-    user = models.ForeignKey("markettor.User", related_name="rest_hooks", on_delete=models.CASCADE)
-    team = models.ForeignKey("markettor.Team", related_name="rest_hooks", on_delete=models.CASCADE)
+    user = models.ForeignKey("clairview.User", related_name="rest_hooks", on_delete=models.CASCADE)
+    team = models.ForeignKey("clairview.Team", related_name="rest_hooks", on_delete=models.CASCADE)
     event = models.CharField("Event", max_length=64, db_index=True)
     resource_id = models.IntegerField(null=True, blank=True)
     target = models.URLField("Target URL", max_length=255)

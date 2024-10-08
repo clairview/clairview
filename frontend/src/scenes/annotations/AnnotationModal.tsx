@@ -6,7 +6,7 @@ import {
     LemonSelect,
     LemonTextArea,
     Link,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { LemonField } from 'lib/lemon-ui/LemonField'

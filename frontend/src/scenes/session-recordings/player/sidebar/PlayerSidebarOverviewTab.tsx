@@ -1,4 +1,4 @@
-import { PersonDisplay } from '@markettor/apps-common'
+import { PersonDisplay } from '@clairview/apps-common'
 import { useValues } from 'kea'
 import { PropertiesTable } from 'lib/components/PropertiesTable'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'

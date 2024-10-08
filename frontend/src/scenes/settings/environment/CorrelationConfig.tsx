@@ -1,5 +1,5 @@
-import { IconPlus } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconPlus } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { EventSelect } from 'lib/components/EventSelect/EventSelect'
 import { PropertySelect } from 'lib/components/PropertySelect/PropertySelect'

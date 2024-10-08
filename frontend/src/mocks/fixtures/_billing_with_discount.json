@@ -14,7 +14,7 @@
         {
             "key": "zapier",
             "name": "Zapier",
-            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
             "unit": null,
             "limit": null,
             "note": null
@@ -46,7 +46,7 @@
         {
             "key": "apps",
             "name": "Apps library",
-            "description": "Connect your data to MarketTor with 50+ apps.",
+            "description": "Connect your data to ClairView with 50+ apps.",
             "unit": null,
             "limit": null,
             "note": null
@@ -158,7 +158,7 @@
         {
             "key": "subscriptions",
             "name": "Insight & dashboard subscriptions",
-            "description": "Create a subscription for any insight or dashboard in MarketTor to receive regular reports with their updates.",
+            "description": "Create a subscription for any insight or dashboard in ClairView to receive regular reports with their updates.",
             "unit": null,
             "limit": null,
             "note": null
@@ -230,7 +230,7 @@
         {
             "key": "team_members",
             "name": "Team members",
-            "description": "MarketTor doesn't charge per seat add your entire team!",
+            "description": "ClairView doesn't charge per seat add your entire team!",
             "unit": null,
             "limit": null,
             "note": "Unlimited"
@@ -238,7 +238,7 @@
         {
             "key": "organizations_projects",
             "name": "Projects",
-            "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+            "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
             "unit": null,
             "limit": null,
             "note": "Unlimited"
@@ -254,7 +254,7 @@
         {
             "key": "social_sso",
             "name": "SSO via Google, Github, or Gitlab",
-            "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+            "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
             "unit": null,
             "limit": null,
             "note": null
@@ -270,7 +270,7 @@
         {
             "key": "sso_enforcement",
             "name": "SSO",
-            "description": "Allow users to sign up and log in to your MarketTor account with your specified SSO provider.",
+            "description": "Allow users to sign up and log in to your ClairView account with your specified SSO provider.",
             "unit": null,
             "limit": null,
             "note": null
@@ -278,7 +278,7 @@
         {
             "key": "white_labeling",
             "name": "White labeling",
-            "description": "Use your own branding in your MarketTor organization.",
+            "description": "Use your own branding in your ClairView organization.",
             "unit": null,
             "limit": null,
             "note": null
@@ -286,7 +286,7 @@
         {
             "key": "community_support",
             "name": "Community forum",
-            "description": "Get help from the MarketTor community in our public forums.",
+            "description": "Get help from the ClairView community in our public forums.",
             "unit": null,
             "limit": null,
             "note": null
@@ -294,7 +294,7 @@
         {
             "key": "dedicated_support",
             "name": "Dedicated Slack channel",
-            "description": "Get help directly in a dedicated Slack channel shared between you and the MarketTor team.",
+            "description": "Get help directly in a dedicated Slack channel shared between you and the ClairView team.",
             "unit": null,
             "limit": null,
             "note": "$2k/month spend or above"
@@ -333,8 +333,8 @@
             "price_description": null,
             "usage_key": "events",
             "icon_key": "IconGraph",
-            "image_url": "https://markettor.com/images/product/product-icons/product-analytics.svg",
-            "docs_url": "https://markettor.com/docs/product-analytics",
+            "image_url": "https://clairview.com/images/product/product-icons/product-analytics.svg",
+            "docs_url": "https://clairview.com/docs/product-analytics",
             "subscribed": true,
             "plans": [
                 {
@@ -342,8 +342,8 @@
                     "product_key": "product_analytics",
                     "name": "Product analytics + data stack",
                     "description": "Trends, funnels, path analysis, CDP + more.",
-                    "image_url": "https://markettor.com/images/product/product-icons/product-analytics.svg",
-                    "docs_url": "https://markettor.com/docs/product-analytics",
+                    "image_url": "https://clairview.com/images/product/product-icons/product-analytics.svg",
+                    "docs_url": "https://clairview.com/docs/product-analytics",
                     "note": null,
                     "unit": "event",
                     "free_allocation": 1000000,
@@ -390,8 +390,8 @@
                     "product_key": "product_analytics",
                     "name": "Product analytics + data stack",
                     "description": "Trends, funnels, path analysis, CDP + more.",
-                    "image_url": "https://markettor.com/images/product/product-icons/product-analytics.svg",
-                    "docs_url": "https://markettor.com/docs/product-analytics",
+                    "image_url": "https://clairview.com/images/product/product-icons/product-analytics.svg",
+                    "docs_url": "https://clairview.com/docs/product-analytics",
                     "note": null,
                     "unit": "event",
                     "free_allocation": null,
@@ -431,7 +431,7 @@
                         {
                             "key": "subscriptions",
                             "name": "Insight & dashboard subscriptions",
-                            "description": "Create a subscription for any insight or dashboard in MarketTor to receive regular reports with their updates.",
+                            "description": "Create a subscription for any insight or dashboard in ClairView to receive regular reports with their updates.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -619,9 +619,9 @@
                     "name": "Group analytics",
                     "description": "Understand how groups of users behave.",
                     "price_description": null,
-                    "image_url": "https://markettor.com/images/product/product-icons/group-analytics.svg",
+                    "image_url": "https://clairview.com/images/product/product-icons/group-analytics.svg",
                     "icon_key": "IconPeople",
-                    "docs_url": "https://markettor.com/docs/product-analytics/group-analytics",
+                    "docs_url": "https://clairview.com/docs/product-analytics/group-analytics",
                     "type": "group_analytics",
                     "tiers": [],
                     "tiered": false,
@@ -645,8 +645,8 @@
             "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
             "price_description": null,
             "usage_key": "recordings",
-            "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
-            "docs_url": "https://markettor.com/docs/session-replay",
+            "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
+            "docs_url": "https://clairview.com/docs/session-replay",
             "subscribed": true,
             "plans": [
                 {
@@ -654,8 +654,8 @@
                     "product_key": "session_replay",
                     "name": "Session replay",
                     "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
-                    "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
-                    "docs_url": "https://markettor.com/docs/session-replay",
+                    "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
+                    "docs_url": "https://clairview.com/docs/session-replay",
                     "note": null,
                     "unit": "recording",
                     "free_allocation": 15000,
@@ -686,8 +686,8 @@
                     "product_key": "session_replay",
                     "name": "Session replay",
                     "description": "Searchable recordings of people using your app or website with console logs and behavioral bucketing.",
-                    "image_url": "https://markettor.com/images/product/product-icons/session-replay.svg",
-                    "docs_url": "https://markettor.com/docs/session-replay",
+                    "image_url": "https://clairview.com/images/product/product-icons/session-replay.svg",
+                    "docs_url": "https://clairview.com/docs/session-replay",
                     "note": null,
                     "unit": "recording",
                     "free_allocation": null,
@@ -845,8 +845,8 @@
             "description": "Roll out new features to a subset of users.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
-            "docs_url": "https://markettor.com/docs/feature-flags",
+            "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
+            "docs_url": "https://clairview.com/docs/feature-flags",
             "subscribed": null,
             "plans": [
                 {
@@ -854,8 +854,8 @@
                     "product_key": "feature_flags",
                     "name": "Feature flags",
                     "description": "Roll out new features to a subset of users.",
-                    "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
-                    "docs_url": "https://markettor.com/docs/feature-flags",
+                    "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
+                    "docs_url": "https://clairview.com/docs/feature-flags",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -878,8 +878,8 @@
                     "product_key": "feature_flags",
                     "name": "Feature flags",
                     "description": "Roll out new features to a subset of users.",
-                    "image_url": "https://markettor.com/images/product/product-icons/feature-flags.svg",
-                    "docs_url": "https://markettor.com/docs/feature-flags",
+                    "image_url": "https://clairview.com/images/product/product-icons/feature-flags.svg",
+                    "docs_url": "https://clairview.com/docs/feature-flags",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -929,8 +929,8 @@
             "description": "Test different versions of a feature to see which performs best.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/experimentation.svg",
-            "docs_url": "https://markettor.com/docs/experiments",
+            "image_url": "https://clairview.com/images/product/product-icons/experimentation.svg",
+            "docs_url": "https://clairview.com/docs/experiments",
             "subscribed": null,
             "plans": [
                 {
@@ -938,8 +938,8 @@
                     "product_key": "experimentation",
                     "name": "A/B testing",
                     "description": "Test different versions of a feature to see which performs best.",
-                    "image_url": "https://markettor.com/images/product/product-icons/experimentation.svg",
-                    "docs_url": "https://markettor.com/docs/experiments",
+                    "image_url": "https://clairview.com/images/product/product-icons/experimentation.svg",
+                    "docs_url": "https://clairview.com/docs/experiments",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -978,20 +978,20 @@
         },
         {
             "name": "Integrations",
-            "description": "Connect MarketTor to your favorite tools.",
+            "description": "Connect ClairView to your favorite tools.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
-            "docs_url": "https://markettor.com/docs/apps",
+            "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
+            "docs_url": "https://clairview.com/docs/apps",
             "subscribed": null,
             "plans": [
                 {
                     "plan_key": "free-20230117",
                     "product_key": "integrations",
                     "name": "Integrations",
-                    "description": "Connect MarketTor to your favorite tools.",
-                    "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
-                    "docs_url": "https://markettor.com/docs/apps",
+                    "description": "Connect ClairView to your favorite tools.",
+                    "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
+                    "docs_url": "https://clairview.com/docs/apps",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -999,7 +999,7 @@
                         {
                             "key": "zapier",
                             "name": "Zapier",
-                            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1031,7 +1031,7 @@
                         {
                             "key": "apps",
                             "name": "Apps library",
-                            "description": "Connect your data to MarketTor with 50+ apps.",
+                            "description": "Connect your data to ClairView with 50+ apps.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1045,9 +1045,9 @@
                     "plan_key": "paid-20230117",
                     "product_key": "integrations",
                     "name": "Integrations",
-                    "description": "Connect MarketTor to your favorite tools.",
-                    "image_url": "https://markettor.com/images/product/product-icons/integrations.svg",
-                    "docs_url": "https://markettor.com/docs/apps",
+                    "description": "Connect ClairView to your favorite tools.",
+                    "image_url": "https://clairview.com/images/product/product-icons/integrations.svg",
+                    "docs_url": "https://clairview.com/docs/apps",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -1055,7 +1055,7 @@
                         {
                             "key": "zapier",
                             "name": "Zapier",
-                            "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                            "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1087,7 +1087,7 @@
                         {
                             "key": "apps",
                             "name": "Apps library",
-                            "description": "Connect your data to MarketTor with 50+ apps.",
+                            "description": "Connect your data to ClairView with 50+ apps.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1129,8 +1129,8 @@
             "description": "SSO, permission management, and support.",
             "price_description": null,
             "usage_key": null,
-            "image_url": "https://markettor.com/images/product/product-icons/platform.svg",
-            "docs_url": "https://markettor.com/docs",
+            "image_url": "https://clairview.com/images/product/product-icons/platform.svg",
+            "docs_url": "https://clairview.com/docs",
             "subscribed": null,
             "plans": [
                 {
@@ -1138,8 +1138,8 @@
                     "product_key": "platform_and_support",
                     "name": "Platform and support",
                     "description": "SSO, permission management, and support.",
-                    "image_url": "https://markettor.com/images/product/product-icons/platform.svg",
-                    "docs_url": "https://markettor.com/docs",
+                    "image_url": "https://clairview.com/images/product/product-icons/platform.svg",
+                    "docs_url": "https://clairview.com/docs",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -1163,7 +1163,7 @@
                         {
                             "key": "team_members",
                             "name": "Team members",
-                            "description": "MarketTor doesn't charge per seat add your entire team!",
+                            "description": "ClairView doesn't charge per seat add your entire team!",
                             "unit": null,
                             "limit": null,
                             "note": "Unlimited"
@@ -1171,7 +1171,7 @@
                         {
                             "key": "organizations_projects",
                             "name": "Projects",
-                            "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+                            "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
                             "unit": "project",
                             "limit": 1,
                             "note": null
@@ -1187,7 +1187,7 @@
                         {
                             "key": "social_sso",
                             "name": "SSO via Google, Github, or Gitlab",
-                            "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+                            "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1195,7 +1195,7 @@
                         {
                             "key": "community_support",
                             "name": "Community forum",
-                            "description": "Get help from the MarketTor community in our public forum.",
+                            "description": "Get help from the ClairView community in our public forum.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1218,8 +1218,8 @@
                     "product_key": "platform_and_support",
                     "name": "Platform and support",
                     "description": "SSO, permission management, and support.",
-                    "image_url": "https://markettor.com/images/product/product-icons/platform.svg",
-                    "docs_url": "https://markettor.com/docs",
+                    "image_url": "https://clairview.com/images/product/product-icons/platform.svg",
+                    "docs_url": "https://clairview.com/docs",
                     "note": null,
                     "unit": null,
                     "free_allocation": null,
@@ -1243,7 +1243,7 @@
                         {
                             "key": "team_members",
                             "name": "Team members",
-                            "description": "MarketTor doesn't charge per seat add your entire team!",
+                            "description": "ClairView doesn't charge per seat add your entire team!",
                             "unit": null,
                             "limit": null,
                             "note": "Unlimited"
@@ -1251,7 +1251,7 @@
                         {
                             "key": "organizations_projects",
                             "name": "Projects",
-                            "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+                            "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
                             "unit": null,
                             "limit": null,
                             "note": "Unlimited"
@@ -1267,7 +1267,7 @@
                         {
                             "key": "social_sso",
                             "name": "SSO via Google, Github, or Gitlab",
-                            "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+                            "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1283,7 +1283,7 @@
                         {
                             "key": "sso_enforcement",
                             "name": "SSO",
-                            "description": "Allow users to sign up and log in to your MarketTor account with your specified SSO provider.",
+                            "description": "Allow users to sign up and log in to your ClairView account with your specified SSO provider.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1291,7 +1291,7 @@
                         {
                             "key": "white_labeling",
                             "name": "White labeling",
-                            "description": "Use your own branding in your MarketTor organization.",
+                            "description": "Use your own branding in your ClairView organization.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1299,7 +1299,7 @@
                         {
                             "key": "community_support",
                             "name": "Community forum",
-                            "description": "Get help from the MarketTor community in our public forum.",
+                            "description": "Get help from the ClairView community in our public forum.",
                             "unit": null,
                             "limit": null,
                             "note": null
@@ -1307,7 +1307,7 @@
                         {
                             "key": "dedicated_support",
                             "name": "Dedicated Slack channel",
-                            "description": "Get help in a dedicated Slack channel shared between you and the MarketTor team.",
+                            "description": "Get help in a dedicated Slack channel shared between you and the ClairView team.",
                             "unit": null,
                             "limit": null,
                             "note": "$2k/month spend or above"
@@ -1505,7 +1505,7 @@
                                 {
                                     "key": "zapier",
                                     "name": "Zapier",
-                                    "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                                    "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -1514,7 +1514,7 @@
                                 {
                                     "key": "apps",
                                     "name": "Apps library",
-                                    "description": "Connect your data to MarketTor with 50+ apps.",
+                                    "description": "Connect your data to ClairView with 50+ apps.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -1556,7 +1556,7 @@
                                 {
                                     "key": "organizations_projects",
                                     "name": "Projects",
-                                    "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+                                    "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
                                     "unit": "project",
                                     "limit": 1,
                                     "note": null,
@@ -1565,7 +1565,7 @@
                                 {
                                     "key": "social_sso",
                                     "name": "SSO via Google, Github, or Gitlab",
-                                    "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+                                    "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -1592,7 +1592,7 @@
                                 {
                                     "key": "team_members",
                                     "name": "Team members",
-                                    "description": "MarketTor doesn't charge per seat - add your entire team!",
+                                    "description": "ClairView doesn't charge per seat - add your entire team!",
                                     "unit": null,
                                     "limit": null,
                                     "note": "Unlimited",
@@ -1616,7 +1616,7 @@
                                 {
                                     "key": "community_support",
                                     "name": "Community forum",
-                                    "description": "Get help from the MarketTor community in our public forum.",
+                                    "description": "Get help from the ClairView community in our public forum.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -1698,7 +1698,7 @@
                                 {
                                     "key": "subscriptions",
                                     "name": "Insight & dashboard subscriptions",
-                                    "description": "Create a subscription for any insight or dashboard in MarketTor to receive regular reports with their updates.",
+                                    "description": "Create a subscription for any insight or dashboard in ClairView to receive regular reports with their updates.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -1977,7 +1977,7 @@
                                 {
                                     "key": "zapier",
                                     "name": "Zapier",
-                                    "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                                    "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2013,7 +2013,7 @@
                                 {
                                     "key": "apps",
                                     "name": "Apps library",
-                                    "description": "Connect your data to MarketTor with 50+ apps.",
+                                    "description": "Connect your data to ClairView with 50+ apps.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2055,7 +2055,7 @@
                                 {
                                     "key": "team_members",
                                     "name": "Team members",
-                                    "description": "MarketTor doesn't charge per seat - add your entire team!",
+                                    "description": "ClairView doesn't charge per seat - add your entire team!",
                                     "unit": null,
                                     "limit": null,
                                     "note": "Unlimited",
@@ -2064,7 +2064,7 @@
                                 {
                                     "key": "organizations_projects",
                                     "name": "Projects",
-                                    "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+                                    "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
                                     "unit": null,
                                     "limit": null,
                                     "note": "Unlimited",
@@ -2082,7 +2082,7 @@
                                 {
                                     "key": "social_sso",
                                     "name": "SSO via Google, Github, or Gitlab",
-                                    "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+                                    "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2100,7 +2100,7 @@
                                 {
                                     "key": "sso_enforcement",
                                     "name": "SSO",
-                                    "description": "Allow users to sign up and log in to your MarketTor account with your specified SSO provider.",
+                                    "description": "Allow users to sign up and log in to your ClairView account with your specified SSO provider.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2115,7 +2115,7 @@
                                 {
                                     "key": "community_support",
                                     "name": "Community forum",
-                                    "description": "Get help from the MarketTor community in our public forum.",
+                                    "description": "Get help from the ClairView community in our public forum.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2124,7 +2124,7 @@
                                 {
                                     "key": "dedicated_support",
                                     "name": "Dedicated Slack channel",
-                                    "description": "Get help in a dedicated Slack channel shared between you and the MarketTor team.",
+                                    "description": "Get help in a dedicated Slack channel shared between you and the ClairView team.",
                                     "unit": null,
                                     "limit": null,
                                     "note": "$2k/month spend or above",
@@ -2224,7 +2224,7 @@
                                 {
                                     "key": "subscriptions",
                                     "name": "Insight & dashboard subscriptions",
-                                    "description": "Create a subscription for any insight or dashboard in MarketTor to receive regular reports with their updates.",
+                                    "description": "Create a subscription for any insight or dashboard in ClairView to receive regular reports with their updates.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2452,7 +2452,7 @@
                 },
                 {
                     "type": "base",
-                    "name": "MarketTor Enterprise",
+                    "name": "ClairView Enterprise",
                     "description": "SSO, advanced permissions, and a dedicated Slack channel for support",
                     "price_description": null,
                     "free_allocation": null,
@@ -2503,7 +2503,7 @@
                                 {
                                     "key": "zapier",
                                     "name": "Zapier",
-                                    "description": "Zapier lets you connect MarketTor with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
+                                    "description": "Zapier lets you connect ClairView with thousands of the most popular apps, so you can automate your work and have more time for what matters most—no code required.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2539,7 +2539,7 @@
                                 {
                                     "key": "apps",
                                     "name": "Apps library",
-                                    "description": "Connect your data to MarketTor with 50+ apps.",
+                                    "description": "Connect your data to ClairView with 50+ apps.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2581,7 +2581,7 @@
                                 {
                                     "key": "team_members",
                                     "name": "Team members",
-                                    "description": "MarketTor doesn't charge per seat - add your entire team!",
+                                    "description": "ClairView doesn't charge per seat - add your entire team!",
                                     "unit": null,
                                     "limit": null,
                                     "note": "Unlimited",
@@ -2590,7 +2590,7 @@
                                 {
                                     "key": "organizations_projects",
                                     "name": "Projects",
-                                    "description": "Create silos of data within MarketTor. All data belongs to a single project and all queries are project-specific.",
+                                    "description": "Create silos of data within ClairView. All data belongs to a single project and all queries are project-specific.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2608,7 +2608,7 @@
                                 {
                                     "key": "social_sso",
                                     "name": "SSO via Google, Github, or Gitlab",
-                                    "description": "Log in to MarketTor with your Google, Github, or Gitlab account.",
+                                    "description": "Log in to ClairView with your Google, Github, or Gitlab account.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2626,7 +2626,7 @@
                                 {
                                     "key": "sso_enforcement",
                                     "name": "SSO",
-                                    "description": "Allow users to sign up and log in to your MarketTor account with your specified SSO provider.",
+                                    "description": "Allow users to sign up and log in to your ClairView account with your specified SSO provider.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2659,7 +2659,7 @@
                                 {
                                     "key": "community_support",
                                     "name": "Community forum",
-                                    "description": "Get help from the MarketTor community in our public forum.",
+                                    "description": "Get help from the ClairView community in our public forum.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2668,7 +2668,7 @@
                                 {
                                     "key": "dedicated_support",
                                     "name": "Dedicated Slack channel",
-                                    "description": "Get help in a dedicated Slack channel shared between you and the MarketTor team.",
+                                    "description": "Get help in a dedicated Slack channel shared between you and the ClairView team.",
                                     "unit": null,
                                     "limit": null,
                                     "note": "$2k/month spend or above",
@@ -2686,7 +2686,7 @@
                                 {
                                     "key": "account_manager",
                                     "name": "Account manager",
-                                    "description": "Work with a dedicated account manager to help you get the most out of MarketTor.",
+                                    "description": "Work with a dedicated account manager to help you get the most out of ClairView.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2695,7 +2695,7 @@
                                 {
                                     "key": "training",
                                     "name": "Training sessions",
-                                    "description": "Get training from our team to help you quickly get up and running with MarketTor.",
+                                    "description": "Get training from our team to help you quickly get up and running with ClairView.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,
@@ -2740,7 +2740,7 @@
                                 {
                                     "key": "invoice_payments",
                                     "name": "Payment via invoicing",
-                                    "description": "Pay for your MarketTor subscription via invoice.",
+                                    "description": "Pay for your ClairView subscription via invoice.",
                                     "unit": null,
                                     "limit": null,
                                     "note": null,

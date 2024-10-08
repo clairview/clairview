@@ -1,4 +1,4 @@
-import { IconPlusSmall } from '@markettor/icons'
+import { IconPlusSmall } from '@clairview/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { urls } from 'scenes/urls'
 

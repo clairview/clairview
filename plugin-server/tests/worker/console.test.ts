@@ -1,4 +1,4 @@
-import { ConsoleExtension } from '@markettor/plugin-scaffold'
+import { ConsoleExtension } from '@clairview/plugin-scaffold'
 
 import { KAFKA_PLUGIN_LOG_ENTRIES } from '../../src/config/kafka-topics'
 import { Hub, PluginLogEntrySource, PluginLogEntryType } from '../../src/types'

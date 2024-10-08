@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Spinner } from 'lib/lemon-ui/Spinner'
 

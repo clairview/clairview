@@ -26,7 +26,7 @@
                                 "elements": [
                                     {
                                         "url": "{person.url}",
-                                        "text": { "text": "View Person in MarketTor", "type": "plain_text" },
+                                        "text": { "text": "View Person in ClairView", "type": "plain_text" },
                                         "type": "button"
                                     }
                                 ]
@@ -104,7 +104,7 @@
                     "integration_key": "slack_workspace",
                     "integration_field": "slack_channel",
                     "label": "Channel to post to",
-                    "description": "Select the channel to post to (e.g. #general). The MarketTor app must be installed in the workspace.",
+                    "description": "Select the channel to post to (e.g. #general). The ClairView app must be installed in the workspace.",
                     "secret": false,
                     "required": true
                 },
@@ -120,7 +120,7 @@
                     "key": "username",
                     "type": "string",
                     "label": "Bot name",
-                    "default": "MarketTor",
+                    "default": "ClairView",
                     "required": false,
                     "secret": false
                 },
@@ -139,7 +139,7 @@
                             "elements": [
                                 {
                                     "url": "{person.url}",
-                                    "text": { "text": "View Person in MarketTor", "type": "plain_text" },
+                                    "text": { "text": "View Person in ClairView", "type": "plain_text" },
                                     "type": "button"
                                 },
                                 {
@@ -246,7 +246,7 @@
             "category": ["Custom"],
             "filters": null,
             "masking": null,
-            "icon_url": "/static/markettor-icon.svg"
+            "icon_url": "/static/clairview-icon.svg"
         },
         {
             "sub_templates": null,
@@ -338,7 +338,7 @@
             "id": "template-avo",
             "name": "Avo",
             "description": "Send events to Avo",
-            "hog": "if (empty(inputs.apiKey) or empty(inputs.environment)) {\n    print('API Key and environment has to be set. Skipping...')\n    return\n}\n\nlet avoEvent := {\n    'apiKey': inputs.apiKey,\n    'env': inputs.environment,\n    'appName': inputs.appName,\n    'sessionId': event.properties.$session_id ?? generateUUIDv4(),\n    'createdAt': toString(toDateTime(toUnixTimestamp(now()))),\n    'avoFunction': false,\n    'eventId': null,\n    'eventHash': null,\n    'appVersion': '1.0.0',\n    'libVersion': '1.0.0',\n    'libPlatform': 'node',\n    'trackingId': '',\n    'samplingRate': 1,\n    'type': 'event',\n    'eventName': event.event,\n    'messageId': event.uuid,\n    'eventProperties': []\n}\n\nfun getPropValueType(propValue) {\n    let propType := typeof(propValue)\n    if (propValue == null) {\n        return 'null'\n    } else if (propType == 'string') {\n        return 'string'\n    } else if (propType == 'integer') {\n        return 'int'\n    } else if (propType == 'float') {\n        return 'float'\n    } else if (propType == 'boolean') {\n        return 'boolean'\n    } else if (propType == 'object') {\n        return 'object'\n    } else if (propType == 'array') {\n        return 'list'\n    } else {\n        return propType\n    }\n}\n\nfor (let key, value in event.properties) {\n    let excludeProperties := arrayMap(x -> trim(x), splitByString(',', inputs.excludeProperties))\n    let includeProperties := arrayMap(x -> trim(x), splitByString(',', inputs.includeProperties))\n    let isExcluded := has(excludeProperties, key)\n    let isIncluded := includeProperties[1] == '' or has(includeProperties, key)\n\n    if (not (key like '$%' or isExcluded or not isIncluded)) {\n        avoEvent.eventProperties := arrayPushBack(avoEvent.eventProperties, { 'propertyName': key, 'propertyType': getPropValueType(value) })\n    }\n}\n\nfetch('https://api.avo.app/inspector/markettor/v1/track', {\n    'method': 'POST',\n    'headers': {\n        'env': inputs.environment,\n        'api-key': inputs.apiKey,\n        'content-type': 'application/json',\n        'accept': 'application/json',\n    },\n    'body': [avoEvent]\n})",
+            "hog": "if (empty(inputs.apiKey) or empty(inputs.environment)) {\n    print('API Key and environment has to be set. Skipping...')\n    return\n}\n\nlet avoEvent := {\n    'apiKey': inputs.apiKey,\n    'env': inputs.environment,\n    'appName': inputs.appName,\n    'sessionId': event.properties.$session_id ?? generateUUIDv4(),\n    'createdAt': toString(toDateTime(toUnixTimestamp(now()))),\n    'avoFunction': false,\n    'eventId': null,\n    'eventHash': null,\n    'appVersion': '1.0.0',\n    'libVersion': '1.0.0',\n    'libPlatform': 'node',\n    'trackingId': '',\n    'samplingRate': 1,\n    'type': 'event',\n    'eventName': event.event,\n    'messageId': event.uuid,\n    'eventProperties': []\n}\n\nfun getPropValueType(propValue) {\n    let propType := typeof(propValue)\n    if (propValue == null) {\n        return 'null'\n    } else if (propType == 'string') {\n        return 'string'\n    } else if (propType == 'integer') {\n        return 'int'\n    } else if (propType == 'float') {\n        return 'float'\n    } else if (propType == 'boolean') {\n        return 'boolean'\n    } else if (propType == 'object') {\n        return 'object'\n    } else if (propType == 'array') {\n        return 'list'\n    } else {\n        return propType\n    }\n}\n\nfor (let key, value in event.properties) {\n    let excludeProperties := arrayMap(x -> trim(x), splitByString(',', inputs.excludeProperties))\n    let includeProperties := arrayMap(x -> trim(x), splitByString(',', inputs.includeProperties))\n    let isExcluded := has(excludeProperties, key)\n    let isIncluded := includeProperties[1] == '' or has(includeProperties, key)\n\n    if (not (key like '$%' or isExcluded or not isIncluded)) {\n        avoEvent.eventProperties := arrayPushBack(avoEvent.eventProperties, { 'propertyName': key, 'propertyType': getPropValueType(value) })\n    }\n}\n\nfetch('https://api.avo.app/inspector/clairview/v1/track', {\n    'method': 'POST',\n    'headers': {\n        'env': inputs.environment,\n        'api-key': inputs.apiKey,\n        'content-type': 'application/json',\n        'accept': 'application/json',\n    },\n    'body': [avoEvent]\n})",
             "inputs_schema": [
                 {
                     "key": "apiKey",
@@ -363,7 +363,7 @@
                     "type": "string",
                     "label": "App name",
                     "description": "App name",
-                    "default": "MarketTor",
+                    "default": "ClairView",
                     "secret": false,
                     "required": false
                 },
@@ -521,7 +521,7 @@
             "id": "template-clearbit",
             "name": "Clearbit",
             "description": "Loads data from the Clearbit API and tracks an additional event with the enriched data if found. Once enriched, the person will not be enriched again.",
-            "hog": "let api_key := inputs.api_key\nlet email := inputs.email\n\nif (empty(email) or event.event == '$set' or person.properties.clearbit_enriched) {\n    return false\n}\n\nlet response := fetch(f'https://person-stream.clearbit.com/v2/combined/find?email={email}', {\n    'method': 'GET',\n    'headers': {\n        'Authorization': f'Bearer {api_key}'\n    }\n})\nif (response.status == 200 and not empty(response.body.person)) {\n    print('Clearbit data found - sending event to MarketTor')\n    marketTorCapture({\n        'event': '$set',\n        'distinct_id': event.distinct_id,\n        'properties': {\n            '$lib': 'hog_function',\n            '$hog_function_source': source.url,\n            '$set_once': {\n                'person': response.body.person,\n                'company': response.body.company,\n                'clearbit_enriched': true\n            }\n        }\n    })\n} else {\n    print('No Clearbit data found')\n}",
+            "hog": "let api_key := inputs.api_key\nlet email := inputs.email\n\nif (empty(email) or event.event == '$set' or person.properties.clearbit_enriched) {\n    return false\n}\n\nlet response := fetch(f'https://person-stream.clearbit.com/v2/combined/find?email={email}', {\n    'method': 'GET',\n    'headers': {\n        'Authorization': f'Bearer {api_key}'\n    }\n})\nif (response.status == 200 and not empty(response.body.person)) {\n    print('Clearbit data found - sending event to ClairView')\n    marketTorCapture({\n        'event': '$set',\n        'distinct_id': event.distinct_id,\n        'properties': {\n            '$lib': 'hog_function',\n            '$hog_function_source': source.url,\n            '$set_once': {\n                'person': response.body.person,\n                'company': response.body.company,\n                'clearbit_enriched': true\n            }\n        }\n    })\n} else {\n    print('No Clearbit data found')\n}",
             "inputs_schema": [
                 { "key": "api_key", "type": "string", "label": "Clearbit API Key", "secret": true, "required": true },
                 {
@@ -545,7 +545,7 @@
             "id": "template-customerio",
             "name": "Customer.io",
             "description": "Identify or track events against customers in Customer.io",
-            "hog": "let action := inputs.action\nlet name := event.event\n\nlet hasIdentifier := false\n\nfor (let key, value in inputs.identifiers) {\n    if (not empty(value)) {\n        hasIdentifier := true\n    }\n}\n\nif (not hasIdentifier) {\n    print('No identifier set. Skipping as at least 1 identifier is needed.')\n    return\n}\n\nif (action == 'automatic') {\n    if (event.event in ('$identify', '$set')) {\n        action := 'identify'\n        name := null\n    } else if (event.event == '$pageview') {\n        action := 'page'\n        name := event.properties.$current_url\n    } else if (event.event == '$screen') {\n        action := 'screen'\n        name := event.properties.$screen_name\n    } else {\n        action := 'event'\n    }\n}\n\nlet attributes := inputs.include_all_properties ? action == 'identify' ? person.properties : event.properties : {}\nif (inputs.include_all_properties and action != 'identify' and not empty(event.elements_chain)) {\n    attributes['$elements_chain'] := event.elements_chain\n}\nlet timestamp := toInt(toUnixTimestamp(toDateTime(event.timestamp)))\n\nfor (let key, value in inputs.attributes) {\n    attributes[key] := value\n}\n\nlet res := fetch(f'https://{inputs.host}/api/v2/entity', {\n    'method': 'POST',\n    'headers': {\n        'User-Agent': 'MarketTor Customer.io App',\n        'Authorization': f'Basic {base64Encode(f'{inputs.site_id}:{inputs.token}')}',\n        'Content-Type': 'application/json'\n    },\n    'body': {\n        'type': 'person',\n        'action': action,\n        'name': name,\n        'identifiers': inputs.identifiers,\n        'attributes': attributes,\n        'timestamp': timestamp\n    }\n})\n\nif (res.status >= 400) {\n    throw Error(f'Error from customer.io api: {res.status}: {res.body}');\n}",
+            "hog": "let action := inputs.action\nlet name := event.event\n\nlet hasIdentifier := false\n\nfor (let key, value in inputs.identifiers) {\n    if (not empty(value)) {\n        hasIdentifier := true\n    }\n}\n\nif (not hasIdentifier) {\n    print('No identifier set. Skipping as at least 1 identifier is needed.')\n    return\n}\n\nif (action == 'automatic') {\n    if (event.event in ('$identify', '$set')) {\n        action := 'identify'\n        name := null\n    } else if (event.event == '$pageview') {\n        action := 'page'\n        name := event.properties.$current_url\n    } else if (event.event == '$screen') {\n        action := 'screen'\n        name := event.properties.$screen_name\n    } else {\n        action := 'event'\n    }\n}\n\nlet attributes := inputs.include_all_properties ? action == 'identify' ? person.properties : event.properties : {}\nif (inputs.include_all_properties and action != 'identify' and not empty(event.elements_chain)) {\n    attributes['$elements_chain'] := event.elements_chain\n}\nlet timestamp := toInt(toUnixTimestamp(toDateTime(event.timestamp)))\n\nfor (let key, value in inputs.attributes) {\n    attributes[key] := value\n}\n\nlet res := fetch(f'https://{inputs.host}/api/v2/entity', {\n    'method': 'POST',\n    'headers': {\n        'User-Agent': 'ClairView Customer.io App',\n        'Authorization': f'Basic {base64Encode(f'{inputs.site_id}:{inputs.token}')}',\n        'Content-Type': 'application/json'\n    },\n    'body': {\n        'type': 'person',\n        'action': action,\n        'name': name,\n        'identifiers': inputs.identifiers,\n        'attributes': attributes,\n        'timestamp': timestamp\n    }\n})\n\nif (res.status >= 400) {\n    throw Error(f'Error from customer.io api: {res.status}: {res.body}');\n}",
             "inputs_schema": [
                 {
                     "key": "site_id",
@@ -642,7 +642,7 @@
             "id": "template-engage-so",
             "name": "Engage.so",
             "description": "Send events to Engage.so",
-            "hog": "fetch('https://api.engage.so/markettor', {\n    'method': 'POST',\n    'headers': {\n        'Authorization': f'Basic {base64Encode(f'{inputs.public_key}:{inputs.private_key}')}',\n        'Content-Type': 'application/json'\n    },\n    'body': event\n})",
+            "hog": "fetch('https://api.engage.so/clairview', {\n    'method': 'POST',\n    'headers': {\n        'Authorization': f'Basic {base64Encode(f'{inputs.public_key}:{inputs.private_key}')}',\n        'Content-Type': 'application/json'\n    },\n    'body': event\n})",
             "inputs_schema": [
                 {
                     "key": "public_key",
@@ -682,7 +682,7 @@
             "id": "template-gleap",
             "name": "Gleap",
             "description": "Updates a contact in Gleap",
-            "hog": "let action := inputs.action\nlet name := event.event\n\nif (empty(inputs.userId)) {\n    print('No User ID set. Skipping...')\n    return\n}\n\nlet attributes := inputs.include_all_properties ? person.properties : {}\n\nattributes['userId'] := inputs.userId\n\nfor (let key, value in inputs.attributes) {\n    if (not empty(value)) {\n        attributes[key] := value\n    }\n}\n\nlet res := fetch(f'https://api.gleap.io/admin/identify', {\n    'method': 'POST',\n    'headers': {\n        'User-Agent': 'MarketTor Gleap.io App',\n        'Api-Token': inputs.apiKey,\n        'Content-Type': 'application/json'\n    },\n    'body': attributes\n})\n\nif (res.status >= 400) {\n    print('Error from gleap.io api:', res.status, res.body)\n}",
+            "hog": "let action := inputs.action\nlet name := event.event\n\nif (empty(inputs.userId)) {\n    print('No User ID set. Skipping...')\n    return\n}\n\nlet attributes := inputs.include_all_properties ? person.properties : {}\n\nattributes['userId'] := inputs.userId\n\nfor (let key, value in inputs.attributes) {\n    if (not empty(value)) {\n        attributes[key] := value\n    }\n}\n\nlet res := fetch(f'https://api.gleap.io/admin/identify', {\n    'method': 'POST',\n    'headers': {\n        'User-Agent': 'ClairView Gleap.io App',\n        'Api-Token': inputs.apiKey,\n        'Content-Type': 'application/json'\n    },\n    'body': attributes\n})\n\nif (res.status >= 400) {\n    print('Error from gleap.io api:', res.status, res.body)\n}",
             "inputs_schema": [
                 { "key": "apiKey", "type": "string", "label": "Gleap.io API Key", "secret": true, "required": true },
                 {
@@ -1129,21 +1129,21 @@
         {
             "sub_templates": null,
             "status": "beta",
-            "id": "template-markettor-replicator",
-            "name": "MarketTor",
-            "description": "Send a copy of the incoming data in realtime to another MarketTor instance",
+            "id": "template-clairview-replicator",
+            "name": "ClairView",
+            "description": "Send a copy of the incoming data in realtime to another ClairView instance",
             "hog": "let host := inputs.host\nlet token := inputs.token\nlet include_all_properties := inputs.include_all_properties\nlet propertyOverrides := inputs.properties\nlet properties := include_all_properties ? event.properties : {}\n\nfor (let key, value in propertyOverrides) {\n    properties[key] := value\n}\n\nfetch(f'{host}/e', {\n    'method': 'POST',\n    'headers': {\n        'Content-Type': 'application/json'\n    },\n    'body': {\n        'token': token,\n        'event': event.event,\n        'timestamp': event.timestamp,\n        'distinct_id': event.distinct_id,\n        'elements_chain': event.elements_chain,\n        'properties': properties\n    }\n})",
             "inputs_schema": [
                 {
                     "key": "host",
                     "type": "string",
-                    "label": "MarketTor host",
-                    "description": "For cloud accounts this is either https://us.i.markettor.com or https://eu.i.markettor.com",
-                    "default": "https://us.i.markettor.com",
+                    "label": "ClairView host",
+                    "description": "For cloud accounts this is either https://us.i.clairview.com or https://eu.i.clairview.com",
+                    "default": "https://us.i.clairview.com",
                     "secret": false,
                     "required": true
                 },
-                { "key": "token", "type": "string", "label": "MarketTor API key", "secret": false, "required": true },
+                { "key": "token", "type": "string", "label": "ClairView API key", "secret": false, "required": true },
                 {
                     "key": "include_all_properties",
                     "type": "boolean",
@@ -1166,7 +1166,7 @@
             "category": ["Custom", "Analytics"],
             "filters": null,
             "masking": null,
-            "icon_url": "/static/markettor-icon.svg"
+            "icon_url": "/static/clairview-icon.svg"
         },
         {
             "sub_templates": null,
@@ -1174,7 +1174,7 @@
             "id": "template-rudderstack",
             "name": "RudderStack",
             "description": "Send data to RudderStack",
-            "hog": "fun getPayload() {\n    let rudderPayload := {\n        'context': {\n            'app': {\n                'name': 'MarketTorPlugin',\n            },\n            'os': {},\n            'page': {},\n            'screen': {},\n            'library': {},\n        },\n        'channel': 's2s',\n        'type': 'track',\n        'properties': {},\n    }\n\n    if (not empty(event.properties.$os)) rudderPayload.context.os.name := event.properties.$os\n    if (not empty(event.properties.$browser)) rudderPayload.context.browser := event.properties.$browser\n    if (not empty(event.properties.$browser_version)) rudderPayload.context.browser_version := event.properties.$browser_version\n    if (not empty(event.properties.$host)) rudderPayload.context.page.host := event.properties.$host\n    if (not empty(event.properties.$current_url)) rudderPayload.context.page.url := event.properties.$current_url\n    if (not empty(event.properties.$path)) rudderPayload.context.page.path := event.properties.$path\n    if (not empty(event.properties.$referrer)) rudderPayload.context.page.referrer := event.properties.$referrer\n    if (not empty(event.properties.$initial_referrer)) rudderPayload.context.page.initial_referrer := event.properties.$initial_referrer\n    if (not empty(event.properties.$referring_domain)) rudderPayload.context.page.referring_domain := event.properties.$referring_domain\n    if (not empty(event.properties.$initial_referring_domain)) rudderPayload.context.page.initial_referring_domain := event.properties.$initial_referring_domain\n    if (not empty(event.properties.$screen_height)) rudderPayload.context.screen.height := event.properties.$screen_height\n    if (not empty(event.properties.$screen_width)) rudderPayload.context.screen.width := event.properties.$screen_width\n    if (not empty(event.properties.$lib)) rudderPayload.context.library.name := event.properties.$lib\n    if (not empty(event.properties.$lib_version)) rudderPayload.context.library.version := event.properties.$lib_version\n    if (not empty(event.$ip)) rudderPayload.context.ip := event.$ip\n    if (not empty(event.properties.$active_feature_flags)) rudderPayload.context.active_feature_flags := event.properties.$active_feature_flags\n    if (not empty(event.properties.token)) rudderPayload.context.token := event.properties.token\n    if (not empty(event.uuid)) rudderPayload.messageId := event.uuid\n    if (not empty(event.timestamp)) rudderPayload.originalTimestamp := event.timestamp\n    if (not empty(inputs.identifier)) rudderPayload.userId := inputs.identifier\n    if (not empty(event.properties.$anon_distinct_id ?? event.properties.$device_id ?? event.properties.distinct_id)) rudderPayload.anonymousId := event.properties.$anon_distinct_id ?? event.properties.$device_id ?? event.properties.distinct_id\n\n    if (event.event in ('$identify', '$set')) {\n        rudderPayload.type := 'identify'\n        if (not empty(event.properties.$set)) rudderPayload.context.trait := event.properties.$set\n        if (not empty(event.properties.$set)) rudderPayload.traits := event.properties.$set\n    } else if (event.event == '$create_alias') {\n        rudderPayload.type := 'alias'\n        if (not empty(event.properties.alias)) rudderPayload.userId := event.properties.alias\n        if (not empty(event.distinct_id)) rudderPayload.previousId := event.distinct_id\n    } else if (event.event == '$pageview') {\n        rudderPayload.type := 'page'\n        if (not empty(event.properties.name)) rudderPayload.name := event.properties.name\n        if (not empty(event.properties.$host)) rudderPayload.properties.host := event.properties.$host\n        if (not empty(event.properties.$current_url)) rudderPayload.properties.url := event.properties.$current_url\n        if (not empty(event.properties.$pathname)) rudderPayload.properties.path := event.properties.$pathname\n        if (not empty(event.properties.$referrer)) rudderPayload.properties.referrer := event.properties.$referrer\n        if (not empty(event.properties.$initial_referrer)) rudderPayload.properties.initial_referrer := event.properties.$initial_referrer\n        if (not empty(event.properties.$referring_domain)) rudderPayload.properties.referring_domain := event.properties.$referring_domain\n        if (not empty(event.properties.$initial_referring_domain)) rudderPayload.properties.initial_referring_domain := event.properties.$initial_referring_domain\n    } else if (event.event == '$autocapture') {\n        rudderPayload.type := 'track'\n        if (not empty(event.properties.$event_type)) rudderPayload.event := event.properties.$event_type\n    } else {\n        rudderPayload.type := 'track'\n        if (not empty(event.event)) rudderPayload.event := event.event\n    }\n\n    for (let key, value in event.properties) {\n        if (value != null and not key like '$%') {\n            rudderPayload.properties[key] := value\n        }\n    }\n\n    return {\n        'method': 'POST',\n        'headers': {\n            'Content-Type': 'application/json',\n            'Authorization': f'Basic {base64Encode(f'{inputs.token}:')}',\n        },\n        'body': {\n            'batch': [rudderPayload],\n            'sentAt': now()\n        }\n    }\n}\n\nfetch(f'{inputs.host}/v1/batch', getPayload())",
+            "hog": "fun getPayload() {\n    let rudderPayload := {\n        'context': {\n            'app': {\n                'name': 'ClairViewPlugin',\n            },\n            'os': {},\n            'page': {},\n            'screen': {},\n            'library': {},\n        },\n        'channel': 's2s',\n        'type': 'track',\n        'properties': {},\n    }\n\n    if (not empty(event.properties.$os)) rudderPayload.context.os.name := event.properties.$os\n    if (not empty(event.properties.$browser)) rudderPayload.context.browser := event.properties.$browser\n    if (not empty(event.properties.$browser_version)) rudderPayload.context.browser_version := event.properties.$browser_version\n    if (not empty(event.properties.$host)) rudderPayload.context.page.host := event.properties.$host\n    if (not empty(event.properties.$current_url)) rudderPayload.context.page.url := event.properties.$current_url\n    if (not empty(event.properties.$path)) rudderPayload.context.page.path := event.properties.$path\n    if (not empty(event.properties.$referrer)) rudderPayload.context.page.referrer := event.properties.$referrer\n    if (not empty(event.properties.$initial_referrer)) rudderPayload.context.page.initial_referrer := event.properties.$initial_referrer\n    if (not empty(event.properties.$referring_domain)) rudderPayload.context.page.referring_domain := event.properties.$referring_domain\n    if (not empty(event.properties.$initial_referring_domain)) rudderPayload.context.page.initial_referring_domain := event.properties.$initial_referring_domain\n    if (not empty(event.properties.$screen_height)) rudderPayload.context.screen.height := event.properties.$screen_height\n    if (not empty(event.properties.$screen_width)) rudderPayload.context.screen.width := event.properties.$screen_width\n    if (not empty(event.properties.$lib)) rudderPayload.context.library.name := event.properties.$lib\n    if (not empty(event.properties.$lib_version)) rudderPayload.context.library.version := event.properties.$lib_version\n    if (not empty(event.$ip)) rudderPayload.context.ip := event.$ip\n    if (not empty(event.properties.$active_feature_flags)) rudderPayload.context.active_feature_flags := event.properties.$active_feature_flags\n    if (not empty(event.properties.token)) rudderPayload.context.token := event.properties.token\n    if (not empty(event.uuid)) rudderPayload.messageId := event.uuid\n    if (not empty(event.timestamp)) rudderPayload.originalTimestamp := event.timestamp\n    if (not empty(inputs.identifier)) rudderPayload.userId := inputs.identifier\n    if (not empty(event.properties.$anon_distinct_id ?? event.properties.$device_id ?? event.properties.distinct_id)) rudderPayload.anonymousId := event.properties.$anon_distinct_id ?? event.properties.$device_id ?? event.properties.distinct_id\n\n    if (event.event in ('$identify', '$set')) {\n        rudderPayload.type := 'identify'\n        if (not empty(event.properties.$set)) rudderPayload.context.trait := event.properties.$set\n        if (not empty(event.properties.$set)) rudderPayload.traits := event.properties.$set\n    } else if (event.event == '$create_alias') {\n        rudderPayload.type := 'alias'\n        if (not empty(event.properties.alias)) rudderPayload.userId := event.properties.alias\n        if (not empty(event.distinct_id)) rudderPayload.previousId := event.distinct_id\n    } else if (event.event == '$pageview') {\n        rudderPayload.type := 'page'\n        if (not empty(event.properties.name)) rudderPayload.name := event.properties.name\n        if (not empty(event.properties.$host)) rudderPayload.properties.host := event.properties.$host\n        if (not empty(event.properties.$current_url)) rudderPayload.properties.url := event.properties.$current_url\n        if (not empty(event.properties.$pathname)) rudderPayload.properties.path := event.properties.$pathname\n        if (not empty(event.properties.$referrer)) rudderPayload.properties.referrer := event.properties.$referrer\n        if (not empty(event.properties.$initial_referrer)) rudderPayload.properties.initial_referrer := event.properties.$initial_referrer\n        if (not empty(event.properties.$referring_domain)) rudderPayload.properties.referring_domain := event.properties.$referring_domain\n        if (not empty(event.properties.$initial_referring_domain)) rudderPayload.properties.initial_referring_domain := event.properties.$initial_referring_domain\n    } else if (event.event == '$autocapture') {\n        rudderPayload.type := 'track'\n        if (not empty(event.properties.$event_type)) rudderPayload.event := event.properties.$event_type\n    } else {\n        rudderPayload.type := 'track'\n        if (not empty(event.event)) rudderPayload.event := event.event\n    }\n\n    for (let key, value in event.properties) {\n        if (value != null and not key like '$%') {\n            rudderPayload.properties[key] := value\n        }\n    }\n\n    return {\n        'method': 'POST',\n        'headers': {\n            'Content-Type': 'application/json',\n            'Authorization': f'Basic {base64Encode(f'{inputs.token}:')}',\n        },\n        'body': {\n            'batch': [rudderPayload],\n            'sentAt': now()\n        }\n    }\n}\n\nfetch(f'{inputs.host}/v1/batch', getPayload())",
             "inputs_schema": [
                 {
                     "key": "host",
@@ -1401,7 +1401,7 @@
                     "key": "hook",
                     "type": "string",
                     "label": "Zapier hook path",
-                    "description": "The path of the Zapier webhook. You can create your own or use our native Zapier integration https://zapier.com/apps/markettor/integrations",
+                    "description": "The path of the Zapier webhook. You can create your own or use our native Zapier integration https://zapier.com/apps/clairview/integrations",
                     "secret": false,
                     "required": true
                 },

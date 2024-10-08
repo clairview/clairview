@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { isString } from '@tiptap/core'
 import { actions, connect, kea, path, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
@@ -7,7 +7,7 @@ import api from 'lib/api'
 import { ValidatedPasswordResult, validatePassword } from 'lib/components/PasswordStrength'
 import { CLOUD_HOSTNAMES, FEATURE_FLAGS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { urls } from 'scenes/urls'
 
@@ -97,7 +97,7 @@ export const signupLogic = kea<signupLogicType>([
                         organization_name: payload.organization_name || undefined,
                     })
                     if (!payload.organization_name) {
-                        markettor.capture('sign up organization name not provided')
+                        clairview.capture('sign up organization name not provided')
                     }
                     location.href = res.redirect_url || '/'
                 } catch (e) {

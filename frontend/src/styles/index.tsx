@@ -1,1 +1,1 @@
-import './global.scss' /* Contains MarketTor's main styling configurations */
+import './global.scss' /* Contains ClairView's main styling configurations */

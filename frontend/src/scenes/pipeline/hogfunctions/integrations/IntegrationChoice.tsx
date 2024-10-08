@@ -1,5 +1,5 @@
-import { IconExternal, IconX } from '@markettor/icons'
-import { LemonButton, LemonMenu, LemonSkeleton } from '@markettor/lemon-ui'
+import { IconExternal, IconX } from '@clairview/icons'
+import { LemonButton, LemonMenu, LemonSkeleton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import api from 'lib/api'
 import { integrationsLogic } from 'lib/integrations/integrationsLogic'

@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { forwardRef } from 'react'
 
 interface ValueInspectorButtonProps {

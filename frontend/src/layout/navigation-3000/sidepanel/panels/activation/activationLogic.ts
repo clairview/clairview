@@ -4,7 +4,7 @@ import { router } from 'kea-router'
 import api from 'lib/api'
 import { reverseProxyCheckerLogic } from 'lib/components/ReverseProxyChecker/reverseProxyCheckerLogic'
 import { permanentlyMount } from 'lib/utils/kea-logic-builders'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { membersLogic } from 'scenes/organization/membersLogic'
 import { savedInsightsLogic } from 'scenes/saved-insights/savedInsightsLogic'
 import { inviteLogic } from 'scenes/settings/organization/inviteLogic'
@@ -198,7 +198,7 @@ export const activationLogic = kea<activationLogicType>([
                             tasks.push({
                                 id: ActivationTasks.IngestFirstEvent,
                                 name: 'Ingest your first event',
-                                description: 'Ingest your first event to get started with MarketTor',
+                                description: 'Ingest your first event to get started with ClairView',
                                 completed: currentTeam?.ingested_event ?? false,
                                 canSkip: false,
                                 skipped: false,
@@ -208,7 +208,7 @@ export const activationLogic = kea<activationLogicType>([
                             tasks.push({
                                 id: ActivationTasks.InviteTeamMember,
                                 name: 'Invite a team member',
-                                description: 'Everyone in your organization can benefit from MarketTor',
+                                description: 'Everyone in your organization can benefit from ClairView',
                                 completed: memberCount > 1 || invites.length > 0,
                                 canSkip: true,
                                 skipped: skippedTasks.includes(ActivationTasks.InviteTeamMember),
@@ -255,7 +255,7 @@ export const activationLogic = kea<activationLogicType>([
                                 completed: customEventsCount > 0,
                                 canSkip: true,
                                 skipped: skippedTasks.includes(ActivationTasks.TrackCustomEvents),
-                                url: 'https://markettor.com/tutorials/event-tracking-guide#setting-up-custom-events',
+                                url: 'https://clairview.com/tutorials/event-tracking-guide#setting-up-custom-events',
                             })
                             break
                         case ActivationTasks.SetUpReverseProxy:
@@ -266,7 +266,7 @@ export const activationLogic = kea<activationLogicType>([
                                 completed: hasReverseProxy || false,
                                 canSkip: true,
                                 skipped: skippedTasks.includes(ActivationTasks.SetUpReverseProxy),
-                                url: 'https://markettor.com/docs/advanced/proxy',
+                                url: 'https://clairview.com/docs/advanced/proxy',
                             })
                             break
                         default:
@@ -326,7 +326,7 @@ export const activationLogic = kea<activationLogicType>([
             }
         },
         skipTask: ({ id }) => {
-            markettor.capture('activation sidebar task skipped', {
+            clairview.capture('activation sidebar task skipped', {
                 task: id,
             })
             if (values.currentTeam?.id) {

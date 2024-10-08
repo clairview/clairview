@@ -1,26 +1,26 @@
 openapi: 3.0.0
 info:
     version: '1.0.0'
-    title: MarketTor Capture API
+    title: ClairView Capture API
     description: |
         > Update: These endpoints can now be accessed with either your Team API
         key or your personal API key.
 
-        As explained in our API overview page, MarketTor provides two different
+        As explained in our API overview page, ClairView provides two different
         APIs.
 
         This page refers to our public endpoints, which use the same API key as
-        the MarketTor snippet. The endpoints documented here are used solely with
-        POST requests, and will not return any sensitive data from your MarketTor
+        the ClairView snippet. The endpoints documented here are used solely with
+        POST requests, and will not return any sensitive data from your ClairView
         instance.
 
         > Note: For this API, you should use your 'Project API Key' from the
-        'Project' page in MarketTor. This is the same key used in your frontend
+        'Project' page in ClairView. This is the same key used in your frontend
         snippet.
 
         Note that this specification is an attempt to capture some of the
         details on the [POST-only public endpoints
-        documentation](https://markettor.com/docs/api/post-only-endpoints) but in
+        documentation](https://clairview.com/docs/api/post-only-endpoints) but in
         a format that we can easily use to validate the correctness of our API
         implementation. It is not a complete specification of the API, and
         should not be used as such. It will hopefully become such a document,
@@ -41,9 +41,9 @@ paths:
             description: |
                 > Note: Timestamp is optional. If not set, it'll automatically be set to the current time.
 
-                Capture an event. Events are the core of MarketTor, and are what you use
+                Capture an event. Events are the core of ClairView, and are what you use
                 to track user behavior, and then analyze and visualize in
-                MarketTor.
+                ClairView.
 
             parameters:
                 - in: query
@@ -69,7 +69,7 @@ paths:
                     description: |
                         On successful capture of an event or events, we notify you with a
                         200 response. A 200 response guarantees that the event was persisted
-                        by MarketTor, but does not guarantee that it will be processed
+                        by ClairView, but does not guarantee that it will be processed
                         successfully.
                     content:
                         application/json:
@@ -116,9 +116,9 @@ paths:
                                     application/json schema.
 
                 description: |
-                    Provides a method to capture events. Events are the core of MarketTor,
+                    Provides a method to capture events. Events are the core of ClairView,
                     and are what you use to track user behavior, and then analyze and
-                    visualize in MarketTor.
+                    visualize in ClairView.
 
     /batch/:
         post:
@@ -157,7 +157,7 @@ paths:
                     description: |
                         On successful capture of an event or events, we notify you with a
                         200 response. A 200 response guarantees that the event was persisted
-                        by MarketTor, but does not guarantee that it will be processed
+                        by ClairView, but does not guarantee that it will be processed
                         successfully.
                     content:
                         application/json:
@@ -213,9 +213,9 @@ paths:
                                     application/json schema.
 
                 description: |
-                    Provides a method to capture events. Events are the core of MarketTor,
+                    Provides a method to capture events. Events are the core of ClairView,
                     and are what you use to track user behavior, and then analyze and
-                    visualize in MarketTor.
+                    visualize in ClairView.
 
 components:
     schemas:

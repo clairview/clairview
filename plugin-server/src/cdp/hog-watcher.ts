@@ -4,7 +4,7 @@ import { UUIDT } from '../utils/utils'
 import { CdpRedis } from './redis'
 import { HogFunctionInvocationResult, HogFunctionType } from './types'
 
-export const BASE_REDIS_KEY = process.env.NODE_ENV == 'test' ? '@markettor-test/hog-watcher' : '@markettor/hog-watcher'
+export const BASE_REDIS_KEY = process.env.NODE_ENV == 'test' ? '@clairview-test/hog-watcher' : '@clairview/hog-watcher'
 const REDIS_KEY_TOKENS = `${BASE_REDIS_KEY}/tokens`
 const REDIS_KEY_DISABLED = `${BASE_REDIS_KEY}/disabled`
 const REDIS_KEY_DISABLED_HISTORY = `${BASE_REDIS_KEY}/disabled_history`
@@ -24,7 +24,7 @@ export type HogWatcherFunctionState = {
 
 // TODO: Future follow up - we should swap this to an API call or something.
 // Having it as a celery task ID based on a file path is brittle and hard to test.
-export const CELERY_TASK_ID = 'markettor.tasks.plugin_server.hog_function_state_transition'
+export const CELERY_TASK_ID = 'clairview.tasks.plugin_server.hog_function_state_transition'
 
 export class HogWatcher {
     constructor(private hub: Hub, private redis: CdpRedis) {}

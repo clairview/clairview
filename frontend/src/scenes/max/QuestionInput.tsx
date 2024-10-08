@@ -1,5 +1,5 @@
-import { IconArrowRight } from '@markettor/icons'
-import { LemonButton, LemonTextArea } from '@markettor/lemon-ui'
+import { IconArrowRight } from '@clairview/icons'
+import { LemonButton, LemonTextArea } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { useEffect, useRef } from 'react'

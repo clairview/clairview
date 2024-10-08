@@ -1,4 +1,4 @@
-import { IconEllipsis } from '@markettor/icons'
+import { IconEllipsis } from '@clairview/icons'
 
 import { PopoverProps } from '../Popover/Popover'
 import { LemonButtonWithDropdown } from '.'

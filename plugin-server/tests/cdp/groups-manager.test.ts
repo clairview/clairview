@@ -25,11 +25,11 @@ describe('Groups Manager', () => {
     describe('unit tests', () => {
         beforeEach(() => {
             mockHub.postgres.query.mockImplementation((_, query): Promise<any> => {
-                if (query.includes('markettor_grouptypemapping')) {
+                if (query.includes('clairview_grouptypemapping')) {
                     return Promise.resolve({ rows: mockGroupTypes })
                 }
 
-                if (query.includes('markettor_group')) {
+                if (query.includes('clairview_group')) {
                     return Promise.resolve({ rows: mockGroups })
                 }
                 return Promise.resolve({

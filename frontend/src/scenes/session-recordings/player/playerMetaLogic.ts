@@ -6,7 +6,7 @@ import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
 import { lemonToast } from 'lib/lemon-ui/LemonToast'
 import { getCoreFilterDefinition } from 'lib/taxonomy'
 import { ceilMsToClosestSecond, findLastIndex, objectsEqual } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { countryCodeToName } from 'scenes/insights/views/WorldMap'
 import { sessionRecordingDataLogic } from 'scenes/session-recordings/player/sessionRecordingDataLogic'
 import {
@@ -240,7 +240,7 @@ export const playerMetaLogic = kea<playerMetaLogicType>([
             }
         },
         sessionSummaryFeedback: ({ feedback }) => {
-            markettor.capture('session summary feedback', {
+            clairview.capture('session summary feedback', {
                 feedback,
                 session_summary: values.sessionSummary,
                 summarized_session_id: props.sessionRecordingId,

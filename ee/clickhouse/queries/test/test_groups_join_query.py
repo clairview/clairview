@@ -1,5 +1,5 @@
 from ee.clickhouse.queries.groups_join_query import GroupsJoinQuery
-from markettor.models.filters import Filter
+from clairview.models.filters import Filter
 
 
 def test_groups_join_query_blank():

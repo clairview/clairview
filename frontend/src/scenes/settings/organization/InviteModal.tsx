@@ -1,7 +1,7 @@
 import './InviteModal.scss'
 
-import { IconPlus, IconTrash } from '@markettor/icons'
-import { LemonInput, LemonSelect, LemonTextArea, Link } from '@markettor/lemon-ui'
+import { IconPlus, IconTrash } from '@clairview/icons'
+import { LemonInput, LemonSelect, LemonTextArea, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { OrganizationMembershipLevel } from 'lib/constants'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
@@ -25,8 +25,8 @@ export function EmailUnavailableMessage(): JSX.Element {
     return (
         <LemonBanner type="info" className="my-2">
             <>
-                This MarketTor instance isn't{' '}
-                <Link to="https://markettor.com/docs/self-host/configure/email" target="_blank" targetBlankIcon>
+                This ClairView instance isn't{' '}
+                <Link to="https://clairview.com/docs/self-host/configure/email" target="_blank" targetBlankIcon>
                     configured&nbsp;to&nbsp;send&nbsp;emails&nbsp;
                 </Link>
                 .<br />
@@ -59,7 +59,7 @@ export function InviteRow({ index, isDeletable }: { index: number; isDeletable: 
         <div className="flex gap-2">
             <div className="flex-2">
                 <LemonInput
-                    placeholder={`${name.toLowerCase()}@markettor.com`}
+                    placeholder={`${name.toLowerCase()}@clairview.com`}
                     type="email"
                     className={`error-on-blur${!invitesToSend[index]?.isValid ? ' errored' : ''}`}
                     onChange={(v) => {
@@ -158,8 +158,8 @@ export function InviteTeamMatesComponent(): JSX.Element {
         <>
             {preflight?.licensed_users_available === 0 && (
                 <LemonBanner type="warning">
-                    You've hit the limit of team members you can invite to your MarketTor instance given your license.
-                    Please contact <Link to="mailto:sales@markettor.com">sales@markettor.com</Link> to upgrade your license.
+                    You've hit the limit of team members you can invite to your ClairView instance given your license.
+                    Please contact <Link to="mailto:sales@clairview.com">sales@clairview.com</Link> to upgrade your license.
                 </LemonBanner>
             )}
             <div className="space-y-2">
@@ -190,7 +190,7 @@ export function InviteTeamMatesComponent(): JSX.Element {
                     </div>
                     <LemonTextArea
                         data-attr="invite-optional-message"
-                        placeholder="Tell your teammates why you're inviting them to MarketTor"
+                        placeholder="Tell your teammates why you're inviting them to ClairView"
                         onChange={(e) => updateMessage(e)}
                     />
                 </div>
@@ -234,17 +234,17 @@ export function InviteModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     onClose()
                 }}
                 width={800}
-                title={<>Invite others to {user?.organization?.name || 'MarketTor'}</>}
+                title={<>Invite others to {user?.organization?.name || 'ClairView'}</>}
                 description={
                     preflight?.email_service_available ? (
                         <p>
-                            Invite others to your organization to collaborate together in MarketTor. An invite is specific
+                            Invite others to your organization to collaborate together in ClairView. An invite is specific
                             to an email address and expires after 3 days. Name can be provided for the team member's
                             convenience.
                         </p>
                     ) : (
                         <p>
-                            This MarketTor instance isn't configured to send emails. In the meantime, you can generate a
+                            This ClairView instance isn't configured to send emails. In the meantime, you can generate a
                             link for each team member you want to invite. You can always invite others at a later time.{' '}
                             <strong>Make sure you share links with the organization members you want to invite.</strong>
                         </p>

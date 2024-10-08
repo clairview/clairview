@@ -27,9 +27,9 @@ function AngularInitializeCodeSnippet(): JSX.Element {
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
-markettor.init(
+clairview.init(
   process.env.MARKETTOR_KEY,
   {
     api_host:process.env.MARKETTOR_HOST,
@@ -50,7 +50,7 @@ bootstrapApplication(AppComponent, appConfig)
 export function SDKInstallAngularInstructions(): JSX.Element {
     return (
         <>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
             <h3>Add environment variables</h3>
             <p>
@@ -61,7 +61,7 @@ export function SDKInstallAngularInstructions(): JSX.Element {
 
             <h3>Initialize</h3>
             <p>
-                In your <code>src/main.ts</code>, initialize MarketTor using your project API key and instance address:
+                In your <code>src/main.ts</code>, initialize ClairView using your project API key and instance address:
             </p>
             <AngularInitializeCodeSnippet />
         </>

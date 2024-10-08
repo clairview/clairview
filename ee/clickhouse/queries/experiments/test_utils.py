@@ -1,9 +1,9 @@
 from ee.clickhouse.queries.experiments.utils import requires_flag_warning
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.action.action import Action
-from markettor.models.filters.filter import Filter
-from markettor.test.base import APIBaseTest, ClickhouseTestMixin
-from markettor.test.test_journeys import journeys_for
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.action.action import Action
+from clairview.models.filters.filter import Filter
+from clairview.test.base import APIBaseTest, ClickhouseTestMixin
+from clairview.test.test_journeys import journeys_for
 
 
 class TestUtils(ClickhouseTestMixin, APIBaseTest):

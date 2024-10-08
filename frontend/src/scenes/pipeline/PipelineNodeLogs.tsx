@@ -1,5 +1,5 @@
-import { IconSearch } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonInput, LemonSnack, LemonTable } from '@markettor/lemon-ui'
+import { IconSearch } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonInput, LemonSnack, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LOGS_PORTION_LIMIT } from 'lib/constants'
 import { pluralize } from 'lib/utils'

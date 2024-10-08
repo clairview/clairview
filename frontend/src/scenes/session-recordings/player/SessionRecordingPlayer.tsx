@@ -1,6 +1,6 @@
 import './SessionRecordingPlayer.scss'
 
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { BuilderHog2 } from 'lib/components/hedgehogs'

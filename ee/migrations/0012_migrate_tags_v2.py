@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.db import migrations
 from django.db.models import Q
 
-from markettor.models.tag import tagify
+from clairview.models.tag import tagify
 
 
 def forwards(apps, schema_editor):
@@ -14,8 +14,8 @@ def forwards(apps, schema_editor):
     logger = structlog.get_logger(__name__)
     logger.info("ee/0012_migrate_tags_v2_start")
 
-    Tag = apps.get_model("markettor", "Tag")
-    TaggedItem = apps.get_model("markettor", "TaggedItem")
+    Tag = apps.get_model("clairview", "Tag")
+    TaggedItem = apps.get_model("clairview", "TaggedItem")
     EnterpriseEventDefinition = apps.get_model("ee", "EnterpriseEventDefinition")
     EnterprisePropertyDefinition = apps.get_model("ee", "EnterprisePropertyDefinition")
 
@@ -127,7 +127,7 @@ def forwards(apps, schema_editor):
 
 
 def reverse(apps, schema_editor):
-    TaggedItem = apps.get_model("markettor", "TaggedItem")
+    TaggedItem = apps.get_model("clairview", "TaggedItem")
     TaggedItem.objects.filter(Q(event_definition_id__isnull=False) | Q(property_definition_id__isnull=False)).delete()
     # Cascade deletes tag objects
 
@@ -137,7 +137,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("ee", "0011_add_tags_back"),
-        ("markettor", "0218_uniqueness_constraint_tagged_items"),
+        ("clairview", "0218_uniqueness_constraint_tagged_items"),
     ]
 
     operations = [migrations.RunPython(forwards, reverse)]

@@ -122,7 +122,7 @@ export class HogFunctionManager {
                 PostgresUse.COMMON_READ,
                 `
             SELECT ${HOG_FUNCTION_FIELDS.join(', ')}
-            FROM markettor_hogfunction
+            FROM clairview_hogfunction
             WHERE deleted = FALSE AND enabled = TRUE
         `,
                 [],
@@ -155,7 +155,7 @@ export class HogFunctionManager {
             await this.hub.postgres.query(
                 PostgresUse.COMMON_READ,
                 `SELECT ${HOG_FUNCTION_FIELDS.join(', ')}
-                FROM markettor_hogfunction
+                FROM clairview_hogfunction
                 WHERE id = ANY($1) AND deleted = FALSE AND enabled = TRUE`,
                 [ids],
                 'fetchEnabledHogFunctions'
@@ -182,7 +182,7 @@ export class HogFunctionManager {
             await this.hub.postgres.query(
                 PostgresUse.COMMON_READ,
                 `SELECT ${HOG_FUNCTION_FIELDS.join(', ')}
-                FROM markettor_hogfunction
+                FROM clairview_hogfunction
                 WHERE id = $1 AND deleted = FALSE`,
                 [id],
                 'fetchHogFunction'
@@ -246,7 +246,7 @@ export class HogFunctionManager {
             await this.hub.postgres.query(
                 PostgresUse.COMMON_READ,
                 `SELECT id, team_id, kind, config, sensitive_config
-                FROM markettor_integration
+                FROM clairview_integration
                 WHERE id = ANY($1)`,
                 [integrationIds],
                 'fetchIntegrations'

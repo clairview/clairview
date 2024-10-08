@@ -9,7 +9,7 @@ import {
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { IconDragHandle, IconLink } from 'lib/lemon-ui/icons'
-import { LemonButton, LemonMenu, LemonMenuItems } from '@markettor/lemon-ui'
+import { LemonButton, LemonMenu, LemonMenuItems } from '@clairview/lemon-ui'
 import './NodeWrapper.scss'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
 import { BindLogic, BuiltLogic, useActions, useMountedLogic, useValues } from 'kea'
@@ -18,21 +18,21 @@ import { useInView } from 'react-intersection-observer'
 import { NotebookNodeResource } from '~/types'
 import { ErrorBoundary } from '~/layout/ErrorBoundary'
 import { NotebookNodeLogicProps, notebookNodeLogic } from './notebookNodeLogic'
-import { markettorNodePasteRule, useSyncedAttributes } from './utils'
+import { clairviewNodePasteRule, useSyncedAttributes } from './utils'
 import {
     KNOWN_NODES,
     NotebookNodeProps,
     CustomNotebookNodeAttributes,
-    CreateMarketTorWidgetNodeOptions,
+    CreateClairViewWidgetNodeOptions,
     NodeWrapperProps,
 } from '../Notebook/utils'
 import { useWhyDidIRender } from 'lib/hooks/useWhyDidIRender'
 import { NotebookNodeTitle } from './components/NotebookNodeTitle'
 import { notebookNodeLogicType } from './notebookNodeLogicType'
 import { SlashCommandsPopover } from '../Notebook/SlashCommands'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { NotebookNodeContext } from './NotebookNodeContext'
-import { IconCollapse, IconCopy, IconEllipsis, IconExpand, IconFilter, IconGear, IconPlus, IconX } from '@markettor/icons'
+import { IconCollapse, IconCopy, IconEllipsis, IconExpand, IconFilter, IconGear, IconPlus, IconX } from '@clairview/icons'
 import { useFeatureFlag } from 'lib/hooks/useFeatureFlag'
 
 function NodeWrapper<T extends CustomNotebookNodeAttributes>(props: NodeWrapperProps<T>): JSX.Element {
@@ -340,8 +340,8 @@ function NodeWrapper<T extends CustomNotebookNodeAttributes>(props: NodeWrapperP
 
 export const MemoizedNodeWrapper = memo(NodeWrapper) as typeof NodeWrapper
 
-export function createMarketTorWidgetNode<T extends CustomNotebookNodeAttributes>(
-    options: CreateMarketTorWidgetNodeOptions<T>
+export function createClairViewWidgetNode<T extends CustomNotebookNodeAttributes>(
+    options: CreateClairViewWidgetNodeOptions<T>
 ): Node {
     const { Component, pasteOptions, attributes, serializedText, ...wrapperProps } = options
 
@@ -363,7 +363,7 @@ export function createMarketTorWidgetNode<T extends CustomNotebookNodeAttributes
 
         useEffect(() => {
             if (props.node.attrs.nodeId === null) {
-                markettor.capture('notebook node added', { node_type: props.node.type.name })
+                clairview.capture('notebook node added', { node_type: props.node.type.name })
             }
         }, [props.node.attrs.nodeId])
 
@@ -440,7 +440,7 @@ export function createMarketTorWidgetNode<T extends CustomNotebookNodeAttributes
         addPasteRules() {
             return pasteOptions
                 ? [
-                      markettorNodePasteRule({
+                      clairviewNodePasteRule({
                           editor: this.editor,
                           type: this.type,
                           ...pasteOptions,

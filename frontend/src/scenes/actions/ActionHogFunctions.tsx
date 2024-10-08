@@ -1,4 +1,4 @@
-import { LemonBanner } from '@markettor/lemon-ui'
+import { LemonBanner } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { actionEditLogic } from 'scenes/actions/actionEditLogic'
 import { actionLogic } from 'scenes/actions/actionLogic'

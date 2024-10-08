@@ -4,62 +4,62 @@ import { PostgresUse } from './postgres'
 
 function pluginConfigsInForceQuery(specificField?: keyof PluginConfig): string {
     const fields = specificField
-        ? `markettor_pluginconfig.${specificField}`
+        ? `clairview_pluginconfig.${specificField}`
         : `
-        markettor_pluginconfig.id,
-        markettor_pluginconfig.team_id,
-        markettor_pluginconfig.plugin_id,
-        markettor_pluginconfig.enabled,
-        markettor_pluginconfig.order,
-        markettor_pluginconfig.config,
-        markettor_pluginconfig.filters,
-        markettor_pluginconfig.updated_at,
-        markettor_pluginconfig.created_at
+        clairview_pluginconfig.id,
+        clairview_pluginconfig.team_id,
+        clairview_pluginconfig.plugin_id,
+        clairview_pluginconfig.enabled,
+        clairview_pluginconfig.order,
+        clairview_pluginconfig.config,
+        clairview_pluginconfig.filters,
+        clairview_pluginconfig.updated_at,
+        clairview_pluginconfig.created_at
     `
 
     return `SELECT ${fields}
-       FROM markettor_pluginconfig
-       LEFT JOIN markettor_team ON markettor_team.id = markettor_pluginconfig.team_id
-       LEFT JOIN markettor_organization ON markettor_organization.id = markettor_team.organization_id
-       LEFT JOIN markettor_plugin ON markettor_plugin.id = markettor_pluginconfig.plugin_id
+       FROM clairview_pluginconfig
+       LEFT JOIN clairview_team ON clairview_team.id = clairview_pluginconfig.team_id
+       LEFT JOIN clairview_organization ON clairview_organization.id = clairview_team.organization_id
+       LEFT JOIN clairview_plugin ON clairview_plugin.id = clairview_pluginconfig.plugin_id
        WHERE (
-           markettor_pluginconfig.enabled='t'
-           AND (markettor_pluginconfig.deleted is NULL OR markettor_pluginconfig.deleted!='t')
-           AND markettor_organization.plugins_access_level > 0
+           clairview_pluginconfig.enabled='t'
+           AND (clairview_pluginconfig.deleted is NULL OR clairview_pluginconfig.deleted!='t')
+           AND clairview_organization.plugins_access_level > 0
        )`
 }
 
 const PLUGIN_SELECT = `SELECT
-            markettor_plugin.id,
-            markettor_plugin.name,
-            markettor_plugin.url,
-            markettor_plugin.tag,
-            markettor_plugin.from_json,
-            markettor_plugin.from_web,
-            markettor_plugin.error,
-            markettor_plugin.plugin_type,
-            markettor_plugin.organization_id,
-            markettor_plugin.is_global,
-            markettor_plugin.capabilities,
-            markettor_plugin.public_jobs,
-            markettor_plugin.is_stateless,
-            markettor_plugin.log_level,
-            markettor_plugin.updated_at,
+            clairview_plugin.id,
+            clairview_plugin.name,
+            clairview_plugin.url,
+            clairview_plugin.tag,
+            clairview_plugin.from_json,
+            clairview_plugin.from_web,
+            clairview_plugin.error,
+            clairview_plugin.plugin_type,
+            clairview_plugin.organization_id,
+            clairview_plugin.is_global,
+            clairview_plugin.capabilities,
+            clairview_plugin.public_jobs,
+            clairview_plugin.is_stateless,
+            clairview_plugin.log_level,
+            clairview_plugin.updated_at,
             psf__plugin_json.source as source__plugin_json,
             psf__index_ts.source as source__index_ts,
             psf__frontend_tsx.source as source__frontend_tsx,
             psf__site_ts.source as source__site_ts
-        FROM markettor_plugin
-        LEFT JOIN markettor_pluginsourcefile psf__plugin_json
-            ON (psf__plugin_json.plugin_id = markettor_plugin.id AND psf__plugin_json.filename = 'plugin.json')
-        LEFT JOIN markettor_pluginsourcefile psf__index_ts
-            ON (psf__index_ts.plugin_id = markettor_plugin.id AND psf__index_ts.filename = 'index.ts')
-        LEFT JOIN markettor_pluginsourcefile psf__frontend_tsx
-            ON (psf__frontend_tsx.plugin_id = markettor_plugin.id AND psf__frontend_tsx.filename = 'frontend.tsx')
-        LEFT JOIN markettor_pluginsourcefile psf__site_ts
-            ON (psf__site_ts.plugin_id = markettor_plugin.id AND psf__site_ts.filename = 'site.ts')`
+        FROM clairview_plugin
+        LEFT JOIN clairview_pluginsourcefile psf__plugin_json
+            ON (psf__plugin_json.plugin_id = clairview_plugin.id AND psf__plugin_json.filename = 'plugin.json')
+        LEFT JOIN clairview_pluginsourcefile psf__index_ts
+            ON (psf__index_ts.plugin_id = clairview_plugin.id AND psf__index_ts.filename = 'index.ts')
+        LEFT JOIN clairview_pluginsourcefile psf__frontend_tsx
+            ON (psf__frontend_tsx.plugin_id = clairview_plugin.id AND psf__frontend_tsx.filename = 'frontend.tsx')
+        LEFT JOIN clairview_pluginsourcefile psf__site_ts
+            ON (psf__site_ts.plugin_id = clairview_plugin.id AND psf__site_ts.filename = 'site.ts')`
 
-const PLUGIN_UPSERT_RETURNING = `INSERT INTO markettor_plugin
+const PLUGIN_UPSERT_RETURNING = `INSERT INTO clairview_plugin
     (
         name,
         url,
@@ -105,7 +105,7 @@ const PLUGIN_UPSERT_RETURNING = `INSERT INTO markettor_plugin
 export async function getPlugin(hub: Hub, pluginId: number): Promise<Plugin | undefined> {
     const result = await hub.db.postgres.query(
         PostgresUse.COMMON_READ,
-        `${PLUGIN_SELECT} WHERE markettor_plugin.id = $1`,
+        `${PLUGIN_SELECT} WHERE clairview_plugin.id = $1`,
         [pluginId],
         'getPlugin'
     )
@@ -116,8 +116,8 @@ export async function getActivePluginRows(hub: Hub): Promise<Plugin[]> {
     const { rows }: { rows: Plugin[] } = await hub.db.postgres.query(
         PostgresUse.COMMON_READ,
         `${PLUGIN_SELECT}
-        WHERE markettor_plugin.id IN (${pluginConfigsInForceQuery('plugin_id')}
-        GROUP BY markettor_pluginconfig.plugin_id)`,
+        WHERE clairview_plugin.id IN (${pluginConfigsInForceQuery('plugin_id')}
+        GROUP BY clairview_pluginconfig.plugin_id)`,
         undefined,
         'getActivePluginRows'
     )
@@ -128,7 +128,7 @@ export async function getActivePluginRows(hub: Hub): Promise<Plugin[]> {
 export async function getPluginAttachmentRows(hub: Hub): Promise<PluginAttachmentDB[]> {
     const { rows }: { rows: PluginAttachmentDB[] } = await hub.db.postgres.query(
         PostgresUse.COMMON_READ,
-        `SELECT markettor_pluginattachment.* FROM markettor_pluginattachment
+        `SELECT clairview_pluginattachment.* FROM clairview_pluginattachment
             WHERE plugin_config_id IN (${pluginConfigsInForceQuery('id')})`,
         undefined,
         'getPluginAttachmentRows'
@@ -153,7 +153,7 @@ export async function setPluginCapabilities(
 ): Promise<void> {
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
-        'UPDATE markettor_plugin SET capabilities = ($1) WHERE id = $2',
+        'UPDATE clairview_plugin SET capabilities = ($1) WHERE id = $2',
         [capabilities, pluginId],
         'setPluginCapabilities'
     )
@@ -162,7 +162,7 @@ export async function setPluginCapabilities(
 export async function disablePlugin(hub: Hub, pluginConfigId: PluginConfigId): Promise<void> {
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_pluginconfig SET enabled='f' WHERE id=$1 AND enabled='t'`,
+        `UPDATE clairview_pluginconfig SET enabled='f' WHERE id=$1 AND enabled='t'`,
         [pluginConfigId],
         'disablePlugin'
     )

@@ -2,8 +2,8 @@ import json
 
 from rest_framework import status
 
-from markettor.constants import INSIGHT_FUNNELS, FunnelOrderType, FunnelVizType
-from markettor.test.base import (
+from clairview.constants import INSIGHT_FUNNELS, FunnelOrderType, FunnelVizType
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,

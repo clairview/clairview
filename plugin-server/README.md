@@ -1,6 +1,6 @@
-# MarketTor Plugin Server
+# ClairView Plugin Server
 
-[![npm package](https://img.shields.io/npm/v/@markettor/plugin-server?style=flat-square)](https://www.npmjs.com/package/@markettor/plugin-server)
+[![npm package](https://img.shields.io/npm/v/@clairview/plugin-server?style=flat-square)](https://www.npmjs.com/package/@clairview/plugin-server)
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 This service takes care of processing events with plugins and more.
@@ -9,12 +9,12 @@ This service takes care of processing events with plugins and more.
 
 Let's get you developing the plugin server in no time:
 
-1. Have virtual environment from the main MarketTor repo active.
+1. Have virtual environment from the main ClairView repo active.
 
 1. Install dependencies and prepare for takeoff by running command `pnpm i`.
 
-1. Start a development instance of [MarketTor](/MarketTor/markettor) - [instructions
-   here](https://markettor.com/docs/developing-locally). After all, this is the _MarketTor_ Plugin
+1. Start a development instance of [ClairView](/ClairView/clairview) - [instructions
+   here](https://clairview.com/docs/developing-locally). After all, this is the _ClairView_ Plugin
    Server, and it works in conjuction with the main server.
 
 1. Make sure that the plugin server is configured correctly (see [Configuration](#Configuration)).
@@ -43,7 +43,7 @@ At the time of writing it assumes:
 1. that events are pushed into Kafka topics.
 1. that side-effects of the plugin-server are updates to ClickHouse table data.
 1. that the plugin-server reads certain data from Postgres tables e.g.
-   `markettor_team`, `markettor_pluginsource` etc. These would ideally be wrapped in
+   `clairview_team`, `clairview_pluginsource` etc. These would ideally be wrapped in
    some implementation detail agnostic API.
 
 It specifically doesn't assume details of the running plugin-server process e.g.
@@ -52,13 +52,13 @@ runtime stack.
 See `bin/ci_functional_tests.sh` for how these tests are run in CI. For local
 testing:
 
-1. run docker `docker compose -f docker-compose.dev.yml up` (in markettor folder)
+1. run docker `docker compose -f docker-compose.dev.yml up` (in clairview folder)
 1. setup the test DBs `pnpm setup:test`
 1. start the plugin-server:
     ```bash
     APP_METRICS_FLUSH_FREQUENCY_MS=0 \
         CLICKHOUSE_DATABASE='default' \
-        DATABASE_URL=postgres://markettor:markettor@localhost:5432/test_markettor \
+        DATABASE_URL=postgres://clairview:clairview@localhost:5432/test_clairview \
         PLUGINS_DEFAULT_LOG_LEVEL=0 \
         RELOAD_PLUGIN_JITTER_MAX_MS=0 \
         PLUGIN_SERVER_MODE=functional-tests \
@@ -67,7 +67,7 @@ testing:
 1. run the tests:
     ```bash
     CLICKHOUSE_DATABASE='default' \
-        DATABASE_URL=postgres://markettor:markettor@localhost:5432/test_markettor \
+        DATABASE_URL=postgres://clairview:clairview@localhost:5432/test_clairview \
         pnpm functional_tests --watch
     ```
 
@@ -107,7 +107,7 @@ There's a multitude of settings you can use to control the plugin server. Use th
 
 | Name                                   | Description                                                                                                                                                                                                    | Default value                         |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| DATABASE_URL                           | Postgres database URL                                                                                                                                                                                          | `'postgres://localhost:5432/markettor'` |
+| DATABASE_URL                           | Postgres database URL                                                                                                                                                                                          | `'postgres://localhost:5432/clairview'` |
 | REDIS_URL                              | Redis store URL                                                                                                                                                                                                | `'redis://localhost'`                 |
 | BASE_DIR                               | base path for resolving local plugins                                                                                                                                                                          | `'.'`                                 |
 | WORKER_CONCURRENCY                     | number of concurrent worker threads                                                                                                                                                                            | `0` – all cores                       |
@@ -145,7 +145,7 @@ There's a multitude of settings you can use to control the plugin server. Use th
 ## Releasing a new version
 
 Just bump up `version` in `package.json` on the main branch and the new version will be published automatically,
-with a matching PR in the [main MarketTor repo](https://github.com/MarketTor/markettor) created.
+with a matching PR in the [main ClairView repo](https://github.com/ClairView/clairview) created.
 
 It's advised to use `bump patch/minor/major` label on PRs - that way the above will be done automatically when the PR is merged.
 
@@ -161,7 +161,7 @@ This main thread spawns `WORKER_CONCURRENCY` worker threads, managed using Pisci
 
 Let's talk about the main thread first. This has:
 
-1. `pubSub` – Redis powered pub-sub mechanism for reloading plugins whenever a message is published by the main MarketTor app.
+1. `pubSub` – Redis powered pub-sub mechanism for reloading plugins whenever a message is published by the main ClairView app.
 
 1. `hub` – Handler of connections to required DBs and queues (ClickHouse, Kafka, Postgres, Redis), holds loaded plugins.
    Created via `hub.ts -> createHub`. Every thread has its own instance.
@@ -178,9 +178,9 @@ Let's talk about the main thread first. This has:
 
 1. `queue` – Event ingestion queue. This is a Celery (backed by Redis) or Kafka queue, depending on the setup (EE/Cloud is Kafka due to high volume). These are consumed by the `queue` above, and sent off to the Piscina workers (`src/main/ingestion-queues/queue.ts -> ingestEvent`). Since all of the actual ingestion happens inside worker threads, you'll find the specific ingestion code there (`src/worker/ingestion/ingest-event.ts`). There the data is saved into Postgres (and ClickHouse via Kafka on EE/Cloud).
 
-    It's also a good idea to see the producer side of this ingestion queue, which comes from `markettor/markettor/api/capture.py`. The plugin server gets the `process_event_with_plugins` Celery task from there, in the Postgres pipeline. The ClickHouse via Kafka pipeline gets the data by way of Kafka topic `events_plugin_ingestion`.
+    It's also a good idea to see the producer side of this ingestion queue, which comes from `clairview/clairview/api/capture.py`. The plugin server gets the `process_event_with_plugins` Celery task from there, in the Postgres pipeline. The ClickHouse via Kafka pipeline gets the data by way of Kafka topic `events_plugin_ingestion`.
 
-1. `mmdbServer` – TCP server, which works as an interface between the GeoIP MMDB data reader located in main thread memory and plugins ran in worker threads of the same plugin server instance. This way the GeoIP reader is only loaded in one thread and can be used in all. Additionally this mechanism ensures that `mmdbServer` is ready before ingestion is started (database downloaded from [http-mmdb](https://github.com/MarketTor/http-mmdb) and read), and keeps the database up to date in the background.
+1. `mmdbServer` – TCP server, which works as an interface between the GeoIP MMDB data reader located in main thread memory and plugins ran in worker threads of the same plugin server instance. This way the GeoIP reader is only loaded in one thread and can be used in all. Additionally this mechanism ensures that `mmdbServer` is ready before ingestion is started (database downloaded from [http-mmdb](https://github.com/ClairView/http-mmdb) and read), and keeps the database up to date in the background.
 
 > Note:
 > An `organization_id` is tied to a _company_ and its _installed plugins_, a `team_id` is tied to a _project_ and its _plugin configs_ (enabled/disabled+extra config).
@@ -190,7 +190,7 @@ Let's talk about the main thread first. This has:
 We carry a node-rdkafka patch that adds cooperative rebalancing. To generate this patch:
 
     # setup a local node-rdkafka clone
-    git clone git@github.com:MarketTor/node-rdkafka.git
+    git clone git@github.com:ClairView/node-rdkafka.git
     cd node-rdkafka
     git remote add blizzard git@github.com:Blizzard/node-rdkafka.git
     git fetch blizzard

@@ -50,7 +50,7 @@ exports[`sessionRecordingDataLogic deduplicateSnapshots should match snapshot 1`
                     "childNodes": [
                       {
                         "id": 7,
-                        "textContent": "MarketTor",
+                        "textContent": "ClairView",
                         "type": 3,
                       },
                     ],
@@ -202,7 +202,7 @@ exports[`sessionRecordingDataLogic deduplicateSnapshots should match snapshot 1`
                             "childNodes": [
                               {
                                 "id": 25,
-                                "textContent": "MarketTor React",
+                                "textContent": "ClairView React",
                                 "type": 3,
                               },
                             ],
@@ -1096,7 +1096,7 @@ exports[`sessionRecordingDataLogic deduplicateSnapshots should match snapshot 1`
                     "childNodes": [
                       {
                         "id": 11,
-                        "textContent": "MarketTor",
+                        "textContent": "ClairView",
                         "type": 3,
                       },
                     ],
@@ -1248,7 +1248,7 @@ exports[`sessionRecordingDataLogic deduplicateSnapshots should match snapshot 1`
                             "childNodes": [
                               {
                                 "id": 29,
-                                "textContent": "MarketTor React",
+                                "textContent": "ClairView React",
                                 "type": 3,
                               },
                             ],
@@ -1741,7 +1741,7 @@ exports[`sessionRecordingDataLogic deduplicateSnapshots should match snapshot 1`
           "nextId": null,
           "node": {
             "id": 68,
-            "textContent": "MarketTor",
+            "textContent": "ClairView",
             "type": 3,
           },
           "parentId": 10,

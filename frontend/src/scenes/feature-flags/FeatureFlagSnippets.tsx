@@ -102,7 +102,7 @@ export function PHPSnippet({
     localEvaluation,
     samplePropertyName,
 }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'MarketTor::'
+    const clientSuffix = 'ClairView::'
 
     const flagFunction = multivariant ? 'getFeatureFlag' : 'isFeatureEnabled'
 
@@ -170,11 +170,11 @@ export function GolangSnippet({
             ? `
         // add group properties used in the flag to ensure the flag
         // is evaluated locally, vs. going to our servers
-        groupProperties: map[string]Properties{"${groupType.group_type}": markettor.NewProperties().Set("${propertyName}", "value").Set("name", "xyz")}`
+        groupProperties: map[string]Properties{"${groupType.group_type}": clairview.NewProperties().Set("${propertyName}", "value").Set("name", "xyz")}`
             : `
         // add person properties used in the flag to ensure the flag
         // is evaluated locally, vs. going to our servers
-        PersonProperties: markettor.NewProperties().Set("${propertyName}", "value")`
+        PersonProperties: clairview.NewProperties().Set("${propertyName}", "value")`
         : ''
 
     const flagSnippet = groupType
@@ -215,7 +215,7 @@ export function RubySnippet({
     payload,
     samplePropertyName,
 }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'markettor.'
+    const clientSuffix = 'clairview.'
     const flagFunction = payload ? 'get_feature_flag_payload' : multivariant ? 'get_feature_flag' : 'is_feature_enabled'
 
     const propertyName = samplePropertyName || 'is_authorized'
@@ -273,7 +273,7 @@ export function PythonSnippet({
     payload,
     samplePropertyName,
 }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'markettor.'
+    const clientSuffix = 'clairview.'
     const flagFunction = payload ? 'get_feature_flag_payload' : multivariant ? 'get_feature_flag' : 'feature_enabled'
 
     const propertyName = samplePropertyName || 'is_authorized'
@@ -324,7 +324,7 @@ if ${conditional}:
 }
 
 export function AndroidSnippet({ flagKey, multivariant, payload }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'MarketTor.'
+    const clientSuffix = 'ClairView.'
 
     if (payload) {
         return (
@@ -373,7 +373,7 @@ export function FlutterSnippet({ flagKey, multivariant, payload }: FeatureFlagSn
 }
 
 export function iOSSnippet({ flagKey, multivariant, payload }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'MarketTorSDK.shared.'
+    const clientSuffix = 'ClairViewSDK.shared.'
 
     if (payload) {
         return (
@@ -396,7 +396,7 @@ export function iOSSnippet({ flagKey, multivariant, payload }: FeatureFlagSnippe
 }
 
 export function ReactNativeSnippet({ flagKey, multivariant, payload }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'markettor.'
+    const clientSuffix = 'clairview.'
 
     if (payload) {
         return (
@@ -412,7 +412,7 @@ export function ReactNativeSnippet({ flagKey, multivariant, payload }: FeatureFl
     return (
         <CodeSnippet language={Language.JSX} wrap>
             {`// With a hook
-import { useFeatureFlag } from 'markettor-react-native'
+import { useFeatureFlag } from 'clairview-react-native'
 
 const MyComponent = () => {
     const showFlaggedFeature = useFeatureFlag('${flagKey}')
@@ -445,7 +445,7 @@ export function ReactSnippet({ flagKey, multivariant, payload }: FeatureFlagSnip
     return (
         <CodeSnippet language={Language.JSX} wrap>
             {`
-import { ${flagFunction} } from 'markettor-js/react'
+import { ${flagFunction} } from 'clairview-js/react'
 
 function App() {
     const ${variable} = ${flagFunction}('${flagKey}')
@@ -493,7 +493,7 @@ export function JSSnippet({
         return (
             <>
                 <CodeSnippet language={Language.JavaScript} wrap>
-                    {`markettor.getFeatureFlagPayload('${flagKey ?? ''}')`}
+                    {`clairview.getFeatureFlagPayload('${flagKey ?? ''}')`}
                 </CodeSnippet>
             </>
         )
@@ -503,8 +503,8 @@ export function JSSnippet({
 
     const propertyOverrideSnippet = `// Your flag depends on properties that are not instantly available. If you want
 // to make them available without waiting for server delays, send these properties for flag evaluation, like so:
-// Make sure to call this before evaluating flags. More info: https://markettor.com/docs/libraries/js#overriding-server-properties 
-markettor.${
+// Make sure to call this before evaluating flags. More info: https://clairview.com/docs/libraries/js#overriding-server-properties 
+clairview.${
         groupType
             ? `setGroupPropertiesForFlags({ '${groupType.group_type}': {'${propertyName}': 'value'}})`
             : `setPersonPropertiesForFlags({'${propertyName}': 'value'})`
@@ -512,7 +512,7 @@ markettor.${
 
 `
 
-    const clientSuffix = 'markettor.'
+    const clientSuffix = 'clairview.'
     const flagFunction = multivariant ? 'getFeatureFlag' : 'isFeatureEnabled'
 
     const variantSuffix = multivariant ? ` == 'example-variant'` : ''
@@ -540,16 +540,16 @@ if (${clientSuffix}${flagFunction}('${flagKey ?? ''}') ${variantSuffix}) {
 export function JSBootstrappingSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.JavaScript} wrap>
-            {`// Initialise the markettor library with a distinct ID and feature flags for immediate loading
+            {`// Initialise the clairview library with a distinct ID and feature flags for immediate loading
 // This avoids the delay between the library loading and feature flags becoming available to use.
 
-markettor.init('{project_api_key}', {
+clairview.init('{project_api_key}', {
     api_host: '${apiHostOrigin()}'
     bootstrap:
     {
         distinctID: 'your-anonymous-id',
         featureFlags: {
-    // input the flag values here from 'markettor.getAllFlags(distinct_id)' which you can find in the server-side libraries.
+    // input the flag values here from 'clairview.getAllFlags(distinct_id)' which you can find in the server-side libraries.
         // example:
             // 'flag-1': true,
             // 'variant-flag': 'control',

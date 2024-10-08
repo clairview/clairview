@@ -13,7 +13,7 @@ fi
 
 if [ "$REGISTRY_URL" == "" ]
 then
-export REGISTRY_URL="markettor/markettor"
+export REGISTRY_URL="clairview/clairview"
 fi
 
 export POSTHOG_APP_TAG="${POSTHOG_APP_TAG:-latest}"
@@ -36,7 +36,7 @@ else
     echo "If you created your PostHog stack PRIOR TO August 12th, 2022 / v1.39.0, the Postgres and Clickhouse containers did NOT have persistent named volumes by default."
     echo "If you choose to upgrade, you 💣 will likely lose data 💣 contained in these anonymous volumes."
     echo ""
-    echo "See the discussion here for more information: https://github.com/PostHog/markettor/pull/11256"
+    echo "See the discussion here for more information: https://github.com/PostHog/clairview/pull/11256"
     echo ""
     echo "WE STRONGLY RECOMMEND YOU:"
     echo ""
@@ -58,7 +58,7 @@ fi
 [[ -f ".env" ]] && export $(cat .env | xargs) || ( echo "No .env file found. Please create it with POSTHOG_SECRET and DOMAIN set." && exit 1)
 export POSTHOG_APP_TAG="${POSTHOG_APP_TAG:-latest-release}"
 
-cd markettor
+cd clairview
 git pull
 cd ../
 
@@ -69,8 +69,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.13.0/docker
 sudo chmod +x /usr/local/bin/docker-compose
 
 rm -f docker-compose.yml
-cp markettor/docker-compose.base.yml docker-compose.base.yml
-cp markettor/docker-compose.hobby.yml docker-compose.yml.tmpl
+cp clairview/docker-compose.base.yml docker-compose.base.yml
+cp clairview/docker-compose.hobby.yml docker-compose.yml.tmpl
 envsubst < docker-compose.yml.tmpl > docker-compose.yml
 rm docker-compose.yml.tmpl
 

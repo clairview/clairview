@@ -16,5 +16,5 @@ storybook-static
 dist/
 node_modules/
 pnpm-lock.yaml
-markettor/templates/email/*
+clairview/templates/email/*
 hogvm/typescript/src/stl/bytecode.ts

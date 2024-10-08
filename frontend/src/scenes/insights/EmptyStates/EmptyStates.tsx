@@ -8,8 +8,8 @@ import {
     IconPlusSmall,
     IconPlusSquare,
     IconWarning,
-} from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BuilderHog3 } from 'lib/components/hedgehogs'
 import { supportLogic } from 'lib/components/Support/supportLogic'
@@ -19,7 +19,7 @@ import { Link } from 'lib/lemon-ui/Link'
 import { LoadingBar } from 'lib/lemon-ui/LoadingBar'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import { humanFriendlyNumber } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useEffect, useState } from 'react'
 import { funnelDataLogic } from 'scenes/funnels/funnelDataLogic'
 import { entityFilterLogic } from 'scenes/insights/filters/ActionFilter/entityFilterLogic'
@@ -67,7 +67,7 @@ function SamplingLink({ insightProps }: { insightProps: InsightLogicProps }): JS
             <Link
                 onClick={() => {
                     setSamplingPercentage(suggestedSamplingPercentage)
-                    markettor.capture('sampling_enabled_on_slow_query', {
+                    clairview.capture('sampling_enabled_on_slow_query', {
                         samplingPercentage: suggestedSamplingPercentage,
                     })
                 }}
@@ -337,12 +337,12 @@ export function FunnelSingleStepState({ actionable = true }: FunnelSingleStepSta
                 <div className="mt-4">
                     <Link
                         data-attr="funnels-single-step-help"
-                        to="https://markettor.com/docs/user-guides/funnels?utm_medium=in-product&utm_campaign=funnel-empty-state"
+                        to="https://clairview.com/docs/user-guides/funnels?utm_medium=in-product&utm_campaign=funnel-empty-state"
                         target="_blank"
                         className="flex items-center justify-center"
                         targetBlankIcon
                     >
-                        Learn more about funnels in MarketTor docs
+                        Learn more about funnels in ClairView docs
                     </Link>
                 </div>
             </div>
@@ -386,10 +386,10 @@ export function InsightValidationError({
                     <div className="mt-4">
                         <Link
                             data-attr="insight-funnels-emptystate-help"
-                            to="https://markettor.com/docs/user-guides/funnels?utm_medium=in-product&utm_campaign=funnel-exclusion-filter-state"
+                            to="https://clairview.com/docs/user-guides/funnels?utm_medium=in-product&utm_campaign=funnel-exclusion-filter-state"
                             target="_blank"
                         >
-                            Learn more about funnels in MarketTor docs
+                            Learn more about funnels in ClairView docs
                             <IconOpenInNew style={{ marginLeft: 4, fontSize: '0.85em' }} />
                         </Link>
                     </div>

@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { ErrorDisplay } from 'lib/components/Errors/ErrorDisplay'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'

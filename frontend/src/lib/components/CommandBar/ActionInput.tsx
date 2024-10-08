@@ -1,5 +1,5 @@
-import { IconPencil } from '@markettor/icons'
-import { LemonInput } from '@markettor/lemon-ui'
+import { IconPencil } from '@clairview/icons'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { CommandFlow } from 'lib/components/CommandPalette/commandPaletteLogic'
 import { IconChevronRight } from 'lib/lemon-ui/icons'

@@ -1,8 +1,8 @@
 import './LemonActionableTooltip.scss'
 
 import { Placement } from '@floating-ui/react'
-import { IconX } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { IconOpenInNew } from 'lib/lemon-ui/icons'
 import { IconChevronLeft, IconChevronRight } from 'lib/lemon-ui/icons'
 import { Popover } from 'lib/lemon-ui/Popover/Popover'

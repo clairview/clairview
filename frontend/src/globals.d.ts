@@ -1,4 +1,4 @@
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { ExportedData } from '~/exporter/types'
 
@@ -10,7 +10,7 @@ declare global {
         JS_MARKETTOR_SELF_CAPTURE?: boolean
         JS_CAPTURE_TIME_TO_SEE_DATA?: boolean
         JS_KEA_VERBOSE_LOGGING?: boolean
-        markettor?: markettor
+        clairview?: clairview
         ESBUILD_LOAD_SCRIPT: (name) => void
         ESBUILD_LOAD_CHUNKS: (name) => void
         ESBUILD_LOADED_CHUNKS: Set<string>

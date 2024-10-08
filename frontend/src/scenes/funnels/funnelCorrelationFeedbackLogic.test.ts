@@ -1,6 +1,6 @@
 import { expectLogic } from 'kea-test-utils'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { teamLogic } from 'scenes/teamLogic'
 
 import { useAvailableFeatures } from '~/mocks/features'
@@ -77,7 +77,7 @@ describe('funnelCorrelationFeedbackLogic', () => {
     })
 
     it('captures emoji feedback properly', async () => {
-        jest.spyOn(markettor, 'capture')
+        jest.spyOn(clairview, 'capture')
         await expectLogic(logic, () => {
             logic.actions.setCorrelationFeedbackRating(1)
         })
@@ -87,11 +87,11 @@ describe('funnelCorrelationFeedbackLogic', () => {
             })
             .toDispatchActions(eventUsageLogic, ['reportCorrelationAnalysisFeedback'])
 
-        expect(markettor.capture).toHaveBeenCalledWith('correlation analysis feedback', { rating: 1 })
+        expect(clairview.capture).toHaveBeenCalledWith('correlation analysis feedback', { rating: 1 })
     })
 
     it('goes away on sending feedback, capturing it properly', async () => {
-        jest.spyOn(markettor, 'capture')
+        jest.spyOn(clairview, 'capture')
         await expectLogic(logic, () => {
             logic.actions.setCorrelationFeedbackRating(2)
             logic.actions.setCorrelationDetailedFeedback('tests')
@@ -108,8 +108,8 @@ describe('funnelCorrelationFeedbackLogic', () => {
 
         await expectLogic(eventUsageLogic).toFinishListeners()
 
-        expect(markettor.capture).toHaveBeenCalledWith('correlation analysis feedback', { rating: 2 })
-        expect(markettor.capture).toHaveBeenCalledWith('correlation analysis detailed feedback', {
+        expect(clairview.capture).toHaveBeenCalledWith('correlation analysis feedback', { rating: 2 })
+        expect(clairview.capture).toHaveBeenCalledWith('correlation analysis detailed feedback', {
             rating: 2,
             comments: 'tests',
         })

@@ -125,7 +125,7 @@ describe('HogFunctionManager', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_hogfunction SET name='Test Hog Function team 1 updated' WHERE id = $1`,
+            `UPDATE clairview_hogfunction SET name='Test Hog Function team 1 updated' WHERE id = $1`,
             [hogFunctions[0].id],
             'testKey'
         )
@@ -154,7 +154,7 @@ describe('HogFunctionManager', () => {
 
         await hub.db.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `UPDATE markettor_hogfunction SET enabled=false WHERE id = $1`,
+            `UPDATE clairview_hogfunction SET enabled=false WHERE id = $1`,
             [hogFunctions[0].id],
             'testKey'
         )

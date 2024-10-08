@@ -1,6 +1,6 @@
-import { LemonLabel, LemonSegmentedButton, LemonSwitch, LemonTag } from '@markettor/lemon-ui'
+import { LemonLabel, LemonSegmentedButton, LemonSwitch, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { InsightLogicProps } from '~/types'
 
@@ -25,7 +25,7 @@ export function SamplingFilter({ insightProps, infoTooltipContent }: SamplingFil
             <div className="flex items-center gap-1">
                 <LemonLabel
                     info={infoTooltipContent || DEFAULT_SAMPLING_INFO_TOOLTIP_CONTENT}
-                    infoLink="https://markettor.com/manual/sampling"
+                    infoLink="https://clairview.com/manual/sampling"
                 >
                     Sampling <LemonTag type="warning">BETA</LemonTag>
                 </LemonLabel>
@@ -34,11 +34,11 @@ export function SamplingFilter({ insightProps, infoTooltipContent }: SamplingFil
                     onChange={(checked) => {
                         if (checked) {
                             setSamplingPercentage(10)
-                            markettor.capture('sampling_enabled_on_insight')
+                            clairview.capture('sampling_enabled_on_insight')
                             return
                         }
                         setSamplingPercentage(null)
-                        markettor.capture('sampling_disabled_on_insight')
+                        clairview.capture('sampling_disabled_on_insight')
                     }}
                     checked={!!samplingPercentage}
                     disabledReason={
@@ -58,7 +58,7 @@ export function SamplingFilter({ insightProps, infoTooltipContent }: SamplingFil
                             onChange={(newValue) => {
                                 setSamplingPercentage(newValue)
 
-                                markettor.capture('sampling_percentage_updated', { samplingPercentage })
+                                clairview.capture('sampling_percentage_updated', { samplingPercentage })
                             }}
                         />
                     </div>

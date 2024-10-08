@@ -1,4 +1,4 @@
-import { LemonDropdown } from '@markettor/lemon-ui'
+import { LemonDropdown } from '@clairview/lemon-ui'
 import { getSeriesColor } from 'lib/colors'
 import { capitalizeFirstLetter, percentage } from 'lib/utils'
 import { useEffect, useRef, useState } from 'react'

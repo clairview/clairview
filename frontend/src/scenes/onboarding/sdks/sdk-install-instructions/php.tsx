@@ -8,7 +8,7 @@ function PHPConfigSnippet(): JSX.Element {
         <CodeSnippet language={Language.JSON}>
             {`{
     "require": {
-        "markettor/markettor-php": "1.0.*"
+        "clairview/clairview-php": "1.0.*"
     }
 }`}
         </CodeSnippet>
@@ -24,7 +24,7 @@ function PHPSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.PHP}>
-            {`MarketTor::init('${currentTeam?.api_token}',
+            {`ClairView::init('${currentTeam?.api_token}',
     array('host' => '${apiHostOrigin()}')
 );`}
         </CodeSnippet>

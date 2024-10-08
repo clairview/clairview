@@ -1,5 +1,5 @@
-import { IconTrash } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput } from '@markettor/lemon-ui'
+import { IconTrash } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput } from '@clairview/lemon-ui'
 import { Editor, isTextSelection } from '@tiptap/core'
 import { BubbleMenu } from '@tiptap/react'
 import { useActions } from 'kea'
@@ -49,7 +49,7 @@ export const InlineMenu = ({ editor }: { editor: Editor }): JSX.Element => {
                     <>
                         <LemonInput
                             size="small"
-                            placeholder="https://markettor.com"
+                            placeholder="https://clairview.com"
                             onChange={setLink}
                             value={href ?? ''}
                             className="border-0"

@@ -8,9 +8,9 @@ from django.dispatch.dispatcher import receiver
 from django.utils import timezone
 from rest_framework import exceptions, status
 
-from markettor.constants import AvailableFeature
-from markettor.models.utils import sane_repr
-from markettor.tasks.tasks import sync_all_organization_available_product_features
+from clairview.constants import AvailableFeature
+from clairview.models.utils import sane_repr
+from clairview.tasks.tasks import sync_all_organization_available_product_features
 
 
 class LicenseError(exceptions.APIException):
@@ -102,7 +102,7 @@ def get_licensed_users_available() -> Optional[int]:
     """
 
     license = License.objects.first_valid()
-    from markettor.models import OrganizationInvite
+    from clairview.models import OrganizationInvite
 
     if license:
         if license.max_users is None:

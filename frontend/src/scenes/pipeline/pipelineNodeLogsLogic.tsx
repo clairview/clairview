@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { LemonTableColumns, Link } from '@markettor/lemon-ui'
+import { TZLabel } from '@clairview/apps-common'
+import { LemonTableColumns, Link } from '@clairview/lemon-ui'
 import { actions, connect, events, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import { LOGS_PORTION_LIMIT } from 'lib/constants'

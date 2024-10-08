@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { isURL } from 'lib/utils'
 import stringWithWBR from 'lib/utils/stringWithWBR'

@@ -42,7 +42,7 @@ export function WebAnalyticsRecordingsTile({ tile }: { tile: ReplayTile }): JSX.
               title: 'There are no recordings matching this date range',
               description: 'Make sure you have the javascript snippet setup in your website.',
               buttonText: 'Learn more',
-              buttonTo: 'https://markettor.com/docs/user-guides/recordings',
+              buttonTo: 'https://clairview.com/docs/user-guides/recordings',
           }
     const to = items.length > 0 ? urls.replay(ReplayTabs.Home, replayFilters) : urls.replay()
     return (

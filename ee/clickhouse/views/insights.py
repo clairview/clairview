@@ -1,6 +1,6 @@
 from typing import Any
 
-from markettor.api.utils import action
+from clairview.api.utils import action
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -9,11 +9,11 @@ from ee.clickhouse.queries.funnels.funnel_correlation import FunnelCorrelation
 from ee.clickhouse.queries.paths import ClickhousePaths
 from ee.clickhouse.queries.retention import ClickhouseRetention
 from ee.clickhouse.queries.stickiness import ClickhouseStickiness
-from markettor.api.insight import InsightViewSet
-from markettor.decorators import cached_by_filters
-from markettor.models import Insight
-from markettor.models.dashboard import Dashboard
-from markettor.models.filters import Filter
+from clairview.api.insight import InsightViewSet
+from clairview.decorators import cached_by_filters
+from clairview.models import Insight
+from clairview.models.dashboard import Dashboard
+from clairview.models.filters import Filter
 
 
 class CanEditInsight(BasePermission):

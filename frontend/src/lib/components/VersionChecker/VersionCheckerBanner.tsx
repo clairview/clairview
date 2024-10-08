@@ -19,12 +19,12 @@ export function VersionCheckerBanner(): JSX.Element | null {
             dismissKey={dismissKey}
             action={{
                 children: 'Update now',
-                to: 'https://markettor.com/docs/libraries/js#option-2-install-via-npm',
+                to: 'https://clairview.com/docs/libraries/js#option-2-install-via-npm',
                 targetBlank: true,
             }}
             className="mb-4"
         >
-            <b>Your MarketTor SDK needs updating.</b> The latest version of <code>markettor-js</code> is{' '}
+            <b>Your ClairView SDK needs updating.</b> The latest version of <code>clairview-js</code> is{' '}
             <b>{versionWarning.latestAvailableVersion}</b>, but you're using <b>{versionWarning.latestUsedVersion}</b>.{' '}
             <br />
             {versionWarning.level === 'error' ? (

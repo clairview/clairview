@@ -1,0 +1,689 @@
+# serializer version: 1
+# name: TestNotebooks.test_updates_notebook
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.1
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.10
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.11
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.12
+  '''
+  SELECT "clairview_organizationmembership"."id",
+         "clairview_organizationmembership"."organization_id",
+         "clairview_organizationmembership"."user_id",
+         "clairview_organizationmembership"."level",
+         "clairview_organizationmembership"."joined_at",
+         "clairview_organizationmembership"."updated_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organizationmembership"
+  INNER JOIN "clairview_organization" ON ("clairview_organizationmembership"."organization_id" = "clairview_organization"."id")
+  WHERE "clairview_organizationmembership"."user_id" = 2
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.13
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_activitylog"
+  WHERE ("clairview_activitylog"."scope" = 'Notebook'
+         AND "clairview_activitylog"."team_id" = 2)
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.14
+  '''
+  SELECT "clairview_activitylog"."id",
+         "clairview_activitylog"."team_id",
+         "clairview_activitylog"."organization_id",
+         "clairview_activitylog"."user_id",
+         "clairview_activitylog"."was_impersonated",
+         "clairview_activitylog"."is_system",
+         "clairview_activitylog"."activity",
+         "clairview_activitylog"."item_id",
+         "clairview_activitylog"."scope",
+         "clairview_activitylog"."detail",
+         "clairview_activitylog"."created_at",
+         "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."requested_password_reset_at",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_activitylog"
+  LEFT OUTER JOIN "clairview_user" ON ("clairview_activitylog"."user_id" = "clairview_user"."id")
+  WHERE ("clairview_activitylog"."scope" = 'Notebook'
+         AND "clairview_activitylog"."team_id" = 2)
+  ORDER BY "clairview_activitylog"."created_at" DESC
+  LIMIT 2
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.15
+  '''
+  SELECT "clairview_instancesetting"."id",
+         "clairview_instancesetting"."key",
+         "clairview_instancesetting"."raw_value"
+  FROM "clairview_instancesetting"
+  WHERE "clairview_instancesetting"."key" = 'constance:clairview:RATE_LIMIT_ENABLED'
+  ORDER BY "clairview_instancesetting"."id" ASC
+  LIMIT 1
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.16
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_activitylog"
+  WHERE ("clairview_activitylog"."scope" = 'Notebook'
+         AND "clairview_activitylog"."team_id" = 2)
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.17
+  '''
+  SELECT "clairview_activitylog"."id",
+         "clairview_activitylog"."team_id",
+         "clairview_activitylog"."organization_id",
+         "clairview_activitylog"."user_id",
+         "clairview_activitylog"."was_impersonated",
+         "clairview_activitylog"."is_system",
+         "clairview_activitylog"."activity",
+         "clairview_activitylog"."item_id",
+         "clairview_activitylog"."scope",
+         "clairview_activitylog"."detail",
+         "clairview_activitylog"."created_at",
+         "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."requested_password_reset_at",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_activitylog"
+  LEFT OUTER JOIN "clairview_user" ON ("clairview_activitylog"."user_id" = "clairview_user"."id")
+  WHERE ("clairview_activitylog"."scope" = 'Notebook'
+         AND "clairview_activitylog"."team_id" = 2)
+  ORDER BY "clairview_activitylog"."created_at" DESC
+  LIMIT 2
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.2
+  '''
+  SELECT "clairview_organizationmembership"."id",
+         "clairview_organizationmembership"."organization_id",
+         "clairview_organizationmembership"."user_id",
+         "clairview_organizationmembership"."level",
+         "clairview_organizationmembership"."joined_at",
+         "clairview_organizationmembership"."updated_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organizationmembership"
+  INNER JOIN "clairview_organization" ON ("clairview_organizationmembership"."organization_id" = "clairview_organization"."id")
+  WHERE "clairview_organizationmembership"."user_id" = 2
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.3
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.4
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.5
+  '''
+  SELECT "clairview_organizationmembership"."id",
+         "clairview_organizationmembership"."organization_id",
+         "clairview_organizationmembership"."user_id",
+         "clairview_organizationmembership"."level",
+         "clairview_organizationmembership"."joined_at",
+         "clairview_organizationmembership"."updated_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organizationmembership"
+  INNER JOIN "clairview_organization" ON ("clairview_organizationmembership"."organization_id" = "clairview_organization"."id")
+  WHERE "clairview_organizationmembership"."user_id" = 2
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.6
+  '''
+  SELECT "clairview_notebook"."id",
+         "clairview_notebook"."short_id",
+         "clairview_notebook"."team_id",
+         "clairview_notebook"."title",
+         "clairview_notebook"."content",
+         "clairview_notebook"."text_content",
+         "clairview_notebook"."deleted",
+         "clairview_notebook"."version",
+         "clairview_notebook"."created_at",
+         "clairview_notebook"."created_by_id",
+         "clairview_notebook"."last_modified_at",
+         "clairview_notebook"."last_modified_by_id",
+         "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at",
+         "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."requested_password_reset_at",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in",
+         T5."id",
+         T5."password",
+         T5."last_login",
+         T5."first_name",
+         T5."last_name",
+         T5."is_staff",
+         T5."is_active",
+         T5."date_joined",
+         T5."uuid",
+         T5."current_organization_id",
+         T5."current_team_id",
+         T5."email",
+         T5."pending_email",
+         T5."temporary_token",
+         T5."distinct_id",
+         T5."is_email_verified",
+         T5."requested_password_reset_at",
+         T5."has_seen_product_intro_for",
+         T5."strapi_id",
+         T5."theme_mode",
+         T5."partial_notification_settings",
+         T5."anonymize_data",
+         T5."toolbar_mode",
+         T5."hedgehog_config",
+         T5."events_column_config",
+         T5."email_opt_in"
+  FROM "clairview_notebook"
+  INNER JOIN "clairview_team" ON ("clairview_notebook"."team_id" = "clairview_team"."id")
+  LEFT OUTER JOIN "clairview_user" ON ("clairview_notebook"."created_by_id" = "clairview_user"."id")
+  LEFT OUTER JOIN "clairview_user" T5 ON ("clairview_notebook"."last_modified_by_id" = T5."id")
+  WHERE ("clairview_team"."project_id" = 2
+         AND "clairview_notebook"."short_id" = '00000000')
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.7
+  '''
+  SELECT "clairview_notebook"."id",
+         "clairview_notebook"."short_id",
+         "clairview_notebook"."team_id",
+         "clairview_notebook"."title",
+         "clairview_notebook"."content",
+         "clairview_notebook"."text_content",
+         "clairview_notebook"."deleted",
+         "clairview_notebook"."version",
+         "clairview_notebook"."created_at",
+         "clairview_notebook"."created_by_id",
+         "clairview_notebook"."last_modified_at",
+         "clairview_notebook"."last_modified_by_id"
+  FROM "clairview_notebook"
+  WHERE "clairview_notebook"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.8
+  '''
+  SELECT "clairview_notebook"."id",
+         "clairview_notebook"."short_id",
+         "clairview_notebook"."team_id",
+         "clairview_notebook"."title",
+         "clairview_notebook"."content",
+         "clairview_notebook"."text_content",
+         "clairview_notebook"."deleted",
+         "clairview_notebook"."version",
+         "clairview_notebook"."created_at",
+         "clairview_notebook"."created_by_id",
+         "clairview_notebook"."last_modified_at",
+         "clairview_notebook"."last_modified_by_id"
+  FROM "clairview_notebook"
+  WHERE "clairview_notebook"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  FOR
+  UPDATE
+  '''
+# ---
+# name: TestNotebooks.test_updates_notebook.9
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."requested_password_reset_at",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---

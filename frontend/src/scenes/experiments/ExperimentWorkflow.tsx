@@ -1,6 +1,6 @@
 import './Experiment.scss'
 
-import { IconCheckCircle } from '@markettor/icons'
+import { IconCheckCircle } from '@clairview/icons'
 import clsx from 'clsx'
 import { IconRadioButtonUnchecked } from 'lib/lemon-ui/icons'
 import { useState } from 'react'

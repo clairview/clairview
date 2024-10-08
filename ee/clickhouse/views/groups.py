@@ -5,17 +5,17 @@ from django.db.models import Q
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter
 from rest_framework import mixins, request, response, serializers, viewsets
-from markettor.api.utils import action
+from clairview.api.utils import action
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.pagination import CursorPagination
 
 from ee.clickhouse.queries.related_actors_query import RelatedActorsQuery
-from markettor.api.documentation import extend_schema
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.clickhouse.kafka_engine import trim_quotes_expr
-from markettor.client import sync_execute
-from markettor.models.group import Group
-from markettor.models.group_type_mapping import GroupTypeMapping
+from clairview.api.documentation import extend_schema
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.clickhouse.kafka_engine import trim_quotes_expr
+from clairview.client import sync_execute
+from clairview.models.group import Group
+from clairview.models.group_type_mapping import GroupTypeMapping
 
 
 class GroupTypeSerializer(serializers.ModelSerializer):

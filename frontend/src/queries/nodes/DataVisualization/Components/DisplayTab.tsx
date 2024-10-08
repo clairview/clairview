@@ -1,5 +1,5 @@
-import { IconPlusSmall, IconTrash } from '@markettor/icons'
-import { LemonButton, LemonInput, LemonLabel, LemonSelect, LemonSwitch } from '@markettor/lemon-ui'
+import { IconPlusSmall, IconTrash } from '@clairview/icons'
+import { LemonButton, LemonInput, LemonLabel, LemonSelect, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { SeriesLetter } from 'lib/components/SeriesGlyph'
 import { LemonField } from 'lib/lemon-ui/LemonField'

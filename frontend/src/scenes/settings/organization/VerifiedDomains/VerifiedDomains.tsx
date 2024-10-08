@@ -1,4 +1,4 @@
-import { IconCheckCircle, IconInfo, IconLock, IconTrash, IconWarning } from '@markettor/icons'
+import { IconCheckCircle, IconInfo, IconLock, IconTrash, IconWarning } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 import { IconExclamation, IconOffline } from 'lib/lemon-ui/icons'

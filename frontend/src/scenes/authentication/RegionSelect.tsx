@@ -1,5 +1,5 @@
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonModal, LemonSelect } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonModal, LemonSelect } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { router } from 'kea-router'
 import { CLOUD_HOSTNAMES } from 'lib/constants'

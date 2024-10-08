@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal, Link } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { useState } from 'react'
@@ -37,8 +37,8 @@ export function CreateOrganizationModal({
                 <p>
                     Organizations gather people building together.
                     <br />
-                    <Link to="https://markettor.com/docs/user-guides/organizations-and-projects" target="_blank">
-                        Learn more in MarketTor Docs.
+                    <Link to="https://clairview.com/docs/user-guides/organizations-and-projects" target="_blank">
+                        Learn more in ClairView Docs.
                     </Link>
                 </p>
             }

@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 
 export function DuplicateStepIndicator(): JSX.Element {

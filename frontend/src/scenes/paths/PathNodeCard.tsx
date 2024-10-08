@@ -1,4 +1,4 @@
-import { LemonDropdown, Tooltip } from '@markettor/lemon-ui'
+import { LemonDropdown, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { FunnelPathsFilter } from '~/queries/schema'

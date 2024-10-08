@@ -1,4 +1,4 @@
-import * as packageIcons from '@markettor/icons'
+import * as packageIcons from '@clairview/icons'
 import { Meta, StoryObj } from '@storybook/react'
 import { copyToClipboard } from 'lib/utils/copyToClipboard'
 
@@ -7,7 +7,7 @@ import { Tooltip } from '../Tooltip'
 import { ELEMENTS, OBJECTS, TEAMS_AND_COMPANIES, TECHNOLOGY } from './categories'
 
 const meta: Meta = {
-    title: 'MarketTor 3000/Icons',
+    title: 'ClairView 3000/Icons',
     tags: ['test-skip'],
     parameters: {
         previewTabs: {
@@ -19,7 +19,7 @@ const meta: Meta = {
 }
 export default meta
 
-const markettorIcons = Object.entries(packageIcons)
+const clairviewIcons = Object.entries(packageIcons)
     .filter(([key]) => key !== 'BaseIcon')
     .map(([key, Icon]) => ({ name: key, icon: Icon }))
 
@@ -47,7 +47,7 @@ const IconTemplate = ({ icons }: { icons: { name: string; icon: any }[] }): JSX.
 }
 
 export function Alphabetical(): JSX.Element {
-    return <IconTemplate icons={markettorIcons} />
+    return <IconTemplate icons={clairviewIcons} />
 }
 
 const GroupBase = ({ group }: { group: Record<string, string[]> }): JSX.Element => {

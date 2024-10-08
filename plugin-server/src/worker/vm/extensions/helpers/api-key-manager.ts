@@ -6,8 +6,8 @@ import { timeoutGuard } from '../../../../utils/db/utils'
 import { generateRandomToken, UUIDT } from '../../../../utils/utils'
 import { OrganizationMembershipLevel, RawOrganization } from './../../../../types'
 
-const MARKETTOR_BOT_USER_EMAIL_DOMAIN = 'markettorbot.user'
-const PERSONAL_API_KEY_SALT = 'markettor_personal_api_key'
+const MARKETTOR_BOT_USER_EMAIL_DOMAIN = 'clairviewbot.user'
+const PERSONAL_API_KEY_SALT = 'clairview_personal_api_key'
 
 function generatePersonalApiKeyValue(): [string, string] {
     const value = `phx_${generateRandomToken(32)}`
@@ -48,7 +48,7 @@ export class PluginsApiKeyManager {
             let key: string | null = null
             const userResult = await this.db.postgres.query(
                 PostgresUse.COMMON_WRITE, // Happens on redis cache miss, so let's use the master to reduce races between pods
-                `SELECT id FROM markettor_user WHERE current_organization_id = $1 AND email LIKE $2`,
+                `SELECT id FROM clairview_user WHERE current_organization_id = $1 AND email LIKE $2`,
                 [organizationId, `%@${MARKETTOR_BOT_USER_EMAIL_DOMAIN}`],
                 'fetchPluginsUser'
             )

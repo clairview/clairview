@@ -1,4 +1,4 @@
-import { LemonSwitch, Link } from '@markettor/lemon-ui'
+import { LemonSwitch, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconBranch, IconClipboardEdit, IconLink, IconTextSize } from 'lib/lemon-ui/icons'
 

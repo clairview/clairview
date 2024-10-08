@@ -1,10 +1,10 @@
 # hog-rs
 
-MarketTor Rust service monorepo. This is *not* the Rust client library for MarketTor.
+ClairView Rust service monorepo. This is *not* the Rust client library for ClairView.
 
 ## capture
 
-This is a rewrite of [capture.py](https://github.com/MarketTor/markettor/blob/master/markettor/api/capture.py), in Rust.
+This is a rewrite of [capture.py](https://github.com/ClairView/clairview/blob/master/clairview/api/capture.py), in Rust.
 
 ### Why?
 
@@ -14,10 +14,10 @@ We currently use far too much compute to run this service, and it could be more 
 
 ### How?
 
-I'm trying to ensure the rewrite at least vaguely resembles the Python version. This will both minimize accidental regressions, but also serve as a "rosetta stone" for engineers at MarketTor who have not written Rust before.
+I'm trying to ensure the rewrite at least vaguely resembles the Python version. This will both minimize accidental regressions, but also serve as a "rosetta stone" for engineers at ClairView who have not written Rust before.
 
 ## rusty-hook
-A reliable and performant webhook system for MarketTor
+A reliable and performant webhook system for ClairView
 
 ### Requirements
 
@@ -34,7 +34,7 @@ docker compose -f docker-compose.yml up -d --wait
 2. Test:
 ```bash
 # Note that tests require a DATABASE_URL environment variable to be set, e.g.:
-# export DATABASE_URL=postgres://markettor:markettor@localhost:15432/test_database
+# export DATABASE_URL=postgres://clairview:clairview@localhost:15432/test_database
 # But there is an .env file in the project root that should be used automatically.
 cargo test
 ```

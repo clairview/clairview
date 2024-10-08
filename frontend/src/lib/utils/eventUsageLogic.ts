@@ -13,7 +13,7 @@ import { now } from 'lib/dayjs'
 import { TimeToSeeDataPayload } from 'lib/internalMetrics'
 import { isCoreFilter, PROPERTY_KEYS } from 'lib/taxonomy'
 import { objectClean } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { isFilterWithDisplay, isFunnelsFilter, isTrendsFilter } from 'scenes/insights/sharedUtils'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { EventIndex } from 'scenes/session-recordings/player/eventIndex'
@@ -591,19 +591,19 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
     }),
     listeners(({ values }) => ({
         reportBillingCTAShown: () => {
-            markettor.capture('billing CTA shown')
+            clairview.capture('billing CTA shown')
         },
         reportAxisUnitsChanged: (properties) => {
-            markettor.capture('axis units changed', properties)
+            clairview.capture('axis units changed', properties)
         },
         reportInstanceSettingChange: ({ name, value }) => {
-            markettor.capture('instance setting change', { name, value })
+            clairview.capture('instance setting change', { name, value })
         },
         reportDashboardLoadingTime: async ({ loadingMilliseconds, dashboardId }) => {
-            markettor.capture('dashboard loading time', { loadingMilliseconds, dashboardId })
+            clairview.capture('dashboard loading time', { loadingMilliseconds, dashboardId })
         },
         reportInsightRefreshTime: async ({ loadingMilliseconds, insightShortId }) => {
-            markettor.capture('insight refresh time', { loadingMilliseconds, insightShortId })
+            clairview.capture('insight refresh time', { loadingMilliseconds, insightShortId })
         },
         reportPersonDetailViewed: async (
             {
@@ -616,10 +616,10 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             await breakpoint(500)
 
             let custom_properties_count = 0
-            let markettor_properties_count = 0
+            let clairview_properties_count = 0
             for (const prop of Object.keys(person.properties)) {
                 if (PROPERTY_KEYS.includes(prop)) {
-                    markettor_properties_count += 1
+                    clairview_properties_count += 1
                 } else {
                     custom_properties_count += 1
                 }
@@ -630,25 +630,25 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                 has_email: !!person.properties.email,
                 has_name: !!person.properties.name,
                 custom_properties_count,
-                markettor_properties_count,
+                clairview_properties_count,
             }
-            markettor.capture('person viewed', properties)
+            clairview.capture('person viewed', properties)
         },
         reportTimeToSeeData: async ({ payload }) => {
-            markettor.capture('time to see data', payload)
+            clairview.capture('time to see data', payload)
         },
         reportInsightCreated: async ({ query }, breakpoint) => {
             // "insight created" essentially means that the user clicked "New insight"
             await breakpoint(500) // Debounce to avoid multiple quick "New insight" clicks being reported
 
-            markettor.capture('insight created', {
+            clairview.capture('insight created', {
                 query_kind: query?.kind,
                 query_source_kind: isNodeWithSource(query) ? query.source.kind : undefined,
             })
         },
         reportInsightSaved: async ({ query, isNewInsight }) => {
             // "insight saved" is a proxy for the new insight's results being valuable to the user
-            markettor.capture('insight saved', {
+            clairview.capture('insight saved', {
                 ...sanitizeQuery(query),
                 is_new_insight: isNewInsight,
             })
@@ -668,10 +668,10 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             }
 
             const eventName = delay ? 'insight analyzed' : 'insight viewed'
-            markettor.capture(eventName, objectClean(payload))
+            clairview.capture(eventName, objectClean(payload))
         },
         reportPersonsModalViewed: async ({ params }) => {
-            markettor.capture('insight person modal viewed', params)
+            clairview.capture('insight person modal viewed', params)
         },
         reportDashboardViewed: async ({ dashboard, lastRefreshed, delay }, breakpoint) => {
             if (!delay) {
@@ -711,11 +711,11 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             }
 
             const eventName = delay ? 'dashboard analyzed' : 'viewed dashboard' // `viewed dashboard` name is kept for backwards compatibility
-            markettor.capture(eventName, properties)
+            clairview.capture(eventName, properties)
         },
         reportBookmarkletDragged: async (_, breakpoint) => {
             await breakpoint(500)
-            markettor.capture('bookmarklet drag start')
+            clairview.capture('bookmarklet drag start')
         },
         reportProjectCreationSubmitted: async ({
             projectCount,
@@ -724,17 +724,17 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             projectCount?: number
             nameLength: number
         }) => {
-            markettor.capture('project create submitted', {
+            clairview.capture('project create submitted', {
                 current_project_count: projectCount,
                 name_length: nameLength,
             })
         },
         reportProjectNoticeDismissed: async ({ key }) => {
             // ProjectNotice was previously called DemoWarning
-            markettor.capture('demo warning dismissed', { warning_key: key })
+            clairview.capture('demo warning dismissed', { warning_key: key })
         },
         reportFunnelCalculated: async ({ eventCount, actionCount, interval, funnelVizType, success, error }) => {
-            markettor.capture('funnel result calculated', {
+            clairview.capture('funnel result calculated', {
                 event_count: eventCount,
                 action_count: actionCount,
                 total_count_actions_events: eventCount + actionCount,
@@ -745,52 +745,52 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportFunnelStepReordered: async () => {
-            markettor.capture('funnel step reordered')
+            clairview.capture('funnel step reordered')
         },
         reportPersonPropertyUpdated: async ({ action, totalProperties, oldPropertyType, newPropertyType }) => {
-            markettor.capture(`person property ${action}`, {
+            clairview.capture(`person property ${action}`, {
                 old_property_type: oldPropertyType !== 'undefined' ? oldPropertyType : undefined,
                 new_property_type: newPropertyType !== 'undefined' ? newPropertyType : undefined,
                 total_properties: totalProperties,
             })
         },
         reportDashboardModeToggled: async ({ mode, source }) => {
-            markettor.capture('dashboard mode toggled', { mode, source })
+            clairview.capture('dashboard mode toggled', { mode, source })
         },
         reportDashboardRefreshed: async ({ dashboardId, lastRefreshed }) => {
-            markettor.capture(`dashboard refreshed`, {
+            clairview.capture(`dashboard refreshed`, {
                 dashboard_id: dashboardId,
                 last_refreshed: lastRefreshed?.toString(),
                 refreshAge: lastRefreshed ? now().diff(lastRefreshed, 'seconds') : undefined,
             })
         },
         reportDashboardDateRangeChanged: async ({ dateFrom, dateTo }) => {
-            markettor.capture(`dashboard date range changed`, {
+            clairview.capture(`dashboard date range changed`, {
                 date_from: dateFrom?.toString() || 'Custom',
                 date_to: dateTo?.toString(),
             })
         },
         reportDashboardPropertiesChanged: async () => {
-            markettor.capture(`dashboard properties changed`)
+            clairview.capture(`dashboard properties changed`)
         },
         reportDashboardPinToggled: async (payload) => {
-            markettor.capture(`dashboard pin toggled`, payload)
+            clairview.capture(`dashboard pin toggled`, payload)
         },
         reportDashboardFrontEndUpdate: async ({ attribute, originalLength, newLength }) => {
-            markettor.capture(`dashboard frontend updated`, {
+            clairview.capture(`dashboard frontend updated`, {
                 attribute,
                 original_length: originalLength,
                 new_length: newLength,
             })
         },
         reportDashboardShareToggled: async ({ isShared }) => {
-            markettor.capture(`dashboard share toggled`, { is_shared: isShared })
+            clairview.capture(`dashboard share toggled`, { is_shared: isShared })
         },
         reportUpgradeModalShown: async (payload) => {
-            markettor.capture('upgrade modal shown', payload)
+            clairview.capture('upgrade modal shown', payload)
         },
         reportTimezoneComponentViewed: async (payload) => {
-            markettor.capture('timezone component viewed', payload)
+            clairview.capture('timezone component viewed', payload)
         },
         reportTestAccountFiltersUpdated: async ({ filters }) => {
             const payload = {
@@ -799,58 +799,58 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                     return { key: filter.key, operator: filter.operator, value_length: filter.value.length }
                 }),
             }
-            markettor.capture('test account filters updated', payload)
+            clairview.capture('test account filters updated', payload)
         },
         reportPoEModeUpdated: async ({ mode }) => {
-            markettor.capture('persons on events mode updated', { mode })
+            clairview.capture('persons on events mode updated', { mode })
         },
         reportPersonJoinModeUpdated: async ({ mode }) => {
-            markettor.capture('persons join mode updated', { mode })
+            clairview.capture('persons join mode updated', { mode })
         },
         reportBounceRatePageViewModeUpdated: async ({ mode }) => {
-            markettor.capture('bounce rate page view mode updated', { mode })
+            clairview.capture('bounce rate page view mode updated', { mode })
         },
         reportSessionTableVersionUpdated: async ({ version }) => {
-            markettor.capture('session table version updated', { version })
+            clairview.capture('session table version updated', { version })
         },
         reportInsightFilterRemoved: async ({ index }) => {
-            markettor.capture('local filter removed', { index })
+            clairview.capture('local filter removed', { index })
         },
         reportInsightFilterAdded: async ({ newLength }) => {
-            markettor.capture('filter added', { newLength })
+            clairview.capture('filter added', { newLength })
         },
         reportInsightFilterSet: async ({ filters }) => {
-            markettor.capture('filters set', { filters })
+            clairview.capture('filters set', { filters })
         },
         reportEntityFilterVisibilitySet: async ({ index, visible }) => {
-            markettor.capture('entity filter visbility set', { index, visible })
+            clairview.capture('entity filter visbility set', { index, visible })
         },
         reportPropertySelectOpened: async () => {
-            markettor.capture('property select toggle opened')
+            clairview.capture('property select toggle opened')
         },
         reportCreatedDashboardFromModal: async () => {
-            markettor.capture('created new dashboard from modal')
+            clairview.capture('created new dashboard from modal')
         },
         reportSavedInsightToDashboard: async () => {
-            markettor.capture('saved insight to dashboard')
+            clairview.capture('saved insight to dashboard')
         },
         reportRemovedInsightFromDashboard: async () => {
-            markettor.capture('removed insight from dashboard')
+            clairview.capture('removed insight from dashboard')
         },
         reportInsightsTableCalcToggled: async (payload) => {
-            markettor.capture('insights table calc toggled', payload)
+            clairview.capture('insights table calc toggled', payload)
         },
         reportSavedInsightFilterUsed: ({ filterKeys }) => {
-            markettor.capture('saved insights list page filter used', { filter_keys: filterKeys })
+            clairview.capture('saved insights list page filter used', { filter_keys: filterKeys })
         },
         reportSavedInsightTabChanged: ({ tab }) => {
-            markettor.capture('saved insights list page tab changed', { tab })
+            clairview.capture('saved insights list page tab changed', { tab })
         },
         reportSavedInsightLayoutChanged: ({ layout }) => {
-            markettor.capture('saved insights list page layout changed', { layout })
+            clairview.capture('saved insights list page layout changed', { layout })
         },
         reportSavedInsightNewInsightClicked: ({ insightType }) => {
-            markettor.capture('saved insights new insight clicked', { insight_type: insightType })
+            clairview.capture('saved insights new insight clicked', { insight_type: insightType })
         },
         reportRecording: ({ playerData, durations, type, metadata }) => {
             // @ts-expect-error
@@ -871,39 +871,39 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                 // but for reporting we want to distinguish between not loaded and no value to load
                 snapshot_source: metadata?.snapshot_source || 'unknown',
             }
-            markettor.capture(`recording ${type}`, payload)
+            clairview.capture(`recording ${type}`, payload)
         },
         reportPersonSplit: (props) => {
-            markettor.capture('split person started', props)
+            clairview.capture('split person started', props)
         },
         reportHelpButtonViewed: () => {
-            markettor.capture('help button viewed')
+            clairview.capture('help button viewed')
         },
         reportHelpButtonUsed: (props) => {
-            markettor.capture('help button used', props)
+            clairview.capture('help button used', props)
         },
         reportCorrelationAnalysisFeedback: (props) => {
-            markettor.capture('correlation analysis feedback', props)
+            clairview.capture('correlation analysis feedback', props)
         },
         reportCorrelationAnalysisDetailedFeedback: (props) => {
-            markettor.capture('correlation analysis detailed feedback', props)
+            clairview.capture('correlation analysis detailed feedback', props)
         },
         reportCorrelationInteraction: ({ correlationType, action, props }) => {
-            markettor.capture('correlation interaction', { correlation_type: correlationType, action, ...props })
+            clairview.capture('correlation interaction', { correlation_type: correlationType, action, ...props })
         },
         reportCorrelationViewed: ({ delay, query, propertiesTable }) => {
             const payload = sanitizeQuery(query)
             if (delay === 0) {
-                markettor.capture(`correlation${propertiesTable ? ' properties' : ''} viewed`, payload)
+                clairview.capture(`correlation${propertiesTable ? ' properties' : ''} viewed`, payload)
             } else {
-                markettor.capture(`correlation${propertiesTable ? ' properties' : ''} analyzed`, {
+                clairview.capture(`correlation${propertiesTable ? ' properties' : ''} analyzed`, {
                     ...payload,
                     delay,
                 })
             }
         },
         reportRecordingsListFilterAdded: ({ filterType }) => {
-            markettor.capture('recording list filter added', { filter_type: filterType })
+            clairview.capture('recording list filter added', { filter_type: filterType })
         },
         reportRecordingsListFetched: ({ loadTime, filters, defaultDurationFilter }) => {
             const filterValues = filtersFromUniversalFilterGroups(filters)
@@ -925,7 +925,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                           hasConsoleLogsFilters: !!consoleLogFilters.length,
                       }
                     : {}
-            markettor.capture('recording list fetched', {
+            clairview.capture('recording list fetched', {
                 load_time: loadTime,
                 listing_version: '3',
                 filters,
@@ -933,46 +933,46 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportRecordingsListPropertiesFetched: ({ loadTime }) => {
-            markettor.capture('recording list properties fetched', { load_time: loadTime })
+            clairview.capture('recording list properties fetched', { load_time: loadTime })
         },
         reportRecordingPlayerSeekbarEventHovered: () => {
-            markettor.capture('recording player seekbar event hovered')
+            clairview.capture('recording player seekbar event hovered')
         },
         reportRecordingPlayerSpeedChanged: ({ newSpeed }) => {
-            markettor.capture('recording player speed changed', { new_speed: newSpeed })
+            clairview.capture('recording player speed changed', { new_speed: newSpeed })
         },
         reportRecordingPlayerSkipInactivityToggled: ({ skipInactivity }) => {
-            markettor.capture('recording player skip inactivity toggled', { skip_inactivity: skipInactivity })
+            clairview.capture('recording player skip inactivity toggled', { skip_inactivity: skipInactivity })
         },
         reportRecordingInspectorTabViewed: ({ tab }) => {
-            markettor.capture('recording inspector tab viewed', { tab })
+            clairview.capture('recording inspector tab viewed', { tab })
         },
         reportRecordingInspectorItemExpanded: ({ tab, index }) => {
-            markettor.capture('recording inspector item expanded', { tab, index })
+            clairview.capture('recording inspector item expanded', { tab, index })
         },
         reportRecordingInspectorMiniFilterViewed: ({ tab, minifilterKey }) => {
-            markettor.capture('recording inspector minifilter selected', { tab, minifilterKey })
+            clairview.capture('recording inspector minifilter selected', { tab, minifilterKey })
         },
         reportNextRecordingTriggered: ({ automatic }) => {
-            markettor.capture('recording next recording triggered', { automatic })
+            clairview.capture('recording next recording triggered', { automatic })
         },
         reportRecordingExportedToFile: () => {
-            markettor.capture('recording exported to file')
+            clairview.capture('recording exported to file')
         },
         reportRecordingLoadedFromFile: (properties) => {
-            markettor.capture('recording loaded from file', properties)
+            clairview.capture('recording loaded from file', properties)
         },
         reportRecordingListVisibilityToggled: (properties) => {
-            markettor.capture('recording list visibility toggled', properties)
+            clairview.capture('recording list visibility toggled', properties)
         },
         reportRecordingPinnedToList: (properties) => {
-            markettor.capture('recording pinned to list', properties)
+            clairview.capture('recording pinned to list', properties)
         },
         reportRecordingPlaylistCreated: (properties) => {
-            markettor.capture('recording playlist created', properties)
+            clairview.capture('recording playlist created', properties)
         },
         reportExperimentArchived: ({ experiment }) => {
-            markettor.capture('experiment archived', {
+            clairview.capture('experiment archived', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -980,7 +980,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentReset: ({ experiment }) => {
-            markettor.capture('experiment reset', {
+            clairview.capture('experiment reset', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -988,7 +988,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentCreated: ({ experiment }) => {
-            markettor.capture('experiment created', {
+            clairview.capture('experiment created', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -997,7 +997,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentViewed: ({ experiment }) => {
-            markettor.capture('experiment viewed', {
+            clairview.capture('experiment viewed', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -1006,7 +1006,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentLaunched: ({ experiment, launchDate }) => {
-            markettor.capture('experiment launched', {
+            clairview.capture('experiment launched', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -1016,7 +1016,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentStartDateChange: ({ experiment, newStartDate }) => {
-            markettor.capture('experiment start date changed', {
+            clairview.capture('experiment start date changed', {
                 name: experiment.name,
                 id: experiment.id,
                 old_start_date: experiment.start_date,
@@ -1024,7 +1024,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentCompleted: ({ experiment, endDate, duration, significant }) => {
-            markettor.capture('experiment completed', {
+            clairview.capture('experiment completed', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -1036,23 +1036,23 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportExperimentExposureCohortCreated: ({ experiment, cohort }) => {
-            markettor.capture('experiment exposure cohort created', {
+            clairview.capture('experiment exposure cohort created', {
                 experiment_id: experiment.id,
                 cohort_filters: cohort.filters,
             })
         },
         reportExperimentExposureCohortEdited: ({ existingCohort, newCohort }) => {
-            markettor.capture('experiment exposure cohort edited', {
+            clairview.capture('experiment exposure cohort edited', {
                 existing_filters: existingCohort.filters,
                 new_filters: newCohort.filters,
                 id: newCohort.id,
             })
         },
         reportExperimentInsightLoadFailed: () => {
-            markettor.capture('experiment load insight failed')
+            clairview.capture('experiment load insight failed')
         },
         reportExperimentVariantShipped: ({ experiment }) => {
-            markettor.capture('experiment variant shipped', {
+            clairview.capture('experiment variant shipped', {
                 name: experiment.name,
                 id: experiment.id,
                 filters: sanitizeFilterParams(experiment.filters),
@@ -1061,159 +1061,159 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportPropertyGroupFilterAdded: () => {
-            markettor.capture('property group filter added')
+            clairview.capture('property group filter added')
         },
         reportChangeOuterPropertyGroupFiltersType: ({ type, groupsLength }) => {
-            markettor.capture('outer match property groups type changed', { type, groupsLength })
+            clairview.capture('outer match property groups type changed', { type, groupsLength })
         },
         reportChangeInnerPropertyGroupFiltersType: ({ type, filtersLength }) => {
-            markettor.capture('inner match property group filters type changed', { type, filtersLength })
+            clairview.capture('inner match property group filters type changed', { type, filtersLength })
         },
         reportDataManagementDefinitionHovered: ({ type }) => {
-            markettor.capture('definition hovered', { type })
+            clairview.capture('definition hovered', { type })
         },
         reportDataManagementDefinitionClickView: ({ type }) => {
-            markettor.capture('definition click view', { type })
+            clairview.capture('definition click view', { type })
         },
         reportDataManagementDefinitionClickEdit: ({ type }) => {
-            markettor.capture('definition click edit', { type })
+            clairview.capture('definition click edit', { type })
         },
         reportDataManagementDefinitionSaveSucceeded: ({ type, loadTime }) => {
-            markettor.capture('definition save succeeded', { type, load_time: loadTime })
+            clairview.capture('definition save succeeded', { type, load_time: loadTime })
         },
         reportDataManagementDefinitionSaveFailed: ({ type, loadTime, error }) => {
-            markettor.capture('definition save failed', { type, load_time: loadTime, error })
+            clairview.capture('definition save failed', { type, load_time: loadTime, error })
         },
         reportDataManagementDefinitionCancel: ({ type }) => {
-            markettor.capture('definition cancelled', { type })
+            clairview.capture('definition cancelled', { type })
         },
         reportDataManagementEventDefinitionsPageLoadSucceeded: ({ loadTime, resultsLength }) => {
-            markettor.capture('event definitions page load succeeded', {
+            clairview.capture('event definitions page load succeeded', {
                 load_time: loadTime,
                 num_results: resultsLength,
             })
         },
         reportDataManagementEventDefinitionsPageLoadFailed: ({ loadTime, error }) => {
-            markettor.capture('event definitions page load failed', { load_time: loadTime, error })
+            clairview.capture('event definitions page load failed', { load_time: loadTime, error })
         },
         reportDataManagementEventDefinitionsPageNestedPropertiesLoadSucceeded: ({ loadTime }) => {
-            markettor.capture('event definitions page event nested properties load succeeded', { load_time: loadTime })
+            clairview.capture('event definitions page event nested properties load succeeded', { load_time: loadTime })
         },
         reportDataManagementEventDefinitionsPageNestedPropertiesLoadFailed: ({ loadTime, error }) => {
-            markettor.capture('event definitions page event nested properties load failed', {
+            clairview.capture('event definitions page event nested properties load failed', {
                 load_time: loadTime,
                 error,
             })
         },
         reportDataManagementEventPropertyDefinitionsPageLoadSucceeded: ({ loadTime, resultsLength }) => {
-            markettor.capture('event property definitions page load succeeded', {
+            clairview.capture('event property definitions page load succeeded', {
                 load_time: loadTime,
                 num_results: resultsLength,
             })
         },
         reportDataManagementEventPropertyDefinitionsPageLoadFailed: ({ loadTime, error }) => {
-            markettor.capture('event property definitions page load failed', {
+            clairview.capture('event property definitions page load failed', {
                 load_time: loadTime,
                 error,
             })
         },
         reportInsightOpenedFromRecentInsightList: () => {
-            markettor.capture('insight opened from recent insight list')
+            clairview.capture('insight opened from recent insight list')
         },
         reportRecordingOpenedFromRecentRecordingList: () => {
-            markettor.capture('recording opened from recent recording list')
+            clairview.capture('recording opened from recent recording list')
         },
         reportPersonOpenedFromNewlySeenPersonsList: () => {
-            markettor.capture('person opened from newly seen persons list')
+            clairview.capture('person opened from newly seen persons list')
         },
         reportIngestionContinueWithoutVerifying: () => {
-            markettor.capture('ingestion continue without verifying')
+            clairview.capture('ingestion continue without verifying')
         },
         reportAutocaptureToggled: ({ autocapture_opt_out }) => {
-            markettor.capture('autocapture toggled', {
+            clairview.capture('autocapture toggled', {
                 autocapture_opt_out,
             })
         },
         reportAutocaptureExceptionsToggled: ({ autocapture_opt_in }) => {
-            markettor.capture('autocapture exceptions toggled', {
+            clairview.capture('autocapture exceptions toggled', {
                 autocapture_opt_in,
             })
         },
         reportHeatmapsToggled: ({ heatmaps_opt_in }) => {
-            markettor.capture('heatmaps toggled', {
+            clairview.capture('heatmaps toggled', {
                 heatmaps_opt_in,
             })
         },
         reportFailedToCreateFeatureFlagWithCohort: ({ detail, code }) => {
-            markettor.capture('failed to create feature flag with cohort', { detail, code })
+            clairview.capture('failed to create feature flag with cohort', { detail, code })
         },
         reportFeatureFlagCopySuccess: () => {
-            markettor.capture('feature flag copied')
+            clairview.capture('feature flag copied')
         },
         reportFeatureFlagCopyFailure: ({ error }) => {
-            markettor.capture('feature flag copy failure', { error })
+            clairview.capture('feature flag copy failure', { error })
         },
         reportFeatureFlagScheduleSuccess: () => {
-            markettor.capture('feature flag scheduled')
+            clairview.capture('feature flag scheduled')
         },
         reportFeatureFlagScheduleFailure: ({ error }) => {
-            markettor.capture('feature flag schedule failure', { error })
+            clairview.capture('feature flag schedule failure', { error })
         },
         reportInviteMembersButtonClicked: () => {
-            markettor.capture('invite members button clicked')
+            clairview.capture('invite members button clicked')
         },
         reportTeamSettingChange: ({ name, value }) => {
-            markettor.capture(`${name} team setting updated`, {
+            clairview.capture(`${name} team setting updated`, {
                 setting: name,
                 value,
             })
         },
         reportProjectSettingChange: ({ name, value }) => {
-            markettor.capture(`${name} project setting updated`, {
+            clairview.capture(`${name} project setting updated`, {
                 setting: name,
                 value,
             })
         },
         reportActivationSideBarTaskClicked: ({ key }) => {
-            markettor.capture('activation sidebar task clicked', {
+            clairview.capture('activation sidebar task clicked', {
                 key,
             })
         },
         reportBillingUpgradeClicked: ({ plan }) => {
-            markettor.capture('billing upgrade button clicked', {
+            clairview.capture('billing upgrade button clicked', {
                 plan,
             })
         },
         reportBillingDowngradeClicked: ({ plan }) => {
-            markettor.capture('billing downgrade button clicked', {
+            clairview.capture('billing downgrade button clicked', {
                 plan,
             })
         },
         reportRoleCreated: ({ role }) => {
-            markettor.capture('new role created', {
+            clairview.capture('new role created', {
                 role,
             })
         },
         reportResourceAccessLevelUpdated: ({ resourceType, roleName, accessLevel }) => {
-            markettor.capture('resource access level updated', {
+            clairview.capture('resource access level updated', {
                 resource_type: resourceType,
                 role_name: roleName,
                 access_level: accessLevel,
             })
         },
         reportRoleCustomAddedToAResource: ({ resourceType, rolesLength }) => {
-            markettor.capture('role custom added to a resource', {
+            clairview.capture('role custom added to a resource', {
                 resource_type: resourceType,
                 roles_length: rolesLength,
             })
         },
         reportFlagsCodeExampleInteraction: ({ optionType }) => {
-            markettor.capture('flags code example option selected', {
+            clairview.capture('flags code example option selected', {
                 option_type: optionType,
             })
         },
         reportFlagsCodeExampleLanguage: ({ language }) => {
-            markettor.capture('flags code example language selected', {
+            clairview.capture('flags code example language selected', {
                 language,
             })
         },
@@ -1222,7 +1222,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                 return question.hasOwnProperty('shuffleOptions') && (question as MultipleSurveyQuestion).shuffleOptions
             })
 
-            markettor.capture('survey created', {
+            clairview.capture('survey created', {
                 name: survey.name,
                 id: survey.id,
                 survey_type: survey.type,
@@ -1241,7 +1241,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportSurveyViewed: ({ survey }) => {
-            markettor.capture('survey viewed', {
+            clairview.capture('survey viewed', {
                 name: survey.name,
                 id: survey.id,
                 created_at: survey.created_at,
@@ -1250,7 +1250,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportSurveyArchived: ({ survey }) => {
-            markettor.capture('survey archived', {
+            clairview.capture('survey archived', {
                 name: survey.name,
                 id: survey.id,
                 created_at: survey.created_at,
@@ -1263,7 +1263,7 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
                 return question.hasOwnProperty('shuffleOptions') && (question as MultipleSurveyQuestion).shuffleOptions
             })
 
-            markettor.capture('survey edited', {
+            clairview.capture('survey edited', {
                 name: survey.name,
                 id: survey.id,
                 created_at: survey.created_at,
@@ -1280,12 +1280,12 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportSurveyTemplateClicked: ({ template }) => {
-            markettor.capture('survey template clicked', {
+            clairview.capture('survey template clicked', {
                 template,
             })
         },
         reportSurveyCycleDetected: ({ survey }) => {
-            markettor.capture('survey cycle detected', {
+            clairview.capture('survey cycle detected', {
                 name: survey.name,
                 id: survey.id,
                 start_date: survey.start_date,
@@ -1294,14 +1294,14 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
         },
         reportProductUnsubscribed: ({ product }) => {
             const property_key = `unsubscribed_from_${product}`
-            markettor.capture('product unsubscribed', {
+            clairview.capture('product unsubscribed', {
                 product,
                 $set: { [property_key]: true },
             })
         },
         // onboarding
         reportOnboardingProductSelected: ({ productKey, includeFirstOnboardingProductOnUserProperties }) => {
-            markettor.capture('onboarding product selected', {
+            clairview.capture('onboarding product selected', {
                 product_key: productKey,
                 $set_once: {
                     first_onboarding_product_selected: includeFirstOnboardingProductOnUserProperties
@@ -1311,30 +1311,30 @@ export const eventUsageLogic = kea<eventUsageLogicType>([
             })
         },
         reportOnboardingCompleted: ({ productKey }) => {
-            markettor.capture('onboarding completed', {
+            clairview.capture('onboarding completed', {
                 product_key: productKey,
             })
         },
         reportSubscribedDuringOnboarding: ({ productKey }) => {
-            markettor.capture('subscribed during onboarding', {
+            clairview.capture('subscribed during onboarding', {
                 product_key: productKey,
             })
         },
         // command bar
         reportCommandBarStatusChanged: ({ status }) => {
-            markettor.capture('command bar status changed', { status })
+            clairview.capture('command bar status changed', { status })
         },
         reportCommandBarSearch: ({ queryLength }) => {
-            markettor.capture('command bar search', { queryLength })
+            clairview.capture('command bar search', { queryLength })
         },
         reportCommandBarSearchResultOpened: ({ type }) => {
-            markettor.capture('command bar search result opened', { type })
+            clairview.capture('command bar search result opened', { type })
         },
         reportCommandBarActionSearch: ({ query }) => {
-            markettor.capture('command bar action search', { query })
+            clairview.capture('command bar action search', { query })
         },
         reportCommandBarActionResultExecuted: ({ resultDisplay }) => {
-            markettor.capture('command bar search result executed', { resultDisplay })
+            clairview.capture('command bar search result executed', { resultDisplay })
         },
     })),
 ])

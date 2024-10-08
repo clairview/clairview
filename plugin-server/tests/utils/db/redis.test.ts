@@ -7,9 +7,9 @@ describe('Redis', () => {
 
         beforeEach(() => {
             config.REDIS_URL = 'redis://localhost:6379'
-            config.MARKETTOR_REDIS_HOST = 'markettor-redis'
+            config.MARKETTOR_REDIS_HOST = 'clairview-redis'
             config.MARKETTOR_REDIS_PORT = 6379
-            config.MARKETTOR_REDIS_PASSWORD = 'markettor-password'
+            config.MARKETTOR_REDIS_PASSWORD = 'clairview-password'
             config.INGESTION_REDIS_HOST = 'ingestion-redis'
             config.INGESTION_REDIS_PORT = 6479
             config.MARKETTOR_SESSION_RECORDING_REDIS_HOST = 'session-recording-redis'
@@ -17,13 +17,13 @@ describe('Redis', () => {
         })
 
         it('should respond with unique options if all values set', () => {
-            expect(getRedisConnectionOptions(config, 'markettor')).toMatchInlineSnapshot(`
+            expect(getRedisConnectionOptions(config, 'clairview')).toMatchInlineSnapshot(`
                 Object {
                   "options": Object {
-                    "password": "markettor-password",
+                    "password": "clairview-password",
                     "port": 6379,
                   },
-                  "url": "markettor-redis",
+                  "url": "clairview-redis",
                 }
             `)
             expect(getRedisConnectionOptions(config, 'ingestion')).toMatchInlineSnapshot(`
@@ -49,7 +49,7 @@ describe('Redis', () => {
             config.INGESTION_REDIS_HOST = ''
             config.MARKETTOR_SESSION_RECORDING_REDIS_HOST = ''
 
-            expect(getRedisConnectionOptions(config, 'markettor')).toMatchInlineSnapshot(`
+            expect(getRedisConnectionOptions(config, 'clairview')).toMatchInlineSnapshot(`
                 Object {
                   "url": "redis://localhost:6379",
                 }
@@ -72,10 +72,10 @@ describe('Redis', () => {
             expect(getRedisConnectionOptions(config, 'ingestion')).toMatchInlineSnapshot(`
                 Object {
                   "options": Object {
-                    "password": "markettor-password",
+                    "password": "clairview-password",
                     "port": 6379,
                   },
-                  "url": "markettor-redis",
+                  "url": "clairview-redis",
                 }
             `)
         })

@@ -16,9 +16,9 @@ export const defaultConfig = overrideWithEnv(getDefaultConfig())
 export function getDefaultConfig(): PluginsServerConfig {
     return {
         DATABASE_URL: isTestEnv()
-            ? 'postgres://markettor:markettor@localhost:5432/test_markettor'
+            ? 'postgres://clairview:clairview@localhost:5432/test_clairview'
             : isDevEnv()
-            ? 'postgres://markettor:markettor@localhost:5432/markettor'
+            ? 'postgres://clairview:clairview@localhost:5432/clairview'
             : '',
         DATABASE_READONLY_URL: '',
         PLUGIN_STORAGE_DATABASE_URL: '',
@@ -30,7 +30,7 @@ export function getDefaultConfig(): PluginsServerConfig {
         MARKETTOR_POSTGRES_PORT: 5432,
         CLICKHOUSE_HOST: 'localhost',
         CLICKHOUSE_OFFLINE_CLUSTER_HOST: null,
-        CLICKHOUSE_DATABASE: isTestEnv() ? 'markettor_test' : 'default',
+        CLICKHOUSE_DATABASE: isTestEnv() ? 'clairview_test' : 'default',
         CLICKHOUSE_USER: 'default',
         CLICKHOUSE_PASSWORD: null,
         CLICKHOUSE_CA: null,
@@ -39,7 +39,7 @@ export function getDefaultConfig(): PluginsServerConfig {
         EVENT_OVERFLOW_BUCKET_CAPACITY: 1000,
         EVENT_OVERFLOW_BUCKET_REPLENISH_RATE: 1.0,
         SKIP_UPDATE_EVENT_AND_PROPERTIES_STEP: false,
-        KAFKA_HOSTS: 'kafka:9092', // KEEP IN SYNC WITH markettor/settings/data_stores.py
+        KAFKA_HOSTS: 'kafka:9092', // KEEP IN SYNC WITH clairview/settings/data_stores.py
         KAFKA_CLIENT_CERT_B64: undefined,
         KAFKA_CLIENT_CERT_KEY_B64: undefined,
         KAFKA_TRUSTED_CERT_B64: undefined,
@@ -119,7 +119,7 @@ export function getDefaultConfig(): PluginsServerConfig {
         OBJECT_STORAGE_REGION: 'us-east-1',
         OBJECT_STORAGE_ACCESS_KEY_ID: 'object_storage_root_user',
         OBJECT_STORAGE_SECRET_ACCESS_KEY: 'object_storage_root_password',
-        OBJECT_STORAGE_BUCKET: 'markettor',
+        OBJECT_STORAGE_BUCKET: 'clairview',
         PLUGIN_SERVER_MODE: null,
         PLUGIN_SERVER_EVENTS_INGESTION_PIPELINE: null,
         PLUGIN_LOAD_SEQUENTIALLY: false,
@@ -159,7 +159,7 @@ export function getDefaultConfig(): PluginsServerConfig {
         SESSION_RECORDING_BUFFER_AGE_IN_MEMORY_MULTIPLIER: 1.2,
         SESSION_RECORDING_MAX_BUFFER_SIZE_KB: 1024 * 50, // 50MB
         SESSION_RECORDING_REMOTE_FOLDER: 'session_recordings',
-        SESSION_RECORDING_REDIS_PREFIX: '@markettor/replay/',
+        SESSION_RECORDING_REDIS_PREFIX: '@clairview/replay/',
         SESSION_RECORDING_PARTITION_REVOKE_OPTIMIZATION: false,
         SESSION_RECORDING_PARALLEL_CONSUMPTION: false,
         MARKETTOR_SESSION_RECORDING_REDIS_HOST: undefined,
@@ -201,9 +201,9 @@ export function getDefaultConfig(): PluginsServerConfig {
 
         // Cyclotron
         CYCLOTRON_DATABASE_URL: isTestEnv()
-            ? 'postgres://markettor:markettor@localhost:5432/test_cyclotron'
+            ? 'postgres://clairview:clairview@localhost:5432/test_cyclotron'
             : isDevEnv()
-            ? 'postgres://markettor:markettor@localhost:5432/cyclotron'
+            ? 'postgres://clairview:clairview@localhost:5432/cyclotron'
             : '',
 
         CYCLOTRON_SHARD_DEPTH_LIMIT: 1000000,

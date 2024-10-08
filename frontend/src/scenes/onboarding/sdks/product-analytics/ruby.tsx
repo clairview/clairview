@@ -6,7 +6,7 @@ import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 function RubyCaptureSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Ruby}>
-            {"markettor.capture({\n    distinct_id: 'test-id',\n    event: 'test-event'})"}
+            {"clairview.capture({\n    distinct_id: 'test-id',\n    event: 'test-event'})"}
         </CodeSnippet>
     )
 }

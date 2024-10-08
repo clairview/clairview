@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This management command is intended to be used to generate Kafka messages that
-# simulate those that are produced by the MarketTor app when recording session
+# simulate those that are produced by the ClairView app when recording session
 # data. The contents of the snapshot data is however not a valid rrweb snapshot
 # as this isn't required for benchmarking the recordings ingestion consumer, but
 # only simulates the size distribution.
@@ -204,7 +204,7 @@ def generate_snapshot_messages(
     #     "uuid": "<a uuid>",
     #     "distinct_id": "<a uuid>",
     #     "ip": "10.32.42.12",
-    #     "site_url": "https://app.markettor.com",
+    #     "site_url": "https://app.clairview.com",
     #     "data": "<json encoded wrapper around the rrweb snapshot>",
     #     "team_id": team_id,
     #     "now": "<a datetime>"",

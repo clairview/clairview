@@ -1,5 +1,5 @@
-import { IconLogomark } from '@markettor/icons'
-import { LemonButton, Lettermark, Popover, ProfilePicture } from '@markettor/lemon-ui'
+import { IconLogomark } from '@clairview/icons'
+import { LemonButton, Lettermark, Popover, ProfilePicture } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { organizationLogic } from 'scenes/organizationLogic'
 import { teamLogic } from 'scenes/teamLogic'

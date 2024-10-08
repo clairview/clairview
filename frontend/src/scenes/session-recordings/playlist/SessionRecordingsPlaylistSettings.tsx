@@ -1,4 +1,4 @@
-import { LemonSegmentedButton, LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSegmentedButton, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { PlaybackMode, playerSettingsLogic } from '../player/playerSettingsLogic'

@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import { actions, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
 import { loaders } from 'kea-loaders'
@@ -897,7 +897,7 @@ export const experimentLogic = kea<experimentLogicType>([
                     const targetValues = Object.values(PropertyMathType).filter(
                         (value) => value !== PropertyMathType.Sum
                     )
-                    // sync with the backend at https://github.com/MarketTor/markettor/blob/master/ee/clickhouse/queries/experiments/trend_experiment_result.py#L44
+                    // sync with the backend at https://github.com/ClairView/clairview/blob/master/ee/clickhouse/queries/experiments/trend_experiment_result.py#L44
                     // the function uses_math_aggregation_by_user_or_property_value
 
                     const propertyMathValue = (

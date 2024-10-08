@@ -1,7 +1,7 @@
 import './FunnelCorrelationTable.scss'
 
-import { IconArchive, IconTrending } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonTable } from '@markettor/lemon-ui'
+import { IconArchive, IconTrending } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { PropertySelect } from 'lib/components/PropertySelect/PropertySelect'
@@ -265,7 +265,7 @@ export function FunnelPropertyCorrelationTable(): JSX.Element | null {
                                         <p className="m-auto">
                                             Highlight properties which are likely to have affected the conversion rate
                                             within the funnel.{' '}
-                                            <Link to="https://markettor.com/manual/correlation">
+                                            <Link to="https://clairview.com/manual/correlation">
                                                 Learn more about correlation analysis.
                                             </Link>
                                         </p>

@@ -1,4 +1,4 @@
-import { TZLabel } from '@markettor/apps-common'
+import { TZLabel } from '@clairview/apps-common'
 import {
     LemonBanner,
     LemonButton,
@@ -8,7 +8,7 @@ import {
     PaginationControl,
     ProfilePicture,
     usePagination,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { JSONContent } from '@tiptap/core'
 import { useActions, useValues } from 'kea'
 import { activityLogLogic } from 'lib/components/ActivityLog/activityLogLogic'

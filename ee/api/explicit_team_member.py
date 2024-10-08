@@ -6,13 +6,13 @@ from rest_framework import exceptions, serializers, viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from ee.models.explicit_team_membership import ExplicitTeamMembership
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.models.organization import OrganizationMembership
-from markettor.models.team import Team
-from markettor.models.user import User
-from markettor.permissions import TeamMemberStrictManagementPermission
-from markettor.user_permissions import UserPermissionsSerializerMixin
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.models.organization import OrganizationMembership
+from clairview.models.team import Team
+from clairview.models.user import User
+from clairview.permissions import TeamMemberStrictManagementPermission
+from clairview.user_permissions import UserPermissionsSerializerMixin
 
 
 class ExplicitTeamMemberSerializer(serializers.ModelSerializer, UserPermissionsSerializerMixin):

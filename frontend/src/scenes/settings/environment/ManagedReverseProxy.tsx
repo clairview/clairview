@@ -1,4 +1,4 @@
-import { IconEllipsis, IconInfo, IconPlus } from '@markettor/icons'
+import { IconEllipsis, IconInfo, IconPlus } from '@clairview/icons'
 import {
     LemonBanner,
     LemonButton,
@@ -10,7 +10,7 @@ import {
     LemonTabs,
     Spinner,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'

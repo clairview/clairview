@@ -123,7 +123,7 @@ hardcoded_prop_defs: dict = {
         "href": {
             "label": "Target (href)",
             "description": "Filter on the href attribute of the element.",
-            "examples": ["https://markettor.com/about"],
+            "examples": ["https://clairview.com/about"],
         },
     },
     "metadata": {
@@ -155,7 +155,7 @@ hardcoded_prop_defs: dict = {
         },
         "$pageview_id": {
             "label": "Pageview ID",
-            "description": "MarketTor's internal ID for matching events to a pageview.",
+            "description": "ClairView's internal ID for matching events to a pageview.",
             "system": True,
         },
         "$autocapture_disabled_server_side": {
@@ -236,7 +236,7 @@ hardcoded_prop_defs: dict = {
         },
         "$exception_personURL": {
             "label": "Exception person URL",
-            "description": "The MarketTor person that experienced the exception",
+            "description": "The ClairView person that experienced the exception",
         },
         "$ce_version": {
             "label": "$ce_version",
@@ -362,7 +362,7 @@ hardcoded_prop_defs: dict = {
         "$app_namespace": {
             "label": "App Namespace",
             "description": "The namespace of the app as identified in the app store.",
-            "examples": ["com.markettor.app"],
+            "examples": ["com.clairview.app"],
         },
         "$app_version": {
             "label": "App Version",
@@ -534,7 +534,7 @@ hardcoded_prop_defs: dict = {
         },
         "$sent_at": {
             "label": "Sent At",
-            "description": "Time the event was sent to MarketTor. Used for correcting the event timestamp when the device clock is off.",
+            "description": "Time the event was sent to ClairView. Used for correcting the event timestamp when the device clock is off.",
             "examples": ["2023-05-20T15:31:00Z"],
         },
         "$browser": {
@@ -564,7 +564,7 @@ hardcoded_prop_defs: dict = {
         },
         "$raw_user_agent": {
             "label": "Raw User Agent",
-            "description": "MarketTor process information like browser, OS, and device type from the user agent string. This is the raw user agent string.",
+            "description": "ClairView process information like browser, OS, and device type from the user agent string. This is the raw user agent string.",
             "examples": ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)"],
         },
         "$user_agent": {
@@ -599,7 +599,7 @@ hardcoded_prop_defs: dict = {
         "$lib": {
             "label": "Library",
             "description": "What library was used to send the event.",
-            "examples": ["web", "markettor-ios"],
+            "examples": ["web", "clairview-ios"],
         },
         "$lib_custom_api_host": {
             "label": "Library Custom API Host",
@@ -629,7 +629,7 @@ hardcoded_prop_defs: dict = {
         "$referrer": {
             "label": "Referrer URL",
             "description": "URL of where the user came from.",
-            "examples": ["https://google.com/search?q=markettor&rlz=1C..."],
+            "examples": ["https://google.com/search?q=clairview&rlz=1C..."],
         },
         "$referring_domain": {
             "label": "Referring Domain",
@@ -638,7 +638,7 @@ hardcoded_prop_defs: dict = {
         },
         "$user_id": {
             "label": "User ID",
-            "description": "This variable will be set to the distinct ID if you've called markettor.identify('distinct id'). If the user is anonymous, it'll be empty.",
+            "description": "This variable will be set to the distinct ID if you've called clairview.identify('distinct id'). If the user is anonymous, it'll be empty.",
         },
         "$ip": {
             "label": "IP Address",
@@ -799,7 +799,7 @@ hardcoded_prop_defs: dict = {
         "referring_application": {
             "label": "Referrer Application",
             "description": "The namespace of the app that made the request.",
-            "examples": ["com.markettor.app"],
+            "examples": ["com.clairview.app"],
         },
         "version": {
             "label": "App Version",
@@ -915,7 +915,7 @@ hardcoded_prop_defs: dict = {
     "session_properties": {
         "$session_duration": {
             "label": "Session duration",
-            "description": "The duration of the session being tracked. Learn more about how MarketTor tracks sessions in our documentation.\n\nNote, if the duration is formatted as a single number (not 'HH:MM:SS'), it's in seconds.",
+            "description": "The duration of the session being tracked. Learn more about how ClairView tracks sessions in our documentation.\n\nNote, if the duration is formatted as a single number (not 'HH:MM:SS'), it's in seconds.",
             "examples": ["01:04:12"],
             "type": "Numeric",
         },

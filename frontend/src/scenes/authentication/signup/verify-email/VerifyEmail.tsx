@@ -1,4 +1,4 @@
-import { LemonButton, LemonCheckbox, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonCheckbox, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { BridgePage } from 'lib/components/BridgePage/BridgePage'
 import { HeartHog, MailHog, SurprisedHog } from 'lib/components/hedgehogs'
@@ -55,7 +55,7 @@ export const VerifyEmailHelpLinks = (): JSX.Element => {
     const checklist = [
         'Wait 5 minutes. Sometimes it takes a bit for email providers to deliver emails.',
         'Check your spam folder and any firewalls you may have active',
-        'Ask your company IT department to allow any emails from @markettor.com',
+        'Ask your company IT department to allow any emails from @clairview.com',
         'Channel your inner hedgehog and take another peek at your inbox',
     ]
 
@@ -127,7 +127,7 @@ export function VerifyEmail(): JSX.Element {
                     <div className="px-12 py-8 text-center flex flex-col items-center max-w-160 w-full">
                         {view === 'pending' ? (
                             <>
-                                <h2 className="text-lg">Welcome to MarketTor!</h2>
+                                <h2 className="text-lg">Welcome to ClairView!</h2>
                                 <h1 className="text-3xl font-bold">Let's verify your email address.</h1>
                                 <div className="max-w-60 my-10">
                                     <MailHog className="w-full h-full" />
@@ -146,7 +146,7 @@ export function VerifyEmail(): JSX.Element {
                                 <div className="max-w-60 mb-12">
                                     <HeartHog className="w-full h-full" />
                                 </div>
-                                <p>Thanks for verifying your email address. Now taking you to MarketTor...</p>
+                                <p>Thanks for verifying your email address. Now taking you to ClairView...</p>
                             </>
                         ) : view === 'invalid' ? (
                             <>

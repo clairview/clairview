@@ -2,7 +2,7 @@ from rest_framework import mixins, serializers, viewsets
 
 from ee.api.role import RolePermissions
 from ee.models.organization_resource_access import OrganizationResourceAccess
-from markettor.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.routing import TeamAndOrgViewSetMixin
 
 
 class OrganizationResourceAccessSerializer(serializers.ModelSerializer):

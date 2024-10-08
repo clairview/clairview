@@ -1,10 +1,10 @@
 from typing import Union
 
-from markettor.client import sync_execute
-from markettor.constants import TREND_FILTER_TYPE_ACTIONS
-from markettor.models.filters.filter import Filter
-from markettor.models.team.team import Team
-from markettor.queries.query_date_range import QueryDateRange
+from clairview.client import sync_execute
+from clairview.constants import TREND_FILTER_TYPE_ACTIONS
+from clairview.models.filters.filter import Filter
+from clairview.models.team.team import Team
+from clairview.queries.query_date_range import QueryDateRange
 
 
 def requires_flag_warning(filter: Filter, team: Team) -> bool:

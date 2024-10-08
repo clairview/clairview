@@ -6,7 +6,7 @@ from django.http import HttpRequest, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError
 
-from markettor.models.instance_setting import get_instance_settings
+from clairview.models.instance_setting import get_instance_settings
 
 
 def get_sentry_stats(start_time: str, end_time: str) -> tuple[dict, int]:

@@ -5,7 +5,7 @@ import { subscriptions } from 'kea-subscriptions'
 import api from 'lib/api'
 import { Dayjs, dayjs } from 'lib/dayjs'
 import { apiStatusLogic } from 'lib/logic/apiStatusLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { PrecheckResponseType } from 'scenes/authentication/loginLogic'
 import { userLogic } from 'scenes/userLogic'
 
@@ -87,7 +87,7 @@ export const timeSensitiveAuthenticationLogic = kea<timeSensitiveAuthenticationL
                     throw e
                 }
 
-                markettor.capture('reauthentication_completed')
+                clairview.capture('reauthentication_completed')
 
                 actions.setTimeSensitiveAuthenticationRequired(false)
                 // Refresh the user so we know the new session expiry
@@ -115,7 +115,7 @@ export const timeSensitiveAuthenticationLogic = kea<timeSensitiveAuthenticationL
     subscriptions(({ values, actions }) => ({
         showAuthenticationModal: (shown) => {
             if (shown) {
-                markettor.capture('reauthentication_modal_shown')
+                clairview.capture('reauthentication_modal_shown')
 
                 if (!values.precheckResponse) {
                     actions.precheck()
@@ -127,7 +127,7 @@ export const timeSensitiveAuthenticationLogic = kea<timeSensitiveAuthenticationL
     listeners(({ actions, values }) => ({
         setDismissedReauthentication: ({ value }) => {
             if (value) {
-                markettor.capture('reauthentication_modal_dismissed')
+                clairview.capture('reauthentication_modal_dismissed')
             }
         },
         checkReauthentication: () => {

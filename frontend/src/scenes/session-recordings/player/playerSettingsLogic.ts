@@ -33,7 +33,7 @@ const MiniFilters: SharedListMiniFilter[] = [
         key: 'all-automatic',
         name: 'Auto',
         alone: true,
-        tooltip: 'Curated list of key MarketTor events, custom events, error logs etc.',
+        tooltip: 'Curated list of key ClairView events, custom events, error logs etc.',
     },
     {
         tab: SessionRecordingPlayerTab.ALL,
@@ -58,9 +58,9 @@ const MiniFilters: SharedListMiniFilter[] = [
     },
     {
         tab: SessionRecordingPlayerTab.EVENTS,
-        key: 'events-markettor',
-        name: 'MarketTor',
-        tooltip: 'Standard MarketTor events like Pageviews, Autocapture etc.',
+        key: 'events-clairview',
+        name: 'ClairView',
+        tooltip: 'Standard ClairView events like Pageviews, Autocapture etc.',
     },
     {
         tab: SessionRecordingPlayerTab.EVENTS,
@@ -84,7 +84,7 @@ const MiniFilters: SharedListMiniFilter[] = [
         tab: SessionRecordingPlayerTab.EVENTS,
         key: 'events-exceptions',
         name: 'Exceptions',
-        tooltip: 'Exception events from MarketTor or its Sentry integration',
+        tooltip: 'Exception events from ClairView or its Sentry integration',
     },
     {
         tab: SessionRecordingPlayerTab.CONSOLE,

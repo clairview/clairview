@@ -126,7 +126,7 @@ describe('Events', () => {
     /**
      * Test fails because property filters act on properties.$time but not all events have that property
      *
-     * Needs https://github.com/MarketTor/markettor/issues/8250 before can query on timestamp
+     * Needs https://github.com/ClairView/clairview/issues/8250 before can query on timestamp
      */
     it.skip('can filter after a date and can filter before it', () => {
         cy.intercept(/api\/projects\/\d+\/activity\/explore\/.*/).as('getEvents')

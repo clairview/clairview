@@ -1,7 +1,7 @@
 import './index.scss'
 
-import { IconGear, IconHome, IconLaptop } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonDropdown, LemonDropdownProps } from '@markettor/lemon-ui'
+import { IconGear, IconHome, IconLaptop } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonDropdown, LemonDropdownProps } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'

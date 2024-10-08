@@ -1,4 +1,4 @@
-import { PaginationManual } from '@markettor/lemon-ui'
+import { PaginationManual } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import api, { CountedPaginatedResponse } from 'lib/api'

@@ -1,7 +1,7 @@
 import { closestCenter, DndContext } from '@dnd-kit/core'
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { IconGear, IconInfo, IconLock, IconPlus, IconTrash, IconX } from '@markettor/icons'
+import { IconGear, IconInfo, IconLock, IconPlus, IconTrash, IconX } from '@clairview/icons'
 import {
     LemonButton,
     LemonCheckbox,
@@ -13,7 +13,7 @@ import {
     LemonTag,
     LemonTextArea,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { CodeEditorInline, CodeEditorInlineProps } from 'lib/monaco/CodeEditorInline'
@@ -391,7 +391,7 @@ export function HogFunctionInputWithSchema({ schema }: HogFunctionInputWithSchem
                                     {supportsTemplating && (
                                         <LemonButton
                                             size="xsmall"
-                                            to="https://markettor.com/docs/cdp/destinations#input-formatting"
+                                            to="https://clairview.com/docs/cdp/destinations#input-formatting"
                                             sideIcon={<IconInfo />}
                                             noPadding
                                             className=" opacity-0 group-hover:opacity-100 p-1 transition-opacity"

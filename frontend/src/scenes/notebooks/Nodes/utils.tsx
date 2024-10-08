@@ -1,5 +1,5 @@
 import { ExtendedRegExpMatchArray, NodeViewProps, PasteRule } from '@tiptap/core'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { NodeType } from '@tiptap/pm/model'
 import { Editor as TTEditor } from '@tiptap/core'
 import { CustomNotebookNodeAttributes, NotebookNodeAttributes } from '../Notebook/utils'
@@ -12,10 +12,10 @@ export function createUrlRegex(path: string | RegExp, origin?: string): RegExp {
 }
 
 export function reportNotebookNodeCreation(nodeType: string): void {
-    markettor.capture('notebook node created', { type: nodeType })
+    clairview.capture('notebook node created', { type: nodeType })
 }
 
-export function markettorNodePasteRule(options: {
+export function clairviewNodePasteRule(options: {
     find: string | RegExp
     type: NodeType
     editor: TTEditor

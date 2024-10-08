@@ -1,6 +1,6 @@
 import './YearInHogButton.scss'
 
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { HeartHog } from 'lib/components/hedgehogs'
 import { IconXmasTree } from 'lib/lemon-ui/icons'
@@ -29,7 +29,7 @@ export function YearInHogButton({ url }: { url: string | null }): JSX.Element | 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
             >
-                MarketTor Unwrapped
+                ClairView Unwrapped
             </LemonButton>
         </div>
     ) : null

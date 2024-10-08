@@ -25,7 +25,7 @@ export function Site({ url }: { url?: string } = {}): JSX.Element {
             src={launchUrl(decodedUrl)}
             // allow-same-origin is particularly important here, because otherwise redirect_to_site cannot work
             // Note that combining allow-scripts and allow-same-origin effectively allows the iframe access to the
-            // MarketTor app, which is why it's important that users only add sites that they control here
+            // ClairView app, which is why it's important that users only add sites that they control here
             sandbox="allow-downloads allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
         />
     )

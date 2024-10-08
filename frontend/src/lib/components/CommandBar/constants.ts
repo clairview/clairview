@@ -6,13 +6,13 @@ export const actionScopeToName: Record<string, string> = {
 export enum TabGroup {
     All = 'all',
     EventData = 'event_data',
-    MarketTor = 'markettor',
+    ClairView = 'clairview',
 }
 
 export const groupToName: Record<TabGroup, string | null> = {
     [TabGroup.All]: 'All',
     [TabGroup.EventData]: 'Event data',
-    [TabGroup.MarketTor]: 'MarketTor',
+    [TabGroup.ClairView]: 'ClairView',
 }
 
 export enum Tab {

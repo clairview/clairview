@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useState } from 'react'
 
 import { HogFunctionFiltersType, HogFunctionSubTemplateIdType } from '~/types'

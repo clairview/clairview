@@ -6,14 +6,14 @@ import type { userPreferencesLogicType } from './userPreferencesLogicType'
 export const userPreferencesLogic = kea<userPreferencesLogicType>([
     path(['lib', 'logic', 'userPreferencesLogic']),
     actions({
-        setHideMarketTorPropertiesInTable: (enabled: boolean) => ({ enabled }),
+        setHideClairViewPropertiesInTable: (enabled: boolean) => ({ enabled }),
     }),
     reducers(() => ({
-        hideMarketTorPropertiesInTable: [
+        hideClairViewPropertiesInTable: [
             false,
             { persist: true },
             {
-                setHideMarketTorPropertiesInTable: (_, { enabled }) => enabled,
+                setHideClairViewPropertiesInTable: (_, { enabled }) => enabled,
             },
         ],
     })),

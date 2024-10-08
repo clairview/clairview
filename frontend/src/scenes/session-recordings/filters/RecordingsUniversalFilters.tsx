@@ -1,4 +1,4 @@
-import { LemonSelect } from '@markettor/lemon-ui'
+import { LemonSelect } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useMountedLogic, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'

@@ -1,4 +1,4 @@
-import { IconCollapse, IconExpand } from '@markettor/icons'
+import { IconCollapse, IconExpand } from '@clairview/icons'
 import clsx from 'clsx'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import React, { HTMLProps, useState } from 'react'

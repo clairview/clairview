@@ -1,7 +1,7 @@
 import './BoldNumber.scss'
 
-import { IconTrending } from '@markettor/icons'
-import { LemonRow, Link } from '@markettor/lemon-ui'
+import { IconTrending } from '@clairview/icons'
+import { LemonRow, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { IconFlare, IconTrendingDown, IconTrendingFlat } from 'lib/lemon-ui/icons'

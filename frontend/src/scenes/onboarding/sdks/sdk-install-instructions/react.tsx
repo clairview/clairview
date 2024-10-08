@@ -26,7 +26,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-import { MarketTorProvider} from 'markettor-js/react'
+import { ClairViewProvider} from 'clairview-js/react'
 
 const options = {
   api_host: process.env.REACT_APP_PUBLIC_MARKETTOR_HOST,
@@ -35,12 +35,12 @@ const options = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MarketTorProvider 
+    <ClairViewProvider 
       apiKey={process.env.REACT_APP_PUBLIC_MARKETTOR_KEY}
       options={options}
     >
       <App />
-    </MarketTorProvider>
+    </ClairViewProvider>
   </React.StrictMode>
 );`}
         </CodeSnippet>
@@ -56,7 +56,7 @@ export function SDKInstallReactInstructions(): JSX.Element {
             <ReactEnvVarsSnippet />
             <h3>Initialize</h3>
             <p>
-                Integrate MarketTor at the root of your app (<code>src/index.js</code> for the default{' '}
+                Integrate ClairView at the root of your app (<code>src/index.js</code> for the default{' '}
                 <code>create-react-app</code>).
             </p>
             <ReactSetupSnippet />

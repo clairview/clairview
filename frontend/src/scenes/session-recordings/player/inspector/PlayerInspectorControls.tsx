@@ -1,5 +1,5 @@
-import { IconBug, IconDashboard, IconInfo, IconTerminal } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonInput, LemonSelect, LemonTabs, Tooltip } from '@markettor/lemon-ui'
+import { IconBug, IconDashboard, IconInfo, IconTerminal } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonInput, LemonSelect, LemonTabs, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { IconUnverifiedEvent } from 'lib/lemon-ui/icons'

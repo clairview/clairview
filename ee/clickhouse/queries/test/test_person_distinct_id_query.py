@@ -1,4 +1,4 @@
-from markettor.queries import person_distinct_id_query
+from clairview.queries import person_distinct_id_query
 
 
 def test_person_distinct_id_query(db, snapshot):

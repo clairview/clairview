@@ -1,9 +1,9 @@
-import { IconCheck, IconMap, IconMessage, IconStack } from '@markettor/icons'
-import { LemonButton, Link, Spinner } from '@markettor/lemon-ui'
+import { IconCheck, IconMap, IconMessage, IconStack } from '@clairview/icons'
+import { LemonButton, Link, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { WavingHog } from 'lib/components/hedgehogs'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import React from 'react'
 import { convertLargeNumberToWords } from 'scenes/billing/billing-utils'
 import { billingProductLogic } from 'scenes/billing/billingProductLogic'
@@ -87,7 +87,7 @@ const GetStartedButton = ({ product }: { product: BillingProductV2Type }): JSX.E
                         onClick={() => {
                             setTeamPropertiesForProduct(product.type as ProductKey)
                             reportOnboardingProductSelected(product.type, includeFirstOnboardingProductOnUserProperties)
-                            markettor.capture('product onboarding skipped', { product_key: product.type })
+                            clairview.capture('product onboarding skipped', { product_key: product.type })
                             completeOnboarding()
                         }}
                     >
@@ -258,7 +258,7 @@ export function OnboardingProductIntroduction({ stepKey }: { stepKey: Onboarding
                                     </li>
                                     <li>
                                         <Link
-                                            to={`https://markettor.com/tutorials/${websiteSlug[billingProduct.type]}`}
+                                            to={`https://clairview.com/tutorials/${websiteSlug[billingProduct.type]}`}
                                             target="_blank"
                                         >
                                             <IconMap className="mr-2 text-xl" />
@@ -267,7 +267,7 @@ export function OnboardingProductIntroduction({ stepKey }: { stepKey: Onboarding
                                     </li>
                                     <li>
                                         <Link
-                                            to={`https://markettor.com/questions/topic/${
+                                            to={`https://clairview.com/questions/topic/${
                                                 websiteSlug[billingProduct.type]
                                             }`}
                                             target="_blank"

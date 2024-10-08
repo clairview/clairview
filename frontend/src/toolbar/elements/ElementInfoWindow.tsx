@@ -1,4 +1,4 @@
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 
 import { ElementInfo } from '~/toolbar/elements/ElementInfo'

@@ -1,5 +1,5 @@
 def test_system_status(db):
-    from markettor.clickhouse.system_status import system_status
+    from clairview.clickhouse.system_status import system_status
 
     results = list(system_status())
     assert [row["key"] for row in results] == [

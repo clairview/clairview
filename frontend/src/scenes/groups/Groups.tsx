@@ -110,12 +110,12 @@ export function Groups({ groupTypeIndex }: { groupTypeIndex: number }): JSX.Elem
                         <LemonBanner type="info">
                             No {plural} found. Make sure to send properties with your {singular} for them to show up in
                             the list.{' '}
-                            <Link to="https://markettor.com/docs/user-guides/group-analytics" target="_blank">
+                            <Link to="https://clairview.com/docs/user-guides/group-analytics" target="_blank">
                                 Read more here.
                             </Link>
                         </LemonBanner>
                         <CodeSnippet language={Language.JavaScript} wrap>
-                            {`markettor.group('${singular}', 'id:5', {\n` +
+                            {`clairview.group('${singular}', 'id:5', {\n` +
                                 `    name: 'Awesome ${singular}',\n` +
                                 '    value: 11\n' +
                                 '});'}

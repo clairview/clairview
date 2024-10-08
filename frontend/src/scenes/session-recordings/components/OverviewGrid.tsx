@@ -1,4 +1,4 @@
-import { Tooltip } from '@markettor/lemon-ui'
+import { Tooltip } from '@clairview/lemon-ui'
 
 export function OverviewGrid({ children }: { children: React.ReactNode }): JSX.Element {
     return (

@@ -1,4 +1,4 @@
-import { LemonBanner, LemonButton, LemonInputSelect, LemonInputSelectOption, Link } from '@markettor/lemon-ui'
+import { LemonBanner, LemonButton, LemonInputSelect, LemonInputSelectOption, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconSlackExternal } from 'lib/lemon-ui/icons'
 import { useMemo } from 'react'
@@ -81,9 +81,9 @@ export function SlackChannelPicker({ onChange, value, integration, disabled }: S
                 <LemonBanner type="info">
                     <div className="flex gap-2 items-center">
                         <span>
-                            The MarketTor Slack App is not in this channel. Please add it to the channel otherwise
+                            The ClairView Slack App is not in this channel. Please add it to the channel otherwise
                             Subscriptions will fail to be delivered.{' '}
-                            <Link to="https://markettor.com/docs/webhooks/slack" target="_blank">
+                            <Link to="https://clairview.com/docs/webhooks/slack" target="_blank">
                                 See the Docs for more information
                             </Link>
                         </span>

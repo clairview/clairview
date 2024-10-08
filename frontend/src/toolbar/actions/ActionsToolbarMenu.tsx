@@ -1,4 +1,4 @@
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { IconOpenInNew } from 'lib/lemon-ui/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

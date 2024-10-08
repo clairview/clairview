@@ -1,4 +1,4 @@
-import { LemonSelect } from '@markettor/lemon-ui'
+import { LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { RollingDateRangeFilter } from 'lib/components/DateFilter/RollingDateRangeFilter'
 import { dateFromToText } from 'lib/utils'

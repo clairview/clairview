@@ -1,4 +1,4 @@
-import { IconGear, IconPlusSmall, IconTrash } from '@markettor/icons'
+import { IconGear, IconPlusSmall, IconTrash } from '@clairview/icons'
 import {
     LemonButton,
     LemonInput,
@@ -9,7 +9,7 @@ import {
     LemonTabs,
     LemonTag,
     Popover,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { getSeriesColor } from 'lib/colors'

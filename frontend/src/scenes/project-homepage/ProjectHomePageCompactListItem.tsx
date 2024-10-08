@@ -1,4 +1,4 @@
-import { LemonButton, LemonButtonProps } from '@markettor/lemon-ui'
+import { LemonButton, LemonButtonProps } from '@clairview/lemon-ui'
 import React from 'react'
 
 export type RecentItemRowProps = Pick<LemonButtonProps, 'onClick' | 'to'> & {

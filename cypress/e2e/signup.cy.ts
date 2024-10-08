@@ -11,7 +11,7 @@ describe('Signup', () => {
     })
 
     it('Cannot create account with existing email', () => {
-        cy.get('[data-attr=signup-email]').type('test@markettor.com').should('have.value', 'test@markettor.com')
+        cy.get('[data-attr=signup-email]').type('test@clairview.com').should('have.value', 'test@clairview.com')
         cy.get('[data-attr=password]').type(VALID_PASSWORD).should('have.value', VALID_PASSWORD)
         cy.get('[data-attr=signup-start]').click()
         cy.get('[data-attr=signup-name]').type('Jane Doe').should('have.value', 'Jane Doe')
@@ -44,7 +44,7 @@ describe('Signup', () => {
     it('Can create user account with first name, last name and organization name', () => {
         cy.intercept('POST', '/api/signup/').as('signupRequest')
 
-        const email = `new_user+${Math.floor(Math.random() * 10000)}@markettor.com`
+        const email = `new_user+${Math.floor(Math.random() * 10000)}@clairview.com`
         cy.get('[data-attr=signup-email]').type(email).should('have.value', email)
         cy.get('[data-attr=password]').type(VALID_PASSWORD).should('have.value', VALID_PASSWORD)
         cy.get('[data-attr=signup-start]').click()
@@ -72,7 +72,7 @@ describe('Signup', () => {
         cy.intercept('POST', '/api/signup/').as('signupRequest')
 
         // Create initial account
-        const email = `new_user+generic_error_test@markettor.com`
+        const email = `new_user+generic_error_test@clairview.com`
         cy.get('[data-attr=signup-email]').type(email).should('have.value', email)
         cy.get('[data-attr=password]').type(VALID_PASSWORD).should('have.value', VALID_PASSWORD)
         cy.get('[data-attr=signup-start]').click()
@@ -102,7 +102,7 @@ describe('Signup', () => {
         cy.get('[data-attr=signup-go-back]').click()
 
         // Update email to generic email
-        const newEmail = `new_user+${Math.floor(Math.random() * 10000)}@markettor.com`
+        const newEmail = `new_user+${Math.floor(Math.random() * 10000)}@clairview.com`
         cy.get('[data-attr=signup-email]').clear().type(newEmail).should('have.value', newEmail)
         cy.get('[data-attr=signup-start]').click()
         cy.get('[data-attr=signup-submit]').click()
@@ -121,7 +121,7 @@ describe('Signup', () => {
     it('Can create user account with just a first name', () => {
         cy.intercept('POST', '/api/signup/').as('signupRequest')
 
-        const email = `new_user+${Math.floor(Math.random() * 10000)}@markettor.com`
+        const email = `new_user+${Math.floor(Math.random() * 10000)}@clairview.com`
         cy.get('[data-attr=signup-email]').type(email).should('have.value', email)
         cy.get('[data-attr=password]').type(VALID_PASSWORD).should('have.value', VALID_PASSWORD)
         cy.get('[data-attr=signup-start]').click()
@@ -148,9 +148,9 @@ describe('Signup', () => {
         // we get the expected error that no social session exists.
         cy.visit('/logout')
         cy.location('pathname').should('include', '/login')
-        cy.visit('/organization/confirm-creation?organization_name=&first_name=Test&email=test%40markettor.com')
+        cy.visit('/organization/confirm-creation?organization_name=&first_name=Test&email=test%40clairview.com')
 
-        cy.get('[name=email]').should('have.value', 'test@markettor.com')
+        cy.get('[name=email]').should('have.value', 'test@clairview.com')
         cy.get('[name=first_name]').should('have.value', 'Test')
         cy.get('[name=organization_name]').type('Hogflix SpinOff').should('have.value', 'Hogflix SpinOff')
         cy.get('[data-attr=signup-role-at-organization]').click()

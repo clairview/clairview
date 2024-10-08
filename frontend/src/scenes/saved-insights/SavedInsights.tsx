@@ -20,8 +20,8 @@ import {
     IconUserPaths,
     IconVideoCamera,
     IconWarning,
-} from '@markettor/icons'
-import { LemonSelectOptions } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonSelectOptions } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ActivityLog } from 'lib/components/ActivityLog/ActivityLog'
 import { Alerts } from 'lib/components/Alerts/views/Alerts'
@@ -280,7 +280,7 @@ export const QUERY_TYPES_METADATA: Record<NodeKind, InsightTypeMetadata> = {
     },
     [NodeKind.DatabaseSchemaQuery]: {
         name: 'Database Schema',
-        description: 'Introspect the MarketTor database schema',
+        description: 'Introspect the ClairView database schema',
         icon: IconTorQL,
         inMenu: true,
     },

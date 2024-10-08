@@ -15,7 +15,7 @@ pub struct Config {
     #[envconfig(nested = true)]
     pub consumer: ConsumerConfig,
 
-    #[envconfig(default = "postgres://markettor:markettor@localhost:5432/markettor")]
+    #[envconfig(default = "postgres://clairview:clairview@localhost:5432/clairview")]
     pub database_url: String,
 
     // Rust service connect directly to postgres, not via pgbouncer, so we keep this low

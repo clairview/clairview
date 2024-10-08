@@ -1,5 +1,5 @@
-import { IconChevronDown, IconClock, IconEllipsis } from '@markettor/icons'
-import { LemonButton, Spinner, Tooltip } from '@markettor/lemon-ui'
+import { IconChevronDown, IconClock, IconEllipsis } from '@clairview/icons'
+import { LemonButton, Spinner, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { humanFriendlyDetailedTime } from 'lib/utils'
 import { copyToClipboard } from 'lib/utils/copyToClipboard'

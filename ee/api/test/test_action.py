@@ -4,9 +4,9 @@ import pytest
 from django.utils import timezone
 from rest_framework import status
 
-from markettor.cloud_utils import is_cloud
-from markettor.models import Action, Tag
-from markettor.test.base import APIBaseTest
+from clairview.cloud_utils import is_cloud
+from clairview.models import Action, Tag
+from clairview.test.base import APIBaseTest
 
 # Testing enterprise properties of actions here (i.e., tagging).
 

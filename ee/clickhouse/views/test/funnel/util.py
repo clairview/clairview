@@ -4,8 +4,8 @@ from typing import Any, Literal, Optional, TypedDict, Union
 from django.test.client import Client
 
 from ee.clickhouse.queries.funnels.funnel_correlation import EventOddsRatioSerialized
-from markettor.constants import FunnelCorrelationType
-from markettor.models.property import GroupTypeIndex
+from clairview.constants import FunnelCorrelationType
+from clairview.models.property import GroupTypeIndex
 
 
 class EventPattern(TypedDict, total=False):

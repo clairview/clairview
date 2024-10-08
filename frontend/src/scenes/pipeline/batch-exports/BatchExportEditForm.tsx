@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import {
     LemonBanner,
     LemonCalendarSelectInput,
@@ -8,7 +8,7 @@ import {
     LemonInputSelect,
     LemonSelect,
     Tooltip,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { LemonField } from 'lib/lemon-ui/LemonField'
@@ -170,7 +170,7 @@ export function BatchExportsEditFields({
                             </LemonField>
                         </div>
                         <LemonField name="prefix" label="Key prefix">
-                            <LemonInput placeholder="e.g. markettor-events/" />
+                            <LemonInput placeholder="e.g. clairview-events/" />
                         </LemonField>
 
                         <div className="flex gap-4">
@@ -475,11 +475,11 @@ export function BatchExportsEditFields({
                     </>
                 ) : batchExportConfigForm.destination === 'HTTP' ? (
                     <>
-                        <LemonField name="url" label="MarketTor region">
+                        <LemonField name="url" label="ClairView region">
                             <LemonSelect
                                 options={[
-                                    { value: 'https://us.i.markettor.com/batch/', label: 'US' },
-                                    { value: 'https://eu.i.markettor.com/batch/', label: 'EU' },
+                                    { value: 'https://us.i.clairview.com/batch/', label: 'US' },
+                                    { value: 'https://eu.i.clairview.com/batch/', label: 'EU' },
                                 ]}
                             />
                         </LemonField>

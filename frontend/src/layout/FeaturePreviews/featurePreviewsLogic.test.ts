@@ -13,7 +13,7 @@ describe('featurePreviewsLogic', () => {
     beforeEach(() => {
         useMocks({
             post: {
-                'https://markettorhelp.zendesk.com/api/v2/requests.json': [200, {}],
+                'https://clairviewhelp.zendesk.com/api/v2/requests.json': [200, {}],
             },
         })
         initKeaTests()

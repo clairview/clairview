@@ -1,4 +1,4 @@
-import { PluginEvent, ProcessedPluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent, ProcessedPluginEvent } from '@clairview/plugin-scaffold'
 import fetch from 'node-fetch'
 
 import { KAFKA_EVENTS_PLUGIN_INGESTION, KAFKA_PLUGIN_LOG_ENTRIES } from '../../src/config/kafka-topics'
@@ -770,23 +770,23 @@ describe('vm tests', () => {
         expect(event.properties).toEqual({ count: 2, query: 'bla', results: [true, true] })
     })
 
-    test('markettor.api', async () => {
+    test('clairview.api', async () => {
         const indexJs = `
             async function processEvent (event, meta) {
                 event.properties = {}
-                const getResponse = await markettor.api.get('/api/event')
+                const getResponse = await clairview.api.get('/api/event')
                 event.properties.get = await getResponse.json()
-                await markettor.api.get('/api/event', { data: { url: 'param' } })
-                await markettor.api.post('/api/event', { data: { a: 1 }})
-                await markettor.api.put('/api/event', { data: { b: 2 } })
-                await markettor.api.patch('/api/event', { data: { c: 3 }})
-                await markettor.api.delete('/api/event')
+                await clairview.api.get('/api/event', { data: { url: 'param' } })
+                await clairview.api.post('/api/event', { data: { a: 1 }})
+                await clairview.api.put('/api/event', { data: { b: 2 } })
+                await clairview.api.patch('/api/event', { data: { c: 3 }})
+                await clairview.api.delete('/api/event')
 
                 // test auth defaults override
-                await markettor.api.get('/api/event', { projectApiKey: 'token', personalApiKey: 'secret' })
+                await clairview.api.get('/api/event', { projectApiKey: 'token', personalApiKey: 'secret' })
 
                 // test replace @current with team id
-                await markettor.api.get('/api/projects/@current/event')
+                await clairview.api.get('/api/projects/@current/event')
 
                 return event
             }
@@ -804,21 +804,21 @@ describe('vm tests', () => {
         expect((fetch as any).mock.calls.length).toEqual(8)
         expect((fetch as any).mock.calls).toEqual([
             [
-                'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: { Authorization: expect.stringContaining('Bearer phx_') },
                     method: 'GET',
                 },
             ],
             [
-                'https://app.markettor.com/api/event?url=param&token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?url=param&token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: { Authorization: expect.stringContaining('Bearer phx_') },
                     method: 'GET',
                 },
             ],
             [
-                'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: {
                         Authorization: expect.stringContaining('Bearer phx_'),
@@ -829,7 +829,7 @@ describe('vm tests', () => {
                 },
             ],
             [
-                'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: { Authorization: expect.stringContaining('Bearer phx_') },
                     method: 'PUT',
@@ -837,7 +837,7 @@ describe('vm tests', () => {
                 },
             ],
             [
-                'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: {
                         Authorization: expect.stringContaining('Bearer phx_'),
@@ -848,21 +848,21 @@ describe('vm tests', () => {
                 },
             ],
             [
-                'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
+                'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
                     headers: { Authorization: expect.stringContaining('Bearer phx_') },
                     method: 'DELETE',
                 },
             ],
             [
-                'https://app.markettor.com/api/event?token=token',
+                'https://app.clairview.com/api/event?token=token',
                 {
                     headers: { Authorization: 'Bearer secret' },
                     method: 'GET',
                 },
             ],
             [
-                'https://app.markettor.com/api/projects/' +
+                'https://app.clairview.com/api/projects/' +
                     pluginConfig39.team_id +
                     '/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2',
                 {
@@ -952,10 +952,10 @@ describe('vm tests', () => {
         expect(Object.values(vm.tasks.schedule).map((v) => typeof v?.exec)).toEqual(['function'])
     })
 
-    test('markettor in runEvery', async () => {
+    test('clairview in runEvery', async () => {
         const indexJs = `
             async function runEveryMinute(meta) {
-                await markettor.capture('my-new-event', { random: 'properties' })
+                await clairview.capture('my-new-event', { random: 'properties' })
                 return 'haha'
             }
         `
@@ -974,17 +974,17 @@ describe('vm tests', () => {
             distinct_id: 'plugin-id-60',
             event: 'my-new-event',
             properties: expect.objectContaining({
-                $lib: 'markettor-plugin-server',
+                $lib: 'clairview-plugin-server',
                 random: 'properties',
                 distinct_id: 'plugin-id-60',
             }),
         })
     })
 
-    test('markettor in runEvery with timestamp', async () => {
+    test('clairview in runEvery with timestamp', async () => {
         const indexJs = `
             async function runEveryMinute(meta) {
-                await markettor.capture('my-new-event', { random: 'properties', timestamp: '2020-02-23T02:15:00Z' })
+                await clairview.capture('my-new-event', { random: 'properties', timestamp: '2020-02-23T02:15:00Z' })
                 return 'haha'
             }
         `
@@ -1003,14 +1003,14 @@ describe('vm tests', () => {
             timestamp: '2020-02-23T02:15:00Z', // taken out of the properties
             distinct_id: 'plugin-id-60',
             event: 'my-new-event',
-            properties: expect.objectContaining({ $lib: 'markettor-plugin-server', random: 'properties' }),
+            properties: expect.objectContaining({ $lib: 'clairview-plugin-server', random: 'properties' }),
         })
     })
 
-    test('markettor.capture accepts user-defined distinct id', async () => {
+    test('clairview.capture accepts user-defined distinct id', async () => {
         const indexJs = `
             function runEveryMinute(meta) {
-                markettor.capture('my-new-event', { random: 'properties', distinct_id: 'custom id' })
+                clairview.capture('my-new-event', { random: 'properties', distinct_id: 'custom id' })
                 return 'haha'
             }
         `
@@ -1030,7 +1030,7 @@ describe('vm tests', () => {
             distinct_id: 'custom id',
             event: 'my-new-event',
             properties: expect.objectContaining({
-                $lib: 'markettor-plugin-server',
+                $lib: 'clairview-plugin-server',
                 random: 'properties',
                 distinct_id: 'custom id',
             }),

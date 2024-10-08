@@ -5,9 +5,9 @@ from ee.api.hooks import valid_domain
 from ee.api.test.base import APILicensedTest
 from ee.models.hook import Hook
 from hogvm.python.operation import TORQL_BYTECODE_VERSION
-from markettor.models.action.action import Action
-from markettor.models.hog_functions.hog_function import HogFunction
-from markettor.test.base import ClickhouseTestMixin
+from clairview.models.action.action import Action
+from clairview.models.hog_functions.hog_function import HogFunction
+from clairview.test.base import ClickhouseTestMixin
 
 
 class TestHooksAPI(ClickhouseTestMixin, APILicensedTest):

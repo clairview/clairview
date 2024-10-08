@@ -26,7 +26,7 @@ type Subscription struct {
 	ShouldClose *atomic.Bool
 }
 
-type ResponseMarketTorEvent struct {
+type ResponseClairViewEvent struct {
 	Uuid       string                 `json:"uuid"`
 	Timestamp  string                 `json:"timestamp"`
 	DistinctId string                 `json:"distinct_id"`
@@ -42,17 +42,17 @@ type ResponseGeoEvent struct {
 }
 
 type Filter struct {
-	inboundChan chan MarketTorEvent
+	inboundChan chan ClairViewEvent
 	subChan     chan Subscription
 	unSubChan   chan Subscription
 	subs        []Subscription
 }
 
-func NewFilter(subChan chan Subscription, unSubChan chan Subscription, inboundChan chan MarketTorEvent) *Filter {
+func NewFilter(subChan chan Subscription, unSubChan chan Subscription, inboundChan chan ClairViewEvent) *Filter {
 	return &Filter{subChan: subChan, unSubChan: unSubChan, inboundChan: inboundChan, subs: make([]Subscription, 0)}
 }
 
-func convertToResponseGeoEvent(event MarketTorEvent) *ResponseGeoEvent {
+func convertToResponseGeoEvent(event ClairViewEvent) *ResponseGeoEvent {
 	return &ResponseGeoEvent{
 		Lat:   event.Lat,
 		Lng:   event.Lng,
@@ -60,8 +60,8 @@ func convertToResponseGeoEvent(event MarketTorEvent) *ResponseGeoEvent {
 	}
 }
 
-func convertToResponseMarketTorEvent(event MarketTorEvent, teamId int) *ResponseMarketTorEvent {
-	return &ResponseMarketTorEvent{
+func convertToResponseClairViewEvent(event ClairViewEvent, teamId int) *ResponseClairViewEvent {
+	return &ResponseClairViewEvent{
 		Uuid:       event.Uuid,
 		Timestamp:  event.Timestamp,
 		DistinctId: event.DistinctId,
@@ -105,7 +105,7 @@ func (c *Filter) Run() {
 		case unSub := <-c.unSubChan:
 			c.subs = removeSubscription(unSub.ClientId, c.subs)
 		case event := <-c.inboundChan:
-			var responseEvent *ResponseMarketTorEvent
+			var responseEvent *ResponseClairViewEvent
 			var responseGeoEvent *ResponseGeoEvent
 
 			for _, sub := range c.subs {
@@ -141,7 +141,7 @@ func (c *Filter) Run() {
 					}
 				} else {
 					if responseEvent == nil {
-						responseEvent = convertToResponseMarketTorEvent(event, sub.TeamId)
+						responseEvent = convertToResponseClairViewEvent(event, sub.TeamId)
 					}
 
 					select {

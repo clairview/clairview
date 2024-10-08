@@ -1,4 +1,4 @@
-import { LemonDivider, LemonSelect, LemonSwitch } from '@markettor/lemon-ui'
+import { LemonDivider, LemonSelect, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import React, { useEffect, useRef } from 'react'
 import { pipelineDefaultEnabledLogic } from 'scenes/pipeline/pipelineDefaultEnabledLogic'

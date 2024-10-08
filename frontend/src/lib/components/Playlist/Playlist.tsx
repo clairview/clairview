@@ -1,7 +1,7 @@
 import './Playlist.scss'
 
-import { IconCollapse } from '@markettor/icons'
-import { LemonButton, LemonButtonProps, LemonCollapse, LemonSkeleton, Tooltip } from '@markettor/lemon-ui'
+import { IconCollapse } from '@clairview/icons'
+import { LemonButton, LemonButtonProps, LemonCollapse, LemonSkeleton, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useResizeBreakpoints } from 'lib/hooks/useResizeObserver'
 import { IconChevronRight } from 'lib/lemon-ui/icons'

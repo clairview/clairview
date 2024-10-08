@@ -1,5 +1,5 @@
-import { IconDownload } from '@markettor/icons'
-import { LemonButton, LemonDialog, LemonInput, LemonMenu, lemonToast } from '@markettor/lemon-ui'
+import { IconDownload } from '@clairview/icons'
+import { LemonButton, LemonDialog, LemonInput, LemonMenu, lemonToast } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { TriggerExportProps } from 'lib/components/ExportButton/exporter'
 import { exportsLogic } from 'lib/components/ExportButton/exportsLogic'
@@ -20,7 +20,7 @@ import { ExporterFormat } from '~/types'
 
 import { dataTableLogic, DataTableRow } from './dataTableLogic'
 
-// Sync with markettor/torql/constants.py
+// Sync with clairview/torql/constants.py
 export const MAX_SELECT_RETURNED_ROWS = 50000
 
 const columnDisallowList = ['person.$delete', '*']

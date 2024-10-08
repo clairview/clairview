@@ -1,10 +1,10 @@
 import { Marker } from 'maplibre-gl'
 
 import { NotebookNodeType } from '~/types'
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { personLogic } from 'scenes/persons/personLogic'
 import { useValues } from 'kea'
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { NotFound } from 'lib/components/NotFound'
 import { Map } from '../../../lib/components/Map/Map'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -50,7 +50,7 @@ type NotebookNodeMapAttributes = {
     id: string
 }
 
-export const NotebookNodeMap = createMarketTorWidgetNode<NotebookNodeMapAttributes>({
+export const NotebookNodeMap = createClairViewWidgetNode<NotebookNodeMapAttributes>({
     nodeType: NotebookNodeType.Map,
     titlePlaceholder: 'Location',
     Component,

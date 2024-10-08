@@ -13,21 +13,21 @@ from ee.session_recordings.session_recording_extensions import (
     persist_recording,
     save_recording_with_new_content,
 )
-from markettor.models.signals import mute_selected_signals
-from markettor.session_recordings.models.session_recording import SessionRecording
-from markettor.session_recordings.queries.test.session_replay_sql import (
+from clairview.models.signals import mute_selected_signals
+from clairview.session_recordings.models.session_recording import SessionRecording
+from clairview.session_recordings.queries.test.session_replay_sql import (
     produce_replay_summary,
 )
-from markettor.settings import (
+from clairview.settings import (
     OBJECT_STORAGE_ENDPOINT,
     OBJECT_STORAGE_ACCESS_KEY_ID,
     OBJECT_STORAGE_SECRET_ACCESS_KEY,
     OBJECT_STORAGE_BUCKET,
 )
-from markettor.storage.object_storage import write, list_objects
-from markettor.test.base import APIBaseTest, ClickhouseTestMixin
+from clairview.storage.object_storage import write, list_objects
+from clairview.test.base import APIBaseTest, ClickhouseTestMixin
 
-long_url = f"https://app.markettor.com/my-url?token={token_urlsafe(600)}"
+long_url = f"https://app.clairview.com/my-url?token={token_urlsafe(600)}"
 
 
 TEST_BUCKET = "test_storage_bucket-TestSessionRecordingExtensions"
@@ -95,7 +95,7 @@ class TestSessionRecordingExtensions(ClickhouseTestMixin, APIBaseTest):
                     first_timestamp=(two_minutes_ago - timedelta(hours=48)).isoformat(),
                     last_timestamp=(two_minutes_ago - timedelta(hours=46)).isoformat(),
                     distinct_id="distinct_id_1",
-                    first_url="https://app.markettor.com/my-url",
+                    first_url="https://app.clairview.com/my-url",
                 )
 
                 # this recording already has several files stored from Mr. Blobby
@@ -124,7 +124,7 @@ class TestSessionRecordingExtensions(ClickhouseTestMixin, APIBaseTest):
             assert recording.duration == 7200
             assert recording.click_count == 0
             assert recording.keypress_count == 0
-            assert recording.start_url == "https://app.markettor.com/my-url"
+            assert recording.start_url == "https://app.clairview.com/my-url"
 
             # recordings which were blob ingested can not be loaded with this mechanism
             assert load_persisted_recording(recording) is None

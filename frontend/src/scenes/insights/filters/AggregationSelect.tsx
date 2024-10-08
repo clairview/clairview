@@ -1,4 +1,4 @@
-import { LemonSelect, LemonSelectSection } from '@markettor/lemon-ui'
+import { LemonSelect, LemonSelectSection } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
 import { groupsAccessLogic } from 'lib/introductions/groupsAccessLogic'

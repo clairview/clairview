@@ -1,13 +1,13 @@
 from typing import Any, Optional
 
-import markettoranalytics
+import clairviewanalytics
 import requests
 import structlog
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from rest_framework import serializers, status, viewsets
-from markettor.api.utils import action
+from clairview.api.utils import action
 from rest_framework.exceptions import NotFound, PermissionDenied, ValidationError
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -15,14 +15,14 @@ from rest_framework.response import Response
 from ee.billing.billing_manager import BillingManager, build_billing_token
 from ee.models import License
 from ee.settings import BILLING_SERVICE_URL
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.cloud_utils import get_cached_instance_license
-from markettor.event_usage import groups
-from markettor.models import Organization
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.cloud_utils import get_cached_instance_license
+from clairview.event_usage import groups
+from clairview.models import Organization
 
 logger = structlog.get_logger(__name__)
 
-BILLING_SERVICE_JWT_AUD = "markettor:license-key"
+BILLING_SERVICE_JWT_AUD = "clairview:license-key"
 
 
 class BillingSerializer(serializers.Serializer):
@@ -71,7 +71,7 @@ class BillingViewset(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
                 BillingManager(license).update_billing(org, {"custom_limits_usd": custom_limits_usd})
 
                 if distinct_id:
-                    markettoranalytics.capture(
+                    clairviewanalytics.capture(
                         distinct_id,
                         "billing limits updated",
                         properties={**custom_limits_usd},
@@ -79,7 +79,7 @@ class BillingViewset(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
                             groups(org, self.request.user.team) if hasattr(self.request.user, "team") else groups(org)
                         ),
                     )
-                    markettoranalytics.group_identify(
+                    clairviewanalytics.group_identify(
                         "organization",
                         str(org.id),
                         properties={f"billing_limits_{key}": value for key, value in custom_limits_usd.items()},

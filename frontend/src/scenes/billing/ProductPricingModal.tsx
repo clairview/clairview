@@ -1,4 +1,4 @@
-import { LemonModal } from '@markettor/lemon-ui'
+import { LemonModal } from '@clairview/lemon-ui'
 import { capitalizeFirstLetter } from 'lib/utils'
 
 import { BillingPlanType, BillingProductV2AddonType, BillingProductV2Type } from '~/types'

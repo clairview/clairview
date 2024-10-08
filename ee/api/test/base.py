@@ -3,12 +3,12 @@ from typing import Optional, cast
 from zoneinfo import ZoneInfo
 
 from ee.models.license import License, LicenseManager
-from markettor.test.base import APIBaseTest
+from clairview.test.base import APIBaseTest
 
 
 class LicensedTestMixin:
     """
-    Test API using Django REST Framework test suite, for licensed MarketTor (mainly enterprise edition).
+    Test API using Django REST Framework test suite, for licensed ClairView (mainly enterprise edition).
     """
 
     CONFIG_LICENSE_KEY: Optional[str] = "12345::67890"
@@ -17,7 +17,7 @@ class LicensedTestMixin:
 
     def license_required_response(
         self,
-        message: str = "This feature is part of the premium MarketTor offering. Self-hosted licenses are no longer available for purchase. Please contact sales@markettor.com to discuss options.",
+        message: str = "This feature is part of the premium ClairView offering. Self-hosted licenses are no longer available for purchase. Please contact sales@clairview.com to discuss options.",
     ) -> dict[str, Optional[str]]:
         return {
             "type": "server_error",

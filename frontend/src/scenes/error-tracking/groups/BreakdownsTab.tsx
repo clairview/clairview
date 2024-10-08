@@ -1,4 +1,4 @@
-import { LemonSegmentedButton, LemonSegmentedButtonOption } from '@markettor/lemon-ui'
+import { LemonSegmentedButton, LemonSegmentedButtonOption } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { useResizeBreakpoints } from 'lib/hooks/useResizeObserver'

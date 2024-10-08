@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import React, { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'

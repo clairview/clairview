@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconPlus } from '@markettor/icons'
-import { LemonButton, LemonSelectOptions, LemonTag, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconPlus } from '@clairview/icons'
+import { LemonButton, LemonSelectOptions, LemonTag, Link, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { UNSUBSCRIBE_SURVEY_ID } from 'lib/constants'
 import { More } from 'lib/lemon-ui/LemonButton/More'
@@ -80,7 +80,7 @@ export const BillingProductAddon = ({ addon }: { addon: BillingProductV2AddonTyp
                             <h4 className="leading-5 mb-1 font-bold">{addon.name}</h4>
                             {addon.inclusion_only ? (
                                 <div className="flex gap-x-2">
-                                    <Tooltip title="Automatically included with your plan. Used based on your markettor-js config options.">
+                                    <Tooltip title="Automatically included with your plan. Used based on your clairview-js config options.">
                                         <LemonTag type="muted">Config option</LemonTag>
                                     </Tooltip>
                                 </div>
@@ -105,7 +105,7 @@ export const BillingProductAddon = ({ addon }: { addon: BillingProductV2AddonTyp
                         {is_enhanced_persons_og_customer && (
                             <p className="mt-2 mb-0">
                                 <Link
-                                    to="https://markettor.com/changelog/2024#person-profiles-launched-markettor-now-up-to-80percent-cheaper"
+                                    to="https://clairview.com/changelog/2024#person-profiles-launched-clairview-now-up-to-80percent-cheaper"
                                     className="italic"
                                     target="_blank"
                                     targetBlankIcon
@@ -141,7 +141,7 @@ export const BillingProductAddon = ({ addon }: { addon: BillingProductV2AddonTyp
                                 Included with plan
                             </LemonTag>
                         ) : addon.contact_support ? (
-                            <LemonButton type="secondary" to="https://markettor.com/talk-to-a-human">
+                            <LemonButton type="secondary" to="https://clairview.com/talk-to-a-human">
                                 Contact support
                             </LemonButton>
                         ) : (

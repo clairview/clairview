@@ -1,5 +1,5 @@
-import { IconPencil } from '@markettor/icons'
-import { LemonBanner, LemonButton, LemonModal, LemonTabs, Link, Spinner } from '@markettor/lemon-ui'
+import { IconPencil } from '@clairview/icons'
+import { LemonBanner, LemonButton, LemonModal, LemonTabs, Link, Spinner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
@@ -48,8 +48,8 @@ export function AppCode({
                 description={
                     <p>
                         Read our{' '}
-                        <Link to="https://markettor.com/docs/apps/build" target="_blank">
-                            app building overview in MarketTor docs
+                        <Link to="https://clairview.com/docs/apps/build" target="_blank">
+                            app building overview in ClairView docs
                         </Link>{' '}
                         for a good grasp of the possibilities.
                     </p>

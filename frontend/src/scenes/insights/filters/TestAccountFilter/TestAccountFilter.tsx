@@ -1,4 +1,4 @@
-import { IconGear } from '@markettor/icons'
+import { IconGear } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonSwitch, LemonSwitchProps } from 'lib/lemon-ui/LemonSwitch/LemonSwitch'

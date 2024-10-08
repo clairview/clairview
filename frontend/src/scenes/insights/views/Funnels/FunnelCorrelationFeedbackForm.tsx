@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton, LemonTextArea } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, LemonTextArea } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconComment } from 'lib/lemon-ui/icons'
 import { useRef } from 'react'

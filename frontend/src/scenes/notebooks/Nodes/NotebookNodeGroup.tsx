@@ -1,4 +1,4 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType, PropertyFilterType, PropertyOperator } from '~/types'
 import { useActions, useValues } from 'kea'
 import { urls } from 'scenes/urls'
@@ -83,7 +83,7 @@ type NotebookNodeGroupAttributes = {
     groupTypeIndex: number
 }
 
-export const NotebookNodeGroup = createMarketTorWidgetNode<NotebookNodeGroupAttributes>({
+export const NotebookNodeGroup = createClairViewWidgetNode<NotebookNodeGroupAttributes>({
     nodeType: NotebookNodeType.Group,
     titlePlaceholder: 'Group',
     Component,

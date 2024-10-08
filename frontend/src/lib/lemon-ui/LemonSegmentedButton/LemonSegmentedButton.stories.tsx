@@ -1,4 +1,4 @@
-import { IconBook, IconCalculator, IconCalendar, IconGear } from '@markettor/icons'
+import { IconBook, IconCalculator, IconCalendar, IconGear } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 

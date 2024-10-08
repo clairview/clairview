@@ -1,4 +1,4 @@
-import { IconHome, IconPerson } from '@markettor/icons'
+import { IconHome, IconPerson } from '@clairview/icons'
 import clsx from 'clsx'
 import { DashboardCompatibleScenes } from 'lib/components/SceneDashboardChoice/sceneDashboardChoiceModalLogic'
 import { Scene } from 'scenes/sceneTypes'

@@ -16,7 +16,7 @@ from ee.clickhouse.queries.experiments import (
     FF_DISTRIBUTION_THRESHOLD,
     MIN_PROBABILITY_FOR_SIGNIFICANCE,
 )
-from markettor.constants import (
+from clairview.constants import (
     ACTIONS,
     EVENTS,
     TRENDS_CUMULATIVE,
@@ -25,11 +25,11 @@ from markettor.constants import (
     ExperimentSignificanceCode,
     ExperimentNoResultsErrorKeys,
 )
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.filters.filter import Filter
-from markettor.models.team import Team
-from markettor.queries.trends.trends import Trends
-from markettor.queries.trends.util import ALL_SUPPORTED_MATH_FUNCTIONS
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.filters.filter import Filter
+from clairview.models.team import Team
+from clairview.queries.trends.trends import Trends
+from clairview.queries.trends.util import ALL_SUPPORTED_MATH_FUNCTIONS
 
 Probability = float
 
@@ -49,7 +49,7 @@ class Variant:
 
 
 def uses_math_aggregation_by_user_or_property_value(filter: Filter):
-    # sync with frontend: https://github.com/MarketTor/markettor/blob/master/frontend/src/scenes/experiments/experimentLogic.tsx#L662
+    # sync with frontend: https://github.com/ClairView/clairview/blob/master/frontend/src/scenes/experiments/experimentLogic.tsx#L662
     # the selector experimentCountPerUserMath
 
     entities = filter.entities
@@ -100,7 +100,7 @@ class ClickhouseTrendExperimentResult:
 
         uses_math_aggregation = uses_math_aggregation_by_user_or_property_value(filter)
 
-        # Keep in sync with https://github.com/MarketTor/markettor/blob/master/frontend/src/scenes/experiments/ExperimentView/components.tsx#L91
+        # Keep in sync with https://github.com/ClairView/clairview/blob/master/frontend/src/scenes/experiments/ExperimentView/components.tsx#L91
         query_filter = filter.shallow_clone(
             {
                 "display": TRENDS_CUMULATIVE if not uses_math_aggregation else TRENDS_LINEAR,

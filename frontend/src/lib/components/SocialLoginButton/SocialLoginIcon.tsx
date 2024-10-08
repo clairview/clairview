@@ -1,4 +1,4 @@
-import { IconGithub } from '@markettor/icons'
+import { IconGithub } from '@clairview/icons'
 import { IconGitlab, IconGoogle, IconKey } from 'lib/lemon-ui/icons'
 
 import { SSOProvider } from '~/types'

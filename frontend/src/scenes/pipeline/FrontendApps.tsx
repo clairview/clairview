@@ -1,4 +1,4 @@
-import { LemonTable, LemonTableColumn } from '@markettor/lemon-ui'
+import { LemonTable, LemonTableColumn } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { ProductIntroduction } from 'lib/components/ProductIntroduction/ProductIntroduction'
@@ -29,8 +29,8 @@ export function FrontendApps(): JSX.Element {
                 productName="Site apps"
                 thingName="site app"
                 productKey={ProductKey.SITE_APPS}
-                description="Site apps allow you to add custom functionality to your website using MarketTor."
-                docsURL="https://markettor.com/docs/apps/pineapple-mode"
+                description="Site apps allow you to add custom functionality to your website using ClairView."
+                docsURL="https://clairview.com/docs/apps/pineapple-mode"
                 actionElementOverride={<NewButton stage={PipelineStage.SiteApp} />}
                 isEmpty={shouldShowEmptyState}
             />

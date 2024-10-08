@@ -41,7 +41,7 @@ async fn it_captures_one_event() -> Result<()> {
 }
 
 #[tokio::test]
-async fn it_captures_a_markettorjs_array() -> Result<()> {
+async fn it_captures_a_clairviewjs_array() -> Result<()> {
     setup_tracing();
     let token = random_string("token", 16);
     let distinct_id1 = random_string("id", 16);

@@ -6,7 +6,7 @@ import { PersonModeEventPropertyInstructions } from '../shared-snippets'
 function GoCaptureSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Go}>
-            {'client.Enqueue(markettor.Capture{\n    DistinctId: "test-user",\n    Event: "test-snippet"\n})'}
+            {'client.Enqueue(clairview.Capture{\n    DistinctId: "test-user",\n    Event: "test-snippet"\n})'}
         </CodeSnippet>
     )
 }

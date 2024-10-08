@@ -134,7 +134,7 @@ const HOG_TEMPLATE: HogFunctionTemplateType = {
     ],
     filters: null,
     masking: null,
-    icon_url: '/static/markettor-icon.svg',
+    icon_url: '/static/clairview-icon.svg',
 }
 
 const HOG_FUNCTION: HogFunctionType = {
@@ -206,7 +206,7 @@ describe('hogFunctionConfigurationLogic', () => {
         it('saves if form valid', async () => {
             logic.mount()
             await expectLogic(logic).toDispatchActions(['loadTemplate', 'loadTemplateSuccess'])
-            logic.actions.setConfigurationValue('inputs.url', { value: 'https://markettor.com' })
+            logic.actions.setConfigurationValue('inputs.url', { value: 'https://clairview.com' })
 
             await expectLogic(logic, () => {
                 logic.actions.submitConfiguration()

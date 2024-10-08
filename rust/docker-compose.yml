@@ -6,7 +6,7 @@ services:
         restart: on-failure
 
     kafka:
-        image: ghcr.io/markettor/kafka-container:v2.8.2
+        image: ghcr.io/clairview/kafka-container:v2.8.2
         restart: on-failure
         depends_on:
             - zookeeper
@@ -55,11 +55,11 @@ services:
         image: docker.io/library/postgres:16-alpine
         restart: on-failure
         environment:
-            POSTGRES_USER: markettor
-            POSTGRES_DB: markettor
-            POSTGRES_PASSWORD: markettor
+            POSTGRES_USER: clairview
+            POSTGRES_DB: clairview
+            POSTGRES_PASSWORD: clairview
         healthcheck:
-            test: ['CMD-SHELL', 'pg_isready -U markettor']
+            test: ['CMD-SHELL', 'pg_isready -U clairview']
             interval: 5s
             timeout: 5s
         ports:
@@ -77,7 +77,7 @@ services:
                 condition: service_healthy
                 restart: true
         environment:
-            DATABASE_URL: postgres://markettor:markettor@db:5432/test_database
+            DATABASE_URL: postgres://clairview:clairview@db:5432/test_database
 
     echo_server:
         image: docker.io/library/caddy:2

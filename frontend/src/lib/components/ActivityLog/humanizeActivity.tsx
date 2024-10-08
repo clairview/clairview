@@ -43,9 +43,9 @@ export type ActivityLogItem = {
     detail: ActivityLogDetail
     /** Present if the log is used as a notification. Whether the notification is unread. */
     unread?: boolean
-    /** Whether the activity was initiated by a MarketTor staff member impersonating a user. */
+    /** Whether the activity was initiated by a ClairView staff member impersonating a user. */
     is_staff?: boolean
-    /** Whether the activity was initiated by the MarketTor backend. Example: an exported image when sharing an insight. */
+    /** Whether the activity was initiated by the ClairView backend. Example: an exported image when sharing an insight. */
     is_system?: boolean
 }
 
@@ -116,7 +116,7 @@ export function humanize(
 
 export function userNameForLogItem(logItem: ActivityLogItem): string {
     if (logItem.is_system) {
-        return 'MarketTor'
+        return 'ClairView'
     }
     return logItem.user ? fullName(logItem.user) : 'A user'
 }

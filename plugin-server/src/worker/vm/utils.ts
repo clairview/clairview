@@ -14,10 +14,10 @@ export const postgresIncrement = async (
     const incrementResult = await db.postgres.query(
         PostgresUse.PLUGIN_STORAGE_RW,
         `
-        INSERT INTO markettor_pluginstorage (plugin_config_id, key, value)
+        INSERT INTO clairview_pluginstorage (plugin_config_id, key, value)
         VALUES ($1, $2, $3)
         ON CONFLICT ("plugin_config_id", "key")
-        DO UPDATE SET value = markettor_pluginstorage.value::numeric + ${incrementBy}
+        DO UPDATE SET value = clairview_pluginstorage.value::numeric + ${incrementBy}
         RETURNING value
         `,
         [pluginConfigId, key, incrementBy],
@@ -36,7 +36,7 @@ export const postgresSetOnce = async (
     await db.postgres.query(
         PostgresUse.PLUGIN_STORAGE_RW,
         `
-        INSERT INTO markettor_pluginstorage (plugin_config_id, key, value)
+        INSERT INTO clairview_pluginstorage (plugin_config_id, key, value)
         VALUES ($1, $2, $3)
         ON CONFLICT ("plugin_config_id", "key")
         DO NOTHING
@@ -53,7 +53,7 @@ export const postgresGet = async (
 ): Promise<QueryResult<any>> => {
     return await db.postgres.query(
         PostgresUse.PLUGIN_STORAGE_RW,
-        'SELECT * FROM markettor_pluginstorage WHERE "plugin_config_id"=$1 AND "key"=$2 LIMIT 1',
+        'SELECT * FROM clairview_pluginstorage WHERE "plugin_config_id"=$1 AND "key"=$2 LIMIT 1',
         [pluginConfigId, key],
         'storageGet'
     )

@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { EditableField } from 'lib/components/EditableField/EditableField'
 import { NotFound } from 'lib/components/NotFound'

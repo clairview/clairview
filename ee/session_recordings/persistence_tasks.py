@@ -6,8 +6,8 @@ from django.utils import timezone
 from prometheus_client import Counter
 
 from ee.session_recordings.session_recording_extensions import persist_recording
-from markettor.session_recordings.models.session_recording import SessionRecording
-from markettor.tasks.utils import CeleryQueue
+from clairview.session_recordings.models.session_recording import SessionRecording
+from clairview.tasks.utils import CeleryQueue
 
 logger = structlog.get_logger(__name__)
 

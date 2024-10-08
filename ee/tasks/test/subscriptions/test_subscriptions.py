@@ -10,12 +10,12 @@ from ee.tasks.subscriptions import (
     schedule_all_subscriptions,
 )
 from ee.tasks.test.subscriptions.subscriptions_test_factory import create_subscription
-from markettor.models.dashboard import Dashboard
-from markettor.models.dashboard_tile import DashboardTile
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.models.instance_setting import set_instance_setting
-from markettor.test.base import APIBaseTest
+from clairview.models.dashboard import Dashboard
+from clairview.models.dashboard_tile import DashboardTile
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.models.instance_setting import set_instance_setting
+from clairview.test.base import APIBaseTest
 
 
 @patch("ee.tasks.subscriptions.send_slack_subscription_report")
@@ -119,14 +119,14 @@ class TestSubscriptionsTasks(APIBaseTest):
 
         assert mock_send_email.call_args_list == [
             call(
-                "test1@markettor.com",
+                "test1@clairview.com",
                 subscription,
                 [self.asset],
                 invite_message=None,
                 total_asset_count=1,
             ),
             call(
-                "test2@markettor.com",
+                "test2@clairview.com",
                 subscription,
                 [self.asset],
                 invite_message=None,
@@ -144,13 +144,13 @@ class TestSubscriptionsTasks(APIBaseTest):
             team=self.team,
             insight=self.insight,
             created_by=self.user,
-            target_value="test_existing@markettor.com,test_new@markettor.com",
+            target_value="test_existing@clairview.com,test_new@clairview.com",
         )
         mock_gen_assets.return_value = [self.insight], [self.asset]
 
         handle_subscription_value_change(
             subscription.id,
-            previous_value="test_existing@markettor.com",
+            previous_value="test_existing@clairview.com",
             invite_message="My invite message",
         )
 
@@ -158,7 +158,7 @@ class TestSubscriptionsTasks(APIBaseTest):
 
         assert mock_send_email.call_args_list == [
             call(
-                "test_new@markettor.com",
+                "test_new@clairview.com",
                 subscription,
                 [self.asset],
                 invite_message="My invite message",

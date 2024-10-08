@@ -1,5 +1,5 @@
-import { IconChat } from '@markettor/icons'
-import { LemonTag, Tooltip } from '@markettor/lemon-ui'
+import { IconChat } from '@clairview/icons'
+import { LemonTag, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { humanizeScope } from 'lib/components/ActivityLog/humanizeActivity'
 import { WarningHog } from 'lib/components/hedgehogs'
@@ -64,7 +64,7 @@ export const SidePanelDiscussion = (): JSX.Element => {
                                 </span>
                             ) : null}
                         </span>
-                        <Tooltip title="This is a feature we are experimenting with! We'd love to get your feedback on it and whether this is something useful for working with MarketTor.">
+                        <Tooltip title="This is a feature we are experimenting with! We'd love to get your feedback on it and whether this is something useful for working with ClairView.">
                             <LemonTag type="completion">Experimental</LemonTag>
                         </Tooltip>
                     </div>

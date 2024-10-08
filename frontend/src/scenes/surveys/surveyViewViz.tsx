@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonTable } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonTable } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { LemonDivider } from 'lib/lemon-ui/LemonDivider'

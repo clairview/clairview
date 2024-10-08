@@ -1,14 +1,14 @@
 from typing import Any
 
 from rest_framework import viewsets
-from markettor.api.utils import action
+from clairview.api.utils import action
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from ee.tasks.slack import handle_slack_event
-from markettor.api.integration import IntegrationSerializer
-from markettor.models.integration import (
+from clairview.api.integration import IntegrationSerializer
+from clairview.models.integration import (
     Integration,
     SlackIntegration,
     SlackIntegrationError,

@@ -1,4 +1,4 @@
-import { LemonInput, LemonTextArea, Link } from '@markettor/lemon-ui'
+import { LemonInput, LemonTextArea, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import api from 'lib/api'
@@ -135,10 +135,10 @@ export function EditSubscription({
                                         <code>{window.location.origin}</code>
                                     </b>
                                     . <br />
-                                    If this value is not configured correctly MarketTor may be unable to correctly send
+                                    If this value is not configured correctly ClairView may be unable to correctly send
                                     Subscriptions.{' '}
                                     <Link
-                                        to="https://markettor.com/docs/configuring-markettor/environment-variables?utm_medium=in-product&utm_campaign=subcriptions-system-status-site-url-misconfig"
+                                        to="https://clairview.com/docs/configuring-clairview/environment-variables?utm_medium=in-product&utm_campaign=subcriptions-system-status-site-url-misconfig"
                                         target="_blank"
                                         targetBlankIcon
                                     >
@@ -161,10 +161,10 @@ export function EditSubscription({
                                 {emailDisabled && (
                                     <LemonBanner type="error">
                                         <>
-                                            Email subscriptions are not currently possible as this MarketTor instance
+                                            Email subscriptions are not currently possible as this ClairView instance
                                             isn't{' '}
                                             <Link
-                                                to="https://markettor.com/docs/self-host/configure/email"
+                                                to="https://clairview.com/docs/self-host/configure/email"
                                                 target="_blank"
                                                 targetBlankIcon
                                             >
@@ -208,7 +208,7 @@ export function EditSubscription({
                                         <LemonBanner type="info">
                                             <div className="flex justify-between gap-2">
                                                 <span>
-                                                    Slack is not yet configured for this project. Add MarketTor to your
+                                                    Slack is not yet configured for this project. Add ClairView to your
                                                     Slack workspace to continue.
                                                 </span>
                                                 <Link
@@ -237,8 +237,8 @@ export function EditSubscription({
                                             help={
                                                 <>
                                                     Private channels are only shown if you have{' '}
-                                                    <Link to="https://markettor.com/docs/webhooks/slack" target="_blank">
-                                                        added the MarketTor Slack App
+                                                    <Link to="https://clairview.com/docs/webhooks/slack" target="_blank">
+                                                        added the ClairView Slack App
                                                     </Link>{' '}
                                                     to them
                                                 </>

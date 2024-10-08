@@ -14,7 +14,7 @@ from .replay import (
     cluster_replay_error_embeddings,
 )
 
-# As our EE tasks are not included at startup for Celery, we need to ensure they are declared here so that they are imported by markettor/settings/celery.py
+# As our EE tasks are not included at startup for Celery, we need to ensure they are declared here so that they are imported by clairview/settings/celery.py
 
 __all__ = [
     "persist_single_recording",

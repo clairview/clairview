@@ -1,5 +1,5 @@
-import { IconPlus } from '@markettor/icons'
-import { LemonButton, LemonTable } from '@markettor/lemon-ui'
+import { IconPlus } from '@clairview/icons'
+import { LemonButton, LemonTable } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { viewLinkLogic } from 'scenes/data-warehouse/viewLinkLogic'
 export interface FixedField {

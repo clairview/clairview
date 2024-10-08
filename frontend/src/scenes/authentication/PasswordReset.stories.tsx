@@ -65,8 +65,8 @@ export const Success = (): JSX.Element => {
         },
     })
     useEffect(() => {
-        passwordResetLogic.actions.setRequestPasswordResetValues({ email: 'test@markettor.com' })
-        passwordResetLogic.actions.submitRequestPasswordResetSuccess({ email: 'test@markettor.com' })
+        passwordResetLogic.actions.setRequestPasswordResetValues({ email: 'test@clairview.com' })
+        passwordResetLogic.actions.submitRequestPasswordResetSuccess({ email: 'test@clairview.com' })
     }, [])
     return <PasswordReset />
 }
@@ -86,7 +86,7 @@ export const Throttled = (): JSX.Element => {
         },
     })
     useEffect(() => {
-        passwordResetLogic.actions.setRequestPasswordResetValues({ email: 'test@markettor.com' })
+        passwordResetLogic.actions.setRequestPasswordResetValues({ email: 'test@clairview.com' })
         passwordResetLogic.actions.setRequestPasswordResetManualErrors({ code: 'throttled' })
     }, [])
     return <PasswordReset />

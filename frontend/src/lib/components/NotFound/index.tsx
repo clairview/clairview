@@ -1,7 +1,7 @@
 import './NotFound.scss'
 
-import { IconArrowRight, IconCheckCircle } from '@markettor/icons'
-import { LemonButton, lemonToast, ProfilePicture, SpinnerOverlay } from '@markettor/lemon-ui'
+import { IconArrowRight, IconCheckCircle } from '@clairview/icons'
+import { LemonButton, lemonToast, ProfilePicture, SpinnerOverlay } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { getCookie } from 'lib/api'
 import { LemonMenuOverlay } from 'lib/lemon-ui/LemonMenu/LemonMenu'
@@ -106,7 +106,7 @@ export function LogInAsSuggestions({ suggestedUsers }: { suggestedUsers: UserBas
                             credentials: 'same-origin',
                             mode: 'cors',
                             headers: {
-                                'X-CSRFToken': getCookie('markettor_csrftoken') as string,
+                                'X-CSRFToken': getCookie('clairview_csrftoken') as string,
                             },
                         })
                             .then((response) => {

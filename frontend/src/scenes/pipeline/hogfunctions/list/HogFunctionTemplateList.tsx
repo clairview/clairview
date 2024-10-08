@@ -1,5 +1,5 @@
-import { IconPlusSmall } from '@markettor/icons'
-import { LemonButton, LemonInput, LemonTable, Link } from '@markettor/lemon-ui'
+import { IconPlusSmall } from '@clairview/icons'
+import { LemonButton, LemonInput, LemonTable, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PayGateButton } from 'lib/components/PayGateMini/PayGateButton'
 import { LemonTableLink } from 'lib/lemon-ui/LemonTable/LemonTableLink'

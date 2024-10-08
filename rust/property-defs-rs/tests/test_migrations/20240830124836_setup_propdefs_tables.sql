@@ -1,9 +1,9 @@
--- These mimic the markettor main-db property, event and event-property tables, and are only used
+-- These mimic the clairview main-db property, event and event-property tables, and are only used
 -- for testing (so we can use `sqlx::test`)
 
--- Create a unique contraint on markettor_eventdefinition for team_id and name, matching the django one
+-- Create a unique contraint on clairview_eventdefinition for team_id and name, matching the django one
 
-CREATE TABLE IF NOT EXISTS markettor_eventdefinition (
+CREATE TABLE IF NOT EXISTS clairview_eventdefinition (
     id UUID PRIMARY KEY,
     name TEXT NOT NULL,
     volume_30_day INTEGER,
@@ -11,11 +11,11 @@ CREATE TABLE IF NOT EXISTS markettor_eventdefinition (
     team_id INTEGER NOT NULL,
     last_seen_at TIMESTAMPTZ NOT NULL,
     created_at TIMESTAMPTZ NOT NULL,
-    CONSTRAINT markettor_eventdefinition_team_id_name_80fa0b87_uniq UNIQUE (team_id, name)
+    CONSTRAINT clairview_eventdefinition_team_id_name_80fa0b87_uniq UNIQUE (team_id, name)
 );
 
 
-CREATE TABLE IF NOT EXISTS markettor_propertydefinition (
+CREATE TABLE IF NOT EXISTS clairview_propertydefinition (
     id UUID PRIMARY KEY,
     name VARCHAR(400) NOT NULL,
     is_numerical BOOLEAN NOT NULL,
@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS markettor_propertydefinition (
     type SMALLINT NOT NULL DEFAULT 1
 );
 
-CREATE UNIQUE INDEX markettor_propertydefinition_uniq ON markettor_propertydefinition (team_id, name, type, coalesce(group_type_index, -1));
+CREATE UNIQUE INDEX clairview_propertydefinition_uniq ON clairview_propertydefinition (team_id, name, type, coalesce(group_type_index, -1));
 
 
-CREATE TABLE IF NOT EXISTS markettor_eventproperty (
+CREATE TABLE IF NOT EXISTS clairview_eventproperty (
     id SERIAL PRIMARY KEY,
     event VARCHAR(400)NOT NULL,
     property VARCHAR(400) NOT NULL,
     team_id INTEGER NOT NULL
 );
 
-CREATE UNIQUE INDEX markettor_event_property_unique_team_event_property ON markettor_eventproperty (team_id, event, property);
+CREATE UNIQUE INDEX clairview_event_property_unique_team_event_property ON clairview_eventproperty (team_id, event, property);

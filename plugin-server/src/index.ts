@@ -28,7 +28,7 @@ if (argv.includes('--version') || argv.includes('-v')) {
 
 const status = new Status(alternativeMode)
 
-status.info('⚡', `@markettor/plugin-server v${version}`)
+status.info('⚡', `@clairview/plugin-server v${version}`)
 
 switch (alternativeMode) {
     case AlternativeMode.Version:

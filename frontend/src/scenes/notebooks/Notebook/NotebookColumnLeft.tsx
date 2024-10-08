@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, BuiltLogic, useActions, useValues } from 'kea'
 import { LemonWidget } from 'lib/lemon-ui/LemonWidget'

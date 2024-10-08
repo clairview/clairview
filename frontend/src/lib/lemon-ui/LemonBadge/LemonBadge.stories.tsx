@@ -1,4 +1,4 @@
-import { IconPlusSmall } from '@markettor/icons'
+import { IconPlusSmall } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 

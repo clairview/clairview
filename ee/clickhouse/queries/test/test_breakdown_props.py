@@ -1,17 +1,17 @@
 import pytest
 from freezegun import freeze_time
 
-from markettor.models.cohort import Cohort
-from markettor.models.entity import Entity
-from markettor.models.filters import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.queries.breakdown_props import (
+from clairview.models.cohort import Cohort
+from clairview.models.entity import Entity
+from clairview.models.filters import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.queries.breakdown_props import (
     _to_bucketing_expression,
     get_breakdown_prop_values,
 )
-from markettor.queries.trends.util import process_math
-from markettor.test.base import (
+from clairview.queries.trends.util import process_math
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -41,7 +41,7 @@ class TestBreakdownProps(ClickhouseTestMixin, APIBaseTest):
             {
                 "key": "email",
                 "type": "person",
-                "value": "markettor.com",
+                "value": "clairview.com",
                 "operator": "not_icontains",
             },
             {
@@ -58,7 +58,7 @@ class TestBreakdownProps(ClickhouseTestMixin, APIBaseTest):
             {
                 "key": "distinct_id",
                 "type": "event",
-                "value": "markettor.com",
+                "value": "clairview.com",
                 "operator": "not_icontains",
             },
         ]

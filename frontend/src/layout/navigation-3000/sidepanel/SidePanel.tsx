@@ -1,7 +1,7 @@
 import './SidePanel.scss'
 
-import { IconEllipsis, IconFeatures, IconGear, IconInfo, IconNotebook, IconSupport } from '@markettor/icons'
-import { LemonButton, LemonMenu, LemonMenuItems, LemonModal } from '@markettor/lemon-ui'
+import { IconEllipsis, IconFeatures, IconGear, IconInfo, IconNotebook, IconSupport } from '@clairview/icons'
+import { LemonButton, LemonMenu, LemonMenuItems, LemonModal } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Resizer } from 'lib/components/Resizer/Resizer'

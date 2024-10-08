@@ -1,9 +1,9 @@
-import { LemonTag, Link } from '@markettor/lemon-ui'
+import { LemonTag, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonRadio, LemonRadioOption } from 'lib/lemon-ui/LemonRadio'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
@@ -58,7 +58,7 @@ export function PersonsOnEvents(): JSX.Element {
 
     const handleChange = (mode: PoEMode): void => {
         updateCurrentTeam({ modifiers: { ...currentTeam?.modifiers, personsOnEventsMode: mode } })
-        markettor.capture('user changed personsOnEventsMode setting', { personsOnEventsMode: mode })
+        clairview.capture('user changed personsOnEventsMode setting', { personsOnEventsMode: mode })
         reportPoEModeUpdated(mode)
     }
 
@@ -68,7 +68,7 @@ export function PersonsOnEvents(): JSX.Element {
                 Choose the behavior of person property filters. For the best performance,{' '}
                 <strong>we strongly recommend the first option.</strong>{' '}
                 <Link
-                    to="https://markettor.com/docs/how-markettor-works/queries#filtering-on-person-properties"
+                    to="https://clairview.com/docs/how-clairview-works/queries#filtering-on-person-properties"
                     target="blank"
                 >
                     Learn about the details in our docs.

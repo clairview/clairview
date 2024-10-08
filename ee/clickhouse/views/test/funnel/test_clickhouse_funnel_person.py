@@ -4,11 +4,11 @@ from unittest.mock import patch
 from django.core.cache import cache
 from rest_framework import status
 
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.group.util import create_group
-from markettor.models.instance_setting import get_instance_setting
-from markettor.models.person import Person
-from markettor.test.base import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.group.util import create_group
+from clairview.models.instance_setting import get_instance_setting
+from clairview.models.person import Person
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -198,7 +198,7 @@ class TestFunnelPerson(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(10, len(people))
         self.assertEqual(None, j["next"])
 
-    @patch("markettor.models.person.util.delete_person")
+    @patch("clairview.models.person.util.delete_person")
     def test_basic_pagination_with_deleted(self, delete_person_patch):
         if not get_instance_setting("PERSON_ON_EVENTS_ENABLED"):
             return

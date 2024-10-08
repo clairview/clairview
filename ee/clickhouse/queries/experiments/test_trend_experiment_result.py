@@ -10,7 +10,7 @@ from ee.clickhouse.queries.experiments.trend_experiment_result import (
     calculate_credible_intervals as calculate_trend_credible_intervals,
 )
 from ee.clickhouse.queries.experiments.trend_experiment_result import calculate_p_value
-from markettor.constants import ExperimentSignificanceCode
+from clairview.constants import ExperimentSignificanceCode
 
 Probability = float
 

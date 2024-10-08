@@ -1,5 +1,5 @@
-import ClickHouse from '@markettor/clickhouse'
-import { CacheOptions, Properties } from '@markettor/plugin-scaffold'
+import ClickHouse from '@clairview/clickhouse'
+import { CacheOptions, Properties } from '@clairview/plugin-scaffold'
 import { captureException } from '@sentry/node'
 import { Pool as GenericPool } from 'generic-pool'
 import Redis from 'ioredis'
@@ -453,7 +453,7 @@ export class DB {
             }) as ClickHousePerson[]
         } else if (database === Database.Postgres) {
             return await this.postgres
-                .query<RawPerson>(PostgresUse.COMMON_WRITE, 'SELECT * FROM markettor_person', undefined, 'fetchPersons')
+                .query<RawPerson>(PostgresUse.COMMON_WRITE, 'SELECT * FROM clairview_person', undefined, 'fetchPersons')
                 .then(({ rows }) => rows.map(this.toPerson))
         } else {
             throw new Error(`Can't fetch persons for database: ${database}`)
@@ -470,22 +470,22 @@ export class DB {
         }
 
         let queryString = `SELECT
-                markettor_person.id,
-                markettor_person.uuid,
-                markettor_person.created_at,
-                markettor_person.team_id,
-                markettor_person.properties,
-                markettor_person.properties_last_updated_at,
-                markettor_person.properties_last_operation,
-                markettor_person.is_user_id,
-                markettor_person.version,
-                markettor_person.is_identified
-            FROM markettor_person
-            JOIN markettor_persondistinctid ON (markettor_persondistinctid.person_id = markettor_person.id)
+                clairview_person.id,
+                clairview_person.uuid,
+                clairview_person.created_at,
+                clairview_person.team_id,
+                clairview_person.properties,
+                clairview_person.properties_last_updated_at,
+                clairview_person.properties_last_operation,
+                clairview_person.is_user_id,
+                clairview_person.version,
+                clairview_person.is_identified
+            FROM clairview_person
+            JOIN clairview_persondistinctid ON (clairview_persondistinctid.person_id = clairview_person.id)
             WHERE
-                markettor_person.team_id = $1
-                AND markettor_persondistinctid.team_id = $1
-                AND markettor_persondistinctid.distinct_id = $2`
+                clairview_person.team_id = $1
+                AND clairview_persondistinctid.team_id = $1
+                AND clairview_persondistinctid.distinct_id = $2`
         if (options.forUpdate) {
             // Locks the teamId and distinctId tied to this personId + this person's info
             queryString = queryString.concat(` FOR UPDATE`)
@@ -528,7 +528,7 @@ export class DB {
         const { rows } = await this.postgres.query<RawPerson>(
             tx ?? PostgresUse.COMMON_WRITE,
             `WITH inserted_person AS (
-                    INSERT INTO markettor_person (
+                    INSERT INTO clairview_person (
                         created_at, properties, properties_last_updated_at,
                         properties_last_operation, team_id, is_user_id, is_identified, uuid, version
                     )
@@ -537,10 +537,10 @@ export class DB {
                 )` +
                 distinctIds
                     .map(
-                        // NOTE: Keep this in sync with the markettor_persondistinctid INSERT in
+                        // NOTE: Keep this in sync with the clairview_persondistinctid INSERT in
                         // `addDistinctIdPooled`
                         (_, index) => `, distinct_id_${index} AS (
-                        INSERT INTO markettor_persondistinctid (distinct_id, person_id, team_id, version)
+                        INSERT INTO clairview_persondistinctid (distinct_id, person_id, team_id, version)
                         VALUES (
                             $${11 + index + distinctIds!.length - 1},
                             (SELECT id FROM inserted_person),
@@ -624,7 +624,7 @@ export class DB {
         const values = [...updateValues, person.id].map(sanitizeJsonbValue)
 
         // Potentially overriding values badly if there was an update to the person after computing updateValues above
-        const queryString = `UPDATE markettor_person SET version = ${versionString}, ${Object.keys(update).map(
+        const queryString = `UPDATE clairview_person SET version = ${versionString}, ${Object.keys(update).map(
             (field, index) => `"${sanitizeSqlIdentifier(field)}" = $${index + 1}`
         )} WHERE id = $${Object.values(update).length + 1}
         RETURNING *`
@@ -662,7 +662,7 @@ export class DB {
     public async deletePerson(person: InternalPerson, tx?: TransactionClient): Promise<ProducerRecord[]> {
         const { rows } = await this.postgres.query<{ version: string }>(
             tx ?? PostgresUse.COMMON_WRITE,
-            'DELETE FROM markettor_person WHERE team_id = $1 AND id = $2 RETURNING version',
+            'DELETE FROM clairview_person WHERE team_id = $1 AND id = $2 RETURNING version',
             [person.team_id, person.id],
             'deletePerson'
         )
@@ -703,7 +703,7 @@ export class DB {
         } else if (database === Database.Postgres) {
             const result = await this.postgres.query(
                 PostgresUse.COMMON_WRITE, // used in tests only
-                'SELECT * FROM markettor_persondistinctid WHERE person_id=$1 AND team_id=$2 ORDER BY id',
+                'SELECT * FROM clairview_persondistinctid WHERE person_id=$1 AND team_id=$2 ORDER BY id',
                 [person.id, person.team_id],
                 'fetchDistinctIds'
             )
@@ -725,7 +725,7 @@ export class DB {
         const result = await this.postgres.query(
             PostgresUse.COMMON_WRITE,
             `
-                INSERT INTO markettor_personlessdistinctid (team_id, distinct_id, is_merged, created_at)
+                INSERT INTO clairview_personlessdistinctid (team_id, distinct_id, is_merged, created_at)
                 VALUES ($1, $2, false, now())
                 ON CONFLICT (team_id, distinct_id) DO NOTHING
                 RETURNING is_merged
@@ -743,7 +743,7 @@ export class DB {
             PostgresUse.COMMON_WRITE,
             `
                 SELECT is_merged
-                FROM markettor_personlessdistinctid
+                FROM clairview_personlessdistinctid
                 WHERE team_id = $1 AND distinct_id = $2
             `,
             [teamId, distinctId],
@@ -761,7 +761,7 @@ export class DB {
         const result = await this.postgres.query(
             tx ?? PostgresUse.COMMON_WRITE,
             `
-                INSERT INTO markettor_personlessdistinctid (team_id, distinct_id, is_merged, created_at)
+                INSERT INTO clairview_personlessdistinctid (team_id, distinct_id, is_merged, created_at)
                 VALUES ($1, $2, true, now())
                 ON CONFLICT (team_id, distinct_id) DO UPDATE
                 SET is_merged = true
@@ -794,8 +794,8 @@ export class DB {
     ): Promise<ProducerRecord[]> {
         const insertResult = await this.postgres.query(
             tx ?? PostgresUse.COMMON_WRITE,
-            // NOTE: Keep this in sync with the markettor_persondistinctid INSERT in `createPerson`
-            'INSERT INTO markettor_persondistinctid (distinct_id, person_id, team_id, version) VALUES ($1, $2, $3, $4) RETURNING *',
+            // NOTE: Keep this in sync with the clairview_persondistinctid INSERT in `createPerson`
+            'INSERT INTO clairview_persondistinctid (distinct_id, person_id, team_id, version) VALUES ($1, $2, $3, $4) RETURNING *',
             [distinctId, person.id, person.team_id, version],
             'addDistinctIdPooled'
         )
@@ -830,7 +830,7 @@ export class DB {
             movedDistinctIdResult = await this.postgres.query(
                 tx ?? PostgresUse.COMMON_WRITE,
                 `
-                    UPDATE markettor_persondistinctid
+                    UPDATE clairview_persondistinctid
                     SET person_id = $1, version = COALESCE(version, 0)::numeric + 1
                     WHERE person_id = $2
                       AND team_id = $3
@@ -842,7 +842,7 @@ export class DB {
         } catch (error) {
             if (
                 (error as Error).message.includes(
-                    'insert or update on table "markettor_persondistinctid" violates foreign key constraint'
+                    'insert or update on table "clairview_persondistinctid" violates foreign key constraint'
                 )
             ) {
                 // this is caused by a race condition where the _target_ person was deleted after fetching but
@@ -884,7 +884,7 @@ export class DB {
     public async createCohort(cohort: Partial<Cohort>): Promise<Cohort> {
         const insertResult = await this.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `INSERT INTO markettor_cohort (name, description, deleted, groups, team_id,
+            `INSERT INTO clairview_cohort (name, description, deleted, groups, team_id,
                                          created_at, created_by_id, is_calculating,
                                          last_calculation, errors_calculating, is_static,
                                          version, pending_version)
@@ -917,7 +917,7 @@ export class DB {
     ): Promise<CohortPeople> {
         const insertResult = await this.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `INSERT INTO markettor_cohortpeople (cohort_id, person_id, version) VALUES ($1, $2, $3) RETURNING *;`,
+            `INSERT INTO clairview_cohortpeople (cohort_id, person_id, version) VALUES ($1, $2, $3) RETURNING *;`,
             [cohortId, personId, version],
             'addPersonToCohort'
         )
@@ -945,17 +945,17 @@ export class DB {
             // happens rarely, so we're just going to do the performance optimal thing i.e. do
             // nothing on conflicts, so we keep using the value that the person merged into had
             `WITH cohort_update AS (
-                UPDATE markettor_cohortpeople
+                UPDATE clairview_cohortpeople
                 SET person_id = $1
                 WHERE person_id = $2
                 RETURNING person_id
             ),
             deletions AS (
-                DELETE FROM markettor_featureflaghashkeyoverride
+                DELETE FROM clairview_featureflaghashkeyoverride
                 WHERE team_id = $3 AND person_id = $2
                 RETURNING team_id, person_id, feature_flag_key, hash_key
             )
-            INSERT INTO markettor_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
+            INSERT INTO clairview_featureflaghashkeyoverride (team_id, person_id, feature_flag_key, hash_key)
                 SELECT team_id, $1, feature_flag_key, hash_key
                 FROM deletions
                 ON CONFLICT DO NOTHING`,
@@ -1051,7 +1051,7 @@ export class DB {
             await this.postgres.query(
                 PostgresUse.COMMON_READ,
                 `
-                SELECT * FROM markettor_eventdefinition
+                SELECT * FROM clairview_eventdefinition
                 ${teamId ? 'WHERE team_id = $1' : ''}
                 -- Order by something that gives a deterministic order. Note
                 -- that this is a unique index.
@@ -1070,7 +1070,7 @@ export class DB {
             await this.postgres.query(
                 PostgresUse.COMMON_READ,
                 `
-                SELECT * FROM markettor_propertydefinition
+                SELECT * FROM clairview_propertydefinition
                 ${teamId ? 'WHERE team_id = $1' : ''}
                 -- Order by something that gives a deterministic order. Note
                 -- that this is a unique index.
@@ -1089,7 +1089,7 @@ export class DB {
             await this.postgres.query(
                 PostgresUse.COMMON_READ,
                 `
-                    SELECT * FROM markettor_eventproperty
+                    SELECT * FROM clairview_eventproperty
                     ${teamId ? 'WHERE team_id = $1' : ''}
                     -- Order by something that gives a deterministic order. Note
                     -- that this is a unique index.
@@ -1145,7 +1145,7 @@ export class DB {
     }: CreateUserPayload): Promise<QueryResult> {
         const createUserResult = await this.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `INSERT INTO markettor_user (uuid, password, first_name, last_name, email, distinct_id, is_staff, is_active, date_joined, events_column_config, current_organization_id)
+            `INSERT INTO clairview_user (uuid, password, first_name, last_name, email, distinct_id, is_staff, is_active, date_joined, events_column_config, current_organization_id)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING id`,
             [
@@ -1168,7 +1168,7 @@ export class DB {
             const now = new Date().toISOString()
             await this.postgres.query(
                 PostgresUse.COMMON_WRITE,
-                `INSERT INTO markettor_organizationmembership (id, organization_id, user_id, level, joined_at, updated_at)
+                `INSERT INTO clairview_organizationmembership (id, organization_id, user_id, level, joined_at, updated_at)
                 VALUES ($1, $2, $3, $4, $5, $6)`,
                 [
                     new UUIDT().toString(),
@@ -1194,7 +1194,7 @@ export class DB {
     }: CreatePersonalApiKeyPayload): Promise<QueryResult> {
         return await this.postgres.query(
             PostgresUse.COMMON_WRITE,
-            `INSERT INTO markettor_personalapikey (id, user_id, label, secure_value, created_at)
+            `INSERT INTO clairview_personalapikey (id, user_id, label, secure_value, created_at)
             VALUES ($1, $2, $3, $4, $5)
             RETURNING secure_value`,
             [id, user_id, label, secure_value, created_at.toISOString()],
@@ -1209,7 +1209,7 @@ export class DB {
         tx?: TransactionClient,
         options: { forUpdate?: boolean } = {}
     ): Promise<Group | undefined> {
-        let queryString = `SELECT * FROM markettor_group WHERE team_id = $1 AND group_type_index = $2 AND group_key = $3`
+        let queryString = `SELECT * FROM clairview_group WHERE team_id = $1 AND group_type_index = $2 AND group_key = $3`
 
         if (options.forUpdate) {
             queryString = queryString.concat(` FOR UPDATE`)
@@ -1246,7 +1246,7 @@ export class DB {
         const result = await this.postgres.query(
             tx ?? PostgresUse.COMMON_WRITE,
             `
-            INSERT INTO markettor_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
+            INSERT INTO clairview_group (team_id, group_key, group_type_index, group_properties, created_at, properties_last_updated_at, properties_last_operation, version)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             ON CONFLICT (team_id, group_key, group_type_index) DO NOTHING
             RETURNING version
@@ -1265,7 +1265,7 @@ export class DB {
         )
 
         if (result.rows.length === 0) {
-            throw new RaceConditionError('Parallel markettor_group inserts, retry')
+            throw new RaceConditionError('Parallel clairview_group inserts, retry')
         }
     }
 
@@ -1283,7 +1283,7 @@ export class DB {
         await this.postgres.query(
             tx ?? PostgresUse.COMMON_WRITE,
             `
-            UPDATE markettor_group SET
+            UPDATE clairview_group SET
             created_at = $4,
             group_properties = $5,
             properties_last_updated_at = $6,
@@ -1345,7 +1345,7 @@ export class DB {
         return (
             await this.postgres.query(
                 PostgresUse.COMMON_READ,
-                'SELECT * from markettor_team WHERE organization_id = (SELECT id from markettor_organization WHERE plugins_access_level = $1)',
+                'SELECT * from clairview_team WHERE organization_id = (SELECT id from clairview_organization WHERE plugins_access_level = $1)',
                 [OrganizationPluginsAccessLevel.ROOT],
                 'getTeamsInOrganizationsWithRootPluginAccess'
             )
@@ -1361,7 +1361,7 @@ export class DB {
             let publicJobs: Record<string, any> = (
                 await this.postgres.query(
                     tx,
-                    'SELECT public_jobs FROM markettor_plugin WHERE id = $1 FOR UPDATE',
+                    'SELECT public_jobs FROM clairview_plugin WHERE id = $1 FOR UPDATE',
                     [pluginId],
                     'selectPluginPublicJobsForUpdate'
                 )
@@ -1376,7 +1376,7 @@ export class DB {
 
                 await this.postgres.query(
                     tx,
-                    'UPDATE markettor_plugin SET public_jobs = $1 WHERE id = $2',
+                    'UPDATE clairview_plugin SET public_jobs = $1 WHERE id = $2',
                     [JSON.stringify(publicJobs), pluginId],
                     'updatePublicJob'
                 )
@@ -1387,7 +1387,7 @@ export class DB {
     public async getPluginSource(pluginId: Plugin['id'], filename: string): Promise<string | null> {
         const { rows }: { rows: { source: string }[] } = await this.postgres.query(
             PostgresUse.COMMON_READ,
-            `SELECT source FROM markettor_pluginsourcefile WHERE plugin_id = $1 AND filename = $2`,
+            `SELECT source FROM clairview_pluginsourcefile WHERE plugin_id = $1 AND filename = $2`,
             [pluginId, filename],
             'getPluginSource'
         )

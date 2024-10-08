@@ -5,7 +5,7 @@ use tracing::instrument;
 
 // TRICKY: This cache data is coming from django-redis. If it ever goes out of sync, we'll bork.
 // TODO: Add integration tests across repos to ensure this doesn't happen.
-pub const TEAM_FLAGS_CACHE_PREFIX: &str = "markettor:1:team_feature_flags_";
+pub const TEAM_FLAGS_CACHE_PREFIX: &str = "clairview:1:team_feature_flags_";
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -159,7 +159,7 @@ impl FeatureFlagList {
             FlagError::DatabaseUnavailable
         })?;
 
-        let query = "SELECT id, team_id, name, key, filters, deleted, active, ensure_experience_continuity FROM markettor_featureflag WHERE team_id = $1";
+        let query = "SELECT id, team_id, name, key, filters, deleted, active, ensure_experience_continuity FROM clairview_featureflag WHERE team_id = $1";
         let flags_row = sqlx::query_as::<_, FeatureFlagRow>(query)
             .bind(team_id)
             .fetch_all(&mut *conn)

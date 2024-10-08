@@ -1,4 +1,4 @@
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 
 import { SDKInstallNextJSInstructions } from '../sdk-install-instructions/next-js'
 import { ProductAnalyticsAllJSFinalSteps } from './AllJSFinalSteps'

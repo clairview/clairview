@@ -3,7 +3,7 @@ import { loaders } from 'kea-loaders'
 import { router } from 'kea-router'
 import api from 'lib/api'
 import { deleteWithUndo } from 'lib/utils/deleteWithUndo'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { notebookLogic } from 'scenes/notebooks/Notebook/notebookLogic'
 import type { notebookLogicType } from 'scenes/notebooks/Notebook/notebookLogicType'
 import { defaultNotebookContent, EditorFocusPosition, JSONContent } from 'scenes/notebooks/Notebook/utils'
@@ -96,7 +96,7 @@ export const notebooksModel = kea<notebooksModelType>([
                         onCreate?.(logic)
                     })
 
-                    markettor.capture(`notebook created`, {
+                    clairview.capture(`notebook created`, {
                         short_id: notebook.short_id,
                     })
 

@@ -1,5 +1,5 @@
-import { IconCollapse, IconExpand, IconPlus } from '@markettor/icons'
-import { LemonMenu, LemonSwitch } from '@markettor/lemon-ui'
+import { IconCollapse, IconExpand, IconPlus } from '@clairview/icons'
+import { LemonMenu, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { supportLogic } from 'lib/components/Support/supportLogic'
 import { IconFeedback } from 'lib/lemon-ui/icons'
@@ -200,7 +200,7 @@ export function SessionAttributionExplorer(): JSX.Element {
                             attributed. We use the referring domain, <code>utm_source</code>, <code>utm_medium</code>,{' '}
                             <code>utm_campaign</code>, and the presence of advertising ids like <code>gclid</code> and{' '}
                             <code>gad_source</code>, to assign a session a{' '}
-                            <Link to="https://markettor.com/docs/data/channel-type">Channel type</Link>.
+                            <Link to="https://clairview.com/docs/data/channel-type">Channel type</Link>.
                         </p>
                         <p>
                             The table below shows sessions that are grouped, and you can change how they are grouped.

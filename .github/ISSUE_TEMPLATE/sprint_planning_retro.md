@@ -15,7 +15,7 @@ title: Sprint 1.n.0 m/2 - Jan 1 to Jan 12
 
 ## Urgent incident follow-ups
 
-https://github.com/orgs/MarketTor/projects/103/views/2
+https://github.com/orgs/ClairView/projects/103/views/2
 
 # Team sprint planning
 

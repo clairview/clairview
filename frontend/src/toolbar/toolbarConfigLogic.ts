@@ -35,7 +35,7 @@ export const toolbarConfigLogic = kea<toolbarConfigLogicType>([
     })),
 
     selectors({
-        markettor: [(s) => [s.props], (props) => props.markettor ?? null],
+        clairview: [(s) => [s.props], (props) => props.clairview ?? null],
         apiURL: [
             (s) => [s.props],
             (props: ToolbarProps) => `${props.apiURL?.endsWith('/') ? props.apiURL.replace(/\/+$/, '') : props.apiURL}`,
@@ -62,9 +62,9 @@ export const toolbarConfigLogic = kea<toolbarConfigLogicType>([
         },
         tokenExpired: () => {
             toolbarMarkettorJS.capture('toolbar token expired')
-            console.warn('MarketTor Toolbar API token expired. Clearing session.')
+            console.warn('ClairView Toolbar API token expired. Clearing session.')
             if (values.props.source !== 'localstorage') {
-                lemonToast.error('MarketTor Toolbar API token expired.')
+                lemonToast.error('ClairView Toolbar API token expired.')
             }
             actions.persistConfig()
         },
@@ -76,7 +76,7 @@ export const toolbarConfigLogic = kea<toolbarConfigLogicType>([
                 temporaryToken: values.temporaryToken ?? undefined,
                 actionId: values.actionId ?? undefined,
                 userIntent: values.userIntent ?? undefined,
-                markettor: undefined,
+                clairview: undefined,
                 featureFlags: undefined,
             }
 

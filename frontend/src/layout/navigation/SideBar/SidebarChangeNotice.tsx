@@ -1,8 +1,8 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton, LemonDivider, TooltipProps } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, LemonDivider, TooltipProps } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import React, { Fragment, useState } from 'react'
 import { Scene } from 'scenes/sceneTypes'
 
@@ -90,7 +90,7 @@ export function useSidebarChangeNotices({ identifier }: SidebarChangeNoticeProps
 
     const onAcknowledged = (): void => {
         notices.forEach((change) => {
-            markettor.capture('sidebar notice acknowledged', {
+            clairview.capture('sidebar notice acknowledged', {
                 change: change.flagSuffix,
                 $set: {
                     [`sidebar_notice/${change.flagSuffix}`]: true,

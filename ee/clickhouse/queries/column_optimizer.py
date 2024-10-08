@@ -1,20 +1,20 @@
 from collections import Counter as TCounter
 from typing import cast
 
-from markettor.constants import TREND_FILTER_TYPE_ACTIONS, FunnelCorrelationType
-from markettor.models.action.util import get_action_tables_and_properties
-from markettor.models.filters.mixins.utils import cached_property
-from markettor.models.filters.properties_timeline_filter import PropertiesTimelineFilter
-from markettor.models.filters.stickiness_filter import StickinessFilter
-from markettor.models.filters.utils import GroupTypeIndex
-from markettor.models.property import PropertyIdentifier
-from markettor.models.property.util import (
+from clairview.constants import TREND_FILTER_TYPE_ACTIONS, FunnelCorrelationType
+from clairview.models.action.util import get_action_tables_and_properties
+from clairview.models.filters.mixins.utils import cached_property
+from clairview.models.filters.properties_timeline_filter import PropertiesTimelineFilter
+from clairview.models.filters.stickiness_filter import StickinessFilter
+from clairview.models.filters.utils import GroupTypeIndex
+from clairview.models.property import PropertyIdentifier
+from clairview.models.property.util import (
     box_value,
     count_torql_properties,
     extract_tables_and_properties,
 )
-from markettor.queries.column_optimizer.foss_column_optimizer import FOSSColumnOptimizer
-from markettor.queries.trends.util import is_series_group_based
+from clairview.queries.column_optimizer.foss_column_optimizer import FOSSColumnOptimizer
+from clairview.queries.trends.util import is_series_group_based
 
 
 class EnterpriseColumnOptimizer(FOSSColumnOptimizer):
@@ -81,13 +81,13 @@ class EnterpriseColumnOptimizer(FOSSColumnOptimizer):
 
             # Math properties are also implicitly used.
             #
-            # See markettor/queries/trends/util.py#process_math
+            # See clairview/queries/trends/util.py#process_math
             if entity.math_property:
                 counter[(entity.math_property, "event", None)] += 1
 
             # If groups are involved, they're also used
             #
-            # See markettor/queries/trends/util.py#process_math
+            # See clairview/queries/trends/util.py#process_math
             if is_series_group_based(entity):
                 counter[(f"$group_{entity.math_group_type_index}", "event", None)] += 1
 

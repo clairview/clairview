@@ -1,4 +1,4 @@
-import { IconGear } from '@markettor/icons'
+import { IconGear } from '@clairview/icons'
 import { BindLogic, useActions, useValues } from 'kea'
 
 import { LemonButton } from '~/lib/lemon-ui/LemonButton'

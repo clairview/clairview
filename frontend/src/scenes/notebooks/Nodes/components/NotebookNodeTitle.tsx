@@ -1,6 +1,6 @@
-import { LemonInput, Tooltip } from '@markettor/lemon-ui'
+import { LemonInput, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { KeyboardEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { notebookLogic } from 'scenes/notebooks/Notebook/notebookLogic'
@@ -23,7 +23,7 @@ export function NotebookNodeTitle(): JSX.Element {
         })
 
         if (title != newValue) {
-            markettor.capture('notebook node title updated')
+            clairview.capture('notebook node title updated')
         }
 
         toggleEditingTitle(false)
@@ -49,7 +49,7 @@ export function NotebookNodeTitle(): JSX.Element {
                 className="NotebookNodeTitle NotebookNodeTitle--editable"
                 onDoubleClick={() => {
                     toggleEditingTitle(true)
-                    markettor.capture('notebook editing node title')
+                    clairview.capture('notebook editing node title')
                 }}
             >
                 {title}

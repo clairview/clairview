@@ -1,8 +1,8 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { FeatureFlagBasicType, NotebookNodeType, Survey } from '~/types'
 import { BindLogic, useActions, useValues } from 'kea'
 import { IconSurveys } from 'lib/lemon-ui/icons'
-import { LemonDivider } from '@markettor/lemon-ui'
+import { LemonDivider } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'
 import { notebookNodeLogic } from './notebookNodeLogic'
@@ -104,7 +104,7 @@ type NotebookNodeSurveyAttributes = {
     id: string
 }
 
-export const NotebookNodeSurvey = createMarketTorWidgetNode<NotebookNodeSurveyAttributes>({
+export const NotebookNodeSurvey = createClairViewWidgetNode<NotebookNodeSurveyAttributes>({
     nodeType: NotebookNodeType.Survey,
     titlePlaceholder: 'Survey',
     Component,

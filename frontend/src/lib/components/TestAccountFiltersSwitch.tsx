@@ -1,5 +1,5 @@
-import { IconGear } from '@markettor/icons'
-import { LemonButton, LemonSwitch, LemonSwitchProps } from '@markettor/lemon-ui'
+import { IconGear } from '@clairview/icons'
+import { LemonButton, LemonSwitch, LemonSwitchProps } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { teamLogic } from 'scenes/teamLogic'
 

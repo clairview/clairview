@@ -1,5 +1,5 @@
-import { IconCrown, IconLeave, IconLock, IconUnlock } from '@markettor/icons'
-import { LemonButton, LemonSelect, LemonSelectOption, LemonSnack, LemonSwitch, LemonTable } from '@markettor/lemon-ui'
+import { IconCrown, IconLeave, IconLock, IconUnlock } from '@clairview/icons'
+import { LemonButton, LemonSelect, LemonSelectOption, LemonSnack, LemonSwitch, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { RestrictionScope, useRestrictedArea } from 'lib/components/RestrictedArea'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'

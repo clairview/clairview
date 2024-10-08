@@ -75,7 +75,7 @@ export const startAsyncWebhooksHandlerConsumer = async ({
     status.info('🔁', `Starting webhooks handler consumer`)
 
     const consumer = kafka.consumer({
-        // NOTE: This should never clash with the group ID specified for the kafka engine markettor/ee/clickhouse/sql/clickhouse.py
+        // NOTE: This should never clash with the group ID specified for the kafka engine clairview/ee/clickhouse/sql/clickhouse.py
         groupId: `${KAFKA_PREFIX}clickhouse-plugin-server-async-webhooks`,
         sessionTimeout: serverConfig.KAFKA_CONSUMPTION_SESSION_TIMEOUT_MS,
         rebalanceTimeout: serverConfig.KAFKA_CONSUMPTION_REBALANCE_TIMEOUT_MS ?? undefined,

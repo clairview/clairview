@@ -1,10 +1,10 @@
-import { LemonDialog, LemonInput, LemonTextArea, lemonToast } from '@markettor/lemon-ui'
+import { LemonDialog, LemonInput, LemonTextArea, lemonToast } from '@clairview/lemon-ui'
 import { actions, connect, kea, listeners, path, reducers } from 'kea'
 import { actionToUrl, router, urlToAction } from 'kea-router'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { objectsEqual } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { userLogic } from 'scenes/userLogic'
 
 import { PipelineBackend } from '../types'
@@ -47,7 +47,7 @@ export const destinationsFiltersLogic = kea<destinationsFiltersLogicType>([
         setFilters: async ({ filters }, breakpoint) => {
             if (filters.search && filters.search.length > 2) {
                 await breakpoint(1000)
-                markettor.capture('cdp destination search', { search: filters.search })
+                clairview.capture('cdp destination search', { search: filters.search })
             }
         },
 
@@ -71,7 +71,7 @@ export const destinationsFiltersLogic = kea<destinationsFiltersLogicType>([
                     </div>
                 ),
                 onSubmit: async (values) => {
-                    markettor.capture('cdp destination feedback', { ...values })
+                    clairview.capture('cdp destination feedback', { ...values })
                     lemonToast.success('Thank you for your feedback!')
                 },
             })

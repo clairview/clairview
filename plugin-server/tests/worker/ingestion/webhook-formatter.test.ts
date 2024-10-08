@@ -12,7 +12,7 @@ describe('WebhookFormatter', () => {
         eventUuid: '123',
         teamId: 123,
         distinctId: 'WALL-E',
-        person_properties: { email: 'test@markettor.com' },
+        person_properties: { email: 'test@clairview.com' },
         person_created_at: '2021-10-31T00%3A44%3A00.000Z' as ISOTimestamp,
 
         elementsList: [],
@@ -23,7 +23,7 @@ describe('WebhookFormatter', () => {
                 index: 1,
                 type: 'organization',
                 key: '123',
-                properties: { name: 'MarketTor', plan: 'paid' },
+                properties: { name: 'ClairView', plan: 'paid' },
             },
 
             project: {

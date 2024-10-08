@@ -1,8 +1,8 @@
-import { IconInfo, IconOpenSidebar } from '@markettor/icons'
-import { LemonButton, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo, IconOpenSidebar } from '@clairview/icons'
+import { LemonButton, Link, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { useEffect } from 'react'
 import { billingLogic } from 'scenes/billing/billingLogic'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
@@ -48,7 +48,7 @@ export function PayGateMini({
 
     useEffect(() => {
         if (gateVariant) {
-            markettor.capture('pay gate shown', {
+            clairview.capture('pay gate shown', {
                 product_key: productWithFeature?.type,
                 feature: feature,
                 gate_variant: gateVariant,
@@ -58,7 +58,7 @@ export function PayGateMini({
 
     const handleCtaClick = (): void => {
         hideUpgradeModal()
-        markettor.capture('pay gate CTA clicked', {
+        clairview.capture('pay gate CTA clicked', {
             product_key: productWithFeature?.type,
             feature: feature,
             gate_variant: gateVariant,
@@ -230,7 +230,7 @@ const renderGateVariantMessage = (
     isAddonProduct?: boolean
 ): JSX.Element => {
     if (gateVariant === 'move-to-cloud') {
-        return <>This feature is only available on MarketTor Cloud.</>
+        return <>This feature is only available on ClairView Cloud.</>
     } else if (isAddonProduct) {
         return (
             <>
@@ -258,7 +258,7 @@ const DocsLink = ({ url }: { url: string }): JSX.Element => {
     return (
         <div className="mb-4">
             <Link to={url} target="_blank">
-                Learn more in MarketTor Docs.
+                Learn more in ClairView Docs.
             </Link>
         </div>
     )

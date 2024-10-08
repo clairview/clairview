@@ -2,8 +2,8 @@ from rest_framework import status
 
 from ee.api.test.base import APILicensedTest
 from ee.models.role import Role, RoleMembership
-from markettor.models.organization import Organization, OrganizationMembership
-from markettor.models.user import User
+from clairview.models.organization import Organization, OrganizationMembership
+from clairview.models.user import User
 
 
 class TestRoleMembershipAPI(APILicensedTest):

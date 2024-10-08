@@ -1,13 +1,13 @@
 from django.db import models
 
 from ee.models.organization_resource_access import OrganizationResourceAccess
-from markettor.models.utils import UUIDModel
+from clairview.models.utils import UUIDModel
 
 
 class Role(UUIDModel):
     name = models.CharField(max_length=200)
     organization = models.ForeignKey(
-        "markettor.Organization",
+        "clairview.Organization",
         on_delete=models.CASCADE,
         related_name="roles",
         related_query_name="role",
@@ -18,7 +18,7 @@ class Role(UUIDModel):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         on_delete=models.SET_NULL,
         related_name="roles",
         related_query_name="role",
@@ -38,14 +38,14 @@ class RoleMembership(UUIDModel):
     )
     # TODO: Eventually remove this as we only need the organization membership
     user = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         on_delete=models.CASCADE,
         related_name="role_memberships",
         related_query_name="role_membership",
     )
 
     organization_member = models.ForeignKey(
-        "markettor.OrganizationMembership",
+        "clairview.OrganizationMembership",
         on_delete=models.CASCADE,
         related_name="role_memberships",
         related_query_name="role_membership",

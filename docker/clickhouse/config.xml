@@ -674,7 +674,7 @@
     <remote_servers>
 
         <!-- Test only shard config for testing distributed storage -->
-        <markettor>
+        <clairview>
             <!-- Inter-server per-cluster secret for Distributed queries
                  default: no secret (no authentication will be performed)
 
@@ -711,7 +711,7 @@
                     <!-- <priority>1</priority> -->
                 </replica>
             </shard>
-        </markettor>
+        </clairview>
     </remote_servers>
 
     <!-- The list of hosts allowed to use in URL-related storage engines and table functions.

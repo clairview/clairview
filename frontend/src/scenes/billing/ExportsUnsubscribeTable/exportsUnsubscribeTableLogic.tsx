@@ -1,4 +1,4 @@
-import { IconDatabase } from '@markettor/icons'
+import { IconDatabase } from '@clairview/icons'
 import { actions, afterMount, connect, kea, path, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import api from 'lib/api'

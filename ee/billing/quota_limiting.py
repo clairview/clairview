@@ -5,23 +5,23 @@ from enum import Enum
 from typing import Optional, TypedDict, cast
 
 import dateutil.parser
-import markettoranalytics
+import clairviewanalytics
 from django.db.models import Q
 from django.utils import timezone
 from sentry_sdk import capture_exception
 
-from markettor.cache_utils import cache_for
-from markettor.event_usage import report_organization_action
-from markettor.models.organization import Organization, OrganizationUsageInfo
-from markettor.models.team.team import Team
-from markettor.redis import get_client
-from markettor.tasks.usage_report import (
+from clairview.cache_utils import cache_for
+from clairview.event_usage import report_organization_action
+from clairview.models.organization import Organization, OrganizationUsageInfo
+from clairview.models.team.team import Team
+from clairview.redis import get_client
+from clairview.tasks.usage_report import (
     convert_team_usage_rows_to_dict,
     get_teams_with_billable_event_count_in_period,
     get_teams_with_recording_count_in_period,
     get_teams_with_rows_synced_in_period,
 )
-from markettor.utils import get_current_day
+from clairview.utils import get_current_day
 
 QUOTA_LIMIT_DATA_RETENTION_FLAG = "retain-data-past-quota-limit"
 
@@ -41,8 +41,8 @@ class QuotaResource(Enum):
 
 
 class QuotaLimitingCaches(Enum):
-    QUOTA_LIMITER_CACHE_KEY = "@markettor/quota-limits/"
-    QUOTA_LIMITING_SUSPENDED_KEY = "@markettor/quota-limiting-suspended/"
+    QUOTA_LIMITER_CACHE_KEY = "@clairview/quota-limits/"
+    QUOTA_LIMITING_SUSPENDED_KEY = "@clairview/quota-limiting-suspended/"
 
 
 OVERAGE_BUFFER = {
@@ -132,7 +132,7 @@ def org_quota_limited_until(
             "quota_limiting_suspended_until": None,
         }
 
-    if markettoranalytics.feature_enabled(
+    if clairviewanalytics.feature_enabled(
         QUOTA_LIMIT_DATA_RETENTION_FLAG,
         str(organization.id),
         groups={"organization": str(organization.id)},

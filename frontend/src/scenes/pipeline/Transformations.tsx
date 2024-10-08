@@ -2,7 +2,7 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core'
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { LemonBadge, LemonButton, LemonModal, LemonTable, LemonTableColumn, Link } from '@markettor/lemon-ui'
+import { LemonBadge, LemonButton, LemonModal, LemonTable, LemonTableColumn, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { ProductIntroduction } from 'lib/components/ProductIntroduction/ProductIntroduction'
@@ -31,7 +31,7 @@ export function Transformations(): JSX.Element {
     return (
         <>
             <PageHeader
-                caption="Transform your incoming events before they are stored in MarketTor or sent on to Destinations."
+                caption="Transform your incoming events before they are stored in ClairView or sent on to Destinations."
                 buttons={<NewButton stage={PipelineStage.Transformation} />}
             />
             <ProductIntroduction
@@ -39,7 +39,7 @@ export function Transformations(): JSX.Element {
                 thingName="transformation"
                 productKey={ProductKey.PIPELINE_TRANSFORMATIONS}
                 description="Pipeline transformations allow you to enrich your data with additional information, such as geolocation."
-                docsURL="https://markettor.com/docs/cdp"
+                docsURL="https://clairview.com/docs/cdp"
                 actionElementOverride={<NewButton stage={PipelineStage.Transformation} />}
                 isEmpty={shouldShowEmptyState}
             />

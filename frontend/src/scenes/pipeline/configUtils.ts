@@ -1,8 +1,8 @@
-import { PluginConfigChoice, PluginConfigSchema } from '@markettor/plugin-scaffold'
+import { PluginConfigChoice, PluginConfigSchema } from '@clairview/plugin-scaffold'
 
 import { PluginType } from '~/types'
 
-// Keep this in sync with: markettor/api/plugin.py
+// Keep this in sync with: clairview/api/plugin.py
 export const SECRET_FIELD_VALUE = '**************** MARKETTOR SECRET FIELD ****************'
 
 export function getConfigSchemaArray(

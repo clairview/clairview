@@ -15,9 +15,9 @@ from social_core.exceptions import AuthFailed, AuthMissingParameter
 
 from ee.api.test.base import APILicensedTest
 from ee.models.license import License
-from markettor.constants import AvailableFeature
-from markettor.models import OrganizationMembership, User
-from markettor.models.organization_domain import OrganizationDomain
+from clairview.constants import AvailableFeature
+from clairview.models import OrganizationMembership, User
+from clairview.models.organization_domain import OrganizationDomain
 
 SAML_MOCK_SETTINGS = {
     "SOCIAL_AUTH_SAML_SECURITY_CONFIG": {
@@ -105,12 +105,12 @@ class TestEELoginPrecheckAPI(APILicensedTest):
 
 
 class TestEEAuthenticationAPI(APILicensedTest):
-    CONFIG_EMAIL = "user7@markettor.com"
+    CONFIG_EMAIL = "user7@clairview.com"
 
     def create_enforced_domain(self, **kwargs) -> OrganizationDomain:
         return OrganizationDomain.objects.create(
             **{
-                "domain": "markettor.com",
+                "domain": "clairview.com",
                 "organization": self.organization,
                 "verified_at": timezone.now(),
                 "sso_enforcement": "google-oauth2",
@@ -176,9 +176,9 @@ class TestEEAuthenticationAPI(APILicensedTest):
         with self.settings(
             **GOOGLE_MOCK_SETTINGS,
             EMAIL_HOST="localhost",
-            SITE_URL="https://my.markettor.net",
+            SITE_URL="https://my.clairview.net",
         ):
-            response = self.client.post("/api/reset/", {"email": "i_dont_exist@markettor.com"})
+            response = self.client.post("/api/reset/", {"email": "i_dont_exist@clairview.com"})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.json(),
@@ -191,7 +191,7 @@ class TestEEAuthenticationAPI(APILicensedTest):
         )
         self.assertEqual(len(mail.outbox), 0)
 
-    @patch("markettor.models.organization_domain.logger.warning")
+    @patch("clairview.models.organization_domain.logger.warning")
     def test_cannot_enforce_sso_without_a_license(self, mock_warning):
         self.client.logout()
         self.license.valid_until = timezone.now() - datetime.timedelta(days=1)
@@ -217,8 +217,8 @@ class TestEEAuthenticationAPI(APILicensedTest):
 
         # Ensure warning is properly logged for debugging
         mock_warning.assert_called_with(
-            "🤑🚪 SSO is enforced for domain markettor.com but the organization does not have the proper license.",
-            domain="markettor.com",
+            "🤑🚪 SSO is enforced for domain clairview.com but the organization does not have the proper license.",
+            domain="clairview.com",
             organization=str(self.organization.id),
         )
 
@@ -241,7 +241,7 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
         super().setUpTestData()
 
         cls.organization_domain = OrganizationDomain.objects.create(
-            domain="markettor.com",
+            domain="clairview.com",
             verified_at=timezone.now(),
             organization=cls.organization,
             jit_provisioning_enabled=True,
@@ -297,7 +297,7 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
 
     def test_login_precheck_with_available_but_unenforced_saml(self):
         response = self.client.post(
-            "/api/login/precheck", {"email": "helloworld@markettor.com"}
+            "/api/login/precheck", {"email": "helloworld@clairview.com"}
         )  # Note Google OAuth is not configured
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {"sso_enforcement": None, "saml_available": True})
@@ -305,7 +305,7 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
     # Initiate SAML flow
 
     def test_can_initiate_saml_flow(self):
-        response = self.client.get("/login/saml/?email=hellohello@markettor.com")
+        response = self.client.get("/login/saml/?email=hellohello@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         # Assert user is redirected to the IdP's login page
@@ -353,9 +353,9 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
 
     @freeze_time("2021-08-25T22:09:14.252Z")  # Ensures the SAML timestamp validation passes
     def test_can_login_with_saml(self):
-        user = User.objects.create(email="engineering@markettor.com", distinct_id=str(uuid.uuid4()))
+        user = User.objects.create(email="engineering@clairview.com", distinct_id=str(uuid.uuid4()))
 
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         _session = self.client.session
@@ -397,7 +397,7 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
         For example in this case we receive the user's first name at `urn:oid:2.5.4.42` instead of `first_name`.
         """
 
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         _session = self.client.session
@@ -428,8 +428,8 @@ class TestEESAMLAuthenticationAPI(APILicensedTest):
         # User is created
         self.assertEqual(User.objects.count(), user_count + 1)
         user = cast(User, User.objects.last())
-        self.assertEqual(user.first_name, "MarketTor")
-        self.assertEqual(user.email, "engineering@markettor.com")
+        self.assertEqual(user.first_name, "ClairView")
+        self.assertEqual(user.email, "engineering@clairview.com")
         self.assertEqual(user.organization, self.organization)
         self.assertEqual(user.team, self.team)
         self.assertEqual(user.organization_memberships.count(), 1)
@@ -463,7 +463,7 @@ LERK8jfXCMVmWPTy830CtQaZX2AJyBwHG4ElP2BOZNbFAvGzrKaBmK2Ym/OJxkhx
 YotAcSbU3p5bzd11wpyebYHB"""
         self.organization_domain.save()
 
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         _session = self.client.session
@@ -502,7 +502,7 @@ YotAcSbU3p5bzd11wpyebYHB"""
         self.organization_domain.jit_provisioning_enabled = False
         self.organization_domain.save()
 
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         _session = self.client.session
@@ -539,7 +539,7 @@ YotAcSbU3p5bzd11wpyebYHB"""
 
     @freeze_time("2021-08-25T23:53:51.000Z")
     def test_cannot_create_account_without_first_name_in_payload(self):
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         _session = self.client.session
@@ -574,9 +574,9 @@ YotAcSbU3p5bzd11wpyebYHB"""
 
     @freeze_time("2021-08-25T22:09:14.252Z")
     def test_cannot_login_with_saml_on_unverified_domain(self):
-        User.objects.create(email="engineering@markettor.com", distinct_id=str(uuid.uuid4()))
+        User.objects.create(email="engineering@clairview.com", distinct_id=str(uuid.uuid4()))
 
-        response = self.client.get("/login/saml/?email=engineering@markettor.com")
+        response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
 
         # Note we "unverify" the domain after the initial request because we want to test the actual login process (not SAML initiation)
@@ -616,14 +616,14 @@ YotAcSbU3p5bzd11wpyebYHB"""
     def test_saml_can_be_enforced(self):
         User.objects.create_and_join(
             organization=self.organization,
-            email="engineering@markettor.com",
+            email="engineering@clairview.com",
             password=self.CONFIG_PASSWORD,
         )
 
         # Can log in regularly with SAML configured
         response = self.client.post(
             "/api/login",
-            {"email": "engineering@markettor.com", "password": self.CONFIG_PASSWORD},
+            {"email": "engineering@clairview.com", "password": self.CONFIG_PASSWORD},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {"success": True})
@@ -633,7 +633,7 @@ YotAcSbU3p5bzd11wpyebYHB"""
         self.organization_domain.save()
         response = self.client.post(
             "/api/login",
-            {"email": "engineering@markettor.com", "password": self.CONFIG_PASSWORD},
+            {"email": "engineering@clairview.com", "password": self.CONFIG_PASSWORD},
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
@@ -647,7 +647,7 @@ YotAcSbU3p5bzd11wpyebYHB"""
         )
 
         # Login precheck returns SAML info
-        response = self.client.post("/api/login/precheck", {"email": "engineering@markettor.com"})
+        response = self.client.post("/api/login/precheck", {"email": "engineering@clairview.com"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {"sso_enforcement": "saml", "saml_available": True})
 
@@ -666,7 +666,7 @@ YotAcSbU3p5bzd11wpyebYHB"""
 
         # Cannot start SAML flow
         with self.assertRaises(AuthFailed) as e:
-            response = self.client.get("/login/saml/?email=engineering@markettor.com")
+            response = self.client.get("/login/saml/?email=engineering@clairview.com")
         self.assertEqual(
             str(e.exception),
             "Authentication failed: Your organization does not have the required license to use SAML.",

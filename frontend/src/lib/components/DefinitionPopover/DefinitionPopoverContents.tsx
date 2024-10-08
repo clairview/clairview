@@ -1,6 +1,6 @@
 import { hide } from '@floating-ui/react'
-import { IconInfo } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonSelect, LemonSwitch } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonSelect, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ActionPopoverInfo } from 'lib/components/DefinitionPopover/ActionPopoverInfo'
 import { CohortPopoverInfo } from 'lib/components/DefinitionPopover/CohortPopoverInfo'

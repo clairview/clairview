@@ -1,8 +1,8 @@
 {
     "page": {
         "id": "1ll2gn427qjl",
-        "name": "MarketTor",
-        "url": "https://status.markettor.com",
+        "name": "ClairView",
+        "url": "https://status.clairview.com",
         "time_zone": "Etc/UTC",
         "updated_at": "2024-06-29T05:42:34.351Z"
     },
@@ -39,7 +39,7 @@
         },
         {
             "id": "j6bgzv8dh942",
-            "name": "MarketTor.com",
+            "name": "ClairView.com",
             "status": "operational",
             "created_at": "2022-11-21T21:31:36.659Z",
             "updated_at": "2023-04-28T19:15:51.255Z",

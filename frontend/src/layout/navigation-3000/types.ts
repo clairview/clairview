@@ -1,4 +1,4 @@
-import { LemonTagType, SideAction } from '@markettor/lemon-ui'
+import { LemonTagType, SideAction } from '@clairview/lemon-ui'
 import { Logic, LogicWrapper } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { Dayjs } from 'lib/dayjs'

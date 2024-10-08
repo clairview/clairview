@@ -1,4 +1,4 @@
-import { LemonButton, LemonCheckbox, LemonTable, LemonTableColumns } from '@markettor/lemon-ui'
+import { LemonButton, LemonCheckbox, LemonTable, LemonTableColumns } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconRefresh } from 'lib/lemon-ui/icons'
 import { LemonCollapse } from 'lib/lemon-ui/LemonCollapse'

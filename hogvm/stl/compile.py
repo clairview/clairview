@@ -4,8 +4,8 @@
 import glob
 import json
 
-from markettor.torql import ast
-from markettor.torql.bytecode import create_bytecode, parse_program
+from clairview.torql import ast
+from clairview.torql.bytecode import create_bytecode, parse_program
 
 source = "hogvm/stl/src/*.hog"
 target_ts = "hogvm/typescript/src/stl/bytecode.ts"

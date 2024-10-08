@@ -1,22 +1,22 @@
 from datetime import datetime
 from typing import Any
 
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.filters import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.instance_setting import override_instance_config
-from markettor.queries.funnels.funnel_unordered import ClickhouseFunnelUnordered
-from markettor.queries.funnels.test.breakdown_cases import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.filters import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.instance_setting import override_instance_config
+from clairview.queries.funnels.funnel_unordered import ClickhouseFunnelUnordered
+from clairview.queries.funnels.test.breakdown_cases import (
     FunnelStepResult,
     assert_funnel_results_equal,
 )
-from markettor.test.base import (
+from clairview.test.base import (
     APIBaseTest,
     snapshot_clickhouse_queries,
     also_test_with_person_on_events_v2,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 def funnel_breakdown_group_test_factory(Funnel, FunnelPerson, _create_event, _create_action, _create_person):

@@ -1,4 +1,4 @@
-import ClickHouse from '@markettor/clickhouse'
+import ClickHouse from '@clairview/clickhouse'
 import { performance } from 'perf_hooks'
 
 import { defaultConfig } from '../../src/config/config'

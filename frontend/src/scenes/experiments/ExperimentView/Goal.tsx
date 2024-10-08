@@ -1,7 +1,7 @@
 import '../Experiment.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonModal, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonModal, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { InsightLabel } from 'lib/components/InsightLabel'

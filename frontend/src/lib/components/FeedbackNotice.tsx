@@ -1,5 +1,5 @@
-import { IconBug } from '@markettor/icons'
-import { LemonBanner } from '@markettor/lemon-ui'
+import { IconBug } from '@clairview/icons'
+import { LemonBanner } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { IconFeedback } from 'lib/lemon-ui/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

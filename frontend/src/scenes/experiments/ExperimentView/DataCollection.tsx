@@ -1,7 +1,7 @@
 import '../Experiment.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonModal, Link, Tooltip } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonModal, Link, Tooltip } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { AnimationType } from 'lib/animations/animations'
 import { Animation } from 'lib/components/Animation/Animation'
@@ -139,7 +139,7 @@ export function DataCollection(): JSX.Element {
                                     </div>
                                     <div>
                                         Read more in the{' '}
-                                        <Link to="https://markettor.com/docs/experiments/sample-size-running-time#minimum-detectable-effect-mde">
+                                        <Link to="https://clairview.com/docs/experiments/sample-size-running-time#minimum-detectable-effect-mde">
                                             documentation.
                                         </Link>
                                     </div>

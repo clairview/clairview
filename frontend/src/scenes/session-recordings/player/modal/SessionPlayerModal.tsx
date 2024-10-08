@@ -1,4 +1,4 @@
-import { LemonModal } from '@markettor/lemon-ui'
+import { LemonModal } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { SessionRecordingPlayer } from 'scenes/session-recordings/player/SessionRecordingPlayer'
 

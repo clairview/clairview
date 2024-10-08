@@ -1,6 +1,6 @@
 import './SessionRecordingPlayerExplorer.scss'
 
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useResizeObserver } from 'lib/hooks/useResizeObserver'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
 import { useState } from 'react'

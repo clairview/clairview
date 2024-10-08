@@ -1,4 +1,4 @@
-import { LemonSelect, LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSelect, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { NotFound } from 'lib/components/NotFound'

@@ -1,6 +1,6 @@
 import { Monaco } from '@monaco-editor/react'
-import { IconMagicWand, IconPlus, IconX } from '@markettor/icons'
-import { LemonInput, Link } from '@markettor/lemon-ui'
+import { IconMagicWand, IconPlus, IconX } from '@clairview/icons'
+import { LemonInput, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
@@ -128,7 +128,7 @@ export function TorQLQueryEditor(props: TorQLQueryEditorProps): JSX.Element {
                             placeholder={
                                 aiAvailable
                                     ? 'What do you want to know? How would you like to tweak the query?'
-                                    : 'To use AI features, set environment variable OPENAI_API_KEY for this instance of MarketTor'
+                                    : 'To use AI features, set environment variable OPENAI_API_KEY for this instance of ClairView'
                             }
                             disabled={!aiAvailable}
                             maxLength={400}
@@ -138,7 +138,7 @@ export function TorQLQueryEditor(props: TorQLQueryEditorProps): JSX.Element {
                             onClick={() => draftFromPrompt()}
                             disabledReason={
                                 !aiAvailable
-                                    ? 'Environment variable OPENAI_API_KEY is unset for this instance of MarketTor'
+                                    ? 'Environment variable OPENAI_API_KEY is unset for this instance of ClairView'
                                     : !prompt
                                     ? 'Provide a prompt first'
                                     : null
@@ -315,7 +315,7 @@ export function TorQLQueryEditor(props: TorQLQueryEditorProps): JSX.Element {
                                         <div>
                                             Save a query as a view that can be referenced in another query. This is
                                             useful for modeling data and organizing large queries into readable chunks.{' '}
-                                            <Link to="https://markettor.com/docs/data-warehouse">More Info</Link>{' '}
+                                            <Link to="https://clairview.com/docs/data-warehouse">More Info</Link>{' '}
                                         </div>
                                     }
                                 >

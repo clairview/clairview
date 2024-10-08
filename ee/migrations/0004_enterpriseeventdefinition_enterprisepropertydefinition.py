@@ -8,7 +8,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("markettor", "0156_insight_short_id"),
+        ("clairview", "0156_insight_short_id"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("ee", "0003_license_max_users"),
     ]
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                         parent_link=True,
                         primary_key=True,
                         serialize=False,
-                        to="markettor.propertydefinition",
+                        to="clairview.propertydefinition",
                     ),
                 ),
                 ("description", models.CharField(blank=True, max_length=400)),
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
             options={
                 "abstract": False,
             },
-            bases=("markettor.propertydefinition",),
+            bases=("clairview.propertydefinition",),
         ),
         migrations.CreateModel(
             name="EnterpriseEventDefinition",
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                         parent_link=True,
                         primary_key=True,
                         serialize=False,
-                        to="markettor.eventdefinition",
+                        to="clairview.eventdefinition",
                     ),
                 ),
                 ("description", models.CharField(blank=True, max_length=400)),
@@ -103,6 +103,6 @@ class Migration(migrations.Migration):
             options={
                 "abstract": False,
             },
-            bases=("markettor.eventdefinition",),
+            bases=("clairview.eventdefinition",),
         ),
     ]

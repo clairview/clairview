@@ -1,6 +1,6 @@
 import './TimelineSeekbar.scss'
 
-import { LemonBadge } from '@markettor/lemon-ui'
+import { LemonBadge } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { Dayjs } from 'lib/dayjs'
 import { Spinner } from 'lib/lemon-ui/Spinner/Spinner'

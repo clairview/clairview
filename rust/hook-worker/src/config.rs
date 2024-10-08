@@ -13,7 +13,7 @@ pub struct Config {
     #[envconfig(from = "BIND_PORT", default = "3301")]
     pub port: u16,
 
-    #[envconfig(default = "postgres://markettor:markettor@localhost:15432/test_database")]
+    #[envconfig(default = "postgres://clairview:clairview@localhost:15432/test_database")]
     pub database_url: String,
 
     #[envconfig(default = "worker")]

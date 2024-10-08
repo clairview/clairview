@@ -10,8 +10,8 @@ from hogvm.python.operation import (
     TORQL_BYTECODE_VERSION as VERSION,
 )
 from hogvm.python.utils import UncaughtHogVMException
-from markettor.torql.bytecode import create_bytecode
-from markettor.torql.parser import parse_expr, parse_program
+from clairview.torql.bytecode import create_bytecode
+from clairview.torql.parser import parse_expr, parse_program
 
 
 class TestBytecodeExecute:

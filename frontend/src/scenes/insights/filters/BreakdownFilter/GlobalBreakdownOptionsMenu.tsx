@@ -1,7 +1,7 @@
 import './BreakdownTagMenu.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonInput, LemonLabel, LemonSwitch } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonInput, LemonLabel, LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 import { insightLogic } from 'scenes/insights/insightLogic'

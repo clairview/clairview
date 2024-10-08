@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconWarning } from '@markettor/icons'
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconWarning } from '@clairview/icons'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useState } from 'react'
 import { Setup2FA } from 'scenes/authentication/Setup2FA'

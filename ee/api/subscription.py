@@ -7,13 +7,13 @@ from rest_framework import serializers, viewsets
 from rest_framework.exceptions import ValidationError
 
 from ee.tasks import subscriptions
-from markettor.api.forbid_destroy_model import ForbidDestroyModel
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.api.shared import UserBasicSerializer
-from markettor.constants import AvailableFeature
-from markettor.models.subscription import Subscription, unsubscribe_using_token
-from markettor.permissions import PremiumFeaturePermission
-from markettor.utils import str_to_bool
+from clairview.api.forbid_destroy_model import ForbidDestroyModel
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.api.shared import UserBasicSerializer
+from clairview.constants import AvailableFeature
+from clairview.models.subscription import Subscription, unsubscribe_using_token
+from clairview.permissions import PremiumFeaturePermission
+from clairview.utils import str_to_bool
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):

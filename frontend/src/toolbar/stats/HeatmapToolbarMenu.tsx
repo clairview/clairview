@@ -1,5 +1,5 @@
-import { IconMagicWand } from '@markettor/icons'
-import { LemonTag, Link } from '@markettor/lemon-ui'
+import { IconMagicWand } from '@clairview/icons'
+import { LemonTag, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
 import { HeatmapsSettings } from 'lib/components/heatmaps/HeatMapsSettings'
@@ -20,20 +20,20 @@ import { currentPageLogic } from '~/toolbar/stats/currentPageLogic'
 import { toolbarConfigLogic } from '../toolbarConfigLogic'
 
 const HeatmapsJSWarning = (): JSX.Element | null => {
-    const { markettor } = useValues(toolbarConfigLogic)
+    const { clairview } = useValues(toolbarConfigLogic)
 
-    if (!markettor || markettor?.heatmaps?.isEnabled) {
+    if (!clairview || clairview?.heatmaps?.isEnabled) {
         return null
     }
 
     return (
         <p className="my-2 bg-danger-highlight border border-danger rounded p-2">
-            {!markettor.heatmaps ? (
-                <>The version of markettor-js you are using does not support collecting heatmap data.</>
-            ) : !markettor.heatmaps.isEnabled ? (
+            {!clairview.heatmaps ? (
+                <>The version of clairview-js you are using does not support collecting heatmap data.</>
+            ) : !clairview.heatmaps.isEnabled ? (
                 <>
-                    You can enable heatmap collection in your markettor-js configuration or{' '}
-                    <Link to="https://us.markettor.com/settings/project#heatmaps">in your project config</Link>.
+                    You can enable heatmap collection in your clairview-js configuration or{' '}
+                    <Link to="https://us.clairview.com/settings/project#heatmaps">in your project config</Link>.
                 </>
             ) : null}
         </p>

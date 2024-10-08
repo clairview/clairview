@@ -1,5 +1,5 @@
-import { IconEllipsis } from '@markettor/icons'
-import { LemonButton, LemonMenu, PopoverReferenceContext } from '@markettor/lemon-ui'
+import { IconEllipsis } from '@clairview/icons'
+import { LemonButton, LemonMenu, PopoverReferenceContext } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import { useValues } from 'kea'
 import { copyToClipboard } from 'lib/utils/copyToClipboard'

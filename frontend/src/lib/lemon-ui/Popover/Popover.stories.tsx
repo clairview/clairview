@@ -1,4 +1,4 @@
-import { IconChevronDown } from '@markettor/icons'
+import { IconChevronDown } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 import { Popover } from './Popover'

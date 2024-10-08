@@ -257,7 +257,7 @@ test.concurrent(`plugin method tests: teardown is called on stateful plugin relo
 
 test.concurrent(`plugin method tests: can update distinct_id via processEvent`, async () => {
     // Prior to introducing
-    // https://github.com/MarketTor/product-internal/pull/405/files this was
+    // https://github.com/ClairView/product-internal/pull/405/files this was
     // possible so I'm including a test here to explicitly check for it.
     const plugin = await createPlugin({
         organization_id: organizationId,

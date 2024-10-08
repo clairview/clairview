@@ -6,11 +6,11 @@ import { teamLogic } from 'scenes/teamLogic'
 export function NodeInstallSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Bash}>
-            {`npm install markettor-node
+            {`npm install clairview-node
 # OR
-yarn add markettor-node
+yarn add clairview-node
 # OR
-pnpm add markettor-node`}
+pnpm add clairview-node`}
         </CodeSnippet>
     )
 }
@@ -20,9 +20,9 @@ export function NodeSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.JavaScript}>
-            {`import { MarketTor } from 'markettor-node'
+            {`import { ClairView } from 'clairview-node'
 
-const client = new MarketTor(
+const client = new ClairView(
     '${currentTeam?.api_token}',
     { host: '${apiHostOrigin()}' }
 )`}

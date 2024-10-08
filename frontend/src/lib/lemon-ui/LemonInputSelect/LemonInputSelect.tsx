@@ -1,5 +1,5 @@
-import { IconPencil } from '@markettor/icons'
-import { LemonCheckbox, Tooltip } from '@markettor/lemon-ui'
+import { IconPencil } from '@clairview/icons'
+import { LemonCheckbox, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import Fuse from 'fuse.js'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'

@@ -23,7 +23,7 @@ from hogvm.python.utils import (
 )
 
 if TYPE_CHECKING:
-    from markettor.models import Team
+    from clairview.models import Team
 
 MAX_MEMORY = 64 * 1024 * 1024  # 64 MB
 MAX_FUNCTION_ARGS_LENGTH = 300

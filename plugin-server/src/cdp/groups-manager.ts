@@ -66,7 +66,7 @@ export class GroupsManager {
         if (teamsToLoad.length) {
             const result = await this.hub.postgres.query(
                 PostgresUse.COMMON_READ,
-                `SELECT team_id, group_type, group_type_index FROM markettor_grouptypemapping WHERE team_id = ANY($1)`,
+                `SELECT team_id, group_type, group_type_index FROM clairview_grouptypemapping WHERE team_id = ANY($1)`,
                 [teamsToLoad],
                 'fetchGroupTypes'
             )
@@ -110,7 +110,7 @@ export class GroupsManager {
             await this.hub.postgres.query(
                 PostgresUse.COMMON_READ,
                 `SELECT team_id, group_type_index, group_key, group_properties
-            FROM markettor_group
+            FROM clairview_group
             WHERE team_id = ANY($1) AND group_type_index = ANY($2) AND group_key = ANY($3)`,
                 [teamIds, groupIndexes, groupKeys],
                 'fetchGroups'

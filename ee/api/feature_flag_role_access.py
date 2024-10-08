@@ -5,10 +5,10 @@ from ee.api.role import RoleSerializer
 from ee.models.feature_flag_role_access import FeatureFlagRoleAccess
 from ee.models.organization_resource_access import OrganizationResourceAccess
 from ee.models.role import Role
-from markettor.api.feature_flag import FeatureFlagSerializer
-from markettor.api.routing import TeamAndOrgViewSetMixin
-from markettor.models import FeatureFlag
-from markettor.models.organization import OrganizationMembership
+from clairview.api.feature_flag import FeatureFlagSerializer
+from clairview.api.routing import TeamAndOrgViewSetMixin
+from clairview.models import FeatureFlag
+from clairview.models.organization import OrganizationMembership
 
 
 class FeatureFlagRoleAccessPermissions(BasePermission):

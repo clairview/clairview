@@ -1,7 +1,7 @@
 import './TaxonomicPropertyFilter.scss'
 
-import { IconPlusSmall } from '@markettor/icons'
-import { LemonButton, LemonDropdown } from '@markettor/lemon-ui'
+import { IconPlusSmall } from '@clairview/icons'
+import { LemonButton, LemonDropdown } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { OperatorValueSelect } from 'lib/components/PropertyFilters/components/OperatorValueSelect'
@@ -92,7 +92,7 @@ export function TaxonomicPropertyFilter({
         !(filter?.type === PropertyFilterType.TorQL) &&
         // If we're in a feature flag, we don't want to show operators for cohorts because
         // we don't support any cohort matching operators other than "in"
-        // See https://github.com/MarketTor/markettor/pull/25149/
+        // See https://github.com/ClairView/clairview/pull/25149/
         !(filter?.type === PropertyFilterType.Cohort && exactMatchFeatureFlagCohortOperators)
     const placeOperatorValueSelectOnLeft = filter?.type && filter?.key && filter?.type === PropertyFilterType.Cohort
 

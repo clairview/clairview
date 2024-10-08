@@ -5,7 +5,7 @@ set -e
 export RUST_LOG="INFO"
 export HOST="::"
 export PORT="3302"
-export DATABASE_URL="postgres://markettor:markettor@localhost:5432/cyclotron"
+export DATABASE_URL="postgres://clairview:clairview@localhost:5432/cyclotron"
 export CLEANUP_INTERVAL_SECONDS="10"
 export PG_MAX_CONNECTIONS="10"
 export PG_MIN_CONNECTIONS="1"

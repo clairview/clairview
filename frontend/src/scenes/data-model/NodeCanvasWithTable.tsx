@@ -1,4 +1,4 @@
-import { LemonButton, LemonTag } from '@markettor/lemon-ui'
+import { LemonButton, LemonTag } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { humanFriendlyDetailedTime } from 'lib/utils'

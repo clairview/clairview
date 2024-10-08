@@ -8,20 +8,20 @@ from freezegun import freeze_time
 from parameterized import parameterized
 
 from ee.clickhouse.materialized_columns.columns import materialize
-from markettor.clickhouse.client import sync_execute
-from markettor.torql.ast import CompareOperation, And, SelectQuery
-from markettor.torql.base import Expr
-from markettor.torql.context import TorQLContext
-from markettor.torql.printer import print_ast
-from markettor.models import Person
-from markettor.models.filters import SessionRecordingsFilter
-from markettor.schema import PersonsOnEventsMode
-from markettor.session_recordings.queries.session_recording_list_from_filters import (
+from clairview.clickhouse.client import sync_execute
+from clairview.torql.ast import CompareOperation, And, SelectQuery
+from clairview.torql.base import Expr
+from clairview.torql.context import TorQLContext
+from clairview.torql.printer import print_ast
+from clairview.models import Person
+from clairview.models.filters import SessionRecordingsFilter
+from clairview.schema import PersonsOnEventsMode
+from clairview.session_recordings.queries.session_recording_list_from_filters import (
     SessionRecordingListFromFilters,
 )
-from markettor.session_recordings.queries.test.session_replay_sql import produce_replay_summary
-from markettor.session_recordings.sql.session_replay_event_sql import TRUNCATE_SESSION_REPLAY_EVENTS_TABLE_SQL
-from markettor.test.base import (
+from clairview.session_recordings.queries.test.session_replay_sql import produce_replay_summary
+from clairview.session_recordings.sql.session_replay_event_sql import TRUNCATE_SESSION_REPLAY_EVENTS_TABLE_SQL
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     QueryMatchingTest,

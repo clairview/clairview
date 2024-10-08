@@ -1,8 +1,8 @@
-import { LemonDialog } from '@markettor/lemon-ui'
+import { LemonDialog } from '@clairview/lemon-ui'
 import { actions, connect, events, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { forms } from 'kea-forms'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import React from 'react'
 
 import { BillingPlanType, BillingProductV2AddonType, BillingProductV2Type, BillingTierType } from '~/types'
@@ -278,25 +278,25 @@ export const billingProductLogic = kea<billingProductLogicType>([
             )
         },
         reportSurveyShown: ({ surveyID }) => {
-            markettor.capture('survey shown', {
+            clairview.capture('survey shown', {
                 $survey_id: surveyID,
             })
             actions.setSurveyID(surveyID)
         },
         reportSurveySent: ({ surveyID, surveyResponse }) => {
-            // @note(zach): this is submitting to https://us.markettor.com/project/2/surveys/018b6e13-590c-0000-decb-c727a2b3f462?edit=true
+            // @note(zach): this is submitting to https://us.clairview.com/project/2/surveys/018b6e13-590c-0000-decb-c727a2b3f462?edit=true
             // $survey_response: open text response
             // $survey_response_1: this is the product type
             // $survey_response_2: list of reasons
             // The order is due to the form being built before reasons we're supported. Please do not change the order.
-            markettor.capture('survey sent', {
+            clairview.capture('survey sent', {
                 $survey_id: surveyID,
                 ...surveyResponse,
             })
             actions.setSurveyID('')
         },
         reportSurveyDismissed: ({ surveyID }) => {
-            markettor.capture('survey dismissed', {
+            clairview.capture('survey dismissed', {
                 $survey_id: surveyID,
             })
             actions.setSurveyID('')

@@ -1,4 +1,4 @@
-import { PluginEvent, ProcessedPluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent, ProcessedPluginEvent } from '@clairview/plugin-scaffold'
 import { ProducerRecord } from 'kafkajs'
 import { DateTime } from 'luxon'
 

@@ -10,10 +10,10 @@ pub struct Config {
     #[envconfig(default = "127.0.0.1:3001")]
     pub address: SocketAddr,
 
-    #[envconfig(default = "postgres://markettor:markettor@localhost:5432/markettor")]
+    #[envconfig(default = "postgres://clairview:clairview@localhost:5432/clairview")]
     pub write_database_url: String,
 
-    #[envconfig(default = "postgres://markettor:markettor@localhost:5432/markettor")]
+    #[envconfig(default = "postgres://clairview:clairview@localhost:5432/clairview")]
     pub read_database_url: String,
 
     #[envconfig(default = "1000")]
@@ -40,9 +40,9 @@ impl Config {
         Self {
             address: SocketAddr::from_str("127.0.0.1:0").unwrap(),
             redis_url: "redis://localhost:6379/".to_string(),
-            write_database_url: "postgres://markettor:markettor@localhost:5432/test_markettor"
+            write_database_url: "postgres://clairview:clairview@localhost:5432/test_clairview"
                 .to_string(),
-            read_database_url: "postgres://markettor:markettor@localhost:5432/test_markettor".to_string(),
+            read_database_url: "postgres://clairview:clairview@localhost:5432/test_clairview".to_string(),
             max_concurrency: 1000,
             max_pg_connections: 10,
             acquire_timeout_secs: 1,
@@ -81,11 +81,11 @@ mod tests {
         );
         assert_eq!(
             config.write_database_url,
-            "postgres://markettor:markettor@localhost:5432/markettor"
+            "postgres://clairview:clairview@localhost:5432/clairview"
         );
         assert_eq!(
             config.read_database_url,
-            "postgres://markettor:markettor@localhost:5432/markettor"
+            "postgres://clairview:clairview@localhost:5432/clairview"
         );
         assert_eq!(config.max_concurrency, 1000);
         assert_eq!(config.max_pg_connections, 10);
@@ -98,11 +98,11 @@ mod tests {
         assert_eq!(config.address, SocketAddr::from_str("127.0.0.1:0").unwrap());
         assert_eq!(
             config.write_database_url,
-            "postgres://markettor:markettor@localhost:5432/test_markettor"
+            "postgres://clairview:clairview@localhost:5432/test_clairview"
         );
         assert_eq!(
             config.read_database_url,
-            "postgres://markettor:markettor@localhost:5432/test_markettor"
+            "postgres://clairview:clairview@localhost:5432/test_clairview"
         );
         assert_eq!(config.max_concurrency, 1000);
         assert_eq!(config.max_pg_connections, 10);
@@ -115,11 +115,11 @@ mod tests {
         assert_eq!(config.address, SocketAddr::from_str("127.0.0.1:0").unwrap());
         assert_eq!(
             config.write_database_url,
-            "postgres://markettor:markettor@localhost:5432/test_markettor"
+            "postgres://clairview:clairview@localhost:5432/test_clairview"
         );
         assert_eq!(
             config.read_database_url,
-            "postgres://markettor:markettor@localhost:5432/test_markettor"
+            "postgres://clairview:clairview@localhost:5432/test_clairview"
         );
         assert_eq!(config.max_concurrency, 1000);
         assert_eq!(config.max_pg_connections, 10);

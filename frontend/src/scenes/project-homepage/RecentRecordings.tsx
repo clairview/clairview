@@ -64,7 +64,7 @@ export function RecentRecordings(): JSX.Element {
                               title: 'There are no recordings for this project',
                               description: 'Make sure you have the javascript snippet setup in your website.',
                               buttonText: 'Learn more',
-                              buttonTo: 'https://markettor.com/docs/user-guides/recordings',
+                              buttonTo: 'https://clairview.com/docs/user-guides/recordings',
                           }
                         : {
                               title: 'Recordings are not enabled for this project',

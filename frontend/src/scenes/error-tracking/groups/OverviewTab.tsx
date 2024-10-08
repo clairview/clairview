@@ -1,5 +1,5 @@
-import { PersonDisplay, TZLabel } from '@markettor/apps-common'
-import { LemonButton } from '@markettor/lemon-ui'
+import { PersonDisplay, TZLabel } from '@clairview/apps-common'
+import { LemonButton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { EmptyMessage } from 'lib/components/EmptyMessage/EmptyMessage'

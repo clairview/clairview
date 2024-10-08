@@ -1,4 +1,4 @@
-import { LemonTable, LemonTableColumn } from '@markettor/lemon-ui'
+import { LemonTable, LemonTableColumn } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { execHog } from 'lib/hog'
 import { lightenDarkenColor } from 'lib/utils'

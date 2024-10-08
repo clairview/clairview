@@ -103,7 +103,7 @@ export const EventDebugMenu = (): JSX.Element => {
                 </div>
             </ToolbarMenu.Body>
             <ToolbarMenu.Footer>
-                <span className="text-xs">View events from this page as they are sent to MarketTor.</span>
+                <span className="text-xs">View events from this page as they are sent to ClairView.</span>
             </ToolbarMenu.Footer>
         </ToolbarMenu>
     )

@@ -62,7 +62,7 @@ async function fetchAndInsertFreshMmdb(hub: Hub): Promise<ReaderModel> {
     const { db } = hub
 
     // TODO: use local GeoLite2 on container at share/GeoLite2-City.mmdb instead of downloading it each time
-    status.info('⏳', 'Downloading GeoLite2 database from MarketTor servers...')
+    status.info('⏳', 'Downloading GeoLite2 database from ClairView servers...')
     const response = await fetch(MMDB_ENDPOINT, { compress: false })
     const contentType = response.headers.get('content-type')
     const filename = response.headers.get('content-disposition')!.match(/filename="(.+)"/)![1]
@@ -73,7 +73,7 @@ async function fetchAndInsertFreshMmdb(hub: Hub): Promise<ReaderModel> {
     const newAttachmentResults = await db.postgres.query<PluginAttachmentDB>(
         PostgresUse.COMMON_WRITE,
         `
-        INSERT INTO markettor_pluginattachment (
+        INSERT INTO clairview_pluginattachment (
             key, content_type, file_name, file_size, contents, plugin_config_id, team_id
         ) VALUES ($1, $2, $3, $4, $5, NULL, NULL) RETURNING *
     `,
@@ -84,7 +84,7 @@ async function fetchAndInsertFreshMmdb(hub: Hub): Promise<ReaderModel> {
     await db.postgres.query(
         PostgresUse.COMMON_WRITE,
         `
-        DELETE FROM markettor_pluginattachment WHERE key = $1 AND id != $2
+        DELETE FROM clairview_pluginattachment WHERE key = $1 AND id != $2
     `,
         [MMDB_ATTACHMENT_KEY, newAttachmentResults.rows[0].id],
         'deleteGeoIpAttachment'
@@ -100,7 +100,7 @@ async function distributableFetchAndInsertFreshMmdb(hub: Hub): Promise<ReaderMod
     if (fetchingStatus === MMDBFileStatus.Unavailable) {
         status.info(
             '☹️',
-            'MMDB fetch and insert for GeoIP capabilities is currently unavailable in this MarketTor instance - IP location data may be stale or unavailable'
+            'MMDB fetch and insert for GeoIP capabilities is currently unavailable in this ClairView instance - IP location data may be stale or unavailable'
         )
         return null
     }
@@ -151,7 +151,7 @@ export async function prepareMmdb(hub: Hub, onlyBackground = false): Promise<Rea
         PostgresUse.COMMON_WRITE,
         `
             SELECT *
-            FROM markettor_pluginattachment
+            FROM clairview_pluginattachment
             WHERE key = $1
               AND plugin_config_id IS NULL
               AND team_id IS NULL
@@ -168,7 +168,7 @@ export async function prepareMmdb(hub: Hub, onlyBackground = false): Promise<Rea
         } else {
             const mmdb = await distributableFetchAndInsertFreshMmdb(hub)
             if (!mmdb) {
-                status.warn('🤒', 'Because of MMDB unavailability, GeoIP plugins will fail in this MarketTor instance')
+                status.warn('🤒', 'Because of MMDB unavailability, GeoIP plugins will fail in this ClairView instance')
             }
             return mmdb
         }

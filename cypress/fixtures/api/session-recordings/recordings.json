@@ -10,7 +10,7 @@
             "start_time": "2021-10-04T05:19:17.458000Z",
             "end_time": "2021-10-04T05:38:50.133000Z",
             "distinct_id": "Nr5jM7FCbz1XaBmFBmsny4NrDmU9y9lOx1Cb3c2DAAw",
-            "email": "test@markettor.com",
+            "email": "test@clairview.com",
             "click_count": 45,
             "keypress_count": 0,
             "person": {
@@ -24,7 +24,7 @@
                     "$initial_os": "Linux",
                     "$geoip_country_name": "Nigeria",
                     "$geoip_country_code": "NG",
-                    "email": "test@markettor.com"
+                    "email": "test@clairview.com"
                 }
             }
         },

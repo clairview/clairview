@@ -1,6 +1,6 @@
 import { actions, afterMount, kea, path, reducers } from 'kea'
 import { getAppContext } from 'lib/utils/getAppContext'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { AppContext } from '~/types'
 
@@ -12,7 +12,7 @@ export type FeatureFlagsSet = {
 const eventsNotified: Record<string, boolean> = {}
 function notifyFlagIfNeeded(flag: string, flagState: string | boolean | undefined): void {
     if (!eventsNotified[flag]) {
-        markettor.capture('$feature_flag_called', {
+        clairview.capture('$feature_flag_called', {
             $feature_flag: flag,
             $feature_flag_response: flagState === undefined ? false : flagState,
         })
@@ -92,6 +92,6 @@ export const featureFlagLogic = kea<featureFlagLogicType>([
         ],
     }),
     afterMount(({ actions }) => {
-        markettor.onFeatureFlags(actions.setFeatureFlags)
+        clairview.onFeatureFlags(actions.setFeatureFlags)
     }),
 ])

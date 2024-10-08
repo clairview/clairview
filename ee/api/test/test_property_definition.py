@@ -7,9 +7,9 @@ from rest_framework import status
 
 from ee.models.license import License, LicenseManager
 from ee.models.property_definition import EnterprisePropertyDefinition
-from markettor.models import EventProperty, Tag, ActivityLog
-from markettor.models.property_definition import PropertyDefinition
-from markettor.test.base import APIBaseTest
+from clairview.models import EventProperty, Tag, ActivityLog
+from clairview.models.property_definition import PropertyDefinition
+from clairview.test.base import APIBaseTest
 
 
 class TestPropertyDefinitionEnterpriseAPI(APIBaseTest):

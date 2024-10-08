@@ -1,4 +1,4 @@
-import { LemonButtonProps, LemonSelect } from '@markettor/lemon-ui'
+import { LemonButtonProps, LemonSelect } from '@clairview/lemon-ui'
 
 import { FilterLogicalOperator } from '~/types'
 

@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { LogLevel, PluginConfig } from '../../../../src/types'
 import { closeHub, createHub } from '../../../../src/utils/db/hub'
@@ -22,7 +22,7 @@ describe('user-agent tests', () => {
     test('should not process event when $userAgent is missing', async () => {
         const event = {
             properties: {
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -37,7 +37,7 @@ describe('user-agent tests', () => {
         const event = {
             properties: {
                 $useragent: '',
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -53,7 +53,7 @@ describe('user-agent tests', () => {
             properties: {
                 $useragent:
                     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15',
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -86,7 +86,7 @@ describe('user-agent tests', () => {
             properties: {
                 '$user-agent':
                     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15',
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -121,7 +121,7 @@ describe('user-agent tests', () => {
             properties: {
                 $user_agent:
                     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15',
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -159,7 +159,7 @@ describe('user-agent tests', () => {
             distinct_id: '91786645996505845983216505144491686624250709556909346823253562854100595129050',
             properties: {
                 $ip: '31.164.196.102',
-                $lib: 'markettor-python',
+                $lib: 'clairview-python',
                 $lib_version: '1.4.4',
                 $plugins_deferred: [],
                 $plugins_failed: [],
@@ -200,7 +200,7 @@ describe('user-agent tests', () => {
             distinct_id: '91786645996505845983216505144491686624250709556909346823253562854100595129050',
             properties: {
                 $ip: '31.164.196.102',
-                $lib: 'markettor-python',
+                $lib: 'clairview-python',
                 $lib_version: '1.4.4',
                 $plugins_deferred: [],
                 $plugins_failed: [],
@@ -242,7 +242,7 @@ describe('user-agent tests', () => {
                 $device: '',
                 $device_type: 'Desktop',
                 $useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0',
-                $lib: 'markettor-node',
+                $lib: 'clairview-node',
             },
         } as unknown as PluginEvent
 
@@ -267,7 +267,7 @@ describe('user-agent tests', () => {
                 properties: {
                     segment_userAgent:
                         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15',
-                    $lib: 'markettor-node',
+                    $lib: 'clairview-node',
                 },
             } as unknown as PluginEvent
 

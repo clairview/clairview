@@ -1,4 +1,4 @@
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { PropertiesTable } from 'lib/components/PropertiesTable'
 import { IconOpenInNew } from 'lib/lemon-ui/icons'
@@ -36,7 +36,7 @@ export function PersonPreview(props: PersonPreviewProps): JSX.Element | null {
                 <p>
                     Person profiles allow you to see a detailed view of a Person's user properties, track users across
                     devices, and more. To create person profiles, see{' '}
-                    <Link to="https://markettor.com/docs/data/persons#capturing-person-profiles">here.</Link>
+                    <Link to="https://clairview.com/docs/data/persons#capturing-person-profiles">here.</Link>
                 </p>
             </div>
         )

@@ -1,0 +1,1976 @@
+# serializer version: 1
+# name: TestInsight.test_insight_funnels_torql_breakdown
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT array(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', '')) AS value,
+         count(*) as count
+  FROM events e
+  INNER JOIN
+    (SELECT distinct_id,
+            argMax(person_id, version) as person_id
+     FROM person_distinct_id2
+     WHERE team_id = 2
+     GROUP BY distinct_id
+     HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+  INNER JOIN
+    (SELECT id,
+            argMax(properties, version) as person_props
+     FROM person
+     WHERE team_id = 2
+     GROUP BY id
+     HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON pdi.person_id = person.id
+  WHERE team_id = 2
+    AND event IN ['user did things', 'user signed up']
+    AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+    AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+    AND (and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1))
+  GROUP BY value
+  ORDER BY count DESC, value DESC
+  LIMIT 26
+  OFFSET 0
+  '''
+# ---
+# name: TestInsight.test_insight_funnels_torql_breakdown.1
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT countIf(steps = 1) step_1,
+         countIf(steps = 2) step_2,
+         avg(step_1_average_conversion_time_inner) step_1_average_conversion_time,
+         median(step_1_median_conversion_time_inner) step_1_median_conversion_time,
+         prop
+  FROM
+    (SELECT aggregation_target,
+            steps,
+            avg(step_1_conversion_time) step_1_average_conversion_time_inner,
+            median(step_1_conversion_time) step_1_median_conversion_time_inner ,
+            prop
+     FROM
+       (SELECT aggregation_target,
+               steps,
+               max(steps) over (PARTITION BY aggregation_target,
+                                             prop) as max_steps,
+                               step_1_conversion_time ,
+                               prop
+        FROM
+          (SELECT *,
+                  if(latest_0 <= latest_1
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, 2, 1) AS steps ,
+                  if(isNotNull(latest_1)
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, dateDiff('second', toDateTime(latest_0), toDateTime(latest_1)), NULL) step_1_conversion_time,
+                  prop
+           FROM
+             (SELECT aggregation_target, timestamp, step_0,
+                                                    latest_0,
+                                                    step_1,
+                                                    min(latest_1) over (PARTITION by aggregation_target,
+                                                                                     prop
+                                                                        ORDER BY timestamp DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 0 PRECEDING) latest_1 ,
+                                                                       prop
+              FROM
+                (SELECT *,
+                        if(notEmpty(arrayFilter(x -> notEmpty(x), prop_vals)), prop_vals, ['']) as prop
+                 FROM
+                   (SELECT e.timestamp as timestamp,
+                           if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as aggregation_target,
+                           if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as person_id,
+                           person.person_props as person_props,
+                           if(event = 'user signed up', 1, 0) as step_0,
+                           if(step_0 = 1, timestamp, null) as latest_0,
+                           if(event = 'user did things', 1, 0) as step_1,
+                           if(step_1 = 1, timestamp, null) as latest_1,
+                           array(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', '')) AS prop_basic,
+                           prop_basic as prop,
+                           argMinIf(prop, timestamp, notEmpty(arrayFilter(x -> notEmpty(x), prop))) over (PARTITION by aggregation_target) as prop_vals
+                    FROM events e
+                    LEFT OUTER JOIN
+                      (SELECT distinct_id,
+                              argMax(person_id, version) as person_id
+                       FROM person_distinct_id2
+                       WHERE team_id = 2
+                         AND distinct_id IN
+                           (SELECT distinct_id
+                            FROM events
+                            WHERE team_id = 2
+                              AND event IN ['user did things', 'user signed up']
+                              AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                              AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC') )
+                       GROUP BY distinct_id
+                       HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+                    INNER JOIN
+                      (SELECT id,
+                              argMax(properties, version) as person_props
+                       FROM person
+                       WHERE team_id = 2
+                       GROUP BY id
+                       HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+                    WHERE team_id = 2
+                      AND event IN ['user did things', 'user signed up']
+                      AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                      AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+                      AND (and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1))
+                      AND (step_0 = 1
+                           OR step_1 = 1) )))
+           WHERE step_0 = 1 ))
+     GROUP BY aggregation_target,
+              steps,
+              prop
+     HAVING steps = max_steps)
+  GROUP BY prop
+  '''
+# ---
+# name: TestInsight.test_insight_funnels_torql_global_filters
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT countIf(steps = 1) step_1,
+         countIf(steps = 2) step_2,
+         avg(step_1_average_conversion_time_inner) step_1_average_conversion_time,
+         median(step_1_median_conversion_time_inner) step_1_median_conversion_time
+  FROM
+    (SELECT aggregation_target,
+            steps,
+            avg(step_1_conversion_time) step_1_average_conversion_time_inner,
+            median(step_1_conversion_time) step_1_median_conversion_time_inner
+     FROM
+       (SELECT aggregation_target,
+               steps,
+               max(steps) over (PARTITION BY aggregation_target) as max_steps,
+                               step_1_conversion_time
+        FROM
+          (SELECT *,
+                  if(latest_0 <= latest_1
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, 2, 1) AS steps ,
+                  if(isNotNull(latest_1)
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, dateDiff('second', toDateTime(latest_0), toDateTime(latest_1)), NULL) step_1_conversion_time
+           FROM
+             (SELECT aggregation_target, timestamp, step_0,
+                                                    latest_0,
+                                                    step_1,
+                                                    min(latest_1) over (PARTITION by aggregation_target
+                                                                        ORDER BY timestamp DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 0 PRECEDING) latest_1
+              FROM
+                (SELECT e.timestamp as timestamp,
+                        if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as aggregation_target,
+                        if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as person_id,
+                        person.person_props as person_props,
+                        if(event = 'user signed up', 1, 0) as step_0,
+                        if(step_0 = 1, timestamp, null) as latest_0,
+                        if(event = 'user did things', 1, 0) as step_1,
+                        if(step_1 = 1, timestamp, null) as latest_1
+                 FROM events e
+                 LEFT OUTER JOIN
+                   (SELECT distinct_id,
+                           argMax(person_id, version) as person_id
+                    FROM person_distinct_id2
+                    WHERE team_id = 2
+                      AND distinct_id IN
+                        (SELECT distinct_id
+                         FROM events
+                         WHERE team_id = 2
+                           AND event IN ['user did things', 'user signed up']
+                           AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                           AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC') )
+                    GROUP BY distinct_id
+                    HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+                 INNER JOIN
+                   (SELECT id,
+                           argMax(properties, version) as person_props
+                    FROM person
+                    WHERE team_id = 2
+                    GROUP BY id
+                    HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+                 WHERE team_id = 2
+                   AND event IN ['user did things', 'user signed up']
+                   AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                   AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+                   AND ((and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1))
+                        AND (ifNull(like(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', ''), '%fish%'), 0)))
+                   AND (step_0 = 1
+                        OR step_1 = 1) ))
+           WHERE step_0 = 1 ))
+     GROUP BY aggregation_target,
+              steps
+     HAVING steps = max_steps)
+  '''
+# ---
+# name: TestInsight.test_insight_funnels_torql_local_filters
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT countIf(steps = 1) step_1,
+         countIf(steps = 2) step_2,
+         avg(step_1_average_conversion_time_inner) step_1_average_conversion_time,
+         median(step_1_median_conversion_time_inner) step_1_median_conversion_time
+  FROM
+    (SELECT aggregation_target,
+            steps,
+            avg(step_1_conversion_time) step_1_average_conversion_time_inner,
+            median(step_1_conversion_time) step_1_median_conversion_time_inner
+     FROM
+       (SELECT aggregation_target,
+               steps,
+               max(steps) over (PARTITION BY aggregation_target) as max_steps,
+                               step_1_conversion_time
+        FROM
+          (SELECT *,
+                  if(latest_0 <= latest_1
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, 2, 1) AS steps ,
+                  if(isNotNull(latest_1)
+                     AND latest_1 <= latest_0 + INTERVAL 14 DAY, dateDiff('second', toDateTime(latest_0), toDateTime(latest_1)), NULL) step_1_conversion_time
+           FROM
+             (SELECT aggregation_target, timestamp, step_0,
+                                                    latest_0,
+                                                    step_1,
+                                                    min(latest_1) over (PARTITION by aggregation_target
+                                                                        ORDER BY timestamp DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 0 PRECEDING) latest_1
+              FROM
+                (SELECT e.timestamp as timestamp,
+                        if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as aggregation_target,
+                        if(notEmpty(pdi.distinct_id), pdi.person_id, e.person_id) as person_id,
+                        person.person_props as person_props,
+                        if(event = 'user signed up'
+                           AND (and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1)
+                                AND ifNull(like(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', ''), '%fish%'), 0)), 1, 0) as step_0,
+                        if(step_0 = 1, timestamp, null) as latest_0,
+                        if(event = 'user did things'
+                           AND (and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1)
+                                AND ifNull(like(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', ''), '%fish%'), 0)), 1, 0) as step_1,
+                        if(step_1 = 1, timestamp, null) as latest_1
+                 FROM events e
+                 LEFT OUTER JOIN
+                   (SELECT distinct_id,
+                           argMax(person_id, version) as person_id
+                    FROM person_distinct_id2
+                    WHERE team_id = 2
+                      AND distinct_id IN
+                        (SELECT distinct_id
+                         FROM events
+                         WHERE team_id = 2
+                           AND event IN ['user did things', 'user signed up']
+                           AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                           AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC') )
+                    GROUP BY distinct_id
+                    HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+                 INNER JOIN
+                   (SELECT id,
+                           argMax(properties, version) as person_props
+                    FROM person
+                    WHERE team_id = 2
+                    GROUP BY id
+                    HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+                 WHERE team_id = 2
+                   AND event IN ['user did things', 'user signed up']
+                   AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+                   AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+                   AND (step_0 = 1
+                        OR step_1 = 1) ))
+           WHERE step_0 = 1 ))
+     GROUP BY aggregation_target,
+              steps
+     HAVING steps = max_steps)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_breakdown
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT if(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 'le%ss', 'more') AS value,
+         count(*) as count
+  FROM events e
+  WHERE team_id = 2
+    AND event = '$pageview'
+    AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+    AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+  GROUP BY value
+  ORDER BY count DESC, value DESC
+  LIMIT 26
+  OFFSET 0
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_breakdown.1
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total,
+         breakdown_value
+  FROM
+    (SELECT SUM(total) as count,
+            day_start,
+            breakdown_value
+     FROM
+       (SELECT *
+        FROM
+          (SELECT toUInt16(0) AS total,
+                  ticks.day_start as day_start,
+                  breakdown_value
+           FROM
+             (SELECT toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) as day_start
+              FROM numbers(8)
+              UNION ALL SELECT toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')) as day_start) as ticks
+           CROSS JOIN
+             (SELECT breakdown_value
+              FROM
+                (SELECT ['more', 'le%ss'] as breakdown_value) ARRAY
+              JOIN breakdown_value) as sec
+           ORDER BY breakdown_value,
+                    day_start
+           UNION ALL SELECT count(*) as total,
+                            toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) as day_start,
+                            transform(ifNull(nullIf(if(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 'le%ss', 'more'), ''), '$$_clairview_breakdown_null_$$'), (['more', 'le%ss']), (['more', 'le%ss']), '$$_clairview_breakdown_other_$$') as breakdown_value
+           FROM events e
+           WHERE e.team_id = 2
+             AND event = '$pageview'
+             AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+             AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+           GROUP BY day_start,
+                    breakdown_value))
+     GROUP BY day_start,
+              breakdown_value
+     ORDER BY breakdown_value,
+              day_start)
+  GROUP BY breakdown_value
+  ORDER BY breakdown_value
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_breakdown_materialized
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT if(ifNull(less(accurateCastOrNull(nullIf(nullIf(events.mat_int_value, ''), 'null'), 'Int64'), 10), 0), 'le%ss', 'more') AS value,
+         count(*) as count
+  FROM events e
+  WHERE team_id = 2
+    AND event = '$pageview'
+    AND toTimeZone(timestamp, 'UTC') >= toDateTime('2012-01-08 00:00:00', 'UTC')
+    AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+  GROUP BY value
+  ORDER BY count DESC, value DESC
+  LIMIT 26
+  OFFSET 0
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_breakdown_materialized.1
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total,
+         breakdown_value
+  FROM
+    (SELECT SUM(total) as count,
+            day_start,
+            breakdown_value
+     FROM
+       (SELECT *
+        FROM
+          (SELECT toUInt16(0) AS total,
+                  ticks.day_start as day_start,
+                  breakdown_value
+           FROM
+             (SELECT toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) as day_start
+              FROM numbers(8)
+              UNION ALL SELECT toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')) as day_start) as ticks
+           CROSS JOIN
+             (SELECT breakdown_value
+              FROM
+                (SELECT ['more', 'le%ss'] as breakdown_value) ARRAY
+              JOIN breakdown_value) as sec
+           ORDER BY breakdown_value,
+                    day_start
+           UNION ALL SELECT count(*) as total,
+                            toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) as day_start,
+                            transform(ifNull(nullIf(if(ifNull(less(accurateCastOrNull(nullIf(nullIf(events.mat_int_value, ''), 'null'), 'Int64'), 10), 0), 'le%ss', 'more'), ''), '$$_clairview_breakdown_null_$$'), (['more', 'le%ss']), (['more', 'le%ss']), '$$_clairview_breakdown_other_$$') as breakdown_value
+           FROM events e
+           WHERE e.team_id = 2
+             AND event = '$pageview'
+             AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+             AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+           GROUP BY day_start,
+                    breakdown_value))
+     GROUP BY day_start,
+              breakdown_value
+     ORDER BY breakdown_value,
+              day_start)
+  GROUP BY breakdown_value
+  ORDER BY breakdown_value
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_global_filters
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_global_filters.1
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        LEFT OUTER JOIN
+          (SELECT distinct_id,
+                  argMax(person_id, version) as person_id
+           FROM person_distinct_id2
+           WHERE team_id = 2
+             AND distinct_id IN
+               (SELECT distinct_id
+                FROM events
+                WHERE team_id = 2
+                  AND event = '$pageview'
+                  AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+                  AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC'))
+           GROUP BY distinct_id
+           HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+        INNER JOIN
+          (SELECT id,
+                  argMax(properties, version) as person_props
+           FROM person
+           WHERE team_id = 2
+           GROUP BY id
+           HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+          AND ((and(ifNull(greater(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1))
+               AND (ifNull(like(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', ''), '%fish%'), 0)))
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_global_filters_materialized
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_global_filters_materialized.1
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        LEFT OUTER JOIN
+          (SELECT distinct_id,
+                  argMax(person_id, version) as person_id
+           FROM person_distinct_id2
+           WHERE team_id = 2
+             AND distinct_id IN
+               (SELECT distinct_id
+                FROM events
+                WHERE team_id = 2
+                  AND event = '$pageview'
+                  AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+                  AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC'))
+           GROUP BY distinct_id
+           HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+        INNER JOIN
+          (SELECT id,
+                  argMax(pmat_fish, version) as pmat_fish
+           FROM person
+           WHERE team_id = 2
+           GROUP BY id
+           HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+          AND ((and(ifNull(greater(accurateCastOrNull(nullIf(nullIf(events.mat_int_value, ''), 'null'), 'Int64'), 10), 0), 1))
+               AND (ifNull(like(nullIf(nullIf(pmat_fish, ''), 'null'), '%fish%'), 0)))
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_local_filters
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        LEFT OUTER JOIN
+          (SELECT distinct_id,
+                  argMax(person_id, version) as person_id
+           FROM person_distinct_id2
+           WHERE team_id = 2
+             AND distinct_id IN
+               (SELECT distinct_id
+                FROM events
+                WHERE team_id = 2
+                  AND event = '$pageview'
+                  AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+                  AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC'))
+           GROUP BY distinct_id
+           HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+        INNER JOIN
+          (SELECT id,
+                  argMax(properties, version) as person_props
+           FROM person
+           WHERE team_id = 2
+           GROUP BY id
+           HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+          AND (and(ifNull(less(accurateCastOrNull(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'int_value'), ''), 'null'), '^"|"$', ''), 'Int64'), 10), 0), 1)
+               AND ifNull(like(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, 'fish'), ''), 'null'), '^"|"$', ''), '%fish%'), 0))
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_insight_trend_torql_local_filters_materialized
+  '''
+  /* user_id:0 request:_snapshot_ */
+  SELECT groupArray(day_start) as date,
+         groupArray(count) AS total
+  FROM
+    (SELECT SUM(total) AS count,
+            day_start
+     FROM
+       (SELECT toUInt16(0) AS total,
+               toStartOfDay(toDateTime('2012-01-15 23:59:59', 'UTC')) - toIntervalDay(number) AS day_start
+        FROM numbers(dateDiff('day', toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), toDateTime('2012-01-15 23:59:59', 'UTC')))
+        UNION ALL SELECT toUInt16(0) AS total,
+                         toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC'))
+        UNION ALL SELECT count(*) AS total,
+                         toStartOfDay(toTimeZone(toDateTime(timestamp, 'UTC'), 'UTC')) AS date
+        FROM events e
+        LEFT OUTER JOIN
+          (SELECT distinct_id,
+                  argMax(person_id, version) as person_id
+           FROM person_distinct_id2
+           WHERE team_id = 2
+             AND distinct_id IN
+               (SELECT distinct_id
+                FROM events
+                WHERE team_id = 2
+                  AND event = '$pageview'
+                  AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+                  AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC'))
+           GROUP BY distinct_id
+           HAVING argMax(is_deleted, version) = 0) AS pdi ON e.distinct_id = pdi.distinct_id
+        INNER JOIN
+          (SELECT id,
+                  argMax(pmat_fish, version) as pmat_fish
+           FROM person
+           WHERE team_id = 2
+           GROUP BY id
+           HAVING max(is_deleted) = 0 SETTINGS optimize_aggregation_in_order = 1) person ON person.id = pdi.person_id
+        WHERE team_id = 2
+          AND event = '$pageview'
+          AND toTimeZone(timestamp, 'UTC') >= toDateTime(toStartOfDay(toDateTime('2012-01-08 00:00:00', 'UTC')), 'UTC')
+          AND toTimeZone(timestamp, 'UTC') <= toDateTime('2012-01-15 23:59:59', 'UTC')
+          AND (and(ifNull(less(accurateCastOrNull(nullIf(nullIf(events.mat_int_value, ''), 'null'), 'Int64'), 10), 0), 1)
+               AND ifNull(like(nullIf(nullIf(pmat_fish, ''), 'null'), '%fish%'), 0))
+        GROUP BY date)
+     GROUP BY day_start
+     ORDER BY day_start)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.1
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.10
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.11
+  '''
+  SELECT "clairview_dashboardtile"."id",
+         "clairview_dashboardtile"."dashboard_id",
+         "clairview_dashboardtile"."insight_id",
+         "clairview_dashboardtile"."text_id",
+         "clairview_dashboardtile"."layouts",
+         "clairview_dashboardtile"."color",
+         "clairview_dashboardtile"."filters_hash",
+         "clairview_dashboardtile"."last_refresh",
+         "clairview_dashboardtile"."refreshing",
+         "clairview_dashboardtile"."refresh_attempt",
+         "clairview_dashboardtile"."deleted"
+  FROM "clairview_dashboardtile"
+  WHERE "clairview_dashboardtile"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.12
+  '''
+  SELECT "clairview_dashboarditem"."id",
+         "clairview_dashboarditem"."name",
+         "clairview_dashboarditem"."derived_name",
+         "clairview_dashboarditem"."description",
+         "clairview_dashboarditem"."team_id",
+         "clairview_dashboarditem"."filters",
+         "clairview_dashboarditem"."filters_hash",
+         "clairview_dashboarditem"."query",
+         "clairview_dashboarditem"."order",
+         "clairview_dashboarditem"."deleted",
+         "clairview_dashboarditem"."saved",
+         "clairview_dashboarditem"."created_at",
+         "clairview_dashboarditem"."refreshing",
+         "clairview_dashboarditem"."created_by_id",
+         "clairview_dashboarditem"."is_sample",
+         "clairview_dashboarditem"."short_id",
+         "clairview_dashboarditem"."favorited",
+         "clairview_dashboarditem"."refresh_attempt",
+         "clairview_dashboarditem"."last_modified_at",
+         "clairview_dashboarditem"."last_modified_by_id",
+         "clairview_dashboarditem"."dashboard_id",
+         "clairview_dashboarditem"."last_refresh",
+         "clairview_dashboarditem"."layouts",
+         "clairview_dashboarditem"."color",
+         "clairview_dashboarditem"."dive_dashboard_id",
+         "clairview_dashboarditem"."updated_at",
+         "clairview_dashboarditem"."deprecated_tags",
+         "clairview_dashboarditem"."tags"
+  FROM "clairview_dashboarditem"
+  WHERE "clairview_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.13
+  '''
+  SELECT "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared"
+  FROM "clairview_dashboard"
+  WHERE "clairview_dashboard"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.14
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.15
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.16
+  '''
+  SELECT "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared"
+  FROM "clairview_dashboard"
+  INNER JOIN "clairview_dashboardtile" ON ("clairview_dashboard"."id" = "clairview_dashboardtile"."dashboard_id")
+  WHERE (NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboardtile"."insight_id" = 2)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.17
+  '''
+  SELECT "clairview_dashboardtile"."id",
+         "clairview_dashboardtile"."dashboard_id",
+         "clairview_dashboardtile"."insight_id",
+         "clairview_dashboardtile"."text_id",
+         "clairview_dashboardtile"."layouts",
+         "clairview_dashboardtile"."color",
+         "clairview_dashboardtile"."filters_hash",
+         "clairview_dashboardtile"."last_refresh",
+         "clairview_dashboardtile"."refreshing",
+         "clairview_dashboardtile"."refresh_attempt",
+         "clairview_dashboardtile"."deleted"
+  FROM "clairview_dashboardtile"
+  INNER JOIN "clairview_dashboard" ON ("clairview_dashboardtile"."dashboard_id" = "clairview_dashboard"."id")
+  WHERE (NOT ("clairview_dashboardtile"."deleted"
+              AND "clairview_dashboardtile"."deleted" IS NOT NULL)
+         AND NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboardtile"."insight_id" = 2)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.18
+  '''
+  SELECT "clairview_dashboardtile"."dashboard_id"
+  FROM "clairview_dashboardtile"
+  INNER JOIN "clairview_dashboard" ON ("clairview_dashboardtile"."dashboard_id" = "clairview_dashboard"."id")
+  WHERE (NOT ("clairview_dashboardtile"."deleted"
+              AND "clairview_dashboardtile"."deleted" IS NOT NULL)
+         AND NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboardtile"."insight_id" = 2)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.19
+  '''
+  SELECT "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared"
+  FROM "clairview_dashboard"
+  WHERE (NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboard"."id" IN (1,
+                                          2,
+                                          3,
+                                          4,
+                                          5 /* ... */))
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.2
+  '''
+  SELECT "clairview_organizationmembership"."id",
+         "clairview_organizationmembership"."organization_id",
+         "clairview_organizationmembership"."user_id",
+         "clairview_organizationmembership"."level",
+         "clairview_organizationmembership"."joined_at",
+         "clairview_organizationmembership"."updated_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organizationmembership"
+  INNER JOIN "clairview_organization" ON ("clairview_organizationmembership"."organization_id" = "clairview_organization"."id")
+  WHERE "clairview_organizationmembership"."user_id" = 2
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.20
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_dashboarditem"
+  WHERE NOT ("clairview_dashboarditem"."deleted")
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.21
+  '''
+  SELECT "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in"
+  FROM "clairview_user"
+  WHERE "clairview_user"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.22
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.23
+  '''
+  SELECT "clairview_organizationmembership"."id",
+         "clairview_organizationmembership"."organization_id",
+         "clairview_organizationmembership"."user_id",
+         "clairview_organizationmembership"."level",
+         "clairview_organizationmembership"."joined_at",
+         "clairview_organizationmembership"."updated_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organizationmembership"
+  INNER JOIN "clairview_organization" ON ("clairview_organizationmembership"."organization_id" = "clairview_organization"."id")
+  WHERE "clairview_organizationmembership"."user_id" = 2
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.24
+  '''
+  SELECT "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_organization"
+  WHERE "clairview_organization"."id" = '00000000-0000-0000-0000-000000000000'::uuid
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.25
+  '''
+  SELECT COUNT(*) AS "__count"
+  FROM "clairview_dashboarditem"
+  INNER JOIN "clairview_team" ON ("clairview_dashboarditem"."team_id" = "clairview_team"."id")
+  WHERE (NOT ("clairview_dashboarditem"."deleted")
+         AND "clairview_team"."project_id" = 2)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.26
+  '''
+  SELECT "clairview_dashboarditem"."id",
+         "clairview_dashboarditem"."name",
+         "clairview_dashboarditem"."derived_name",
+         "clairview_dashboarditem"."description",
+         "clairview_dashboarditem"."team_id",
+         "clairview_dashboarditem"."filters",
+         "clairview_dashboarditem"."filters_hash",
+         "clairview_dashboarditem"."query",
+         "clairview_dashboarditem"."order",
+         "clairview_dashboarditem"."deleted",
+         "clairview_dashboarditem"."saved",
+         "clairview_dashboarditem"."created_at",
+         "clairview_dashboarditem"."refreshing",
+         "clairview_dashboarditem"."created_by_id",
+         "clairview_dashboarditem"."is_sample",
+         "clairview_dashboarditem"."short_id",
+         "clairview_dashboarditem"."favorited",
+         "clairview_dashboarditem"."refresh_attempt",
+         "clairview_dashboarditem"."last_modified_at",
+         "clairview_dashboarditem"."last_modified_by_id",
+         "clairview_dashboarditem"."dashboard_id",
+         "clairview_dashboarditem"."last_refresh",
+         "clairview_dashboarditem"."layouts",
+         "clairview_dashboarditem"."color",
+         "clairview_dashboarditem"."dive_dashboard_id",
+         "clairview_dashboarditem"."updated_at",
+         "clairview_dashboarditem"."deprecated_tags",
+         "clairview_dashboarditem"."tags",
+         "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at",
+         "clairview_user"."id",
+         "clairview_user"."password",
+         "clairview_user"."last_login",
+         "clairview_user"."first_name",
+         "clairview_user"."last_name",
+         "clairview_user"."is_staff",
+         "clairview_user"."is_active",
+         "clairview_user"."date_joined",
+         "clairview_user"."uuid",
+         "clairview_user"."current_organization_id",
+         "clairview_user"."current_team_id",
+         "clairview_user"."email",
+         "clairview_user"."pending_email",
+         "clairview_user"."temporary_token",
+         "clairview_user"."distinct_id",
+         "clairview_user"."is_email_verified",
+         "clairview_user"."requested_password_reset_at",
+         "clairview_user"."has_seen_product_intro_for",
+         "clairview_user"."strapi_id",
+         "clairview_user"."theme_mode",
+         "clairview_user"."partial_notification_settings",
+         "clairview_user"."anonymize_data",
+         "clairview_user"."toolbar_mode",
+         "clairview_user"."hedgehog_config",
+         "clairview_user"."events_column_config",
+         "clairview_user"."email_opt_in",
+         T5."id",
+         T5."password",
+         T5."last_login",
+         T5."first_name",
+         T5."last_name",
+         T5."is_staff",
+         T5."is_active",
+         T5."date_joined",
+         T5."uuid",
+         T5."current_organization_id",
+         T5."current_team_id",
+         T5."email",
+         T5."pending_email",
+         T5."temporary_token",
+         T5."distinct_id",
+         T5."is_email_verified",
+         T5."requested_password_reset_at",
+         T5."has_seen_product_intro_for",
+         T5."strapi_id",
+         T5."theme_mode",
+         T5."partial_notification_settings",
+         T5."anonymize_data",
+         T5."toolbar_mode",
+         T5."hedgehog_config",
+         T5."events_column_config",
+         T5."email_opt_in"
+  FROM "clairview_dashboarditem"
+  INNER JOIN "clairview_team" ON ("clairview_dashboarditem"."team_id" = "clairview_team"."id")
+  LEFT OUTER JOIN "clairview_user" ON ("clairview_dashboarditem"."created_by_id" = "clairview_user"."id")
+  LEFT OUTER JOIN "clairview_user" T5 ON ("clairview_dashboarditem"."last_modified_by_id" = T5."id")
+  WHERE (NOT ("clairview_dashboarditem"."deleted")
+         AND "clairview_team"."project_id" = 2)
+  ORDER BY "clairview_dashboarditem"."order" ASC
+  LIMIT 100
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.27
+  '''
+  SELECT ("clairview_dashboardtile"."insight_id") AS "_prefetch_related_val_insight_id",
+         "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared",
+         "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_dashboard"
+  INNER JOIN "clairview_dashboardtile" ON ("clairview_dashboard"."id" = "clairview_dashboardtile"."dashboard_id")
+  INNER JOIN "clairview_team" ON ("clairview_dashboard"."team_id" = "clairview_team"."id")
+  INNER JOIN "clairview_organization" ON ("clairview_team"."organization_id" = "clairview_organization"."id")
+  WHERE (NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboardtile"."insight_id" IN (1,
+                                                      2,
+                                                      3,
+                                                      4,
+                                                      5 /* ... */))
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.28
+  '''
+  SELECT "clairview_dashboardtile"."id",
+         "clairview_dashboardtile"."dashboard_id",
+         "clairview_dashboardtile"."insight_id",
+         "clairview_dashboardtile"."text_id",
+         "clairview_dashboardtile"."layouts",
+         "clairview_dashboardtile"."color",
+         "clairview_dashboardtile"."filters_hash",
+         "clairview_dashboardtile"."last_refresh",
+         "clairview_dashboardtile"."refreshing",
+         "clairview_dashboardtile"."refresh_attempt",
+         "clairview_dashboardtile"."deleted",
+         "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared",
+         "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at",
+         "clairview_organization"."id",
+         "clairview_organization"."name",
+         "clairview_organization"."slug",
+         "clairview_organization"."logo_media_id",
+         "clairview_organization"."created_at",
+         "clairview_organization"."updated_at",
+         "clairview_organization"."plugins_access_level",
+         "clairview_organization"."for_internal_metrics",
+         "clairview_organization"."is_member_join_email_enabled",
+         "clairview_organization"."enforce_2fa",
+         "clairview_organization"."is_hipaa",
+         "clairview_organization"."customer_id",
+         "clairview_organization"."available_product_features",
+         "clairview_organization"."usage",
+         "clairview_organization"."never_drop_data",
+         "clairview_organization"."customer_trust_scores",
+         "clairview_organization"."setup_section_2_completed",
+         "clairview_organization"."personalization",
+         "clairview_organization"."domain_whitelist"
+  FROM "clairview_dashboardtile"
+  INNER JOIN "clairview_dashboard" ON ("clairview_dashboardtile"."dashboard_id" = "clairview_dashboard"."id")
+  INNER JOIN "clairview_team" ON ("clairview_dashboard"."team_id" = "clairview_team"."id")
+  INNER JOIN "clairview_organization" ON ("clairview_team"."organization_id" = "clairview_organization"."id")
+  WHERE (NOT ("clairview_dashboardtile"."deleted"
+              AND "clairview_dashboardtile"."deleted" IS NOT NULL)
+         AND NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboardtile"."insight_id" IN (1,
+                                                      2,
+                                                      3,
+                                                      4,
+                                                      5 /* ... */))
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.29
+  '''
+  SELECT "clairview_taggeditem"."id",
+         "clairview_taggeditem"."tag_id",
+         "clairview_taggeditem"."dashboard_id",
+         "clairview_taggeditem"."insight_id",
+         "clairview_taggeditem"."event_definition_id",
+         "clairview_taggeditem"."property_definition_id",
+         "clairview_taggeditem"."action_id",
+         "clairview_taggeditem"."feature_flag_id"
+  FROM "clairview_taggeditem"
+  WHERE "clairview_taggeditem"."insight_id" IN (1,
+                                              2,
+                                              3,
+                                              4,
+                                              5 /* ... */)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.3
+  '''
+  SELECT "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared"
+  FROM "clairview_dashboard"
+  WHERE (NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboard"."id" = 2)
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.30
+  '''
+  SELECT "clairview_taggeditem"."id",
+         "clairview_taggeditem"."tag_id",
+         "clairview_taggeditem"."dashboard_id",
+         "clairview_taggeditem"."insight_id",
+         "clairview_taggeditem"."event_definition_id",
+         "clairview_taggeditem"."property_definition_id",
+         "clairview_taggeditem"."action_id",
+         "clairview_taggeditem"."feature_flag_id"
+  FROM "clairview_taggeditem"
+  WHERE "clairview_taggeditem"."insight_id" IN (1,
+                                              2,
+                                              3,
+                                              4,
+                                              5 /* ... */)
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.4
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.5
+  '''
+  SELECT "clairview_dashboarditem"."id",
+         "clairview_dashboarditem"."name",
+         "clairview_dashboarditem"."derived_name",
+         "clairview_dashboarditem"."description",
+         "clairview_dashboarditem"."team_id",
+         "clairview_dashboarditem"."filters",
+         "clairview_dashboarditem"."filters_hash",
+         "clairview_dashboarditem"."query",
+         "clairview_dashboarditem"."order",
+         "clairview_dashboarditem"."deleted",
+         "clairview_dashboarditem"."saved",
+         "clairview_dashboarditem"."created_at",
+         "clairview_dashboarditem"."refreshing",
+         "clairview_dashboarditem"."created_by_id",
+         "clairview_dashboarditem"."is_sample",
+         "clairview_dashboarditem"."short_id",
+         "clairview_dashboarditem"."favorited",
+         "clairview_dashboarditem"."refresh_attempt",
+         "clairview_dashboarditem"."last_modified_at",
+         "clairview_dashboarditem"."last_modified_by_id",
+         "clairview_dashboarditem"."dashboard_id",
+         "clairview_dashboarditem"."last_refresh",
+         "clairview_dashboarditem"."layouts",
+         "clairview_dashboarditem"."color",
+         "clairview_dashboarditem"."dive_dashboard_id",
+         "clairview_dashboarditem"."updated_at",
+         "clairview_dashboarditem"."deprecated_tags",
+         "clairview_dashboarditem"."tags"
+  FROM "clairview_dashboarditem"
+  WHERE "clairview_dashboarditem"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.6
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.7
+  '''
+  SELECT "clairview_dashboard"."id",
+         "clairview_dashboard"."name",
+         "clairview_dashboard"."description",
+         "clairview_dashboard"."team_id",
+         "clairview_dashboard"."pinned",
+         "clairview_dashboard"."created_at",
+         "clairview_dashboard"."created_by_id",
+         "clairview_dashboard"."deleted",
+         "clairview_dashboard"."last_accessed_at",
+         "clairview_dashboard"."filters",
+         "clairview_dashboard"."creation_mode",
+         "clairview_dashboard"."restriction_level",
+         "clairview_dashboard"."deprecated_tags",
+         "clairview_dashboard"."tags",
+         "clairview_dashboard"."share_token",
+         "clairview_dashboard"."is_shared"
+  FROM "clairview_dashboard"
+  WHERE (NOT ("clairview_dashboard"."deleted")
+         AND "clairview_dashboard"."id" IN (1,
+                                          2,
+                                          3,
+                                          4,
+                                          5 /* ... */))
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.8
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---
+# name: TestInsight.test_listing_insights_does_not_nplus1.9
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid",
+         "clairview_team"."organization_id",
+         "clairview_team"."project_id",
+         "clairview_team"."api_token",
+         "clairview_team"."app_urls",
+         "clairview_team"."name",
+         "clairview_team"."slack_incoming_webhook",
+         "clairview_team"."created_at",
+         "clairview_team"."updated_at",
+         "clairview_team"."anonymize_ips",
+         "clairview_team"."completed_snippet_onboarding",
+         "clairview_team"."has_completed_onboarding_for",
+         "clairview_team"."ingested_event",
+         "clairview_team"."autocapture_opt_out",
+         "clairview_team"."autocapture_web_vitals_opt_in",
+         "clairview_team"."autocapture_web_vitals_allowed_metrics",
+         "clairview_team"."autocapture_exceptions_opt_in",
+         "clairview_team"."autocapture_exceptions_errors_to_ignore",
+         "clairview_team"."session_recording_opt_in",
+         "clairview_team"."session_recording_sample_rate",
+         "clairview_team"."session_recording_minimum_duration_milliseconds",
+         "clairview_team"."session_recording_linked_flag",
+         "clairview_team"."session_recording_network_payload_capture_config",
+         "clairview_team"."session_replay_config",
+         "clairview_team"."capture_console_log_opt_in",
+         "clairview_team"."capture_performance_opt_in",
+         "clairview_team"."surveys_opt_in",
+         "clairview_team"."heatmaps_opt_in",
+         "clairview_team"."session_recording_version",
+         "clairview_team"."signup_token",
+         "clairview_team"."is_demo",
+         "clairview_team"."access_control",
+         "clairview_team"."week_start_day",
+         "clairview_team"."inject_web_apps",
+         "clairview_team"."test_account_filters",
+         "clairview_team"."test_account_filters_default_checked",
+         "clairview_team"."path_cleaning_filters",
+         "clairview_team"."timezone",
+         "clairview_team"."data_attributes",
+         "clairview_team"."person_display_name_properties",
+         "clairview_team"."live_events_columns",
+         "clairview_team"."recording_domains",
+         "clairview_team"."primary_dashboard_id",
+         "clairview_team"."extra_settings",
+         "clairview_team"."modifiers",
+         "clairview_team"."correlation_config",
+         "clairview_team"."session_recording_retention_period_days",
+         "clairview_team"."plugins_opt_in",
+         "clairview_team"."opt_out_capture",
+         "clairview_team"."event_names",
+         "clairview_team"."event_names_with_usage",
+         "clairview_team"."event_properties",
+         "clairview_team"."event_properties_with_usage",
+         "clairview_team"."event_properties_numerical",
+         "clairview_team"."external_data_workspace_id",
+         "clairview_team"."external_data_workspace_last_synced_at"
+  FROM "clairview_team"
+  WHERE "clairview_team"."id" = 2
+  LIMIT 21
+  '''
+# ---

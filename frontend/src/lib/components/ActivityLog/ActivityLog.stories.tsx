@@ -21,7 +21,7 @@ const meta: Meta<typeof ActivityLog> = {
                 '/api/users/@me': () => [
                     200,
                     {
-                        email: 'test@markettor.com',
+                        email: 'test@clairview.com',
                         first_name: 'Test Hedgehog',
                         organization: {
                             ...organizationCurrent,
@@ -106,7 +106,7 @@ export function WithoutAuditLogsFeaure(): JSX.Element {
             '/api/users/@me': () => [
                 200,
                 {
-                    email: 'test@markettor.com',
+                    email: 'test@clairview.com',
                     first_name: 'Test Hedgehog',
                     organization: {
                         ...organizationCurrent,

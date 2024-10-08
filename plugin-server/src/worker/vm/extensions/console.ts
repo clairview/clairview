@@ -1,4 +1,4 @@
-import { ConsoleExtension } from '@markettor/plugin-scaffold'
+import { ConsoleExtension } from '@clairview/plugin-scaffold'
 
 import { Hub, PluginConfig, PluginLogEntrySource, PluginLogEntryType } from '../../../types'
 import { status } from '../../../utils/status'

@@ -1,4 +1,4 @@
-import { LemonBanner, Link } from '@markettor/lemon-ui'
+import { LemonBanner, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { apiHostOrigin } from 'lib/utils/apiHost'
@@ -9,14 +9,14 @@ export interface iOSSetupProps {
 }
 
 function IOSInstallCocoaPodsSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Ruby}>{'pod "MarketTor", "~> 3.0.0"'}</CodeSnippet>
+    return <CodeSnippet language={Language.Ruby}>{'pod "ClairView", "~> 3.0.0"'}</CodeSnippet>
 }
 
 function IOSInstallSPMSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Swift}>
             {`dependencies: [
-  .package(url: "https://github.com/MarketTor/markettor-ios.git", from: "3.0.0")
+  .package(url: "https://github.com/ClairView/clairview-ios.git", from: "3.0.0")
 ]`}
         </CodeSnippet>
     )
@@ -28,7 +28,7 @@ function IOSSetupSnippet({ includeReplay }: iOSSetupProps): JSX.Element {
     return (
         <CodeSnippet language={Language.Swift}>
             {`import Foundation
-import MarketTor
+import ClairView
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -36,11 +36,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let MARKETTOR_API_KEY = "${currentTeam?.api_token}"
         let MARKETTOR_HOST = "${apiHostOrigin()}"
 
-        let config = MarketTorConfig(apiKey: MARKETTOR_API_KEY, host: MARKETTOR_HOST)
+        let config = ClairViewConfig(apiKey: MARKETTOR_API_KEY, host: MARKETTOR_HOST)
         ${
             includeReplay
                 ? `
-        // check https://markettor.com/docs/session-replay/ios#installation
+        // check https://clairview.com/docs/session-replay/ios#installation
         // for more config and to learn about how we capture sessions on mobile
         // and what to expect
         config.sessionReplay = true
@@ -52,7 +52,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         config.sessionReplayConfig.screenshotMode = true`
                 : ''
         }
-        MarketTorSDK.shared.setup(config)
+        ClairViewSDK.shared.setup(config)
 
         return true
     }
@@ -66,13 +66,13 @@ export function SDKInstallIOSInstructions(props: iOSSetupProps): JSX.Element {
         <>
             {props.includeReplay ? (
                 <LemonBanner type="info">
-                    🚧 NOTE: <Link to="https://markettor.com/docs/session-replay/mobile">Mobile recording</Link> is
+                    🚧 NOTE: <Link to="https://clairview.com/docs/session-replay/mobile">Mobile recording</Link> is
                     currently in beta. We are keen to gather as much feedback as possible so if you try this out please
                     let us know. You can send feedback via the{' '}
-                    <Link to="https://us.markettor.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
+                    <Link to="https://us.clairview.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
                         in-app support panel
                     </Link>{' '}
-                    or one of our other <Link to="https://markettor.com/docs/support-options">support options</Link>.
+                    or one of our other <Link to="https://clairview.com/docs/support-options">support options</Link>.
                 </LemonBanner>
             ) : null}
             <h3>Install via CocoaPods</h3>
@@ -89,7 +89,7 @@ export function SDKInstallIOSTrackScreenInstructions(): JSX.Element {
     return (
         <>
             <p>
-                With <code>configuration.captureScreenViews</code> set as <code>true</code>, MarketTor will try to record
+                With <code>configuration.captureScreenViews</code> set as <code>true</code>, ClairView will try to record
                 all screen changes automatically.
             </p>
             <p>
@@ -97,7 +97,7 @@ export function SDKInstallIOSTrackScreenInstructions(): JSX.Element {
             </p>
             <CodeSnippet
                 language={Language.Swift}
-            >{`MarketTorSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])`}</CodeSnippet>
+            >{`ClairViewSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])`}</CodeSnippet>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { LemonSegmentedButton } from '@markettor/lemon-ui'
+import { LemonSegmentedButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { insightLogic } from 'scenes/insights/insightLogic'
 

@@ -4,12 +4,12 @@ from freezegun import freeze_time
 
 from ee.tasks.subscriptions.slack_subscriptions import send_slack_subscription_report
 from ee.tasks.test.subscriptions.subscriptions_test_factory import create_subscription
-from markettor.models.dashboard import Dashboard
-from markettor.models.exported_asset import ExportedAsset
-from markettor.models.insight import Insight
-from markettor.models.integration import Integration
-from markettor.models.subscription import Subscription
-from markettor.test.base import APIBaseTest
+from clairview.models.dashboard import Dashboard
+from clairview.models.exported_asset import ExportedAsset
+from clairview.models.insight import Insight
+from clairview.models.integration import Integration
+from clairview.models.subscription import Subscription
+from clairview.test.base import APIBaseTest
 
 
 @patch("ee.tasks.subscriptions.slack_subscriptions.SlackIntegration")
@@ -67,13 +67,13 @@ class TestSlackSubscriptionsTasks(APIBaseTest):
                 "elements": [
                     {
                         "type": "button",
-                        "text": {"type": "plain_text", "text": "View in MarketTor"},
-                        "url": "http://localhost:8000/insights/123456?utm_source=markettor&utm_campaign=subscription_report&utm_medium=slack",
+                        "text": {"type": "plain_text", "text": "View in ClairView"},
+                        "url": "http://localhost:8000/insights/123456?utm_source=clairview&utm_campaign=subscription_report&utm_medium=slack",
                     },
                     {
                         "type": "button",
                         "text": {"type": "plain_text", "text": "Manage Subscription"},
-                        "url": f"http://localhost:8000/insights/123456/subscriptions/{self.subscription.id}?utm_source=markettor&utm_campaign=subscription_report&utm_medium=slack",
+                        "url": f"http://localhost:8000/insights/123456/subscriptions/{self.subscription.id}?utm_source=clairview&utm_campaign=subscription_report&utm_medium=slack",
                     },
                 ],
             },
@@ -92,7 +92,7 @@ class TestSlackSubscriptionsTasks(APIBaseTest):
 
         assert (
             first_call["text"]
-            == "This channel has been subscribed to the Insight *My Test subscription* on MarketTor! 🎉\nThis subscription is sent every day. The next one will be sent on Wednesday February 02, 2022"
+            == "This channel has been subscribed to the Insight *My Test subscription* on ClairView! 🎉\nThis subscription is sent every day. The next one will be sent on Wednesday February 02, 2022"
         )
 
     def test_subscription_dashboard_delivery(self, MockSlackIntegration: MagicMock) -> None:
@@ -140,13 +140,13 @@ class TestSlackSubscriptionsTasks(APIBaseTest):
                 "elements": [
                     {
                         "type": "button",
-                        "text": {"type": "plain_text", "text": "View in MarketTor"},
-                        "url": f"http://localhost:8000/dashboard/{self.dashboard.id}?utm_source=markettor&utm_campaign=subscription_report&utm_medium=slack",
+                        "text": {"type": "plain_text", "text": "View in ClairView"},
+                        "url": f"http://localhost:8000/dashboard/{self.dashboard.id}?utm_source=clairview&utm_campaign=subscription_report&utm_medium=slack",
                     },
                     {
                         "type": "button",
                         "text": {"type": "plain_text", "text": "Manage Subscription"},
-                        "url": f"http://localhost:8000/dashboard/{self.dashboard.id}/subscriptions/{self.subscription.id}?utm_source=markettor&utm_campaign=subscription_report&utm_medium=slack",
+                        "url": f"http://localhost:8000/dashboard/{self.dashboard.id}/subscriptions/{self.subscription.id}?utm_source=clairview&utm_campaign=subscription_report&utm_medium=slack",
                     },
                 ],
             },
@@ -181,7 +181,7 @@ class TestSlackSubscriptionsTasks(APIBaseTest):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"Showing 3 of 10 Insights. <http://localhost:8000/dashboard/{self.dashboard.id}?utm_source=markettor&utm_campaign=subscription_report&utm_medium=slack|View the rest in MarketTor>",
+                    "text": f"Showing 3 of 10 Insights. <http://localhost:8000/dashboard/{self.dashboard.id}?utm_source=clairview&utm_campaign=subscription_report&utm_medium=slack|View the rest in ClairView>",
                 },
             }
         ]

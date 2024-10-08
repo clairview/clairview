@@ -6,8 +6,8 @@ from os.path import dirname
 
 from django.utils.timezone import now
 
-os.environ["MARKETTOR_DB_NAME"] = "markettor_test"
-os.environ["DJANGO_SETTINGS_MODULE"] = "markettor.settings"
+os.environ["MARKETTOR_DB_NAME"] = "clairview_test"
+os.environ["DJANGO_SETTINGS_MODULE"] = "clairview.settings"
 sys.path.append(dirname(dirname(dirname(__file__))))
 
 import django  # noqa: E402
@@ -15,9 +15,9 @@ import django  # noqa: E402
 django.setup()
 
 from ee.clickhouse.materialized_columns.columns import get_materialized_columns  # noqa: E402
-from markettor import client  # noqa: E402
-from markettor.clickhouse.query_tagging import reset_query_tags, tag_queries  # noqa: E402
-from markettor.models.utils import UUIDT  # noqa: E402
+from clairview import client  # noqa: E402
+from clairview.clickhouse.query_tagging import reset_query_tags, tag_queries  # noqa: E402
+from clairview.models.utils import UUIDT  # noqa: E402
 
 get_column = lambda rows, index: [row[index] for row in rows]
 

@@ -25,7 +25,7 @@ export async function createPluginActivityLog(
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
         `
-        INSERT INTO markettor_activitylog (id, team_id, organization_id, activity, item_id, detail, scope, is_system, created_at)
+        INSERT INTO clairview_activitylog (id, team_id, organization_id, activity, item_id, detail, scope, is_system, created_at)
         VALUES ($1, $2, $3, $4, $5, $6, 'PluginConfig', TRUE, NOW())
         `,
         [new UUIDT().toString(), teamObject.id, teamObject.organization_id, activity, pluginConfigId, details],

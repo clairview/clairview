@@ -1,5 +1,5 @@
-import { IconNotebook, IconPlus } from '@markettor/icons'
-import { LemonDivider, LemonDropdown, ProfilePicture } from '@markettor/lemon-ui'
+import { IconNotebook, IconPlus } from '@clairview/icons'
+import { LemonDivider, LemonDropdown, ProfilePicture } from '@clairview/lemon-ui'
 import { BuiltLogic, useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { IconWithCount } from 'lib/lemon-ui/icons'

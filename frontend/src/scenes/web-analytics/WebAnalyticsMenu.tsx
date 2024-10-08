@@ -1,4 +1,4 @@
-import { IconEllipsis, IconSearch } from '@markettor/icons'
+import { IconEllipsis, IconSearch } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonMenu } from 'lib/lemon-ui/LemonMenu'

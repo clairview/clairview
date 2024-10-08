@@ -1,13 +1,13 @@
 import pytest
 
 from ee.clickhouse.materialized_columns.columns import materialize
-from markettor.client import sync_execute
-from markettor.models.filters import Filter
-from markettor.models.team import Team
-from markettor.queries.person_query import PersonQuery
-from markettor.test.base import _create_person
-from markettor.models.cohort import Cohort
-from markettor.models.property import Property
+from clairview.client import sync_execute
+from clairview.models.filters import Filter
+from clairview.models.team import Team
+from clairview.queries.person_query import PersonQuery
+from clairview.test.base import _create_person
+from clairview.models.cohort import Cohort
+from clairview.models.property import Property
 
 
 def person_query(team: Team, filter: Filter, **kwargs):
@@ -30,12 +30,12 @@ def testdata(db, team):
     _create_person(
         distinct_ids=["1"],
         team_id=team.pk,
-        properties={"email": "tim@markettor.com", "$os": "windows", "$browser": "chrome"},
+        properties={"email": "tim@clairview.com", "$os": "windows", "$browser": "chrome"},
     )
     _create_person(
         distinct_ids=["2"],
         team_id=team.pk,
-        properties={"email": "marius@markettor.com", "$os": "Mac", "$browser": "firefox"},
+        properties={"email": "marius@clairview.com", "$os": "Mac", "$browser": "firefox"},
     )
     _create_person(
         distinct_ids=["3"],
@@ -61,7 +61,7 @@ def test_person_query(testdata, team, snapshot):
                 {
                     "key": "email",
                     "type": "person",
-                    "value": "markettor",
+                    "value": "clairview",
                     "operator": "icontains",
                 },
             ]
@@ -137,7 +137,7 @@ def test_person_query_with_multiple_cohorts(testdata, team, snapshot):
                 {
                     "key": "email",
                     "type": "person",
-                    "value": "markettor",
+                    "value": "clairview",
                     "operator": "icontains",
                 },
             ]
@@ -178,7 +178,7 @@ def test_person_query_with_anded_property_groups(testdata, team, snapshot):
                     {
                         "key": "email",
                         "type": "person",
-                        "value": "markettor",
+                        "value": "clairview",
                         "operator": "icontains",
                     },
                     {
@@ -214,7 +214,7 @@ def test_person_query_with_and_and_or_property_groups(testdata, team, snapshot):
                             {
                                 "key": "email",
                                 "type": "person",
-                                "value": "markettor",
+                                "value": "clairview",
                                 "operator": "icontains",
                             },
                             {
@@ -254,7 +254,7 @@ def test_person_query_with_extra_requested_fields(testdata, team, snapshot):
                 {
                     "key": "email",
                     "type": "person",
-                    "value": "markettor",
+                    "value": "clairview",
                     "operator": "icontains",
                 }
             ],
@@ -307,7 +307,7 @@ def test_person_query_with_extra_fields(testdata, team, snapshot):
                 {
                     "key": "email",
                     "type": "person",
-                    "value": "markettor",
+                    "value": "clairview",
                     "operator": "icontains",
                 }
             ]
@@ -355,7 +355,7 @@ def test_person_query_with_entity_filters_and_property_group_filters(testdata, t
                             {
                                 "key": "email",
                                 "type": "person",
-                                "value": "markettor",
+                                "value": "clairview",
                                 "operator": "icontains",
                             },
                             {

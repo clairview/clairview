@@ -1,8 +1,8 @@
-import markettorEE from '@markettor/ee/exports'
+import clairviewEE from '@clairview/ee/exports'
 import { EventType } from '@rrweb/types'
 import { ifEeDescribe } from 'lib/ee.test'
 
-import { MarketTorEE } from '../../../frontend/@markettor/ee/types'
+import { ClairViewEE } from '../../../frontend/@clairview/ee/types'
 import * as incrementalSnapshotJson from './__mocks__/increment-with-child-duplication.json'
 import { validateAgainstWebSchema, validateFromMobile } from './index'
 import { wireframe } from './mobile.types'
@@ -54,14 +54,14 @@ describe('replay/transform', () => {
     })
 
     ifEeDescribe('transform', () => {
-        let markettorEEModule: MarketTorEE
+        let clairviewEEModule: ClairViewEE
         beforeEach(async () => {
-            markettorEEModule = await markettorEE()
+            clairviewEEModule = await clairviewEE()
         })
 
         test('can process top level screenshot', () => {
             expect(
-                markettorEEModule.mobileReplay?.transformToWeb([
+                clairviewEEModule.mobileReplay?.transformToWeb([
                     {
                         data: { width: 300, height: 600 },
                         timestamp: 1,
@@ -94,7 +94,7 @@ describe('replay/transform', () => {
 
         test('can process screenshot mutation', () => {
             expect(
-                markettorEEModule.mobileReplay?.transformToWeb([
+                clairviewEEModule.mobileReplay?.transformToWeb([
                     {
                         data: { width: 300, height: 600 },
                         timestamp: 1,
@@ -131,7 +131,7 @@ describe('replay/transform', () => {
 
         test('can process unknown types without error', () => {
             expect(
-                markettorEEModule.mobileReplay?.transformToWeb([
+                clairviewEEModule.mobileReplay?.transformToWeb([
                     {
                         data: { width: 300, height: 600 },
                         timestamp: 1,
@@ -164,7 +164,7 @@ describe('replay/transform', () => {
         })
 
         test('can ignore unknown wireframe types', () => {
-            const unexpectedWireframeType = markettorEEModule.mobileReplay?.transformToWeb([
+            const unexpectedWireframeType = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: { screen: 'App Home Page', width: 300, height: 600 },
                     timestamp: 1,
@@ -191,7 +191,7 @@ describe('replay/transform', () => {
         })
 
         test('can short-circuit non-mobile full snapshot', () => {
-            const allWeb = markettorEEModule.mobileReplay?.transformToWeb([
+            const allWeb = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: { href: 'https://my-awesome.site', width: 300, height: 600 },
                     timestamp: 1,
@@ -209,7 +209,7 @@ describe('replay/transform', () => {
         })
 
         test('can convert images', () => {
-            const exampleWithImage = markettorEEModule.mobileReplay?.transformToWeb([
+            const exampleWithImage = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         screen: 'App Home Page',
@@ -263,7 +263,7 @@ describe('replay/transform', () => {
         })
 
         test('can convert rect with text', () => {
-            const exampleWithRectAndText = markettorEEModule.mobileReplay?.transformToWeb([
+            const exampleWithRectAndText = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         width: 300,
@@ -312,7 +312,7 @@ describe('replay/transform', () => {
         })
 
         test('child wireframes are processed', () => {
-            const textEvent = markettorEEModule.mobileReplay?.transformToWeb([
+            const textEvent = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: { screen: 'App Home Page', width: 300, height: 600 },
                     timestamp: 1,
@@ -395,7 +395,7 @@ describe('replay/transform', () => {
         })
 
         test('respect incremental ids, replace with body otherwise', () => {
-            const textEvent = markettorEEModule.mobileReplay?.transformToWeb([
+            const textEvent = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     windowId: 'ddc9c89d-2272-4b07-a280-c00db3a9182f',
                     data: {
@@ -429,13 +429,13 @@ describe('replay/transform', () => {
         })
 
         test('incremental mutations de-duplicate the tree', () => {
-            const conversion = markettorEEModule.mobileReplay?.transformEventToWeb(incrementalSnapshotJson)
+            const conversion = clairviewEEModule.mobileReplay?.transformEventToWeb(incrementalSnapshotJson)
             expect(conversion).toMatchSnapshot()
         })
 
         test('omitting x and y is equivalent to setting them to 0', () => {
             expect(
-                markettorEEModule.mobileReplay?.transformToWeb([
+                clairviewEEModule.mobileReplay?.transformToWeb([
                     {
                         type: 2,
                         data: {
@@ -455,7 +455,7 @@ describe('replay/transform', () => {
         })
 
         test('can convert status bar', () => {
-            const converted = markettorEEModule.mobileReplay?.transformToWeb([
+            const converted = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         width: 300,
@@ -511,7 +511,7 @@ describe('replay/transform', () => {
         })
 
         test('can convert navigation bar', () => {
-            const converted = markettorEEModule.mobileReplay?.transformToWeb([
+            const converted = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         width: 300,
@@ -551,7 +551,7 @@ describe('replay/transform', () => {
         })
 
         test('can convert invalid text wireframe', () => {
-            const converted = markettorEEModule.mobileReplay?.transformToWeb([
+            const converted = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         width: 300,
@@ -588,7 +588,7 @@ describe('replay/transform', () => {
         })
 
         test('can set background image to base64 png', () => {
-            const converted = markettorEEModule.mobileReplay?.transformToWeb([
+            const converted = clairviewEEModule.mobileReplay?.transformToWeb([
                 {
                     data: {
                         width: 300,
@@ -645,7 +645,7 @@ describe('replay/transform', () => {
         describe('inputs', () => {
             test('input gets 0 padding by default but can be overridden', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -676,7 +676,7 @@ describe('replay/transform', () => {
 
             test('buttons with nested elements', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -721,7 +721,7 @@ describe('replay/transform', () => {
             })
             test('wrapping with labels', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -742,7 +742,7 @@ describe('replay/transform', () => {
 
             test('web_view with URL', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -762,7 +762,7 @@ describe('replay/transform', () => {
 
             test('progress rating', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -785,7 +785,7 @@ describe('replay/transform', () => {
 
             test('open keyboard custom event', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         timestamp: 1,
                         type: EventType.Custom,
                         data: { tag: 'keyboard', payload: { open: true, height: 150 } },
@@ -795,7 +795,7 @@ describe('replay/transform', () => {
 
             test('isolated add mutation', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         timestamp: 1,
                         type: EventType.IncrementalSnapshot,
                         data: {
@@ -822,7 +822,7 @@ describe('replay/transform', () => {
 
             test('isolated remove mutation', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         timestamp: 1,
                         type: EventType.IncrementalSnapshot,
                         data: {
@@ -835,7 +835,7 @@ describe('replay/transform', () => {
 
             test('isolated update mutation', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         timestamp: 1,
                         type: EventType.IncrementalSnapshot,
                         data: {
@@ -864,7 +864,7 @@ describe('replay/transform', () => {
 
             test('closed keyboard custom event', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         timestamp: 1,
                         type: EventType.Custom,
                         data: { tag: 'keyboard', payload: { open: false } },
@@ -874,7 +874,7 @@ describe('replay/transform', () => {
 
             test('radio_group', () => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [
@@ -1185,7 +1185,7 @@ describe('replay/transform', () => {
                 },
             ])('$type - $inputType - $value', (testCase) => {
                 expect(
-                    markettorEEModule.mobileReplay?.transformEventToWeb({
+                    clairviewEEModule.mobileReplay?.transformEventToWeb({
                         type: 2,
                         data: {
                             wireframes: [testCase],

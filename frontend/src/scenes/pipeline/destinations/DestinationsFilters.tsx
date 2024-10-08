@@ -1,4 +1,4 @@
-import { LemonCheckbox, LemonInput, LemonSelect, Link } from '@markettor/lemon-ui'
+import { LemonCheckbox, LemonInput, LemonSelect, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 
 import { PipelineBackend } from '../types'

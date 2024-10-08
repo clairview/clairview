@@ -1,7 +1,7 @@
 import './FeatureFlagInstructions.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonCheckbox, LemonSelect, Link } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonCheckbox, LemonSelect, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { INSTANTLY_AVAILABLE_PROPERTIES } from 'lib/constants'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'

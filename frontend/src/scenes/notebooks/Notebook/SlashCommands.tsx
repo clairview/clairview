@@ -10,9 +10,9 @@ import {
     IconTrends,
     IconUpload,
     IconUserPaths,
-} from '@markettor/icons'
-import { IconCode } from '@markettor/icons'
-import { LemonButton, LemonDivider, lemonToast } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { IconCode } from '@clairview/icons'
+import { LemonButton, LemonDivider, lemonToast } from '@clairview/lemon-ui'
 import { Extension } from '@tiptap/core'
 import { ReactRenderer } from '@tiptap/react'
 import Suggestion from '@tiptap/suggestion'

@@ -121,7 +121,7 @@ impl AppContext {
             metrics::counter!(GROUP_TYPE_READS).increment(1);
 
             let found = sqlx::query_scalar!(
-                    "SELECT group_type_index FROM markettor_grouptypemapping WHERE group_type = $1 AND team_id = $2",
+                    "SELECT group_type_index FROM clairview_grouptypemapping WHERE group_type = $1 AND team_id = $2",
                     group_name,
                     update.team_id
                 )

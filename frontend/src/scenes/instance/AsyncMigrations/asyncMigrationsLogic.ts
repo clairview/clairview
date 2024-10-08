@@ -12,7 +12,7 @@ import { InstanceSetting } from '~/types'
 import type { asyncMigrationsLogicType } from './asyncMigrationsLogicType'
 export type TabName = 'overview' | 'internal_metrics'
 
-// keep in sync with MigrationStatus in markettor/models/async_migration.py
+// keep in sync with MigrationStatus in clairview/models/async_migration.py
 export enum AsyncMigrationStatus {
     NotStarted = 0,
     Running = 1,
@@ -55,8 +55,8 @@ export interface AsyncMigration {
     celery_task_id: string
     started_at: string
     finished_at: string
-    markettor_min_version: string
-    markettor_max_version: string
+    clairview_min_version: string
+    clairview_max_version: string
     error_count: number
     parameters: Record<string, number>
     parameter_definitions: Record<string, [string | number | null, string]>

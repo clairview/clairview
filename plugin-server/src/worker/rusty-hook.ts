@@ -1,4 +1,4 @@
-import { Webhook } from '@markettor/plugin-scaffold'
+import { Webhook } from '@clairview/plugin-scaffold'
 import * as Sentry from '@sentry/node'
 import fetch from 'node-fetch'
 

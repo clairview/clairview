@@ -1,5 +1,5 @@
 import { ApiError } from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { useMocks } from '~/mocks/jest'
 import { performQuery, queryExportContext } from '~/queries/query'
@@ -73,24 +73,24 @@ describe('query', () => {
     })
 
     it('emits an event when a query is run', async () => {
-        jest.spyOn(markettor, 'capture')
+        jest.spyOn(clairview, 'capture')
         const q: EventsQuery = {
             kind: NodeKind.EventsQuery,
             select: ['timestamp'],
             limit: 100,
         }
         await performQuery(q)
-        expect(markettor.capture).toHaveBeenCalledWith('query completed', { query: q, duration: expect.any(Number) })
+        expect(clairview.capture).toHaveBeenCalledWith('query completed', { query: q, duration: expect.any(Number) })
     })
 
     it('emits a specific event on a TorQLQuery', async () => {
-        jest.spyOn(markettor, 'capture')
+        jest.spyOn(clairview, 'capture')
         const q: TorQLQuery = {
             kind: NodeKind.TorQLQuery,
             query: 'select * from events',
         }
         await performQuery(q)
-        expect(markettor.capture).toHaveBeenCalledWith('query completed', {
+        expect(clairview.capture).toHaveBeenCalledWith('query completed', {
             query: q,
             duration: expect.any(Number),
             clickhouse_sql: expect.any(String),
@@ -98,7 +98,7 @@ describe('query', () => {
     })
 
     it('emits an event when a query errors', async () => {
-        jest.spyOn(markettor, 'capture')
+        jest.spyOn(clairview, 'capture')
         const q: EventsQuery = {
             kind: NodeKind.EventsQuery,
             select: ['error'],
@@ -108,6 +108,6 @@ describe('query', () => {
             await performQuery(q)
         }).rejects.toThrow(ApiError)
 
-        expect(markettor.capture).toHaveBeenCalledWith('query failed', { query: q, duration: expect.any(Number) })
+        expect(clairview.capture).toHaveBeenCalledWith('query failed', { query: q, duration: expect.any(Number) })
     })
 })

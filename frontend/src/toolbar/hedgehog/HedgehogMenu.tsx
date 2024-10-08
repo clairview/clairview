@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { useActions } from 'kea'
 import { HedgehogOptions } from 'lib/components/HedgehogBuddy/HedgehogOptions'
 

@@ -6,7 +6,7 @@
     },
     "listeners": {
         "*:8000": {
-            "pass": "applications/markettor"
+            "pass": "applications/clairview"
         },
         "*:8001": {
             "pass": "routes/metrics"
@@ -38,12 +38,12 @@
         ]
     },
     "applications": {
-        "markettor": {
+        "clairview": {
             "type": "python 3.11",
             "processes": $NGINX_UNIT_APP_PROCESSES,
             "working_directory": "/code",
             "path": ".",
-            "module": "markettor.$NGINX_UNIT_PYTHON_PROTOCOL",
+            "module": "clairview.$NGINX_UNIT_PYTHON_PROTOCOL",
             "protocol": "$NGINX_UNIT_PYTHON_PROTOCOL",
             "user": "nobody",
             "limits": {

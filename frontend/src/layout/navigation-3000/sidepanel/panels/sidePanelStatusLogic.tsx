@@ -76,15 +76,15 @@ export interface SPStatus {
     description: string
 }
 
-export const STATUS_PAGE_BASE = 'https://status.markettor.com'
+export const STATUS_PAGE_BASE = 'https://status.clairview.com'
 
 // NOTE: Test account with some incidents - ask @benjackwhite for access
-// export const STATUS_PAGE_BASE = 'https://markettortesting.statuspage.io'
+// export const STATUS_PAGE_BASE = 'https://clairviewtesting.statuspage.io'
 
 // Map the hostname to relevant groups (found via the summary.json endpoint)
 const RELEVANT_GROUPS_MAP = {
-    'us.markettor.com': ['41df083ftqt6', 'z0y6m9kyvy3j'],
-    'eu.markettor.com': ['c4d9jd1jcx3f', 'nfknrn2bf3yz'],
+    'us.clairview.com': ['41df083ftqt6', 'z0y6m9kyvy3j'],
+    'eu.clairview.com': ['c4d9jd1jcx3f', 'nfknrn2bf3yz'],
     localhost: ['f58xx1143yvt', 't3rdjq2z0x7p'], // localhost has IDs for the test status page - that way we really only show it if local dev and overridden to use the other status page
 }
 

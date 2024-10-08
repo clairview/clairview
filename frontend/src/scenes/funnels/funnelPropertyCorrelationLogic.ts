@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, connect, defaults, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { loaders } from 'kea-loaders'
 import api from 'lib/api'
@@ -14,7 +14,7 @@ import { appendToCorrelationConfig } from './funnelUtils'
 
 // List of events that should be excluded, if we don't have an explicit list of
 // excluded properties. Copied from
-// https://github.com/MarketTor/markettor/issues/6474#issuecomment-952044722
+// https://github.com/ClairView/clairview/issues/6474#issuecomment-952044722
 export const DEFAULT_EXCLUDED_PERSON_PROPERTIES = [
     '$initial_geoip_postal_code',
     '$initial_geoip_latitude',

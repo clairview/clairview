@@ -1,4 +1,4 @@
-import { IconCalendar } from '@markettor/icons'
+import { IconCalendar } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
 import { MemberSelect } from 'lib/components/MemberSelect'

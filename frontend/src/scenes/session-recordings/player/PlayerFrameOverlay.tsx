@@ -1,6 +1,6 @@
 import './PlayerFrameOverlay.scss'
 
-import { IconPlay } from '@markettor/icons'
+import { IconPlay } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { useFeatureFlag } from 'lib/hooks/useFeatureFlag'
@@ -43,7 +43,7 @@ const PlayerFrameOverlayContent = (): JSX.Element | null => {
                 </LemonButton>
                 <LemonButton
                     targetBlank
-                    to="https://markettor.com/support?utm_medium=in-product&utm_campaign=recording-not-found"
+                    to="https://clairview.com/support?utm_medium=in-product&utm_campaign=recording-not-found"
                     type="secondary"
                     fullWidth
                     center

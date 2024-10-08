@@ -7,7 +7,7 @@ import { toolbarConfigLogic } from '../toolbarConfigLogic'
 import { useMousePosition } from './useMousePosition'
 
 function ScrollDepthMouseInfo(): JSX.Element | null {
-    const { markettor } = useValues(toolbarConfigLogic)
+    const { clairview } = useValues(toolbarConfigLogic)
     const { heatmapElements, rawHeatmapLoading, shiftPressed } = useValues(heatmapLogic)
 
     const { y: mouseY } = useMousePosition()
@@ -16,7 +16,7 @@ function ScrollDepthMouseInfo(): JSX.Element | null {
         return null
     }
 
-    const scrollOffset = (markettor as any).scrollManager.scrollY()
+    const scrollOffset = (clairview as any).scrollManager.scrollY()
     const scrolledMouseY = mouseY + scrollOffset
 
     const elementInMouseY = heatmapElements.find((x, i) => {
@@ -57,7 +57,7 @@ function ScrollDepthMouseInfo(): JSX.Element | null {
 }
 
 export function ScrollDepth(): JSX.Element | null {
-    const { markettor } = useValues(toolbarConfigLogic)
+    const { clairview } = useValues(toolbarConfigLogic)
 
     const { heatmapEnabled, heatmapFilters, heatmapElements, scrollDepthMarkettorJsError, heatmapColorPalette } =
         useValues(heatmapLogic)
@@ -70,7 +70,7 @@ export function ScrollDepth(): JSX.Element | null {
         return null
     }
 
-    const scrollOffset = (markettor as any).scrollManager.scrollY()
+    const scrollOffset = (clairview as any).scrollManager.scrollY()
 
     // We want to have a fading color from red to orange to green to blue to grey, fading from the highest count to the lowest
     const maxCount = heatmapElements[0]?.count ?? 0

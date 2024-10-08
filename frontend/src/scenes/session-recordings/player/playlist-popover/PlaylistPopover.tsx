@@ -1,5 +1,5 @@
-import { IconPin, IconPlus } from '@markettor/icons'
-import { LemonCheckbox, LemonDivider } from '@markettor/lemon-ui'
+import { IconPin, IconPlus } from '@clairview/icons'
+import { LemonCheckbox, LemonDivider } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { IconOpenInNew, IconWithCount } from 'lib/lemon-ui/icons'

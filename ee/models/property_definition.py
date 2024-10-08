@@ -1,18 +1,18 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from markettor.models.property_definition import PropertyDefinition
+from clairview.models.property_definition import PropertyDefinition
 
 
 class EnterprisePropertyDefinition(PropertyDefinition):
     description = models.TextField(blank=True, null=True, default="")
     updated_at = models.DateTimeField(auto_now=True)
-    updated_by = models.ForeignKey("markettor.User", null=True, on_delete=models.SET_NULL, blank=True)
+    updated_by = models.ForeignKey("clairview.User", null=True, on_delete=models.SET_NULL, blank=True)
 
     verified = models.BooleanField(default=False, blank=True)
     verified_at = models.DateTimeField(null=True, blank=True)
     verified_by = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         null=True,
         on_delete=models.SET_NULL,
         blank=True,

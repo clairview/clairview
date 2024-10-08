@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'
@@ -13,7 +13,7 @@ function AndroidInstallSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Kotlin}>
             {`dependencies {
-    implementation("com.markettor:markettor-android:3.+")
+    implementation("com.clairview:clairview-android:3.+")
 }`}
         </CodeSnippet>
     )
@@ -34,15 +34,15 @@ function AndroidSetupSnippet({ includeReplay }: AndroidSetupProps): JSX.Element 
     override fun onCreate() {
         super.onCreate()
 
-        // Create a MarketTor Config with the given API key and host
-        val config = MarketTorAndroidConfig(
+        // Create a ClairView Config with the given API key and host
+        val config = ClairViewAndroidConfig(
             apiKey = MARKETTOR_API_KEY,
             host = MARKETTOR_HOST
         )
         ${
             includeReplay
                 ? `
-        // check https://markettor.com/docs/session-replay/android#installation
+        // check https://clairview.com/docs/session-replay/android#installation
         // for more config and to learn about how we capture sessions on mobile
         // and what to expect
         config.sessionReplay = true
@@ -55,8 +55,8 @@ function AndroidSetupSnippet({ includeReplay }: AndroidSetupProps): JSX.Element 
                 : ''
         }
 
-        // Setup MarketTor with the given Context and Config
-        MarketTorAndroid.setup(this, config)
+        // Setup ClairView with the given Context and Config
+        ClairViewAndroid.setup(this, config)
     }
 }`}
         </CodeSnippet>
@@ -68,13 +68,13 @@ export function SDKInstallAndroidInstructions(props: AndroidSetupProps): JSX.Ele
         <>
             {props.includeReplay ? (
                 <LemonBanner type="info">
-                    🚧 NOTE: <Link to="https://markettor.com/docs/session-replay/mobile">Mobile recording</Link> is
+                    🚧 NOTE: <Link to="https://clairview.com/docs/session-replay/mobile">Mobile recording</Link> is
                     currently in beta. We are keen to gather as much feedback as possible so if you try this out please
                     let us know. You can send feedback via the{' '}
-                    <Link to="https://us.markettor.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
+                    <Link to="https://us.clairview.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
                         in-app support panel
                     </Link>{' '}
-                    or one of our other <Link to="https://markettor.com/docs/support-options">support options</Link>.
+                    or one of our other <Link to="https://clairview.com/docs/support-options">support options</Link>.
                 </LemonBanner>
             ) : null}
             <h3>Install</h3>
@@ -89,15 +89,15 @@ export function SDKInstallAndroidTrackScreenInstructions(): JSX.Element {
     return (
         <>
             <p>
-                With <code>captureScreenViews = true</code>, MarketTor will try to record all screen changes
+                With <code>captureScreenViews = true</code>, ClairView will try to record all screen changes
                 automatically.
             </p>
             <p>
                 If you want to manually send a new screen capture event, use the <code>screen</code> function.
             </p>
-            <CodeSnippet language={Language.Kotlin}>{`import com.markettor.MarketTor
+            <CodeSnippet language={Language.Kotlin}>{`import com.clairview.ClairView
 
-MarketTor.screen(
+ClairView.screen(
     screenTitle = "Dashboard",
     properties = mapOf(
         "background" to "blue",

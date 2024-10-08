@@ -10,7 +10,7 @@ import {
     LemonTableColumns,
     LemonTag,
     LemonTagType,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { More } from 'lib/lemon-ui/LemonButton/More'

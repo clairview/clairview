@@ -45,14 +45,14 @@ export { ChartDisplayCategory }
 type integer = number
 
 /**
- * MarketTor Query Schema definition.
+ * ClairView Query Schema definition.
  *
  * This file acts as the source of truth for:
  *
  * - frontend/src/queries/schema.json
  *   - generated from typescript via "pnpm run schema:build:json"
  *
- * - markettor/schema.py
+ * - clairview/schema.py
  *   - generated from json the above json via "pnpm run schema:build:python"
  * */
 
@@ -1173,7 +1173,7 @@ export type RefreshType =
 export interface QueryRequest {
     /** Client provided query ID. Can be used to retrieve the status or cancel the query. */
     client_query_id?: string
-    // Sync the `refresh` description here with the two instances in markettor/api/insight.py
+    // Sync the `refresh` description here with the two instances in clairview/api/insight.py
     /**
      * Whether results should be calculated sync or async, and how much to rely on the cache:
      * - `'blocking'` - calculate synchronously (returning only when the query is done), UNLESS there are very fresh results in the cache
@@ -1189,7 +1189,7 @@ export interface QueryRequest {
     /** @deprecated Use `refresh` instead. */
     async?: boolean
     /**
-     * Submit a JSON string representing a query for MarketTor data analysis,
+     * Submit a JSON string representing a query for ClairView data analysis,
      * for example a TorQL query.
      *
      * Example payload:
@@ -1201,7 +1201,7 @@ export interface QueryRequest {
      * ```
      *
      * For more details on TorQL queries,
-     * see the [MarketTor TorQL documentation](/docs/torql#api-access).
+     * see the [ClairView TorQL documentation](/docs/torql#api-access).
      */
     query: QuerySchema
     filters_override?: DashboardFilter
@@ -1614,7 +1614,7 @@ export interface ExperimentTrendQuery extends DataNode<ExperimentTrendQueryRespo
     kind: NodeKind.ExperimentTrendQuery
     count_query: TrendsQuery
     // Defaults to $feature_flag_called if not specified
-    // https://github.com/MarketTor/markettor/blob/master/markettor/torql_queries/experiments/experiment_trend_query_runner.py
+    // https://github.com/ClairView/clairview/blob/master/clairview/torql_queries/experiments/experiment_trend_query_runner.py
     exposure_query?: TrendsQuery
     experiment_id: integer
 }
@@ -1815,7 +1815,7 @@ export interface DatabaseSchemaField {
 }
 
 export interface DatabaseSchemaTableCommon {
-    type: 'markettor' | 'data_warehouse' | 'view' | 'batch_export' | 'materialized_view'
+    type: 'clairview' | 'data_warehouse' | 'view' | 'batch_export' | 'materialized_view'
     id: string
     name: string
     fields: Record<string, DatabaseSchemaField>
@@ -1833,8 +1833,8 @@ export interface DatabaseSchemaMaterializedViewTable extends DatabaseSchemaTable
     status?: string
 }
 
-export interface DatabaseSchemaMarketTorTable extends DatabaseSchemaTableCommon {
-    type: 'markettor'
+export interface DatabaseSchemaClairViewTable extends DatabaseSchemaTableCommon {
+    type: 'clairview'
 }
 
 export interface DatabaseSchemaDataWarehouseTable extends DatabaseSchemaTableCommon {
@@ -1850,7 +1850,7 @@ export interface DatabaseSchemaBatchExportTable extends DatabaseSchemaTableCommo
 }
 
 export type DatabaseSchemaTable =
-    | DatabaseSchemaMarketTorTable
+    | DatabaseSchemaClairViewTable
     | DatabaseSchemaDataWarehouseTable
     | DatabaseSchemaViewTable
     | DatabaseSchemaBatchExportTable

@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider, LemonTabs, LemonTag, LemonTagType, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider, LemonTabs, LemonTag, LemonTagType, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
@@ -88,7 +88,7 @@ function emptyPayloadMessage(
 ): JSX.Element | string {
     return payloadCaptureIsEnabled ? (
         item.is_initial ? (
-            `${label} captured before MarketTor was initialized`
+            `${label} captured before ClairView was initialized`
         ) : (
             `No ${label.toLowerCase()} body captured`
         )
@@ -390,12 +390,12 @@ export function BodyDisplay({
     return isAutoRedaction ? (
         <>
             <p>
-                This content was redacted by MarketTor to protect sensitive data.{' '}
+                This content was redacted by ClairView to protect sensitive data.{' '}
                 <Link
-                    to="https://markettor.com/docs/session-replay/network-recording?utm_medium=in-product"
+                    to="https://clairview.com/docs/session-replay/network-recording?utm_medium=in-product"
                     target="_blank"
                 >
-                    Learn how to override MarketTor's automatic redaction code.
+                    Learn how to override ClairView's automatic redaction code.
                 </Link>
             </p>
             <pre>received: {displayContent}</pre>
@@ -420,7 +420,7 @@ export function HeadersDisplay({
     const isHeadersCaptureEnabled =
         currentTeam?.capture_performance_opt_in &&
         currentTeam?.session_recording_network_payload_capture_config?.recordHeaders
-    const emptyMessage = isInitial ? 'captured before MarketTor was initialized' : 'No headers captured'
+    const emptyMessage = isInitial ? 'captured before ClairView was initialized' : 'No headers captured'
 
     return (
         <div className="flex flex-col w-full">

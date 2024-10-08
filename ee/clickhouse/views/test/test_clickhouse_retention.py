@@ -4,22 +4,22 @@ from typing import Literal, Optional, TypedDict, Union
 from django.test.client import Client
 
 from ee.clickhouse.views.test.funnel.util import EventPattern
-from markettor.api.test.test_organization import create_organization
-from markettor.api.test.test_team import create_team
-from markettor.api.test.test_user import create_user
-from markettor.models.instance_setting import (
+from clairview.api.test.test_organization import create_organization
+from clairview.api.test.test_team import create_team
+from clairview.api.test.test_user import create_user
+from clairview.models.instance_setting import (
     get_instance_setting,
     override_instance_config,
 )
-from markettor.models.person import Person as PersonModel
-from markettor.test.base import (
+from clairview.models.person import Person as PersonModel
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     also_test_with_materialized_columns,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import create_all_events, update_or_create_person
-from markettor.utils import encode_get_request_params
+from clairview.test.test_journeys import create_all_events, update_or_create_person
+from clairview.utils import encode_get_request_params
 
 
 class RetentionTests(APIBaseTest, ClickhouseTestMixin):
@@ -27,7 +27,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
     def test_retention_test_account_filters(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -35,7 +35,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
             {
                 "key": "email",
                 "type": "person",
-                "value": "markettor.com",
+                "value": "clairview.com",
                 "operator": "not_icontains",
             }
         ]
@@ -44,7 +44,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
         update_or_create_person(
             distinct_ids=["person 1"],
             team_id=team.pk,
-            properties={"email": "markettor.com"},
+            properties={"email": "clairview.com"},
         )
         update_or_create_person(distinct_ids=["person 2"], team_id=team.pk)
         update_or_create_person(distinct_ids=["person 3"], team_id=team.pk)
@@ -93,7 +93,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
     def test_retention_aggregation_by_distinct_id_and_retrieve_people(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -160,7 +160,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
     def test_people_stable_pagination(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -241,7 +241,7 @@ class RetentionTests(APIBaseTest, ClickhouseTestMixin):
 
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -309,7 +309,7 @@ class BreakdownTests(APIBaseTest, ClickhouseTestMixin):
     def test_can_get_retention_cohort_breakdown(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -359,7 +359,7 @@ class BreakdownTests(APIBaseTest, ClickhouseTestMixin):
     def test_can_get_retention_cohort_breakdown_with_retention_type_target(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -417,7 +417,7 @@ class BreakdownTests(APIBaseTest, ClickhouseTestMixin):
         """
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -483,7 +483,7 @@ class BreakdownTests(APIBaseTest, ClickhouseTestMixin):
         """
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -552,7 +552,7 @@ class BreakdownTests(APIBaseTest, ClickhouseTestMixin):
         """
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -605,7 +605,7 @@ class IntervalTests(APIBaseTest, ClickhouseTestMixin):
     def test_can_get_retention_week_interval(self):
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -645,18 +645,18 @@ class IntervalTests(APIBaseTest, ClickhouseTestMixin):
 class RegressionTests(APIBaseTest, ClickhouseTestMixin):
     def test_can_get_actors_and_use_percent_char_filter(self):
         """
-        References https://github.com/MarketTor/markettor/issues/7747
+        References https://github.com/ClairView/clairview/issues/7747
 
         Essentially we were performing a double string substitution, which
         causes issues if, in that case, we use a string substitution that
         includes a '%' character, and then run substitution again.
 
         This was the case for instance when you wanted to filter out test users
-        e.g. by postgres LIKE matching '%markettor.com%'
+        e.g. by postgres LIKE matching '%clairview.com%'
         """
         organization = create_organization(name="test")
         team = create_team(organization=organization)
-        user = create_user(email="test@markettor.com", password="1234", organization=organization)
+        user = create_user(email="test@clairview.com", password="1234", organization=organization)
 
         self.client.force_login(user)
 
@@ -674,7 +674,7 @@ class RegressionTests(APIBaseTest, ClickhouseTestMixin):
                 properties=[
                     {
                         "key": "email",
-                        "value": "markettor.com",
+                        "value": "clairview.com",
                         "operator": "not_icontains",
                         "type": "person",
                     }

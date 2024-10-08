@@ -97,7 +97,7 @@ describe('ActionMatcher', () => {
                 : null,
             pinned_at: null,
         }
-        await insertRow(hub.db.postgres, 'markettor_action', action)
+        await insertRow(hub.db.postgres, 'clairview_action', action)
         await actionManager.reloadAction(action.team_id, action.id)
 
         return {
@@ -518,7 +518,7 @@ describe('ActionMatcher', () => {
             ])
 
             const eventMarkettor = createTestEvent({
-                properties: { $current_url: 'http://markettor.com/pricing' },
+                properties: { $current_url: 'http://clairview.com/pricing' },
             })
             const eventExample = createTestEvent({
                 properties: { $current_url: 'https://example.com/' },

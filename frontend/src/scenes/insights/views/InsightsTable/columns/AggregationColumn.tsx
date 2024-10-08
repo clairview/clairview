@@ -1,7 +1,7 @@
 import './AggregationColumn.scss'
 
-import { IconChevronDown } from '@markettor/icons'
-import { LemonMenu, LemonMenuItem } from '@markettor/lemon-ui'
+import { IconChevronDown } from '@clairview/icons'
+import { LemonMenu, LemonMenuItem } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { average, median } from 'lib/utils'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'

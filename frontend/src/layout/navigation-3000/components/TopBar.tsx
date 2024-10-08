@@ -1,7 +1,7 @@
 import './TopBar.scss'
 
-import { IconChevronDown } from '@markettor/icons'
-import { LemonButton, LemonSkeleton, LemonTag } from '@markettor/lemon-ui'
+import { IconChevronDown } from '@clairview/icons'
+import { LemonButton, LemonSkeleton, LemonTag } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'

@@ -1,4 +1,4 @@
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import { TaxonomicFilter } from 'lib/components/TaxonomicFilter/TaxonomicFilter'
 import { TaxonomicFilterGroupType, TaxonomicFilterValue } from 'lib/components/TaxonomicFilter/types'
 import { LemonButton, LemonButtonProps } from 'lib/lemon-ui/LemonButton'

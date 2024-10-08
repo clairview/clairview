@@ -1,4 +1,4 @@
-import { LemonButton, LemonTable, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonTable, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -153,11 +153,11 @@ function FirstStep(): JSX.Element {
 
     return (
         <>
-            <h2 className="mt-4">Managed by MarketTor</h2>
+            <h2 className="mt-4">Managed by ClairView</h2>
 
             <p>
-                Data will be synced to MarketTor and regularly refreshed.{' '}
-                <Link to="https://markettor.com/docs/data-warehouse/setup#stripe">Learn more</Link>
+                Data will be synced to ClairView and regularly refreshed.{' '}
+                <Link to="https://clairview.com/docs/data-warehouse/setup#stripe">Learn more</Link>
             </p>
             <LemonTable
                 dataSource={filteredConnectors}
@@ -202,7 +202,7 @@ function FirstStep(): JSX.Element {
 
             <p>
                 Data will be queried directly from your data source that you manage.{' '}
-                <Link to="https://markettor.com/docs/data-warehouse/setup#linking-a-custom-source">Learn more</Link>
+                <Link to="https://clairview.com/docs/data-warehouse/setup#linking-a-custom-source">Learn more</Link>
             </p>
             <LemonTable
                 dataSource={manualConnectors}

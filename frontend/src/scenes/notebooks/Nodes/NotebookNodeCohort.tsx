@@ -1,4 +1,4 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType, PropertyFilterType } from '~/types'
 import { useActions, useValues } from 'kea'
 import { urls } from 'scenes/urls'
@@ -9,9 +9,9 @@ import { useEffect, useMemo } from 'react'
 import clsx from 'clsx'
 import { NotFound } from 'lib/components/NotFound'
 import { cohortEditLogic } from 'scenes/cohorts/cohortEditLogic'
-import { IconPeople, IconPerson, IconTrends } from '@markettor/icons'
+import { IconPeople, IconPerson, IconTrends } from '@clairview/icons'
 import { Query } from '~/queries/Query/Query'
-import { LemonDivider, LemonTag } from '@markettor/lemon-ui'
+import { LemonDivider, LemonTag } from '@clairview/lemon-ui'
 import { DataTableNode, NodeKind } from '~/queries/schema'
 
 const Component = ({ attributes }: NotebookNodeProps<NotebookNodeCohortAttributes>): JSX.Element => {
@@ -152,7 +152,7 @@ type NotebookNodeCohortAttributes = {
     id: number
 }
 
-export const NotebookNodeCohort = createMarketTorWidgetNode<NotebookNodeCohortAttributes>({
+export const NotebookNodeCohort = createClairViewWidgetNode<NotebookNodeCohortAttributes>({
     nodeType: NotebookNodeType.Cohort,
     titlePlaceholder: 'Cohort',
     Component,

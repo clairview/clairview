@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 import { detect } from 'detect-browser'
 
 import { Hub, PluginConfig, PluginLogEntrySource, PluginLogEntryType, PluginMethods } from '../../../types'
@@ -203,7 +203,7 @@ function detectDeviceType(userAgent: string) {
 export const USER_AGENT_CONFIG_SCHEMA = [
     {
         markdown:
-            "User Agent plugin allows you to populate events with the $browser, $browser_version for MarketTor Clients that don't  typically populate these properties",
+            "User Agent plugin allows you to populate events with the $browser, $browser_version for ClairView Clients that don't  typically populate these properties",
     },
     {
         key: 'overrideUserAgentDetails',

@@ -1,6 +1,6 @@
 import './RetentionTable.scss'
 
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { exportsLogic } from 'lib/components/ExportButton/exportsLogic'

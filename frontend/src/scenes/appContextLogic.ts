@@ -34,7 +34,7 @@ export const appContextLogic = kea<appContextLogicType>([
                         new Error(`Preloaded user ${preloadedUser.uuid} does not match remote user ${remoteUser.uuid}`),
                         {
                             tags: {
-                                markettor_app_context: JSON.stringify(getAppContext()),
+                                clairview_app_context: JSON.stringify(getAppContext()),
                                 remote_user: JSON.stringify(remoteUser),
                             },
                         }

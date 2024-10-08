@@ -2,9 +2,9 @@ from django.utils import timezone
 from rest_framework import serializers
 
 from ee.models.event_definition import EnterpriseEventDefinition
-from markettor.api.shared import UserBasicSerializer
-from markettor.api.tagged_item import TaggedItemSerializerMixin
-from markettor.models.activity_logging.activity_log import (
+from clairview.api.shared import UserBasicSerializer
+from clairview.api.tagged_item import TaggedItemSerializerMixin
+from clairview.models.activity_logging.activity_log import (
     dict_changes_between,
     log_activity,
     Detail,

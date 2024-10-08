@@ -3,7 +3,7 @@ import './LineGraph.scss'
 // TODO: Move the below scss to somewhere more common
 import '../../../../../scenes/insights/InsightTooltip/InsightTooltip.scss'
 
-import { LemonTable } from '@markettor/lemon-ui'
+import { LemonTable } from '@clairview/lemon-ui'
 import {
     ChartData,
     ChartType,

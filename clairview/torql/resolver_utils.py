@@ -1,0 +1,88 @@
+from typing import Optional
+
+from clairview import schema
+from clairview.torql import ast
+from clairview.torql.context import TorQLContext
+from clairview.torql.errors import ResolutionError, SyntaxError
+from clairview.torql.visitor import clone_expr
+
+
+def lookup_field_by_name(scope: ast.SelectQueryType, name: str, context: TorQLContext) -> Optional[ast.Type]:
+    """Looks for a field in the scope's list of aliases and children for each joined table."""
+    if name in scope.aliases:
+        return scope.aliases[name]
+    else:
+        named_tables = [table for table in scope.tables.values() if table.has_child(name, context)]
+        anonymous_tables = [table for table in scope.anonymous_tables if table.has_child(name, context)]
+        tables_with_field = named_tables + anonymous_tables
+
+        if len(tables_with_field) > 1:
+            raise ResolutionError(f"Ambiguous query. Found multiple sources for field: {name}")
+        elif len(tables_with_field) == 1:
+            return tables_with_field[0].get_child(name, context)
+
+        if scope.parent:
+            return lookup_field_by_name(scope.parent, name, context)
+
+        return None
+
+
+def lookup_cte_by_name(scopes: list[ast.SelectQueryType], name: str) -> Optional[ast.CTE]:
+    for scope in reversed(scopes):
+        if scope and scope.ctes and name in scope.ctes:
+            return scope.ctes[name]
+    return None
+
+
+def get_long_table_name(select: ast.SelectQueryType, type: ast.Type) -> str:
+    if isinstance(type, ast.TableType):
+        return select.get_alias_for_table_type(type) or ""
+    elif isinstance(type, ast.LazyTableType):
+        return type.table.to_printed_torql()
+    elif isinstance(type, ast.TableAliasType):
+        return type.alias
+    elif isinstance(type, ast.SelectQueryAliasType):
+        return type.alias
+    elif isinstance(type, ast.SelectViewType):
+        return type.alias
+    elif isinstance(type, ast.LazyJoinType):
+        return f"{get_long_table_name(select, type.table_type)}__{type.field}"
+    elif isinstance(type, ast.VirtualTableType):
+        return f"{get_long_table_name(select, type.table_type)}__{type.field}"
+    else:
+        raise ResolutionError(f"Unknown table type in LazyTableResolver: {type.__class__.__name__}")
+
+
+def ast_to_query_node(expr: ast.Expr | ast.TorQLXTag):
+    if isinstance(expr, ast.Constant):
+        return expr.value
+    elif isinstance(expr, ast.Array):
+        return [ast_to_query_node(e) for e in expr.exprs]
+    elif isinstance(expr, ast.Tuple):
+        return tuple(ast_to_query_node(e) for e in expr.exprs)
+    elif isinstance(expr, ast.TorQLXTag):
+        for klass in schema.__dict__.values():
+            if isinstance(klass, type) and issubclass(klass, schema.BaseModel) and klass.__name__ == expr.kind:
+                attributes = expr.to_dict()
+                attributes.pop("kind")
+                attributes = {key: ast_to_query_node(value) for key, value in attributes.items()}
+                return klass(**attributes)
+        raise SyntaxError(f'Tag of kind "{expr.kind}" not found in schema.')
+    else:
+        raise SyntaxError(f'Expression of type "{type(expr).__name__}". Can\'t convert to constant.')
+
+
+def expand_torqlx_query(node: ast.TorQLXTag, team_id: Optional[int]):
+    from clairview.torql_queries.query_runner import get_query_runner
+    from clairview.models import Team
+
+    if team_id is None:
+        raise ResolutionError("team_id is required to convert a query tag to a query", start=node.start, end=node.end)
+
+    try:
+        query_node = ast_to_query_node(node)
+        runner = get_query_runner(query_node, Team.objects.get(pk=team_id))
+        query = clone_expr(runner.to_query(), clear_locations=True)
+        return query
+    except Exception as e:
+        raise ResolutionError(f"Error parsing query tag: {e}", start=node.start, end=node.end)

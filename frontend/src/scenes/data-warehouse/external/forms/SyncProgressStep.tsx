@@ -1,4 +1,4 @@
-import { LemonButton, LemonTable, LemonTableColumns, LemonTag, LemonTagType } from '@markettor/lemon-ui'
+import { LemonButton, LemonTable, LemonTableColumns, LemonTag, LemonTagType } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { sourceWizardLogic } from 'scenes/data-warehouse/new/sourceWizardLogic'
 import { dataWarehouseSettingsLogic } from 'scenes/data-warehouse/settings/dataWarehouseSettingsLogic'

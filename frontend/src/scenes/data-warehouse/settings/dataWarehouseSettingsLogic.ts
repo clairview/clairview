@@ -3,7 +3,7 @@ import { loaders } from 'kea-loaders'
 import { router, urlToAction } from 'kea-router'
 import api, { ApiMethodOptions, PaginatedResponse } from 'lib/api'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { databaseTableListLogic } from 'scenes/data-management/database/databaseTableListLogic'
 
 import { DatabaseSchemaDataWarehouseTable } from '~/queries/schema'
@@ -160,7 +160,7 @@ export const dataWarehouseSettingsLogic = kea<dataWarehouseSettingsLogicType>([
             actions.loadSources(null)
             actions.sourceLoadingFinished(source)
 
-            markettor.capture('source deleted', { sourceType: source.source_type })
+            clairview.capture('source deleted', { sourceType: source.source_type })
         },
         reloadSource: async ({ source }) => {
             // Optimistic UI updates before sending updates to the backend
@@ -189,7 +189,7 @@ export const dataWarehouseSettingsLogic = kea<dataWarehouseSettingsLogicType>([
                 await api.externalDataSources.reload(source.id)
                 actions.loadSources(null)
 
-                markettor.capture('source reloaded', { sourceType: source.source_type })
+                clairview.capture('source reloaded', { sourceType: source.source_type })
             } catch (e: any) {
                 if (e.message) {
                     lemonToast.error(e.message)
@@ -206,7 +206,7 @@ export const dataWarehouseSettingsLogic = kea<dataWarehouseSettingsLogicType>([
             }
         },
         updateSchema: (schema) => {
-            markettor.capture('schema updated', { shouldSync: schema.should_sync, syncType: schema.sync_type })
+            clairview.capture('schema updated', { shouldSync: schema.should_sync, syncType: schema.sync_type })
         },
         loadSourcesSuccess: () => {
             clearTimeout(cache.refreshTimeout)

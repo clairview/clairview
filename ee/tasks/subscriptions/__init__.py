@@ -9,9 +9,9 @@ from sentry_sdk import capture_exception, capture_message
 from ee.tasks.subscriptions.email_subscriptions import send_email_subscription_report
 from ee.tasks.subscriptions.slack_subscriptions import send_slack_subscription_report
 from ee.tasks.subscriptions.subscription_utils import generate_assets
-from markettor import settings
-from markettor.models.subscription import Subscription
-from markettor.tasks.utils import CeleryQueue
+from clairview import settings
+from clairview.models.subscription import Subscription
+from clairview.tasks.utils import CeleryQueue
 
 logger = structlog.get_logger(__name__)
 

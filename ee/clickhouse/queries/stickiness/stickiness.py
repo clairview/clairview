@@ -4,7 +4,7 @@ from ee.clickhouse.queries.stickiness.stickiness_actors import (
 from ee.clickhouse.queries.stickiness.stickiness_event_query import (
     ClickhouseStickinessEventsQuery,
 )
-from markettor.queries.stickiness.stickiness import Stickiness
+from clairview.queries.stickiness.stickiness import Stickiness
 
 
 class ClickhouseStickiness(Stickiness):

@@ -1,5 +1,5 @@
-import { IconBrackets, IconDatabase } from '@markettor/icons'
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { IconBrackets, IconDatabase } from '@clairview/icons'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import { clsx } from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { router } from 'kea-router'
@@ -59,7 +59,7 @@ interface DatabaseTableTreeProps {
 export const DatabaseTableTreeWithItems = ({ inline }: DatabaseTableTreeProps): JSX.Element => {
     const {
         dataWarehouseTablesBySourceType,
-        markettorTables,
+        clairviewTables,
         databaseLoading,
         nonMaterializedViews,
         materializedViews,
@@ -190,8 +190,8 @@ export const DatabaseTableTreeWithItems = ({ inline }: DatabaseTableTreeProps): 
                     isLoading: databaseLoading,
                 },
                 {
-                    name: 'MarketTor',
-                    items: markettorTables.map((table) => ({
+                    name: 'ClairView',
+                    items: clairviewTables.map((table) => ({
                         name: table.name,
                         table: table,
                         dropdownOverlay: dropdownOverlay(table),
@@ -256,8 +256,8 @@ export const DatabaseTableTreeWithItems = ({ inline }: DatabaseTableTreeProps): 
                 isLoading: databaseLoading,
             },
             {
-                name: 'MarketTor',
-                items: markettorTables.map((table) => ({
+                name: 'ClairView',
+                items: clairviewTables.map((table) => ({
                     table: table,
                     icon: <IconDatabase />,
                 })),

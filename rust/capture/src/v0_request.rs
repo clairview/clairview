@@ -37,11 +37,11 @@ pub struct EventQuery {
 
 impl EventQuery {
     /// Returns the parsed value of the sent_at timestamp if present in the query params.
-    /// We only support the format sent by recent markettor-js versions, in milliseconds integer.
+    /// We only support the format sent by recent clairview-js versions, in milliseconds integer.
     /// Values in seconds integer (older SDKs will be ignored).
     pub fn sent_at(&self) -> Option<OffsetDateTime> {
         if let Some(value) = self.sent_at {
-            let value_nanos: i128 = i128::from(value) * 1_000_000; // Assuming the value is in milliseconds, latest markettor-js releases
+            let value_nanos: i128 = i128::from(value) * 1_000_000; // Assuming the value is in milliseconds, latest clairview-js releases
             if let Ok(sent_at) = OffsetDateTime::from_unix_timestamp_nanos(value_nanos) {
                 if sent_at.year() > 2020 {
                     // Could be lower if the input is in seconds
@@ -81,7 +81,7 @@ pub struct RawEvent {
     )]
     pub token: Option<String>,
     #[serde(alias = "$distinct_id", skip_serializing_if = "Option::is_none")]
-    pub distinct_id: Option<Value>, // markettor-js accepts arbitrary values as distinct_id
+    pub distinct_id: Option<Value>, // clairview-js accepts arbitrary values as distinct_id
     #[serde(default, deserialize_with = "empty_string_is_none")]
     pub uuid: Option<Uuid>,
     pub event: String,
@@ -102,7 +102,7 @@ pub static GZIP_MAGIC_NUMBERS: [u8; 3] = [0x1f, 0x8b, 8];
 #[derive(Deserialize)]
 #[serde(untagged)]
 pub enum RawRequest {
-    /// Array of events (markettor-js)
+    /// Array of events (clairview-js)
     Array(Vec<RawEvent>),
     /// Batched events (/batch)
     Batch(BatchedRequest),
@@ -121,7 +121,7 @@ pub struct BatchedRequest {
 
 impl RawRequest {
     /// Takes a request payload and tries to decompress and unmarshall it.
-    /// While markettor-js sends a compression query param, a sizable portion of requests
+    /// While clairview-js sends a compression query param, a sizable portion of requests
     /// fail due to it being missing when the body is compressed.
     /// Instead of trusting the parameter, we peek at the payload's first three bytes to
     /// detect gzip, fallback to uncompressed utf8 otherwise.

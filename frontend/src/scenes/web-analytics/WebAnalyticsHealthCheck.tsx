@@ -25,7 +25,7 @@ export const WebAnalyticsHealthCheck = (): JSX.Element | null => {
                 </p>
                 <p>
                     Please see{' '}
-                    <Link to="https://markettor.com/docs/libraries/js">documentation for how to set up markettor-js</Link>.
+                    <Link to="https://clairview.com/docs/libraries/js">documentation for how to set up clairview-js</Link>.
                 </p>
             </LemonBanner>
         )
@@ -38,7 +38,7 @@ export const WebAnalyticsHealthCheck = (): JSX.Element | null => {
                 </p>
                 <p>
                     Please see{' '}
-                    <Link to="https://markettor.com/docs/libraries/js">documentation for how to set up markettor-js</Link>.
+                    <Link to="https://clairview.com/docs/libraries/js">documentation for how to set up clairview-js</Link>.
                 </p>
             </LemonBanner>
         )

@@ -1,4 +1,4 @@
-import { IconTrash } from '@markettor/icons'
+import { IconTrash } from '@clairview/icons'
 import { useActions } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { personDeleteModalLogic } from 'scenes/persons/personDeleteModalLogic'

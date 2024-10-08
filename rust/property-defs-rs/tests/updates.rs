@@ -118,7 +118,7 @@ async fn assert_eventdefinition_exists(
     let count: Option<i64> = sqlx::query_scalar(
         r#"
         SELECT COUNT(*)
-        FROM markettor_eventdefinition
+        FROM clairview_eventdefinition
         WHERE name = $1 AND team_id = $2 AND last_seen_at >= $3 AND last_seen_at <= $4
         "#,
     )
@@ -149,7 +149,7 @@ async fn assert_propertydefinition_exists(
     let count: Option<i64> = sqlx::query_scalar(
         r#"
         SELECT COUNT(*)
-        FROM markettor_propertydefinition
+        FROM clairview_propertydefinition
         WHERE name = $1 AND type = $2 AND is_numerical = $3 AND team_id = $4 AND property_type = $5
         "#,
     )

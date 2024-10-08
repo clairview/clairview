@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { FeatureFlagKey } from 'lib/constants'
-import { EarlyAccessFeature } from 'markettor-js'
+import { EarlyAccessFeature } from 'clairview-js'
 
 import { setFeatureFlags, useStorybookMocks } from '~/mocks/browser'
 
@@ -27,7 +27,7 @@ CONSTRAINED_PREVIEWS.add('constrained-test-2' as FeatureFlagKey)
 const Template: StoryFn<StoryProps> = ({ earlyAccessFeatures, enabledFeatureFlags }) => {
     useStorybookMocks({
         get: {
-            'https://us.i.markettor.com/api/early_access_features/': { earlyAccessFeatures },
+            'https://us.i.clairview.com/api/early_access_features/': { earlyAccessFeatures },
         },
     })
     setFeatureFlags(enabledFeatureFlags)
@@ -45,7 +45,7 @@ Basic.args = {
         {
             name: 'Data Warehouse',
             description:
-                'The MarketTor data warehouse gives you a place to put all of your most important data, query across these datasets, and analyze alongside the product analytics data already in MarketTor',
+                'The ClairView data warehouse gives you a place to put all of your most important data, query across these datasets, and analyze alongside the product analytics data already in ClairView',
             stage: 'beta',
             documentationUrl: 'https://docs.example.com',
             flagKey: 'data-warehouse',
@@ -74,7 +74,7 @@ WithConstrainedFeature.args = {
         {
             name: 'Data Warehouse',
             description:
-                'The MarketTor data warehouse gives you a place to put all of your most important data, query across these datasets, and analyze alongside the product analytics data already in MarketTor',
+                'The ClairView data warehouse gives you a place to put all of your most important data, query across these datasets, and analyze alongside the product analytics data already in ClairView',
             stage: 'beta',
             documentationUrl: 'https://docs.example.com',
             flagKey: 'data-warehouse',

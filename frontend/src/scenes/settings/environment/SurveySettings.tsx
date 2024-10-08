@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { SurveySettings as BasicSurveySettings } from 'scenes/surveys/SurveySettings'
 import { urls } from 'scenes/urls'
 

@@ -17,11 +17,11 @@ function RemixAppClientCodeSnippet(): JSX.Element {
             {`import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
-import markettor from "markettor-js";
+import clairview from "clairview-js";
 
 function MarkettorInit() {
   useEffect(() => {
-    markettor.init('${currentTeam?.api_token}', {
+    clairview.init('${currentTeam?.api_token}', {
       api_host: '${apiHostOrigin()}',
       ${
           isPersonProfilesDisabled
@@ -50,12 +50,12 @@ startTransition(() => {
 export function SDKInstallRemixJSInstructions(): JSX.Element {
     return (
         <>
-            <h3>Install markettor-js using your package manager</h3>
+            <h3>Install clairview-js using your package manager</h3>
             <JSInstallSnippet />
 
             <h3>Initialize</h3>
             <p>
-                Go to your <code>app/entry.client.tsx</code> file and initialize MarketTor as a component:
+                Go to your <code>app/entry.client.tsx</code> file and initialize ClairView as a component:
             </p>
             <RemixAppClientCodeSnippet />
         </>

@@ -2,7 +2,7 @@ import { actions, afterMount, kea, listeners, path, reducers, selectors } from '
 import { loaders } from 'kea-loaders'
 import api from 'lib/api'
 import { FEATURE_FLAGS } from 'lib/constants'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { userLogic } from 'scenes/userLogic'
 
 import { toolbarConfigLogic, toolbarFetch } from '~/toolbar/toolbarConfigLogic'
@@ -133,7 +133,7 @@ export const hedgehogBuddyLogic = kea<hedgehogBuddyLogicType>([
                 enabled,
             })
 
-            markettor.capture(enabled ? 'hedgehog mode enabled' : 'hedgehog mode disabled')
+            clairview.capture(enabled ? 'hedgehog mode enabled' : 'hedgehog mode disabled')
         },
 
         addAccessory: ({ accessory }) => {
@@ -172,14 +172,14 @@ export const hedgehogBuddyLogic = kea<hedgehogBuddyLogicType>([
             actions.loadRemoteConfig()
         }
 
-        markettor.getEarlyAccessFeatures((features) => {
+        clairview.getEarlyAccessFeatures((features) => {
             const relatedEAF = features.find((x) => x.flagKey === FEATURE_FLAGS.HEDGEHOG_MODE)
             if (relatedEAF) {
-                if (markettor.getFeatureFlag(FEATURE_FLAGS.HEDGEHOG_MODE)) {
+                if (clairview.getFeatureFlag(FEATURE_FLAGS.HEDGEHOG_MODE)) {
                     actions.setHedgehogModeEnabled(true)
                 }
 
-                markettor.updateEarlyAccessFeatureEnrollment(FEATURE_FLAGS.HEDGEHOG_MODE, false)
+                clairview.updateEarlyAccessFeatureEnrollment(FEATURE_FLAGS.HEDGEHOG_MODE, false)
             }
         })
     }),

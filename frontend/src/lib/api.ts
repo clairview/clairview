@@ -4,7 +4,7 @@ import { ActivityLogProps } from 'lib/components/ActivityLog/ActivityLog'
 import { ActivityLogItem } from 'lib/components/ActivityLog/humanizeActivity'
 import { apiStatusLogic } from 'lib/logic/apiStatusLogic'
 import { objectClean, toParams } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { stringifiedFingerprint } from 'scenes/error-tracking/utils'
 import { RecordingComment } from 'scenes/session-recordings/player/inspector/playerInspectorLogic'
 import { SavedSessionRecordingPlaylistsResult } from 'scenes/session-recordings/saved-playlists/savedSessionRecordingPlaylistsLogic'
@@ -168,7 +168,7 @@ export class ApiError extends Error {
     }
 }
 
-const CSRF_COOKIE_NAME = 'markettor_csrftoken'
+const CSRF_COOKIE_NAME = 'clairview_csrftoken'
 
 export function getCookie(name: string): string | null {
     let cookieValue: string | null = null
@@ -923,10 +923,10 @@ function getSessionId(): string | undefined {
     // get_session_id is not always present e.g. in the toolbar
     // but our typing in the SDK doesn't make this clear
     // TODO when the SDK makes this safe this check can be simplified
-    if (typeof markettor?.get_session_id !== 'function') {
+    if (typeof clairview?.get_session_id !== 'function') {
         return undefined
     }
-    return markettor.get_session_id()
+    return clairview.get_session_id()
 }
 
 const api = {
@@ -2522,10 +2522,10 @@ async function handleFetch(url: string, method: string, fetcher: () => Promise<R
     if (!response.ok) {
         const duration = new Date().getTime() - startTime
         const pathname = new URL(url, location.origin).pathname
-        // when used inside the markettor toolbar, `markettor.capture` isn't loaded
+        // when used inside the clairview toolbar, `clairview.capture` isn't loaded
         // check if the function is available before calling it.
-        if (markettor.capture) {
-            markettor.capture('client_request_failure', { pathname, method, duration, status: response.status })
+        if (clairview.capture) {
+            clairview.capture('client_request_failure', { pathname, method, duration, status: response.status })
         }
 
         const data = await getJSONOrNull(response)

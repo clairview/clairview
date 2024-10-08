@@ -1,5 +1,5 @@
-import { IconX } from '@markettor/icons'
-import { LemonButton, LemonFileInput, lemonToast } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, LemonFileInput, lemonToast } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { useRestrictedArea } from 'lib/components/RestrictedArea'
 import { OrganizationMembershipLevel } from 'lib/constants'

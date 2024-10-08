@@ -1,5 +1,5 @@
-import { IconFeatures } from '@markettor/icons'
-import { LemonButton, LemonTable, LemonTabs } from '@markettor/lemon-ui'
+import { IconFeatures } from '@clairview/icons'
+import { LemonButton, LemonTable, LemonTabs } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import { useActions, useValues } from 'kea'
 import { JSONViewer } from 'lib/components/JSONViewer'

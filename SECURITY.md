@@ -2,10 +2,10 @@
 
 ## Supported Versions
 
-We always recommend using the latest version of MarketTor to ensure you get all security updates.
+We always recommend using the latest version of ClairView to ensure you get all security updates.
 
 ## Reporting a Vulnerability
 
-Please report security vulnerabilities to security@markettor.com.
+Please report security vulnerabilities to security@clairview.com.
 
 We currently do not operate a bug bounty program, but we will generously reward you with merch for any actionable security vulnerabilities found.

@@ -1,5 +1,5 @@
-import { IconHome, IconLock, IconPin, IconPinFilled, IconShare } from '@markettor/icons'
-import { LemonInput } from '@markettor/lemon-ui'
+import { IconHome, IconLock, IconPin, IconPinFilled, IconShare } from '@clairview/icons'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { MemberSelect } from 'lib/components/MemberSelect'
 import { ObjectTags } from 'lib/components/ObjectTags/ObjectTags'

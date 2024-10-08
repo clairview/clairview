@@ -5,7 +5,7 @@ import {
     LemonModal,
     LemonSegmentedButton,
     LemonSelect,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 

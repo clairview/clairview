@@ -2,7 +2,7 @@ import api, { ApiMethodOptions } from 'lib/api'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { delay } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 
 import { OnlineExportContext, QueryExportContext } from '~/types'
 
@@ -147,10 +147,10 @@ export async function performQuery<N extends DataNode>(
                 logParams.clickhouse_sql = (response as TorQLQueryResponse)?.clickhouse
             }
         }
-        markettor.capture('query completed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
+        clairview.capture('query completed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
         return response
     } catch (e) {
-        markettor.capture('query failed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
+        clairview.capture('query failed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
         throw e
     }
 }

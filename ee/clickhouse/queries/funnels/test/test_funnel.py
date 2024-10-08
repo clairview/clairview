@@ -3,26 +3,26 @@ from datetime import datetime
 from ee.clickhouse.queries.funnels.test.breakdown_cases import (
     funnel_breakdown_group_test_factory,
 )
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models.action import Action
-from markettor.models.cohort import Cohort
-from markettor.models.filters import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.queries.funnels.funnel import ClickhouseFunnel
-from markettor.queries.funnels.funnel_persons import ClickhouseFunnelActors
-from markettor.queries.funnels.funnel_strict_persons import ClickhouseFunnelStrictActors
-from markettor.queries.funnels.funnel_unordered_persons import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models.action import Action
+from clairview.models.cohort import Cohort
+from clairview.models.filters import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.queries.funnels.funnel import ClickhouseFunnel
+from clairview.queries.funnels.funnel_persons import ClickhouseFunnelActors
+from clairview.queries.funnels.funnel_strict_persons import ClickhouseFunnelStrictActors
+from clairview.queries.funnels.funnel_unordered_persons import (
     ClickhouseFunnelUnorderedActors,
 )
-from markettor.queries.funnels.test.test_funnel import _create_action
-from markettor.test.base import (
+from clairview.queries.funnels.test.test_funnel import _create_action
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
     _create_person,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 class TestFunnelGroupBreakdown(

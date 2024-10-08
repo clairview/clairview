@@ -1,4 +1,4 @@
-import { LemonTable } from '@markettor/lemon-ui'
+import { LemonTable } from '@clairview/lemon-ui'
 import { Meta } from '@storybook/react'
 
 import * as hedgehogs from './hedgehogs'
@@ -21,7 +21,7 @@ const meta: Meta = {
             description: {
                 component: `
 
-[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/MarketTor-Design-System-One?node-id=3775%3A2092)
+[Related Figma area](https://www.figma.com/file/Y9G24U4r04nEjIDGIEGuKI/ClairView-Design-System-One?node-id=3775%3A2092)
 
 Our hedgehog has many professions so it’s vital you choose the correct one for whatever project
 or page you are working on.s

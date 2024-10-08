@@ -1,4 +1,4 @@
-import ClickHouse from '@markettor/clickhouse'
+import ClickHouse from '@clairview/clickhouse'
 import * as fs from 'fs'
 import { Kafka, SASLOptions } from 'kafkajs'
 import { DateTime } from 'luxon'

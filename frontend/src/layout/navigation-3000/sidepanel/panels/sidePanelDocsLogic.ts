@@ -6,7 +6,7 @@ import { sceneLogic } from 'scenes/sceneLogic'
 import { sidePanelStateLogic } from '../sidePanelStateLogic'
 import type { sidePanelDocsLogicType } from './sidePanelDocsLogicType'
 
-export const MARKETTOR_WEBSITE_ORIGIN = 'https://markettor.com'
+export const MARKETTOR_WEBSITE_ORIGIN = 'https://clairview.com'
 
 const sanitizePath = (path: string): string => {
     return path[0] === '/' ? path : `/${path}`
@@ -157,7 +157,7 @@ export const sidePanelDocsLogic = kea<sidePanelDocsLogicType>([
                 }
 
                 if (event.data.type === 'external-navigation') {
-                    // This should only be triggered for us|eu.markettor.com links
+                    // This should only be triggered for us|eu.clairview.com links
                     actions.handleExternalUrl(event.data.url)
                     return
                 }

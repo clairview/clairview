@@ -1,4 +1,4 @@
-import * as packageIcons from '@markettor/icons'
+import * as packageIcons from '@clairview/icons'
 
 import { ELEMENTS, OBJECTS, TEAMS_AND_COMPANIES, TECHNOLOGY, UNUSED_ICONS } from './categories'
 

@@ -1,6 +1,6 @@
 import './EmptyDashboardComponent.scss'
 
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import { useValues } from 'kea'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonSkeleton } from 'lib/lemon-ui/LemonSkeleton'

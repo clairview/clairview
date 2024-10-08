@@ -243,7 +243,7 @@ export const HOG_EXAMPLES: Record<string, Pick<HogFunctionType, 'hog' | 'bytecod
             35,
         ],
     },
-    markettor_capture: {
+    clairview_capture: {
         hog: "marketTorCapture({\n    'event': f'{event.event} (copy)',\n    'distinct_id': event.distinct_id,\n    'properties': {}\n})",
         bytecode: [
             '_h',
@@ -304,8 +304,8 @@ export const HOG_INPUTS_EXAMPLES: Record<string, Pick<HogFunctionType, 'inputs' 
         ],
         inputs: {
             url: {
-                value: 'https://example.com/markettor-webhook',
-                bytecode: ['_h', 32, 'https://example.com/markettor-webhook'],
+                value: 'https://example.com/clairview-webhook',
+                bytecode: ['_h', 32, 'https://example.com/clairview-webhook'],
             },
             method: { value: 'POST' },
             headers: {
@@ -379,7 +379,7 @@ export const HOG_FILTERS_EXAMPLES: Record<string, Pick<HogFunctionType, 'filters
                     name: '$pageview',
                     type: 'events',
                     order: 0,
-                    properties: [{ key: '$current_url', type: 'event', value: 'markettor', operator: 'icontains' }],
+                    properties: [{ key: '$current_url', type: 'event', value: 'clairview', operator: 'icontains' }],
                 },
                 { id: '$autocapture', name: '$autocapture', type: 'events', order: 1 },
             ],
@@ -396,7 +396,7 @@ export const HOG_FILTERS_EXAMPLES: Record<string, Pick<HogFunctionType, 'filters
                 3,
                 1,
                 32,
-                '%markettor%',
+                '%clairview%',
                 32,
                 '$current_url',
                 32,

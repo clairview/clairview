@@ -1,5 +1,5 @@
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput, LemonModal, LemonTable, Link } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput, LemonModal, LemonTable, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { supportLogic } from 'lib/components/Support/supportLogic'

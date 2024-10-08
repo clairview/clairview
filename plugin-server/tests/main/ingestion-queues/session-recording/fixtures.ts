@@ -8,7 +8,7 @@ export function createIncomingRecordingMessage(
     partialMetadata: Partial<IncomingRecordingMessage['metadata']> = {}
 ): IncomingRecordingMessage {
     // the data on the kafka message is a compressed string.
-    // it is a compressed $snapshot MarketTor event
+    // it is a compressed $snapshot ClairView event
     // that has properties, and they have $snapshot_data
     // that will have data_items, which are the actual snapshots each individually compressed
 

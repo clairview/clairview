@@ -8,8 +8,8 @@ import {
     IconSearch,
     IconShare,
     IconTrash,
-} from '@markettor/icons'
-import { LemonButton, LemonButtonProps, LemonDialog, LemonMenu, LemonMenuItems } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonButton, LemonButtonProps, LemonDialog, LemonMenu, LemonMenuItems } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { useFeatureFlag } from 'lib/hooks/useFeatureFlag'
@@ -201,7 +201,7 @@ const MenuActions = (): JSX.Element => {
             label: 'Export to file',
             onClick: () => exportRecordingToFile(false),
             icon: <IconDownload />,
-            tooltip: 'Export recording to a file. This can be loaded later into MarketTor for playback.',
+            tooltip: 'Export recording to a file. This can be loaded later into ClairView for playback.',
         },
         {
             label: 'Explore DOM',
@@ -212,7 +212,7 @@ const MenuActions = (): JSX.Element => {
             label: 'Export mobile replay to file',
             onClick: () => exportRecordingToFile(true),
             tooltip:
-                'DEBUG ONLY - Export untransformed recording to a file. This can be loaded later into MarketTor for playback.',
+                'DEBUG ONLY - Export untransformed recording to a file. This can be loaded later into ClairView for playback.',
             icon: <IconDownload />,
         },
         hasSimilarRecordings && {

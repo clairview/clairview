@@ -1,7 +1,7 @@
 import './CorrelationMatrix.scss'
 
-import { IconCheckCircle } from '@markettor/icons'
-import { LemonButton, LemonModal } from '@markettor/lemon-ui'
+import { IconCheckCircle } from '@clairview/icons'
+import { LemonButton, LemonModal } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'

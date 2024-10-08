@@ -5,8 +5,8 @@ Rather than add tests here, consider improving event-pipeline-integration test s
 unit tests to appropriate classes/functions.
 */
 
-import { Properties } from '@markettor/plugin-scaffold'
-import { PluginEvent } from '@markettor/plugin-scaffold/src/types'
+import { Properties } from '@clairview/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold/src/types'
 import * as IORedis from 'ioredis'
 import { DateTime } from 'luxon'
 
@@ -15,7 +15,7 @@ import { ClickHouseEvent, Database, Hub, LogLevel, Person, PluginsServerConfig, 
 import { closeHub, createHub } from '../../src/utils/db/hub'
 import { PostgresUse } from '../../src/utils/db/postgres'
 import { personInitialAndUTMProperties } from '../../src/utils/db/utils'
-import { markettor } from '../../src/utils/markettor'
+import { clairview } from '../../src/utils/clairview'
 import { UUIDT } from '../../src/utils/utils'
 import { EventPipelineRunner } from '../../src/worker/ingestion/event-pipeline/runner'
 import { EventsProcessor } from '../../src/worker/ingestion/process-event'
@@ -111,7 +111,7 @@ async function processEvent(
 
 // Simple client used to simulate sending events
 // Use state object to simulate stateful clients that keep track of old
-// distinct id, starting with an anonymous one. I've taken markettor-js as
+// distinct id, starting with an anonymous one. I've taken clairview-js as
 // the reference implementation.
 let state = { currentDistinctId: 'anonymous_id' }
 
@@ -139,7 +139,7 @@ beforeEach(async () => {
     now = DateTime.utc()
 
     // clear the webhook redis cache
-    const hooksCacheKey = `@markettor/plugin-server/hooks/${team.id}`
+    const hooksCacheKey = `@clairview/plugin-server/hooks/${team.id}`
     await redis.del(hooksCacheKey)
 
     // Always start with an anonymous state
@@ -159,7 +159,7 @@ const capture = async (hub: Hub, eventName: string, properties: any = {}) => {
         now: new Date().toISOString(),
         sent_at: new Date().toISOString(),
         ip: '127.0.0.1',
-        site_url: 'https://markettor.com',
+        site_url: 'https://clairview.com',
         team_id: team.id,
         uuid: new UUIDT().toString(),
     }
@@ -174,7 +174,7 @@ const identify = async (hub: Hub, distinctId: string) => {
     const currentDistinctId = state.currentDistinctId
     state.currentDistinctId = distinctId
     await capture(hub, '$identify', {
-        // markettor-js will send the previous distinct id as
+        // clairview-js will send the previous distinct id as
         // $anon_distinct_id
         $anon_distinct_id: currentDistinctId,
         distinct_id: distinctId,
@@ -251,7 +251,7 @@ test('merge people', async () => {
 test('capture new person', async () => {
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_team
+        `UPDATE clairview_team
          SET ingested_event = $1
          WHERE id = $2`,
         [true, team.id],
@@ -267,7 +267,7 @@ test('capture new person', async () => {
         $os: 'Mac OS X',
         $browser_version: '95',
         $referring_domain: 'https://google.com',
-        $referrer: 'https://google.com/?q=markettor',
+        $referrer: 'https://google.com/?q=clairview',
         utm_medium: 'twitter',
         gclid: 'GOOGLE ADS ID',
         msclkid: 'BING ADS ID',
@@ -306,13 +306,13 @@ test('capture new person', async () => {
         $initial_msclkid: 'BING ADS ID',
         gclid: 'GOOGLE ADS ID',
         msclkid: 'BING ADS ID',
-        $initial_referrer: 'https://google.com/?q=markettor',
+        $initial_referrer: 'https://google.com/?q=clairview',
         $initial_referring_domain: 'https://google.com',
         $browser: 'Chrome',
         $browser_version: '95',
         $current_url: 'https://test.com',
         $os: 'Mac OS X',
-        $referrer: 'https://google.com/?q=markettor',
+        $referrer: 'https://google.com/?q=clairview',
         $referring_domain: 'https://google.com',
     }
     expect(persons[0].properties).toEqual(expectedProps)
@@ -336,7 +336,7 @@ test('capture new person', async () => {
             $browser_version: '95',
             $current_url: 'https://test.com',
             $os: 'Mac OS X',
-            $referrer: 'https://google.com/?q=markettor',
+            $referrer: 'https://google.com/?q=clairview',
             $referring_domain: 'https://google.com',
         },
         token: 'THIS IS NOT A TOKEN FOR TEAM 2',
@@ -349,7 +349,7 @@ test('capture new person', async () => {
             $initial_browser_version: '95',
             $initial_gclid: 'GOOGLE ADS ID',
             $initial_msclkid: 'BING ADS ID',
-            $initial_referrer: 'https://google.com/?q=markettor',
+            $initial_referrer: 'https://google.com/?q=clairview',
             $initial_referring_domain: 'https://google.com',
         },
         utm_medium: 'twitter',
@@ -358,7 +358,7 @@ test('capture new person', async () => {
         $browser_version: '95',
         gclid: 'GOOGLE ADS ID',
         msclkid: 'BING ADS ID',
-        $referrer: 'https://google.com/?q=markettor',
+        $referrer: 'https://google.com/?q=clairview',
         $referring_domain: 'https://google.com',
     })
 
@@ -410,13 +410,13 @@ test('capture new person', async () => {
         $initial_msclkid: 'BING ADS ID',
         gclid: 'GOOGLE ADS ID',
         msclkid: 'BING ADS ID',
-        $initial_referrer: 'https://google.com/?q=markettor',
+        $initial_referrer: 'https://google.com/?q=clairview',
         $initial_referring_domain: 'https://google.com',
         $browser: 'Firefox',
         $browser_version: 80,
         $current_url: 'https://test.com/pricing',
         $os: 'Mac OS X',
-        $referrer: 'https://google.com/?q=markettor',
+        $referrer: 'https://google.com/?q=clairview',
         $referring_domain: 'https://google.com',
     }
     expect(persons[0].properties).toEqual(expectedProps)
@@ -612,7 +612,7 @@ test('ip override', async () => {
 test('anonymized ip capture', async () => {
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
-        'update markettor_team set anonymize_ips = $1',
+        'update clairview_team set anonymize_ips = $1',
         [true],
         'testTag'
     )
@@ -867,15 +867,15 @@ test('long htext', async () => {
 test('capture first team event', async () => {
     await hub.db.postgres.query(
         PostgresUse.COMMON_WRITE,
-        `UPDATE markettor_team
+        `UPDATE clairview_team
          SET ingested_event = $1
          WHERE id = $2`,
         [false, team.id],
         'testTag'
     )
 
-    markettor.capture = jest.fn() as any
-    markettor.identify = jest.fn() as any
+    clairview.capture = jest.fn() as any
+    clairview.identify = jest.fn() as any
 
     await processEvent(
         '2',
@@ -894,7 +894,7 @@ test('capture first team event', async () => {
         new UUIDT().toString()
     )
 
-    expect(markettor.capture).toHaveBeenCalledWith({
+    expect(clairview.capture).toHaveBeenCalledWith({
         distinctId: 'plugin_test_user_distinct_id_1001',
         event: 'first team event ingested',
         properties: {
@@ -1302,7 +1302,7 @@ test('distinct team leakage', async () => {
 describe('when handling $identify', () => {
     test('we do not alias users if distinct id changes but we are already identified', async () => {
         // This test is in reference to
-        // https://github.com/MarketTor/markettor/issues/5527 , where we were
+        // https://github.com/ClairView/clairview/issues/5527 , where we were
         // correctly identifying that an anonymous user before login should be
         // aliased to the user they subsequently login as, but incorrectly
         // aliasing on subsequent $identify events. The anonymous case is
@@ -1352,7 +1352,7 @@ describe('when handling $identify', () => {
 
     test('we do not alias users if distinct id changes but we are already identified, with no anonymous event', async () => {
         // This test is in reference to
-        // https://github.com/MarketTor/markettor/issues/5527 , where we were
+        // https://github.com/ClairView/clairview/issues/5527 , where we were
         // correctly identifying that an anonymous user before login should be
         // aliased to the user they subsequently login as, but incorrectly
         // aliasing on subsequent $identify events. The anonymous case is

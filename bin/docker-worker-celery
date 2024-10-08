@@ -2,7 +2,7 @@
 set -e
 
 help () {
-  echo "$0 - start MarketTor's Celery worker"
+  echo "$0 - start ClairView's Celery worker"
   echo
   echo "$0 [options]"
   echo
@@ -83,12 +83,12 @@ if [[ -z "${CELERY_WORKER_QUEUES}" ]]; then
 fi
 
 echo
-echo "SKIP_ASYNC_MIGRATIONS_SETUP=0 celery -A markettor worker ${FLAGS[*]}"
+echo "SKIP_ASYNC_MIGRATIONS_SETUP=0 celery -A clairview worker ${FLAGS[*]}"
 echo
 
 ./bin/migrate-check
 
-SKIP_ASYNC_MIGRATIONS_SETUP=0 CELERY_WORKER_QUEUES=$CELERY_WORKER_QUEUES celery -A markettor worker ${FLAGS[*]} &
+SKIP_ASYNC_MIGRATIONS_SETUP=0 CELERY_WORKER_QUEUES=$CELERY_WORKER_QUEUES celery -A clairview worker ${FLAGS[*]} &
 
 # Exit if any processes exit, and exit with it's exit code
 wait -n

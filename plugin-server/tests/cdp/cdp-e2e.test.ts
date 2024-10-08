@@ -59,7 +59,7 @@ describe('CDP E2E', () => {
 
             if (mode === 'cyclotron') {
                 hub.CDP_CYCLOTRON_ENABLED_TEAMS = '*'
-                hub.CYCLOTRON_DATABASE_URL = 'postgres://markettor:markettor@localhost:5432/test_cyclotron'
+                hub.CYCLOTRON_DATABASE_URL = 'postgres://clairview:clairview@localhost:5432/test_cyclotron'
             }
 
             kafkaObserver = await createKafkaObserver(hub, [KAFKA_APP_METRICS_2, KAFKA_LOG_ENTRIES])
@@ -84,7 +84,7 @@ describe('CDP E2E', () => {
                     uuid: 'b3a1fe86-b10c-43cc-acaf-d208977608d0',
                     event: '$pageview',
                     properties: {
-                        $current_url: 'https://markettor.com',
+                        $current_url: 'https://clairview.com',
                         $lib_version: '1.0.0',
                     },
                     timestamp: '2024-09-03T09:00:00Z',
@@ -129,9 +129,9 @@ describe('CDP E2E', () => {
 
             expect(mockFetch.mock.calls[0]).toMatchInlineSnapshot(`
                 Array [
-                  "https://example.com/markettor-webhook",
+                  "https://example.com/clairview-webhook",
                   Object {
-                    "body": "{\\"event\\":{\\"uuid\\":\\"b3a1fe86-b10c-43cc-acaf-d208977608d0\\",\\"event\\":\\"$pageview\\",\\"elements_chain\\":\\"\\",\\"distinct_id\\":\\"distinct_id\\",\\"url\\":\\"http://localhost:8000/events/1\\",\\"properties\\":{\\"$current_url\\":\\"https://markettor.com\\",\\"$lib_version\\":\\"1.0.0\\"},\\"timestamp\\":\\"2024-09-03T09:00:00Z\\"},\\"groups\\":{},\\"nested\\":{\\"foo\\":\\"http://localhost:8000/events/1\\"},\\"person\\":{\\"id\\":\\"uuid\\",\\"name\\":\\"test\\",\\"url\\":\\"http://localhost:8000/persons/1\\",\\"properties\\":{\\"email\\":\\"test@markettor.com\\"}},\\"event_url\\":\\"http://localhost:8000/events/1-test\\"}",
+                    "body": "{\\"event\\":{\\"uuid\\":\\"b3a1fe86-b10c-43cc-acaf-d208977608d0\\",\\"event\\":\\"$pageview\\",\\"elements_chain\\":\\"\\",\\"distinct_id\\":\\"distinct_id\\",\\"url\\":\\"http://localhost:8000/events/1\\",\\"properties\\":{\\"$current_url\\":\\"https://clairview.com\\",\\"$lib_version\\":\\"1.0.0\\"},\\"timestamp\\":\\"2024-09-03T09:00:00Z\\"},\\"groups\\":{},\\"nested\\":{\\"foo\\":\\"http://localhost:8000/events/1\\"},\\"person\\":{\\"id\\":\\"uuid\\",\\"name\\":\\"test\\",\\"url\\":\\"http://localhost:8000/persons/1\\",\\"properties\\":{\\"email\\":\\"test@clairview.com\\"}},\\"event_url\\":\\"http://localhost:8000/events/1-test\\"}",
                     "headers": Object {
                       "version": "v=1.0.0",
                     },

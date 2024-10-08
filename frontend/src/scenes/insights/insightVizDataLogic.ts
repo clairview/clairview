@@ -1,4 +1,4 @@
-import { lemonToast } from '@markettor/lemon-ui'
+import { lemonToast } from '@clairview/lemon-ui'
 import { actions, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import {
     DISPLAY_TYPES_WITHOUT_DETAILED_RESULTS,
@@ -9,7 +9,7 @@ import { parseProperties } from 'lib/components/PropertyFilters/utils'
 import { NON_TIME_SERIES_DISPLAY_TYPES, NON_VALUES_ON_SERIES_DISPLAY_TYPES } from 'lib/constants'
 import { dayjs } from 'lib/dayjs'
 import { dateMapping, is12HoursOrLess, isLessThan2Days } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { databaseTableListLogic } from 'scenes/data-management/database/databaseTableListLogic'
 import { insightDataLogic } from 'scenes/insights/insightDataLogic'
 import { keyForInsightLogicProps } from 'scenes/insights/sharedUtils'
@@ -455,7 +455,7 @@ export const insightVizDataLogic = kea<insightVizDataLogicType>([
                     kind: values.querySource?.kind,
                     scene: sceneLogic.isMounted() ? sceneLogic.values.scene : null,
                 }
-                markettor.capture('insight timeout message shown', tags)
+                clairview.capture('insight timeout message shown', tags)
             }
         },
         loadDataSuccess: () => {

@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import { KeyboardShortcut } from './KeyboardShortcut'
 
 const meta: Meta<typeof KeyboardShortcut> = {
-    title: 'MarketTor 3000/Keyboard Shortcut',
+    title: 'ClairView 3000/Keyboard Shortcut',
     component: KeyboardShortcut,
     tags: ['autodocs'],
 }

@@ -1,5 +1,5 @@
-import { IconCloud, IconExternal } from '@markettor/icons'
-import { LemonButton, Tooltip } from '@markettor/lemon-ui'
+import { IconCloud, IconExternal } from '@clairview/icons'
+import { LemonButton, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { IconWithBadge } from 'lib/lemon-ui/icons'

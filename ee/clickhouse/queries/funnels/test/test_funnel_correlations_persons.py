@@ -9,21 +9,21 @@ from freezegun import freeze_time
 from ee.clickhouse.queries.funnels.funnel_correlation_persons import (
     FunnelCorrelationActors,
 )
-from markettor.constants import INSIGHT_FUNNELS
-from markettor.models import Cohort, Filter
-from markettor.models.person import Person
-from markettor.session_recordings.queries.test.session_replay_sql import (
+from clairview.constants import INSIGHT_FUNNELS
+from clairview.models import Cohort, Filter
+from clairview.models.person import Person
+from clairview.session_recordings.queries.test.session_replay_sql import (
     produce_replay_summary,
 )
-from markettor.tasks.calculate_cohort import insert_cohort_from_insight_filter
-from markettor.test.base import (
+from clairview.tasks.calculate_cohort import insert_cohort_from_insight_filter
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,
     _create_person,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 FORMAT_TIME = "%Y-%m-%d 00:00:00"
 MAX_STEP_COLUMN = 0
@@ -207,7 +207,7 @@ class TestClickhouseFunnelCorrelationsActors(ClickhouseTestMixin, APIBaseTest):
             [*failure_target_persons, str(person_succ.uuid)],
         )
 
-    @patch("markettor.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
+    @patch("clairview.tasks.calculate_cohort.insert_cohort_from_insight_filter.delay")
     def test_create_funnel_correlation_cohort(self, _insert_cohort_from_insight_filter):
         (
             filter,

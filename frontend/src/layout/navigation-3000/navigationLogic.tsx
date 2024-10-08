@@ -19,8 +19,8 @@ import {
     IconTestTube,
     IconToggle,
     IconWarning,
-} from '@markettor/icons'
-import { lemonToast, Spinner } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { lemonToast, Spinner } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import { actions, connect, events, kea, listeners, path, props, reducers, selectors } from 'kea'
 import { router } from 'kea-router'
@@ -415,7 +415,7 @@ export const navigation3000Logic = kea<navigation3000LogicType>([
                     : [
                           {
                               identifier: Scene.Products,
-                              label: 'Welcome to MarketTor',
+                              label: 'Welcome to ClairView',
                               icon: <IconLogomark />,
                               to: urls.products(),
                           },

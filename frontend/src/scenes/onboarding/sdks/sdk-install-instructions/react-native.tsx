@@ -1,4 +1,4 @@
-import { LemonBanner, Link } from '@markettor/lemon-ui'
+import { LemonBanner, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
 import { apiHostOrigin } from 'lib/utils/apiHost'
@@ -12,17 +12,17 @@ function RNInstallSnippet({ includeReplay }: RNSetupProps): JSX.Element {
     return (
         <CodeSnippet language={Language.Bash}>
             {`# Expo apps
-npx expo install markettor-react-native expo-file-system expo-application expo-device expo-localization${
-                includeReplay ? ` markettor-react-native-session-replay` : ''
+npx expo install clairview-react-native expo-file-system expo-application expo-device expo-localization${
+                includeReplay ? ` clairview-react-native-session-replay` : ''
             } 
 
 # Standard React Native apps
-yarn add markettor-react-native @react-native-async-storage/async-storage react-native-device-info${
-                includeReplay ? ` markettor-react-native-session-replay` : ''
+yarn add clairview-react-native @react-native-async-storage/async-storage react-native-device-info${
+                includeReplay ? ` clairview-react-native-session-replay` : ''
             } 
 # or
-npm i -s markettor-react-native @react-native-async-storage/async-storage react-native-device-info${
-                includeReplay ? ` markettor-react-native-session-replay` : ''
+npm i -s clairview-react-native @react-native-async-storage/async-storage react-native-device-info${
+                includeReplay ? ` clairview-react-native-session-replay` : ''
             } 
 
 # for iOS
@@ -39,21 +39,21 @@ function RNSetupSnippet({ includeReplay }: RNSetupProps): JSX.Element {
     return (
         <>
             <p>
-                MarketTor is most easily used via the <code>MarketTorProvider</code> component but if you need to
+                ClairView is most easily used via the <code>ClairViewProvider</code> component but if you need to
                 instantiate it directly,{' '}
-                <Link to="https://markettor.com/docs/libraries/react-native#without-the-markettorprovider">
+                <Link to="https://clairview.com/docs/libraries/react-native#without-the-clairviewprovider">
                     check out the docs
                 </Link>{' '}
                 which explain how to do this correctly.
             </p>
             <CodeSnippet language={Language.JSX}>
                 {`// App.(js|ts)
-import { MarketTorProvider } from 'markettor-react-native'
+import { ClairViewProvider } from 'clairview-react-native'
 ...
 
 export function MyApp() {
     return (
-        <MarketTorProvider apiKey="${currentTeam?.api_token}" options={{
+        <ClairViewProvider apiKey="${currentTeam?.api_token}" options={{
             host: "${url}",
             ${
                 includeReplay
@@ -82,7 +82,7 @@ export function MyApp() {
             }
         }}>
             <RestOfApp />
-        </MarketTorProvider>
+        </ClairViewProvider>
     )
 }`}
             </CodeSnippet>
@@ -95,13 +95,13 @@ export function SDKInstallRNInstructions(props: RNSetupProps): JSX.Element {
         <>
             {props.includeReplay ? (
                 <LemonBanner type="info">
-                    🚧 NOTE: <Link to="https://markettor.com/docs/session-replay/mobile">Mobile recording</Link> is
+                    🚧 NOTE: <Link to="https://clairview.com/docs/session-replay/mobile">Mobile recording</Link> is
                     currently in beta. We are keen to gather as much feedback as possible so if you try this out please
                     let us know. You can send feedback via the{' '}
-                    <Link to="https://us.markettor.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
+                    <Link to="https://us.clairview.com/#panel=support%3Afeedback%3Asession_replay%3Alow">
                         in-app support panel
                     </Link>{' '}
-                    or one of our other <Link to="https://markettor.com/docs/support-options">support options</Link>.
+                    or one of our other <Link to="https://clairview.com/docs/support-options">support options</Link>.
                 </LemonBanner>
             ) : null}
             <h3>Install</h3>

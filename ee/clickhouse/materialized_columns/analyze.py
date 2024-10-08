@@ -17,16 +17,16 @@ from ee.settings import (
     MATERIALIZE_COLUMNS_MAX_AT_ONCE,
     MATERIALIZE_COLUMNS_MINIMUM_QUERY_TIME,
 )
-from markettor.cache_utils import instance_memoize
-from markettor.client import sync_execute
-from markettor.models.filters.mixins.utils import cached_property
-from markettor.models.person.sql import (
+from clairview.cache_utils import instance_memoize
+from clairview.client import sync_execute
+from clairview.models.filters.mixins.utils import cached_property
+from clairview.models.person.sql import (
     GET_EVENT_PROPERTIES_COUNT,
     GET_PERSON_PROPERTIES_COUNT,
 )
-from markettor.models.property import PropertyName, TableColumn, TableWithProperties
-from markettor.models.property_definition import PropertyDefinition
-from markettor.models.team import Team
+from clairview.models.property import PropertyName, TableColumn, TableWithProperties
+from clairview.models.property_definition import PropertyDefinition
+from clairview.models.team import Team
 
 Suggestion = tuple[TableWithProperties, TableColumn, PropertyName]
 
@@ -128,7 +128,7 @@ SELECT
     --formatReadableSize(avg(read_bytes)),
     --formatReadableSize(max(read_bytes))
 FROM
-    clusterAllReplicas(markettor, system, query_log)
+    clusterAllReplicas(clairview, system, query_log)
 WHERE
     query_start_time > now() - toIntervalHour({since})
     and query LIKE '%JSONExtract%'

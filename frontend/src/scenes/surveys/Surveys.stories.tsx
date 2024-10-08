@@ -30,7 +30,7 @@ const MOCK_BASIC_SURVEY: Survey = {
         uuid: '01863799-062b-0000-8a61-b2842d5f8642',
         distinct_id: 'Sopz9Z4NMIfXGlJe6W1XF98GOqhHNui5J5eRe0tBGTE',
         first_name: 'Employee 427',
-        email: 'test2@markettor.com',
+        email: 'test2@clairview.com',
     },
     questions: [{ question: 'question 1?', type: SurveyQuestionType.Open }],
     conditions: null,
@@ -58,7 +58,7 @@ const MOCK_SURVEY_WITH_MULTIPLE_OPTIONS: Survey = {
         uuid: '01863799-062b-0000-8a61-b2842d5f8642',
         distinct_id: 'Sopz9Z4NMIfXGlJe6W1XF98GOqhHNui5J5eRe0tBGTE',
         first_name: 'Employee 427',
-        email: 'test2@markettor.com',
+        email: 'test2@clairview.com',
     },
     questions: [
         {
@@ -98,12 +98,12 @@ const MOCK_SURVEY_WITH_RELEASE_CONS: Survey = {
         uuid: '01863799-062b-0000-8a61-b2842d5f8642',
         distinct_id: 'Sopz9Z4NMIfXGlJe6W1XF98GOqhHNui5J5eRe0tBGTE',
         first_name: 'Employee 427',
-        email: 'test2@markettor.com',
+        email: 'test2@clairview.com',
     },
     questions: [{ question: 'question 2?', type: SurveyQuestionType.Open }],
     appearance: { backgroundColor: 'white', submitButtonColor: '#2C2C2C' },
     conditions: {
-        url: 'markettor',
+        url: 'clairview',
         selector: '',
         events: { values: [{ name: 'user_subscribed' }] },
         actions: { values: [] },
@@ -142,7 +142,7 @@ const MOCK_SURVEY_WITH_RELEASE_CONS: Survey = {
                         {
                             key: 'email',
                             type: PropertyFilterType.Person,
-                            value: ['li@markettor.com'],
+                            value: ['li@clairview.com'],
                             operator: PropertyOperator.Exact,
                         },
                     ],
@@ -329,7 +329,7 @@ export const NewSurveyWithHTMLQuestionDescription: StoryFn = () => {
             '/api/users/@me': () => [
                 200,
                 {
-                    email: 'test@markettor.com',
+                    email: 'test@clairview.com',
                     first_name: 'Test Hedgehog',
                     organization: {
                         ...organizationCurrent,

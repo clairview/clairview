@@ -1,5 +1,5 @@
-import { IconCopy } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonDivider, LemonInput } from '@markettor/lemon-ui'
+import { IconCopy } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonDivider, LemonInput } from '@clairview/lemon-ui'
 import { captureException } from '@sentry/react'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
@@ -22,7 +22,7 @@ export function PlayerShareRecording(props: PlayerShareLogicProps): JSX.Element 
             <h3>Internal Link</h3>
             <p>
                 <b>Click the button below</b> to copy a direct link to this recording. Make sure the person you share it
-                with has access to this MarketTor project.
+                with has access to this ClairView project.
             </p>
             <LemonButton
                 type="secondary"
@@ -58,7 +58,7 @@ export function PlayerShareRecording(props: PlayerShareLogicProps): JSX.Element 
             <h3>External Link</h3>
 
             <p>
-                You can also share or embed the recording outside of MarketTor. Be aware that all the content of the
+                You can also share or embed the recording outside of ClairView. Be aware that all the content of the
                 recording will be accessible to anyone with the link.
             </p>
 

@@ -9,11 +9,11 @@ from django.utils import timezone
 from prometheus_client import Histogram, Counter
 from sentry_sdk import capture_exception, capture_message
 
-from markettor import settings
-from markettor.session_recordings.models.metadata import PersistedRecordingV1
-from markettor.session_recordings.models.session_recording import SessionRecording
-from markettor.session_recordings.session_recording_helpers import decompress
-from markettor.storage import object_storage
+from clairview import settings
+from clairview.session_recordings.models.metadata import PersistedRecordingV1
+from clairview.session_recordings.models.session_recording import SessionRecording
+from clairview.session_recordings.session_recording_helpers import decompress
+from clairview.storage import object_storage
 
 logger = structlog.get_logger(__name__)
 

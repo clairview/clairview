@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { supportLogic } from 'lib/components/Support/supportLogic'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -57,8 +57,8 @@ export function WebhookIntegration(): JSX.Element {
                 Send notifications when selected actions are performed by users.
                 <br />
                 Guidance on integrating with webhooks available in our docs,{' '}
-                <Link to="https://markettor.com/docs/webhooks/slack">for Slack</Link> and{' '}
-                <Link to="https://markettor.com/docs/webhooks/microsoft-teams">for Microsoft Teams</Link>. Discord is also
+                <Link to="https://clairview.com/docs/webhooks/slack">for Slack</Link> and{' '}
+                <Link to="https://clairview.com/docs/webhooks/microsoft-teams">for Microsoft Teams</Link>. Discord is also
                 supported.
             </p>
 

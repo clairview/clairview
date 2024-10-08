@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a feature for MarketTor
+about: Suggest a feature for ClairView
 labels: enhancement, feature
 
 ---

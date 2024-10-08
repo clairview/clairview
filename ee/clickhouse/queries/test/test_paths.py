@@ -6,22 +6,22 @@ from django.test import TestCase
 from django.utils import timezone
 from freezegun import freeze_time
 
-from markettor.constants import (
+from clairview.constants import (
     FUNNEL_PATH_AFTER_STEP,
     FUNNEL_PATH_BEFORE_STEP,
     FUNNEL_PATH_BETWEEN_STEPS,
     INSIGHT_FUNNELS,
 )
-from markettor.models.filters import Filter, PathFilter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.instance_setting import override_instance_config
-from markettor.queries.paths import Paths, PathsActors
-from markettor.queries.paths.paths_event_query import PathEventQuery
-from markettor.session_recordings.queries.test.session_replay_sql import (
+from clairview.models.filters import Filter, PathFilter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.instance_setting import override_instance_config
+from clairview.queries.paths import Paths, PathsActors
+from clairview.queries.paths.paths_event_query import PathEventQuery
+from clairview.session_recordings.queries.test.session_replay_sql import (
     produce_replay_summary,
 )
-from markettor.test.base import (
+from clairview.test.base import (
     APIBaseTest,
     ClickhouseTestMixin,
     _create_event,

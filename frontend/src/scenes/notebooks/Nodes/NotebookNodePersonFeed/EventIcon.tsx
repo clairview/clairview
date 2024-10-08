@@ -1,5 +1,5 @@
-import { IconCode, IconEye } from '@markettor/icons'
-import { Tooltip } from '@markettor/lemon-ui'
+import { IconCode, IconEye } from '@clairview/icons'
+import { Tooltip } from '@clairview/lemon-ui'
 import { IconAdsClick, IconExclamation, IconEyeHidden } from 'lib/lemon-ui/icons'
 import { CORE_FILTER_DEFINITIONS_BY_GROUP } from 'lib/taxonomy'
 

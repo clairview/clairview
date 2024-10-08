@@ -8,13 +8,13 @@ import { AdvertiseMobileReplay } from '../session-replay/SessionReplaySDKInstruc
 function RNCaptureSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.JSX}>{`// With hooks
-import { useMarketTor } from 'markettor-react-native'
+import { useClairView } from 'clairview-react-native'
 
 const MyComponent = () => {
-    const markettor = useMarketTor()
+    const clairview = useClairView()
 
     useEffect(() => {
-        markettor.capture("MyComponent loaded", { foo: "bar" })
+        clairview.capture("MyComponent loaded", { foo: "bar" })
     }, [])
 }
 `}</CodeSnippet>

@@ -1,4 +1,4 @@
-import { LemonSelect, Link } from '@markettor/lemon-ui'
+import { LemonSelect, Link } from '@clairview/lemon-ui'
 import { IconGolang, IconJavascript, IconNodeJS, IconPHP, IconPython, IconRuby } from 'lib/lemon-ui/icons'
 import { useState } from 'react'
 
@@ -19,7 +19,7 @@ interface ExperimentImplementationDetailsProps {
 }
 
 const UTM_TAGS = '?utm_medium=in-product&utm_campaign=experiment'
-const DOC_BASE_URL = 'https://markettor.com/docs/'
+const DOC_BASE_URL = 'https://clairview.com/docs/'
 const FF_ANCHOR = '#feature-flags'
 
 const OPTIONS = [

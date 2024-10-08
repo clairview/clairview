@@ -96,9 +96,9 @@ const config: Config = {
     moduleNameMapper: {
         '^.+\\.(css|less|scss|svg|png|lottie)$': '<rootDir>/frontend/src/test/mocks/styleMock.js',
         '^~/(.*)$': '<rootDir>/frontend/src/$1',
-        '^@markettor/lemon-ui(|/.*)$': '<rootDir>/frontend/@markettor/lemon-ui/src/$1',
-        '^@markettor/apps-common(|/.*)$': '<rootDir>/frontend/@markettor/apps-common/src/$1',
-        '^@markettor/ee/exports': ['<rootDir>/ee/frontend/exports', '<rootDir>/frontend/@markettor/ee/exports'],
+        '^@clairview/lemon-ui(|/.*)$': '<rootDir>/frontend/@clairview/lemon-ui/src/$1',
+        '^@clairview/apps-common(|/.*)$': '<rootDir>/frontend/@clairview/apps-common/src/$1',
+        '^@clairview/ee/exports': ['<rootDir>/ee/frontend/exports', '<rootDir>/frontend/@clairview/ee/exports'],
         '^lib/(.*)$': '<rootDir>/frontend/src/lib/$1',
         'monaco-editor': '<rootDir>/node_modules/monaco-editor/esm/vs/editor/editor.api.d.ts',
         '^scenes/(.*)$': '<rootDir>/frontend/src/scenes/$1',

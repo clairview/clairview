@@ -1,6 +1,6 @@
 import { NotebookNodeType, PropertyDefinitionType } from '~/types'
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
-import { LemonLabel, LemonSkeleton } from '@markettor/lemon-ui'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { LemonLabel, LemonSkeleton } from '@clairview/lemon-ui'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { PropertiesTable } from 'lib/components/PropertiesTable'
 import { useValues } from 'kea'
@@ -53,7 +53,7 @@ type NotebookNodePropertiesAttributes = {
     id: string
 }
 
-export const NotebookNodeProperties = createMarketTorWidgetNode({
+export const NotebookNodeProperties = createClairViewWidgetNode({
     nodeType: NotebookNodeType.Properties,
     titlePlaceholder: 'Properties',
     Component,

@@ -1,4 +1,4 @@
-import { LemonButton, LemonDropdown, LemonDropdownProps, LemonInput, ProfilePicture } from '@markettor/lemon-ui'
+import { LemonButton, LemonDropdown, LemonDropdownProps, LemonInput, ProfilePicture } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { fullName } from 'lib/utils'
 import { useEffect, useMemo, useState } from 'react'

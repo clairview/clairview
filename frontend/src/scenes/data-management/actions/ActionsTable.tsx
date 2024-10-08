@@ -1,5 +1,5 @@
-import { IconCheckCircle, IconPin, IconPinFilled } from '@markettor/icons'
-import { LemonInput, LemonSegmentedButton } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconPin, IconPinFilled } from '@clairview/icons'
+import { LemonInput, LemonSegmentedButton } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import api from 'lib/api'
 import { ObjectTags } from 'lib/components/ObjectTags/ObjectTags'
@@ -245,7 +245,7 @@ export function ActionsTable(): JSX.Element {
                 thingName="action"
                 isEmpty={shouldShowEmptyState}
                 description="Use actions to combine events that you want to have tracked together or to make detailed Autocapture events easier to reuse."
-                docsURL="https://markettor.com/docs/data/actions"
+                docsURL="https://clairview.com/docs/data/actions"
                 actionElementOverride={
                     <NewActionButton onSelectOption={() => updateHasSeenProductIntroFor(ProductKey.ACTIONS, true)} />
                 }

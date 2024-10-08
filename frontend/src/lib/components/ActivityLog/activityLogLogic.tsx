@@ -28,7 +28,7 @@ import type { activityLogLogicType } from './activityLogLogicType'
 
 /**
  * Having this function inside the `humanizeActivity module was causing very weird test errors in other modules
- * see https://github.com/MarketTor/markettor/pull/12062
+ * see https://github.com/ClairView/clairview/pull/12062
  * So, we inject the function instead
  * **/
 export const describerFor = (logItem?: ActivityLogItem): Describer | undefined => {

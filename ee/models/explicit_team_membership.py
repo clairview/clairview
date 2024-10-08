@@ -1,7 +1,7 @@
 from django.db import models
 
-from markettor.models.utils import UUIDModel, sane_repr
-from markettor.models.organization import OrganizationMembership
+from clairview.models.utils import UUIDModel, sane_repr
+from clairview.models.organization import OrganizationMembership
 
 
 # We call models that grant a user access to some grouping of users a "membership"
@@ -13,13 +13,13 @@ class ExplicitTeamMembership(UUIDModel):
         ADMIN = 8, "administrator"
 
     team = models.ForeignKey(
-        "markettor.Team",
+        "clairview.Team",
         on_delete=models.CASCADE,
         related_name="explicit_memberships",
         related_query_name="explicit_membership",
     )
     parent_membership = models.ForeignKey(
-        "markettor.OrganizationMembership",
+        "clairview.OrganizationMembership",
         on_delete=models.CASCADE,
         related_name="explicit_team_memberships",
         related_query_name="explicit_team_membership",

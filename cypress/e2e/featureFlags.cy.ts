@@ -31,14 +31,14 @@ describe('Feature Flags', () => {
         cy.get('[data-attr=feature-flag-instructions-select-option-php]').click({ force: true })
         cy.get('[data-attr=feature-flag-instructions-snippet]').should(
             'contain',
-            /if (MarketTor::isFeatureEnabled('.*', 'some distinct id')) {/
+            /if (ClairView::isFeatureEnabled('.*', 'some distinct id')) {/
         )
         cy.get('[data-attr=feature-flag-instructions-snippet]').should('contain', / {4}\/\/ do something here/)
         cy.get('[data-attr=feature-flag-instructions-snippet]').should('contain', /}/)
         cy.get('[data-attr=feature-flag-doc-link]').should(
             'have.attr',
             'href',
-            'https://markettor.com/docs/libraries/php?utm_medium=in-product&utm_campaign=feature-flag#feature-flags'
+            'https://clairview.com/docs/libraries/php?utm_medium=in-product&utm_campaign=feature-flag#feature-flags'
         )
 
         // select "add filter" and "property"

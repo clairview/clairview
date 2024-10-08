@@ -4,7 +4,7 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 
 function PythonInstallSnippet(): JSX.Element {
-    return <CodeSnippet language={Language.Bash}>pip install markettor</CodeSnippet>
+    return <CodeSnippet language={Language.Bash}>pip install clairview</CodeSnippet>
 }
 
 function PythonSetupSnippet(): JSX.Element {
@@ -12,9 +12,9 @@ function PythonSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.Python}>
-            {`from markettor import Markettor
+            {`from clairview import Markettor
 
-markettor = Markettor(project_api_key='${currentTeam?.api_token}', host='${apiHostOrigin()}')
+clairview = Markettor(project_api_key='${currentTeam?.api_token}', host='${apiHostOrigin()}')
 
             `}
         </CodeSnippet>

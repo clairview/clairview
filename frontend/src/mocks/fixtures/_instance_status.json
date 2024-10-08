@@ -2,8 +2,8 @@
     "results": {
         "overview": [
             {
-                "key": "markettor_git_sha",
-                "metric": "MarketTor Git SHA",
+                "key": "clairview_git_sha",
+                "metric": "ClairView Git SHA",
                 "value": "Undefined"
             },
             {

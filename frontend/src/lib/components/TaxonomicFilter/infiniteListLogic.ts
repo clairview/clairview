@@ -262,7 +262,7 @@ export const infiniteListLogic = kea<infiniteListLogicType>([
             (rawLocalItems, group): ListFuse => {
                 // maps e.g. "selector" to its display value "CSS Selector"
                 // so a search of "css" matches something
-                function asMarketTorName(
+                function asClairViewName(
                     group: TaxonomicFilterGroup,
                     item: EventDefinition | CohortType
                 ): string | undefined {
@@ -271,12 +271,12 @@ export const infiniteListLogic = kea<infiniteListLogicType>([
 
                 const haystack = (rawLocalItems || []).map((item) => ({
                     name: group?.getName?.(item) || '',
-                    markettorName: asMarketTorName(group, item),
+                    clairviewName: asClairViewName(group, item),
                     item: item,
                 }))
 
                 return new Fuse(haystack, {
-                    keys: ['name', 'markettorName'],
+                    keys: ['name', 'clairviewName'],
                     threshold: 0.3,
                 })
             },

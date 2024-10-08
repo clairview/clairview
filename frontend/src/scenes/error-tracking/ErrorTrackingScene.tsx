@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { IconGear } from '@markettor/icons'
+import { TZLabel } from '@clairview/apps-common'
+import { IconGear } from '@clairview/icons'
 import {
     LemonButton,
     LemonCheckbox,
@@ -7,7 +7,7 @@ import {
     LemonFileInput,
     LemonModal,
     LemonSegmentedButton,
-} from '@markettor/lemon-ui'
+} from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'

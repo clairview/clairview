@@ -1,6 +1,6 @@
 import './AnnotationsOverlay.scss'
 
-import { IconPencil, IconPlusSmall, IconTrash } from '@markettor/icons'
+import { IconPencil, IconPlusSmall, IconTrash } from '@clairview/icons'
 import { Chart } from 'chart.js'
 import { BindLogic, useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'

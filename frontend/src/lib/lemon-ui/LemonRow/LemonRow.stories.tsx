@@ -1,4 +1,4 @@
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { IconPremium } from 'lib/lemon-ui/icons'
 

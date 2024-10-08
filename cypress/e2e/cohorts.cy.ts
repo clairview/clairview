@@ -10,7 +10,7 @@ describe('Cohorts', () => {
 
     it('Cohorts new and list', () => {
         // load an empty page
-        cy.title().should('equal', 'Cohorts • People • MarketTor')
+        cy.title().should('equal', 'Cohorts • People • ClairView')
         cy.contains('Create your first cohort').should('exist')
         cy.get('[data-attr="product-introduction-docs-link"]').should('contain', 'Learn more')
 

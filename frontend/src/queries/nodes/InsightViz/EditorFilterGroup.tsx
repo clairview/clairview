@@ -1,6 +1,6 @@
 import './EditorFilterGroup.scss'
 
-import { IconCollapse, IconExpand } from '@markettor/icons'
+import { IconCollapse, IconExpand } from '@clairview/icons'
 import { LemonBadge } from 'lib/lemon-ui/LemonBadge/LemonBadge'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonField } from 'lib/lemon-ui/LemonField'

@@ -15,11 +15,11 @@ jest.mock('node-fetch', () => ({
 beforeEach(() => {
     const responsesToUrls = {
         'https://google.com/results.json?query=fetched': { count: 2, query: 'bla', results: [true, true] },
-        'https://mmdbcdn.markettor.net/': readFileSync(join(__dirname, 'tests', 'assets', 'GeoLite2-City-Test.mmdb.br')),
-        'https://app.markettor.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2': { hello: 'world' },
+        'https://mmdbcdn.clairview.net/': readFileSync(join(__dirname, 'tests', 'assets', 'GeoLite2-City-Test.mmdb.br')),
+        'https://app.clairview.com/api/event?token=THIS+IS+NOT+A+TOKEN+FOR+TEAM+2': { hello: 'world' },
     }
     const headersToUrls = {
-        'https://mmdbcdn.markettor.net/': new Map([
+        'https://mmdbcdn.clairview.net/': new Map([
             ['content-type', 'vnd.maxmind.maxmind-db'],
             ['content-disposition', `attachment; filename="GeoLite2-City-${DateTime.local().toISODate()}.mmdb"`],
         ]),

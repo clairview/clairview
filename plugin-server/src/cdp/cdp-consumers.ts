@@ -1,4 +1,4 @@
-import { CyclotronJob, CyclotronManager, CyclotronWorker } from '@markettor/cyclotron'
+import { CyclotronJob, CyclotronManager, CyclotronWorker } from '@clairview/cyclotron'
 import { captureException } from '@sentry/node'
 import { Message } from 'node-rdkafka'
 import { Counter, Gauge, Histogram } from 'prom-client'
@@ -260,9 +260,9 @@ abstract class CdpConsumerBase {
 
                         this.produceLogs(result)
 
-                        // MarketTor capture events
-                        const capturedEvents = result.capturedMarketTorEvents
-                        delete result.capturedMarketTorEvents
+                        // ClairView capture events
+                        const capturedEvents = result.capturedClairViewEvents
+                        delete result.capturedClairViewEvents
 
                         for (const event of capturedEvents ?? []) {
                             const team = await this.hub.teamManager.fetchTeam(event.team_id)

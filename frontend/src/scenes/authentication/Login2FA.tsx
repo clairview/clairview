@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Form } from 'kea-forms'
 import { BridgePage } from 'lib/components/BridgePage/BridgePage'
@@ -19,7 +19,7 @@ export function Login2FA(): JSX.Element {
             message={
                 <>
                     Welcome to
-                    <br /> MarketTor{preflight?.cloud ? ' Cloud' : ''}!
+                    <br /> ClairView{preflight?.cloud ? ' Cloud' : ''}!
                 </>
             }
         >

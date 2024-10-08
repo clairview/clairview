@@ -4,10 +4,10 @@ from zoneinfo import ZoneInfo
 from celery import shared_task
 
 from ee.api.sentry_stats import get_stats_for_timerange
-from markettor.models.feature_flag import FeatureFlag
-from markettor.models.filters.filter import Filter
-from markettor.models.team import Team
-from markettor.queries.trends.trends import Trends
+from clairview.models.feature_flag import FeatureFlag
+from clairview.models.filters.filter import Filter
+from clairview.models.team import Team
+from clairview.queries.trends.trends import Trends
 
 
 def check_flags_to_rollback():

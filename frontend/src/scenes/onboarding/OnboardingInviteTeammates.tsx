@@ -25,7 +25,7 @@ export const OnboardingInviteTeammates = ({ stepKey }: { stepKey: OnboardingStep
             case ProductKey.SURVEYS:
                 return 'Surveys are'
             default:
-                return 'MarketTor is'
+                return 'ClairView is'
         }
     }
 
@@ -68,7 +68,7 @@ export const OnboardingInviteTeammates = ({ stepKey }: { stepKey: OnboardingStep
                 </p>
                 {!preflight?.email_service_available && (
                     <p>
-                        This MarketTor instance isn't configured to send emails. In the meantime, enter your teammates'
+                        This ClairView instance isn't configured to send emails. In the meantime, enter your teammates'
                         emails below to generate their custom invite links.{' '}
                         <strong>You'll need to share the links with your project members manually</strong>. You can
                         invite more people later.

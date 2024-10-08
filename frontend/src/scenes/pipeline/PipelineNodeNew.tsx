@@ -1,4 +1,4 @@
-import { IconPlusSmall } from '@markettor/icons'
+import { IconPlusSmall } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { combineUrl, router } from 'kea-router'
 import { NotFound } from 'lib/components/NotFound'

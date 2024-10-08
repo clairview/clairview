@@ -3,8 +3,8 @@ import { CoreFilterDefinition, PropertyFilterValue } from '~/types'
 import { TaxonomicFilterGroupType } from './components/TaxonomicFilter/types'
 import { Link } from './lemon-ui/Link'
 
-/** Same as https://github.com/MarketTor/markettor-js/blob/master/src/utils/event-utils.ts */
-// Ideally this would be imported from markettor-js, we just need to start exporting the list there
+/** Same as https://github.com/ClairView/clairview-js/blob/master/src/utils/event-utils.ts */
+// Ideally this would be imported from clairview-js, we just need to start exporting the list there
 export const CAMPAIGN_PROPERTIES: string[] = [
     'utm_source',
     'utm_medium',
@@ -27,7 +27,7 @@ export const CAMPAIGN_PROPERTIES: string[] = [
     'rdt_cid', // reddit
 ]
 
-// copy from https://github.com/MarketTor/markettor/blob/29ac8d6b2ba5de4b65a148136b681b8e52e20429/plugin-server/src/utils/db/utils.ts#L44
+// copy from https://github.com/ClairView/clairview/blob/29ac8d6b2ba5de4b65a148136b681b8e52e20429/plugin-server/src/utils/db/utils.ts#L44
 const PERSON_PROPERTIES_ADAPTED_FROM_EVENT = new Set([
     // mobile params
     '$app_build',
@@ -71,7 +71,7 @@ export const SESSION_INITIAL_PROPERTIES_ADAPTED_FROM_EVENTS = new Set([
 ])
 
 // If adding event properties with labels, check whether they should be added to
-// PROPERTY_NAME_ALIASES in markettor/api/property_definition.py
+// PROPERTY_NAME_ALIASES in clairview/api/property_definition.py
 // see code to output JSON below this
 export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
     events: {
@@ -209,7 +209,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
                     Filter on the <code>href</code> attribute of the element.
                 </span>
             ),
-            examples: ['https://markettor.com/about'],
+            examples: ['https://clairview.com/about'],
         },
     },
     metadata: {
@@ -241,7 +241,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         },
         $pageview_id: {
             label: 'Pageview ID',
-            description: "MarketTor's internal ID for matching events to a pageview.",
+            description: "ClairView's internal ID for matching events to a pageview.",
             system: true,
         },
         $autocapture_disabled_server_side: {
@@ -322,7 +322,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         },
         $exception_personURL: {
             label: 'Exception person URL',
-            description: 'The MarketTor person that experienced the exception',
+            description: 'The ClairView person that experienced the exception',
         },
         $ce_version: {
             label: '$ce_version',
@@ -451,7 +451,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $app_namespace: {
             label: 'App Namespace',
             description: 'The namespace of the app as identified in the app store.',
-            examples: ['com.markettor.app'],
+            examples: ['com.clairview.app'],
         },
         $app_version: {
             label: 'App Version',
@@ -648,7 +648,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $sent_at: {
             label: 'Sent At',
             description:
-                'Time the event was sent to MarketTor. Used for correcting the event timestamp when the device clock is off.',
+                'Time the event was sent to ClairView. Used for correcting the event timestamp when the device clock is off.',
             examples: [new Date().toISOString()],
         },
         $browser: {
@@ -679,7 +679,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $raw_user_agent: {
             label: 'Raw User Agent',
             description:
-                'MarketTor process information like browser, OS, and device type from the user agent string. This is the raw user agent string.',
+                'ClairView process information like browser, OS, and device type from the user agent string. This is the raw user agent string.',
             examples: ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)'],
         },
         $user_agent: {
@@ -714,7 +714,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $lib: {
             label: 'Library',
             description: 'What library was used to send the event.',
-            examples: ['web', 'markettor-ios'],
+            examples: ['web', 'clairview-ios'],
         },
         $lib_custom_api_host: {
             label: 'Library Custom API Host',
@@ -744,7 +744,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $referrer: {
             label: 'Referrer URL',
             description: 'URL of where the user came from.',
-            examples: ['https://google.com/search?q=markettor&rlz=1C...'],
+            examples: ['https://google.com/search?q=clairview&rlz=1C...'],
         },
         $referring_domain: {
             label: 'Referring Domain',
@@ -756,7 +756,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
             description: (
                 <span>
                     This variable will be set to the distinct ID if you've called{' '}
-                    <pre className="inline">markettor.identify('distinct id')</pre>. If the user is anonymous, it'll be
+                    <pre className="inline">clairview.identify('distinct id')</pre>. If the user is anonymous, it'll be
                     empty.
                 </span>
             ),
@@ -932,7 +932,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         referring_application: {
             label: 'Referrer Application',
             description: 'The namespace of the app that made the request.',
-            examples: ['com.markettor.app'],
+            examples: ['com.clairview.app'],
         },
         // set by the Application Installed/Application Updated/Application Opened events
         // similar to $app_version
@@ -1055,8 +1055,8 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
             label: 'Session duration',
             description: (
                 <span>
-                    The duration of the session being tracked. Learn more about how MarketTor tracks sessions in{' '}
-                    <Link to="https://markettor.com/docs/user-guides/sessions">our documentation.</Link>
+                    The duration of the session being tracked. Learn more about how ClairView tracks sessions in{' '}
+                    <Link to="https://clairview.com/docs/user-guides/sessions">our documentation.</Link>
                     <br /> <br />
                     Note, if the duration is formatted as a single number (not 'HH:MM:SS'), it's in seconds.
                 </span>
@@ -1242,7 +1242,7 @@ CORE_FILTER_DEFINITIONS_BY_GROUP.event_properties.$session_duration =
 
 export const PROPERTY_KEYS = Object.keys(CORE_FILTER_DEFINITIONS_BY_GROUP.event_properties)
 
-/** Return whether a given filter key is part of MarketTor's core (marked by the MarketTor logo). */
+/** Return whether a given filter key is part of ClairView's core (marked by the ClairView logo). */
 export function isCoreFilter(key: string): boolean {
     if (Object.values(CORE_FILTER_DEFINITIONS_BY_GROUP).some((mapping) => Object.keys(mapping).includes(key))) {
         return true

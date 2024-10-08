@@ -1,5 +1,5 @@
-import { IconDay, IconLaptop, IconNight } from '@markettor/icons'
-import { LemonSelect, LemonSelectProps } from '@markettor/lemon-ui'
+import { IconDay, IconLaptop, IconNight } from '@clairview/icons'
+import { LemonSelect, LemonSelectProps } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { userLogic } from 'scenes/userLogic'
 

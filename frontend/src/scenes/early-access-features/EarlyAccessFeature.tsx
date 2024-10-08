@@ -1,5 +1,5 @@
-import { IconFlag, IconQuestion, IconX } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput, LemonSkeleton, LemonTag, LemonTextArea, Link } from '@markettor/lemon-ui'
+import { IconFlag, IconQuestion, IconX } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput, LemonSkeleton, LemonTag, LemonTextArea, Link } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { Form } from 'kea-forms'

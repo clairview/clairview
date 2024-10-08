@@ -13,24 +13,24 @@ from rest_framework.exceptions import ValidationError
 
 from ee.clickhouse.queries.column_optimizer import EnterpriseColumnOptimizer
 from ee.clickhouse.queries.groups_join_query import GroupsJoinQuery
-from markettor.clickhouse.materialized_columns import get_materialized_columns
-from markettor.constants import (
+from clairview.clickhouse.materialized_columns import get_materialized_columns
+from clairview.constants import (
     AUTOCAPTURE_EVENT,
     TREND_FILTER_TYPE_ACTIONS,
     FunnelCorrelationType,
 )
-from markettor.models.element.element import chain_to_elements
-from markettor.models.event.util import ElementSerializer
-from markettor.models.filters import Filter
-from markettor.models.property.util import get_property_string_expr
-from markettor.models.team import Team
-from markettor.queries.funnels.utils import get_funnel_order_actor_class
-from markettor.queries.insight import insight_sync_execute
-from markettor.queries.person_distinct_id_query import get_team_distinct_ids_query
-from markettor.queries.person_query import PersonQuery
-from markettor.queries.util import alias_poe_mode_for_legacy, correct_result_for_sampling
-from markettor.schema import PersonsOnEventsMode
-from markettor.utils import generate_short_id
+from clairview.models.element.element import chain_to_elements
+from clairview.models.event.util import ElementSerializer
+from clairview.models.filters import Filter
+from clairview.models.property.util import get_property_string_expr
+from clairview.models.team import Team
+from clairview.queries.funnels.utils import get_funnel_order_actor_class
+from clairview.queries.insight import insight_sync_execute
+from clairview.queries.person_distinct_id_query import get_team_distinct_ids_query
+from clairview.queries.person_query import PersonQuery
+from clairview.queries.util import alias_poe_mode_for_legacy, correct_result_for_sampling
+from clairview.schema import PersonsOnEventsMode
+from clairview.utils import generate_short_id
 
 
 class EventDefinition(TypedDict):
@@ -961,7 +961,7 @@ def get_entity_odds_ratio(event_contingency_table: EventContingencyTable, prior_
 def build_selector(elements: list[dict[str, Any]]) -> str:
     # build a CSS select given an "elements_chain"
     # NOTE: my source of what this should be doing is
-    # https://github.com/MarketTor/markettor/blob/cc054930a47fb59940531e99a856add49a348ee5/frontend/src/scenes/events/createActionFromEvent.tsx#L36:L36
+    # https://github.com/ClairView/clairview/blob/cc054930a47fb59940531e99a856add49a348ee5/frontend/src/scenes/events/createActionFromEvent.tsx#L36:L36
     #
     def element_to_selector(element: dict[str, Any]) -> str:
         if attr_id := element.get("attr_id"):

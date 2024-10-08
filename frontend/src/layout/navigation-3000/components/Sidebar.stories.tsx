@@ -13,7 +13,7 @@ import { SidebarNavbarItem } from '../types'
 import { Sidebar } from './Sidebar'
 
 const meta: Meta = {
-    title: 'MarketTor 3000/Sidebar',
+    title: 'ClairView 3000/Sidebar',
     parameters: {
         mockDate: '2023-02-01',
         layout: 'fullscreen',

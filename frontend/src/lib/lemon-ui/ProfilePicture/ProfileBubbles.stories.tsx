@@ -4,10 +4,10 @@ import { alphabet, range } from 'lib/utils'
 import { ProfileBubbles as ProfileBubblesComponent, ProfileBubblesProps } from './ProfileBubbles'
 
 const DUMMIES: ProfileBubblesProps['people'] = [
-    { email: 'michael@markettor.com', name: 'Michael' },
-    { email: 'lottie@markettor.com', name: 'Lottie' },
-    { email: 'paul@markettor.com', name: 'Paul' },
-    { email: 'joe@markettor.com', name: 'Joe' },
+    { email: 'michael@clairview.com', name: 'Michael' },
+    { email: 'lottie@clairview.com', name: 'Lottie' },
+    { email: 'paul@clairview.com', name: 'Paul' },
+    { email: 'joe@clairview.com', name: 'Joe' },
 ]
 
 const meta: Meta<typeof ProfileBubblesComponent> = {
@@ -39,7 +39,7 @@ export function MultipleBubblesWithNoImages(props: any): JSX.Element {
             {...props}
             people={range(20).map((x) => ({
                 name: alphabet[x],
-                email: 'not-real-at-all@markettor.com',
+                email: 'not-real-at-all@clairview.com',
             }))}
         />
     )

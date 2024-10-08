@@ -1,6 +1,6 @@
 import './LemonCollapse.scss'
 
-import { IconCollapse, IconExpand } from '@markettor/icons'
+import { IconCollapse, IconExpand } from '@clairview/icons'
 import clsx from 'clsx'
 import React, { ReactNode, useState } from 'react'
 import { Transition } from 'react-transition-group'

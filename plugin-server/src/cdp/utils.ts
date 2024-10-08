@@ -1,6 +1,6 @@
 // NOTE: PostIngestionEvent is our context event - it should never be sent directly to an output, but rather transformed into a lightweight schema
 
-import { CyclotronJob, CyclotronJobUpdate } from '@markettor/cyclotron'
+import { CyclotronJob, CyclotronJobUpdate } from '@clairview/cyclotron'
 import { captureException } from '@sentry/node'
 import { DateTime } from 'luxon'
 import RE2 from 're2'

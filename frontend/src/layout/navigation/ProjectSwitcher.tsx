@@ -1,4 +1,4 @@
-import { IconGear, IconPlus } from '@markettor/icons'
+import { IconGear, IconPlus } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'

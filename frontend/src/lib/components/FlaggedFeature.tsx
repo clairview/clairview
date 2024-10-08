@@ -2,7 +2,7 @@ import { useValues } from 'kea'
 import { FeatureFlagKey } from 'lib/constants'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 
-export type MarketTorFeatureProps = {
+export type ClairViewFeatureProps = {
     flag: FeatureFlagKey
     /** What specific state or variant of feature flag needs to be active. */
     match?: string | boolean
@@ -12,7 +12,7 @@ export type MarketTorFeatureProps = {
     fallback?: React.ReactNode
 }
 
-export function FlaggedFeature({ flag, match, children, fallback }: MarketTorFeatureProps): JSX.Element | null {
+export function FlaggedFeature({ flag, match, children, fallback }: ClairViewFeatureProps): JSX.Element | null {
     const { featureFlags } = useValues(featureFlagLogic)
 
     const flagValue = featureFlags[flag] || false

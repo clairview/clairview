@@ -1,5 +1,5 @@
-import { IconInfo } from '@markettor/icons'
-import { LemonButton, LemonCheckbox, LemonTable } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonButton, LemonCheckbox, LemonTable } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'
 import { useRestrictedArea } from 'lib/components/RestrictedArea'
@@ -104,7 +104,7 @@ export function PermissionsGrid(): JSX.Element {
             <>
                 <div className="flex flex-row justify-between items-center mb-4">
                     <div className="text-muted-alt">
-                        Edit organizational default permission levels for MarketTor resources. Use roles to apply
+                        Edit organizational default permission levels for ClairView resources. Use roles to apply
                         permissions to specific sets of users.
                     </div>
                     {!restrictionReason && (

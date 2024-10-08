@@ -1,4 +1,4 @@
-import { Properties } from '@markettor/plugin-scaffold'
+import { Properties } from '@clairview/plugin-scaffold'
 import { Summary } from 'prom-client'
 
 import { Team } from '../../types'

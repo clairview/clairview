@@ -1,11 +1,11 @@
-import { LemonCheckbox, LemonLabel } from '@markettor/lemon-ui'
+import { LemonCheckbox, LemonLabel } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'
 
 import { LifecycleFilter } from '~/queries/schema'
 import { EditorFilterProps, LifecycleToggle } from '~/types'
 
-// Tooltip explanations taken from https://markettor.com/docs/product-analytics/lifecycle#interpreting-your-lifecycle
+// Tooltip explanations taken from https://clairview.com/docs/product-analytics/lifecycle#interpreting-your-lifecycle
 const lifecycles: { name: LifecycleToggle; tooltip: string; color: string }[] = [
     {
         name: 'new',

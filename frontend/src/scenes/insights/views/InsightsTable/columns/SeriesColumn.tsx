@@ -1,4 +1,4 @@
-import { IconPencil } from '@markettor/icons'
+import { IconPencil } from '@clairview/icons'
 import clsx from 'clsx'
 import { getTrendLikeSeriesColor } from 'lib/colors'
 import { InsightLabel } from 'lib/components/InsightLabel'

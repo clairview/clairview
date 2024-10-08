@@ -1,7 +1,7 @@
 {
-    "name": "@markettor/plugin-server",
+    "name": "@clairview/plugin-server",
     "version": "1.10.5",
-    "description": "MarketTor Plugin Server",
+    "description": "ClairView Plugin Server",
     "types": "dist/index.d.ts",
     "main": "dist/index.js",
     "packageManager": "pnpm@8.6.0",
@@ -36,10 +36,10 @@
         "maxContiguousErrors": 300
     },
     "bin": {
-        "markettor-plugin-server": "bin/markettor-plugin-server"
+        "clairview-plugin-server": "bin/clairview-plugin-server"
     },
-    "author": "MarketTor <hey@markettor.com>",
-    "repository": "https://github.com/MarketTor/markettor-plugin-server",
+    "author": "ClairView <hey@clairview.com>",
+    "repository": "https://github.com/ClairView/clairview-plugin-server",
     "license": "MIT",
     "dependencies": {
         "@aws-sdk/client-s3": "^3.315.0",
@@ -52,10 +52,10 @@
         "@google-cloud/pubsub": "3.0.1",
         "@google-cloud/storage": "^5.8.5",
         "@maxmind/geoip2-node": "^3.4.0",
-        "@markettor/clickhouse": "^1.7.0",
-        "@markettor/cyclotron": "file:../rust/cyclotron-node",
-        "@markettor/hogvm": "^1.0.54",
-        "@markettor/plugin-scaffold": "1.4.4",
+        "@clairview/clickhouse": "^1.7.0",
+        "@clairview/cyclotron": "file:../rust/cyclotron-node",
+        "@clairview/hogvm": "^1.0.54",
+        "@clairview/plugin-scaffold": "1.4.4",
         "@sentry/node": "^7.49.0",
         "@sentry/profiling-node": "^0.3.0",
         "@sentry/tracing": "^7.17.4",
@@ -83,7 +83,7 @@
         "node-schedule": "^2.1.0",
         "pg": "^8.6.0",
         "pino": "^8.6.0",
-        "markettor-node": "2.0.2",
+        "clairview-node": "2.0.2",
         "pretty-bytes": "^5.6.0",
         "prom-client": "^14.2.0",
         "re2": "^1.20.3",

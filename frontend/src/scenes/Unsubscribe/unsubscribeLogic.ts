@@ -1,4 +1,4 @@
-import { api } from '@markettor/apps-common'
+import { api } from '@clairview/apps-common'
 import { actions, afterMount, kea, path } from 'kea'
 import { loaders } from 'kea-loaders'
 import { router } from 'kea-router'

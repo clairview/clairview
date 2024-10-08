@@ -1,4 +1,4 @@
-import { IconBuilding, IconPerson } from '@markettor/icons'
+import { IconBuilding, IconPerson } from '@clairview/icons'
 import { IconCohort, IconUnverifiedEvent } from 'lib/lemon-ui/icons'
 import { Tooltip } from 'lib/lemon-ui/Tooltip'
 

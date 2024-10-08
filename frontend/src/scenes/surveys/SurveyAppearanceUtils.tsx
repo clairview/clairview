@@ -1,5 +1,5 @@
-import { IconLock } from '@markettor/icons'
-import { LemonBanner, LemonTabs, LemonTextArea } from '@markettor/lemon-ui'
+import { IconLock } from '@clairview/icons'
+import { LemonBanner, LemonTabs, LemonTextArea } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { PayGateMini } from 'lib/components/PayGateMini/PayGateMini'

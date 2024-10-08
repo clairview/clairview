@@ -78,8 +78,8 @@ export const CloudWithGoogleLoginEnforcement: StoryFn = () => {
     })
     useEffect(() => {
         // Trigger pre-check
-        loginLogic.actions.setLoginValue('email', 'test@markettor.com')
-        loginLogic.actions.precheck({ email: 'test@markettor.com' })
+        loginLogic.actions.setLoginValue('email', 'test@clairview.com')
+        loginLogic.actions.precheck({ email: 'test@clairview.com' })
     }, [])
     return <Login />
 }

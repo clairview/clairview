@@ -1,4 +1,4 @@
-import { IconPerson } from '@markettor/icons'
+import { IconPerson } from '@clairview/icons'
 import { useValues } from 'kea'
 import { LemonTable, LemonTableColumns } from 'lib/lemon-ui/LemonTable'
 import { capitalizeFirstLetter } from 'lib/utils'

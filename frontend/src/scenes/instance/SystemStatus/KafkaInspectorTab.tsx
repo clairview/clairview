@@ -1,4 +1,4 @@
-import { LemonButton, LemonDivider } from '@markettor/lemon-ui'
+import { LemonButton, LemonDivider } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'

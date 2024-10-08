@@ -14,7 +14,7 @@ import { resetTestDatabase } from '../../helpers/sql'
 const mmdbBrotliContents = readFileSync(join(__dirname, '..', '..', 'assets', 'GeoLite2-City-Test.mmdb.br'))
 
 export const cachedMmdbPluginAttachment = {
-    key: '@markettor/mmdb',
+    key: '@clairview/mmdb',
     content_type: 'vnd.maxmind.maxmind-db',
     file_name: `GeoLite2-City-${DateTime.local().toISODate()}.mmdb.br`,
     file_size: mmdbBrotliContents.byteLength,
@@ -71,7 +71,7 @@ describe('mmdb', () => {
         await setupMmdb(hub)
         expect(hub.DISABLE_MMDB).toBeFalsy()
 
-        expect(fetch).toHaveBeenCalledWith('https://mmdbcdn.markettor.net/', { compress: false })
+        expect(fetch).toHaveBeenCalledWith('https://mmdbcdn.clairview.net/', { compress: false })
         expect(hub.mmdb).toBeInstanceOf(ReaderModel)
 
         expect(await getCityName(hub, '89.160.20.129')).toStrictEqual('Linköping')

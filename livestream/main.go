@@ -64,8 +64,8 @@ func main() {
 
 	stats := newStatsKeeper()
 
-	phEventChan := make(chan MarketTorEvent)
-	statsChan := make(chan MarketTorEvent)
+	phEventChan := make(chan ClairViewEvent)
+	statsChan := make(chan ClairViewEvent)
 	subChan := make(chan Subscription)
 	unSubChan := make(chan Subscription)
 
@@ -75,7 +75,7 @@ func main() {
 	if !isProd {
 		kafkaSecurityProtocol = "PLAINTEXT"
 	}
-	consumer, err := NewMarketTorKafkaConsumer(brokers, kafkaSecurityProtocol, groupID, topic, geolocator, phEventChan, statsChan)
+	consumer, err := NewClairViewKafkaConsumer(brokers, kafkaSecurityProtocol, groupID, topic, geolocator, phEventChan, statsChan)
 	if err != nil {
 		sentry.CaptureException(err)
 		log.Fatalf("Failed to create Kafka consumer: %v", err)

@@ -1,4 +1,4 @@
-import { LemonButton, LemonInput, LemonModal, Link } from '@markettor/lemon-ui'
+import { LemonButton, LemonInput, LemonModal, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { LemonField } from 'lib/lemon-ui/LemonField'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
@@ -67,8 +67,8 @@ export function CreateProjectModal({
                     <p>
                         <strong>Tip:</strong> We recommend using the same project for both your website and app to track
                         conversion fully.{' '}
-                        <Link to="https://markettor.com/manual/organizations-and-projects#projects" target="_blank">
-                            Learn more in MarketTor Docs.
+                        <Link to="https://clairview.com/manual/organizations-and-projects#projects" target="_blank">
+                            Learn more in ClairView Docs.
                         </Link>
                     </p>
                     {currentOrganization?.projects?.some(

@@ -1,4 +1,4 @@
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { upgradeModalLogic } from 'lib/components/UpgradeModal/upgradeModalLogic'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'

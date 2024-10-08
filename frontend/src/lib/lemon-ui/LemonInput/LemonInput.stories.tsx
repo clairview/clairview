@@ -1,4 +1,4 @@
-import { IconCalendar, IconChevronDown } from '@markettor/icons'
+import { IconCalendar, IconChevronDown } from '@clairview/icons'
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { LemonButtonWithDropdown } from 'lib/lemon-ui/LemonButton'
 import { useState } from 'react'

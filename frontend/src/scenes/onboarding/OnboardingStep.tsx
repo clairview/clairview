@@ -1,5 +1,5 @@
-import { IconArrowRight } from '@markettor/icons'
-import { LemonButton, Link } from '@markettor/lemon-ui'
+import { IconArrowRight } from '@clairview/icons'
+import { LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { supportLogic } from 'lib/components/Support/supportLogic'
 import { IconChevronRight } from 'lib/lemon-ui/icons'

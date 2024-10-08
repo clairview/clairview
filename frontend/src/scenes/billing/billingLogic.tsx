@@ -1,4 +1,4 @@
-import { LemonDialog, lemonToast, Link } from '@markettor/lemon-ui'
+import { LemonDialog, lemonToast, Link } from '@clairview/lemon-ui'
 import { actions, afterMount, connect, kea, listeners, path, reducers, selectors } from 'kea'
 import { FieldNamePath, forms } from 'kea-forms'
 import { loaders } from 'kea-loaders'
@@ -12,7 +12,7 @@ import { LemonButtonPropsBase } from 'lib/lemon-ui/LemonButton'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { pluralize } from 'lib/utils'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { userLogic } from 'scenes/userLogic'
 
@@ -508,28 +508,28 @@ export const billingLogic = kea<billingLogicType>([
     })),
     listeners(({ actions, values }) => ({
         reportBillingShown: () => {
-            markettor.capture('billing v2 shown')
+            clairview.capture('billing v2 shown')
         },
         reportBillingAlertShown: ({ alertConfig }) => {
-            markettor.capture('billing alert shown', {
+            clairview.capture('billing alert shown', {
                 ...alertConfig,
             })
         },
         reportBillingAlertActionClicked: ({ alertConfig }) => {
-            markettor.capture('billing alert action clicked', {
+            clairview.capture('billing alert action clicked', {
                 ...alertConfig,
             })
         },
         reportCreditsModalShown: () => {
-            markettor.capture('credits modal shown')
+            clairview.capture('credits modal shown')
         },
         reportCreditsFormSubmitted: ({ creditInput }) => {
-            markettor.capture('credits modal credit form submitted', {
+            clairview.capture('credits modal credit form submitted', {
                 credit_amount_usd: creditInput,
             })
         },
         reportCreditsCTAShown: ({ creditOverview }) => {
-            markettor.capture('credits cta shown', {
+            clairview.capture('credits cta shown', {
                 eligible: creditOverview.eligible,
                 status: creditOverview.status,
                 estimated_monthly_credit_amount_usd: creditOverview.estimated_monthly_credit_amount_usd,
@@ -537,7 +537,7 @@ export const billingLogic = kea<billingLogicType>([
         },
         toggleCreditCTAHeroDismissed: ({ isDismissed }) => {
             if (isDismissed) {
-                markettor.capture('credits cta hero dismissed')
+                clairview.capture('credits cta hero dismissed')
             }
         },
         loadBillingSuccess: () => {
@@ -653,7 +653,7 @@ export const billingLogic = kea<billingLogicType>([
         },
         registerInstrumentationProps: async (_, breakpoint) => {
             await breakpoint(100)
-            if (markettor && values.billing) {
+            if (clairview && values.billing) {
                 const payload = {
                     has_billing_plan: !!values.billing.has_active_subscription,
                     free_trial_until: values.billing.free_trial_until?.toISOString(),
@@ -681,7 +681,7 @@ export const billingLogic = kea<billingLogicType>([
                     payload['billing_period_start'] = values.billing.billing_period.current_period_start
                     payload['billing_period_end'] = values.billing.billing_period.current_period_end
                 }
-                markettor.register(payload)
+                clairview.register(payload)
             }
         },
         showPurchaseCreditsModal: ({ isOpen }) => {

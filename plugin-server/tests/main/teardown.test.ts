@@ -1,5 +1,5 @@
-import ClickHouse from '@markettor/clickhouse'
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import ClickHouse from '@clairview/clickhouse'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { waitForExpect } from '../../functional_tests/expectations'
 import { startPluginsServer } from '../../src/main/pluginsServer'

@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { LemonDivider, LemonTag } from '@markettor/lemon-ui'
+import { TZLabel } from '@clairview/apps-common'
+import { LemonDivider, LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { EditableField } from 'lib/components/EditableField/EditableField'
 import { NotFound } from 'lib/components/NotFound'

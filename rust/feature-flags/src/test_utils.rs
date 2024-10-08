@@ -179,7 +179,7 @@ pub async fn insert_new_team_in_pg(
     const ORG_ID: &str = "019026a4be8000005bf3171d00629163";
 
     client.run_query(
-        r#"INSERT INTO markettor_organization
+        r#"INSERT INTO clairview_organization
         (id, name, slug, created_at, updated_at, plugins_access_level, for_internal_metrics, is_member_join_email_enabled, enforce_2fa, is_hipaa, customer_id, available_product_features, personalization, setup_section_2_completed, domain_whitelist) 
         VALUES
         ($1::uuid, 'Test Organization', 'test-organization', '2024-06-17 14:40:49.298579+00:00', '2024-06-17 14:40:49.298593+00:00', 9, false, true, NULL, false, NULL, '{}', '{}', true, '{}')
@@ -190,7 +190,7 @@ pub async fn insert_new_team_in_pg(
 
     client
         .run_query(
-            r#"INSERT INTO markettor_project
+            r#"INSERT INTO clairview_project
         (id, organization_id, name, created_at) 
         VALUES
         (1, $1::uuid, 'Test Team', '2024-06-17 14:40:51.329772+00:00')
@@ -215,7 +215,7 @@ pub async fn insert_new_team_in_pg(
 
     let mut conn = client.get_connection().await?;
     let res = sqlx::query(
-        r#"INSERT INTO markettor_team
+        r#"INSERT INTO clairview_team
         (id, uuid, organization_id, project_id, api_token, name, created_at, updated_at, app_urls, anonymize_ips, completed_snippet_onboarding, ingested_event, session_recording_opt_in, is_demo, access_control, test_account_filters, timezone, data_attributes, plugins_opt_in, opt_out_capture, event_names, event_names_with_usage, event_properties, event_properties_with_usage, event_properties_numerical) VALUES
         ($1, $5, $2::uuid, 1, $3, $4, '2024-06-17 14:40:51.332036+00:00', '2024-06-17', '{}', false, false, false, false, false, false, '{}', 'UTC', '["data-attr"]', false, false, '[]', '[]', '[]', '[]', '[]')"#
     ).bind(team.id).bind(ORG_ID).bind(&team.api_token).bind(&team.name).bind(uuid).execute(&mut *conn).await?;
@@ -233,7 +233,7 @@ pub async fn insert_new_team_in_pg(
 
     for (group_type, group_type_index) in group_types {
         let res = sqlx::query(
-            r#"INSERT INTO markettor_grouptypemapping
+            r#"INSERT INTO clairview_grouptypemapping
             (group_type, group_type_index, name_singular, name_plural, team_id)
             VALUES
             ($1, $2, NULL, NULL, $3)"#,
@@ -288,7 +288,7 @@ pub async fn insert_flag_for_team_in_pg(
 
     let mut conn = client.get_connection().await?;
     let res = sqlx::query(
-        r#"INSERT INTO markettor_featureflag
+        r#"INSERT INTO clairview_featureflag
         (id, team_id, name, key, filters, deleted, active, ensure_experience_continuity, created_at) VALUES
         ($1, $2, $3, $4, $5, $6, $7, $8, '2024-06-17')"#
     ).bind(payload_flag.id).bind(team_id).bind(&payload_flag.name).bind(&payload_flag.key).bind(&payload_flag.filters).bind(payload_flag.deleted).bind(payload_flag.active).bind(payload_flag.ensure_experience_continuity).execute(&mut *conn).await?;
@@ -318,14 +318,14 @@ pub async fn insert_person_for_team_in_pg(
     let res = sqlx::query(
         r#"
         WITH inserted_person AS (
-            INSERT INTO markettor_person (
+            INSERT INTO clairview_person (
                 created_at, properties, properties_last_updated_at,
                 properties_last_operation, team_id, is_user_id, is_identified, uuid, version
             )
             VALUES ('2023-04-05', $1, '{}', '{}', $2, NULL, true, $3, 0)
             RETURNING *
         )
-        INSERT INTO markettor_persondistinctid (distinct_id, person_id, team_id, version)
+        INSERT INTO clairview_persondistinctid (distinct_id, person_id, team_id, version)
         VALUES ($4, (SELECT id FROM inserted_person), $5, 0)
         "#,
     )

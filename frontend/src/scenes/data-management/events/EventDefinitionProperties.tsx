@@ -1,4 +1,4 @@
-import { LemonTag } from '@markettor/lemon-ui'
+import { LemonTag } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { ObjectTags } from 'lib/components/ObjectTags/ObjectTags'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
@@ -72,7 +72,7 @@ export function EventDefinitionProperties({ definition }: { definition: EventDef
         <div>
             <h3>Top properties</h3>
             <p>
-                Please note that description and tags are shared across events. MarketTor properties are excluded from
+                Please note that description and tags are shared across events. ClairView properties are excluded from
                 this list.
             </p>
             <LemonTable

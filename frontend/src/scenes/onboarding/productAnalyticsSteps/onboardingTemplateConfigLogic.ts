@@ -1,7 +1,7 @@
 import { actions, connect, kea, listeners, path, reducers } from 'kea'
 import { forms } from 'kea-forms'
 import { urlToAction } from 'kea-router'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { dashboardTemplateVariablesLogic } from 'scenes/dashboard/dashboardTemplateVariablesLogic'
 import { newDashboardLogic } from 'scenes/dashboard/newDashboardLogic'
 import { urls } from 'scenes/urls'
@@ -80,7 +80,7 @@ export const onboardingTemplateConfigLogic = kea<onboardingTemplateConfigLogicTy
                     : undefined,
             }),
             submit: async () => {
-                markettor.capture('template requested during onboarding', {
+                clairview.capture('template requested during onboarding', {
                     template_request: values.templateRequestForm.templateRequest,
                 })
                 actions.hideTemplateRequestModal()
@@ -96,7 +96,7 @@ export const onboardingTemplateConfigLogic = kea<onboardingTemplateConfigLogicTy
                 onboardingLogic.actions.goToNextStep()
             }
             actions.setOnCompleteOnboardingRedirectUrl(urls.dashboard(result.id))
-            markettor.capture('dashboard created during onboarding', {
+            clairview.capture('dashboard created during onboarding', {
                 dashboard_id: result.id,
                 creation_mode: result.creation_mode,
                 title: result.name,
@@ -106,7 +106,7 @@ export const onboardingTemplateConfigLogic = kea<onboardingTemplateConfigLogicTy
             })
         },
         reportTemplateSelected: ({ template }) => {
-            markettor.capture('template selected during onboarding', {
+            clairview.capture('template selected during onboarding', {
                 template_id: template.id,
                 template_name: template.template_name,
                 variables: template.variables?.map((v) => v.name),

@@ -1,5 +1,5 @@
-import { IconCheck } from '@markettor/icons'
-import { LemonBadge, LemonButton, LemonSwitch } from '@markettor/lemon-ui'
+import { IconCheck } from '@clairview/icons'
+import { LemonBadge, LemonButton, LemonSwitch } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'

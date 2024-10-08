@@ -2,7 +2,7 @@ import { actions, afterMount, connect, kea, listeners, path, reducers, selectors
 import { loaders } from 'kea-loaders'
 import api from 'lib/api'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { userLogic } from 'scenes/userLogic'
 
 import { PluginInstallationType, PluginType } from '~/types'
@@ -14,7 +14,7 @@ import { getInitialCode, SourcePluginKind } from './sourceAppInitialCode'
 import { GLOBAL_PLUGINS, loadPluginsFromUrl } from './utils'
 
 function capturePluginEvent(event: string, plugin: PluginType, type: PluginInstallationType): void {
-    markettor.capture(event, {
+    clairview.capture(event, {
         plugin_name: plugin.name,
         plugin_url: plugin.url?.startsWith('file:') ? 'file://masked-local-path' : plugin.url,
         plugin_tag: plugin.tag,

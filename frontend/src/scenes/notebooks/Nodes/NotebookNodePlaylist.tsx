@@ -1,4 +1,4 @@
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { FilterType, NotebookNodeType, RecordingUniversalFilters, ReplayTabs } from '~/types'
 import {
     SessionRecordingPlaylistLogicProps,
@@ -130,7 +130,7 @@ export type NotebookNodePlaylistAttributes = {
     pinned?: string[]
 }
 
-export const NotebookNodePlaylist = createMarketTorWidgetNode<NotebookNodePlaylistAttributes>({
+export const NotebookNodePlaylist = createClairViewWidgetNode<NotebookNodePlaylistAttributes>({
     nodeType: NotebookNodeType.RecordingPlaylist,
     titlePlaceholder: 'Session replays',
     Component,

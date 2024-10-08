@@ -9,13 +9,13 @@
             "protocol": "inspector",
             "restart": true,
             "internalConsoleOptions": "openOnSessionStart",
-            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/@markettor/piscina/**"],
+            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/@clairview/piscina/**"],
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node-dev",
             "runtimeArgs": ["--inspect", "--exit-child"],
             "args": ["src/index.ts"],
             "env": {
                 "NODE_ENV": "dev",
-                "BASE_DIR": "${workspaceFolder}/../markettor"
+                "BASE_DIR": "${workspaceFolder}/../clairview"
             }
         },
         {
@@ -25,13 +25,13 @@
             "protocol": "inspector",
             "restart": true,
             "internalConsoleOptions": "openOnSessionStart",
-            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/@markettor/piscina/**"],
+            "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/@clairview/piscina/**"],
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node-dev",
             "runtimeArgs": ["--inspect", "--exit-child"],
             "args": ["src/index.ts"],
             "env": {
                 "NODE_ENV": "dev",
-                "BASE_DIR": "${workspaceFolder}/../markettor"
+                "BASE_DIR": "${workspaceFolder}/../clairview"
             }
         },
         {
@@ -45,7 +45,7 @@
             "cwd": "${workspaceFolder}",
             "args": ["--runInBand", "--forceExit", "--watchAll=false"],
             "env": {
-                "DATABASE_URL": "postgres://localhost:5432/test_markettor"
+                "DATABASE_URL": "postgres://localhost:5432/test_clairview"
             }
         }
     ]

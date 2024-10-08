@@ -4,9 +4,9 @@ import pytest
 from django.utils import timezone
 from rest_framework import status
 
-from markettor.models import Dashboard, FeatureFlag, Insight, Tag
-from markettor.models.tagged_item import TaggedItem
-from markettor.test.base import APIBaseTest
+from clairview.models import Dashboard, FeatureFlag, Insight, Tag
+from clairview.models.tagged_item import TaggedItem
+from clairview.test.base import APIBaseTest
 
 # This serializer only tests the business logic of getting and setting of ee descriptions. It uses the dashboard model
 # as an example, since model specific functionality is already tested in their models' respective serializer tests.

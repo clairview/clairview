@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 import { PreIngestionEvent } from 'types'
 
 import { parseEventTimestamp } from '../timestamps'

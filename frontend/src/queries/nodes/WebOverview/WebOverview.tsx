@@ -1,5 +1,5 @@
-import { IconTrending } from '@markettor/icons'
-import { LemonSkeleton } from '@markettor/lemon-ui'
+import { IconTrending } from '@clairview/icons'
+import { LemonSkeleton } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { getColorVar } from 'lib/colors'
 import { FEATURE_FLAGS } from 'lib/constants'

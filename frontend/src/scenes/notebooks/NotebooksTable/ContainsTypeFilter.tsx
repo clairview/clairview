@@ -1,5 +1,5 @@
 import { LemonInputSelect } from 'lib/lemon-ui/LemonInputSelect'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { NotebooksListFilters } from 'scenes/notebooks/NotebooksTable/notebooksTableLogic'
 
 import { NotebookNodeType } from '~/types'
@@ -46,7 +46,7 @@ export function ContainsTypeFilters({
                     .map(([type, label]) => ({ key: type, label }))}
                 value={filters.contains}
                 onChange={(newValue: string[]) => {
-                    markettor.capture('notebook containing filter applied')
+                    clairview.capture('notebook containing filter applied')
                     setFilters({ contains: newValue.map((x) => x as NotebookNodeType) })
                 }}
                 data-attr="notebooks-list-contains-filters"

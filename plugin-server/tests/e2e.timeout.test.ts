@@ -3,7 +3,7 @@ import { startPluginsServer } from '../src/main/pluginsServer'
 import { Hub, LogLevel, PluginsServerConfig } from '../src/types'
 import { delay, UUIDT } from '../src/utils/utils'
 import { makePiscina } from '../src/worker/piscina'
-import { createMarkettor, DummyMarketTor } from '../src/worker/vm/extensions/markettor'
+import { createMarkettor, DummyClairView } from '../src/worker/vm/extensions/clairview'
 import { delayUntilEventIngested, resetTestDatabaseClickhouse } from './helpers/clickhouse'
 import { resetKafka } from './helpers/kafka'
 import { pluginConfig39 } from './helpers/plugins'
@@ -21,7 +21,7 @@ const extraServerConfig: Partial<PluginsServerConfig> = {
 describe('e2e ingestion timeout', () => {
     let hub: Hub
     let stopServer: () => Promise<void>
-    let markettor: DummyMarketTor
+    let clairview: DummyClairView
 
     beforeAll(async () => {
         await resetKafka(extraServerConfig)
@@ -43,7 +43,7 @@ describe('e2e ingestion timeout', () => {
         const startResponse = await startPluginsServer(extraServerConfig, makePiscina, { ingestion: true })
         hub = startResponse.hub
         stopServer = startResponse.stop
-        markettor = createMarkettor(hub, pluginConfig39)
+        clairview = createMarkettor(hub, pluginConfig39)
     })
 
     afterEach(async () => {
@@ -53,7 +53,7 @@ describe('e2e ingestion timeout', () => {
     test('event captured, processed, ingested', async () => {
         expect((await hub.db.fetchEvents()).length).toBe(0)
         const uuid = new UUIDT().toString()
-        await markettor.capture('custom event', { name: 'haha', uuid, randomProperty: 'lololo' })
+        await clairview.capture('custom event', { name: 'haha', uuid, randomProperty: 'lololo' })
         await delayUntilEventIngested(() => hub.db.fetchEvents())
 
         await hub.kafkaProducer.flush()

@@ -1,5 +1,5 @@
-from markettor.models.group.util import get_aggregation_target_field
-from markettor.queries.stickiness.stickiness_event_query import StickinessEventsQuery
+from clairview.models.group.util import get_aggregation_target_field
+from clairview.queries.stickiness.stickiness_event_query import StickinessEventsQuery
 
 
 class ClickhouseStickinessEventsQuery(StickinessEventsQuery):

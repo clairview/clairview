@@ -1,4 +1,4 @@
-import { IconExpand45, IconInfo, IconOpenSidebar, IconX } from '@markettor/icons'
+import { IconExpand45, IconInfo, IconOpenSidebar, IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import { BindLogic, useActions, useValues } from 'kea'
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
@@ -8,7 +8,7 @@ import { IconOpenInNew } from 'lib/lemon-ui/icons'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
 import { LemonSegmentedButton } from 'lib/lemon-ui/LemonSegmentedButton'
 import { LemonSelect } from 'lib/lemon-ui/LemonSelect'
-import { MarketTorComDocsURL } from 'lib/lemon-ui/Link/Link'
+import { ClairViewComDocsURL } from 'lib/lemon-ui/Link/Link'
 import { Popover } from 'lib/lemon-ui/Popover'
 import { featureFlagLogic } from 'lib/logic/featureFlagLogic'
 import { isNotNil } from 'lib/utils'
@@ -206,7 +206,7 @@ export const WebTabs = ({
         query: QuerySchema
         docs:
             | {
-                  docsUrl: MarketTorComDocsURL
+                  docsUrl: ClairViewComDocsURL
                   title: string
                   description: string | JSX.Element
               }
@@ -284,7 +284,7 @@ export const WebTabs = ({
 }
 
 export interface LearnMorePopoverProps {
-    docsURL: MarketTorComDocsURL
+    docsURL: ClairViewComDocsURL
     title: string
     description: string | JSX.Element
 }

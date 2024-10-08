@@ -4,7 +4,7 @@ import time
 
 
 def main():
-    print("Waiting to run tests until MarketTor is up and serving requests")
+    print("Waiting to run tests until ClairView is up and serving requests")
     booted = False
     ts = datetime.datetime.now()
     while not booted and (datetime.datetime.now() - ts).seconds < 240:
@@ -14,16 +14,16 @@ def main():
             r = conn.getresponse()
             if r.status == 200:
                 booted = True
-                print("MarketTor is alive! Proceeding")
+                print("ClairView is alive! Proceeding")
                 continue
             else:
-                # recieved not 200 from MarketTor, but service is up
+                # recieved not 200 from ClairView, but service is up
                 print("Found status %d" % (r.status,))
                 with open("cypress/screenshots/curl.html", "wb") as f:
                     f.write(r.read)  # type: ignore
-                print("MarketTor is still booting. Sleeping for 1 second")
+                print("ClairView is still booting. Sleeping for 1 second")
         except:
-            print("MarketTor is still booting. Sleeping for 1 second")
+            print("ClairView is still booting. Sleeping for 1 second")
         time.sleep(1)
 
 

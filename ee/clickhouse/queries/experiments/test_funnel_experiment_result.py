@@ -4,14 +4,14 @@ from math import exp, lgamma, log, ceil
 
 from flaky import flaky
 
-from markettor.constants import ExperimentSignificanceCode
-from markettor.torql_queries.experiments.funnel_statistics import (
+from clairview.constants import ExperimentSignificanceCode
+from clairview.torql_queries.experiments.funnel_statistics import (
     are_results_significant,
     calculate_expected_loss,
     calculate_probabilities,
     calculate_credible_intervals as calculate_funnel_credible_intervals,
 )
-from markettor.schema import ExperimentVariantFunnelResult
+from clairview.schema import ExperimentVariantFunnelResult
 
 Probability = float
 

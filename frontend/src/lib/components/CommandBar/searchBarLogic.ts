@@ -301,7 +301,7 @@ export const searchBarLogic = kea<searchBarLogicType>([
                 return {
                     all: [Tab.All],
                     event_data: [Tab.EventDefinition, Tab.Action, Tab.Person, Tab.Cohort, ...tabsForGroups],
-                    markettor: [Tab.Insight, Tab.Dashboard, Tab.Notebook, Tab.Experiment, Tab.FeatureFlag, Tab.Survey],
+                    clairview: [Tab.Insight, Tab.Dashboard, Tab.Notebook, Tab.Experiment, Tab.FeatureFlag, Tab.Survey],
                 }
             },
         ],

@@ -1,6 +1,6 @@
 import './LemonButton.scss'
 
-import { IconChevronDown } from '@markettor/icons'
+import { IconChevronDown } from '@clairview/icons'
 import clsx from 'clsx'
 import { IconChevronRight } from 'lib/lemon-ui/icons'
 import React, { useContext } from 'react'

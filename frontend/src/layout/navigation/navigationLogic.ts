@@ -122,7 +122,7 @@ export const navigationLogic = kea<navigationLogicType>([
                     return 'is_impersonated'
                 } else if (currentTeam?.is_demo && !preflight?.demo) {
                     // If the project is a demo one, show a project-level warning
-                    // Don't show this project-level warning in the MarketTor demo environemnt though,
+                    // Don't show this project-level warning in the ClairView demo environemnt though,
                     // as then Announcement is shown instance-wide
                     return 'demo_project'
                 } else if (!user?.is_email_verified && !user?.has_social_auth && preflight?.email_service_available) {

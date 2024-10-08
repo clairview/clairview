@@ -5,7 +5,7 @@ use envconfig::Envconfig;
 
 #[derive(Envconfig, Clone)]
 pub struct Config {
-    #[envconfig(default = "postgres://markettor:markettor@localhost:5432/markettor")]
+    #[envconfig(default = "postgres://clairview:clairview@localhost:5432/clairview")]
     pub database_url: String,
 
     #[envconfig(default = "10")]

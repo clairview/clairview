@@ -78,7 +78,7 @@ export const insertHogFunction = async (
 ): Promise<HogFunctionType> => {
     // This is only used for testing so we need to override some values
 
-    const res = await insertRow(postgres, 'markettor_hogfunction', {
+    const res = await insertRow(postgres, 'clairview_hogfunction', {
         ...createHogFunction({
             ...hogFunction,
             team_id: team_id,
@@ -99,7 +99,7 @@ export const insertIntegration = async (
 ): Promise<IntegrationType> => {
     const res = await insertRow(
         postgres,
-        'markettor_integration',
+        'clairview_integration',
         createIntegration({
             ...integration,
             team_id: team_id,
@@ -119,7 +119,7 @@ export const createHogExecutionGlobals = (
             name: 'test',
             url: 'http://localhost:8000/persons/1',
             properties: {
-                email: 'test@markettor.com',
+                email: 'test@clairview.com',
             },
             ...(data.person ?? {}),
         },

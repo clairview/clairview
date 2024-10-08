@@ -20,9 +20,9 @@ from ee.billing.quota_limiting import (
     sync_org_quota_limits,
     update_all_org_billing_quotas,
 )
-from markettor.api.test.test_team import create_team
-from markettor.redis import get_client
-from markettor.test.base import BaseTest, _create_event
+from clairview.api.test.test_team import create_team
+from clairview.redis import get_client
+from clairview.test.base import BaseTest, _create_event
 
 
 class TestQuotaLimiting(BaseTest):
@@ -31,15 +31,15 @@ class TestQuotaLimiting(BaseTest):
     def setUp(self) -> None:
         super().setUp()
         self.redis_client = get_client()
-        self.redis_client.delete(f"@markettor/quota-limits/events")
-        self.redis_client.delete(f"@markettor/quota-limits/recordings")
-        self.redis_client.delete(f"@markettor/quota-limits/rows_synced")
-        self.redis_client.delete(f"@markettor/quota-limiting-suspended/events")
-        self.redis_client.delete(f"@markettor/quota-limiting-suspended/recordings")
-        self.redis_client.delete(f"@markettor/quota-limiting-suspended/rows_synced")
+        self.redis_client.delete(f"@clairview/quota-limits/events")
+        self.redis_client.delete(f"@clairview/quota-limits/recordings")
+        self.redis_client.delete(f"@clairview/quota-limits/rows_synced")
+        self.redis_client.delete(f"@clairview/quota-limiting-suspended/events")
+        self.redis_client.delete(f"@clairview/quota-limiting-suspended/recordings")
+        self.redis_client.delete(f"@clairview/quota-limiting-suspended/rows_synced")
 
-    @patch("markettoranalytics.capture")
-    @patch("markettoranalytics.feature_enabled", return_value=True)
+    @patch("clairviewanalytics.capture")
+    @patch("clairviewanalytics.feature_enabled", return_value=True)
     @freeze_time("2021-01-25T23:59:59Z")
     def test_quota_limiting_feature_flag_enabled(self, patch_feature_enabled, patch_capture) -> None:
         with self.settings(USE_TZ=False):
@@ -86,9 +86,9 @@ class TestQuotaLimiting(BaseTest):
         assert quota_limiting_suspended_orgs["events"] == {}
         assert quota_limiting_suspended_orgs["recordings"] == {}
         assert quota_limiting_suspended_orgs["rows_synced"] == {}
-        assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
         patch_capture.reset_mock()
         # Add this org to the redis cache.
@@ -116,12 +116,12 @@ class TestQuotaLimiting(BaseTest):
         assert quota_limiting_suspended_orgs["events"] == {}
         assert quota_limiting_suspended_orgs["recordings"] == {}
         assert quota_limiting_suspended_orgs["rows_synced"] == {}
-        assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == [self.team.api_token.encode("UTF-8")]
-        assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == [self.team.api_token.encode("UTF-8")]
+        assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
-    @patch("markettoranalytics.capture")
-    @patch("markettoranalytics.feature_enabled", return_value=True)
+    @patch("clairviewanalytics.capture")
+    @patch("clairviewanalytics.feature_enabled", return_value=True)
     def test_quota_limit_feature_flag_not_on(self, patch_feature_enabled, patch_capture) -> None:
         # Confirm that we don't send an event if they weren't going to be limited.
         self.organization.usage = {
@@ -146,9 +146,9 @@ class TestQuotaLimiting(BaseTest):
         assert quota_limiting_suspended_orgs["recordings"] == {}
         assert quota_limiting_suspended_orgs["rows_synced"] == {}
 
-        assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
     def test_billing_rate_limit_not_set_if_missing_org_usage(self) -> None:
         with self.settings(USE_TZ=False):
@@ -176,11 +176,11 @@ class TestQuotaLimiting(BaseTest):
         assert quota_limiting_suspended_orgs["recordings"] == {}
         assert quota_limiting_suspended_orgs["rows_synced"] == {}
 
-        assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-        assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+        assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
-    @patch("markettoranalytics.capture")
+    @patch("clairviewanalytics.capture")
     def test_billing_rate_limit(self, patch_capture) -> None:
         with self.settings(USE_TZ=False), freeze_time("2021-01-25T00:00:00Z"):
             self.organization.usage = {
@@ -225,11 +225,11 @@ class TestQuotaLimiting(BaseTest):
                 groups={"instance": "http://localhost:8000", "organization": org_id},
             )
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
             self.organization.refresh_from_db()
             assert self.organization.usage == {
@@ -250,14 +250,14 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
             # Reset the event limiting set so their limiting will be suspended for 1 day.
-            self.redis_client.delete(f"@markettor/quota-limits/events")
+            self.redis_client.delete(f"@clairview/quota-limits/events")
             quota_limited_orgs, quota_limiting_suspended_orgs = update_all_org_billing_quotas()
             assert quota_limited_orgs["events"] == {}
             assert quota_limited_orgs["recordings"] == {}
@@ -265,13 +265,13 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {org_id: 1611705600}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
         # Check that limiting still suspended 23 hrs later
         with freeze_time("2021-01-25T23:00:00Z"):
@@ -282,13 +282,13 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {org_id: 1611705600}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
             self.organization.refresh_from_db()
             assert self.organization.usage == {
                 "events": {
@@ -318,17 +318,17 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == []
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
         # Increase trust score. Their quota limiting suspension expiration should not update.
         with freeze_time("2021-01-25T00:00:00Z"):
-            assert self.redis_client.delete(f"@markettor/quota-limits/events")
+            assert self.redis_client.delete(f"@clairview/quota-limits/events")
 
             self.organization.customer_trust_scores = {"events": 10, "recordings": 0, "rows_synced": 0}
             self.organization.usage = {
@@ -345,13 +345,13 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {org_id: 1611705600}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
             # Reset, quota limiting should be suspended for 3 days.
             self.organization.customer_trust_scores = {"events": 10, "recordings": 0, "rows_synced": 0}
@@ -369,13 +369,13 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {org_id: 1611878400}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
             # Decrease the trust score to 0. Quota limiting should immediately take effect.
             self.organization.customer_trust_scores = {"events": 0, "recordings": 0, "rows_synced": 0}
@@ -393,16 +393,16 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == []
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
         with freeze_time("2021-01-28T00:00:00Z"):
-            self.redis_client.delete(f"@markettor/quota-limits/events")
+            self.redis_client.delete(f"@clairview/quota-limits/events")
 
             # Quota limiting suspension date set in previous billing period, update to new suspension expiration
             self.organization.customer_trust_scores = {"events": 10, "recordings": 0, "rows_synced": 0}
@@ -421,13 +421,13 @@ class TestQuotaLimiting(BaseTest):
             assert quota_limiting_suspended_orgs["events"] == {org_id: 1612137600}
             assert quota_limiting_suspended_orgs["recordings"] == {}
             assert quota_limiting_suspended_orgs["rows_synced"] == {}
-            assert self.redis_client.zrange(f"@markettor/quota-limiting-suspended/events", 0, -1) == [
+            assert self.redis_client.zrange(f"@clairview/quota-limiting-suspended/events", 0, -1) == [
                 self.team.api_token.encode("UTF-8")
             ]
 
-            assert self.redis_client.zrange(f"@markettor/quota-limits/events", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/recordings", 0, -1) == []
-            assert self.redis_client.zrange(f"@markettor/quota-limits/rows_synced", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/events", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/recordings", 0, -1) == []
+            assert self.redis_client.zrange(f"@clairview/quota-limits/rows_synced", 0, -1) == []
 
     def test_set_org_usage_summary_updates_correctly(self):
         self.organization.usage = {

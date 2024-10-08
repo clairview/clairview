@@ -1,4 +1,4 @@
-import { LemonSelect } from '@markettor/lemon-ui'
+import { LemonSelect } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FunnelLayout } from 'lib/constants'
 import { IconFunnelHorizontal, IconFunnelVertical } from 'lib/lemon-ui/icons'

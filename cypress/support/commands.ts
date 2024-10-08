@@ -1,6 +1,6 @@
 Cypress.Commands.add('login', () => {
     // This function isn't used for every test anymore
-    cy.get('[data-attr=login-email]').type('test@markettor.com').should('have.value', 'test@markettor.com').blur()
+    cy.get('[data-attr=login-email]').type('test@clairview.com').should('have.value', 'test@clairview.com').blur()
 
     cy.get('[data-attr=password]', { timeout: 5000 }).should('be.visible') // Wait for login precheck (note blur above)
     cy.get('[data-attr=password]').type('12345678').should('have.value', '12345678')

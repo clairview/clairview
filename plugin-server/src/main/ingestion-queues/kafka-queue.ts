@@ -152,7 +152,7 @@ export class KafkaJSIngestionConsumer {
         sessionTimeout: number
     ): Consumer {
         const consumer = kafka.consumer({
-            // NOTE: This should never clash with the group ID specified for the kafka engine markettor/ee/clickhouse/sql/clickhouse.py
+            // NOTE: This should never clash with the group ID specified for the kafka engine clairview/ee/clickhouse/sql/clickhouse.py
             groupId,
             sessionTimeout: sessionTimeout,
             readUncommitted: false,

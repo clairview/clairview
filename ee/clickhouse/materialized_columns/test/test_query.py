@@ -1,4 +1,4 @@
-from markettor.test.base import APIBaseTest, ClickhouseTestMixin
+from clairview.test.base import APIBaseTest, ClickhouseTestMixin
 
 
 class TestQuery(ClickhouseTestMixin, APIBaseTest):

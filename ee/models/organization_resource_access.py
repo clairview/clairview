@@ -1,6 +1,6 @@
 from django.db import models
 
-from markettor.models.organization import Organization
+from clairview.models.organization import Organization
 
 
 class OrganizationResourceAccess(models.Model):
@@ -23,7 +23,7 @@ class OrganizationResourceAccess(models.Model):
     access_level = models.PositiveSmallIntegerField(default=AccessLevel.CAN_ALWAYS_EDIT, choices=AccessLevel.choices)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="resource_access")
     created_by = models.ForeignKey(
-        "markettor.User",
+        "clairview.User",
         on_delete=models.SET_NULL,
         null=True,
     )

@@ -1,5 +1,5 @@
-import { IconClock } from '@markettor/icons'
-import { LemonButton } from '@markettor/lemon-ui'
+import { IconClock } from '@clairview/icons'
+import { LemonButton } from '@clairview/lemon-ui'
 import { IconTrendingFlat, IconTrendingFlatDown } from 'lib/lemon-ui/icons'
 import { humanFriendlyDuration } from 'lib/utils'
 import { MouseEventHandler } from 'react'

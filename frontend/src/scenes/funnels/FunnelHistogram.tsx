@@ -18,7 +18,7 @@ export function FunnelHistogram(): JSX.Element | null {
     const [width, height] = useSize(ref)
 
     // Must reload the entire graph on a dashboard when values change, otherwise will run into random d3 bugs
-    // See: https://github.com/MarketTor/markettor/pull/5259
+    // See: https://github.com/ClairView/clairview/pull/5259
     const key = isInDashboardContext ? hashCodeForString(JSON.stringify(histogramGraphData)) : 'staticGraph'
 
     if (!histogramGraphData) {

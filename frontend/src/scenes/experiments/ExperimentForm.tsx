@@ -1,7 +1,7 @@
 import './Experiment.scss'
 
-import { IconPlusSmall, IconTrash } from '@markettor/icons'
-import { LemonDivider, LemonInput, LemonTextArea, Tooltip } from '@markettor/lemon-ui'
+import { IconPlusSmall, IconTrash } from '@clairview/icons'
+import { LemonDivider, LemonInput, LemonTextArea, Tooltip } from '@clairview/lemon-ui'
 import { BindLogic, useActions, useValues } from 'kea'
 import { Form, Group } from 'kea-forms'
 import { ExperimentVariantNumber } from 'lib/components/SeriesGlyph'

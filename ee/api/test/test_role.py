@@ -4,7 +4,7 @@ from rest_framework import status
 from ee.api.test.base import APILicensedTest
 from ee.models.organization_resource_access import OrganizationResourceAccess
 from ee.models.role import Role
-from markettor.models.organization import Organization, OrganizationMembership
+from clairview.models.organization import Organization, OrganizationMembership
 
 
 class TestRoleAPI(APILicensedTest):

@@ -4,7 +4,7 @@ from ee.clickhouse.queries.retention.retention_actors import (
 from ee.clickhouse.queries.retention.retention_event_query import (
     ClickhouseRetentionEventsQuery,
 )
-from markettor.queries.retention.retention import Retention
+from clairview.queries.retention.retention import Retention
 
 
 class ClickhouseRetention(Retention):

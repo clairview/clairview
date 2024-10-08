@@ -3,11 +3,11 @@ from datetime import timedelta
 
 from django.utils import timezone
 
-from markettor.models.cohort.cohort import Cohort
-from markettor.models.event_definition import EventDefinition
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.property_definition import PropertyDefinition
-from markettor.models.team.team import Team
+from clairview.models.cohort.cohort import Cohort
+from clairview.models.event_definition import EventDefinition
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.property_definition import PropertyDefinition
+from clairview.models.team.team import Team
 
 from .hardcoded_definitions import hardcoded_prop_defs
 

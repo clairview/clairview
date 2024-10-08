@@ -1,7 +1,7 @@
 import './Variables.scss'
 
-import { IconCopy, IconGear } from '@markettor/icons'
-import { LemonButton, LemonDivider, LemonInput, Popover } from '@markettor/lemon-ui'
+import { IconCopy, IconGear } from '@clairview/icons'
+import { LemonButton, LemonDivider, LemonInput, Popover } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { FEATURE_FLAGS } from 'lib/constants'
 import { LemonField } from 'lib/lemon-ui/LemonField'

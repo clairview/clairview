@@ -1,4 +1,4 @@
-import { IconX } from '@markettor/icons'
+import { IconX } from '@clairview/icons'
 import clsx from 'clsx'
 import React, { useMemo } from 'react'
 

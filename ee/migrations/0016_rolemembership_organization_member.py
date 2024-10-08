@@ -6,7 +6,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("markettor", "0397_projects_backfill"),
+        ("clairview", "0397_projects_backfill"),
         ("ee", "0015_add_verified_properties"),
     ]
 
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="role_memberships",
                 related_query_name="role_membership",
-                to="markettor.organizationmembership",
+                to="clairview.organizationmembership",
             ),
         ),
     ]

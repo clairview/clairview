@@ -1,5 +1,5 @@
-import { IconExternal, IconHome } from '@markettor/icons'
-import { LemonButton, LemonSelect, LemonSkeleton } from '@markettor/lemon-ui'
+import { IconExternal, IconHome } from '@clairview/icons'
+import { LemonButton, LemonSelect, LemonSkeleton } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { useEffect, useRef } from 'react'

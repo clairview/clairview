@@ -1,7 +1,7 @@
 import './index.scss'
 
-import { IconInfo } from '@markettor/icons'
-import { LemonBanner, Link } from '@markettor/lemon-ui'
+import { IconInfo } from '@clairview/icons'
+import { LemonBanner, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { PageHeader } from 'lib/components/PageHeader'
 import { FEATURE_FLAGS } from 'lib/constants'
@@ -93,12 +93,12 @@ export function SystemStatus(): JSX.Element {
             <PageHeader
                 caption={
                     <>
-                        Here you can find all the critical runtime details and settings of your MarketTor instance. You
+                        Here you can find all the critical runtime details and settings of your ClairView instance. You
                         have access to this because you're a <b>staff user</b>.{' '}
                         <Link
                             target="_blank"
                             targetBlankIcon
-                            to="https://markettor.com/docs/self-host/configure/instance-settings?utm_medium=in-product&utm_campaign=instance_status"
+                            to="https://clairview.com/docs/self-host/configure/instance-settings?utm_medium=in-product&utm_campaign=instance_status"
                         >
                             Learn more
                         </Link>
@@ -118,7 +118,7 @@ export function SystemStatus(): JSX.Element {
                         type="warning"
                         action={{
                             children: 'Learn more',
-                            to: 'https://markettor.com/docs/configuring-markettor/environment-variables?utm_medium=in-product&utm_campaign=system-status-site-url-misconfig',
+                            to: 'https://clairview.com/docs/configuring-clairview/environment-variables?utm_medium=in-product&utm_campaign=system-status-site-url-misconfig',
                         }}
                     >
                         Your <code>SITE_URL</code> environment variable seems misconfigured. Your <code>SITE_URL</code>{' '}
@@ -130,7 +130,7 @@ export function SystemStatus(): JSX.Element {
                         <b>
                             <code>{window.location.origin}</code>
                         </b>
-                        . In order for MarketTor to work properly, please set this to the origin where your instance is
+                        . In order for ClairView to work properly, please set this to the origin where your instance is
                         hosted.
                     </LemonBanner>
                 )}

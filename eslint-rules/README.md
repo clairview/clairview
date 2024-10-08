@@ -1,3 +1,3 @@
-# MarketTor Custom ESLint rules
+# ClairView Custom ESLint rules
 
-This package contains custom ESLint rules for MarketTor's codebase.
+This package contains custom ESLint rules for ClairView's codebase.

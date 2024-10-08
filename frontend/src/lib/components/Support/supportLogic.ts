@@ -5,7 +5,7 @@ import { forms } from 'kea-forms'
 import { urlToAction } from 'kea-router'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
 import { uuid } from 'lib/utils'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { organizationLogic } from 'scenes/organizationLogic'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { teamLogic } from 'scenes/teamLogic'
@@ -40,7 +40,7 @@ function getCurrentLocationLink(): string {
 }
 
 function getSessionReplayLink(): string {
-    const replayUrl = markettor
+    const replayUrl = clairview
         .get_session_replay_url({ withTimestamp: true, timestampLookBack: 30 })
         .replace(window.location.origin + '/replay/', 'http://go/session/')
     return `\nSession: ${replayUrl}`
@@ -344,7 +344,7 @@ export const supportLogic = kea<supportLogicType>([
             (sendSupportRequest) =>
                 sendSupportRequest.kind
                     ? SUPPORT_TICKET_KIND_TO_TITLE[sendSupportRequest.kind]
-                    : 'Leave a message with MarketTor',
+                    : 'Leave a message with ClairView',
         ],
     }),
     listeners(({ actions, props, values }) => ({
@@ -414,7 +414,7 @@ export const supportLogic = kea<supportLogicType>([
                         },
                         {
                             id: 22129191462555,
-                            value: markettor.get_distinct_id(),
+                            value: clairview.get_distinct_id(),
                         },
                         {
                             id: 27242745654043,
@@ -464,7 +464,7 @@ export const supportLogic = kea<supportLogicType>([
 
             try {
                 const zendeskRequestBody = JSON.stringify(payload, undefined, 4)
-                const response = await fetch('https://markettorhelp.zendesk.com/api/v2/requests.json', {
+                const response = await fetch('https://clairviewhelp.zendesk.com/api/v2/requests.json', {
                     method: 'POST',
                     body: zendeskRequestBody,
                     headers: { 'Content-Type': 'application/json' },
@@ -494,7 +494,7 @@ export const supportLogic = kea<supportLogicType>([
                 const json = await response.json()
 
                 const zendesk_ticket_id = json.request.id
-                const zendesk_ticket_link = `https://markettorhelp.zendesk.com/agent/tickets/${zendesk_ticket_id}`
+                const zendesk_ticket_link = `https://clairviewhelp.zendesk.com/agent/tickets/${zendesk_ticket_id}`
                 const properties = {
                     zendesk_ticket_uuid,
                     kind,
@@ -503,7 +503,7 @@ export const supportLogic = kea<supportLogicType>([
                     zendesk_ticket_id,
                     zendesk_ticket_link,
                 }
-                markettor.capture('support_ticket', properties)
+                clairview.capture('support_ticket', properties)
                 Sentry.captureMessage('User submitted Zendesk ticket', {
                     tags: {
                         zendesk_ticket_uuid,

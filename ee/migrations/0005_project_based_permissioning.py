@@ -4,12 +4,12 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import markettor.models.utils
+import clairview.models.utils
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("markettor", "0170_project_based_permissioning"),
+        ("clairview", "0170_project_based_permissioning"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("ee", "0004_enterpriseeventdefinition_enterprisepropertydefinition"),
     ]
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.UUIDField(
-                        default=markettor.models.utils.UUIDT,
+                        default=clairview.models.utils.UUIDT,
                         editable=False,
                         primary_key=True,
                         serialize=False,
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="explicit_memberships",
                         related_query_name="explicit_membership",
-                        to="markettor.team",
+                        to="clairview.team",
                     ),
                 ),
                 (
@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="explicit_team_memberships",
                         related_query_name="explicit_team_membership",
-                        to="markettor.organizationmembership",
+                        to="clairview.organizationmembership",
                     ),
                 ),
             ],

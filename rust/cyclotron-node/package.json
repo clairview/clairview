@@ -1,5 +1,5 @@
 {
-    "name": "@markettor/cyclotron",
+    "name": "@clairview/cyclotron",
     "version": "0.1.6",
     "description": "Node bindings for cyclotron",
     "main": "dist/index.js",

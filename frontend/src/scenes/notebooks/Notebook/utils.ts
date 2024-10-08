@@ -1,5 +1,5 @@
 // Helpers for Kea issue with double importing
-import { LemonButtonProps } from '@markettor/lemon-ui'
+import { LemonButtonProps } from '@clairview/lemon-ui'
 import {
     Attribute,
     ChainedCommands as EditorCommands,
@@ -18,9 +18,9 @@ import { NotebookNodeResource, NotebookNodeType } from '~/types'
 import type { NotebookNodeLogicProps } from '../Nodes/notebookNodeLogic'
 
 // TODO: fix the typing of string to NotebookNodeType
-export const KNOWN_NODES: Record<string, CreateMarketTorWidgetNodeOptions<any>> = {}
+export const KNOWN_NODES: Record<string, CreateClairViewWidgetNodeOptions<any>> = {}
 
-export type CreateMarketTorWidgetNodeOptions<T extends CustomNotebookNodeAttributes> = Omit<
+export type CreateClairViewWidgetNodeOptions<T extends CustomNotebookNodeAttributes> = Omit<
     NodeWrapperProps<T>,
     'updateAttributes'
 > & {

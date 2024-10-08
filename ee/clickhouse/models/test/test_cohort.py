@@ -3,20 +3,20 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from freezegun import freeze_time
 
-from markettor.client import sync_execute
-from markettor.torql.torql import TorQLContext
-from markettor.models.action import Action
-from markettor.models.cohort import Cohort
-from markettor.models.cohort.sql import GET_COHORTPEOPLE_BY_COHORT_ID
-from markettor.models.cohort.util import format_filter_query, get_person_ids_by_cohort_id
-from markettor.models.filters import Filter
-from markettor.models.organization import Organization
-from markettor.models.person import Person
-from markettor.models.property.util import parse_prop_grouped_clauses
-from markettor.models.team import Team
-from markettor.queries.util import PersonPropertiesMode
-from markettor.schema import PersonsOnEventsMode
-from markettor.test.base import (
+from clairview.client import sync_execute
+from clairview.torql.torql import TorQLContext
+from clairview.models.action import Action
+from clairview.models.cohort import Cohort
+from clairview.models.cohort.sql import GET_COHORTPEOPLE_BY_COHORT_ID
+from clairview.models.cohort.util import format_filter_query, get_person_ids_by_cohort_id
+from clairview.models.filters import Filter
+from clairview.models.organization import Organization
+from clairview.models.person import Person
+from clairview.models.property.util import parse_prop_grouped_clauses
+from clairview.models.team import Team
+from clairview.queries.util import PersonPropertiesMode
+from clairview.schema import PersonsOnEventsMode
+from clairview.test.base import (
     BaseTest,
     ClickhouseTestMixin,
     _create_event,
@@ -1158,7 +1158,7 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "$autocapture",
-                    "url": "https://markettor.com/feedback/123",
+                    "url": "https://clairview.com/feedback/123",
                     "url_matching": "exact",
                 }
             ],
@@ -1168,12 +1168,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         p1 = Person.objects.create(
             team_id=self.team.pk,
             distinct_ids=["p1"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p1",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -1189,12 +1189,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         Person.objects.create(
             team_id=self.team.pk,
             distinct_ids=["p2"],
-            properties={"name": "test", "email": "test@markettor.com"},
+            properties={"name": "test", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p2",
             timestamp=datetime.now() - timedelta(weeks=3),
         )
@@ -1210,12 +1210,12 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
         p3 = Person.objects.create(
             team_id=self.team.pk,
             distinct_ids=["p3"],
-            properties={"name": "special", "email": "test@markettor.com"},
+            properties={"name": "special", "email": "test@clairview.com"},
         )
         _create_event(
             team=self.team,
             event="$autocapture",
-            properties={"$current_url": "https://markettor.com/feedback/123"},
+            properties={"$current_url": "https://clairview.com/feedback/123"},
             distinct_id="p3",
             timestamp=datetime.now() - timedelta(days=2),
         )
@@ -1236,7 +1236,7 @@ class TestCohort(ClickhouseTestMixin, BaseTest):
                         },
                         {
                             "key": "email",
-                            "value": "test@markettor.com",
+                            "value": "test@clairview.com",
                             "type": "person",
                         },  # this is pushed down
                     ],

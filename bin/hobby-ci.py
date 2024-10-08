@@ -11,7 +11,7 @@ import digitalocean
 import requests
 
 
-DOMAIN = "markettor.cc"
+DOMAIN = "clairview.cc"
 
 
 class HobbyTester:
@@ -65,12 +65,12 @@ class HobbyTester:
             "mkdir hobby \n"
             "cd hobby \n"
             "sed -i \"s/#\\$nrconf{restart} = 'i';/\\$nrconf{restart} = 'a';/g\" /etc/needrestart/needrestart.conf \n"
-            "git clone https://github.com/MarketTor/markettor.git \n"
-            "cd markettor \n"
+            "git clone https://github.com/ClairView/clairview.git \n"
+            "cd clairview \n"
             f"git checkout {self.branch} \n"
             "cd .. \n"
-            f"chmod +x markettor/bin/deploy-hobby \n"
-            f"./markettor/bin/deploy-hobby {self.release_tag} {self.hostname} 1 \n"
+            f"chmod +x clairview/bin/deploy-hobby \n"
+            f"./clairview/bin/deploy-hobby {self.release_tag} {self.hostname} 1 \n"
         )
 
     def block_until_droplet_is_started(self):
@@ -221,7 +221,7 @@ def main():
         print("Creating droplet on Digitalocean for testing Hobby Deployment")
         ht = HobbyTester()
         ht.ensure_droplet(ssh_enabled=True)
-        print("Instance has started. You will be able to access it here after MarketTor boots (~15 minutes):")
+        print("Instance has started. You will be able to access it here after ClairView boots (~15 minutes):")
         print(f"https://{ht.hostname}")
 
     if command == "destroy":

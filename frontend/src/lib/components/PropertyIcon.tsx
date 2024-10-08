@@ -1,4 +1,4 @@
-import { IconGearFilled } from '@markettor/icons'
+import { IconGearFilled } from '@clairview/icons'
 import clsx from 'clsx'
 import {
     IconAndroidOS,

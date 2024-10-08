@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 import { actions, connect, kea, key, listeners, path, props, reducers, selectors } from 'kea'
 import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { Scene } from 'scenes/sceneTypes'
 import { teamLogic } from 'scenes/teamLogic'
 import { userLogic } from 'scenes/userLogic'
@@ -80,17 +80,17 @@ export const sceneDashboardChoiceModalLogic = kea<sceneDashboardChoiceModalLogic
             if (props.scene === Scene.ProjectHomepage) {
                 // TODO be able to save individual or team level home dashboard
                 actions.updateCurrentTeam({ primary_dashboard: dashboardId })
-                markettor.capture('primary dashboard changed')
+                clairview.capture('primary dashboard changed')
             } else {
                 actions.setUserScenePersonalisation(props.scene, dashboardId)
-                markettor.capture('scene dashboard choice set', { scene: props.scene, dashboardId: dashboardId })
+                clairview.capture('scene dashboard choice set', { scene: props.scene, dashboardId: dashboardId })
             }
         },
         showSceneDashboardChoiceModal: async () => {
             if (props.scene === Scene.ProjectHomepage) {
-                markettor.capture('primary dashboard modal opened')
+                clairview.capture('primary dashboard modal opened')
             } else {
-                markettor.capture('scene dashboard choice modal opened', { scene: props.scene })
+                clairview.capture('scene dashboard choice modal opened', { scene: props.scene })
             }
         },
     })),

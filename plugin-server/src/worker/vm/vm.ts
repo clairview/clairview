@@ -1,4 +1,4 @@
-import { RetryError } from '@markettor/plugin-scaffold'
+import { RetryError } from '@clairview/plugin-scaffold'
 import { randomBytes } from 'crypto'
 import { Summary } from 'prom-client'
 import { VM } from 'vm2'
@@ -8,7 +8,7 @@ import { createCache } from './extensions/cache'
 import { createConsole } from './extensions/console'
 import { createGeoIp } from './extensions/geoip'
 import { createJobs } from './extensions/jobs'
-import { createMarkettor } from './extensions/markettor'
+import { createMarkettor } from './extensions/clairview'
 import { createStorage } from './extensions/storage'
 import { createUtils } from './extensions/utilities'
 import { AVAILABLE_IMPORTS } from './imports'
@@ -48,11 +48,11 @@ export function createPluginConfigVM(
         sandbox: {},
     })
 
-    // Add MarketTor utilities to virtual machine
+    // Add ClairView utilities to virtual machine
     vm.freeze(createConsole(hub, pluginConfig), 'console')
-    vm.freeze(createMarkettor(hub, pluginConfig), 'markettor')
+    vm.freeze(createMarkettor(hub, pluginConfig), 'clairview')
 
-    // Add non-MarketTor utilities to virtual machine
+    // Add non-ClairView utilities to virtual machine
     vm.freeze(AVAILABLE_IMPORTS['node-fetch'], 'fetch')
 
     // Add used imports to the virtual machine

@@ -1,4 +1,4 @@
-import { LemonButton } from '@markettor/lemon-ui'
+import { LemonButton } from '@clairview/lemon-ui'
 import { convertSecondsToDuration, DurationPicker } from 'lib/components/DurationPicker/DurationPicker'
 import { OperatorSelect } from 'lib/components/PropertyFilters/components/OperatorValueSelect'
 import { Popover } from 'lib/lemon-ui/Popover/Popover'

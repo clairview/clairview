@@ -1,4 +1,4 @@
-import { LemonInput } from '@markettor/lemon-ui'
+import { LemonInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { DOMAIN_REGEX } from 'lib/constants'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
@@ -49,7 +49,7 @@ export function AddDomainModal(): JSX.Element {
             }
         >
             <LemonInput
-                placeholder="markettor.com"
+                placeholder="clairview.com"
                 autoFocus
                 value={newDomain}
                 onChange={setNewDomain}
@@ -57,7 +57,7 @@ export function AddDomainModal(): JSX.Element {
             />
             {submitted && errored && (
                 <span className="text-danger text-xs">
-                    Please enter a valid domain or subdomain name (e.g. my.markettor.com)
+                    Please enter a valid domain or subdomain name (e.g. my.clairview.com)
                 </span>
             )}
         </LemonModal>

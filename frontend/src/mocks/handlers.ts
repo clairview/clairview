@@ -38,11 +38,11 @@ const hogFunctionTemplateRetrieveMock: MockSignature = (req, res, ctx) => {
 
 // this really returns MaybePromise<ResponseFunction<any>>
 // but MSW doesn't export MaybePromise 🤷
-function markettorCORSResponse(req: RestRequest, res: ResponseComposition, ctx: RestContext): any {
+function clairviewCORSResponse(req: RestRequest, res: ResponseComposition, ctx: RestContext): any {
     return res(
         ctx.status(200),
         ctx.json('ok'),
-        // some of our tests try to make requests via markettor-js e.g. userLogic calls identify
+        // some of our tests try to make requests via clairview-js e.g. userLogic calls identify
         // they have to have CORS allowed, or they pass but print noise to the console
         ctx.set('Access-Control-Allow-Origin', req.referrer.length ? req.referrer : 'http://localhost'),
         ctx.set('Access-Control-Allow-Credentials', 'true'),
@@ -130,9 +130,9 @@ export const defaultMocks: Mocks = {
             exception: "[ErrorDetail(string='Sentry integration not configured', code='invalid')]",
         },
         // We don't want to show the "new version available" banner in tests
-        'https://api.github.com/repos/markettor/markettor-js/tags': () => [200, []],
+        'https://api.github.com/repos/clairview/clairview-js/tags': () => [200, []],
         'https://www.gravatar.com/avatar/:gravatar_id': () => [404, ''],
-        'https://us.i.markettor.com/api/early_access_features': {
+        'https://us.i.clairview.com/api/early_access_features': {
             earlyAccessFeatures: [],
         },
         '/api/billing/': {
@@ -146,17 +146,17 @@ export const defaultMocks: Mocks = {
             status: 'None',
             eligible: false,
         },
-        'https://status.markettor.com/api/v2/summary.json': statusPageAllOK,
+        'https://status.clairview.com/api/v2/summary.json': statusPageAllOK,
         '/api/projects/:team_id/hog_function_templates': _hogFunctionTemplates,
         '/api/projects/:team_id/hog_function_templates/:id': hogFunctionTemplateRetrieveMock,
         '/api/projects/:team_id/hog_functions': EMPTY_PAGINATED_RESPONSE,
     },
     post: {
-        'https://us.i.markettor.com/e/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
-        '/e/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
-        'https://us.i.markettor.com/decide/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
-        '/decide/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
-        'https://us.i.markettor.com/engage/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
+        'https://us.i.clairview.com/e/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
+        '/e/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
+        'https://us.i.clairview.com/decide/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
+        '/decide/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
+        'https://us.i.clairview.com/engage/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
         '/api/projects/:team_id/insights/:insight_id/viewed/': (): MockSignature => [201, null],
         'api/projects/:team_id/query': [200, { results: [] }],
     },
@@ -164,7 +164,7 @@ export const defaultMocks: Mocks = {
         '/api/projects/:team_id/session_recording_playlists/:playlist_id/': {},
     },
     options: {
-        'https://us.i.markettor.com/decide/': (req, res, ctx): MockSignature => markettorCORSResponse(req, res, ctx),
+        'https://us.i.clairview.com/decide/': (req, res, ctx): MockSignature => clairviewCORSResponse(req, res, ctx),
     },
 }
 export const handlers = mocksToHandlers(defaultMocks)

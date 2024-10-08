@@ -6,8 +6,8 @@ import { TeamManager } from '../../../src/worker/ingestion/team-manager'
 import { resetTestDatabase } from '../../helpers/sql'
 
 jest.mock('../../../src/utils/status')
-jest.mock('../../../src/utils/markettor', () => ({
-    markettor: {
+jest.mock('../../../src/utils/clairview', () => ({
+    clairview: {
         identify: jest.fn(),
         capture: jest.fn(),
     },
@@ -40,7 +40,7 @@ describe('TeamManager()', () => {
             jest.spyOn(global.Date, 'now').mockImplementation(() => new Date('2020-02-27T11:00:55Z').getTime())
             await postgres.query(
                 PostgresUse.COMMON_WRITE,
-                "UPDATE markettor_team SET name = 'Updated Name!'",
+                "UPDATE clairview_team SET name = 'Updated Name!'",
                 undefined,
                 'testTag'
             )
@@ -71,7 +71,7 @@ describe('TeamManager()', () => {
             jest.spyOn(global.Date, 'now').mockImplementation(() => new Date('2020-02-27T11:00:05Z').getTime())
             await postgres.query(
                 PostgresUse.COMMON_WRITE,
-                "UPDATE markettor_team SET api_token = 'my_token'",
+                "UPDATE clairview_team SET api_token = 'my_token'",
                 undefined,
                 'testTag'
             )
@@ -86,7 +86,7 @@ describe('TeamManager()', () => {
             // Settings are updated
             await postgres.query(
                 PostgresUse.COMMON_WRITE,
-                'UPDATE markettor_team SET anonymize_ips = true',
+                'UPDATE clairview_team SET anonymize_ips = true',
                 undefined,
                 'testTag'
             )

@@ -1,5 +1,5 @@
-import { IconGraph, IconLifecycle, IconTrends } from '@markettor/icons'
-import { LemonSelect, LemonSelectOptions } from '@markettor/lemon-ui'
+import { IconGraph, IconLifecycle, IconTrends } from '@clairview/icons'
+import { LemonSelect, LemonSelectOptions } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { Icon123, IconAreaChart, IconTableChart } from 'lib/lemon-ui/icons'
 

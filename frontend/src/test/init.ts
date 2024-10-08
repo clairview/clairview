@@ -2,7 +2,7 @@ import { createMemoryHistory } from 'history'
 import { testUtilsPlugin } from 'kea-test-utils'
 import { MOCK_DEFAULT_TEAM } from 'lib/api.mock'
 import { dayjs } from 'lib/dayjs'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { organizationLogic } from 'scenes/organizationLogic'
 import { preflightLogic } from 'scenes/PreflightCheck/preflightLogic'
 import { teamLogic } from 'scenes/teamLogic'
@@ -20,7 +20,7 @@ export function initKeaTests(mountCommonLogic = true, teamForWindowContext: Team
         ...window.MARKETTOR_APP_CONTEXT,
         current_team: teamForWindowContext,
     } as unknown as AppContext
-    markettor.init('no token', {
+    clairview.init('no token', {
         autocapture: false,
         disable_session_recording: true,
         advanced_disable_decide: true,

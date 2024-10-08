@@ -1,8 +1,8 @@
 from django.conf import settings
 
 
-from markettor.models import Team
-from markettor.clickhouse.client import sync_execute
+from clairview.models import Team
+from clairview.clickhouse.client import sync_execute
 
 BATCH_FLUSH_SIZE = settings.REPLAY_EMBEDDINGS_BATCH_SIZE
 MIN_DURATION_INCLUDE_SECONDS = settings.REPLAY_EMBEDDINGS_MIN_DURATION_SECONDS

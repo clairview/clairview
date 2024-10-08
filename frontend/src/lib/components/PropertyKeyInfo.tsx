@@ -1,6 +1,6 @@
 import './PropertyKeyInfo.scss'
 
-import { LemonDivider, TooltipProps } from '@markettor/lemon-ui'
+import { LemonDivider, TooltipProps } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { Popover } from 'lib/lemon-ui/Popover'
 import { getCoreFilterDefinition, PropertyKey } from 'lib/taxonomy'
@@ -38,8 +38,8 @@ export const PropertyKeyInfo = React.forwardRef<HTMLSpanElement, PropertyKeyInfo
     const valueDisplayText = (coreDefinition ? coreDefinition.label : value)?.trim() ?? ''
     const valueDisplayElement = valueDisplayText === '' ? <i>(empty string)</i> : valueDisplayText
 
-    const recognizedSource: 'markettor' | 'langfuse' | null = coreDefinition
-        ? 'markettor'
+    const recognizedSource: 'clairview' | 'langfuse' | null = coreDefinition
+        ? 'clairview'
         : value.startsWith('langfuse ')
         ? 'langfuse'
         : null

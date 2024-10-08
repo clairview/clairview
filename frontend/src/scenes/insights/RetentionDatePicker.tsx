@@ -1,4 +1,4 @@
-import { LemonCalendarSelectInput } from '@markettor/lemon-ui'
+import { LemonCalendarSelectInput } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { dayjs } from 'lib/dayjs'
 import { insightLogic } from 'scenes/insights/insightLogic'

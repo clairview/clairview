@@ -1,6 +1,6 @@
 import './LemonTable.scss'
 
-import { IconInfo } from '@markettor/icons'
+import { IconInfo } from '@clairview/icons'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { router } from 'kea-router'

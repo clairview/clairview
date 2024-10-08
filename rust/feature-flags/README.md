@@ -1,7 +1,7 @@
 
 # Testing
 
-First, make sure docker compose is running (from main markettor repo), and test database exists:
+First, make sure docker compose is running (from main clairview repo), and test database exists:
 
 ```
 docker compose -f ../docker-compose.dev.yml up -d

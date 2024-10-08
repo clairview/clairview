@@ -1,6 +1,6 @@
 import { captureException } from '@sentry/react'
 import api, { getJSONOrNull } from 'lib/api'
-import markettor from 'markettor-js'
+import clairview from 'clairview-js'
 import { getResponseBytes } from 'scenes/insights/utils'
 
 import { getCurrentExporterData } from '~/exporter/exporterViewLogic'
@@ -26,7 +26,7 @@ export interface TimeToSeeDataPayload {
 }
 
 export function currentSessionId(): string | undefined {
-    const sessionDetails = markettor.sessionManager?.checkAndGetSessionAndWindowId?.(true)
+    const sessionDetails = clairview.sessionManager?.checkAndGetSessionAndWindowId?.(true)
     return sessionDetails?.sessionId
 }
 

@@ -1,4 +1,4 @@
-import { LemonButton, LemonTable, LemonTag } from '@markettor/lemon-ui'
+import { LemonButton, LemonTable, LemonTag } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { router } from 'kea-router'
 import { PageHeader } from 'lib/components/PageHeader'
@@ -45,7 +45,7 @@ export function EarlyAccessFeatures(): JSX.Element {
                 thingName="feature"
                 description="Allow your users to individually enable or disable features that are in public beta."
                 isEmpty={shouldShowEmptyState}
-                docsURL="https://markettor.com/docs/feature-flags/early-access-feature-management"
+                docsURL="https://clairview.com/docs/feature-flags/early-access-feature-management"
                 action={() => router.actions.push(urls.earlyAccessFeature('new'))}
             />
             {!shouldShowEmptyState && (

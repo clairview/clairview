@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 import { DateTime } from 'luxon'
 
 import { Hub, Person, Team } from '../../../../src/types'

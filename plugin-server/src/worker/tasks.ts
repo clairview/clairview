@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold/src/types'
+import { PluginEvent } from '@clairview/plugin-scaffold/src/types'
 
 import { EnqueuedPluginJob, Hub, PluginTaskType } from '../types'
 import { retryIfRetriable } from '../utils/retries'

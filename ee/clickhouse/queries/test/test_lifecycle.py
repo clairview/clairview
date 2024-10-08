@@ -3,18 +3,18 @@ from datetime import datetime, timedelta
 from django.utils.timezone import now
 from freezegun.api import freeze_time
 
-from markettor.constants import FILTER_TEST_ACCOUNTS, TRENDS_LIFECYCLE
-from markettor.models.filters.filter import Filter
-from markettor.models.group.util import create_group
-from markettor.models.group_type_mapping import GroupTypeMapping
-from markettor.models.person import Person
-from markettor.queries.test.test_lifecycle import TestLifecycleBase
-from markettor.queries.trends.trends import Trends
-from markettor.test.base import (
+from clairview.constants import FILTER_TEST_ACCOUNTS, TRENDS_LIFECYCLE
+from clairview.models.filters.filter import Filter
+from clairview.models.group.util import create_group
+from clairview.models.group_type_mapping import GroupTypeMapping
+from clairview.models.person import Person
+from clairview.queries.test.test_lifecycle import TestLifecycleBase
+from clairview.queries.trends.trends import Trends
+from clairview.test.base import (
     also_test_with_materialized_columns,
     snapshot_clickhouse_queries,
 )
-from markettor.test.test_journeys import journeys_for
+from clairview.test.test_journeys import journeys_for
 
 
 class TestClickhouseLifecycle(TestLifecycleBase):

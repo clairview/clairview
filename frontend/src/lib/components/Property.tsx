@@ -1,4 +1,4 @@
-import { Link } from '@markettor/lemon-ui'
+import { Link } from '@clairview/lemon-ui'
 import { isExternalLink } from 'lib/utils'
 
 export function Property({ value }: { value: any }): JSX.Element {

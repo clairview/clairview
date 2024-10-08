@@ -5,7 +5,7 @@ const VALID_PASSWORD = 'hedgE-hog-123%'
 describe('Invite Signup', () => {
     it('Authenticated user can invite user but cannot use invite for someone else', () => {
         const user = randomString('user-charlie-')
-        const email = `${user}@markettor.com`
+        const email = `${user}@clairview.com`
 
         cy.get('[data-attr=menu-item-me]').click()
         cy.get('[data-attr=top-menu-item-org-settings]').click()
@@ -39,7 +39,7 @@ describe('Invite Signup', () => {
         const target_email = `newuser+${Math.floor(Math.random() * 10000)
             .toString()
             // Ensure we have a fixed width
-            .padStart(4, '0')}@markettor.com`
+            .padStart(4, '0')}@clairview.com`
         cy.request({
             method: 'POST',
             url: '/api/organizations/@current/invites/',
@@ -74,7 +74,7 @@ describe('Invite Signup', () => {
         // Click "Invite team member"
         cy.get('[data-attr=invite-teammate-button]').first().click()
         // Enter invite the user
-        cy.get('[data-attr=invite-email-input]').type(`fake+${Math.floor(Math.random() * 10000)}@markettor.com`)
+        cy.get('[data-attr=invite-email-input]').type(`fake+${Math.floor(Math.random() * 10000)}@clairview.com`)
         cy.get('[data-attr=invite-team-member-submit]').should('not.be.disabled').click()
 
         // Log in as invited user

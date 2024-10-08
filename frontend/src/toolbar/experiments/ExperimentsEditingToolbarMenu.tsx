@@ -1,4 +1,4 @@
-import { IconPlus } from '@markettor/icons'
+import { IconPlus } from '@clairview/icons'
 import { useActions, useValues } from 'kea'
 import { Form, Group } from 'kea-forms'
 import { LemonBanner } from 'lib/lemon-ui/LemonBanner'

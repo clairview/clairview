@@ -2,7 +2,7 @@ import {
     SessionRecordingPlayer,
     SessionRecordingPlayerProps,
 } from 'scenes/session-recordings/player/SessionRecordingPlayer'
-import { createMarketTorWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
+import { createClairViewWidgetNode } from 'scenes/notebooks/Nodes/NodeWrapper'
 import { NotebookNodeType, SessionRecordingId } from '~/types'
 import { urls } from 'scenes/urls'
 import {
@@ -18,12 +18,12 @@ import {
     SessionRecordingPreviewSkeleton,
 } from 'scenes/session-recordings/playlist/SessionRecordingPreview'
 import { notebookNodeLogic } from './notebookNodeLogic'
-import { LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSwitch } from '@clairview/lemon-ui'
 import { JSONContent, NotebookNodeProps, NotebookNodeAttributeProperties } from '../Notebook/utils'
 import { asDisplay } from 'scenes/persons/person-utils'
 import { IconComment } from 'lib/lemon-ui/icons'
 import { NotFound } from 'lib/components/NotFound'
-import { IconPerson } from '@markettor/icons'
+import { IconPerson } from '@clairview/icons'
 
 const HEIGHT = 500
 const MIN_HEIGHT = '20rem'
@@ -141,7 +141,7 @@ type NotebookNodeRecordingAttributes = {
     noInspector: boolean
 }
 
-export const NotebookNodeRecording = createMarketTorWidgetNode<NotebookNodeRecordingAttributes>({
+export const NotebookNodeRecording = createClairViewWidgetNode<NotebookNodeRecordingAttributes>({
     nodeType: NotebookNodeType.Recording,
     titlePlaceholder: 'Session recording',
     Component,

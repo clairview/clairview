@@ -1,6 +1,6 @@
 import '../Experiment.scss'
 
-import { LemonTable, LemonTableColumns, LemonTag, Link } from '@markettor/lemon-ui'
+import { LemonTable, LemonTableColumns, LemonTag, Link } from '@clairview/lemon-ui'
 import { useValues } from 'kea'
 import { urls } from 'scenes/urls'
 

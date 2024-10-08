@@ -15,7 +15,7 @@ const allNotebooks = [
         short_id: 'abc',
         created_by: {
             first_name: 'Ben',
-            email: 'ben@markettor.com',
+            email: 'ben@clairview.com',
         },
     },
     {
@@ -23,7 +23,7 @@ const allNotebooks = [
         short_id: 'def',
         created_by: {
             first_name: 'Paul',
-            email: 'paul@markettor.com',
+            email: 'paul@clairview.com',
         },
     },
     {
@@ -31,7 +31,7 @@ const allNotebooks = [
         short_id: 'ghi',
         created_by: {
             first_name: 'David',
-            email: 'david@markettor.com',
+            email: 'david@clairview.com',
         },
     },
 ]

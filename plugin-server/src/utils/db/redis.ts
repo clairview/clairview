@@ -9,7 +9,7 @@ import { killGracefully } from '../../utils/utils'
 /** Number of Redis error events until the server is killed gracefully. */
 const REDIS_ERROR_COUNTER_LIMIT = 10
 
-export type REDIS_SERVER_KIND = 'markettor' | 'ingestion' | 'session-recording'
+export type REDIS_SERVER_KIND = 'clairview' | 'ingestion' | 'session-recording'
 
 export function getRedisConnectionOptions(
     serverConfig: PluginsServerConfig,
@@ -20,7 +20,7 @@ export function getRedisConnectionOptions(
 } {
     const fallback = { url: serverConfig.REDIS_URL }
     switch (kind) {
-        case 'markettor':
+        case 'clairview':
             return serverConfig.MARKETTOR_REDIS_HOST
                 ? {
                       url: serverConfig.MARKETTOR_REDIS_HOST,

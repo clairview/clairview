@@ -1,21 +1,21 @@
 from prometheus_client import Histogram
 from django.conf import settings
-from markettor.clickhouse.client import sync_execute
-from markettor.models import Team
+from clairview.clickhouse.client import sync_execute
+from clairview.models import Team
 from sklearn.cluster import DBSCAN
 import pandas as pd
 import numpy as np
-from markettor.session_recordings.models.session_recording_event import SessionRecordingViewed
+from clairview.session_recordings.models.session_recording_event import SessionRecordingViewed
 from datetime import date
 
 CLUSTER_REPLAY_ERRORS_TIMING = Histogram(
-    "markettor_session_recordings_cluster_replay_errors",
+    "clairview_session_recordings_cluster_replay_errors",
     "Time spent clustering the embeddings of replay errors",
     buckets=[0.5, 1, 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
 )
 
 CLUSTER_REPLAY_ERRORS_CLUSTER_COUNT = Histogram(
-    "markettor_session_recordings_errors_cluster_count",
+    "clairview_session_recordings_errors_cluster_count",
     "Count of clusters identified from error messages per team",
     buckets=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20, 25, 30, 35, 40, 45, 50],
     labelnames=["team_id"],

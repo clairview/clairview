@@ -13,8 +13,8 @@ import {
     IconStack,
     IconToggle,
     IconTrends,
-} from '@markettor/icons'
-import { LemonBanner, LemonButton, Link } from '@markettor/lemon-ui'
+} from '@clairview/icons'
+import { LemonBanner, LemonButton, Link } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { SupportForm } from 'lib/components/Support/SupportForm'
 import { getPublicSupportSnippet, supportLogic } from 'lib/components/Support/supportLogic'
@@ -190,7 +190,7 @@ export const SidePanelSupport = (): JSX.Element => {
                                     {PRODUCTS.map((product, index) => (
                                         <li key={index}>
                                             <Link
-                                                to={`https://markettor.com/docs/${product.slug}`}
+                                                to={`https://clairview.com/docs/${product.slug}`}
                                                 className="group flex items-center justify-between px-2 py-1.5"
                                             >
                                                 <div className="flex items-center gap-1.5">
@@ -250,7 +250,7 @@ export const SidePanelSupport = (): JSX.Element => {
                                 <p>
                                     Questions about features, how-tos, or use cases? There are thousands of discussions
                                     in our community forums.{' '}
-                                    <Link to="https://markettor.com/questions">Ask a question</Link>
+                                    <Link to="https://clairview.com/questions">Ask a question</Link>
                                 </p>
                             </Section>
 
@@ -260,7 +260,7 @@ export const SidePanelSupport = (): JSX.Element => {
                                         <LemonButton
                                             type="secondary"
                                             status="alt"
-                                            to="https://markettor.com/wip"
+                                            to="https://clairview.com/wip"
                                             icon={<IconHelmet />}
                                             targetBlank
                                         >
@@ -271,7 +271,7 @@ export const SidePanelSupport = (): JSX.Element => {
                                         <LemonButton
                                             type="secondary"
                                             status="alt"
-                                            to="https://markettor.com/roadmap"
+                                            to="https://clairview.com/roadmap"
                                             icon={<IconMap />}
                                             targetBlank
                                         >
@@ -282,7 +282,7 @@ export const SidePanelSupport = (): JSX.Element => {
                                         <LemonButton
                                             type="secondary"
                                             status="alt"
-                                            to={`https://github.com/MarketTor/markettor/issues/new?&labels=enhancement&template=feature_request.yml&debug-info=${encodeURIComponent(
+                                            to={`https://github.com/ClairView/clairview/issues/new?&labels=enhancement&template=feature_request.yml&debug-info=${encodeURIComponent(
                                                 getPublicSupportSnippet(region, currentOrganization, currentTeam)
                                             )}`}
                                             icon={<IconFeatures />}

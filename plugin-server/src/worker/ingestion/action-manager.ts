@@ -136,7 +136,7 @@ export async function fetchAllActionsGroupedByTeam(
                 steps_json,
                 bytecode,
                 bytecode_error
-            FROM markettor_action
+            FROM clairview_action
             WHERE deleted = FALSE AND (post_to_slack OR id = ANY($1))
         `,
             [additionalActionIds],
@@ -192,7 +192,7 @@ export async function fetchAction(client: PostgresRouter, id: Action['id']): Pro
     const rawActions: RawAction[] = (
         await client.query(
             PostgresUse.COMMON_READ,
-            `SELECT * FROM markettor_action WHERE id = $1 AND deleted = FALSE`,
+            `SELECT * FROM clairview_action WHERE id = $1 AND deleted = FALSE`,
             [id],
             'fetchActions'
         )

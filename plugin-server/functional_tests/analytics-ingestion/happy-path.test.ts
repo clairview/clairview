@@ -56,7 +56,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         properties: {
             distinct_id: distinctId,
             $group_type: 'organization',
-            $group_key: 'markettor',
+            $group_key: 'clairview',
             $group_set: {
                 prop: 'value',
             },
@@ -68,7 +68,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         expect(group).toEqual([
             expect.objectContaining({
                 group_type_index: 0,
-                group_key: 'markettor',
+                group_key: 'clairview',
                 group_properties: { prop: 'value' },
             }),
         ])
@@ -82,7 +82,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         event: 'custom event',
         properties: {
             name: 'haha',
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         },
     })
 
@@ -90,7 +90,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         const [event] = await fetchEvents(teamId, firstEventUuid)
         expect(event).toEqual(
             expect.objectContaining({
-                $group_0: 'markettor',
+                $group_0: 'clairview',
             })
         )
     })
@@ -104,7 +104,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         properties: {
             distinct_id: distinctId,
             $group_type: 'organization',
-            $group_key: 'markettor',
+            $group_key: 'clairview',
             $group_set: {
                 prop: 'updated value',
             },
@@ -116,7 +116,7 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         expect(group).toContainEqual(
             expect.objectContaining({
                 group_type_index: 0,
-                group_key: 'markettor',
+                group_key: 'clairview',
                 group_properties: { prop: 'updated value' },
             })
         )
@@ -130,14 +130,14 @@ test.concurrent(`event ingestion: can set and update group properties`, async ()
         event: 'custom event',
         properties: {
             name: 'haha',
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         },
     })
     await waitForExpect(async () => {
         const [event] = await fetchEvents(teamId, secondEventUuid)
         expect(event).toEqual(
             expect.objectContaining({
-                $group_0: 'markettor',
+                $group_0: 'clairview',
             })
         )
     })
@@ -170,7 +170,7 @@ test.concurrent(`event ingestion: handles $groupidentify with no properties`, as
         properties: {
             distinct_id: distinctId,
             $group_type: 'organization',
-            $group_key: 'markettor',
+            $group_key: 'clairview',
         },
     })
 
@@ -182,7 +182,7 @@ test.concurrent(`event ingestion: handles $groupidentify with no properties`, as
         event: 'custom event',
         properties: {
             name: 'haha',
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         },
     })
 
@@ -194,7 +194,7 @@ test.concurrent(`event ingestion: handles $groupidentify with no properties`, as
 
     expect(event).toEqual(
         expect.objectContaining({
-            $group_0: 'markettor',
+            $group_0: 'clairview',
         })
     )
 })
@@ -326,7 +326,7 @@ test.concurrent(
 
 test.concurrent(`event ingestion: can $set and update person properties with top level $set`, async () => {
     // We support $set at the top level. This is as the time of writing how the
-    // markettor-js library works.
+    // clairview-js library works.
     const teamId = await createTeam(organizationId)
     const distinctId = new UUIDT().toString()
 
@@ -458,7 +458,7 @@ test.concurrent(
     `event ingestion: can $set_once person properties but not update, with top level $set_once`,
     async () => {
         // We support $set_once at the top level. This is as the time of writing
-        // how the markettor-js library works.
+        // how the clairview-js library works.
         const teamId = await createTeam(organizationId)
         const distinctId = new UUIDT().toString()
 
@@ -493,7 +493,7 @@ test.concurrent(
 test.concurrent(`event ingestion: events without a team_id get processed correctly`, async () => {
     const token = new UUIDT().toString()
     const teamId = await createTeam(organizationId, '', token)
-    const personIdentifier = 'test@markettor.com'
+    const personIdentifier = 'test@clairview.com'
 
     await capture({
         teamId: null,
@@ -543,7 +543,7 @@ test.concurrent('consumer updates timestamp exported to prometheus', async () =>
 test.concurrent(`event ingestion: initial login flow keeps the same person_id`, async () => {
     const teamId = await createTeam(organizationId)
     const initialDistinctId = 'initialDistinctId'
-    const personIdentifier = 'test@markettor.com'
+    const personIdentifier = 'test@clairview.com'
 
     // This simulates initial sign-up flow,
     // where the user has first been browsing the site anonymously for a while

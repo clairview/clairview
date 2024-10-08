@@ -1,0 +1,11 @@
+# serializer version: 1
+# name: TestFeatureFlagAnalytics.test_efficient_querying_of_team_decide_usage_data
+  '''
+  SELECT "clairview_team"."id",
+         "clairview_team"."uuid"
+  FROM "clairview_team"
+  INNER JOIN "clairview_organization" ON ("clairview_team"."organization_id" = "clairview_organization"."id")
+  WHERE NOT (("clairview_organization"."for_internal_metrics"
+              OR "clairview_team"."is_demo"))
+  '''
+# ---

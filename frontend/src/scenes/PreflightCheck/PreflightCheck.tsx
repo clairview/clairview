@@ -1,7 +1,7 @@
 import './PreflightCheck.scss'
 
-import { IconCheckCircle, IconCollapse, IconExpand, IconWarning } from '@markettor/icons'
-import { Link, Spinner } from '@markettor/lemon-ui'
+import { IconCheckCircle, IconCollapse, IconExpand, IconWarning } from '@clairview/icons'
+import { Link, Spinner } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useActions, useValues } from 'kea'
 import { AnimatedCollapsible } from 'lib/components/AnimatedCollapsible'
@@ -70,14 +70,14 @@ export function PreflightCheck(): JSX.Element {
                 <p className="text-center mt-4 mb-0">
                     Need help? Take a look at our{' '}
                     <Link
-                        to="https://markettor.com/docs/self-host/deploy/troubleshooting"
+                        to="https://clairview.com/docs/self-host/deploy/troubleshooting"
                         target="_blank"
                         targetBlankIcon={false}
                     >
                         documentation
                     </Link>{' '}
                     or{' '}
-                    <Link to="https://markettor.com/support" target="_blank" targetBlankIcon={false}>
+                    <Link to="https://clairview.com/support" target="_blank" targetBlankIcon={false}>
                         visit community support
                     </Link>
                     .
@@ -128,11 +128,11 @@ export function PreflightCheck(): JSX.Element {
                             <p className="Preflight__header--secondary-text">
                                 Validation happens immediately. You can rerun validation checks by clicking “validate
                                 requirements”. If you get stuck, try our{' '}
-                                <Link to="https://markettor.com/docs/self-host/deploy/troubleshooting" target="_blank">
+                                <Link to="https://clairview.com/docs/self-host/deploy/troubleshooting" target="_blank">
                                     troubleshooting guide
                                 </Link>{' '}
                                 or our{' '}
-                                <Link to="https://markettor.com/docs/runbook" target="_blank">
+                                <Link to="https://clairview.com/docs/runbook" target="_blank">
                                     self-host runbook
                                 </Link>
                                 .

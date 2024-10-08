@@ -1,4 +1,4 @@
-import { api } from '@markettor/apps-common'
+import { api } from '@clairview/apps-common'
 import Fuse from 'fuse.js'
 import { connect, kea, path, selectors } from 'kea'
 import { subscriptions } from 'kea-subscriptions'

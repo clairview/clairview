@@ -1,4 +1,4 @@
-import { LemonSwitch } from '@markettor/lemon-ui'
+import { LemonSwitch } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
 import { hedgehogBuddyLogic } from 'lib/components/HedgehogBuddy/hedgehogBuddyLogic'
 import { HedgehogOptions } from 'lib/components/HedgehogBuddy/HedgehogOptions'

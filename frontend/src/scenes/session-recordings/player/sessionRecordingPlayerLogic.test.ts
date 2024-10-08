@@ -346,13 +346,13 @@ describe('sessionRecordingPlayerLogic', () => {
 
             expect(mockWarn).not.toHaveBeenCalled()
 
-            expect((window as any).__markettor_player_warnings).toEqual([
+            expect((window as any).__clairview_player_warnings).toEqual([
                 ['[replayer]', 'test'],
                 ['[replayer]', 'test2'],
             ])
             jest.runOnlyPendingTimers()
             expect(mockWarn).toHaveBeenCalledWith(
-                '[MarketTor Replayer] 2 warnings (window.__markettor_player_warnings to safely log them)'
+                '[ClairView Replayer] 2 warnings (window.__clairview_player_warnings to safely log them)'
             )
         })
     })

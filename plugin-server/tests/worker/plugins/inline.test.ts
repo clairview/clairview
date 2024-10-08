@@ -1,4 +1,4 @@
-import { PluginEvent } from '@markettor/plugin-scaffold'
+import { PluginEvent } from '@clairview/plugin-scaffold'
 
 import { Hub, LogLevel, Plugin, PluginConfig } from '../../../src/types'
 import { closeHub, createHub } from '../../../src/utils/db/hub'
@@ -34,7 +34,7 @@ describe('Inline plugin', () => {
 
         const { rows }: { rows: Plugin[] } = await hub.postgres.query(
             PostgresUse.COMMON_WRITE,
-            'SELECT * FROM markettor_plugin',
+            'SELECT * FROM clairview_plugin',
             undefined,
             'getPluginRows'
         )

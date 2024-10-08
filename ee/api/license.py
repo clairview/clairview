@@ -1,4 +1,4 @@
-import markettoranalytics
+import clairviewanalytics
 import requests
 from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
@@ -7,10 +7,10 @@ from rest_framework import mixins, request, serializers, viewsets
 from rest_framework.response import Response
 
 from ee.models.license import License, LicenseError
-from markettor.cloud_utils import is_cloud
-from markettor.event_usage import groups
-from markettor.models.organization import Organization
-from markettor.models.team import Team
+from clairview.cloud_utils import is_cloud
+from clairview.event_usage import groups
+from clairview.models.organization import Organization
+from clairview.models.team import Team
 
 
 class LicenseSerializer(serializers.ModelSerializer):
@@ -27,11 +27,11 @@ class LicenseSerializer(serializers.ModelSerializer):
         write_only_fields = ["key"]
 
     def validate(self, data):
-        validation = requests.post("https://license.markettor.com/licenses/activate", data={"key": data["key"]})
+        validation = requests.post("https://license.clairview.com/licenses/activate", data={"key": data["key"]})
         resp = validation.json()
         user = self.context["request"].user
         if not validation.ok:
-            markettoranalytics.capture(
+            clairviewanalytics.capture(
                 user.distinct_id,
                 "license key activation failure",
                 properties={"error": validation.content},
@@ -39,7 +39,7 @@ class LicenseSerializer(serializers.ModelSerializer):
             )
             raise LicenseError(resp["code"], resp["detail"])
 
-        markettoranalytics.capture(
+        clairviewanalytics.capture(
             user.distinct_id,
             "license key activation success",
             properties={},
@@ -67,7 +67,7 @@ class LicenseViewSet(
 
     def destroy(self, request: request.Request, pk=None, **kwargs) -> Response:
         license = get_object_or_404(License, pk=pk)
-        validation = requests.post("https://license.markettor.com/licenses/deactivate", data={"key": license.key})
+        validation = requests.post("https://license.clairview.com/licenses/deactivate", data={"key": license.key})
         validation.raise_for_status()
 
         has_another_valid_license = License.objects.filter(valid_until__gte=now()).exclude(pk=pk).exists()

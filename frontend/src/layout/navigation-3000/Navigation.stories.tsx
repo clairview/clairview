@@ -9,7 +9,7 @@ import { mswDecorator, setFeatureFlags } from '~/mocks/browser'
 import { EMPTY_PAGINATED_RESPONSE } from '~/mocks/handlers'
 
 const meta: Meta = {
-    title: 'MarketTor 3000/Navigation',
+    title: 'ClairView 3000/Navigation',
     decorators: [
         mswDecorator({
             get: {

@@ -2,7 +2,7 @@
 
 if [[ ! -f mmdb.db ]]; then
     sudo apt-get install -y curl ca-certificates brotli
-    curl https://mmdbcdn.markettor.net/ | brotli -d > mmdb.db
+    curl https://mmdbcdn.clairview.net/ | brotli -d > mmdb.db
 fi
 
 git pull

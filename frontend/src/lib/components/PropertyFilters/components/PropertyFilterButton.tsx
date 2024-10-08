@@ -1,7 +1,7 @@
 import './PropertyFilterButton.scss'
 
-import { IconX } from '@markettor/icons'
-import { LemonButton, PopoverReferenceContext, Tooltip } from '@markettor/lemon-ui'
+import { IconX } from '@clairview/icons'
+import { LemonButton, PopoverReferenceContext, Tooltip } from '@clairview/lemon-ui'
 import clsx from 'clsx'
 import { useValues } from 'kea'
 import { PropertyFilterIcon } from 'lib/components/PropertyFilters/components/PropertyFilterIcon'

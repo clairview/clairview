@@ -1,5 +1,5 @@
-import { TZLabel } from '@markettor/apps-common'
-import { IconLock } from '@markettor/icons'
+import { TZLabel } from '@clairview/apps-common'
+import { IconLock } from '@clairview/icons'
 import { LemonTag } from 'lib/lemon-ui/LemonTag/LemonTag'
 
 import { InstanceSetting, SystemStatusRow } from '~/types'

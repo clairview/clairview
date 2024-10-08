@@ -1,4 +1,4 @@
-import { LemonLabel, LemonSelect } from '@markettor/lemon-ui'
+import { LemonLabel, LemonSelect } from '@clairview/lemon-ui'
 import { id } from 'chartjs-plugin-trendline'
 import { useValues } from 'kea'
 import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'

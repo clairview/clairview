@@ -1,7 +1,7 @@
 import './NotebookScene.scss'
 
-import { IconEllipsis } from '@markettor/icons'
-import { LemonButton, LemonMenu, lemonToast } from '@markettor/lemon-ui'
+import { IconEllipsis } from '@clairview/icons'
+import { LemonButton, LemonMenu, lemonToast } from '@clairview/lemon-ui'
 import { router } from 'kea-router'
 import { PageHeader } from 'lib/components/PageHeader'
 import { base64Encode } from 'lib/utils'
