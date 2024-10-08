@@ -63,7 +63,7 @@ export function HogFunctionFilters(): JSX.Element {
                                 TaxonomicFilterGroupType.PersonProperties,
                                 TaxonomicFilterGroupType.EventFeatureFlags,
                                 TaxonomicFilterGroupType.Elements,
-                                TaxonomicFilterGroupType.TorQLExpression,
+                                TaxonomicFilterGroupType.ClairQLExpression,
                             ]}
                             onChange={(properties: AnyPropertyFilter[]) => {
                                 onChange({
@@ -101,7 +101,7 @@ export function HogFunctionFilters(): JSX.Element {
                                 TaxonomicFilterGroupType.EventFeatureFlags,
                                 TaxonomicFilterGroupType.Elements,
                                 TaxonomicFilterGroupType.PersonProperties,
-                                TaxonomicFilterGroupType.TorQLExpression,
+                                TaxonomicFilterGroupType.ClairQLExpression,
                                 ...groupsTaxonomicTypes,
                             ]}
                             propertyFiltersPopover

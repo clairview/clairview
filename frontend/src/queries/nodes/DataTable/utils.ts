@@ -1,7 +1,7 @@
 import { getQueryFeatures, QueryFeature } from '~/queries/nodes/DataTable/queryFeatures'
-import { DataNode, DataTableNode, EventsQuery, TorQLExpression, NodeKind } from '~/queries/schema'
+import { DataNode, DataTableNode, EventsQuery, ClairQLExpression, NodeKind } from '~/queries/schema'
 
-export const defaultDataTableEventColumns: TorQLExpression[] = [
+export const defaultDataTableEventColumns: ClairQLExpression[] = [
     '*',
     'event',
     'person',
@@ -10,9 +10,9 @@ export const defaultDataTableEventColumns: TorQLExpression[] = [
     'timestamp',
 ]
 
-export const defaultDataTablePersonColumns: TorQLExpression[] = ['person', 'id', 'created_at', 'person.$delete']
+export const defaultDataTablePersonColumns: ClairQLExpression[] = ['person', 'id', 'created_at', 'person.$delete']
 
-export function defaultDataTableColumns(kind: NodeKind): TorQLExpression[] {
+export function defaultDataTableColumns(kind: NodeKind): ClairQLExpression[] {
     return kind === NodeKind.PersonsNode || kind === NodeKind.ActorsQuery
         ? defaultDataTablePersonColumns
         : kind === NodeKind.EventsQuery
@@ -22,7 +22,7 @@ export function defaultDataTableColumns(kind: NodeKind): TorQLExpression[] {
         : []
 }
 
-export function getDataNodeDefaultColumns(source: DataNode): TorQLExpression[] {
+export function getDataNodeDefaultColumns(source: DataNode): ClairQLExpression[] {
     if (
         getQueryFeatures(source).has(QueryFeature.selectAndOrderByColumns) &&
         Array.isArray((source as EventsQuery).select) &&
@@ -33,7 +33,7 @@ export function getDataNodeDefaultColumns(source: DataNode): TorQLExpression[] {
     return defaultDataTableColumns(source.kind)
 }
 
-export function getColumnsForQuery(query: DataTableNode): TorQLExpression[] {
+export function getColumnsForQuery(query: DataTableNode): ClairQLExpression[] {
     return query.columns ?? getDataNodeDefaultColumns(query.source)
 }
 

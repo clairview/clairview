@@ -58,12 +58,12 @@ runs:
           shell: bash
           run: pip install uv
 
-        - name: Determine if torql-parser has changed compared to master
+        - name: Determine if clairql-parser has changed compared to master
           shell: bash
-          id: torql-parser-diff
+          id: clairql-parser-diff
           run: |
               git fetch --no-tags --prune --depth=1 origin master
-              changed=$(git diff --quiet HEAD origin/master -- torql_parser/ && echo "false" || echo "true")
+              changed=$(git diff --quiet HEAD origin/master -- clairql_parser/ && echo "false" || echo "true")
               echo "changed=$changed" >> $GITHUB_OUTPUT
 
         - name: Install SAML (python3-saml) dependencies
@@ -98,10 +98,10 @@ runs:
           run: |
               uv pip install --system -r requirements.txt -r requirements-dev.txt
 
-        - name: Install the working version of torql-parser
-          if: steps.torql-parser-diff.outputs.changed == 'true'
+        - name: Install the working version of clairql-parser
+          if: steps.clairql-parser-diff.outputs.changed == 'true'
           shell: bash
-          # This is not cached currently, as it's important to build the current HEAD version of torql-parser if it has
+          # This is not cached currently, as it's important to build the current HEAD version of clairql-parser if it has
           # changed (requirements.txt has the already-published version)
           run: |
               sudo apt-get install libboost-all-dev unzip cmake curl uuid pkg-config
@@ -122,7 +122,7 @@ runs:
               sudo cp out/usr/local/lib/libantlr4-runtime.so* /usr/lib/
               sudo ldconfig
               cd ..
-              uv pip install --system ./torql_parser
+              uv pip install --system ./clairql_parser
 
         - name: Set up needed files
           shell: bash
@@ -179,11 +179,11 @@ runs:
           id: run-decide-read-replica-tests
           if: ${{ inputs.segment == 'Core' && inputs.group == 1 && inputs.person-on-events != 'true' }}
           env:
-              MARKETTOR_DB_NAME: clairview
+              CLAIRVIEW_DB_NAME: clairview
               READ_REPLICA_OPT_IN: 'decide,PersonalAPIKey, local_evaluation'
-              MARKETTOR_POSTGRES_READ_HOST: localhost
-              MARKETTOR_DB_PASSWORD: clairview
-              MARKETTOR_DB_USER: clairview
+              CLAIRVIEW_POSTGRES_READ_HOST: localhost
+              CLAIRVIEW_DB_PASSWORD: clairview
+              CLAIRVIEW_DB_USER: clairview
           shell: bash
           run: |
               pytest clairview/api/test/test_decide.py::TestDecideUsesReadReplica \

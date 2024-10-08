@@ -5,7 +5,7 @@ from infi.clickhouse_orm.utils import import_submodules
 from semantic_version.base import Version
 
 from clairview.async_migrations.definition import AsyncMigrationDefinition
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 from clairview.models.async_migration import (
     AsyncMigration,
     get_all_completed_async_migrations,
@@ -51,10 +51,10 @@ def setup_async_migrations(ignore_clairview_version: bool = False):
         if (
             (not ignore_clairview_version)
             and (migration_name in unapplied_migrations)
-            and (FROZEN_MARKETTOR_VERSION > Version(migration.clairview_max_version))
+            and (FROZEN_CLAIRVIEW_VERSION > Version(migration.clairview_max_version))
         ):
             raise ImproperlyConfigured(
-                f"Migration {migration_name} is required for ClairView versions above {FROZEN_MARKETTOR_VERSION}."
+                f"Migration {migration_name} is required for ClairView versions above {FROZEN_CLAIRVIEW_VERSION}."
             )
 
     first_migration = _set_up_dependency_constants()

@@ -35,8 +35,8 @@ import { QueryContext } from '~/queries/types'
 import type {
     DashboardFilter,
     DatabaseSchemaField,
-    TorQLQuery,
-    TorQLQueryModifiers,
+    ClairQLQuery,
+    ClairQLQueryModifiers,
     InsightVizNode,
     Node,
     QueryStatus,
@@ -74,7 +74,7 @@ export enum AvailableFeature {
     REPLAY_FILTER_PERSON_PROPERTIES = 'replay_filter_person_properties',
     REPLAY_FILTER_EVENTS = 'replay_filter_events',
     REPLAY_DOM_EXPLORER = 'replay_dom_explorer',
-    WORKS_WITH_MARKETTOR_JS = 'works_with_clairview_js',
+    WORKS_WITH_CLAIRVIEW_JS = 'works_with_clairview_js',
     REPLAY_AUTOMATIC_PLAYLISTS = 'replay_automatic_playlists',
     GROUP_ANALYTICS = 'group_analytics',
     SURVEYS_UNLIMITED_SURVEYS = 'surveys_unlimited_surveys',
@@ -533,8 +533,8 @@ export interface TeamType extends TeamBasicType {
     correlation_config: CorrelationConfigType | null
     person_on_events_querying_enabled: boolean
     extra_settings?: Record<string, string | number | boolean | undefined>
-    modifiers?: TorQLQueryModifiers
-    default_modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
+    default_modifiers?: ClairQLQueryModifiers
 }
 
 // This type would be more correct without `Partial<TeamType>`, but it's only used in the shared dashboard/insight
@@ -727,7 +727,7 @@ export enum PropertyFilterType {
     Recording = 'recording',
     LogEntry = 'log_entry',
     Group = 'group',
-    TorQL = 'torql',
+    ClairQL = 'clairql',
     DataWarehouse = 'data_warehouse',
     DataWarehousePersonProperty = 'data_warehouse_person_property',
 }
@@ -796,8 +796,8 @@ export interface FeaturePropertyFilter extends BasePropertyFilter {
     operator: PropertyOperator
 }
 
-export interface TorQLPropertyFilter extends BasePropertyFilter {
-    type: PropertyFilterType.TorQL
+export interface ClairQLPropertyFilter extends BasePropertyFilter {
+    type: PropertyFilterType.ClairQL
     key: string
 }
 
@@ -818,7 +818,7 @@ export type AnyPropertyFilter =
     | LogEntryPropertyFilter
     | GroupPropertyFilter
     | FeaturePropertyFilter
-    | TorQLPropertyFilter
+    | ClairQLPropertyFilter
     | EmptyPropertyFilter
     | DataWarehousePropertyFilter
     | DataWarehousePersonPropertyFilter
@@ -827,7 +827,7 @@ export type AnyPropertyFilter =
 export type AnyPersonScopeFilter =
     | PersonPropertyFilter
     | CohortPropertyFilter
-    | TorQLPropertyFilter
+    | ClairQLPropertyFilter
     | EmptyPropertyFilter
 
 export type AnyFilterLike = AnyPropertyFilter | PropertyGroupFilter | PropertyGroupFilterValue
@@ -1091,7 +1091,7 @@ export interface ActionFilter extends EntityFilter {
     math?: string
     math_property?: string
     math_group_type_index?: integer | null
-    math_torql?: string
+    math_clairql?: string
     properties?: AnyPropertyFilter[]
     type: EntityType
     days?: string[] // TODO: why was this added here?
@@ -2093,7 +2093,7 @@ export type BreakdownType =
     | 'event'
     | 'group'
     | 'session'
-    | 'torql'
+    | 'clairql'
     | 'data_warehouse'
     | 'data_warehouse_person_property'
 export type IntervalType = 'minute' | 'hour' | 'day' | 'week' | 'month'
@@ -2115,7 +2115,7 @@ export enum PathType {
     PageView = '$pageview',
     Screen = '$screen',
     CustomEvent = 'custom_event',
-    TorQL = 'torql',
+    ClairQL = 'clairql',
 }
 
 export enum FunnelPathType {
@@ -2272,7 +2272,7 @@ export interface FunnelsFilterType extends FilterType {
     funnel_window_interval?: number | undefined // length of conversion window
     funnel_order_type?: StepOrderValue
     exclusions?: FunnelExclusionLegacy[] // used in funnel exclusion filters
-    funnel_aggregate_by_torql?: string
+    funnel_aggregate_by_clairql?: string
 
     // frontend only
     layout?: FunnelLayout // used only for funnels
@@ -2290,7 +2290,7 @@ export interface FunnelsFilterType extends FilterType {
 }
 export interface PathsFilterType extends FilterType {
     path_type?: PathType
-    paths_torql_expression?: string
+    paths_clairql_expression?: string
     include_event_types?: PathType[]
     start_point?: string
     end_point?: string
@@ -3542,8 +3542,8 @@ export enum CountPerActorMathType {
     P99 = 'p99_count_per_actor',
 }
 
-export enum TorQLMathType {
-    TorQL = 'torql',
+export enum ClairQLMathType {
+    ClairQL = 'clairql',
 }
 export enum GroupMathType {
     UniqueGroup = 'unique_group',
@@ -3915,7 +3915,7 @@ export interface DataWarehouseSavedQuery {
     /** UUID */
     id: string
     name: string
-    query: TorQLQuery
+    query: ClairQLQuery
     columns: DatabaseSchemaField[]
     last_run_at?: string
     status?: string
@@ -4451,7 +4451,7 @@ export type HogFunctionFilterPropertyFilter = (
     | ElementPropertyFilter
     | GroupPropertyFilter
     | FeaturePropertyFilter
-    | TorQLPropertyFilter
+    | ClairQLPropertyFilter
 )[]
 
 export interface HogFunctionFiltersType {

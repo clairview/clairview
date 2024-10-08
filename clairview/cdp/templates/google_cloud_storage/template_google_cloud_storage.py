@@ -3,7 +3,7 @@ import json
 from copy import deepcopy
 
 from clairview.cdp.templates.hog_function_template import HogFunctionTemplate, HogFunctionTemplateMigrator
-from clairview.torql.escape_sql import escape_torql_string
+from clairview.clairql.escape_sql import escape_clairql_string
 from clairview.models.integration import GoogleCloudIntegration
 
 template: HogFunctionTemplate = HogFunctionTemplate(
@@ -88,7 +88,7 @@ class TemplateGoogleCloudStorageMigrator(HogFunctionTemplateMigrator):
 
         hf["filters"] = {}
         if exportEventsToIgnore:
-            event_names = ", ".join([escape_torql_string(event) for event in exportEventsToIgnore])
+            event_names = ", ".join([escape_clairql_string(event) for event in exportEventsToIgnore])
             query = f"event not in ({event_names})"
             hf["filters"]["events"] = [
                 {
@@ -96,7 +96,7 @@ class TemplateGoogleCloudStorageMigrator(HogFunctionTemplateMigrator):
                     "name": "All events",
                     "type": "events",
                     "order": 0,
-                    "properties": [{"key": query, "type": "torql"}],
+                    "properties": [{"key": query, "type": "clairql"}],
                 }
             ]
 

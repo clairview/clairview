@@ -1,8 +1,8 @@
 from typing import Optional
 from clairview.models.action.action import Action
-from clairview.torql.bytecode import create_bytecode
-from clairview.torql.parser import parse_expr
-from clairview.torql.property import action_to_expr, property_to_expr, ast
+from clairview.clairql.bytecode import create_bytecode
+from clairview.clairql.parser import parse_expr
+from clairview.clairql.property import action_to_expr, property_to_expr, ast
 from clairview.models.team.team import Team
 
 

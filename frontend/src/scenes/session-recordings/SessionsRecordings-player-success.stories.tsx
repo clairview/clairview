@@ -121,7 +121,7 @@ const meta: Meta = {
                     const body = req.body as Record<string, any>
 
                     if (
-                        body.query.kind === 'TorQLQuery' &&
+                        body.query.kind === 'ClairQLQuery' &&
                         body.query.query.startsWith(
                             'SELECT properties.$session_id as session_id, any(properties) as properties'
                         )

@@ -79,7 +79,7 @@ def external_data_resources(client, organization, team):
         external_data_source_id=source.id,
         credential=credentials,
         url_pattern="https://bucket.s3/data/*",
-        columns={"id": {"torql": "StringDatabaseField", "clickhouse": "Nullable(String)", "schema_valid": True}},
+        columns={"id": {"clairql": "StringDatabaseField", "clickhouse": "Nullable(String)", "schema_valid": True}},
     )
     schema = ExternalDataSchema.objects.create(
         team=team,

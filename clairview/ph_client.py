@@ -3,7 +3,7 @@ from clairview.cloud_utils import is_cloud
 
 
 def get_ph_client():
-    from clairviewanalytics import Markettor
+    from clairviewanalytics import Clairview
 
     if not is_cloud():
         return
@@ -22,6 +22,6 @@ def get_ph_client():
     if not api_key:
         return
 
-    ph_client = Markettor(api_key, host=host)
+    ph_client = Clairview(api_key, host=host)
 
     return ph_client

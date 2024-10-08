@@ -22,7 +22,7 @@ import {
     isDataTableNode,
     isEventsQuery,
     isFunnelsQuery,
-    isTorQLQuery,
+    isClairQLQuery,
     isInsightVizNode,
     isLifecycleQuery,
     isPathsQuery,
@@ -210,12 +210,12 @@ export function summarizeInsightQuery(query: InsightQueryNode, context: SummaryC
 }
 
 function summarizeQuery(query: Node): string {
-    if (isTorQLQuery(query)) {
+    if (isClairQLQuery(query)) {
         return 'SQL query'
     }
 
     if (isDataTableNode(query)) {
-        if (isTorQLQuery(query.source)) {
+        if (isClairQLQuery(query.source)) {
             return summarizeQuery(query.source)
         }
 

@@ -84,7 +84,7 @@ class ElementViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
         prop_filters, prop_filter_params = parse_prop_grouped_clauses(
             team_id=self.team.pk,
             property_group=filter.property_groups,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         result = sync_execute(
             GET_ELEMENTS.format(
@@ -101,7 +101,7 @@ class ElementViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
                 **prop_filter_params,
                 **date_params,
                 "filter_event_types": events_filter,
-                **filter.torql_context.values,
+                **filter.clairql_context.values,
             },
         )
         serialized_elements = [

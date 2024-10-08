@@ -1,13 +1,13 @@
 from enum import Enum
 
-TORQL_BYTECODE_IDENTIFIER_V0 = "_h"
-TORQL_BYTECODE_IDENTIFIER = "_H"
-TORQL_BYTECODE_FUNCTION = "_f"
+CLAIRQL_BYTECODE_IDENTIFIER_V0 = "_h"
+CLAIRQL_BYTECODE_IDENTIFIER = "_H"
+CLAIRQL_BYTECODE_FUNCTION = "_f"
 
 # Version history:
 #  0 - initial version
 #  1 - added version numbers; reversed order of function args in stack
-TORQL_BYTECODE_VERSION = 1
+CLAIRQL_BYTECODE_VERSION = 1
 
 
 class Operation(int, Enum):

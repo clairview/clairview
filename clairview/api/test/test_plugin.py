@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from django.core.files.uploadedfile import SimpleUploadedFile
 from freezegun import freeze_time
 from rest_framework import status
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 
 from clairview.models import Plugin, PluginAttachment, PluginConfig, PluginSourceFile
 from clairview.models.organization import Organization, OrganizationMembership
@@ -598,7 +598,7 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
         with self.is_cloud(False):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
-                {"url": f"https://github.com/clairview-plugin/version-equals/commit/{FROZEN_MARKETTOR_VERSION}"},
+                {"url": f"https://github.com/clairview-plugin/version-equals/commit/{FROZEN_CLAIRVIEW_VERSION}"},
             )
             self.assertEqual(response.status_code, 201)
 
@@ -607,13 +607,13 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
                 {
-                    "url": f"https://github.com/clairview-plugin/version-equals/commit/{FROZEN_MARKETTOR_VERSION.next_minor()}"
+                    "url": f"https://github.com/clairview-plugin/version-equals/commit/{FROZEN_CLAIRVIEW_VERSION.next_minor()}"
                 },
             )
             self.assertEqual(response.status_code, 400)
             self.assertEqual(
                 cast(dict[str, str], response.json())["detail"],
-                f'Currently running ClairView version {FROZEN_MARKETTOR_VERSION} does not match this plugin\'s semantic version requirement "{FROZEN_MARKETTOR_VERSION.next_minor()}".',
+                f'Currently running ClairView version {FROZEN_CLAIRVIEW_VERSION} does not match this plugin\'s semantic version requirement "{FROZEN_CLAIRVIEW_VERSION.next_minor()}".',
             )
 
     def test_create_plugin_version_range_gt_current(self, mock_get, mock_reload):
@@ -629,25 +629,25 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
                 {
-                    "url": f"https://github.com/clairview-plugin/version-greater-than/commit/{FROZEN_MARKETTOR_VERSION.next_major()}"
+                    "url": f"https://github.com/clairview-plugin/version-greater-than/commit/{FROZEN_CLAIRVIEW_VERSION.next_major()}"
                 },
             )
             self.assertEqual(response.status_code, 400)
             self.assertEqual(
                 cast(dict[str, str], response.json())["detail"],
-                f'Currently running ClairView version {FROZEN_MARKETTOR_VERSION} does not match this plugin\'s semantic version requirement ">= {FROZEN_MARKETTOR_VERSION.next_major()}".',
+                f'Currently running ClairView version {FROZEN_CLAIRVIEW_VERSION} does not match this plugin\'s semantic version requirement ">= {FROZEN_CLAIRVIEW_VERSION.next_major()}".',
             )
 
     def test_create_plugin_version_range_lt_current(self, mock_get, mock_reload):
         with self.is_cloud(False):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
-                {"url": f"https://github.com/clairview-plugin/version-less-than/commit/{FROZEN_MARKETTOR_VERSION}"},
+                {"url": f"https://github.com/clairview-plugin/version-less-than/commit/{FROZEN_CLAIRVIEW_VERSION}"},
             )
             self.assertEqual(response.status_code, 400)
             self.assertEqual(
                 cast(dict[str, str], response.json())["detail"],
-                f'Currently running ClairView version {FROZEN_MARKETTOR_VERSION} does not match this plugin\'s semantic version requirement "< {FROZEN_MARKETTOR_VERSION}".',
+                f'Currently running ClairView version {FROZEN_CLAIRVIEW_VERSION} does not match this plugin\'s semantic version requirement "< {FROZEN_CLAIRVIEW_VERSION}".',
             )
 
     def test_create_plugin_version_range_lt_next_major(self, mock_get, mock_reload):
@@ -655,7 +655,7 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
                 {
-                    "url": f"https://github.com/clairview-plugin/version-less-than/commit/{FROZEN_MARKETTOR_VERSION.next_major()}"
+                    "url": f"https://github.com/clairview-plugin/version-less-than/commit/{FROZEN_CLAIRVIEW_VERSION.next_major()}"
                 },
             )
             self.assertEqual(response.status_code, 201)
@@ -677,7 +677,7 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
             response = self.client.post(
                 "/api/organizations/@current/plugins/",
                 {
-                    "url": f"https://github.com/clairview-plugin/version-greater-than/commit/{FROZEN_MARKETTOR_VERSION.next_major()}"
+                    "url": f"https://github.com/clairview-plugin/version-greater-than/commit/{FROZEN_CLAIRVIEW_VERSION.next_major()}"
                 },
             )
             self.assertEqual(response.status_code, 201)
@@ -1404,7 +1404,7 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
                 "plugin": plugin_id,
                 "enabled": True,
                 "order": 0,
-                "config": {"bar": "**************** MARKETTOR SECRET FIELD ****************"},
+                "config": {"bar": "**************** CLAIRVIEW SECRET FIELD ****************"},
                 "error": None,
                 "team_id": self.team.pk,
                 "plugin_info": mock.ANY,  # Not testing plugin serialization in this endpoint
@@ -1464,7 +1464,7 @@ class TestPluginAPI(APIBaseTest, QueryMatchingTest):
                 "plugin": plugin_id,
                 "enabled": False,
                 "order": 1,
-                "config": {"bar": "**************** MARKETTOR SECRET FIELD ****************"},
+                "config": {"bar": "**************** CLAIRVIEW SECRET FIELD ****************"},
                 "error": None,
                 "team_id": self.team.pk,
                 "plugin_info": mock.ANY,

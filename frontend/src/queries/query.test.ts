@@ -3,7 +3,7 @@ import clairview from 'clairview-js'
 
 import { useMocks } from '~/mocks/jest'
 import { performQuery, queryExportContext } from '~/queries/query'
-import { EventsQuery, TorQLQuery, NodeKind } from '~/queries/schema'
+import { EventsQuery, ClairQLQuery, NodeKind } from '~/queries/schema'
 import { initKeaTests } from '~/test/init'
 import { PropertyFilterType, PropertyOperator } from '~/types'
 
@@ -13,8 +13,8 @@ describe('query', () => {
             post: {
                 '/api/projects/:team/query': (req) => {
                     const data = req.body as any
-                    if (data.query?.kind === 'TorQLQuery') {
-                        return [200, { results: [], clickhouse: 'clickhouse string', torql: 'torql string' }]
+                    if (data.query?.kind === 'ClairQLQuery') {
+                        return [200, { results: [], clickhouse: 'clickhouse string', clairql: 'clairql string' }]
                     }
                     if (data.query?.kind === 'EventsQuery' && data.query.select[0] === 'error') {
                         return [500, { detail: 'error' }]
@@ -83,10 +83,10 @@ describe('query', () => {
         expect(clairview.capture).toHaveBeenCalledWith('query completed', { query: q, duration: expect.any(Number) })
     })
 
-    it('emits a specific event on a TorQLQuery', async () => {
+    it('emits a specific event on a ClairQLQuery', async () => {
         jest.spyOn(clairview, 'capture')
-        const q: TorQLQuery = {
-            kind: NodeKind.TorQLQuery,
+        const q: ClairQLQuery = {
+            kind: NodeKind.ClairQLQuery,
             query: 'select * from events',
         }
         await performQuery(q)

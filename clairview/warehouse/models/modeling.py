@@ -7,9 +7,9 @@ from django.contrib.postgres import indexes as pg_indexes
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection, models, transaction
 
-from clairview.torql import ast
-from clairview.torql.database.database import Database, create_torql_database
-from clairview.torql.parser import parse_select
+from clairview.clairql import ast
+from clairview.clairql.database.database import Database, create_clairql_database
+from clairview.clairql.parser import parse_select
 from clairview.models.team import Team
 from clairview.models.user import User
 from clairview.models.utils import (
@@ -97,12 +97,12 @@ def get_parents_from_model_query(model_query: str) -> set[str]:
     The parents of a query are any names in the `FROM` clause of the query.
     """
 
-    torql_query = parse_select(model_query)
+    clairql_query = parse_select(model_query)
 
-    if isinstance(torql_query, ast.SelectUnionQuery):
-        queries = torql_query.select_queries
+    if isinstance(clairql_query, ast.SelectUnionQuery):
+        queries = clairql_query.select_queries
     else:
-        queries = [torql_query]
+        queries = [clairql_query]
 
     parents = set()
     ctes = set()
@@ -146,7 +146,7 @@ def get_parents_from_model_query(model_query: str) -> set[str]:
 
 class NodeType(enum.Enum):
     SAVED_QUERY = "SavedQuery"
-    MARKETTOR = "ClairView"
+    CLAIRVIEW = "ClairView"
     TABLE = "Table"
 
 
@@ -302,7 +302,7 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
     ) -> tuple["DataWarehouseModelPath", bool]:
         """Get a root path for a ClairView source, creating it if it doesn't exist.
 
-        ClairView sources are well-known ClairView tables. We check against the team's TorQL database
+        ClairView sources are well-known ClairView tables. We check against the team's ClairQL database
         to ensure that the source exists before creating the path.
 
         Raises:
@@ -311,15 +311,15 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
         Returns:
             A tuple with the model path and a `bool` indicating whether it was created or not.
         """
-        clairview_tables = self.get_torql_database(team).get_clairview_tables()
+        clairview_tables = self.get_clairql_database(team).get_clairview_tables()
         if clairview_source_name not in clairview_tables:
             raise ValueError(f"Provided source {clairview_source_name} is not a ClairView table")
 
         return self.get_or_create(path=[clairview_source_name], team=team, defaults={"saved_query": None})
 
-    def get_torql_database(self, team: Team) -> Database:
-        """Get the TorQL database for given team."""
-        return create_torql_database(team_id=team.pk, team_arg=team)
+    def get_clairql_database(self, team: Team) -> Database:
+        """Get the ClairQL database for given team."""
+        return create_clairql_database(team_id=team.pk, team_arg=team)
 
     def get_or_create_root_path_for_data_warehouse_table(
         self, data_warehouse_table: DataWarehouseTable
@@ -415,7 +415,7 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
         the transaction and clean them up.
         """
         parents = get_parents_from_model_query(query)
-        clairview_tables = self.get_torql_database(team).get_clairview_tables()
+        clairview_tables = self.get_clairql_database(team).get_clairview_tables()
 
         base_params = {
             "team_id": team.pk,
@@ -483,7 +483,7 @@ class DataWarehouseModelPathManager(models.Manager["DataWarehouseModelPath"]):
             elif model_path.table is not None:
                 node_type = NodeType.TABLE
             else:
-                node_type = NodeType.MARKETTOR
+                node_type = NodeType.CLAIRVIEW
 
             for index, node_id in enumerate(model_path.path):
                 try:

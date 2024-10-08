@@ -14,7 +14,7 @@ from structlog import get_logger
 from clairview.clickhouse.client.limit import CeleryConcurrencyLimitExceeded, limit_concurrency
 from clairview.cloud_utils import is_cloud
 from clairview.errors import CHQueryErrorTooManySimultaneousQueries
-from clairview.torql.constants import LimitContext
+from clairview.clairql.constants import LimitContext
 from clairview.metrics import pushed_metrics_registry
 from clairview.ph_client import get_ph_client
 from clairview.redis import get_client
@@ -33,7 +33,7 @@ def delete_expired_exported_assets() -> None:
 
 @shared_task(ignore_result=True)
 def redis_heartbeat() -> None:
-    get_client().set("MARKETTOR_HEARTBEAT", int(time.time()))
+    get_client().set("CLAIRVIEW_HEARTBEAT", int(time.time()))
 
 
 @shared_task(

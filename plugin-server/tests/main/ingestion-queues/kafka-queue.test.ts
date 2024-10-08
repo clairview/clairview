@@ -7,7 +7,7 @@ import { LogLevel, PluginsServerConfig } from '../../../src/types'
 import { Hub } from '../../../src/types'
 import { UUIDT } from '../../../src/utils/utils'
 import { makePiscina } from '../../../src/worker/piscina'
-import { createMarkettor, DummyClairView } from '../../../src/worker/vm/extensions/clairview'
+import { createClairview, DummyClairView } from '../../../src/worker/vm/extensions/clairview'
 import { writeToFile } from '../../../src/worker/vm/extensions/test-utils'
 import { delayUntilEventIngested, resetTestDatabaseClickhouse } from '../../helpers/clickhouse'
 import { resetKafka } from '../../helpers/kafka'
@@ -43,7 +43,7 @@ describe.skip('IngestionConsumer', () => {
         pluginServer = await startPluginsServer(extraServerConfig, makePiscina)
         hub = pluginServer.hub
         stopServer = pluginServer.stop
-        clairview = createMarkettor(hub, pluginConfig39)
+        clairview = createClairview(hub, pluginConfig39)
     })
 
     afterEach(async () => {

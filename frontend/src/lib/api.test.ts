@@ -41,7 +41,7 @@ describe('API helper', () => {
                 {
                     signal: undefined,
                     headers: {
-                        'X-MARKETTOR-SESSION-ID': 'fake-session-id',
+                        'X-CLAIRVIEW-SESSION-ID': 'fake-session-id',
                     },
                 }
             )

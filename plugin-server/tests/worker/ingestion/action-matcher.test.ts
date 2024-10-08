@@ -517,14 +517,14 @@ describe('ActionMatcher', () => {
                 },
             ])
 
-            const eventMarkettor = createTestEvent({
+            const eventClairview = createTestEvent({
                 properties: { $current_url: 'http://clairview.com/pricing' },
             })
             const eventExample = createTestEvent({
                 properties: { $current_url: 'https://example.com/' },
             })
 
-            expect(await actionMatcher.match(eventMarkettor)).toEqual([])
+            expect(await actionMatcher.match(eventClairview)).toEqual([])
             expect(await actionMatcher.match(eventExample)).toEqual([actionDefinition, actionDefinitionEmptyMatching])
         })
 

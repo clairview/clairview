@@ -50,12 +50,12 @@ from clairview.constants import (
     OFFSET,
     PropertyOperatorType,
 )
-from clairview.torql.constants import CSV_EXPORT_LIMIT
+from clairview.clairql.constants import CSV_EXPORT_LIMIT
 from clairview.event_usage import report_user_action
-from clairview.torql.context import TorQLContext
+from clairview.clairql.context import ClairQLContext
 from clairview.models import Cohort, FeatureFlag, User, Person
 from clairview.models.async_deletion import AsyncDeletion, DeletionType
-from clairview.models.cohort.util import get_dependent_cohorts, print_cohort_torql_query
+from clairview.models.cohort.util import get_dependent_cohorts, print_cohort_clairql_query
 from clairview.models.cohort import CohortOrEmpty
 from clairview.models.filters.filter import Filter
 from clairview.models.filters.path_filter import PathFilter
@@ -75,7 +75,7 @@ from clairview.queries.stickiness import StickinessActors
 from clairview.queries.trends.trends_actors import TrendsActors
 from clairview.queries.trends.lifecycle_actors import LifecycleActors
 from clairview.queries.util import get_earliest_timestamp
-from clairview.schema import ActorsQuery, TorQLQuery
+from clairview.schema import ActorsQuery, ClairQLQuery
 from clairview.tasks.calculate_cohort import (
     calculate_cohort_from_list,
     insert_cohort_from_feature_flag,
@@ -183,10 +183,10 @@ class CohortSerializer(serializers.ModelSerializer):
             raise ValidationError("Query must be a dictionary.")
         if query.get("kind") == "ActorsQuery":
             ActorsQuery.model_validate(query)
-        elif query.get("kind") == "TorQLQuery":
-            TorQLQuery.model_validate(query)
+        elif query.get("kind") == "ClairQLQuery":
+            ClairQLQuery.model_validate(query)
         else:
-            raise ValidationError(f"Query must be an ActorsQuery or TorQLQuery. Got: {query.get('kind')}")
+            raise ValidationError(f"Query must be an ActorsQuery or ClairQLQuery. Got: {query.get('kind')}")
         return query
 
     def validate_filters(self, request_filters: dict):
@@ -358,7 +358,7 @@ class CohortViewSet(TeamAndOrgViewSetMixin, ForbidDestroyModel, viewsets.ModelVi
         query, params = PersonQuery(filter, team.pk, cohort=cohort).get_query(paginate=True)
         raw_result = sync_execute(
             query,
-            {**params, **filter.torql_context.values},
+            {**params, **filter.clairql_context.values},
             workload=Workload.OFFLINE,  # this endpoint is only used by external API requests
         )
         actor_ids = [row[0] for row in raw_result]
@@ -526,14 +526,14 @@ def insert_cohort_people_into_pg(cohort: Cohort):
 
 
 def insert_cohort_query_actors_into_ch(cohort: Cohort):
-    context = TorQLContext(enable_select_queries=True, team_id=cohort.team.pk)
-    query = print_cohort_torql_query(cohort, context)
+    context = ClairQLContext(enable_select_queries=True, team_id=cohort.team.pk)
+    query = print_cohort_clairql_query(cohort, context)
     insert_actors_into_cohort_by_query(cohort, query, {}, context)
 
 
 def insert_cohort_actors_into_ch(cohort: Cohort, filter_data: dict):
     from_existing_cohort_id = filter_data.get("from_cohort_id")
-    context: TorQLContext
+    context: ClairQLContext
 
     if from_existing_cohort_id:
         existing_cohort = Cohort.objects.get(pk=from_existing_cohort_id)
@@ -548,7 +548,7 @@ def insert_cohort_actors_into_ch(cohort: Cohort, filter_data: dict):
             "from_cohort_id": existing_cohort.pk,
             "version": existing_cohort.version,
         }
-        context = Filter(data=filter_data, team=cohort.team).torql_context
+        context = Filter(data=filter_data, team=cohort.team).clairql_context
     else:
         insight_type = filter_data.get("insight")
         query_builder: ActorBaseQuery
@@ -557,25 +557,25 @@ def insert_cohort_actors_into_ch(cohort: Cohort, filter_data: dict):
             filter = Filter(data=filter_data, team=cohort.team)
             entity = get_target_entity(filter)
             query_builder = TrendsActors(cohort.team, entity, filter)
-            context = filter.torql_context
+            context = filter.clairql_context
         elif insight_type == INSIGHT_STICKINESS:
             stickiness_filter = StickinessFilter(data=filter_data, team=cohort.team)
             entity = get_target_entity(stickiness_filter)
             query_builder = StickinessActors(cohort.team, entity, stickiness_filter)
-            context = stickiness_filter.torql_context
+            context = stickiness_filter.clairql_context
         elif insight_type == INSIGHT_FUNNELS:
             funnel_filter = Filter(data=filter_data, team=cohort.team)
             funnel_actor_class = get_funnel_actor_class(funnel_filter)
             query_builder = funnel_actor_class(filter=funnel_filter, team=cohort.team)
-            context = funnel_filter.torql_context
+            context = funnel_filter.clairql_context
         elif insight_type == INSIGHT_PATHS:
             path_filter = PathFilter(data=filter_data, team=cohort.team)
             query_builder = PathsActors(path_filter, cohort.team, funnel_filter=None)
-            context = path_filter.torql_context
+            context = path_filter.clairql_context
         elif insight_type == INSIGHT_LIFECYCLE:
             lifecycle_filter = LifecycleFilter(data=filter_data, team=cohort.team)
             query_builder = LifecycleActors(team=cohort.team, filter=lifecycle_filter)
-            context = lifecycle_filter.torql_context
+            context = lifecycle_filter.clairql_context
 
         else:
             if settings.DEBUG:
@@ -594,7 +594,7 @@ def insert_cohort_actors_into_ch(cohort: Cohort, filter_data: dict):
     insert_actors_into_cohort_by_query(cohort, query, params, context)
 
 
-def insert_actors_into_cohort_by_query(cohort: Cohort, query: str, params: dict[str, Any], context: TorQLContext):
+def insert_actors_into_cohort_by_query(cohort: Cohort, query: str, params: dict[str, Any], context: ClairQLContext):
     try:
         sync_execute(
             INSERT_COHORT_ALL_PEOPLE_THROUGH_PERSON_ID.format(cohort_table=PERSON_STATIC_COHORT_TABLE, query=query),

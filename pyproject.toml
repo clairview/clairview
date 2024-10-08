@@ -15,7 +15,7 @@ exclude = [
     "./plugin-server/node_modules/",
     "./plugins/node_modules/",
     "./env",
-    "./clairview/torql/grammar",
+    "./clairview/clairql/grammar",
 ]
 
 [tool.ruff.lint]
@@ -78,13 +78,13 @@ max-complexity = 10
 "./clairview/management/commands/partition.py" = ["T201"]
 "./clairview/management/commands/migrate_clickhouse.py" = ["T201"]
 "./clairview/email.py" = ["T201"]
-"./clairview/torql/grammar/TorQLParser.py" = [
+"./clairview/clairql/grammar/ClairQLParser.py" = [
     "F401",
     "F841",
     "E711",
 ]
 "./clairview/celery.py" = ["T201"]
-"./clairview/torql/grammar/TorQLLexer.py" = ["F401"]
+"./clairview/clairql/grammar/ClairQLLexer.py" = ["F401"]
 "./clairview/utils.py" = ["T201"]
 "./clairview/management/commands/sync_feature_flags.py" = ["T201"]
 "./cypress/wait.py" = ["T201"]

@@ -20,13 +20,13 @@
 
 {% if not opt_out_capture and js_clairview_api_key %}
     <script>
-        window.JS_MARKETTOR_API_KEY = {{js_clairview_api_key | safe}};
-        window.JS_MARKETTOR_HOST = {{js_clairview_host | safe}};
-        window.JS_MARKETTOR_UI_HOST = {{js_clairview_ui_host | safe}};
-        window.JS_MARKETTOR_SELF_CAPTURE = {{self_capture | yesno:"true,false" }};
-        window.MARKETTOR_USER_IDENTITY_WITH_FLAGS = JSON.parse("{{ clairview_bootstrap | escapejs }}")
+        window.JS_CLAIRVIEW_API_KEY = {{js_clairview_api_key | safe}};
+        window.JS_CLAIRVIEW_HOST = {{js_clairview_host | safe}};
+        window.JS_CLAIRVIEW_UI_HOST = {{js_clairview_ui_host | safe}};
+        window.JS_CLAIRVIEW_SELF_CAPTURE = {{self_capture | yesno:"true,false" }};
+        window.CLAIRVIEW_USER_IDENTITY_WITH_FLAGS = JSON.parse("{{ clairview_bootstrap | escapejs }}")
         window.IMPERSONATED_SESSION = {{is_impersonated_session | yesno:"true,false"}};
-        window.MARKETTOR_JS_UUID_VERSION = "{{clairview_js_uuid_version}}";
+        window.CLAIRVIEW_JS_UUID_VERSION = "{{clairview_js_uuid_version}}";
     </script>
 {% endif %}
 {% if sentry_dsn %}
@@ -40,7 +40,7 @@
     </script>
 {% endif %}
 <script id='clairview-app-user-preload'>
-    window.MARKETTOR_APP_CONTEXT = JSON.parse("{{ clairview_app_context | escapejs }}");
+    window.CLAIRVIEW_APP_CONTEXT = JSON.parse("{{ clairview_app_context | escapejs }}");
     // Inject the expected location of JS bundle, use to allow the location of
     // he bundle to be set at runtime, e.g. for ClairView Cloud we serve the
     // frontent JS from a CDN

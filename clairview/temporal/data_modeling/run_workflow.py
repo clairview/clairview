@@ -23,8 +23,8 @@ from deltalake import DeltaTable
 from django.conf import settings
 from dlt.common.libs.deltalake import get_delta_tables
 
-from clairview.torql.database.database import create_torql_database
-from clairview.torql.query import execute_torql_query
+from clairview.clairql.database.database import create_clairql_database
+from clairview.clairql.query import execute_clairql_query
 from clairview.models import Team
 from clairview.settings.base_variables import TEST
 from clairview.temporal.batch_exports.base import ClairViewWorkflow
@@ -65,9 +65,9 @@ CLICKHOUSE_DLT_MAPPING: dict[str, dlt_data_types.TDataType] = {
 }
 
 
-class EmptyTorQLResponseColumnsError(Exception):
+class EmptyClairQLResponseColumnsError(Exception):
     def __init__(self):
-        super().__init__("After running a TorQL query, no columns where returned")
+        super().__init__("After running a ClairQL query, no columns where returned")
 
 
 @dataclasses.dataclass(frozen=True)
@@ -313,7 +313,7 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
         }
         table_columns[column_name] = column_schema
 
-    torql_query = saved_query.query["query"]
+    clairql_query = saved_query.query["query"]
 
     destination = get_dlt_destination()
     pipeline = dlt.pipeline(
@@ -321,7 +321,7 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
         destination=destination,
         dataset_name=f"team_{team.pk}_model_{model_label}",
     )
-    _ = await asyncio.to_thread(pipeline.run, torql_table(torql_query, team, saved_query.name, table_columns))
+    _ = await asyncio.to_thread(pipeline.run, clairql_table(clairql_query, team, saved_query.name, table_columns))
 
     tables = get_delta_tables(pipeline)
 
@@ -337,14 +337,14 @@ async def materialize_model(model_label: str, team: Team) -> tuple[str, DeltaTab
 
 
 @dlt.source(max_table_nesting=0)
-def torql_table(query: str, team: Team, table_name: str, table_columns: dlt_typing.TTableSchemaColumns):
-    """A dlt source representing a TorQL table given by a TorQL query."""
+def clairql_table(query: str, team: Team, table_name: str, table_columns: dlt_typing.TTableSchemaColumns):
+    """A dlt source representing a ClairQL table given by a ClairQL query."""
 
-    async def get_torql_rows():
-        response = await asyncio.to_thread(execute_torql_query, query, team)
+    async def get_clairql_rows():
+        response = await asyncio.to_thread(execute_clairql_query, query, team)
 
         if not response.columns:
-            raise EmptyTorQLResponseColumnsError()
+            raise EmptyClairQLResponseColumnsError()
 
         columns: list[str] = response.columns
 
@@ -352,8 +352,8 @@ def torql_table(query: str, team: Team, table_name: str, table_columns: dlt_typi
             yield dict(zip(columns, row))
 
     yield dlt.resource(
-        get_torql_rows,
-        name="torql_table",
+        get_clairql_rows,
+        name="clairql_table",
         table_name=table_name,
         table_format="delta",
         write_disposition="replace",
@@ -520,8 +520,8 @@ async def build_dag_from_selectors(selector_paths: SelectorPaths, team_id: int) 
 
 async def get_clairview_tables(team_id: int) -> list[str]:
     team = await database_sync_to_async(Team.objects.get)(id=team_id)
-    torql_db = await database_sync_to_async(create_torql_database)(team_id=team_id, team_arg=team)
-    clairview_tables = torql_db.get_clairview_tables()
+    clairql_db = await database_sync_to_async(create_clairql_database)(team_id=team_id, team_arg=team)
+    clairview_tables = clairql_db.get_clairview_tables()
     return clairview_tables
 
 

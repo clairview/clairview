@@ -130,7 +130,7 @@ export function EventDefinitionsTable(): JSX.Element {
                     : ''}
                 event usage statistics?{' '}
                 <Link
-                    to={urls.insightNewTorQL(
+                    to={urls.insightNewClairQL(
                         'SELECT event, count()\n' +
                             'FROM events\n' +
                             'WHERE {filters}\n' +

@@ -167,9 +167,9 @@ const MOCK_SURVEY_WITH_RELEASE_CONS: Survey = {
 
 const MOCK_SURVEY_SHOWN = {
     clickhouse:
-        "SELECT count() AS `survey shown` FROM events WHERE and(equals(events.team_id, 1), equals(events.event, %(torql_val_0)s), ifNull(equals(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(torql_val_1)s), ''), 'null'), '^\"|\"$', ''), %(torql_val_2)s), 0)) LIMIT 100 SETTINGS readonly=2, max_execution_time=60",
+        "SELECT count() AS `survey shown` FROM events WHERE and(equals(events.team_id, 1), equals(events.event, %(clairql_val_0)s), ifNull(equals(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, %(clairql_val_1)s), ''), 'null'), '^\"|\"$', ''), %(clairql_val_2)s), 0)) LIMIT 100 SETTINGS readonly=2, max_execution_time=60",
     columns: ['survey shown'],
-    torql: "SELECT count() AS `survey shown` FROM events WHERE and(equals(event, 'survey shown'), equals(properties.$survey_id, '0188e637-3b72-0000-f407-07a338652af9')) LIMIT 100",
+    clairql: "SELECT count() AS `survey shown` FROM events WHERE and(equals(event, 'survey shown'), equals(properties.$survey_id, '0188e637-3b72-0000-f407-07a338652af9')) LIMIT 100",
     query: "select count() as 'survey shown' from events where event == 'survey shown' and properties.$survey_id == '0187c279-bcae-0000-34f5-4f121921f006'",
     results: [[0]],
     types: [['survey shown', 'UInt64']],

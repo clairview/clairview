@@ -21,7 +21,7 @@ for file in os.listdir(directory):
 
 
 @pytest.mark.parametrize("filename", fixtures)
-@pytest.mark.parametrize("mode", ("legacy", "torql"))
+@pytest.mark.parametrize("mode", ("legacy", "clairql"))
 @pytest.mark.django_db
 @patch("clairview.tasks.exports.csv_exporter.requests.request")
 @patch("clairview.tasks.exports.csv_exporter.process_query_dict")
@@ -53,12 +53,12 @@ def test_csv_rendering(mock_settings, mock_process_query_dict, mock_request, fil
 
         assert csv_rows == fixture["csv_rows"]
 
-    if mode == "torql":
+    if mode == "clairql":
         asset.export_context["source"] = {"some": "query"}
         asset.save()
-        if fixture.get("torql_response"):
-            # If TorQL has a different response structure, add it to the fixture as `torql_response`
-            mock_process_query_dict.return_value = fixture["torql_response"]
+        if fixture.get("clairql_response"):
+            # If ClairQL has a different response structure, add it to the fixture as `clairql_response`
+            mock_process_query_dict.return_value = fixture["clairql_response"]
         elif fixture["response"].get("results") is not None:
             mock_process_query_dict.return_value = fixture["response"]
         else:

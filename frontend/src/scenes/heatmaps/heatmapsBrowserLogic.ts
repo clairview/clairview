@@ -14,8 +14,8 @@ import { objectsEqual } from 'lib/utils'
 import clairview from 'clairview-js'
 import { RefObject } from 'react'
 
-import { TorQLQuery, NodeKind } from '~/queries/schema'
-import { torql } from '~/queries/utils'
+import { ClairQLQuery, NodeKind } from '~/queries/schema'
+import { clairql } from '~/queries/utils'
 
 import type { heatmapsBrowserLogicType } from './heatmapsBrowserLogicType'
 
@@ -72,13 +72,13 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
                         return []
                     }
 
-                    const query: TorQLQuery = {
-                        kind: NodeKind.TorQLQuery,
-                        query: torql`SELECT distinct properties.$current_url AS urls
+                    const query: ClairQLQuery = {
+                        kind: NodeKind.ClairQLQuery,
+                        query: clairql`SELECT distinct properties.$current_url AS urls
                                      FROM events
                                      WHERE timestamp >= now() - INTERVAL 7 DAY
                                        AND timestamp <= now()
-                                       AND properties.$current_url like '%${torql.identifier(
+                                       AND properties.$current_url like '%${clairql.identifier(
                                            values.browserSearchTerm
                                        )}%'
                                      ORDER BY timestamp DESC
@@ -96,9 +96,9 @@ export const heatmapsBrowserLogic = kea<heatmapsBrowserLogicType>([
             null as { url: string; count: number }[] | null,
             {
                 loadTopUrls: async () => {
-                    const query: TorQLQuery = {
-                        kind: NodeKind.TorQLQuery,
-                        query: torql`SELECT properties.$current_url AS url, count() as count
+                    const query: ClairQLQuery = {
+                        kind: NodeKind.ClairQLQuery,
+                        query: clairql`SELECT properties.$current_url AS url, count() as count
                                      FROM events
                                      WHERE timestamp >= now() - INTERVAL 7 DAY
                                        AND event in ('$pageview'

@@ -51,7 +51,7 @@ describe('dataNodeLogic - query cancellation', () => {
         logic = dataNodeLogic({
             key: testUniqueKey,
             query: {
-                kind: NodeKind.TorQLQuery,
+                kind: NodeKind.ClairQLQuery,
                 query: 'select * from events',
             },
         })

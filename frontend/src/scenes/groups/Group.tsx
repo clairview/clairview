@@ -177,7 +177,7 @@ export function Group(): JSX.Element {
                                                                     properties: [
                                                                         {
                                                                             key: `$group_${groupTypeIndex} = '${groupKey}'`,
-                                                                            type: 'torql',
+                                                                            type: 'clairql',
                                                                         },
                                                                     ],
                                                                 } as ActionFilter,

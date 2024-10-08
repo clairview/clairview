@@ -16,7 +16,7 @@ function FlutterAndroidSetupSnippet(): JSX.Element {
         <CodeSnippet language={Language.XML}>
             {'<application>\n\t<activity>\n\t\t[...]\n\t</activity>\n\t<meta-data android:name="com.clairview.clairview.API_KEY" android:value="' +
                 currentTeam?.api_token +
-                '" />\n\t<meta-data android:name="com.clairview.clairview.MARKETTOR_HOST" android:value="' +
+                '" />\n\t<meta-data android:name="com.clairview.clairview.CLAIRVIEW_HOST" android:value="' +
                 url +
                 '" />\n\t<meta-data android:name="com.clairview.clairview.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />\n\t<meta-data android:name="com.clairview.clairview.DEBUG" android:value="true" />\n</application>'}
         </CodeSnippet>
@@ -31,7 +31,7 @@ function FlutterIOSSetupSnippet(): JSX.Element {
         <CodeSnippet language={Language.XML}>
             {'<dict>\n\t[...]\n\t<key>com.clairview.clairview.API_KEY</key>\n\t<string>' +
                 currentTeam?.api_token +
-                '</string>\n\t<key>com.clairview.clairview.MARKETTOR_HOST</key>\n\t<string>' +
+                '</string>\n\t<key>com.clairview.clairview.CLAIRVIEW_HOST</key>\n\t<string>' +
                 url +
                 '</string>\n\t<key>com.clairview.clairview.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>\n\t<true/>\n\t[...]\n</dict>'}
         </CodeSnippet>

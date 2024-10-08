@@ -45,13 +45,13 @@ class TestWarming(APIBaseTest):
             team=self.team, user=self.user, insight=self.insight5, last_viewed_at=datetime.now(UTC) - timedelta(days=1)
         )
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_no_stale_insights(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = []
         insights = list(priority_insights(self.team))
         self.assertEqual(insights, [])
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_no_stale_dashboard_insights(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = [
             "2345:",
@@ -62,7 +62,7 @@ class TestWarming(APIBaseTest):
         ]
         self.assertEqual(insights, exptected_results)
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_only_insights_with_dashboards(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = [
             "1234:5678",
@@ -74,7 +74,7 @@ class TestWarming(APIBaseTest):
         ]
         self.assertEqual(insights, expected_results)
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_mixed_valid_and_invalid_combos(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = [
             "1234:5678",
@@ -88,19 +88,19 @@ class TestWarming(APIBaseTest):
         ]
         self.assertEqual(insights, expected_results)
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_insights_not_viewed_recently(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = ["4567:"]
         insights = list(priority_insights(self.team))
         self.assertEqual(insights, [])
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_dashboards_not_accessed_recently(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = ["5678:8901"]
         insights = list(priority_insights(self.team))
         self.assertEqual(insights, [])
 
-    @patch("clairview.torql_queries.query_cache.QueryCacheManager.get_stale_insights")
+    @patch("clairview.clairql_queries.query_cache.QueryCacheManager.get_stale_insights")
     def test_priority_insights_combination_of_cases(self, mock_get_stale_insights):
         mock_get_stale_insights.return_value = [
             "1234:5678",

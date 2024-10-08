@@ -17,8 +17,8 @@ from ee.models.license import License
 from ee.settings import BILLING_SERVICE_URL
 from clairview.clickhouse.client import sync_execute
 from clairview.cloud_utils import TEST_clear_instance_license_cache
-from clairview.torql.query import execute_torql_query
-from clairview.torql_queries.events_query_runner import EventsQueryRunner
+from clairview.clairql.query import execute_clairql_query
+from clairview.clairql_queries.events_query_runner import EventsQueryRunner
 from clairview.models import Organization, Plugin, Team
 from clairview.models.app_metrics2.sql import TRUNCATE_APP_METRICS2_TABLE_SQL
 from clairview.models.dashboard import Dashboard
@@ -519,12 +519,12 @@ class UsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin
                     "local_evaluation_requests_count_in_period": 0,
                     "billable_feature_flag_requests_count_in_period": 0,
                     "survey_responses_count_in_period": 1,
-                    "torql_app_bytes_read": 0,
-                    "torql_app_rows_read": 0,
-                    "torql_app_duration_ms": 0,
-                    "torql_api_bytes_read": 0,
-                    "torql_api_rows_read": 0,
-                    "torql_api_duration_ms": 0,
+                    "clairql_app_bytes_read": 0,
+                    "clairql_app_rows_read": 0,
+                    "clairql_app_duration_ms": 0,
+                    "clairql_api_bytes_read": 0,
+                    "clairql_api_rows_read": 0,
+                    "clairql_api_duration_ms": 0,
                     "event_explorer_app_bytes_read": 0,
                     "event_explorer_app_rows_read": 0,
                     "event_explorer_app_duration_ms": 0,
@@ -573,12 +573,12 @@ class UsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin
                             "local_evaluation_requests_count_in_period": 0,
                             "billable_feature_flag_requests_count_in_period": 0,
                             "survey_responses_count_in_period": 1,
-                            "torql_app_bytes_read": 0,
-                            "torql_app_rows_read": 0,
-                            "torql_app_duration_ms": 0,
-                            "torql_api_bytes_read": 0,
-                            "torql_api_rows_read": 0,
-                            "torql_api_duration_ms": 0,
+                            "clairql_app_bytes_read": 0,
+                            "clairql_app_rows_read": 0,
+                            "clairql_app_duration_ms": 0,
+                            "clairql_api_bytes_read": 0,
+                            "clairql_api_rows_read": 0,
+                            "clairql_api_duration_ms": 0,
                             "event_explorer_app_bytes_read": 0,
                             "event_explorer_app_rows_read": 0,
                             "event_explorer_app_duration_ms": 0,
@@ -621,12 +621,12 @@ class UsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin
                             "local_evaluation_requests_count_in_period": 0,
                             "billable_feature_flag_requests_count_in_period": 0,
                             "survey_responses_count_in_period": 0,
-                            "torql_app_bytes_read": 0,
-                            "torql_app_rows_read": 0,
-                            "torql_app_duration_ms": 0,
-                            "torql_api_bytes_read": 0,
-                            "torql_api_rows_read": 0,
-                            "torql_api_duration_ms": 0,
+                            "clairql_app_bytes_read": 0,
+                            "clairql_app_rows_read": 0,
+                            "clairql_app_duration_ms": 0,
+                            "clairql_api_bytes_read": 0,
+                            "clairql_api_rows_read": 0,
+                            "clairql_api_duration_ms": 0,
                             "event_explorer_app_bytes_read": 0,
                             "event_explorer_app_rows_read": 0,
                             "event_explorer_app_duration_ms": 0,
@@ -692,12 +692,12 @@ class UsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin
                     "local_evaluation_requests_count_in_period": 0,
                     "billable_feature_flag_requests_count_in_period": 0,
                     "survey_responses_count_in_period": 0,
-                    "torql_app_bytes_read": 0,
-                    "torql_app_rows_read": 0,
-                    "torql_app_duration_ms": 0,
-                    "torql_api_bytes_read": 0,
-                    "torql_api_rows_read": 0,
-                    "torql_api_duration_ms": 0,
+                    "clairql_app_bytes_read": 0,
+                    "clairql_app_rows_read": 0,
+                    "clairql_app_duration_ms": 0,
+                    "clairql_api_bytes_read": 0,
+                    "clairql_api_rows_read": 0,
+                    "clairql_api_duration_ms": 0,
                     "event_explorer_app_bytes_read": 0,
                     "event_explorer_app_rows_read": 0,
                     "event_explorer_app_duration_ms": 0,
@@ -746,12 +746,12 @@ class UsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin
                             "local_evaluation_requests_count_in_period": 0,
                             "billable_feature_flag_requests_count_in_period": 0,
                             "survey_responses_count_in_period": 0,
-                            "torql_app_bytes_read": 0,
-                            "torql_app_rows_read": 0,
-                            "torql_app_duration_ms": 0,
-                            "torql_api_bytes_read": 0,
-                            "torql_api_rows_read": 0,
-                            "torql_api_duration_ms": 0,
+                            "clairql_app_bytes_read": 0,
+                            "clairql_app_rows_read": 0,
+                            "clairql_app_duration_ms": 0,
+                            "clairql_api_bytes_read": 0,
+                            "clairql_api_rows_read": 0,
+                            "clairql_api_duration_ms": 0,
                             "event_explorer_app_bytes_read": 0,
                             "event_explorer_app_rows_read": 0,
                             "event_explorer_app_duration_ms": 0,
@@ -867,9 +867,9 @@ class ReplayUsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTable
         assert org_reports[str(self.organization.id)].mobile_recording_count_in_period == 1
 
 
-class TorQLUsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin):
+class ClairQLUsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTablesMixin):
     @also_test_with_materialized_columns(event_properties=["$lib"], verify_no_jsonextract=False)
-    def test_usage_report_torql_queries(self) -> None:
+    def test_usage_report_clairql_queries(self) -> None:
         for _ in range(0, 100):
             _create_event(
                 distinct_id="hello",
@@ -882,10 +882,10 @@ class TorQLUsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTables
         sync_execute("SYSTEM FLUSH LOGS")
         sync_execute("TRUNCATE TABLE system.query_log")
 
-        execute_torql_query(
+        execute_clairql_query(
             query="select * from events limit 200",
             team=self.team,
-            query_type="TorQLQuery",
+            query_type="ClairQLQuery",
         )
         EventsQueryRunner(query=EventsQuery(select=["event"], limit=50), team=self.team).calculate()
         sync_execute("SYSTEM FLUSH LOGS")
@@ -897,13 +897,13 @@ class TorQLUsageReport(APIBaseTest, ClickhouseTestMixin, ClickhouseDestroyTables
         report = _get_team_report(all_reports, self.team)
 
         # We selected 200 or 50 rows, but still read 100 rows to return the query
-        assert report.torql_app_rows_read == 100
-        assert report.torql_app_bytes_read > 0
+        assert report.clairql_app_rows_read == 100
+        assert report.clairql_app_bytes_read > 0
         assert report.event_explorer_app_rows_read == 100
         assert report.event_explorer_app_bytes_read > 0
 
         # Nothing was read via the API
-        assert report.torql_api_rows_read == 0
+        assert report.clairql_api_rows_read == 0
         assert report.event_explorer_api_rows_read == 0
 
 

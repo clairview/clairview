@@ -41,7 +41,7 @@ export function NavigationBase(): JSX.Element {
 }
 
 export function Navigation3000(): JSX.Element {
-    setFeatureFlags([FEATURE_FLAGS.MARKETTOR_3000_NAV])
+    setFeatureFlags([FEATURE_FLAGS.CLAIRVIEW_3000_NAV])
     useEffect(() => {
         router.actions.push(urls.projectHomepage())
     }, [])

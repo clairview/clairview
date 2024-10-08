@@ -244,7 +244,7 @@ export const HOG_EXAMPLES: Record<string, Pick<HogFunctionType, 'hog' | 'bytecod
         ],
     },
     clairview_capture: {
-        hog: "marketTorCapture({\n    'event': f'{event.event} (copy)',\n    'distinct_id': event.distinct_id,\n    'properties': {}\n})",
+        hog: "clairViewCapture({\n    'event': f'{event.event} (copy)',\n    'distinct_id': event.distinct_id,\n    'properties': {}\n})",
         bytecode: [
             '_h',
             32,
@@ -275,7 +275,7 @@ export const HOG_EXAMPLES: Record<string, Pick<HogFunctionType, 'hog' | 'bytecod
             42,
             3,
             2,
-            'marketTorCapture',
+            'clairViewCapture',
             1,
             35,
         ],

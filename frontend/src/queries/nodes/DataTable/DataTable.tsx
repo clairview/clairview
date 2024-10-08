@@ -38,9 +38,9 @@ import {
 } from '~/queries/nodes/DataTable/utils'
 import { EventName } from '~/queries/nodes/EventsNode/EventName'
 import { EventPropertyFilters } from '~/queries/nodes/EventsNode/EventPropertyFilters'
-import { TorQLQueryEditor } from '~/queries/nodes/TorQLQuery/TorQLQueryEditor'
+import { ClairQLQueryEditor } from '~/queries/nodes/ClairQLQuery/ClairQLQueryEditor'
 import { insightVizDataNodeKey } from '~/queries/nodes/InsightViz/InsightViz'
-import { EditTorQLButton } from '~/queries/nodes/Node/EditTorQLButton'
+import { EditClairQLButton } from '~/queries/nodes/Node/EditClairQLButton'
 import { OpenEditorButton } from '~/queries/nodes/Node/OpenEditorButton'
 import { PersonPropertyFilters } from '~/queries/nodes/PersonsNode/PersonPropertyFilters'
 import { PersonsSearch } from '~/queries/nodes/PersonsNode/PersonsSearch'
@@ -50,7 +50,7 @@ import {
     DataTableNode,
     EventsNode,
     EventsQuery,
-    TorQLQuery,
+    ClairQLQuery,
     PersonsNode,
     SessionAttributionExplorerQuery,
 } from '~/queries/schema'
@@ -58,11 +58,11 @@ import { QueryContext } from '~/queries/types'
 import {
     isActorsQuery,
     isEventsQuery,
-    isTorQlAggregation,
-    isTorQLQuery,
+    isClairQlAggregation,
+    isClairQLQuery,
     isInsightActorsQuery,
-    taxonomicEventFilterToTorQL,
-    taxonomicPersonFilterToTorQL,
+    taxonomicEventFilterToClairQL,
+    taxonomicPersonFilterToClairQL,
 } from '~/queries/utils'
 import { EventType, InsightLogicProps } from '~/types'
 
@@ -82,12 +82,12 @@ interface DataTableProps {
 }
 
 const eventGroupTypes = [
-    TaxonomicFilterGroupType.TorQLExpression,
+    TaxonomicFilterGroupType.ClairQLExpression,
     TaxonomicFilterGroupType.EventProperties,
     TaxonomicFilterGroupType.PersonProperties,
     TaxonomicFilterGroupType.EventFeatureFlags,
 ]
-const personGroupTypes = [TaxonomicFilterGroupType.TorQLExpression, TaxonomicFilterGroupType.PersonProperties]
+const personGroupTypes = [TaxonomicFilterGroupType.ClairQLExpression, TaxonomicFilterGroupType.PersonProperties]
 
 let uniqueNode = 0
 
@@ -139,7 +139,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showSearch,
         showEventFilter,
         showPropertyFilter,
-        showTorQLEditor,
+        showClairQLEditor,
         showReload,
         showExport,
         showElapsedTime,
@@ -195,7 +195,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                         </div>
                         <LemonDivider />
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.TorQLExpression}
+                            groupType={TaxonomicFilterGroupType.ClairQLExpression}
                             value={key}
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -203,15 +203,15 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const torQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToTorQL(g, v)
-                                    : taxonomicEventFilterToTorQL(g, v)
-                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                const clairQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToClairQL(g, v)
+                                    : taxonomicEventFilterToClairQL(g, v)
+                                if (setQuery && clairQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
                                     // Typecasting to a query type with select and order_by fields.
                                     // The actual query may or may not be an events query.
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
-                                    const isAggregation = isTorQlAggregation(torQl)
+                                    const isAggregation = isClairQlAggregation(clairQl)
                                     const isOrderBy = source.orderBy?.[0] === key
                                     const isDescOrderBy = source.orderBy?.[0] === `${key} DESC`
                                     setQuery({
@@ -219,13 +219,13 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                                         source: {
                                             ...source,
                                             select: columns
-                                                .map((s, i) => (i === index ? torQl : s))
+                                                .map((s, i) => (i === index ? clairQl : s))
                                                 .filter((c) =>
                                                     isAggregation ? c !== '*' && c !== 'person.$delete' : true
                                                 ),
                                             orderBy:
                                                 isOrderBy || isDescOrderBy
-                                                    ? [isDescOrderBy ? `${torQl} DESC` : torQl]
+                                                    ? [isDescOrderBy ? `${clairQl} DESC` : clairQl]
                                                     : source.orderBy,
                                         },
                                     })
@@ -269,7 +269,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             </>
                         ) : null}
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.TorQLExpression}
+                            groupType={TaxonomicFilterGroupType.ClairQLExpression}
                             value=""
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -278,18 +278,18 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const torQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToTorQL(g, v)
-                                    : taxonomicEventFilterToTorQL(g, v)
-                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
-                                    const isAggregation = isTorQlAggregation(torQl)
+                                const clairQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToClairQL(g, v)
+                                    : taxonomicEventFilterToClairQL(g, v)
+                                if (setQuery && clairQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                    const isAggregation = isClairQlAggregation(clairQl)
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
                                     setQuery({
                                         ...query,
                                         source: {
                                             ...source,
-                                            select: [...columns.slice(0, index), torQl, ...columns.slice(index)].filter(
+                                            select: [...columns.slice(0, index), clairQl, ...columns.slice(index)].filter(
                                                 (c) => (isAggregation ? c !== '*' && c !== 'person.$delete' : true)
                                             ),
                                         } as EventsQuery | ActorsQuery,
@@ -298,7 +298,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             }}
                         />
                         <TaxonomicPopover
-                            groupType={TaxonomicFilterGroupType.TorQLExpression}
+                            groupType={TaxonomicFilterGroupType.ClairQLExpression}
                             value=""
                             groupTypes={groupTypes}
                             metadataSource={query.source}
@@ -307,11 +307,11 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                             type="tertiary"
                             fullWidth
                             onChange={(v, g) => {
-                                const torQl = isActorsQuery(query.source)
-                                    ? taxonomicPersonFilterToTorQL(g, v)
-                                    : taxonomicEventFilterToTorQL(g, v)
-                                if (setQuery && torQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
-                                    const isAggregation = isTorQlAggregation(torQl)
+                                const clairQl = isActorsQuery(query.source)
+                                    ? taxonomicPersonFilterToClairQL(g, v)
+                                    : taxonomicEventFilterToClairQL(g, v)
+                                if (setQuery && clairQl && sourceFeatures.has(QueryFeature.selectAndOrderByColumns)) {
+                                    const isAggregation = isClairQlAggregation(clairQl)
                                     const source = query.source as EventsQuery
                                     const columns = columnsInLemonTable ?? getDataNodeDefaultColumns(source)
                                     setQuery?.({
@@ -320,7 +320,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
                                             ...source,
                                             select: [
                                                 ...columns.slice(0, index + 1),
-                                                torQl,
+                                                clairQl,
                                                 ...columns.slice(index + 1),
                                             ].filter((c) =>
                                                 isAggregation ? c !== '*' && c !== 'person.$delete' : true
@@ -385,7 +385,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
     ].filter((column) => !query.hiddenColumns?.includes(column.dataIndex) && column.dataIndex !== '*')
 
     const setQuerySource = useCallback(
-        (source: EventsNode | EventsQuery | PersonsNode | ActorsQuery | TorQLQuery | SessionAttributionExplorerQuery) =>
+        (source: EventsNode | EventsQuery | PersonsNode | ActorsQuery | ClairQLQuery | SessionAttributionExplorerQuery) =>
             setQuery?.({ ...query, source }),
         [setQuery]
     )
@@ -407,7 +407,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showDateRange && sourceFeatures.has(QueryFeature.dateRangePicker) ? (
             <DateRange
                 key="date-range"
-                query={query.source as TorQLQuery | EventsQuery | SessionAttributionExplorerQuery}
+                query={query.source as ClairQLQuery | EventsQuery | SessionAttributionExplorerQuery}
                 setQuery={setQuerySource}
             />
         ) : null,
@@ -420,7 +420,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         showPropertyFilter && sourceFeatures.has(QueryFeature.eventPropertyFilters) ? (
             <EventPropertyFilters
                 key="event-property"
-                query={query.source as EventsQuery | TorQLQuery | SessionAttributionExplorerQuery}
+                query={query.source as EventsQuery | ClairQLQuery | SessionAttributionExplorerQuery}
                 setQuery={setQuerySource}
                 taxonomicGroupTypes={Array.isArray(showPropertyFilter) ? showPropertyFilter : undefined}
             />
@@ -468,7 +468,7 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
     const editorButton = (
         <>
             <OpenEditorButton query={query} />
-            {response?.torql ? <EditTorQLButton torql={response.torql} /> : null}
+            {response?.clairql ? <EditClairQLButton clairql={response.clairql} /> : null}
         </>
     )
 
@@ -485,8 +485,8 @@ export function DataTable({ uniqueKey, query, setQuery, context, cachedResults }
         <BindLogic logic={dataTableLogic} props={dataTableLogicProps}>
             <BindLogic logic={dataNodeLogic} props={dataNodeLogicProps}>
                 <div className="relative w-full flex flex-col gap-4 flex-1 h-full">
-                    {showTorQLEditor && isTorQLQuery(query.source) && !isReadOnly ? (
-                        <TorQLQueryEditor query={query.source} setQuery={setQuerySource} embedded={embedded} />
+                    {showClairQLEditor && isClairQLQuery(query.source) && !isReadOnly ? (
+                        <ClairQLQueryEditor query={query.source} setQuery={setQuerySource} embedded={embedded} />
                     ) : null}
                     {showFirstRow && (
                         <div className="flex gap-4 items-center flex-wrap">

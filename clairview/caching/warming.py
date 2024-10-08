@@ -14,9 +14,9 @@ from clairview.api.services.query import process_query_dict
 from clairview.caching.utils import largest_teams
 from clairview.clickhouse.query_tagging import tag_queries
 from clairview.errors import CHQueryErrorTooManySimultaneousQueries
-from clairview.torql_queries.query_cache import QueryCacheManager
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from clairview.torql_queries.query_runner import ExecutionMode
+from clairview.clairql_queries.query_cache import QueryCacheManager
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from clairview.clairql_queries.query_runner import ExecutionMode
 from clairview.models import Team, Insight, DashboardTile
 from clairview.tasks.utils import CeleryQueue
 

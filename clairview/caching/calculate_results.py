@@ -18,8 +18,8 @@ from clairview.constants import (
     FunnelVizType,
 )
 from clairview.decorators import CacheType
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from clairview.torql_queries.query_runner import get_query_runner_or_none
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from clairview.clairql_queries.query_runner import get_query_runner_or_none
 from clairview.logging.timing import timed
 from clairview.models import (
     Dashboard,
@@ -164,7 +164,7 @@ def calculate_for_query_based_insight(
             insight.team_id,
             cache_key,
             last_refresh,
-            result=None,  # Not caching the result here, since in TorQL this is the query runner's responsibility
+            result=None,  # Not caching the result here, since in ClairQL this is the query runner's responsibility
         )
 
     return InsightResult(
@@ -181,7 +181,7 @@ def calculate_for_query_based_insight(
         cache_target_age=response.get("cache_target_age"),
         timings=response.get("timings"),
         query_status=response.get("query_status"),
-        torql=response.get("torql"),
+        clairql=response.get("clairql"),
         types=response.get("types"),
     )
 

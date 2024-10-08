@@ -56,7 +56,7 @@ export function DashboardEditBar(): JSX.Element {
                     ...groupsTaxonomicTypes,
                     TaxonomicFilterGroupType.Cohorts,
                     TaxonomicFilterGroupType.Elements,
-                    TaxonomicFilterGroupType.TorQLExpression,
+                    TaxonomicFilterGroupType.ClairQLExpression,
                 ]}
             />
         </div>

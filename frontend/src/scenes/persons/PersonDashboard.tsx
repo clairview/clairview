@@ -9,7 +9,7 @@ import { dashboardLogic, DashboardLogicProps } from 'scenes/dashboard/dashboardL
 import { personDashboardLogic } from 'scenes/persons/personDashboardLogic'
 import { Scene } from 'scenes/sceneTypes'
 
-import { TorQLPropertyFilter, PersonType, PropertyFilterType } from '~/types'
+import { ClairQLPropertyFilter, PersonType, PropertyFilterType } from '~/types'
 
 export function PersonDashboard({ person }: { person: PersonType }): JSX.Element {
     const { showSceneDashboardChoiceModal } = useActions(sceneDashboardChoiceModalLogic({ scene: Scene.Person }))
@@ -48,20 +48,20 @@ function PersonDashboardExisting({
             // `dashboard?.filters.properties` is typed as `any` but it's a list...
             const current = Array.isArray(dashboard?.filters.properties) ? dashboard?.filters.properties : []
             // TODO: needs https://github.com/ClairView/clairview/pull/16653 so we can filter by person ID
-            const torQLPersonFilter = `person.properties.email = '${person.properties.email}'`
-            const desired: TorQLPropertyFilter = {
-                type: PropertyFilterType.TorQL,
-                key: torQLPersonFilter,
+            const clairQLPersonFilter = `person.properties.email = '${person.properties.email}'`
+            const desired: ClairQLPropertyFilter = {
+                type: PropertyFilterType.ClairQL,
+                key: clairQLPersonFilter,
             }
 
             const hasDesired = current.some(
-                (item) => item.type === PropertyFilterType.TorQL && item.key === torQLPersonFilter
+                (item) => item.type === PropertyFilterType.ClairQL && item.key === clairQLPersonFilter
             )
             if (!hasDesired) {
                 setProperties([
                     ...current.filter(
                         (item) =>
-                            item.type === PropertyFilterType.TorQL && !item.key.startsWith('person.properties.email')
+                            item.type === PropertyFilterType.ClairQL && !item.key.startsWith('person.properties.email')
                     ),
                     desired,
                 ])

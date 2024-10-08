@@ -121,7 +121,7 @@ class Insight(models.Model):
 
     @cached_property
     def query_from_filters(self):
-        from clairview.torql_queries.legacy_compatibility.filter_to_query import filter_to_query
+        from clairview.clairql_queries.legacy_compatibility.filter_to_query import filter_to_query
 
         try:
             return {
@@ -198,7 +198,7 @@ class Insight(models.Model):
     def get_effective_query(
         self, *, dashboard: Optional[Dashboard], dashboard_filters_override: Optional[dict] = None
     ) -> Optional[dict]:
-        from clairview.torql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
+        from clairview.clairql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
 
         if not (dashboard or dashboard_filters_override) or not self.query:
             return self.query

@@ -3,7 +3,7 @@ import { urls } from 'scenes/urls'
 import { insight } from '../productAnalytics'
 import { randomString } from '../support/random'
 
-const torQLQuery = `select event,
+const clairQLQuery = `select event,
           count()
      from events
  group by event,
@@ -31,7 +31,7 @@ describe('Insights', () => {
                 cy.get('.Link').click()
             })
 
-            cy.get('[data-attr="torql-query-editor"]').should('not.exist')
+            cy.get('[data-attr="clairql-query-editor"]').should('not.exist')
             cy.get('tr.DataVizRow').should('have.length.gte', 2)
 
             cy.get('[data-attr="insight-edit-button"]').click()
@@ -54,8 +54,8 @@ describe('Insights', () => {
              */
 
             insight.newInsight('SQL')
-            cy.get('[data-attr="torql-query-editor"]').should('exist')
-            insight.updateQueryEditorText(torQLQuery, 'torql-query-editor')
+            cy.get('[data-attr="clairql-query-editor"]').should('exist')
+            insight.updateQueryEditorText(clairQLQuery, 'clairql-query-editor')
 
             cy.get('.DataVizRow').should('have.length.gte', 2)
 
@@ -65,8 +65,8 @@ describe('Insights', () => {
             cy.contains('tr', 'No insight results').should('not.exist')
 
             insight.clickTab('SQL')
-            cy.get('[data-attr="torql-query-editor"]').should('exist')
-            insight.updateQueryEditorText(torQLQuery, 'torql-query-editor')
+            cy.get('[data-attr="clairql-query-editor"]').should('exist')
+            insight.updateQueryEditorText(clairQLQuery, 'clairql-query-editor')
 
             cy.get('.DataVizRow').should('have.length.gte', 2)
 

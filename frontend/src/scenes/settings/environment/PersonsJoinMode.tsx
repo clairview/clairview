@@ -5,9 +5,9 @@ import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { TorQLQueryModifiers } from '~/queries/schema'
+import { ClairQLQueryModifiers } from '~/queries/schema'
 
-type PersonsJoinMode = NonNullable<TorQLQueryModifiers['personsJoinMode']>
+type PersonsJoinMode = NonNullable<ClairQLQueryModifiers['personsJoinMode']>
 
 const personsJoinOptions: LemonRadioOption<PersonsJoinMode>[] = [
     {

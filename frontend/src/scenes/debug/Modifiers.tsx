@@ -1,15 +1,15 @@
 import { LemonLabel } from 'lib/lemon-ui/LemonLabel'
 import { LemonSelect } from 'lib/lemon-ui/LemonSelect'
 
-import { TorQLQueryModifiers } from '~/queries/schema'
+import { ClairQLQueryModifiers } from '~/queries/schema'
 
-export interface ModifiersProps<Q extends { response?: Record<string, any>; modifiers?: TorQLQueryModifiers }> {
+export interface ModifiersProps<Q extends { response?: Record<string, any>; modifiers?: ClairQLQueryModifiers }> {
     setQuery: (query: Q) => void
     query: Q | null
     response: Required<Q>['response'] | null
 }
 
-export function Modifiers<Q extends { response?: Record<string, any>; modifiers?: TorQLQueryModifiers }>({
+export function Modifiers<Q extends { response?: Record<string, any>; modifiers?: ClairQLQueryModifiers }>({
     setQuery,
     query,
     response = null,

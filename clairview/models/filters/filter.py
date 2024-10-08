@@ -38,7 +38,7 @@ from .mixins.funnel import (
     FunnelWindowDaysMixin,
     FunnelWindowMixin,
     HistogramMixin,
-    FunnelTorQLAggregationMixin,
+    FunnelClairQLAggregationMixin,
 )
 from .mixins.groups import GroupsAggregationMixin
 from .mixins.interval import IntervalMixin
@@ -74,7 +74,7 @@ class Filter(
     FunnelTrendsPersonsMixin,
     FunnelPersonsStepBreakdownMixin,
     FunnelLayoutMixin,
-    FunnelTorQLAggregationMixin,
+    FunnelClairQLAggregationMixin,
     FunnelTypeMixin,
     HistogramMixin,
     GroupsAggregationMixin,

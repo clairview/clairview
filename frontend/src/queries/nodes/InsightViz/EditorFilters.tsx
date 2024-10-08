@@ -13,7 +13,7 @@ import { FunnelsQuerySteps } from 'scenes/insights/EditorFilters/FunnelsQuerySte
 import { PathsAdvanced } from 'scenes/insights/EditorFilters/PathsAdvanced'
 import { PathsEventsTypes } from 'scenes/insights/EditorFilters/PathsEventTypes'
 import { PathsExclusions } from 'scenes/insights/EditorFilters/PathsExclusions'
-import { PathsTorQL } from 'scenes/insights/EditorFilters/PathsTorQL'
+import { PathsClairQL } from 'scenes/insights/EditorFilters/PathsClairQL'
 import { PathsTargetEnd, PathsTargetStart } from 'scenes/insights/EditorFilters/PathsTarget'
 import { PathsWildcardGroups } from 'scenes/insights/EditorFilters/PathsWildcardGroups'
 import { RetentionSummary } from 'scenes/insights/EditorFilters/RetentionSummary'
@@ -76,7 +76,7 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
         isTrendsFunnel
     const hasPathsAdvanced = hasAvailableFeature(AvailableFeature.PATHS_ADVANCED)
     const hasAttribution = isStepsFunnel
-    const hasPathsTorQL = isPaths && pathsFilter?.includeEventTypes?.includes(PathType.TorQL)
+    const hasPathsClairQL = isPaths && pathsFilter?.includeEventTypes?.includes(PathType.ClairQL)
 
     const editorFilters: InsightEditorFilterGroup[] = [
         {
@@ -94,10 +94,10 @@ export function EditorFilters({ query, showing, embedded }: EditorFiltersProps):
                               label: 'Event Types',
                               component: PathsEventsTypes,
                           },
-                          hasPathsTorQL && {
-                              key: 'torql',
-                              label: 'TorQL Expression',
-                              component: PathsTorQL,
+                          hasPathsClairQL && {
+                              key: 'clairql',
+                              label: 'ClairQL Expression',
+                              component: PathsClairQL,
                           },
                           hasPathsAdvanced && {
                               key: 'wildcard-groups',

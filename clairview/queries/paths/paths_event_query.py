@@ -6,9 +6,9 @@ from clairview.constants import (
     FUNNEL_PATH_BETWEEN_STEPS,
     PAGEVIEW_EVENT,
     SCREEN_EVENT,
-    TORQL,
+    CLAIRQL,
 )
-from clairview.torql.torql import translate_torql
+from clairview.clairql.clairql import translate_clairql
 from clairview.models.filters.path_filter import PathFilter
 from clairview.models.property.util import get_property_string_expr
 from clairview.models.team import Team
@@ -65,20 +65,20 @@ class PathEventQuery(EventQuery):
             for field in self._extra_event_properties
         ]
 
-        event_torql = "event"
+        event_clairql = "event"
 
-        if self._should_query_torql():
-            event_torql = self._filter.paths_torql_expression or event_torql
+        if self._should_query_clairql():
+            event_clairql = self._filter.paths_clairql_expression or event_clairql
         if self._should_query_url():
-            event_torql = f"if(event = '{PAGEVIEW_EVENT}', replaceRegexpAll(ifNull(properties.$current_url, ''), '(.)/$', '\\\\1'), {event_torql})"
+            event_clairql = f"if(event = '{PAGEVIEW_EVENT}', replaceRegexpAll(ifNull(properties.$current_url, ''), '(.)/$', '\\\\1'), {event_clairql})"
         if self._should_query_screen():
-            event_torql = f"if(event = '{SCREEN_EVENT}', properties.$screen_name, {event_torql})"
+            event_clairql = f"if(event = '{SCREEN_EVENT}', properties.$screen_name, {event_clairql})"
 
         event_conditional = (
             "ifNull("
-            + translate_torql(
-                query=event_torql,
-                context=self._filter.torql_context,
+            + translate_clairql(
+                query=event_clairql,
+                context=self._filter.clairql_context,
                 dialect="clickhouse",
                 events_table_alias=self.EVENT_TABLE_ALIAS,
             )
@@ -202,7 +202,7 @@ class PathEventQuery(EventQuery):
         if self._filter.include_all_custom_events:
             or_conditions.append(f"NOT event LIKE '$%%'")
 
-        if self._filter.include_torql:
+        if self._filter.include_clairql:
             or_conditions.append(f"1 = 1")
 
         if self._filter.custom_events:
@@ -241,12 +241,12 @@ class PathEventQuery(EventQuery):
 
         return False
 
-    def _should_query_torql(self) -> bool:
+    def _should_query_clairql(self) -> bool:
         if (
             self._filter.target_events == [] and self._filter.custom_events == []
-        ) and TORQL not in self._filter.exclude_events:
+        ) and CLAIRQL not in self._filter.exclude_events:
             return True
-        elif self._filter.include_torql:
+        elif self._filter.include_clairql:
             return True
 
         return False

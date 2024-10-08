@@ -46,7 +46,7 @@ import {
     QueryBasedInsightModel,
 } from '~/types'
 
-import { InlineTorQLEditor } from './InlineTorQLEditor'
+import { InlineClairQLEditor } from './InlineClairQLEditor'
 import type { taxonomicFilterLogicType } from './taxonomicFilterLogicType'
 
 export const eventTaxonomicGroupProps: Pick<TaxonomicFilterGroup, 'getPopoverHeader' | 'getIcon'> = {
@@ -146,7 +146,7 @@ export const taxonomicFilterLogic = kea<taxonomicFilterLogicType>([
         metadataSource: [
             () => [(_, props) => props.metadataSource],
             (metadataSource): AnyDataNode =>
-                metadataSource ?? { kind: NodeKind.TorQLQuery, query: 'select event from events' },
+                metadataSource ?? { kind: NodeKind.ClairQLQuery, query: 'select event from events' },
         ],
         excludedProperties: [
             () => [(_, props) => props.excludedProperties],
@@ -485,11 +485,11 @@ export const taxonomicFilterLogic = kea<taxonomicFilterLogicType>([
                         getIcon: getPropertyDefinitionIcon,
                     },
                     {
-                        name: 'TorQL expression',
+                        name: 'ClairQL expression',
                         searchPlaceholder: null,
-                        type: TaxonomicFilterGroupType.TorQLExpression,
-                        render: InlineTorQLEditor,
-                        getPopoverHeader: () => 'TorQL expression',
+                        type: TaxonomicFilterGroupType.ClairQLExpression,
+                        render: InlineClairQLEditor,
+                        getPopoverHeader: () => 'ClairQL expression',
                         componentProps: { metadataSource },
                     },
                     {
@@ -626,7 +626,7 @@ export const taxonomicFilterLogic = kea<taxonomicFilterLogicType>([
     }),
     listeners(({ actions, values, props }) => ({
         selectItem: ({ group, value, item }) => {
-            if (item || group.type === TaxonomicFilterGroupType.TorQLExpression) {
+            if (item || group.type === TaxonomicFilterGroupType.ClairQLExpression) {
                 props.onChange?.(group, value, item)
             }
             actions.setSearchQuery('')

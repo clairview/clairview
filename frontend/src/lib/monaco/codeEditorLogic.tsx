@@ -18,10 +18,10 @@ import {
     AnyDataNode,
     DataVisualizationNode,
     HogLanguage,
-    TorQLFilters,
-    TorQLMetadata,
-    TorQLMetadataResponse,
-    TorQLNotice,
+    ClairQLFilters,
+    ClairQLMetadata,
+    ClairQLMetadataResponse,
+    ClairQLNotice,
     NodeKind,
 } from '~/queries/schema'
 
@@ -30,10 +30,10 @@ import type { codeEditorLogicType } from './codeEditorLogicType'
 export const editorModelsStateKey = (key: string | number): string => `${key}/editorModelQueries`
 export const activemodelStateKey = (key: string | number): string => `${key}/activeModelUri`
 
-const METADATA_LANGUAGES = [HogLanguage.hog, HogLanguage.torQL, HogLanguage.torQLExpr, HogLanguage.hogTemplate]
+const METADATA_LANGUAGES = [HogLanguage.hog, HogLanguage.clairQL, HogLanguage.clairQLExpr, HogLanguage.hogTemplate]
 
 export interface ModelMarker extends editor.IMarkerData {
-    torQLFix?: string
+    clairQLFix?: string
     start: number
     end: number
 }
@@ -43,7 +43,7 @@ export interface CodeEditorLogicProps {
     query: string
     language: string
     sourceQuery?: AnyDataNode
-    metadataFilters?: TorQLFilters
+    metadataFilters?: ClairQLFilters
     monaco?: Monaco | null
     editor?: editor.IStandaloneCodeEditor | null
     globals?: Record<string, any>
@@ -51,7 +51,7 @@ export interface CodeEditorLogicProps {
 }
 
 export const codeEditorLogic = kea<codeEditorLogicType>([
-    path(['lib', 'monaco', 'torQLMetadataProvider']),
+    path(['lib', 'monaco', 'clairQLMetadataProvider']),
     props({} as CodeEditorLogicProps),
     key((props) => props.key),
     actions({
@@ -70,7 +70,7 @@ export const codeEditorLogic = kea<codeEditorLogicType>([
     }),
     loaders(({ props }) => ({
         metadata: [
-            null as null | [string, TorQLMetadataResponse],
+            null as null | [string, ClairQLMetadataResponse],
             {
                 reloadMetadata: async (_, breakpoint) => {
                     const model = props.editor?.getModel()
@@ -84,12 +84,12 @@ export const codeEditorLogic = kea<codeEditorLogicType>([
                     }
 
                     const variables =
-                        props.sourceQuery?.kind === NodeKind.TorQLQuery
+                        props.sourceQuery?.kind === NodeKind.ClairQLQuery
                             ? props.sourceQuery.variables ?? undefined
                             : undefined
 
-                    const response = await performQuery<TorQLMetadata>({
-                        kind: NodeKind.TorQLMetadata,
+                    const response = await performQuery<ClairQLMetadata>({
+                        kind: NodeKind.ClairQLMetadata,
                         language: props.language as HogLanguage,
                         query: query,
                         filters: props.metadataFilters,
@@ -113,7 +113,7 @@ export const codeEditorLogic = kea<codeEditorLogicType>([
                     const markers: ModelMarker[] = []
                     const [query, metadataResponse] = metadata
 
-                    function noticeToMarker(error: TorQLNotice, severity: MarkerSeverity): ModelMarker {
+                    function noticeToMarker(error: ClairQLNotice, severity: MarkerSeverity): ModelMarker {
                         const start = model!.getPositionAt(error.start ?? 0)
                         const end = model!.getPositionAt(error.end ?? query.length)
                         return {
@@ -125,7 +125,7 @@ export const codeEditorLogic = kea<codeEditorLogicType>([
                             endColumn: end.column,
                             message: error.message ?? 'Unknown error',
                             severity: severity,
-                            torQLFix: error.fix,
+                            clairQLFix: error.fix,
                         }
                     }
 
@@ -139,7 +139,7 @@ export const codeEditorLogic = kea<codeEditorLogicType>([
                         markers.push(noticeToMarker(notice, 1 /* MarkerSeverity.Hint */))
                     }
 
-                    props.monaco?.editor.setModelMarkers(model, 'torql', markers)
+                    props.monaco?.editor.setModelMarkers(model, 'clairql', markers)
                     return markers
                 },
             },

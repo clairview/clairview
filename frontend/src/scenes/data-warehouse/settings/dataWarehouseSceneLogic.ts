@@ -12,7 +12,7 @@ import {
     DatabaseSchemaMaterializedViewTable,
     DatabaseSchemaTable,
     DatabaseSerializedFieldType,
-    TorQLQuery,
+    ClairQLQuery,
     NodeKind,
 } from '~/queries/schema'
 
@@ -280,8 +280,8 @@ export const dataWarehouseSceneLogic = kea<dataWarehouseSceneLogicType>([
         },
         updateView: ({ query }) => {
             if (values.editingView) {
-                const newViewQuery: TorQLQuery = {
-                    kind: NodeKind.TorQLQuery,
+                const newViewQuery: ClairQLQuery = {
+                    kind: NodeKind.ClairQLQuery,
                     query: query,
                 }
                 const oldView = values.viewsMapById[values.editingView]

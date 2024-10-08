@@ -2,17 +2,17 @@ import re
 from typing import Any, NamedTuple, cast, Optional, Union
 from datetime import datetime, timedelta
 
-from clairview.torql import ast
-from clairview.torql.ast import CompareOperation
-from clairview.torql.parser import parse_select
-from clairview.torql.property import entity_to_expr, property_to_expr
-from clairview.torql.query import execute_torql_query
-from clairview.torql_queries.insights.paginators import TorQLHasMorePaginator
+from clairview.clairql import ast
+from clairview.clairql.ast import CompareOperation
+from clairview.clairql.parser import parse_select
+from clairview.clairql.property import entity_to_expr, property_to_expr
+from clairview.clairql.query import execute_clairql_query
+from clairview.clairql_queries.insights.paginators import ClairQLHasMorePaginator
 from clairview.models import Team, Property
 from clairview.models.filters.session_recordings_filter import SessionRecordingsFilter
 from clairview.models.filters.mixins.utils import cached_property
 from clairview.models.property import PropertyGroup
-from clairview.schema import QueryTiming, TorQLQueryModifiers, PersonsOnEventsMode
+from clairview.schema import QueryTiming, ClairQLQueryModifiers, PersonsOnEventsMode
 from clairview.session_recordings.queries.session_replay_events import ttl_days
 from clairview.constants import TREND_FILTER_TYPE_ACTIONS
 
@@ -22,11 +22,11 @@ logger = structlog.get_logger(__name__)
 
 
 def is_event_property(p: Property) -> bool:
-    return p.type == "event" or (p.type == "torql" and bool(re.search(r"(?<!person\.)properties\.", p.key)))
+    return p.type == "event" or (p.type == "clairql" and bool(re.search(r"(?<!person\.)properties\.", p.key)))
 
 
 def is_person_property(p: Property) -> bool:
-    return p.type == "person" or (p.type == "torql" and "person.properties" in p.key)
+    return p.type == "person" or (p.type == "clairql" and "person.properties" in p.key)
 
 
 def is_group_property(p: Property) -> bool:
@@ -101,15 +101,15 @@ class SessionRecordingListFromFilters:
         self,
         team: Team,
         filter: SessionRecordingsFilter,
-        torql_query_modifiers: Optional[TorQLQueryModifiers],
+        clairql_query_modifiers: Optional[ClairQLQueryModifiers],
         **_,
     ):
         self._team = team
         self._filter = filter
-        self._paginator = TorQLHasMorePaginator(
+        self._paginator = ClairQLHasMorePaginator(
             limit=filter.limit or self.SESSION_RECORDINGS_DEFAULT_LIMIT, offset=filter.offset or 0
         )
-        self._torql_query_modifiers = torql_query_modifiers
+        self._clairql_query_modifiers = clairql_query_modifiers
 
     @property
     def ttl_days(self):
@@ -118,12 +118,12 @@ class SessionRecordingListFromFilters:
     def run(self) -> SessionRecordingQueryResult:
         query = self.get_query()
 
-        paginated_response = self._paginator.execute_torql_query(
+        paginated_response = self._paginator.execute_clairql_query(
             # TODO I guess the paginator needs to know how to handle union queries or all callers are supposed to collapse them or .... 🤷
             query=cast(ast.SelectQuery, query),
             team=self._team,
             query_type="SessionRecordingListQuery",
-            modifiers=self._torql_query_modifiers,
+            modifiers=self._clairql_query_modifiers,
         )
 
         return SessionRecordingQueryResult(
@@ -418,11 +418,11 @@ class ReplayFiltersEventsSubQuery:
         self,
         team: Team,
         filter: SessionRecordingsFilter,
-        torql_query_modifiers: Optional[TorQLQueryModifiers] = None,
+        clairql_query_modifiers: Optional[ClairQLQueryModifiers] = None,
     ):
         self._team = team
         self._filter = filter
-        self._torql_query_modifiers = torql_query_modifiers
+        self._clairql_query_modifiers = clairql_query_modifiers
 
     @cached_property
     def _event_predicates(self):
@@ -471,19 +471,19 @@ class ReplayFiltersEventsSubQuery:
     def get_event_ids_for_session(self) -> SessionRecordingQueryResult:
         query = self.get_query_for_event_id_matching()
 
-        torql_query_response = execute_torql_query(
+        clairql_query_response = execute_clairql_query(
             query=query,
             team=self._team,
             query_type="SessionRecordingMatchingEventsForSessionQuery",
-            modifiers=self._torql_query_modifiers,
+            modifiers=self._clairql_query_modifiers,
         )
 
-        flattened_results = [str(uuid) for row in torql_query_response.results for uuid in row[0]]
+        flattened_results = [str(uuid) for row in clairql_query_response.results for uuid in row[0]]
 
         return SessionRecordingQueryResult(
             results=flattened_results,
             has_more_recording=False,
-            timings=torql_query_response.timings,
+            timings=clairql_query_response.timings,
         )
 
     def _where_predicates(self) -> ast.Expr:

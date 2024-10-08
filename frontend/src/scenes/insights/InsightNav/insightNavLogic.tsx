@@ -29,7 +29,7 @@ import {
     TrendsQuery,
 } from '~/queries/schema'
 import {
-    containsTorQLQuery,
+    containsClairQLQuery,
     filterKeyForQuery,
     getDisplay,
     getShowPercentStackView,
@@ -79,7 +79,7 @@ const cleanSeriesEntityMath = (
     entity: EventsNode | ActionsNode | DataWarehouseNode,
     mathAvailability: MathAvailability
 ): EventsNode | ActionsNode | DataWarehouseNode => {
-    const { math, math_property, math_group_type_index, math_torql, ...baseEntity } = entity
+    const { math, math_property, math_group_type_index, math_clairql, ...baseEntity } = entity
 
     // TODO: This should be improved to keep a math that differs from the default.
     // For this we need to know wether the math was actively changed e.g.
@@ -136,7 +136,7 @@ export const insightNavLogic = kea<insightNavLogicType>([
         activeView: [
             (s) => [s.query],
             (query) => {
-                if (containsTorQLQuery(query)) {
+                if (containsClairQLQuery(query)) {
                     return InsightType.SQL
                 } else if (isHogQuery(query)) {
                     return InsightType.HOG

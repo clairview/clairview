@@ -47,7 +47,7 @@ const VariableInput = ({ variable, closePopover }: { variable: Variable; closePo
         inputRef.current?.focus()
     }, [inputRef.current])
 
-    const variableAsTorQL = `{variables.${variable.code_name}}`
+    const variableAsClairQL = `{variables.${variable.code_name}}`
 
     return (
         <div>
@@ -94,13 +94,13 @@ const VariableInput = ({ variable, closePopover }: { variable: Variable; closePo
                             }}
                             className="text-xs flex flex-1 items-center"
                         >
-                            {variableAsTorQL}
+                            {variableAsClairQL}
                         </code>
                         <LemonButton
                             icon={<IconCopy />}
                             size="xsmall"
-                            onClick={() => void copyToClipboard(variableAsTorQL, 'variable TorQL')}
-                            tooltip="Copy TorQL"
+                            onClick={() => void copyToClipboard(variableAsClairQL, 'variable ClairQL')}
+                            tooltip="Copy ClairQL"
                         />
                         <LemonButton icon={<IconGear />} size="xsmall" tooltip="Open variable settings" />
                     </div>
@@ -125,7 +125,7 @@ const VariableComponent = ({ variable }: { variable: Variable }): JSX.Element =>
                 <LemonField.Pure
                     label={variable.name}
                     className="gap-0"
-                    info={`Use this variable in your TorQL by referencing {variables.${variable.code_name}}`}
+                    info={`Use this variable in your ClairQL by referencing {variables.${variable.code_name}}`}
                 >
                     <LemonButton
                         type="secondary"

@@ -22,7 +22,7 @@ import { collectAllElementsDeep, querySelectorAllDeep } from 'query-selector-sha
 
 import { currentPageLogic } from '~/toolbar/stats/currentPageLogic'
 import { toolbarConfigLogic, toolbarFetch } from '~/toolbar/toolbarConfigLogic'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import { CountedHTMLElement, ElementsEventType, HeatmapElement, HeatmapResponseType } from '~/toolbar/types'
 import { elementToActionStep, trimElement } from '~/toolbar/utils'
 import { FilterType, PropertyFilterType, PropertyOperator } from '~/types'
@@ -435,7 +435,7 @@ export const heatmapLogic = kea<heatmapLogicType>([
             },
         ],
 
-        scrollDepthMarkettorJsError: [
+        scrollDepthClairviewJsError: [
             (s) => [s.clairview],
             (clairview: ClairView): 'version' | 'disabled' | null => {
                 const clairviewVersion =
@@ -532,12 +532,12 @@ export const heatmapLogic = kea<heatmapLogicType>([
 
         enableHeatmap: () => {
             actions.loadAllEnabled()
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'heatmap', enabled: true })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'heatmap', enabled: true })
         },
 
         disableHeatmap: () => {
             actions.resetElementStats()
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'heatmap', enabled: false })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'heatmap', enabled: false })
         },
 
         loadAllEnabled: async ({ delayMs }, breakpoint) => {

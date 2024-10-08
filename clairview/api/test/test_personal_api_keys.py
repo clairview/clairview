@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from rest_framework import status
 
-from clairview.jwt import MarkettorJwtAudience, encode_jwt
+from clairview.jwt import ClairviewJwtAudience, encode_jwt
 from clairview.models.insight import Insight
 from clairview.models.organization import Organization
 from clairview.models.personal_api_key import PersonalAPIKey, hash_key_value
@@ -346,7 +346,7 @@ class TestPersonalAPIKeysAPIAuthentication(PersonalAPIKeysBaseTest):
         impersonated_access_token = encode_jwt(
             {"id": self.user.id},
             timedelta(minutes=15),
-            MarkettorJwtAudience.IMPERSONATED_USER,
+            ClairviewJwtAudience.IMPERSONATED_USER,
         )
 
         response = self.client.get(

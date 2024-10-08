@@ -17,8 +17,8 @@ export interface RetentionTrendPayload {
 
 export interface RetentionTablePeoplePayload {
     next?: string // Legacy support
-    offset?: number // Offset for TorQL queries
-    result?: RetentionTableAppearanceType[] // TODO: Rename to plural responses to match TorQL responses
+    offset?: number // Offset for ClairQL queries
+    result?: RetentionTableAppearanceType[] // TODO: Rename to plural responses to match ClairQL responses
     missing_persons?: number
 }
 

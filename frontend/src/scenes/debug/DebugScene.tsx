@@ -26,10 +26,10 @@ export function DebugScene(): JSX.Element {
                             Split
                         </LemonButton>
                         <LemonButton
-                            active={query1 === stringifiedExamples.TorQLRaw}
-                            onClick={() => setQuery1(stringifiedExamples.TorQLRaw)}
+                            active={query1 === stringifiedExamples.ClairQLRaw}
+                            onClick={() => setQuery1(stringifiedExamples.ClairQLRaw)}
                         >
-                            TorQL Debug
+                            ClairQL Debug
                         </LemonButton>
                         {featureFlags[FEATURE_FLAGS.HOG] ? (
                             <LemonButton
@@ -40,10 +40,10 @@ export function DebugScene(): JSX.Element {
                             </LemonButton>
                         ) : null}
                         <LemonButton
-                            active={query1 === stringifiedExamples.TorQLTable}
-                            onClick={() => setQuery1(stringifiedExamples.TorQLTable)}
+                            active={query1 === stringifiedExamples.ClairQLTable}
+                            onClick={() => setQuery1(stringifiedExamples.ClairQLTable)}
                         >
-                            TorQL Table
+                            ClairQL Table
                         </LemonButton>
                         <LemonButton
                             active={query1 === stringifiedExamples.Events}
@@ -55,7 +55,7 @@ export function DebugScene(): JSX.Element {
                             <LemonSelect
                                 placeholder="More sample queries"
                                 options={Object.entries(stringifiedExamples)
-                                    .filter(([k]) => k !== 'TorQLTable' && k !== 'TorQLRaw')
+                                    .filter(([k]) => k !== 'ClairQLTable' && k !== 'ClairQLRaw')
                                     .map(([k, v]) => {
                                         return { label: k, value: v }
                                     })}
@@ -71,11 +71,11 @@ export function DebugScene(): JSX.Element {
             />
             <div className="flex gap-2">
                 <div className="flex-1 w-1/2">
-                    <DebugSceneQuery query={query1} setQuery={setQuery1} queryKey="new-torql-debug-1" />
+                    <DebugSceneQuery query={query1} setQuery={setQuery1} queryKey="new-clairql-debug-1" />
                 </div>
                 {query2 ? (
                     <div className="flex-1 w-1/2">
-                        <DebugSceneQuery query={query2} setQuery={setQuery2} queryKey="new-torql-debug-2" />
+                        <DebugSceneQuery query={query2} setQuery={setQuery2} queryKey="new-clairql-debug-2" />
                     </div>
                 ) : null}
             </div>

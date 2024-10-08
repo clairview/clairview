@@ -2,8 +2,8 @@ import logging
 from typing import Any, Optional
 from rest_framework import serializers
 
-from clairview.torql.bytecode import create_bytecode
-from clairview.torql.parser import parse_program, parse_string_template
+from clairview.clairql.bytecode import create_bytecode
+from clairview.clairql.parser import parse_program, parse_string_template
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +143,7 @@ def compile_hog(hog: str, supported_functions: Optional[set[str]] = None) -> lis
     # Attempt to compile the hog
     try:
         program = parse_program(hog)
-        return create_bytecode(program, supported_functions=supported_functions or {"fetch", "marketTorCapture"})
+        return create_bytecode(program, supported_functions=supported_functions or {"fetch", "clairViewCapture"})
     except Exception as e:
         logger.error(f"Failed to compile hog {e}", exc_info=True)
         raise serializers.ValidationError({"hog": "Hog code has errors."})

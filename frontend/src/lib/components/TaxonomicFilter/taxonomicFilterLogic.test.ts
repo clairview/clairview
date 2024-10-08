@@ -12,7 +12,7 @@ import { AppContext } from '~/types'
 
 import { infiniteListLogic } from './infiniteListLogic'
 
-window.MARKETTOR_APP_CONTEXT = { current_team: { id: MOCK_TEAM_ID } } as unknown as AppContext
+window.CLAIRVIEW_APP_CONTEXT = { current_team: { id: MOCK_TEAM_ID } } as unknown as AppContext
 
 describe('taxonomicFilterLogic', () => {
     let logic: ReturnType<typeof taxonomicFilterLogic.build>

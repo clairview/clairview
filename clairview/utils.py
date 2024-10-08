@@ -430,7 +430,7 @@ def render_template(
     # `get_all_flags` call above.
     context["clairview_bootstrap"] = json.dumps(clairview_bootstrap)
 
-    context["clairview_js_uuid_version"] = settings.MARKETTOR_JS_UUID_VERSION
+    context["clairview_js_uuid_version"] = settings.CLAIRVIEW_JS_UUID_VERSION
 
     html = template.render(context, request=request)
     response = HttpResponse(html)
@@ -598,7 +598,7 @@ def generate_cache_key(stringified: str) -> str:
 
 
 def get_celery_heartbeat() -> Union[str, int]:
-    last_heartbeat = get_client().get("MARKETTOR_HEARTBEAT")
+    last_heartbeat = get_client().get("CLAIRVIEW_HEARTBEAT")
     worker_heartbeat = int(time.time()) - int(last_heartbeat) if last_heartbeat else -1
 
     if 0 <= worker_heartbeat < 300:

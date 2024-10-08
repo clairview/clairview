@@ -191,9 +191,9 @@ class TestSchemaHelpers(TestCase):
                 {"exclusions": [FunnelExclusionEventsNode(funnelFromStep=0, funnelToStep=1)]},
                 1,
             ),
-            # funnelAggregateByTorQL
-            # ({}, {"funnelAggregateByTorQL": ""}, 1),
-            ({"funnelAggregateByTorQL": "distinct_id"}, {"funnelAggregateByTorQL": "distinct_id"}, 1),
+            # funnelAggregateByClairQL
+            # ({}, {"funnelAggregateByClairQL": ""}, 1),
+            ({"funnelAggregateByClairQL": "distinct_id"}, {"funnelAggregateByClairQL": "distinct_id"}, 1),
             # funnelFromStep and funnelToStep
             ({"funnelFromStep": 1, "funnelToStep": 2}, {"funnelFromStep": 1, "funnelToStep": 2}, 2),
             # funnelOrderType

@@ -8,7 +8,7 @@ import { createCache } from './extensions/cache'
 import { createConsole } from './extensions/console'
 import { createGeoIp } from './extensions/geoip'
 import { createJobs } from './extensions/jobs'
-import { createMarkettor } from './extensions/clairview'
+import { createClairview } from './extensions/clairview'
 import { createStorage } from './extensions/storage'
 import { createUtils } from './extensions/utilities'
 import { AVAILABLE_IMPORTS } from './imports'
@@ -50,7 +50,7 @@ export function createPluginConfigVM(
 
     // Add ClairView utilities to virtual machine
     vm.freeze(createConsole(hub, pluginConfig), 'console')
-    vm.freeze(createMarkettor(hub, pluginConfig), 'clairview')
+    vm.freeze(createClairview(hub, pluginConfig), 'clairview')
 
     // Add non-ClairView utilities to virtual machine
     vm.freeze(AVAILABLE_IMPORTS['node-fetch'], 'fetch')

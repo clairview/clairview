@@ -3756,12 +3756,12 @@ class TestDecideUsesReadReplica(TransactionTestCase):
 
     then run this test:
 
-    MARKETTOR_DB_NAME='clairview' READ_REPLICA_OPT_IN='decide,PersonalAPIKey,local_evaluation' MARKETTOR_POSTGRES_READ_HOST='localhost'  MARKETTOR_DB_PASSWORD='clairview' MARKETTOR_DB_USER='clairview'  ./bin/tests clairview/api/test/test_decide.py::TestDecideUsesReadReplica
+    CLAIRVIEW_DB_NAME='clairview' READ_REPLICA_OPT_IN='decide,PersonalAPIKey,local_evaluation' CLAIRVIEW_POSTGRES_READ_HOST='localhost'  CLAIRVIEW_DB_PASSWORD='clairview' CLAIRVIEW_DB_USER='clairview'  ./bin/tests clairview/api/test/test_decide.py::TestDecideUsesReadReplica
 
     or run locally with the same env vars.
     For local run, also change postgres_config in data_stores.py so you can have a different user for the read replica.
 
-    MARKETTOR_DB_NAME='clairview' READ_REPLICA_OPT_IN='decide' MARKETTOR_POSTGRES_READ_HOST='localhost'  MARKETTOR_DB_PASSWORD='clairview' MARKETTOR_DB_USER='clairview' MARKETTOR_DB_PASSWORD_READ_REPLICA='password' MARKETTOR_DB_USER_READ_REPLICA='clairview2' ./bin/start
+    CLAIRVIEW_DB_NAME='clairview' READ_REPLICA_OPT_IN='decide' CLAIRVIEW_POSTGRES_READ_HOST='localhost'  CLAIRVIEW_DB_PASSWORD='clairview' CLAIRVIEW_DB_USER='clairview' CLAIRVIEW_DB_PASSWORD_READ_REPLICA='password' CLAIRVIEW_DB_USER_READ_REPLICA='clairview2' ./bin/start
 
     This test suite aims to be comprehensive, covering all decide code paths so we can catch if something is hitting the main db
     when it shouldn't be.

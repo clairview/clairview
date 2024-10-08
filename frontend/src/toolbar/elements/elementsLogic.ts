@@ -8,7 +8,7 @@ import { actionsTabLogic } from '~/toolbar/actions/actionsTabLogic'
 import { experimentsTabLogic } from '~/toolbar/experiments/experimentsTabLogic'
 import { currentPageLogic } from '~/toolbar/stats/currentPageLogic'
 import { toolbarConfigLogic } from '~/toolbar/toolbarConfigLogic'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import { ActionElementWithMetadata, ElementWithMetadata } from '~/toolbar/types'
 
 import { elementToActionStep, getAllClickTargets, getElementForStep, getRectForElement } from '../utils'
@@ -386,11 +386,11 @@ export const elementsLogic = kea<elementsLogicType>([
     }),
     listeners(({ actions }) => ({
         enableInspect: () => {
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'inspect', enabled: true })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'inspect', enabled: true })
             actionsLogic.actions.getActions()
         },
         disableInspect: () => {
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'inspect', enabled: false })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'inspect', enabled: false })
         },
         selectElement: ({ element }) => {
             const inspectForAction =
@@ -431,7 +431,7 @@ export const elementsLogic = kea<elementsLogicType>([
                 }
             }
 
-            toolbarMarkettorJS.capture('toolbar selected HTML element', {
+            toolbarClairviewJS.capture('toolbar selected HTML element', {
                 element_tag: element?.tagName.toLowerCase(),
                 element_type: (element as HTMLInputElement)?.type,
                 has_href: !!(element as HTMLAnchorElement)?.href,

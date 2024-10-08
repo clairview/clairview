@@ -111,7 +111,7 @@ export function BreakdownTag({
 
     return (
         <LemonTag type="breakdown" {...props}>
-            {breakdownType === 'torql' ? (
+            {breakdownType === 'clairql' ? (
                 <HoqQLPropertyInfo value={propertyName as string} />
             ) : (
                 <PropertyKeyInfo

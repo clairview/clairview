@@ -29,23 +29,23 @@ describe('config', () => {
     })
 
     describe('DATABASE_URL', () => {
-        test('Error if DATABASE_URL is not set AND MARKETTOR_DB_NAME is not set', () => {
+        test('Error if DATABASE_URL is not set AND CLAIRVIEW_DB_NAME is not set', () => {
             const env = {
                 DATABASE_URL: '',
-                MARKETTOR_DB_NAME: '',
+                CLAIRVIEW_DB_NAME: '',
             }
             expect(() => overrideWithEnv(getDefaultConfig(), env)).toThrowError(
-                'You must specify either DATABASE_URL or the database options MARKETTOR_DB_NAME, MARKETTOR_DB_USER, MARKETTOR_DB_PASSWORD, MARKETTOR_POSTGRES_HOST, MARKETTOR_POSTGRES_PORT!'
+                'You must specify either DATABASE_URL or the database options CLAIRVIEW_DB_NAME, CLAIRVIEW_DB_USER, CLAIRVIEW_DB_PASSWORD, CLAIRVIEW_POSTGRES_HOST, CLAIRVIEW_POSTGRES_PORT!'
             )
         })
 
         test('Set DATABASE_URL to a string composed of URL-encoded connection options if DATABASE_URL is not explictly set', () => {
             const env = {
                 DATABASE_URL: '',
-                MARKETTOR_DB_NAME: 'mydb',
-                MARKETTOR_DB_USER: 'user1@domain',
-                MARKETTOR_DB_PASSWORD: 'strong?password',
-                MARKETTOR_POSTGRES_HOST: 'my.host',
+                CLAIRVIEW_DB_NAME: 'mydb',
+                CLAIRVIEW_DB_USER: 'user1@domain',
+                CLAIRVIEW_DB_PASSWORD: 'strong?password',
+                CLAIRVIEW_POSTGRES_HOST: 'my.host',
             }
             const config = overrideWithEnv(getDefaultConfig(), env)
             expect(config.DATABASE_URL).toEqual('postgres://user1%40domain:strong%3Fpassword@my.host:5432/mydb')
@@ -54,10 +54,10 @@ describe('config', () => {
         test('DATABASE_URL takes precedence to individual config options', () => {
             const env = {
                 DATABASE_URL: 'my_db_url',
-                MARKETTOR_DB_NAME: 'mydb',
-                MARKETTOR_DB_USER: 'user1',
-                MARKETTOR_DB_PASSWORD: 'strongpassword',
-                MARKETTOR_POSTGRES_HOST: 'my.host',
+                CLAIRVIEW_DB_NAME: 'mydb',
+                CLAIRVIEW_DB_USER: 'user1',
+                CLAIRVIEW_DB_PASSWORD: 'strongpassword',
+                CLAIRVIEW_POSTGRES_HOST: 'my.host',
             }
             const config = overrideWithEnv(getDefaultConfig(), env)
             expect(config.DATABASE_URL).toEqual('my_db_url')

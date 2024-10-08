@@ -5,15 +5,15 @@ from clairview.api.utils import action
 from rest_framework.exceptions import ValidationError
 
 from clairview.api.routing import TeamAndOrgViewSetMixin
-from clairview.torql.database.schema.sessions_v1 import (
+from clairview.clairql.database.schema.sessions_v1 import (
     get_lazy_session_table_properties_v1,
     get_lazy_session_table_values_v1,
 )
-from clairview.torql.database.schema.sessions_v2 import (
+from clairview.clairql.database.schema.sessions_v2 import (
     get_lazy_session_table_values_v2,
     get_lazy_session_table_properties_v2,
 )
-from clairview.torql.modifiers import create_default_modifiers_for_team
+from clairview.clairql.modifiers import create_default_modifiers_for_team
 from clairview.rate_limit import (
     ClickHouseBurstRateThrottle,
     ClickHouseSustainedRateThrottle,

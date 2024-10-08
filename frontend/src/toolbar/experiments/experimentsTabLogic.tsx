@@ -8,7 +8,7 @@ import { urls } from 'scenes/urls'
 import { toolbarLogic } from '~/toolbar/bar/toolbarLogic'
 import { experimentsLogic } from '~/toolbar/experiments/experimentsLogic'
 import { toolbarConfigLogic } from '~/toolbar/toolbarConfigLogic'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import {
     ExperimentDraftType,
     ExperimentForm,
@@ -368,11 +368,11 @@ export const experimentsTabLogic = kea<experimentsTabLogicType>([
             }
         },
         showButtonExperiments: () => {
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'experiments', enabled: true })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'experiments', enabled: true })
         },
         hideButtonExperiments: () => {
             actions.setShowExperimentsTooltip(false)
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'experiments', enabled: false })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'experiments', enabled: false })
         },
         [experimentsLogic.actionTypes.getExperimentsSuccess]: () => {
             const { userIntent, selectedExperimentId } = values

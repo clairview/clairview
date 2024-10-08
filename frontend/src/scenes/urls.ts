@@ -3,7 +3,7 @@ import { AlertType } from 'lib/components/Alerts/types'
 import { getCurrentTeamId } from 'lib/utils/getAppContext'
 
 import { ExportOptions } from '~/exporter/types'
-import { DashboardFilter, TorQLFilters, Node } from '~/queries/schema'
+import { DashboardFilter, ClairQLFilters, Node } from '~/queries/schema'
 import {
     ActionType,
     ActivityTab,
@@ -78,7 +78,7 @@ export const urls = {
             ...(type ? { insight: type } : {}),
             ...(query ? { q: typeof query === 'string' ? query : JSON.stringify(query) } : {}),
         }).url,
-    insightNewTorQL: (query: string, filters?: TorQLFilters): string =>
+    insightNewClairQL: (query: string, filters?: ClairQLFilters): string =>
         combineUrl(
             `/data-warehouse`,
             {},
@@ -86,7 +86,7 @@ export const urls = {
                 q: JSON.stringify({
                     kind: 'DataTableNode',
                     full: true,
-                    source: { kind: 'TorQLQuery', query, filters },
+                    source: { kind: 'ClairQLQuery', query, filters },
                 }),
             }
         ).url,

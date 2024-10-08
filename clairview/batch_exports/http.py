@@ -30,11 +30,11 @@ from clairview.batch_exports.service import (
     sync_batch_export,
     unpause_batch_export,
 )
-from clairview.torql import ast, errors
-from clairview.torql.torql import TorQLContext
-from clairview.torql.parser import parse_select
-from clairview.torql.printer import prepare_ast_for_printing, print_prepared_ast
-from clairview.torql.visitor import clone_expr
+from clairview.clairql import ast, errors
+from clairview.clairql.clairql import ClairQLContext
+from clairview.clairql.parser import parse_select
+from clairview.clairql.printer import prepare_ast_for_printing, print_prepared_ast
+from clairview.clairql.visitor import clone_expr
 from clairview.models import (
     BatchExport,
     BatchExportDestination,
@@ -169,9 +169,9 @@ class BatchExportDestinationSerializer(serializers.ModelSerializer):
         return data
 
 
-class TorQLSelectQueryField(serializers.Field):
+class ClairQLSelectQueryField(serializers.Field):
     def to_internal_value(self, data: str) -> ast.SelectQuery | ast.SelectUnionQuery:
-        """Parse a TorQL SelectQuery from a string query."""
+        """Parse a ClairQL SelectQuery from a string query."""
         try:
             parsed_query = parse_select(data)
         except Exception:
@@ -182,12 +182,12 @@ class TorQLSelectQueryField(serializers.Field):
                 ast.SelectQuery,
                 prepare_ast_for_printing(
                     parsed_query,
-                    context=TorQLContext(team_id=self.context["team_id"], enable_select_queries=True),
-                    dialect="torql",
+                    context=ClairQLContext(team_id=self.context["team_id"], enable_select_queries=True),
+                    dialect="clairql",
                 ),
             )
-        except errors.ExposedTorQLError as e:
-            raise serializers.ValidationError(f"Invalid TorQL query: {e}")
+        except errors.ExposedClairQLError as e:
+            raise serializers.ValidationError(f"Invalid ClairQL query: {e}")
 
         return prepared_select_query
 
@@ -200,7 +200,7 @@ class BatchExportsField(TypedDict):
 class BatchExportsSchema(TypedDict):
     fields: list[BatchExportsField]
     values: dict[str, str]
-    torql_query: str
+    clairql_query: str
 
 
 class BatchExportSerializer(serializers.ModelSerializer):
@@ -209,7 +209,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
     destination = BatchExportDestinationSerializer()
     latest_runs = BatchExportRunSerializer(many=True, read_only=True)
     interval = serializers.ChoiceField(choices=BATCH_EXPORT_INTERVALS)
-    torql_query = TorQLSelectQueryField(required=False)
+    clairql_query = ClairQLSelectQueryField(required=False)
 
     class Meta:
         model = BatchExport
@@ -227,7 +227,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
             "start_at",
             "end_at",
             "latest_runs",
-            "torql_query",
+            "clairql_query",
             "schema",
         ]
         read_only_fields = ["id", "team_id", "created_at", "last_updated_at", "latest_runs", "schema"]
@@ -254,9 +254,9 @@ class BatchExportSerializer(serializers.ModelSerializer):
             ):
                 raise PermissionDenied("Higher frequency exports are not enabled for this team.")
 
-        torql_query = None
-        if torql_query := validated_data.pop("torql_query", None):
-            batch_export_schema = self.serialize_torql_query_to_batch_export_schema(torql_query)
+        clairql_query = None
+        if clairql_query := validated_data.pop("clairql_query", None):
+            batch_export_schema = self.serialize_clairql_query_to_batch_export_schema(clairql_query)
             validated_data["schema"] = batch_export_schema
 
         destination = BatchExportDestination(**destination_data)
@@ -269,19 +269,19 @@ class BatchExportSerializer(serializers.ModelSerializer):
 
         return batch_export
 
-    def serialize_torql_query_to_batch_export_schema(self, torql_query: ast.SelectQuery) -> BatchExportSchema:
-        """Return a batch export schema from a TorQL query ast."""
+    def serialize_clairql_query_to_batch_export_schema(self, clairql_query: ast.SelectQuery) -> BatchExportSchema:
+        """Return a batch export schema from a ClairQL query ast."""
         try:
             # Print the query in ClickHouse dialect to catch unresolved field errors, and discard the result
-            context = TorQLContext(
+            context = ClairQLContext(
                 team_id=self.context["team_id"],
                 enable_select_queries=True,
                 limit_top_select=False,
             )
-            print_prepared_ast(clone_expr(torql_query), context=context, dialect="clickhouse")
+            print_prepared_ast(clone_expr(clairql_query), context=context, dialect="clickhouse")
 
             # Recreate the context
-            context = TorQLContext(
+            context = ClairQLContext(
                 team_id=self.context["team_id"],
                 enable_select_queries=True,
                 limit_top_select=False,
@@ -289,12 +289,12 @@ class BatchExportSerializer(serializers.ModelSerializer):
             batch_export_schema: BatchExportsSchema = {
                 "fields": [],
                 "values": {},
-                "torql_query": print_prepared_ast(torql_query, context=context, dialect="torql"),
+                "clairql_query": print_prepared_ast(clairql_query, context=context, dialect="clairql"),
             }
-        except errors.ExposedTorQLError:
-            raise serializers.ValidationError("Unsupported TorQL query")
+        except errors.ExposedClairQLError:
+            raise serializers.ValidationError("Unsupported ClairQL query")
 
-        for field in torql_query.select:
+        for field in clairql_query.select:
             expression = print_prepared_ast(
                 field.expr,  # type: ignore
                 context=context,
@@ -316,8 +316,8 @@ class BatchExportSerializer(serializers.ModelSerializer):
 
         return batch_export_schema
 
-    def validate_torql_query(self, torql_query: ast.SelectQuery | ast.SelectUnionQuery) -> ast.SelectQuery:
-        """Validate a TorQLQuery being used for batch exports.
+    def validate_clairql_query(self, clairql_query: ast.SelectQuery | ast.SelectUnionQuery) -> ast.SelectQuery:
+        """Validate a ClairQLQuery being used for batch exports.
 
         This method essentially checks that a query is supported by batch exports:
         1. UNION ALL is not supported.
@@ -325,10 +325,10 @@ class BatchExportSerializer(serializers.ModelSerializer):
         3. Query must SELECT FROM events, and only from events.
         """
 
-        if isinstance(torql_query, ast.SelectUnionQuery):
+        if isinstance(clairql_query, ast.SelectUnionQuery):
             raise serializers.ValidationError("UNIONs are not supported")
 
-        parsed = cast(ast.SelectQuery, torql_query)
+        parsed = cast(ast.SelectQuery, clairql_query)
 
         if parsed.select_from is None:
             raise serializers.ValidationError("Query must SELECT FROM events")
@@ -342,7 +342,7 @@ class BatchExportSerializer(serializers.ModelSerializer):
         if parsed.select_from.next_join is not None:
             raise serializers.ValidationError("JOINs are not supported")
 
-        return torql_query
+        return clairql_query
 
     def update(self, batch_export: BatchExport, validated_data: dict) -> BatchExport:
         """Update a BatchExport."""
@@ -356,8 +356,8 @@ class BatchExportSerializer(serializers.ModelSerializer):
                     **destination_data.get("config", {}),
                 }
 
-            if torql_query := validated_data.pop("torql_query", None):
-                batch_export_schema = self.serialize_torql_query_to_batch_export_schema(torql_query)
+            if clairql_query := validated_data.pop("clairql_query", None):
+                batch_export_schema = self.serialize_clairql_query_to_batch_export_schema(clairql_query)
                 validated_data["schema"] = batch_export_schema
 
             batch_export.destination.save()

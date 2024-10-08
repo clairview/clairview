@@ -49,11 +49,11 @@ interface InsightsLabelProps {
 interface MathTagProps {
     math: string | undefined
     mathProperty: string | undefined
-    mathTorQL: string | undefined
+    mathClairQL: string | undefined
     mathGroupTypeIndex: number | null | undefined
 }
 
-function MathTag({ math, mathProperty, mathTorQL, mathGroupTypeIndex }: MathTagProps): JSX.Element {
+function MathTag({ math, mathProperty, mathClairQL, mathGroupTypeIndex }: MathTagProps): JSX.Element {
     const { mathDefinitions } = useValues(mathsLogic)
     const { aggregationLabel } = useValues(groupsModel)
 
@@ -79,8 +79,8 @@ function MathTag({ math, mathProperty, mathTorQL, mathGroupTypeIndex }: MathTagP
             </>
         )
     }
-    if (math === 'torql') {
-        return <LemonTag className="max-w-60 text-ellipsis overflow-hidden">{String(mathTorQL) || 'TorQL'}</LemonTag>
+    if (math === 'clairql') {
+        return <LemonTag className="max-w-60 text-ellipsis overflow-hidden">{String(mathClairQL) || 'ClairQL'}</LemonTag>
     }
     return <LemonTag>{capitalizeFirstLetter(math)}</LemonTag>
 }
@@ -168,7 +168,7 @@ export function InsightLabel({
                         <MathTag
                             math={action?.math}
                             mathProperty={action?.math_property}
-                            mathTorQL={action?.math_torql}
+                            mathClairQL={action?.math_clairql}
                             mathGroupTypeIndex={action?.math_group_type_index}
                         />
                     )}

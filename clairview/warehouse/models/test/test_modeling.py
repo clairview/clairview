@@ -199,8 +199,8 @@ class TestModelPath(BaseTest):
 
         self.assertIn((child_saved_query.id.hex, NodeType.SAVED_QUERY), dag.nodes)
         self.assertIn((parent_saved_query.id.hex, NodeType.SAVED_QUERY), dag.nodes)
-        self.assertIn(("events", NodeType.MARKETTOR), dag.nodes)
-        self.assertIn(("persons", NodeType.MARKETTOR), dag.nodes)
+        self.assertIn(("events", NodeType.CLAIRVIEW), dag.nodes)
+        self.assertIn(("persons", NodeType.CLAIRVIEW), dag.nodes)
         self.assertEqual(len(dag.nodes), 4)
 
     def test_creating_cycles_raises_exception(self):

@@ -16,7 +16,7 @@ from rest_framework.exceptions import ValidationError
 from semantic_version.base import SimpleSpec
 
 from clairview.cloud_utils import is_cloud
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 from clairview.models.organization import Organization
 from clairview.models.signals import mutable_receiver
 from clairview.models.team import Team
@@ -107,9 +107,9 @@ def update_validated_data_from_url(validated_data: dict[str, Any], url: str) -> 
             spec = SimpleSpec(clairview_version.replace(" ", ""))
         except ValueError:
             raise ValidationError(f'Invalid ClairView semantic version requirement "{clairview_version}"!')
-        if FROZEN_MARKETTOR_VERSION not in spec:
+        if FROZEN_CLAIRVIEW_VERSION not in spec:
             raise ValidationError(
-                f'Currently running ClairView version {FROZEN_MARKETTOR_VERSION} does not match this plugin\'s semantic version requirement "{clairview_version}".'
+                f'Currently running ClairView version {FROZEN_CLAIRVIEW_VERSION} does not match this plugin\'s semantic version requirement "{clairview_version}".'
             )
 
     return plugin_json

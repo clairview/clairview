@@ -11,7 +11,7 @@ class TestView(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "TorQLQuery",
+                    "kind": "ClairQLQuery",
                     "query": f"select event as event from events LIMIT 100",
                 },
             },
@@ -40,7 +40,7 @@ class TestView(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "TorQLQuery",
+                    "kind": "ClairQLQuery",
                     "query": f"select event as event from event_view LIMIT 100",
                 },
             },
@@ -53,7 +53,7 @@ class TestView(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "TorQLQuery",
+                    "kind": "ClairQLQuery",
                     "query": f"select event as event from events LIMIT 100",
                 },
             },
@@ -64,7 +64,7 @@ class TestView(APIBaseTest):
             f"/api/projects/{self.team.id}/warehouse_saved_queries/" + view["id"],
             {
                 "query": {
-                    "kind": "TorQLQuery",
+                    "kind": "ClairQLQuery",
                     "query": f"select distinct_id as distinct_id from events LIMIT 100",
                 },
             },
@@ -91,8 +91,8 @@ class TestView(APIBaseTest):
     @patch(
         "clairview.warehouse.models.table.DataWarehouseTable.get_columns",
         return_value={
-            "id": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
-            "a_column": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
+            "id": {"clickhouse": "String", "clairql": "StringDatabaseField", "valid": True},
+            "a_column": {"clickhouse": "String", "clairql": "StringDatabaseField", "valid": True},
         },
     )
     @patch(
@@ -121,7 +121,7 @@ class TestView(APIBaseTest):
             {
                 "name": "event_view",
                 "query": {
-                    "kind": "TorQLQuery",
+                    "kind": "ClairQLQuery",
                     "query": f"select id as id, a_column as a_column from whatever LIMIT 100",
                 },
             },

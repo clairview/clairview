@@ -12,7 +12,7 @@ from django.utils.timezone import now
 from rest_framework.exceptions import NotFound
 from sentry_sdk import capture_exception
 
-from clairview.jwt import MarkettorJwtAudience, decode_jwt, encode_jwt
+from clairview.jwt import ClairviewJwtAudience, decode_jwt, encode_jwt
 from clairview.models.utils import UUIDT
 from clairview.settings import DEBUG
 from clairview.storage import object_storage
@@ -123,12 +123,12 @@ def get_public_access_token(asset: ExportedAsset, expiry_delta: Optional[timedel
     return encode_jwt(
         {"id": asset.id},
         expiry_delta=expiry_delta,
-        audience=MarkettorJwtAudience.EXPORTED_ASSET,
+        audience=ClairviewJwtAudience.EXPORTED_ASSET,
     )
 
 
 def asset_for_token(token: str) -> ExportedAsset:
-    info = decode_jwt(token, audience=MarkettorJwtAudience.EXPORTED_ASSET)
+    info = decode_jwt(token, audience=ClairviewJwtAudience.EXPORTED_ASSET)
     asset = ExportedAsset.objects.select_related("dashboard", "insight").get(pk=info["id"])
 
     return asset

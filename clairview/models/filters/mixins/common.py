@@ -50,7 +50,7 @@ from clairview.constants import (
     TRENDS_WORLD_MAP,
     BreakdownAttributionType,
 )
-from clairview.torql.constants import BREAKDOWN_VALUES_LIMIT, BREAKDOWN_VALUES_LIMIT_FOR_COUNTRIES
+from clairview.clairql.constants import BREAKDOWN_VALUES_LIMIT, BREAKDOWN_VALUES_LIMIT_FOR_COUNTRIES
 from clairview.models.entity import Entity, ExclusionEntity, MathType
 from clairview.models.filters.mixins.base import BaseParamMixin, BreakdownType
 from clairview.models.filters.mixins.utils import (

@@ -6,7 +6,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.utils import timezone
 
-from clairview.torql.errors import BaseTorQLError
+from clairview.clairql.errors import BaseClairQLError
 from clairview.models.signals import mutable_receiver
 from clairview.plugins.plugin_server_api import drop_action_on_workers, reload_action_on_workers
 
@@ -89,15 +89,15 @@ class Action(models.Model):
         return [action_step.event for action_step in self.steps]
 
     def refresh_bytecode(self):
-        from clairview.torql.property import action_to_expr
-        from clairview.torql.bytecode import create_bytecode
+        from clairview.clairql.property import action_to_expr
+        from clairview.clairql.bytecode import create_bytecode
 
         try:
             new_bytecode = create_bytecode(action_to_expr(self))
             if new_bytecode != self.bytecode or self.bytecode_error is not None:
                 self.bytecode = new_bytecode
                 self.bytecode_error = None
-        except BaseTorQLError as e:
+        except BaseClairQLError as e:
             # There are several known cases when bytecode generation can fail. Instead of spamming
             # Sentry with errors, ignore those cases for now.
             if self.bytecode is not None or self.bytecode_error != str(e):

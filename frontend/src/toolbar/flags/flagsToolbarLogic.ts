@@ -6,7 +6,7 @@ import { permanentlyMount } from 'lib/utils/kea-logic-builders'
 import type { ClairView } from 'clairview-js'
 
 import { toolbarConfigLogic, toolbarFetch } from '~/toolbar/toolbarConfigLogic'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import { CombinedFeatureFlagAndValueType } from '~/types'
 
 import type { flagsToolbarLogicType } from './flagsToolbarLogicType'
@@ -119,7 +119,7 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
             const clientClairView = values.clairview
             if (clientClairView) {
                 clientClairView.featureFlags.override({ ...values.localOverrides, [flagKey]: overrideValue })
-                toolbarMarkettorJS.capture('toolbar feature flag overridden')
+                toolbarClairviewJS.capture('toolbar feature flag overridden')
                 actions.checkLocalOverrides()
                 clientClairView.featureFlags.reloadFeatureFlags()
             }
@@ -134,7 +134,7 @@ export const flagsToolbarLogic = kea<flagsToolbarLogicType>([
                 } else {
                     clientClairView.featureFlags.override(false)
                 }
-                toolbarMarkettorJS.capture('toolbar feature flag override removed')
+                toolbarClairviewJS.capture('toolbar feature flag override removed')
                 actions.checkLocalOverrides()
                 clientClairView.featureFlags.reloadFeatureFlags()
             }

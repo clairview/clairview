@@ -47,13 +47,13 @@ class TestPropFormat(ClickhouseTestMixin, BaseTest):
             property_group=filter.property_groups,
             allow_denormalized_props=True,
             team_id=self.team.pk,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
             **kwargs,
         )
         final_query = "SELECT uuid FROM events WHERE team_id = %(team_id)s {}".format(query)
         return sync_execute(
             final_query,
-            {**params, **filter.torql_context.values, "team_id": self.team.pk},
+            {**params, **filter.clairql_context.values, "team_id": self.team.pk},
         )
 
     def test_prop_person(self):
@@ -782,7 +782,7 @@ class TestPropDenormalized(ClickhouseTestMixin, BaseTest):
             property_group=outer_properties,
             allow_denormalized_props=True,
             person_properties_mode=PersonPropertiesMode.USING_PERSON_PROPERTIES_COLUMN,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         joins = ""
         if join_person_tables:
@@ -799,7 +799,7 @@ class TestPropDenormalized(ClickhouseTestMixin, BaseTest):
         self.assertNotIn("json", final_query.lower())
         return sync_execute(
             final_query,
-            {**params, **filter.torql_context.values, "team_id": self.team.pk},
+            {**params, **filter.clairql_context.values, "team_id": self.team.pk},
         )
 
     def test_prop_event_denormalized(self):
@@ -1058,7 +1058,7 @@ def test_parse_prop_clauses_defaults(snapshot):
             property_group=filter.property_groups,
             allow_denormalized_props=False,
             team_id=1,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1068,7 +1068,7 @@ def test_parse_prop_clauses_defaults(snapshot):
             person_properties_mode=PersonPropertiesMode.USING_PERSON_PROPERTIES_COLUMN,
             allow_denormalized_props=False,
             team_id=1,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1078,7 +1078,7 @@ def test_parse_prop_clauses_defaults(snapshot):
             property_group=filter.property_groups,
             person_properties_mode=PersonPropertiesMode.DIRECT,
             allow_denormalized_props=False,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1105,7 +1105,7 @@ def test_parse_prop_clauses_precalculated_cohort(snapshot):
             person_properties_mode=PersonPropertiesMode.USING_SUBQUERY,
             allow_denormalized_props=False,
             person_id_joined_alias="pdi.person_id",
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1133,7 +1133,7 @@ def test_parse_prop_clauses_funnel_step_element_prepend_regression(snapshot):
             allow_denormalized_props=False,
             team_id=1,
             prepend="PREPEND",
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1155,7 +1155,7 @@ def test_parse_groups_persons_edge_case_with_single_filter(snapshot):
             property_group=filter.property_groups,
             person_properties_mode=PersonPropertiesMode.USING_PERSON_PROPERTIES_COLUMN,
             allow_denormalized_props=True,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
         == snapshot
     )
@@ -1949,7 +1949,7 @@ def test_session_property_validation():
         parse_prop_grouped_clauses(
             team_id=1,
             property_group=filter.property_groups,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
 
     # Operator not valid for $session_duration
@@ -1969,7 +1969,7 @@ def test_session_property_validation():
         parse_prop_grouped_clauses(
             team_id=1,
             property_group=filter.property_groups,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
 
     # Value not valid for $session_duration
@@ -1989,7 +1989,7 @@ def test_session_property_validation():
         parse_prop_grouped_clauses(
             team_id=1,
             property_group=filter.property_groups,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
 
     # Valid property values
@@ -2008,5 +2008,5 @@ def test_session_property_validation():
     parse_prop_grouped_clauses(
         team_id=1,
         property_group=filter.property_groups,
-        torql_context=filter.torql_context,
+        clairql_context=filter.clairql_context,
     )

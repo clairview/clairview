@@ -1,9 +1,9 @@
 import dataclasses
 
 from clairview.client import sync_execute
-from clairview.torql.bytecode import create_bytecode
-from clairview.torql.torql import TorQLContext
-from clairview.torql.property import action_to_expr
+from clairview.clairql.bytecode import create_bytecode
+from clairview.clairql.clairql import ClairQLContext
+from clairview.clairql.property import action_to_expr
 from clairview.models.action import Action
 from clairview.models.action.util import filter_event, format_action_filter
 from clairview.models.test.test_event_model import filter_by_actions_factory
@@ -13,7 +13,7 @@ from clairview.test.base import (
     _create_event,
     _create_person,
 )
-from hogvm.python.operation import Operation as op, TORQL_BYTECODE_IDENTIFIER as _H, TORQL_BYTECODE_VERSION
+from hogvm.python.operation import Operation as op, CLAIRQL_BYTECODE_IDENTIFIER as _H, CLAIRQL_BYTECODE_VERSION
 
 
 @dataclasses.dataclass
@@ -23,9 +23,9 @@ class MockEvent:
 
 
 def _get_events_for_action(action: Action) -> list[MockEvent]:
-    torql_context = TorQLContext(team_id=action.team_id)
+    clairql_context = ClairQLContext(team_id=action.team_id)
     formatted_query, params = format_action_filter(
-        team_id=action.team_id, action=action, prepend="", torql_context=torql_context
+        team_id=action.team_id, action=action, prepend="", clairql_context=clairql_context
     )
     query = f"""
         SELECT
@@ -38,7 +38,7 @@ def _get_events_for_action(action: Action) -> list[MockEvent]:
     """
     events = sync_execute(
         query,
-        {"team_id": action.team_id, **params, **torql_context.values},
+        {"team_id": action.team_id, **params, **clairql_context.values},
         team_id=action.team_id,
     )
     return [MockEvent(str(uuid), distinct_id) for uuid, distinct_id in events]
@@ -256,7 +256,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
         events = _get_events_for_action(action1)
         self.assertEqual(len(events), 1)
 
-    def test_filter_with_torql(self):
+    def test_filter_with_clairql(self):
         _create_event(
             event="insight viewed",
             team=self.team,
@@ -276,7 +276,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             steps_json=[
                 {
                     "event": "insight viewed",
-                    "properties": [{"key": "toInt(properties.filters_count) > 10", "type": "torql"}],
+                    "properties": [{"key": "toInt(properties.filters_count) > 10", "type": "clairql"}],
                 }
             ],
         )
@@ -289,7 +289,7 @@ class TestActionFormat(ClickhouseTestMixin, BaseTest):
             action1.bytecode,
             [
                 _H,
-                TORQL_BYTECODE_VERSION,
+                CLAIRQL_BYTECODE_VERSION,
                 # event = 'insight viewed'
                 op.STRING,
                 "insight viewed",

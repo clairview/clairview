@@ -410,7 +410,7 @@ export const redirects: Record<
     '/events/:id/*': ({ id, _ }) => {
         const query = getDefaultEventsSceneQuery([
             {
-                type: PropertyFilterType.TorQL,
+                type: PropertyFilterType.ClairQL,
                 key: `uuid = '${id.replaceAll(/[^a-f0-9-]/g, '')}'`,
                 value: null,
             },

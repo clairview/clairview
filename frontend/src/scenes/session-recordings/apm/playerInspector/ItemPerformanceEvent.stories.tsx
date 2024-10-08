@@ -103,7 +103,7 @@ const exampleWithoutPerformanceObserverValues = {
         'Authorization-CS': 'false',
         'Authorization-CS-debug': 'false',
         'GA-Client': '12345',
-        'X-Markettor-Session-ID': '0191ff59-4b70-73ca-889f-87bbafc17c31',
+        'X-Clairview-Session-ID': '0191ff59-4b70-73ca-889f-87bbafc17c31',
         baggage:
             'sentry-environment=production,sentry-release=12345,sentry-public_key=12345,sentry-trace_id=12345,sentry-sample_rate=0.01,sentry-transaction=%2Fdashboard%2F,sentry-sampled=false',
         'sentry-trace': '12345-12345-0',

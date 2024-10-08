@@ -210,7 +210,7 @@ class TestInsightModel(BaseTest):
                     "kind": "DataTableNode",
                     "source": {
                         "filters": query_filters,
-                        "kind": "TorQLQuery",
+                        "kind": "ClairQLQuery",
                         "modifiers": None,
                         "query": "select * from events where {filters}",
                         "response": None,

@@ -9,9 +9,9 @@ import { organizationLogic } from './organizationLogic'
 describe('organizationLogic', () => {
     let logic: ReturnType<typeof organizationLogic.build>
 
-    describe('if MARKETTOR_APP_CONTEXT available', () => {
+    describe('if CLAIRVIEW_APP_CONTEXT available', () => {
         beforeEach(() => {
-            window.MARKETTOR_APP_CONTEXT = { current_user: { organization: { id: 'WXYZ' } } } as unknown as AppContext
+            window.CLAIRVIEW_APP_CONTEXT = { current_user: { organization: { id: 'WXYZ' } } } as unknown as AppContext
             initKeaTests()
             logic = organizationLogic()
             logic.mount()
@@ -26,9 +26,9 @@ describe('organizationLogic', () => {
         })
     })
 
-    describe('if MARKETTOR_APP_CONTEXT not available', () => {
+    describe('if CLAIRVIEW_APP_CONTEXT not available', () => {
         beforeEach(async () => {
-            window.MARKETTOR_APP_CONTEXT = undefined as unknown as AppContext
+            window.CLAIRVIEW_APP_CONTEXT = undefined as unknown as AppContext
             initKeaTests()
             logic = organizationLogic()
             logic.mount()

@@ -36,7 +36,7 @@ import {
     DataNode,
     EventsQuery,
     EventsQueryResponse,
-    TorQLQueryModifiers,
+    ClairQLQueryModifiers,
     InsightVizNode,
     NodeKind,
     PersonsNode,
@@ -60,7 +60,7 @@ export interface DataNodeLogicProps {
     /** Load priority. Higher priority (smaller number) queries will be loaded first. */
     loadPriority?: number
     /** Override modifiers when making the request */
-    modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
 
     dataNodeCollectionId?: string
 
@@ -73,7 +73,7 @@ const LOAD_MORE_ROWS_LIMIT = 10000
 
 const concurrencyController = new ConcurrencyController(1)
 
-function addModifiers(query: DataNode, modifiers?: TorQLQueryModifiers): DataNode {
+function addModifiers(query: DataNode, modifiers?: ClairQLQueryModifiers): DataNode {
     if (!modifiers) {
         return query
     }

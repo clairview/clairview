@@ -103,8 +103,8 @@ describe('hogvm execute', () => {
     test('error handling', async () => {
         const globals = { properties: { foo: 'bar' } }
         const options = { globals }
-        expect(() => execSync([], options)).toThrow("Invalid TorQL bytecode, must start with '_H'")
-        await expect(execAsync([], options)).rejects.toThrow("Invalid TorQL bytecode, must start with '_H'")
+        expect(() => execSync([], options)).toThrow("Invalid ClairQL bytecode, must start with '_H'")
+        await expect(execAsync([], options)).rejects.toThrow("Invalid ClairQL bytecode, must start with '_H'")
 
         expect(() => execSync(['_h', op.INTEGER, 2, op.INTEGER, 1, 'InvalidOp'], options)).toThrow(
             'Unexpected node while running bytecode in chunk "root": InvalidOp'

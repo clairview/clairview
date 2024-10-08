@@ -82,7 +82,7 @@ export const login2FALogic = kea<login2FALogicType>([
     listeners({
         submitTwofactortokenSuccess: () => {
             handleLoginRedirect()
-            // Reload the page after login to ensure MARKETTOR_APP_CONTEXT is set correctly.
+            // Reload the page after login to ensure CLAIRVIEW_APP_CONTEXT is set correctly.
             window.location.reload()
         },
     }),

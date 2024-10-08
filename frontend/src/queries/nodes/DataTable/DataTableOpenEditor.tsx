@@ -16,11 +16,11 @@ interface DataTableOpenEditorProps {
 export function DataTableOpenEditor({ query }: DataTableOpenEditorProps): JSX.Element | null {
     const { response } = useValues(dataTableLogic)
 
-    const tableInsightQuery: DataTableNode | null = response?.torql
+    const tableInsightQuery: DataTableNode | null = response?.clairql
         ? {
               kind: NodeKind.DataTableNode,
               full: true,
-              source: { kind: NodeKind.TorQLQuery, query: response.torql },
+              source: { kind: NodeKind.ClairQLQuery, query: response.clairql },
           }
         : null
 
@@ -30,7 +30,7 @@ export function DataTableOpenEditor({ query }: DataTableOpenEditorProps): JSX.El
             icon={<IconTableChart />}
             to={urls.insightNew(undefined, undefined, query)}
             sideAction={
-                response?.torql
+                response?.clairql
                     ? {
                           dropdown: {
                               overlay: (

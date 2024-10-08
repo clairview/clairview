@@ -220,7 +220,7 @@ export const pipelineDestinationsLogic = kea<pipelineDestinationsLogicType>([
             (pluginConfigs, plugins, batchExportConfigs, hogFunctions, user, featureFlags): Destination[] => {
                 // Migrations are shown only in impersonation mode, for us to be able to trigger them.
                 const httpEnabled =
-                    featureFlags[FEATURE_FLAGS.BATCH_EXPORTS_MARKETTOR_HTTP] || user?.is_impersonated || user?.is_staff
+                    featureFlags[FEATURE_FLAGS.BATCH_EXPORTS_CLAIRVIEW_HTTP] || user?.is_impersonated || user?.is_staff
 
                 const rawBatchExports = Object.values(batchExportConfigs).filter((config) =>
                     httpEnabled ? true : config.destination.type !== ('HTTP' as const)

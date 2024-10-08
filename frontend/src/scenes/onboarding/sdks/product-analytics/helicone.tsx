@@ -34,7 +34,7 @@ export function ProductAnalyticsHeliconeInstructions(): JSX.Element {
                         Helicone-Auth header
                     </Link>{' '}
                     when installing Helicone, add two new headers
-                    <strong> Helicone-Markettor-Key</strong> and <strong>Helicone-Markettor-Host</strong> with your ClairView
+                    <strong> Helicone-Clairview-Key</strong> and <strong>Helicone-Clairview-Host</strong> with your ClairView
                     details:
                     <CodeSnippet language={Language.Python}>
                         {`# Example for adding it to OpenAI in Python
@@ -44,8 +44,8 @@ api_key="your-api-key-here",  # Replace with your OpenAI API key
 base_url="https://oai.hconeai.com/v1",  # Set the API endpoint
 default_headers= { 
     "Helicone-Auth": f"Bearer {HELICONE_API_KEY}",
-    "Helicone-Markettor-Key": "${currentTeam?.api_token}}",
-    "Helicone-Markettor-Host": "${apiHostOrigin()}",
+    "Helicone-Clairview-Key": "${currentTeam?.api_token}}",
+    "Helicone-Clairview-Host": "${apiHostOrigin()}",
     }
 )
                         `}

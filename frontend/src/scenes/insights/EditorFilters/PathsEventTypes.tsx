@@ -35,9 +35,9 @@ export function PathsEventsTypes({ insightProps }: EditorFilterProps): JSX.Eleme
             selected: includeEventTypes?.includes(PathType.CustomEvent),
         },
         {
-            type: PathType.TorQL,
-            label: 'TorQL expression',
-            selected: includeEventTypes?.includes(PathType.TorQL),
+            type: PathType.ClairQL,
+            label: 'ClairQL expression',
+            selected: includeEventTypes?.includes(PathType.ClairQL),
         },
     ]
 

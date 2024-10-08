@@ -112,7 +112,7 @@ class LifecycleEventQuery(EventQuery):
             team_id=self._team_id,
             table_name=self.EVENT_TABLE_ALIAS,
             person_properties_mode=get_person_properties_mode(self._team),
-            torql_context=self._filter.torql_context,
+            clairql_context=self._filter.clairql_context,
         )
         self.params.update(entity_params)
 

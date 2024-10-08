@@ -15,7 +15,7 @@ class BaseHogFunctionTemplateTest(BaseTest):
 
     def setUp(self):
         super().setUp()
-        self.compiled_hog = compile_hog(self.template.hog, supported_functions={"fetch", "print", "marketTorCapture"})
+        self.compiled_hog = compile_hog(self.template.hog, supported_functions={"fetch", "print", "clairViewCapture"})
 
         self.mock_print = MagicMock(side_effect=lambda *args: print("[DEBUG HogFunctionPrint]", *args))  # noqa: T201
         # Side effect - log the fetch call and return  with sensible output
@@ -23,7 +23,7 @@ class BaseHogFunctionTemplateTest(BaseTest):
             side_effect=lambda *args: print("[DEBUG HogFunctionFetch]", *args) or self.mock_fetch_response(*args)  # noqa: T201
         )
         self.mock_clairview_capture = MagicMock(
-            side_effect=lambda *args: print("[DEBUG HogFunctionMarkettorCapture]", *args)  # noqa: T201
+            side_effect=lambda *args: print("[DEBUG HogFunctionClairviewCapture]", *args)  # noqa: T201
         )
 
     mock_fetch_response = lambda *args: {"status": 200, "body": {}}
@@ -76,7 +76,7 @@ class BaseHogFunctionTemplateTest(BaseTest):
         final_functions: dict = {
             "fetch": self.mock_fetch,
             "print": self.mock_print,
-            "marketTorCapture": self.mock_clairview_capture,
+            "clairViewCapture": self.mock_clairview_capture,
         }
 
         if functions:

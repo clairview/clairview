@@ -113,8 +113,8 @@ class TrendsTotalVolume:
                     aggregator=determine_aggregator(entity, team),
                 )
             else:
-                if entity.math == "torql":
-                    tag_queries(trend_volume_type="torql")
+                if entity.math == "clairql":
+                    tag_queries(trend_volume_type="clairql")
                 else:
                     tag_queries(trend_volume_type="volume_aggregate")
                 content_sql = VOLUME_AGGREGATE_SQL.format(event_query_base=event_query_base, **content_sql_params)
@@ -186,8 +186,8 @@ class TrendsTotalVolume:
                     **content_sql_params,
                 )
             else:
-                if entity.math == "torql":
-                    tag_queries(trend_volume_type="torql")
+                if entity.math == "clairql":
+                    tag_queries(trend_volume_type="clairql")
                 else:
                     tag_queries(trend_volume_type="volume")
                 content_sql = VOLUME_SQL.format(

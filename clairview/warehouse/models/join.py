@@ -3,11 +3,11 @@ from warnings import warn
 
 from django.db import models
 
-from clairview.torql.ast import SelectQuery
-from clairview.torql.context import TorQLContext
-from clairview.torql.database.models import LazyJoinToAdd
-from clairview.torql.errors import ResolutionError
-from clairview.torql.parser import parse_expr
+from clairview.clairql.ast import SelectQuery
+from clairview.clairql.context import ClairQLContext
+from clairview.clairql.database.models import LazyJoinToAdd
+from clairview.clairql.errors import ResolutionError
+from clairview.clairql.parser import parse_expr
 from clairview.models.team import Team
 from clairview.models.utils import CreatedMetaFields, DeletedMetaFields, UUIDModel
 from clairview.warehouse.models.datawarehouse_saved_query import DataWarehouseSavedQuery
@@ -46,25 +46,25 @@ class DataWarehouseJoin(CreatedMetaFields, UUIDModel, DeletedMetaFields):
     ):
         def _join_function(
             join_to_add: LazyJoinToAdd,
-            context: TorQLContext,
+            context: ClairQLContext,
             node: SelectQuery,
         ):
             _source_table_key = override_source_table_key or self.source_table_key
             _joining_table_key = override_joining_table_key or self.joining_table_key
 
-            from clairview.torql import ast
+            from clairview.clairql import ast
 
             if not join_to_add.fields_accessed:
                 raise ResolutionError(f"No fields requested from {join_to_add.to_table}")
 
             left = parse_expr(_source_table_key)
             if not isinstance(left, ast.Field):
-                raise ResolutionError("Data Warehouse Join TorQL expression should be a Field node")
+                raise ResolutionError("Data Warehouse Join ClairQL expression should be a Field node")
             left.chain = [join_to_add.from_table, *left.chain]
 
             right = parse_expr(_joining_table_key)
             if not isinstance(right, ast.Field):
-                raise ResolutionError("Data Warehouse Join TorQL expression should be a Field node")
+                raise ResolutionError("Data Warehouse Join ClairQL expression should be a Field node")
             right.chain = [join_to_add.to_table, *right.chain]
 
             join_expr = ast.JoinExpr(

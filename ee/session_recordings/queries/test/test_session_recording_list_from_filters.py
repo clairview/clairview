@@ -9,10 +9,10 @@ from parameterized import parameterized
 
 from ee.clickhouse.materialized_columns.columns import materialize
 from clairview.clickhouse.client import sync_execute
-from clairview.torql.ast import CompareOperation, And, SelectQuery
-from clairview.torql.base import Expr
-from clairview.torql.context import TorQLContext
-from clairview.torql.printer import print_ast
+from clairview.clairql.ast import CompareOperation, And, SelectQuery
+from clairview.clairql.base import Expr
+from clairview.clairql.context import ClairQLContext
+from clairview.clairql.printer import print_ast
 from clairview.models import Person
 from clairview.models.filters import SessionRecordingsFilter
 from clairview.schema import PersonsOnEventsMode
@@ -30,13 +30,13 @@ from clairview.test.base import (
 )
 
 
-# The TorQL pair of TestClickhouseSessionRecordingsListFromSessionReplay can be renamed when delete the old one
+# The ClairQL pair of TestClickhouseSessionRecordingsListFromSessionReplay can be renamed when delete the old one
 @freeze_time("2021-01-01T13:46:23")
 class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
     def _print_query(self, query: SelectQuery) -> str:
         return print_ast(
             query,
-            TorQLContext(team_id=self.team.pk, enable_select_queries=True),
+            ClairQLContext(team_id=self.team.pk, enable_select_queries=True),
             "clickhouse",
             pretty=True,
         )
@@ -137,13 +137,13 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
                 },
             )
             session_recording_list_instance = SessionRecordingListFromFilters(
-                filter=filter, team=self.team, torql_query_modifiers=None
+                filter=filter, team=self.team, clairql_query_modifiers=None
             )
 
-            torql_parsed_select = session_recording_list_instance.get_query()
-            printed_query = self._print_query(torql_parsed_select)
+            clairql_parsed_select = session_recording_list_instance.get_query()
+            printed_query = self._print_query(clairql_parsed_select)
 
-            person_filtering_expr = self._matching_person_filter_expr_from(torql_parsed_select)
+            person_filtering_expr = self._matching_person_filter_expr_from(clairql_parsed_select)
 
             self._assert_is_events_person_filter(person_filtering_expr)
 
@@ -153,12 +153,12 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
             else:
                 # We get the person property value from the persons JOIN
                 assert re.search(
-                    r"argMax\(replaceRegexpAll\(nullIf\(nullIf\(JSONExtractRaw\(person\.properties, %\(torql_val_\d+\)s\), ''\), 'null'\), '^\"|\"\$', ''\), person\.version\) AS properties___rgInternal",
+                    r"argMax\(replaceRegexpAll\(nullIf\(nullIf\(JSONExtractRaw\(person\.properties, %\(clairql_val_\d+\)s\), ''\), 'null'\), '^\"|\"\$', ''\), person\.version\) AS properties___rgInternal",
                     printed_query,
                 )
                 # Then we actually filter on that property value
                 assert re.search(
-                    r"ifNull\(equals\(events__person\.properties___rgInternal, %\(torql_val_\d+\)s\), 0\)",
+                    r"ifNull\(equals\(events__person\.properties___rgInternal, %\(clairql_val_\d+\)s\), 0\)",
                     printed_query,
                 )
             self.assertQueryMatchesSnapshot(printed_query)
@@ -176,8 +176,8 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
         ]
         assert len(event_person_condition) == 1
 
-    def _matching_person_filter_expr_from(self, torql_parsed_select: SelectQuery) -> list[Expr]:
-        where_conditions: list[Expr] = torql_parsed_select.where.exprs
+    def _matching_person_filter_expr_from(self, clairql_parsed_select: SelectQuery) -> list[Expr]:
+        where_conditions: list[Expr] = clairql_parsed_select.where.exprs
         ands = [x for x in where_conditions if isinstance(x, And)]
         assert len(ands) == 1
         and_comparisons = [x for x in ands[0].exprs if isinstance(x, CompareOperation)]
@@ -260,7 +260,7 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
             )
 
             session_recording_list_instance = SessionRecordingListFromFilters(
-                filter=match_everyone_filter, team=self.team, torql_query_modifiers=None
+                filter=match_everyone_filter, team=self.team, clairql_query_modifiers=None
             )
             (session_recordings, _, _) = session_recording_list_instance.run()
 
@@ -281,7 +281,7 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
             )
 
             session_recording_list_instance = SessionRecordingListFromFilters(
-                filter=match_bla_filter, team=self.team, torql_query_modifiers=None
+                filter=match_bla_filter, team=self.team, clairql_query_modifiers=None
             )
             (session_recordings, _, _) = session_recording_list_instance.run()
 
@@ -347,7 +347,7 @@ class TestClickhouseSessionRecordingsListFromFilters(ClickhouseTestMixin, APIBas
 
             filter = SessionRecordingsFilter(team=self.team, data={"person_uuid": str(p.uuid)})
             session_recording_list_instance = SessionRecordingListFromFilters(
-                filter=filter, team=self.team, torql_query_modifiers=None
+                filter=filter, team=self.team, clairql_query_modifiers=None
             )
             (session_recordings, _, _) = session_recording_list_instance.run()
             assert sorted([r["session_id"] for r in session_recordings]) == sorted([session_id_two, session_id_one])

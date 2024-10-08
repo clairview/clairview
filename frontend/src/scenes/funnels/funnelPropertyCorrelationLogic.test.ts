@@ -102,7 +102,7 @@ describe('funnelPropertyCorrelationLogic', () => {
             },
         })
         initKeaTests(false)
-        window.MARKETTOR_APP_CONTEXT = undefined // to force API request to /api/environments/@current
+        window.CLAIRVIEW_APP_CONTEXT = undefined // to force API request to /api/environments/@current
     })
 
     const defaultProps: InsightLogicProps = {

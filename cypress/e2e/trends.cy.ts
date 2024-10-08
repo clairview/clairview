@@ -47,20 +47,20 @@ describe('Trends', () => {
         cy.get('[data-attr=math-property-select]').should('exist')
     })
 
-    it('Select TorQL expressions', () => {
+    it('Select ClairQL expressions', () => {
         cy.get('[data-attr=math-property-selector-0]').should('not.exist')
 
         cy.get('[data-attr=math-selector-0]').click()
         cy.get('[data-attr=math-total-0]').should('be.visible')
 
-        cy.get('[data-attr=math-node-torql-expression-0]').click()
-        cy.get('[data-attr=math-torql-select-0]').click()
+        cy.get('[data-attr=math-node-clairql-expression-0]').click()
+        cy.get('[data-attr=math-clairql-select-0]').click()
         cy.get('.CodeEditorResizeable')
             .click()
             .type(
                 '{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}avg(1042) * 2048'
             )
-        cy.contains('Update TorQL expression').click()
+        cy.contains('Update ClairQL expression').click()
 
         cy.get('[data-attr=chart-filter]').click()
         cy.contains('Table').click()

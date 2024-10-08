@@ -6,7 +6,7 @@ from dateutil.relativedelta import relativedelta
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
 from clairview.models.insight import Insight
 from clairview.models.utils import UUIDModel, CreatedMetaFields
 from clairview.schema import AlertCondition, InsightThreshold, AlertState, AlertCalculationInterval

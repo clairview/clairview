@@ -1,13 +1,13 @@
 import { DateFilter } from 'lib/components/DateFilter/DateFilter'
 
-import { EventsQuery, TorQLQuery, SessionAttributionExplorerQuery } from '~/queries/schema'
-import { isEventsQuery, isTorQLQuery, isSessionAttributionExplorerQuery } from '~/queries/utils'
+import { EventsQuery, ClairQLQuery, SessionAttributionExplorerQuery } from '~/queries/schema'
+import { isEventsQuery, isClairQLQuery, isSessionAttributionExplorerQuery } from '~/queries/utils'
 
-interface DateRangeProps<Q extends EventsQuery | TorQLQuery | SessionAttributionExplorerQuery> {
+interface DateRangeProps<Q extends EventsQuery | ClairQLQuery | SessionAttributionExplorerQuery> {
     query: Q
     setQuery?: (query: Q) => void
 }
-export function DateRange<Q extends EventsQuery | TorQLQuery | SessionAttributionExplorerQuery>({
+export function DateRange<Q extends EventsQuery | ClairQLQuery | SessionAttributionExplorerQuery>({
     query,
     setQuery,
 }: DateRangeProps<Q>): JSX.Element | null {
@@ -27,7 +27,7 @@ export function DateRange<Q extends EventsQuery | TorQLQuery | SessionAttributio
             />
         )
     }
-    if (isTorQLQuery(query) || isSessionAttributionExplorerQuery(query)) {
+    if (isClairQLQuery(query) || isSessionAttributionExplorerQuery(query)) {
         return (
             <DateFilter
                 size="medium"

@@ -3,7 +3,7 @@ import { startPluginsServer } from '../src/main/pluginsServer'
 import { Hub, LogLevel, PluginsServerConfig } from '../src/types'
 import { delay, UUIDT } from '../src/utils/utils'
 import { makePiscina } from '../src/worker/piscina'
-import { createMarkettor, DummyClairView } from '../src/worker/vm/extensions/clairview'
+import { createClairview, DummyClairView } from '../src/worker/vm/extensions/clairview'
 import { delayUntilEventIngested, resetTestDatabaseClickhouse } from './helpers/clickhouse'
 import { resetKafka } from './helpers/kafka'
 import { pluginConfig39 } from './helpers/plugins'
@@ -43,7 +43,7 @@ describe('e2e ingestion timeout', () => {
         const startResponse = await startPluginsServer(extraServerConfig, makePiscina, { ingestion: true })
         hub = startResponse.hub
         stopServer = startResponse.stop
-        clairview = createMarkettor(hub, pluginConfig39)
+        clairview = createClairview(hub, pluginConfig39)
     })
 
     afterEach(async () => {

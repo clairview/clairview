@@ -21,7 +21,7 @@ class ClairViewConfig(AppConfig):
 
     def ready(self):
         clairviewanalytics.api_key = "sTMFPsFhdP1Ssg"
-        clairviewanalytics.personal_api_key = os.environ.get("MARKETTOR_PERSONAL_API_KEY")
+        clairviewanalytics.personal_api_key = os.environ.get("CLAIRVIEW_PERSONAL_API_KEY")
         clairviewanalytics.poll_interval = 90
         clairviewanalytics.enable_exception_autocapture = True
         clairviewanalytics.exception_autocapture_integrations = [Integrations.Django]

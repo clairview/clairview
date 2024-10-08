@@ -26,15 +26,15 @@ from clairview.clickhouse.client.execute_async import (
 from clairview.clickhouse.query_tagging import tag_queries
 from clairview.errors import ExposedCHQueryError
 from clairview.event_usage import report_user_action
-from clairview.torql.ai import PromptUnclear, write_sql_from_prompt
-from clairview.torql.errors import ExposedTorQLError
-from clairview.torql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
-from clairview.torql_queries.query_runner import ExecutionMode, execution_mode_from_refresh
+from clairview.clairql.ai import PromptUnclear, write_sql_from_prompt
+from clairview.clairql.errors import ExposedClairQLError
+from clairview.clairql_queries.apply_dashboard_filters import apply_dashboard_filters_to_dict
+from clairview.clairql_queries.query_runner import ExecutionMode, execution_mode_from_refresh
 from clairview.models.user import User
 from clairview.rate_limit import (
     AIBurstRateThrottle,
     AISustainedRateThrottle,
-    TorQLQueryThrottle,
+    ClairQLQueryThrottle,
     ClickHouseBurstRateThrottle,
     ClickHouseSustainedRateThrottle,
 )
@@ -61,8 +61,8 @@ class QueryViewSet(TeamAndOrgViewSetMixin, PydanticModelMixin, viewsets.ViewSet)
         if self.action in ("draft_sql", "chat"):
             return [AIBurstRateThrottle(), AISustainedRateThrottle()]
         if query := self.request.data.get("query"):
-            if isinstance(query, dict) and query.get("kind") == "TorQLQuery":
-                return [TorQLQueryThrottle()]
+            if isinstance(query, dict) and query.get("kind") == "ClairQLQuery":
+                return [ClairQLQueryThrottle()]
         return [ClickHouseBurstRateThrottle(), ClickHouseSustainedRateThrottle()]
 
     @extend_schema(
@@ -106,7 +106,7 @@ class QueryViewSet(TeamAndOrgViewSetMixin, PydanticModelMixin, viewsets.ViewSet)
             if result.get("query_status") and result["query_status"].get("complete") is False:
                 response_status = status.HTTP_202_ACCEPTED
             return Response(result, status=response_status)
-        except (ExposedTorQLError, ExposedCHQueryError) as e:
+        except (ExposedClairQLError, ExposedCHQueryError) as e:
             raise ValidationError(str(e), getattr(e, "code_name", None))
         except Exception as e:
             self.handle_column_ch_error(e)

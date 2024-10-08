@@ -6,7 +6,7 @@ import {
     filterKeyForQuery,
     isEventsNode,
     isFunnelsQuery,
-    isTorQLQuery,
+    isClairQLQuery,
     isInsightQueryNode,
     isInsightQueryWithDisplay,
     isInsightQueryWithSeries,
@@ -37,7 +37,7 @@ export const compareQuery = (a: Node, b: Node, opts?: CompareQueryOpts): boolean
 }
 
 export const haveVariablesOrFiltersChanged = (a: Node, b: Node): boolean => {
-    if (!isTorQLQuery(a) || !isTorQLQuery(b)) {
+    if (!isClairQLQuery(a) || !isClairQLQuery(b)) {
         return false
     }
 

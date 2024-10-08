@@ -6,11 +6,11 @@ import { Spinner } from 'lib/lemon-ui/Spinner'
 import { codeEditorLogic } from 'lib/monaco/codeEditorLogic'
 import { codeEditorLogicType } from 'lib/monaco/codeEditorLogicType'
 import { findNextFocusableElement, findPreviousFocusableElement } from 'lib/monaco/domUtils'
-import { torQLAutocompleteProvider } from 'lib/monaco/torQLAutocompleteProvider'
-import { torQLMetadataProvider } from 'lib/monaco/torQLMetadataProvider'
+import { clairQLAutocompleteProvider } from 'lib/monaco/clairQLAutocompleteProvider'
+import { clairQLMetadataProvider } from 'lib/monaco/clairQLMetadataProvider'
 import * as hog from 'lib/monaco/languages/hog'
 import * as hogJson from 'lib/monaco/languages/hogJson'
-import * as torQL from 'lib/monaco/languages/torQL'
+import * as clairQL from 'lib/monaco/languages/clairQL'
 import * as hogTemplate from 'lib/monaco/languages/hogTemplate'
 import { inStorybookTestRunner } from 'lib/utils'
 import { editor, editor as importedEditor, IDisposable } from 'monaco-editor'
@@ -51,29 +51,29 @@ function initEditor(
             monaco.languages.register({ id: 'hog', extensions: ['.hog'], mimetypes: ['application/hog'] })
             monaco.languages.setLanguageConfiguration('hog', hog.conf())
             monaco.languages.setMonarchTokensProvider('hog', hog.language())
-            monaco.languages.registerCompletionItemProvider('hog', torQLAutocompleteProvider(HogLanguage.hog))
-            monaco.languages.registerCodeActionProvider('hog', torQLMetadataProvider())
+            monaco.languages.registerCompletionItemProvider('hog', clairQLAutocompleteProvider(HogLanguage.hog))
+            monaco.languages.registerCodeActionProvider('hog', clairQLMetadataProvider())
         }
     }
-    if (editorProps?.language === 'torQL' || editorProps?.language === 'torQLExpr') {
+    if (editorProps?.language === 'clairQL' || editorProps?.language === 'clairQLExpr') {
         const language: HogLanguage = editorProps.language as HogLanguage
         if (!monaco.languages.getLanguages().some(({ id }) => id === language)) {
             monaco.languages.register(
-                language === 'torQL'
+                language === 'clairQL'
                     ? {
                           id: language,
-                          extensions: ['.sql', '.torql'],
-                          mimetypes: ['application/torql'],
+                          extensions: ['.sql', '.clairql'],
+                          mimetypes: ['application/clairql'],
                       }
                     : {
                           id: language,
-                          mimetypes: ['application/torql+expr'],
+                          mimetypes: ['application/clairql+expr'],
                       }
             )
-            monaco.languages.setLanguageConfiguration(language, torQL.conf())
-            monaco.languages.setMonarchTokensProvider(language, torQL.language())
-            monaco.languages.registerCompletionItemProvider(language, torQLAutocompleteProvider(language))
-            monaco.languages.registerCodeActionProvider(language, torQLMetadataProvider())
+            monaco.languages.setLanguageConfiguration(language, clairQL.conf())
+            monaco.languages.setMonarchTokensProvider(language, clairQL.language())
+            monaco.languages.registerCompletionItemProvider(language, clairQLAutocompleteProvider(language))
+            monaco.languages.registerCodeActionProvider(language, clairQLMetadataProvider())
         }
     }
     if (editorProps?.language === 'hogTemplate') {
@@ -86,9 +86,9 @@ function initEditor(
             monaco.languages.setMonarchTokensProvider('hogTemplate', hogTemplate.language())
             monaco.languages.registerCompletionItemProvider(
                 'hogTemplate',
-                torQLAutocompleteProvider(HogLanguage.hogTemplate)
+                clairQLAutocompleteProvider(HogLanguage.hogTemplate)
             )
-            monaco.languages.registerCodeActionProvider('hogTemplate', torQLMetadataProvider())
+            monaco.languages.registerCodeActionProvider('hogTemplate', clairQLMetadataProvider())
         }
     }
     if (editorProps?.language === 'hogJson') {
@@ -99,8 +99,8 @@ function initEditor(
             })
             monaco.languages.setLanguageConfiguration('hogJson', hogJson.conf())
             monaco.languages.setMonarchTokensProvider('hogJson', hogJson.language())
-            monaco.languages.registerCompletionItemProvider('hogJson', torQLAutocompleteProvider(HogLanguage.hogJson))
-            monaco.languages.registerCodeActionProvider('hogJson', torQLMetadataProvider())
+            monaco.languages.registerCompletionItemProvider('hogJson', clairQLAutocompleteProvider(HogLanguage.hogJson))
+            monaco.languages.registerCodeActionProvider('hogJson', clairQLMetadataProvider())
         }
     }
     if (options.tabFocusMode) {

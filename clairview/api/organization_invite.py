@@ -167,7 +167,7 @@ class OrganizationInviteViewSet(
         data = cast(Any, request.data)
         user = cast(User, self.request.user)
         current_url = request.headers.get("Referer")
-        session_id = request.headers.get("X-Markettor-Session-Id")
+        session_id = request.headers.get("X-Clairview-Session-Id")
         if user.distinct_id:
             clairviewanalytics.capture(
                 user.distinct_id,

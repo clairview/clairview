@@ -53,7 +53,7 @@ import {
     FunnelExclusionLegacy,
     FunnelsFilterType,
     GroupMathType,
-    TorQLMathType,
+    ClairQLMathType,
     InsightType,
     isDataWarehouseFilter,
     PathsFilterType,
@@ -81,7 +81,7 @@ const actorsOnlyMathTypes = [
     BaseMathType.WeeklyActiveUsers,
     BaseMathType.MonthlyActiveUsers,
     GroupMathType.UniqueGroup,
-    TorQLMathType.TorQL,
+    ClairQLMathType.ClairQL,
 ]
 
 const funnelsMathTypes = [BaseMathType.FirstTimeForUser]
@@ -137,7 +137,7 @@ export const legacyEntityToNode = (
                 ...shared,
                 math: entity.math || 'total',
                 math_property: entity.math_property,
-                math_torql: entity.math_torql,
+                math_clairql: entity.math_clairql,
                 math_group_type_index: entity.math_group_type_index,
             } as any
         }
@@ -423,7 +423,7 @@ export const funnelsFilterToQuery = (filters: Partial<FunnelsFilterType>): Funne
                 : undefined,
         layout: filters.layout,
         hiddenLegendBreakdowns: hiddenLegendKeysToBreakdowns(filters.hidden_legend_keys),
-        funnelAggregateByTorQL: filters.funnel_aggregate_by_torql,
+        funnelAggregateByClairQL: filters.funnel_aggregate_by_clairql,
     })
 }
 
@@ -443,7 +443,7 @@ export const retentionFilterToQuery = (filters: Partial<RetentionFilterType>): R
 
 export const pathsFilterToQuery = (filters: Partial<PathsFilterType>): PathsFilter => {
     return objectCleanWithEmpty({
-        pathsTorQLExpression: filters.paths_torql_expression,
+        pathsClairQLExpression: filters.paths_clairql_expression,
         includeEventTypes: filters.include_event_types,
         startPoint: filters.start_point,
         endPoint: filters.end_point,

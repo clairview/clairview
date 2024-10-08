@@ -52,8 +52,8 @@ export function DataWarehouseExternalScene(): JSX.Element {
                 caption={
                     <div>
                         Explore all your data in ClairView with{' '}
-                        <Link to="https://clairview.com/manual/torql" target="_blank">
-                            TorQL
+                        <Link to="https://clairview.com/manual/clairql" target="_blank">
+                            ClairQL
                         </Link>
                         . Connect your own tables from S3 to query data from outside ClairView.{' '}
                         <Link to="https://clairview.com/docs/data/data-warehouse">Learn more</Link>

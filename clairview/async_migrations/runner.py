@@ -6,7 +6,7 @@ from sentry_sdk.api import capture_exception
 
 from clairview.async_migrations.definition import AsyncMigrationDefinition
 from clairview.async_migrations.setup import (
-    FROZEN_MARKETTOR_VERSION,
+    FROZEN_CLAIRVIEW_VERSION,
     get_async_migration_definition,
     get_async_migration_dependency,
 )
@@ -264,7 +264,7 @@ def attempt_migration_rollback(migration_instance: AsyncMigration):
 
 
 def is_clairview_version_compatible(clairview_min_version, clairview_max_version):
-    return get_instance_setting("ASYNC_MIGRATIONS_IGNORE_MARKETTOR_VERSION") or FROZEN_MARKETTOR_VERSION in SimpleSpec(
+    return get_instance_setting("ASYNC_MIGRATIONS_IGNORE_CLAIRVIEW_VERSION") or FROZEN_CLAIRVIEW_VERSION in SimpleSpec(
         f">={clairview_min_version},<={clairview_max_version}"
     )
 

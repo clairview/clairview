@@ -6,7 +6,7 @@ function FlutterCaptureSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Dart}>
             {
-                "import 'package:clairview_flutter/clairview_flutter.dart';\n\nawait Markettor().screen(\n\tscreenName: 'Example Screen',\n);"
+                "import 'package:clairview_flutter/clairview_flutter.dart';\n\nawait Clairview().screen(\n\tscreenName: 'Example Screen',\n);"
             }
         </CodeSnippet>
     )

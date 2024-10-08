@@ -10,12 +10,12 @@ from rest_framework.decorators import action
 from clairview.api.routing import TeamAndOrgViewSetMixin
 from clairview.api.shared import UserBasicSerializer
 from clairview.constants import DATA_WAREHOUSE_TASK_QUEUE
-from clairview.torql.context import TorQLContext
-from clairview.torql.database.database import SerializedField, create_torql_database, serialize_fields
-from clairview.torql.errors import ExposedTorQLError
-from clairview.torql.metadata import is_valid_view
-from clairview.torql.parser import parse_select
-from clairview.torql.printer import print_ast
+from clairview.clairql.context import ClairQLContext
+from clairview.clairql.database.database import SerializedField, create_clairql_database, serialize_fields
+from clairview.clairql.errors import ExposedClairQLError
+from clairview.clairql.metadata import is_valid_view
+from clairview.clairql.parser import parse_select
+from clairview.clairql.printer import print_ast
 from clairview.temporal.common.client import sync_connect
 from clairview.temporal.data_modeling.run_workflow import RunWorkflowInputs, Selector
 from clairview.warehouse.models import DataWarehouseJoin, DataWarehouseModelPath, DataWarehouseSavedQuery
@@ -46,9 +46,9 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
 
     def get_columns(self, view: DataWarehouseSavedQuery) -> list[SerializedField]:
         team_id = self.context["team_id"]
-        context = TorQLContext(team_id=team_id, database=create_torql_database(team_id=team_id))
+        context = ClairQLContext(team_id=team_id, database=create_clairql_database(team_id=team_id))
 
-        fields = serialize_fields(view.torql_definition().fields, context, view.name, table_type="external")
+        fields = serialize_fields(view.clairql_definition().fields, context, view.name, table_type="external")
         return [
             SerializedField(
                 key=field.name,
@@ -112,7 +112,7 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
     def validate_query(self, query):
         team_id = self.context["team_id"]
 
-        context = TorQLContext(team_id=team_id, enable_select_queries=True)
+        context = ClairQLContext(team_id=team_id, enable_select_queries=True)
         select_ast = parse_select(query["query"])
         _is_valid_view = is_valid_view(select_ast)
         if not _is_valid_view:
@@ -127,7 +127,7 @@ class DataWarehouseSavedQuerySerializer(serializers.ModelSerializer):
                 settings=None,
             )
         except Exception as err:
-            if isinstance(err, ExposedTorQLError):
+            if isinstance(err, ExposedClairQLError):
                 error = str(err)
                 raise exceptions.ValidationError(detail=f"Invalid query: {error}")
             elif not settings.DEBUG:

@@ -7,7 +7,7 @@ from collections.abc import Callable
 
 from hogvm.python.debugger import debugger, color_bytecode
 from hogvm.python.objects import is_hog_error, new_hog_closure, CallFrame, ThrowFrame, new_hog_callable, is_hog_upvalue
-from hogvm.python.operation import Operation, TORQL_BYTECODE_IDENTIFIER, TORQL_BYTECODE_IDENTIFIER_V0
+from hogvm.python.operation import Operation, CLAIRQL_BYTECODE_IDENTIFIER, CLAIRQL_BYTECODE_IDENTIFIER_V0
 from hogvm.python.stl import STL
 from hogvm.python.stl.bytecode import BYTECODE_STL
 from dataclasses import dataclass
@@ -44,9 +44,9 @@ def execute_bytecode(
     team: Optional["Team"] = None,
     debug=False,
 ) -> BytecodeResult:
-    if len(bytecode) == 0 or (bytecode[0] != TORQL_BYTECODE_IDENTIFIER and bytecode[0] != TORQL_BYTECODE_IDENTIFIER_V0):
-        raise HogVMException(f"Invalid bytecode. Must start with '{TORQL_BYTECODE_IDENTIFIER}'")
-    version = bytecode[1] if len(bytecode) >= 2 and bytecode[0] == TORQL_BYTECODE_IDENTIFIER else 0
+    if len(bytecode) == 0 or (bytecode[0] != CLAIRQL_BYTECODE_IDENTIFIER and bytecode[0] != CLAIRQL_BYTECODE_IDENTIFIER_V0):
+        raise HogVMException(f"Invalid bytecode. Must start with '{CLAIRQL_BYTECODE_IDENTIFIER}'")
+    version = bytecode[1] if len(bytecode) >= 2 and bytecode[0] == CLAIRQL_BYTECODE_IDENTIFIER else 0
     result = None
     start_time = time.time()
     last_op = len(bytecode) - 1
@@ -68,7 +68,7 @@ def execute_bytecode(
     if len(call_stack) == 0:
         call_stack.append(
             CallFrame(
-                ip=2 if bytecode[0] == TORQL_BYTECODE_IDENTIFIER else 1,
+                ip=2 if bytecode[0] == CLAIRQL_BYTECODE_IDENTIFIER else 1,
                 chunk="root",
                 stack_start=0,
                 arg_len=0,
@@ -77,7 +77,7 @@ def execute_bytecode(
                         type="main",
                         arg_count=0,
                         upvalue_count=0,
-                        ip=2 if bytecode[0] == TORQL_BYTECODE_IDENTIFIER else 1,
+                        ip=2 if bytecode[0] == CLAIRQL_BYTECODE_IDENTIFIER else 1,
                         chunk="root",
                         name="",
                     )
@@ -233,11 +233,11 @@ def execute_bytecode(
                 push_stack(pop_stack() not in pop_stack())
             case Operation.REGEX:
                 args = [pop_stack(), pop_stack()]
-                # TODO: swap this for re2, as used in TorQL/ClickHouse and in the NodeJS VM
+                # TODO: swap this for re2, as used in ClairQL/ClickHouse and in the NodeJS VM
                 push_stack(bool(re.search(re.compile(args[1]), args[0])))
             case Operation.NOT_REGEX:
                 args = [pop_stack(), pop_stack()]
-                # TODO: swap this for re2, as used in TorQL/ClickHouse and in the NodeJS VM
+                # TODO: swap this for re2, as used in ClairQL/ClickHouse and in the NodeJS VM
                 push_stack(not bool(re.search(re.compile(args[1]), args[0])))
             case Operation.IREGEX:
                 args = [pop_stack(), pop_stack()]

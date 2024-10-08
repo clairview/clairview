@@ -81,9 +81,9 @@ before(() => {
 })
 
 beforeEach(() => {
-    Cypress.env('MARKETTOR_PROPERTY_CURRENT_TEST_TITLE', Cypress.currentTest.title)
-    Cypress.env('MARKETTOR_PROPERTY_CURRENT_TEST_FULL_TITLE', Cypress.currentTest.titlePath.join(' > '))
-    Cypress.env('MARKETTOR_PROPERTY_GITHUB_ACTION_RUN_URL', process.env.GITHUB_ACTION_RUN_URL)
+    Cypress.env('CLAIRVIEW_PROPERTY_CURRENT_TEST_TITLE', Cypress.currentTest.title)
+    Cypress.env('CLAIRVIEW_PROPERTY_CURRENT_TEST_FULL_TITLE', Cypress.currentTest.titlePath.join(' > '))
+    Cypress.env('CLAIRVIEW_PROPERTY_GITHUB_ACTION_RUN_URL', process.env.GITHUB_ACTION_RUN_URL)
     cy.useSubscriptionStatus('subscribed')
 
     cy.intercept('**/decide/*', (req) =>

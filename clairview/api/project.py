@@ -13,7 +13,7 @@ from clairview.api.routing import TeamAndOrgViewSetMixin
 from clairview.api.shared import ProjectBackwardCompatBasicSerializer
 from clairview.api.team import PremiumMultiProjectPermissions, TeamSerializer, validate_team_attrs
 from clairview.event_usage import report_user_action
-from clairview.jwt import MarkettorJwtAudience, encode_jwt
+from clairview.jwt import ClairviewJwtAudience, encode_jwt
 from clairview.models import User
 from clairview.models.activity_logging.activity_log import (
     Detail,
@@ -178,7 +178,7 @@ class ProjectBackwardCompatSerializer(ProjectBackwardCompatBasicSerializer, User
         return encode_jwt(
             {"team_id": team.id, "api_token": team.api_token},
             timedelta(days=7),
-            MarkettorJwtAudience.LIVESTREAM,
+            ClairviewJwtAudience.LIVESTREAM,
         )
 
     @staticmethod

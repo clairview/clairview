@@ -14,7 +14,7 @@ from clairview.constants import (
     UNIQUE_USERS,
     WEEKLY_ACTIVE,
 )
-from clairview.torql.torql import translate_torql
+from clairview.clairql.clairql import translate_clairql
 from clairview.models.entity import Entity
 from clairview.models.event.sql import EVENT_JOIN_PERSON_SQL
 from clairview.models.filters import Filter
@@ -93,8 +93,8 @@ def process_math(
             params[key] = entity.math_property
     elif entity.math in COUNT_PER_ACTOR_MATH_FUNCTIONS:
         aggregate_operation = f"{COUNT_PER_ACTOR_MATH_FUNCTIONS[entity.math]}(intermediate_count)"
-    elif entity.math == "torql":
-        aggregate_operation = translate_torql(entity.math_torql, filter.torql_context)
+    elif entity.math == "clairql":
+        aggregate_operation = translate_clairql(entity.math_clairql, filter.clairql_context)
 
     return aggregate_operation, join_condition, params
 

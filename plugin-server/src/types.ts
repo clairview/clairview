@@ -137,11 +137,11 @@ export interface PluginsServerConfig extends CdpConfig {
     DATABASE_READONLY_URL: string // Optional read-only replica to the main Postgres database
     PLUGIN_STORAGE_DATABASE_URL: string // Optional read-write Postgres database for plugin storage
     POSTGRES_CONNECTION_POOL_SIZE: number
-    MARKETTOR_DB_NAME: string | null
-    MARKETTOR_DB_USER: string
-    MARKETTOR_DB_PASSWORD: string
-    MARKETTOR_POSTGRES_HOST: string
-    MARKETTOR_POSTGRES_PORT: number
+    CLAIRVIEW_DB_NAME: string | null
+    CLAIRVIEW_DB_USER: string
+    CLAIRVIEW_DB_PASSWORD: string
+    CLAIRVIEW_POSTGRES_HOST: string
+    CLAIRVIEW_POSTGRES_PORT: number
     CLICKHOUSE_HOST: string
     CLICKHOUSE_OFFLINE_CLUSTER_HOST: string | null
     CLICKHOUSE_DATABASE: string
@@ -160,9 +160,9 @@ export interface PluginsServerConfig extends CdpConfig {
     INGESTION_REDIS_HOST: string
     INGESTION_REDIS_PORT: number
     // Redis params for the core clairview (django+celery) services
-    MARKETTOR_REDIS_PASSWORD: string
-    MARKETTOR_REDIS_HOST: string
-    MARKETTOR_REDIS_PORT: number
+    CLAIRVIEW_REDIS_PASSWORD: string
+    CLAIRVIEW_REDIS_HOST: string
+    CLAIRVIEW_REDIS_PORT: number
     // Common redis params
     REDIS_POOL_MIN_SIZE: number // minimum number of Redis connections to use per thread
     REDIS_POOL_MAX_SIZE: number // maximum number of Redis connections to use per thread
@@ -290,8 +290,8 @@ export interface PluginsServerConfig extends CdpConfig {
     SESSION_RECORDING_MAX_PARALLEL_FLUSHES: number
     SESSION_RECORDING_KAFKA_FETCH_MIN_BYTES: number
 
-    MARKETTOR_SESSION_RECORDING_REDIS_HOST: string | undefined
-    MARKETTOR_SESSION_RECORDING_REDIS_PORT: number | undefined
+    CLAIRVIEW_SESSION_RECORDING_REDIS_HOST: string | undefined
+    CLAIRVIEW_SESSION_RECORDING_REDIS_PORT: number | undefined
 
     // kafka debug stats interval
     SESSION_RECORDING_KAFKA_CONSUMPTION_STATISTICS_EVENT_INTERVAL_MS: number

@@ -167,7 +167,7 @@ def test_update_cache_updates_identical_cache_keys(team: Team, user: User, cache
 @pytest.mark.django_db
 @freeze_time("2020-01-04T13:01:01Z")
 @patch("clairview.caching.insight_cache.update_cache_task")
-@patch("clairview.caching.insight_cache.process_query_dict", side_effect=Exception())  # TorQL branch
+@patch("clairview.caching.insight_cache.process_query_dict", side_effect=Exception())  # ClairQL branch
 def test_update_cache_when_calculation_fails(
     spy_process_query_dict,
     spy_update_cache_task,

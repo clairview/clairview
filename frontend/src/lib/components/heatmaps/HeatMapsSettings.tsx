@@ -11,17 +11,17 @@ import React, { useState } from 'react'
 import { HEATMAP_COLOR_PALETTE_OPTIONS, heatmapLogic } from '~/toolbar/elements/heatmapLogic'
 
 const ScrollDepthJSWarning = (): JSX.Element | null => {
-    const { scrollDepthMarkettorJsError } = useValues(heatmapLogic)
+    const { scrollDepthClairviewJsError } = useValues(heatmapLogic)
 
-    if (!scrollDepthMarkettorJsError) {
+    if (!scrollDepthClairviewJsError) {
         return null
     }
 
     return (
         <p className="my-2 bg-danger-highlight border border-danger rounded p-2">
-            {scrollDepthMarkettorJsError === 'version' ? (
+            {scrollDepthClairviewJsError === 'version' ? (
                 <>This feature requires a newer version of clairview-js</>
-            ) : scrollDepthMarkettorJsError === 'disabled' ? (
+            ) : scrollDepthClairviewJsError === 'disabled' ? (
                 <>
                     Your clairview-js config has <i>disable_scroll_properties</i> set - these properties are required for
                     scroll depth calculations to work.

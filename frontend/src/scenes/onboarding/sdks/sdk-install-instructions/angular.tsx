@@ -12,7 +12,7 @@ function EnvVarsSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.Bash}>
-            {[`MARKETTOR_KEY=${currentTeam?.api_token}`, `MARKETTOR_HOST=${apiHostOrigin()}`].join('\n')}
+            {[`CLAIRVIEW_KEY=${currentTeam?.api_token}`, `CLAIRVIEW_HOST=${apiHostOrigin()}`].join('\n')}
         </CodeSnippet>
     )
 }
@@ -30,9 +30,9 @@ import { AppComponent } from './app/app.component';
 import clairview from 'clairview-js'
 
 clairview.init(
-  process.env.MARKETTOR_KEY,
+  process.env.CLAIRVIEW_KEY,
   {
-    api_host:process.env.MARKETTOR_HOST,
+    api_host:process.env.CLAIRVIEW_HOST,
     ${
         !isPersonProfilesDisabled
             ? `person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well`

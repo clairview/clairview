@@ -20,7 +20,7 @@ import {
     FunnelsFilterType,
     GroupMathType,
     GroupPropertyFilter,
-    TorQLMathType,
+    ClairQLMathType,
     InsightShortId,
     InsightType,
     IntervalType,
@@ -64,9 +64,9 @@ export enum NodeKind {
     EventsQuery = 'EventsQuery',
     PersonsNode = 'PersonsNode',
     HogQuery = 'HogQuery',
-    TorQLQuery = 'TorQLQuery',
-    TorQLMetadata = 'TorQLMetadata',
-    TorQLAutocomplete = 'TorQLAutocomplete',
+    ClairQLQuery = 'ClairQLQuery',
+    ClairQLMetadata = 'ClairQLMetadata',
+    ClairQLAutocomplete = 'ClairQLAutocomplete',
     ActorsQuery = 'ActorsQuery',
     FunnelsActorsQuery = 'FunnelsActorsQuery',
     FunnelCorrelationActorsQuery = 'FunnelCorrelationActorsQuery',
@@ -116,9 +116,9 @@ export type AnyDataNode =
     | InsightActorsQueryOptions
     | SessionsTimelineQuery
     | HogQuery
-    | TorQLQuery
-    | TorQLMetadata
-    | TorQLAutocomplete
+    | ClairQLQuery
+    | ClairQLMetadata
+    | ClairQLAutocomplete
     | WebOverviewQuery
     | WebStatsTableQuery
     | WebExternalClicksTableQuery
@@ -144,9 +144,9 @@ export type QuerySchema =
     | InsightActorsQueryOptions
     | SessionsTimelineQuery
     | HogQuery
-    | TorQLQuery
-    | TorQLMetadata
-    | TorQLAutocomplete
+    | ClairQLQuery
+    | ClairQLMetadata
+    | ClairQLAutocomplete
     | WebOverviewQuery
     | WebStatsTableQuery
     | WebExternalClicksTableQuery
@@ -198,20 +198,20 @@ export interface Node<R extends Record<string, any> = Record<string, any>> {
 export type AnyResponseType =
     | Record<string, any>
     | HogQueryResponse
-    | TorQLQueryResponse
-    | TorQLMetadataResponse
-    | TorQLAutocompleteResponse
+    | ClairQLQueryResponse
+    | ClairQLMetadataResponse
+    | ClairQLAutocompleteResponse
     | EventsNode['response']
     | EventsQueryResponse
 
 /** @internal - no need to emit to schema.json. */
 export interface DataNode<R extends Record<string, any> = Record<string, any>> extends Node<R> {
     /** Modifiers used when performing the query */
-    modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
 }
 
-/** TorQL Query Options are automatically set per team. However, they can be overriden in the query. */
-export interface TorQLQueryModifiers {
+/** ClairQL Query Options are automatically set per team. However, they can be overriden in the query. */
+export interface ClairQLQueryModifiers {
     personsOnEventsMode?:
         | 'disabled' // `disabled` is deprecated and set for removal - `person_id_override_properties_joined` is its faster functional equivalent
         | 'person_id_no_override_properties_on_events'
@@ -238,7 +238,7 @@ export interface DataWarehouseEventsModifier {
     id_field: string
 }
 
-export interface TorQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
+export interface ClairQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
     /** Input query string */
     query?: string
     /** Executed ClickHouse query */
@@ -250,33 +250,33 @@ export interface TorQLQueryResponse extends AnalyticsQueryResponseBase<any[]> {
     /** Query explanation output */
     explain?: string[]
     /** Query metadata output */
-    metadata?: TorQLMetadataResponse
+    metadata?: ClairQLMetadataResponse
     hasMore?: boolean
     limit?: integer
     offset?: integer
 }
 
-export type CachedTorQLQueryResponse = CachedQueryResponse<TorQLQueryResponse>
+export type CachedClairQLQueryResponse = CachedQueryResponse<ClairQLQueryResponse>
 
-/** Filters object that will be converted to a TorQL {filters} placeholder */
-export interface TorQLFilters {
+/** Filters object that will be converted to a ClairQL {filters} placeholder */
+export interface ClairQLFilters {
     properties?: AnyPropertyFilter[]
     dateRange?: DateRange
     filterTestAccounts?: boolean
 }
 
-export interface TorQLVariable {
+export interface ClairQLVariable {
     variableId: string
     code_name: string
     value?: any
 }
 
-export interface TorQLQuery extends DataNode<TorQLQueryResponse> {
-    kind: NodeKind.TorQLQuery
+export interface ClairQLQuery extends DataNode<ClairQLQueryResponse> {
+    kind: NodeKind.ClairQLQuery
     query: string
-    filters?: TorQLFilters
+    filters?: ClairQLFilters
     /** Variables to be subsituted into the query */
-    variables?: Record<string, TorQLVariable>
+    variables?: Record<string, ClairQLVariable>
     /** Constant values that can be referenced with the {placeholder} syntax in the query */
     values?: Record<string, any>
     /** @deprecated use modifiers.debug instead */
@@ -326,20 +326,20 @@ export interface RecordingsQuery extends DataNode<RecordingsQueryResponse> {
     user_modified_filters?: Record<string, any>
 }
 
-export interface TorQLNotice {
+export interface ClairQLNotice {
     start?: integer
     end?: integer
     message: string
     fix?: string
 }
 
-export interface TorQLMetadataResponse {
+export interface ClairQLMetadataResponse {
     query?: string
     isValid?: boolean
     isValidView?: boolean
-    errors: TorQLNotice[]
-    warnings: TorQLNotice[]
-    notices: TorQLNotice[]
+    errors: ClairQLNotice[]
+    warnings: ClairQLNotice[]
+    notices: ClairQLNotice[]
     query_status?: never
 }
 
@@ -399,7 +399,7 @@ export interface AutocompleteCompletionItem {
         | 'Snippet'
 }
 
-export interface TorQLAutocompleteResponse {
+export interface ClairQLAutocompleteResponse {
     suggestions: AutocompleteCompletionItem[]
     /** Whether or not the suggestions returned are complete */
     incomplete_list: boolean
@@ -411,13 +411,13 @@ export interface TorQLAutocompleteResponse {
 export enum HogLanguage {
     hog = 'hog',
     hogJson = 'hogJson',
-    torQL = 'torQL',
-    torQLExpr = 'torQLExpr',
+    clairQL = 'clairQL',
+    clairQLExpr = 'clairQLExpr',
     hogTemplate = 'hogTemplate',
 }
 
-export interface TorQLMetadata extends DataNode<TorQLMetadataResponse> {
-    kind: NodeKind.TorQLMetadata
+export interface ClairQLMetadata extends DataNode<ClairQLMetadataResponse> {
+    kind: NodeKind.ClairQLMetadata
     /** Language to validate */
     language: HogLanguage
     /** Query to validate */
@@ -427,15 +427,15 @@ export interface TorQLMetadata extends DataNode<TorQLMetadataResponse> {
     /** Extra globals for the query */
     globals?: Record<string, any>
     /** Extra filters applied to query via {filters} */
-    filters?: TorQLFilters
+    filters?: ClairQLFilters
     /** Variables to be subsituted into the query */
-    variables?: Record<string, TorQLVariable>
+    variables?: Record<string, ClairQLVariable>
     /** Enable more verbose output, usually run from the /debug page */
     debug?: boolean
 }
 
-export interface TorQLAutocomplete extends DataNode<TorQLAutocompleteResponse> {
-    kind: NodeKind.TorQLAutocomplete
+export interface ClairQLAutocomplete extends DataNode<ClairQLAutocompleteResponse> {
+    kind: NodeKind.ClairQLAutocomplete
     /** Language to validate */
     language: HogLanguage
     /** Query to validate */
@@ -445,7 +445,7 @@ export interface TorQLAutocomplete extends DataNode<TorQLAutocompleteResponse> {
     /** Global values in scope */
     globals?: Record<string, any>
     /** Table to validate the expression against */
-    filters?: TorQLFilters
+    filters?: ClairQLFilters
     /**
      * Start position of the editor word
      */
@@ -456,14 +456,14 @@ export interface TorQLAutocomplete extends DataNode<TorQLAutocompleteResponse> {
     endPosition: integer
 }
 
-export type MathType = BaseMathType | PropertyMathType | CountPerActorMathType | GroupMathType | TorQLMathType
+export type MathType = BaseMathType | PropertyMathType | CountPerActorMathType | GroupMathType | ClairQLMathType
 
 export interface EntityNode extends Node {
     name?: string
     custom_name?: string
     math?: MathType
     math_property?: string
-    math_torql?: string
+    math_clairql?: string
     math_group_type_index?: 0 | 1 | 2 | 3 | 4
     /** Properties configurable in the interface */
     properties?: AnyPropertyFilter[]
@@ -505,7 +505,7 @@ export interface QueryTiming {
 export interface EventsQueryResponse extends AnalyticsQueryResponseBase<any[][]> {
     columns: any[]
     types: string[]
-    torql: string
+    clairql: string
     hasMore?: boolean
     limit?: integer
     offset?: integer
@@ -525,9 +525,9 @@ export interface EventsQueryPersonColumn {
 export interface EventsQuery extends DataNode<EventsQueryResponse> {
     kind: NodeKind.EventsQuery
     /** Return a limited set of data. Required. */
-    select: TorQLExpression[]
-    /** TorQL filters to apply on returned data */
-    where?: TorQLExpression[]
+    select: ClairQLExpression[]
+    /** ClairQL filters to apply on returned data */
+    where?: ClairQLExpression[]
     /** Properties configurable in the interface */
     properties?: AnyPropertyFilter[]
     /** Fixed properties in the query, can't be edited in the interface (e.g. scoping down by person) */
@@ -586,7 +586,7 @@ export interface DataTableNode
                     | EventsQuery
                     | PersonsNode
                     | ActorsQuery
-                    | TorQLQuery
+                    | ClairQLQuery
                     | WebOverviewQuery
                     | WebStatsTableQuery
                     | WebExternalClicksTableQuery
@@ -607,7 +607,7 @@ export interface DataTableNode
         | EventsQuery
         | PersonsNode
         | ActorsQuery
-        | TorQLQuery
+        | ClairQLQuery
         | WebOverviewQuery
         | WebStatsTableQuery
         | WebExternalClicksTableQuery
@@ -618,9 +618,9 @@ export interface DataTableNode
         | ExperimentFunnelQuery
         | ExperimentTrendQuery
     /** Columns shown in the table, unless the `source` provides them. */
-    columns?: TorQLExpression[]
+    columns?: ClairQLExpression[]
     /** Columns that aren't shown in the table, even if in columns or returned data */
-    hiddenColumns?: TorQLExpression[]
+    hiddenColumns?: ClairQLExpression[]
 }
 
 export interface GoalLine {
@@ -684,7 +684,7 @@ export interface TableSettings {
 
 export interface DataVisualizationNode extends Node<never> {
     kind: NodeKind.DataVisualizationNode
-    source: TorQLQuery
+    source: ClairQLQuery
     display?: ChartDisplayType
     chartSettings?: ChartSettings
     tableSettings?: TableSettings
@@ -700,8 +700,8 @@ interface DataTableNodeViewProps {
     showPropertyFilter?: boolean | TaxonomicFilterGroupType[]
     /** Show filter to exclude test accounts */
     showTestAccountFilters?: boolean
-    /** Include a TorQL query editor above TorQL tables */
-    showTorQLEditor?: boolean
+    /** Include a ClairQL query editor above ClairQL tables */
+    showClairQLEditor?: boolean
     /** Show the kebab menu at the end of the row */
     showActions?: boolean
     /** Show date range selector */
@@ -804,7 +804,7 @@ export interface InsightsQueryBase<R extends AnalyticsQueryResponseBase<any>> ex
     /** Sampling rate */
     samplingFactor?: number | null
     /** Modifiers used when performing the query */
-    modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
 }
 
 /** `TrendsFilterType` minus everything inherited from `FilterType` and `shown_as` */
@@ -883,7 +883,7 @@ export type AIPropertyFilter =
     | CohortPropertyFilter
     // | RecordingPropertyFilter
     // | LogEntryPropertyFilter
-    // | TorQLPropertyFilter
+    // | ClairQLPropertyFilter
     // | EmptyPropertyFilter
     // | DataWarehousePropertyFilter
     // | DataWarehousePersonPropertyFilter
@@ -891,13 +891,13 @@ export type AIPropertyFilter =
     | FeaturePropertyFilter
 
 export interface AIEventsNode
-    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_torql' | 'limit' | 'groupBy'> {
+    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_clairql' | 'limit' | 'groupBy'> {
     properties?: AIPropertyFilter[]
     fixedProperties?: AIPropertyFilter[]
 }
 
 export interface AIActionsNode
-    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_torql' | 'limit' | 'groupBy'> {
+    extends Omit<EventsNode, 'fixedProperties' | 'properties' | 'math_clairql' | 'limit' | 'groupBy'> {
     properties?: AIPropertyFilter[]
     fixedProperties?: AIPropertyFilter[]
 }
@@ -979,7 +979,7 @@ export type FunnelsFilter = {
     /** @default first_touch */
     breakdownAttributionType?: FunnelsFilterLegacy['breakdown_attribution_type']
     breakdownAttributionValue?: integer
-    funnelAggregateByTorQL?: FunnelsFilterLegacy['funnel_aggregate_by_torql']
+    funnelAggregateByClairQL?: FunnelsFilterLegacy['funnel_aggregate_by_clairql']
     funnelToStep?: integer
     funnelFromStep?: integer
     /** @default ordered */
@@ -1076,7 +1076,7 @@ export type PathsFilterLegacy = Omit<
 export type PathsFilter = {
     /** @default 50 */
     edgeLimit?: integer
-    pathsTorQLExpression?: PathsFilterLegacy['paths_torql_expression']
+    pathsClairQLExpression?: PathsFilterLegacy['paths_clairql_expression']
     includeEventTypes?: PathsFilterLegacy['include_event_types']
     startPoint?: PathsFilterLegacy['start_point']
     endPoint?: PathsFilterLegacy['end_point']
@@ -1190,18 +1190,18 @@ export interface QueryRequest {
     async?: boolean
     /**
      * Submit a JSON string representing a query for ClairView data analysis,
-     * for example a TorQL query.
+     * for example a ClairQL query.
      *
      * Example payload:
      *
      * ```
      *
-     * {"query": {"kind": "TorQLQuery", "query": "select * from events limit 100"}}
+     * {"query": {"kind": "ClairQLQuery", "query": "select * from events limit 100"}}
      *
      * ```
      *
-     * For more details on TorQL queries,
-     * see the [ClairView TorQL documentation](/docs/torql#api-access).
+     * For more details on ClairQL queries,
+     * see the [ClairView ClairQL documentation](/docs/clairql#api-access).
      */
     query: QuerySchema
     filters_override?: DashboardFilter
@@ -1215,12 +1215,12 @@ export interface AnalyticsQueryResponseBase<T> {
     results: T
     /** Measured timings for different parts of the query generation process */
     timings?: QueryTiming[]
-    /** Generated TorQL query. */
-    torql?: string
+    /** Generated ClairQL query. */
+    clairql?: string
     /** Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise. */
     error?: string
     /** Modifiers used when performing the query */
-    modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
     /** Query status indicates whether next to the provided data, a query is still running. */
     query_status?: QueryStatus
 }
@@ -1325,7 +1325,7 @@ export interface LifecycleQuery extends InsightsQueryBase<LifecycleQueryResponse
 export interface ActorsQueryResponse extends AnalyticsQueryResponseBase<any[][]> {
     columns: any[]
     types: string[]
-    torql: string
+    clairql: string
     hasMore?: boolean
     limit: integer
     offset: integer
@@ -1336,8 +1336,8 @@ export type CachedActorsQueryResponse = CachedQueryResponse<ActorsQueryResponse>
 
 export interface ActorsQuery extends DataNode<ActorsQueryResponse> {
     kind: NodeKind.ActorsQuery
-    source?: InsightActorsQuery | FunnelsActorsQuery | FunnelCorrelationActorsQuery | TorQLQuery
-    select?: TorQLExpression[]
+    source?: InsightActorsQuery | FunnelsActorsQuery | FunnelCorrelationActorsQuery | ClairQLQuery
+    select?: ClairQLExpression[]
     search?: string
     /** Currently only person filters supported. No filters for querying groups. See `filter_conditions()` in actor_strategies.py. */
     properties?: AnyPersonScopeFilter[]
@@ -1463,7 +1463,7 @@ export interface WebStatsTableQuery extends WebAnalyticsQueryBase<WebStatsTableQ
 export interface WebStatsTableQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    torql?: string
+    clairql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1479,7 +1479,7 @@ export interface WebExternalClicksTableQuery extends WebAnalyticsQueryBase<WebEx
 export interface WebExternalClicksTableQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    torql?: string
+    clairql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1495,7 +1495,7 @@ export interface WebGoalsQuery extends WebAnalyticsQueryBase<WebGoalsQueryRespon
 export interface WebGoalsQueryResponse extends AnalyticsQueryResponseBase<unknown[]> {
     types?: unknown[]
     columns?: unknown[]
-    torql?: string
+    clairql?: string
     samplingRate?: SamplingRate
     hasMore?: boolean
     limit?: integer
@@ -1535,7 +1535,7 @@ export type CachedSessionAttributionExplorerQueryResponse = CachedQueryResponse<
 export interface ErrorTrackingQuery extends DataNode<ErrorTrackingQueryResponse> {
     kind: NodeKind.ErrorTrackingQuery
     fingerprint?: string[]
-    select?: TorQLExpression[]
+    select?: ClairQLExpression[]
     order?: 'last_seen' | 'first_seen' | 'occurrences' | 'users' | 'sessions'
     dateRange: DateRange
     assignee?: integer | null
@@ -1614,7 +1614,7 @@ export interface ExperimentTrendQuery extends DataNode<ExperimentTrendQueryRespo
     kind: NodeKind.ExperimentTrendQuery
     count_query: TrendsQuery
     // Defaults to $feature_flag_called if not specified
-    // https://github.com/ClairView/clairview/blob/master/clairview/torql_queries/experiments/experiment_trend_query_runner.py
+    // https://github.com/ClairView/clairview/blob/master/clairview/clairql_queries/experiments/experiment_trend_query_runner.py
     exposure_query?: TrendsQuery
     experiment_id: integer
 }
@@ -1643,7 +1643,7 @@ export type Day = integer
 
 export interface InsightActorsQueryBase extends DataNode<ActorsQueryResponse> {
     includeRecordings?: boolean
-    modifiers?: TorQLQueryModifiers
+    modifiers?: ClairQLQueryModifiers
 }
 
 export interface InsightActorsQuery<S extends InsightsQueryBase<AnalyticsQueryResponseBase<any>> = InsightQuerySource>
@@ -1805,7 +1805,7 @@ export interface DatabaseSchemaSource {
 
 export interface DatabaseSchemaField {
     name: string
-    torql_value: string
+    clairql_value: string
     type: DatabaseSerializedFieldType
     schema_valid: boolean
     table?: string
@@ -1823,12 +1823,12 @@ export interface DatabaseSchemaTableCommon {
 
 export interface DatabaseSchemaViewTable extends DatabaseSchemaTableCommon {
     type: 'view'
-    query: TorQLQuery
+    query: ClairQLQuery
 }
 
 export interface DatabaseSchemaMaterializedViewTable extends DatabaseSchemaTableCommon {
     type: 'materialized_view'
-    query: TorQLQuery
+    query: ClairQLQuery
     last_run_at?: string
     status?: string
 }
@@ -1880,7 +1880,7 @@ export type DatabaseSerializedFieldType =
     | 'view'
     | 'materialized_view'
 
-export type TorQLExpression = string
+export type ClairQLExpression = string
 
 // Various utility types below
 
@@ -1905,7 +1905,7 @@ export interface InsightDateRange {
     explicitDate?: boolean | null
 }
 
-export type MultipleBreakdownType = Extract<BreakdownType, 'person' | 'event' | 'group' | 'session' | 'torql'>
+export type MultipleBreakdownType = Extract<BreakdownType, 'person' | 'event' | 'group' | 'session' | 'clairql'>
 
 export interface Breakdown {
     type?: MultipleBreakdownType | null
@@ -1936,7 +1936,7 @@ export interface CompareFilter {
     compare_to?: string
 }
 
-// TODO: Rename to `DashboardFilters` for consistency with `TorQLFilters`
+// TODO: Rename to `DashboardFilters` for consistency with `ClairQLFilters`
 export interface DashboardFilter {
     date_from?: string | null
     date_to?: string | null

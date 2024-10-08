@@ -346,7 +346,7 @@
      ORDER BY breakdown_value) as sub_B ON sub_A.breakdown_value = sub_B.breakdown_value
   '''
 # ---
-# name: TestFormula.test_breakdown_torql
+# name: TestFormula.test_breakdown_clairql
   '''
   
   SELECT concat(ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, '$some_prop'), ''), 'null'), '^"|"$', '')), ''), ' : ', ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, 'location'), ''), 'null'), '^"|"$', '')), '')) AS value,
@@ -376,7 +376,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestFormula.test_breakdown_torql.1
+# name: TestFormula.test_breakdown_clairql.1
   '''
   
   SELECT concat(ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(person_props, '$some_prop'), ''), 'null'), '^"|"$', '')), ''), ' : ', ifNull(toString(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(events.properties, 'location'), ''), 'null'), '^"|"$', '')), '')) AS value,
@@ -406,7 +406,7 @@
   OFFSET 0
   '''
 # ---
-# name: TestFormula.test_breakdown_torql.2
+# name: TestFormula.test_breakdown_clairql.2
   '''
   SELECT sub_A.date,
          arrayMap((A, B) -> A + B, arrayResize(sub_A.total, max_length, 0), arrayResize(sub_B.total, max_length, 0)) ,

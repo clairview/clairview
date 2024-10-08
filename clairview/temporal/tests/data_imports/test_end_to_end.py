@@ -9,17 +9,17 @@ from django.test import override_settings
 import pytest
 import pytest_asyncio
 import psycopg
-from clairview.torql.modifiers import create_default_modifiers_for_team
-from clairview.torql.query import execute_torql_query
-from clairview.torql_queries.insights.funnels.funnel import Funnel
-from clairview.torql_queries.insights.funnels.funnel_query_context import FunnelQueryContext
+from clairview.clairql.modifiers import create_default_modifiers_for_team
+from clairview.clairql.query import execute_clairql_query
+from clairview.clairql_queries.insights.funnels.funnel import Funnel
+from clairview.clairql_queries.insights.funnels.funnel_query_context import FunnelQueryContext
 from clairview.models.team.team import Team
 from clairview.schema import (
     BreakdownFilter,
     BreakdownType,
     EventsNode,
     FunnelsQuery,
-    TorQLQueryModifiers,
+    ClairQLQueryModifiers,
     PersonsOnEventsMode,
 )
 from clairview.temporal.data_imports import ACTIVITIES
@@ -139,7 +139,7 @@ async def _run(
     await sync_to_async(schema.refresh_from_db)()
     assert schema.last_synced_at == run.created_at
 
-    res = await sync_to_async(execute_torql_query)(f"SELECT * FROM {table_name}", team)
+    res = await sync_to_async(execute_clairql_query)(f"SELECT * FROM {table_name}", team)
     assert len(res.results) == 1
 
     for name, field in external_tables.get(table_name, {}).items():
@@ -545,7 +545,7 @@ async def test_postgres_binary_columns(team, postgres_config, postgres_connectio
         mock_data_response=[],
     )
 
-    res = await sync_to_async(execute_torql_query)(f"SELECT * FROM postgres_binary_col_test", team)
+    res = await sync_to_async(execute_clairql_query)(f"SELECT * FROM postgres_binary_col_test", team)
     columns = res.columns
 
     assert columns is not None
@@ -616,12 +616,12 @@ async def test_funnels_lazy_joins_ordering(team, stripe_customer):
     funnel_class = Funnel(context=FunnelQueryContext(query=query, team=team))
 
     query_ast = funnel_class.get_query()
-    await sync_to_async(execute_torql_query)(
+    await sync_to_async(execute_clairql_query)(
         query_type="FunnelsQuery",
         query=query_ast,
         team=team,
         modifiers=create_default_modifiers_for_team(
-            team, TorQLQueryModifiers(personsOnEventsMode=PersonsOnEventsMode.PERSON_ID_OVERRIDE_PROPERTIES_JOINED)
+            team, ClairQLQueryModifiers(personsOnEventsMode=PersonsOnEventsMode.PERSON_ID_OVERRIDE_PROPERTIES_JOINED)
         ),
     )
 
@@ -656,7 +656,7 @@ async def test_postgres_schema_evolution(team, postgres_config, postgres_connect
         sync_type_config={"incremental_field": "id", "incremental_field_type": "integer"},
     )
 
-    res = await sync_to_async(execute_torql_query)("SELECT * FROM postgres_test_table", team)
+    res = await sync_to_async(execute_clairql_query)("SELECT * FROM postgres_test_table", team)
     columns = res.columns
 
     assert columns is not None
@@ -675,7 +675,7 @@ async def test_postgres_schema_evolution(team, postgres_config, postgres_connect
     # Execute the same schema again - load
     await _execute_run(str(uuid.uuid4()), inputs, [])
 
-    res = await sync_to_async(execute_torql_query)("SELECT * FROM postgres_test_table", team)
+    res = await sync_to_async(execute_clairql_query)("SELECT * FROM postgres_test_table", team)
     columns = res.columns
 
     assert columns is not None
@@ -717,7 +717,7 @@ async def test_sql_database_missing_incremental_values(team, postgres_config, po
         sync_type_config={"incremental_field": "id", "incremental_field_type": "integer"},
     )
 
-    res = await sync_to_async(execute_torql_query)("SELECT * FROM postgres_test_table", team)
+    res = await sync_to_async(execute_clairql_query)("SELECT * FROM postgres_test_table", team)
     columns = res.columns
 
     assert columns is not None
@@ -759,7 +759,7 @@ async def test_sql_database_incremental_initual_value(team, postgres_config, pos
         sync_type_config={"incremental_field": "id", "incremental_field_type": "integer"},
     )
 
-    res = await sync_to_async(execute_torql_query)("SELECT * FROM postgres_test_table", team)
+    res = await sync_to_async(execute_clairql_query)("SELECT * FROM postgres_test_table", team)
     columns = res.columns
 
     assert columns is not None
@@ -810,4 +810,4 @@ async def test_billing_limits(team, stripe_customer):
     assert job.status == ExternalDataJob.Status.CANCELLED
 
     with pytest.raises(Exception):
-        await sync_to_async(execute_torql_query)("SELECT * FROM stripe_customer", team)
+        await sync_to_async(execute_clairql_query)("SELECT * FROM stripe_customer", team)

@@ -949,7 +949,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
                     type: ActivityScope.INSIGHT,
                     action: 'changed',
                     field: 'derived_name',
-                    before: 'from TorQL into a data table.',
+                    before: 'from ClairQL into a data table.',
                     after: "Pageview unique sessions by person's $email",
                 },
                 {
@@ -986,7 +986,7 @@ export const insightsActivityResponseJson: ActivityLogItem[] = [
                         full: true,
                         kind: 'DataTableNode',
                         source: {
-                            kind: 'TorQLQuery',
+                            kind: 'ClairQLQuery',
                             query: '   select event,\n          person.properties.email,\n          properties.$browser,\n          count()\n     from events\n    where timestamp > now () - interval 1 day\n      and person.properties.email is not null\n group by event,\n          properties.$browser,\n          person.properties.email\n order by count() desc\n    limit 100',
                         },
                     },

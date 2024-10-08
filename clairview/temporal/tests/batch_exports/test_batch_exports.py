@@ -365,9 +365,9 @@ async def test_iter_records_uses_extra_query_parameters(clickhouse_client):
             data_interval_start.isoformat(),
             data_interval_end.isoformat(),
             fields=[
-                {"expression": "JSONExtractInt(properties, %(torql_val_0)s)", "alias": "custom_prop"},
+                {"expression": "JSONExtractInt(properties, %(clairql_val_0)s)", "alias": "custom_prop"},
             ],
-            extra_query_parameters={"torql_val_0": "custom"},
+            extra_query_parameters={"clairql_val_0": "custom"},
         )
         for record in record_batch.to_pylist()
     ]

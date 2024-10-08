@@ -344,7 +344,7 @@ export const navigation3000Logic = kea<navigation3000LogicType>([
                 currentTeam,
                 hasOnboardedAnyProduct
             ): NavbarItem[][] => {
-                const isUsingSidebar = featureFlags[FEATURE_FLAGS.MARKETTOR_3000_NAV]
+                const isUsingSidebar = featureFlags[FEATURE_FLAGS.CLAIRVIEW_3000_NAV]
                 const hasOnboardedFeatureFlags = currentTeam?.has_completed_onboarding_for?.[ProductKey.FEATURE_FLAGS]
                 const sectionOne: NavbarItem[] = hasOnboardedAnyProduct
                     ? [
@@ -580,7 +580,7 @@ export const navigation3000Logic = kea<navigation3000LogicType>([
         activeNavbarItemId: [
             (s) => [s.activeNavbarItemIdRaw, featureFlagLogic.selectors.featureFlags],
             (activeNavbarItemIdRaw, featureFlags): string | null => {
-                if (!featureFlags[FEATURE_FLAGS.MARKETTOR_3000_NAV]) {
+                if (!featureFlags[FEATURE_FLAGS.CLAIRVIEW_3000_NAV]) {
                     return null
                 }
                 return activeNavbarItemIdRaw

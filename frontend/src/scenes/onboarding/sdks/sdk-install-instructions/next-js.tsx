@@ -13,7 +13,7 @@ function NextEnvVarsSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.Bash}>
-            {[`NEXT_PUBLIC_MARKETTOR_KEY=${currentTeam?.api_token}`, `NEXT_PUBLIC_MARKETTOR_HOST=${apiHostOrigin()}`].join(
+            {[`NEXT_PUBLIC_CLAIRVIEW_KEY=${currentTeam?.api_token}`, `NEXT_PUBLIC_CLAIRVIEW_HOST=${apiHostOrigin()}`].join(
                 '\n'
             )}
         </CodeSnippet>
@@ -30,8 +30,8 @@ import clairview from "clairview-js"
 import { ClairViewProvider } from 'clairview-js/react'
 
 if (typeof window !== 'undefined') { // checks that we are client-side
-  clairview.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
-    api_host: process.env.NEXT_PUBLIC_MARKETTOR_HOST || '${apiHostOrigin()}',
+  clairview.init(process.env.NEXT_PUBLIC_CLAIRVIEW_KEY, {
+    api_host: process.env.NEXT_PUBLIC_CLAIRVIEW_HOST || '${apiHostOrigin()}',
     ${
         isPersonProfilesDisabled
             ? ``
@@ -69,8 +69,8 @@ import clairview from 'clairview-js'
 import { ClairViewProvider } from 'clairview-js/react'
 
 if (typeof window !== 'undefined') {
-  clairview.init(process.env.NEXT_PUBLIC_MARKETTOR_KEY, {
-    api_host: process.env.NEXT_PUBLIC_MARKETTOR_HOST,
+  clairview.init(process.env.NEXT_PUBLIC_CLAIRVIEW_KEY, {
+    api_host: process.env.NEXT_PUBLIC_CLAIRVIEW_HOST,
     ${
         isPersonProfilesDisabled
             ? ``

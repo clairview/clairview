@@ -1,6 +1,6 @@
 from inline_snapshot import snapshot
 
-from hogvm.python.operation import TORQL_BYTECODE_VERSION
+from hogvm.python.operation import CLAIRQL_BYTECODE_VERSION
 from clairview.cdp.templates.webhook.template_webhook import template as template_webhook
 from clairview.management.commands.migrate_action_webhooks import migrate_action_webhooks
 from clairview.models import Action
@@ -74,7 +74,7 @@ class TestMigrateActionWebhooks(BaseTest):
         assert hog_function.name == f"Webhook for action {self.action.id} (Test Action)"
         assert hog_function.filters == {
             "actions": [{"id": f"{self.action.id}", "name": "Test Action", "type": "actions", "order": 0}],
-            "bytecode": ["_H", TORQL_BYTECODE_VERSION, 29, 3, 1, 4, 1],
+            "bytecode": ["_H", CLAIRQL_BYTECODE_VERSION, 29, 3, 1, 4, 1],
         }
         assert hog_function.hog == template_webhook.hog
         assert hog_function.inputs_schema == template_webhook.inputs_schema

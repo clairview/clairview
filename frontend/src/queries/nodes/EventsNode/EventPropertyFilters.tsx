@@ -2,11 +2,11 @@ import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'
 import { TaxonomicFilterGroupType } from 'lib/components/TaxonomicFilter/types'
 import { useState } from 'react'
 
-import { EventsNode, EventsQuery, TorQLQuery, SessionAttributionExplorerQuery } from '~/queries/schema'
-import { isTorQLQuery, isSessionAttributionExplorerQuery } from '~/queries/utils'
+import { EventsNode, EventsQuery, ClairQLQuery, SessionAttributionExplorerQuery } from '~/queries/schema'
+import { isClairQLQuery, isSessionAttributionExplorerQuery } from '~/queries/utils'
 import { AnyPropertyFilter } from '~/types'
 
-interface EventPropertyFiltersProps<Q extends EventsNode | EventsQuery | TorQLQuery | SessionAttributionExplorerQuery> {
+interface EventPropertyFiltersProps<Q extends EventsNode | EventsQuery | ClairQLQuery | SessionAttributionExplorerQuery> {
     query: Q
     setQuery?: (query: Q) => void
     taxonomicGroupTypes?: TaxonomicFilterGroupType[]
@@ -14,13 +14,13 @@ interface EventPropertyFiltersProps<Q extends EventsNode | EventsQuery | TorQLQu
 
 let uniqueNode = 0
 export function EventPropertyFilters<
-    Q extends EventsNode | EventsQuery | TorQLQuery | SessionAttributionExplorerQuery
+    Q extends EventsNode | EventsQuery | ClairQLQuery | SessionAttributionExplorerQuery
 >({ query, setQuery, taxonomicGroupTypes }: EventPropertyFiltersProps<Q>): JSX.Element {
     const [id] = useState(() => uniqueNode++)
     const properties =
-        isTorQLQuery(query) || isSessionAttributionExplorerQuery(query) ? query.filters?.properties : query.properties
+        isClairQLQuery(query) || isSessionAttributionExplorerQuery(query) ? query.filters?.properties : query.properties
     const eventNames =
-        isTorQLQuery(query) || isSessionAttributionExplorerQuery(query) ? [] : query.event ? [query.event] : []
+        isClairQLQuery(query) || isSessionAttributionExplorerQuery(query) ? [] : query.event ? [query.event] : []
 
     return !properties || Array.isArray(properties) ? (
         <PropertyFilters
@@ -32,11 +32,11 @@ export function EventPropertyFilters<
                     TaxonomicFilterGroupType.EventFeatureFlags,
                     TaxonomicFilterGroupType.Cohorts,
                     TaxonomicFilterGroupType.Elements,
-                    TaxonomicFilterGroupType.TorQLExpression,
+                    TaxonomicFilterGroupType.ClairQLExpression,
                 ]
             }
             onChange={(value: AnyPropertyFilter[]) => {
-                if (isTorQLQuery(query) || isSessionAttributionExplorerQuery(query)) {
+                if (isClairQLQuery(query) || isSessionAttributionExplorerQuery(query)) {
                     setQuery?.({ ...query, filters: { ...(query.filters ?? {}), properties: value } })
                 } else {
                     setQuery?.({ ...query, properties: value })

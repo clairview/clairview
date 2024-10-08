@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "query",
-                    models.JSONField(blank=True, default=dict, help_text="TorQL query", null=True),
+                    models.JSONField(blank=True, default=dict, help_text="ClairQL query", null=True),
                 ),
                 (
                     "created_by",

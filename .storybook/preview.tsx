@@ -28,18 +28,18 @@ const setupMsw = () => {
         },
     })
     ;(window as any).__mockServiceWorker = worker
-    ;(window as any).MARKETTOR_APP_CONTEXT = getStorybookAppContext()
+    ;(window as any).CLAIRVIEW_APP_CONTEXT = getStorybookAppContext()
 }
 setupMsw()
 
-const setupMarkettorJs = () => {
+const setupClairviewJs = () => {
     // Make sure we don't hit production clairview. We want to control requests to,
     // e.g. `/decide/` for feature flags
-    window.JS_MARKETTOR_HOST = apiHostOrigin()
+    window.JS_CLAIRVIEW_HOST = apiHostOrigin()
 
     loadClairViewJS()
 }
-setupMarkettorJs()
+setupClairviewJs()
 
 /** Storybook global parameters. See https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters */
 export const parameters: Parameters = {

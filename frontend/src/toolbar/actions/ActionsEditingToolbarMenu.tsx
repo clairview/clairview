@@ -9,7 +9,7 @@ import { actionsTabLogic } from '~/toolbar/actions/actionsTabLogic'
 import { SelectorEditingModal } from '~/toolbar/actions/SelectorEditingModal'
 import { StepField } from '~/toolbar/actions/StepField'
 import { ToolbarMenu } from '~/toolbar/bar/ToolbarMenu'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 
 export const ActionsEditingToolbarMenu = (): JSX.Element => {
     const {
@@ -38,7 +38,7 @@ export const ActionsEditingToolbarMenu = (): JSX.Element => {
                 startingSelector={editingSelectorValue}
                 onChange={(selector) => {
                     if (selector && editingSelector !== null) {
-                        toolbarMarkettorJS.capture('toolbar_manual_selector_applied', {
+                        toolbarClairviewJS.capture('toolbar_manual_selector_applied', {
                             chosenSelector: selector,
                         })
                         setElementSelector(selector, editingSelector)
@@ -124,7 +124,7 @@ export const ActionsEditingToolbarMenu = (): JSX.Element => {
                                                     icon={<IconPencil />}
                                                     onClick={(e) => {
                                                         e.stopPropagation()
-                                                        toolbarMarkettorJS.capture(
+                                                        toolbarClairviewJS.capture(
                                                             'toolbar_manual_selector_modal_opened',
                                                             {
                                                                 selector: step?.selector,

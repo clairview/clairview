@@ -9,7 +9,7 @@ PERSISTED_FEATURE_FLAGS = [
     "simplify-actions",
     "historical-exports-v2",
     "ingestion-warnings-enabled",
-    "persons-torql-query",
+    "persons-clairql-query",
     "datanode-concurrency-limit",
     "session-table-property-filters",
     "query-async",

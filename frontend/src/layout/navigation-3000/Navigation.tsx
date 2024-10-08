@@ -44,7 +44,7 @@ export function Navigation({
         // eslint-disable-next-line react/forbid-dom-props
         <div className={clsx('Navigation3000', mobileLayout && 'Navigation3000--mobile')} style={theme?.mainStyle}>
             <Navbar />
-            <FlaggedFeature flag={FEATURE_FLAGS.MARKETTOR_3000_NAV}>
+            <FlaggedFeature flag={FEATURE_FLAGS.CLAIRVIEW_3000_NAV}>
                 {activeNavbarItem && <Sidebar key={activeNavbarItem.identifier} navbarItem={activeNavbarItem} />}
             </FlaggedFeature>
             <main>

@@ -348,7 +348,7 @@ export function AndroidSnippet({ flagKey, multivariant, payload }: FeatureFlagSn
 }
 
 export function FlutterSnippet({ flagKey, multivariant, payload }: FeatureFlagSnippet): JSX.Element {
-    const clientSuffix = 'await Markettor().'
+    const clientSuffix = 'await Clairview().'
 
     if (payload) {
         return (

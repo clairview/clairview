@@ -16,8 +16,8 @@ process.on('unhandledRejection', (err) => {
 
 export function initKeaTests(mountCommonLogic = true, teamForWindowContext: TeamType = MOCK_DEFAULT_TEAM): void {
     dayjs.tz.setDefault('UTC')
-    window.MARKETTOR_APP_CONTEXT = {
-        ...window.MARKETTOR_APP_CONTEXT,
+    window.CLAIRVIEW_APP_CONTEXT = {
+        ...window.CLAIRVIEW_APP_CONTEXT,
         current_team: teamForWindowContext,
     } as unknown as AppContext
     clairview.init('no token', {

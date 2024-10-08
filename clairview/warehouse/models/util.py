@@ -1,6 +1,6 @@
 import re
 
-from clairview.torql.database.models import (
+from clairview.clairql.database.models import (
     BooleanDatabaseField,
     DateDatabaseField,
     DateTimeDatabaseField,
@@ -37,13 +37,13 @@ def get_view_or_table_by_name(team, name) -> Union["DataWarehouseSavedQuery", "D
 
 def remove_named_tuples(type):
     """Remove named tuples from query"""
-    from clairview.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING
+    from clairview.warehouse.models.table import CLICKHOUSE_CLAIRQL_MAPPING
 
     tokenified_type = re.split(r"(\W)", type)
     filtered_tokens = [
         token
         for token in tokenified_type
-        if token == "Nullable" or (len(token) == 1 and not token.isalnum()) or token in CLICKHOUSE_TORQL_MAPPING.keys()
+        if token == "Nullable" or (len(token) == 1 and not token.isalnum()) or token in CLICKHOUSE_CLAIRQL_MAPPING.keys()
     ]
     return "".join(filtered_tokens)
 
@@ -60,7 +60,7 @@ def clean_type(column_type: str) -> str:
     return column_type
 
 
-CLICKHOUSE_TORQL_MAPPING = {
+CLICKHOUSE_CLAIRQL_MAPPING = {
     "UUID": StringDatabaseField,
     "String": StringDatabaseField,
     "DateTime64": DateTimeDatabaseField,
@@ -87,7 +87,7 @@ CLICKHOUSE_TORQL_MAPPING = {
     "Decimal": FloatDatabaseField,
 }
 
-STR_TO_TORQL_MAPPING = {
+STR_TO_CLAIRQL_MAPPING = {
     "BooleanDatabaseField": BooleanDatabaseField,
     "DateDatabaseField": DateDatabaseField,
     "DateTimeDatabaseField": DateTimeDatabaseField,

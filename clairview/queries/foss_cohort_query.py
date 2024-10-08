@@ -482,7 +482,7 @@ class FOSSCohortQuery(EventQuery):
                 # should be no person properties in these filters, but if there are, use
                 # the inefficient person subquery default mode
                 person_properties_mode=PersonPropertiesMode.USING_SUBQUERY,
-                torql_context=self._filter.torql_context,
+                clairql_context=self._filter.clairql_context,
             )
             params.update(prop_params)
             return prop_query, params
@@ -612,7 +612,7 @@ class FOSSCohortQuery(EventQuery):
                 int(event[1]),
                 self._team_id,
                 f"{prepend}_entity_{idx}",
-                self._filter.torql_context,
+                self._filter.clairql_context,
             )
         elif event[0] == "events":
             self._add_event(str(event[1]))
@@ -621,7 +621,7 @@ class FOSSCohortQuery(EventQuery):
                 None,
                 self._team_id,
                 f"{prepend}_entity_{idx}",
-                self._filter.torql_context,
+                self._filter.clairql_context,
             )
         else:
             raise ValueError(f"Event type must be 'events' or 'actions'")

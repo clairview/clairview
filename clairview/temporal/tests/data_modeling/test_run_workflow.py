@@ -18,7 +18,7 @@ from dlt.common.libs.deltalake import get_delta_tables
 from freezegun.api import freeze_time
 
 from clairview import constants
-from clairview.torql.database.database import create_torql_database
+from clairview.clairql.database.database import create_clairql_database
 from clairview.models import Team
 from clairview.temporal.data_modeling.run_workflow import (
     BuildDagActivityInputs,
@@ -50,8 +50,8 @@ TEST_TIME = dt.datetime.now(dt.UTC)
 @pytest_asyncio.fixture
 async def clairview_tables(ateam):
     team = await database_sync_to_async(Team.objects.get)(id=ateam.pk)
-    torql_db = await database_sync_to_async(create_torql_database)(team_id=ateam.pk, team_arg=team)
-    clairview_tables = torql_db.get_clairview_tables()
+    clairql_db = await database_sync_to_async(create_clairql_database)(team_id=ateam.pk, team_arg=team)
+    clairview_tables = clairql_db.get_clairview_tables()
 
     return clairview_tables
 
@@ -109,7 +109,7 @@ async def test_create_table_activity(activity_environment, ateam):
     saved_query = await DataWarehouseSavedQuery.objects.acreate(
         team=ateam,
         name="my_model",
-        query={"query": query, "kind": "TorQLQuery"},
+        query={"query": query, "kind": "ClairQLQuery"},
     )
 
     create_table_activity_inputs = CreateTableActivityInputs(team_id=ateam.pk, models=[saved_query.id.hex])
@@ -121,8 +121,8 @@ async def test_create_table_activity(activity_environment, ateam):
         unittest.mock.patch(
             "clairview.warehouse.models.table.DataWarehouseTable.get_columns",
             return_value={
-                "id": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
-                "a_column": {"clickhouse": "String", "torql": "StringDatabaseField", "valid": True},
+                "id": {"clickhouse": "String", "clairql": "StringDatabaseField", "valid": True},
+                "a_column": {"clickhouse": "String", "clairql": "StringDatabaseField", "valid": True},
             },
         ),
     ):
@@ -300,7 +300,7 @@ async def test_materialize_model(ateam, bucket_name, minio_client, pageview_even
     saved_query = await DataWarehouseSavedQuery.objects.acreate(
         team=ateam,
         name="my_model",
-        query={"query": query, "kind": "TorQLQuery"},
+        query={"query": query, "kind": "ClairQLQuery"},
     )
 
     with (
@@ -357,22 +357,22 @@ async def saved_queries(ateam):
     parent_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model",
-        query={"query": parent_query, "kind": "TorQLQuery"},
+        query={"query": parent_query, "kind": "ClairQLQuery"},
     )
     child_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_child",
-        query={"query": "select * from my_model where distinct_id = 'b'", "kind": "TorQLQuery"},
+        query={"query": "select * from my_model where distinct_id = 'b'", "kind": "ClairQLQuery"},
     )
     child_2_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_child_2",
-        query={"query": "select * from my_model where distinct_id = 'a'", "kind": "TorQLQuery"},
+        query={"query": "select * from my_model where distinct_id = 'a'", "kind": "ClairQLQuery"},
     )
     grand_child_saved_query = await database_sync_to_async(DataWarehouseSavedQuery.objects.create)(
         team=ateam,
         name="my_model_grand_child",
-        query={"query": "select * from my_model_child union all select * from my_model_child_2", "kind": "TorQLQuery"},
+        query={"query": "select * from my_model_child union all select * from my_model_child_2", "kind": "ClairQLQuery"},
     )
     await database_sync_to_async(DataWarehouseModelPath.objects.create_from_saved_query)(parent_saved_query)
     await database_sync_to_async(DataWarehouseModelPath.objects.create_from_saved_query)(child_saved_query)

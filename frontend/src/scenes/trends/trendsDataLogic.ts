@@ -13,7 +13,7 @@ import { EventsNode, InsightQueryNode, LifecycleQuery, MathType, TrendsFilter, T
 import {
     ChartDisplayType,
     CountPerActorMathType,
-    TorQLMathType,
+    ClairQLMathType,
     InsightLogicProps,
     LifecycleToggle,
     PropertyMathType,
@@ -27,7 +27,7 @@ import { IndexedTrendResult } from './types'
 /** All math types that can result in non-whole numbers. */
 const POSSIBLY_FRACTIONAL_MATH_TYPES: Set<MathType> = new Set(
     [CountPerActorMathType.Average as MathType]
-        .concat(Object.values(TorQLMathType))
+        .concat(Object.values(ClairQLMathType))
         .concat(Object.values(PropertyMathType))
 )
 

@@ -67,7 +67,7 @@ export function TaxonomicFilter({
     const { setSearchQuery, moveUp, moveDown, tabLeft, tabRight, selectSelected } = useActions(logic)
 
     useEffect(() => {
-        if (groupType !== TaxonomicFilterGroupType.TorQLExpression) {
+        if (groupType !== TaxonomicFilterGroupType.ClairQLExpression) {
             window.setTimeout(() => focusInput(), 1)
         }
     }, [])
@@ -92,7 +92,7 @@ export function TaxonomicFilter({
                 // eslint-disable-next-line react/forbid-dom-props
                 style={style}
             >
-                {activeTab !== TaxonomicFilterGroupType.TorQLExpression || taxonomicGroupTypes.length > 1 ? (
+                {activeTab !== TaxonomicFilterGroupType.ClairQLExpression || taxonomicGroupTypes.length > 1 ? (
                     <div className="relative">
                         <LemonInput
                             data-attr="taxonomic-filter-searchfield"

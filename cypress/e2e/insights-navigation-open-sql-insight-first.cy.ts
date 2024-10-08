@@ -2,7 +2,7 @@ import { urls } from 'scenes/urls'
 
 import { insight } from '../productAnalytics'
 
-const torQLQuery = `select event,
+const clairQLQuery = `select event,
           count()
      from events
  group by event,
@@ -26,8 +26,8 @@ describe('Insights', () => {
 
             beforeEach(() => {
                 insight.newInsight('SQL')
-                insight.updateQueryEditorText(torQLQuery, 'torql-query-editor')
-                cy.get('[data-attr="torql-query-editor"]').should('exist')
+                insight.updateQueryEditorText(clairQLQuery, 'clairql-query-editor')
+                cy.get('[data-attr="clairql-query-editor"]').should('exist')
                 cy.get('tr.DataVizRow').should('have.length.gte', 2)
             })
 
@@ -66,8 +66,8 @@ describe('Insights', () => {
 
             it('can open a new SQL insight', () => {
                 insight.clickTab('SQL')
-                insight.updateQueryEditorText(torQLQuery, 'torql-query-editor')
-                cy.get('[data-attr="torql-query-editor"]').should('exist')
+                insight.updateQueryEditorText(clairQLQuery, 'clairql-query-editor')
+                cy.get('[data-attr="clairql-query-editor"]').should('exist')
                 cy.get('tr.DataVizRow').should('have.length.gte', 2)
             })
         })

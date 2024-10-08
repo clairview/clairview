@@ -31,7 +31,7 @@ export function RetentionSummary({ insightProps }: EditorFilterProps): JSX.Eleme
             <div className="flex items-center">
                 Show
                 {showGroupsOptions ? (
-                    <AggregationSelect className="mx-2" insightProps={insightProps} torqlAvailable={false} />
+                    <AggregationSelect className="mx-2" insightProps={insightProps} clairqlAvailable={false} />
                 ) : (
                     <b> Unique users </b>
                 )}

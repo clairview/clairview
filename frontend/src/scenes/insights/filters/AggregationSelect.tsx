@@ -1,6 +1,6 @@
 import { LemonSelect, LemonSelectSection } from '@clairview/lemon-ui'
 import { useActions, useValues } from 'kea'
-import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
+import { ClairQLEditor } from 'lib/components/ClairQLEditor/ClairQLEditor'
 import { groupsAccessLogic } from 'lib/introductions/groupsAccessLogic'
 import { GroupIntroductionFooter } from 'scenes/groups/GroupsIntroduction'
 import { insightVizDataLogic } from 'scenes/insights/insightVizDataLogic'
@@ -10,7 +10,7 @@ import { FunnelsQuery } from '~/queries/schema'
 import { isFunnelsQuery, isInsightQueryNode, isStickinessQuery } from '~/queries/utils'
 import { InsightLogicProps } from '~/types'
 
-function getTorQLValue(groupIndex?: number, aggregationQuery?: string): string {
+function getClairQLValue(groupIndex?: number, aggregationQuery?: string): string {
     if (groupIndex !== undefined) {
         return `$group_${groupIndex}`
     } else if (aggregationQuery) {
@@ -19,7 +19,7 @@ function getTorQLValue(groupIndex?: number, aggregationQuery?: string): string {
     return UNIQUE_USERS
 }
 
-function torQLToFilterValue(value?: string): { groupIndex?: number; aggregationQuery?: string } {
+function clairQLToFilterValue(value?: string): { groupIndex?: number; aggregationQuery?: string } {
     if (value?.match(/^\$group_[0-9]+$/)) {
         return { groupIndex: parseInt(value.replace('$group_', '')) }
     } else if (value === 'person_id') {
@@ -33,14 +33,14 @@ const UNIQUE_USERS = 'person_id'
 type AggregationSelectProps = {
     insightProps: InsightLogicProps
     className?: string
-    torqlAvailable?: boolean
+    clairqlAvailable?: boolean
     value?: string
 }
 
 export function AggregationSelect({
     insightProps,
     className,
-    torqlAvailable,
+    clairqlAvailable,
 }: AggregationSelectProps): JSX.Element | null {
     const { querySource } = useValues(insightVizDataLogic(insightProps))
     const { updateQuerySource } = useActions(insightVizDataLogic(insightProps))
@@ -52,16 +52,16 @@ export function AggregationSelect({
         return null
     }
 
-    const value = getTorQLValue(
+    const value = getClairQLValue(
         isStickinessQuery(querySource) ? undefined : querySource.aggregation_group_type_index,
-        isFunnelsQuery(querySource) ? querySource.funnelsFilter?.funnelAggregateByTorQL : undefined
+        isFunnelsQuery(querySource) ? querySource.funnelsFilter?.funnelAggregateByClairQL : undefined
     )
     const onChange = (value: string): void => {
-        const { aggregationQuery, groupIndex } = torQLToFilterValue(value)
+        const { aggregationQuery, groupIndex } = clairQLToFilterValue(value)
         if (isFunnelsQuery(querySource)) {
             updateQuerySource({
                 aggregation_group_type_index: groupIndex,
-                funnelsFilter: { ...querySource.funnelsFilter, funnelAggregateByTorQL: aggregationQuery },
+                funnelsFilter: { ...querySource.funnelsFilter, funnelAggregateByClairQL: aggregationQuery },
             } as FunnelsQuery)
         } else {
             updateQuerySource({ aggregation_group_type_index: groupIndex } as FunnelsQuery)
@@ -93,29 +93,29 @@ export function AggregationSelect({
         })
     }
 
-    if (torqlAvailable) {
+    if (clairqlAvailable) {
         baseValues.push(`properties.$session_id`)
         optionSections[0].options.push({
             value: 'properties.$session_id',
             label: `Unique sessions`,
         })
         optionSections[0].options.push({
-            label: 'Custom TorQL expression',
+            label: 'Custom ClairQL expression',
             options: [
                 {
-                    // This is a bit of a hack so that the TorQL option is only highlighted as active when the user has
-                    // set a custom value (because actually _all_ the options are TorQL)
+                    // This is a bit of a hack so that the ClairQL option is only highlighted as active when the user has
+                    // set a custom value (because actually _all_ the options are ClairQL)
                     value: !value || baseValues.includes(value) ? '' : value,
                     label: <span className="font-mono">{value}</span>,
-                    labelInMenu: function CustomTorQLOptionWrapped({ onSelect }) {
+                    labelInMenu: function CustomClairQLOptionWrapped({ onSelect }) {
                         return (
                             // eslint-disable-next-line react/forbid-dom-props
                             <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                                <TorQLEditor
+                                <ClairQLEditor
                                     onChange={onSelect}
                                     value={value}
                                     placeholder={
-                                        "Enter TorQL expression, such as:\n- distinct_id\n- properties.$session_id\n- concat(distinct_id, ' ', properties.$session_id)\n- if(1 < 2, 'one', 'two')"
+                                        "Enter ClairQL expression, such as:\n- distinct_id\n- properties.$session_id\n- concat(distinct_id, ' ', properties.$session_id)\n- if(1 < 2, 'one', 'two')"
                                     }
                                 />
                             </div>

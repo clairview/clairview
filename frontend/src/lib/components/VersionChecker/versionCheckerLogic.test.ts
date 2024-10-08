@@ -3,7 +3,7 @@ import { expectLogic } from 'kea-test-utils'
 import { useMocks } from '~/mocks/jest'
 import { initKeaTests } from '~/test/init'
 
-import { MarkettorJSDeprecation, versionCheckerLogic } from './versionCheckerLogic'
+import { ClairviewJSDeprecation, versionCheckerLogic } from './versionCheckerLogic'
 
 const useMockedVersions = (
     githubVersions: { version: string }[],
@@ -20,7 +20,7 @@ const useMockedVersions = (
                 200,
                 {
                     deprecateBeforeVersion,
-                } as MarkettorJSDeprecation,
+                } as ClairviewJSDeprecation,
             ],
         },
         post: {

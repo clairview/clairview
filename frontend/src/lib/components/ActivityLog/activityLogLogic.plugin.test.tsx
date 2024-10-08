@@ -66,7 +66,7 @@ describe('the activity log logic', () => {
                     type: ActivityScope.PLUGIN,
                     action: 'created',
                     field: 'super secret password',
-                    after: '**************** MARKETTOR SECRET FIELD ****************',
+                    after: '**************** CLAIRVIEW SECRET FIELD ****************',
                 },
             ])
             const actual = logic.values.humanizedActivity

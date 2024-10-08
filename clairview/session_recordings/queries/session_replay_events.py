@@ -132,8 +132,8 @@ class SessionReplayEvents:
     def get_events(
         self, session_id: str, team: Team, metadata: RecordingMetadata, events_to_ignore: list[str] | None
     ) -> tuple[list | None, list | None]:
-        from clairview.schema import TorQLQuery, TorQLQueryResponse
-        from clairview.torql_queries.torql_query_runner import TorQLQueryRunner
+        from clairview.schema import ClairQLQuery, ClairQLQueryResponse
+        from clairview.clairql_queries.clairql_query_runner import ClairQLQueryRunner
 
         q = """
             select event, timestamp, elements_chain_href, elements_chain_texts, elements_chain_elements, properties.$window_id, properties.$current_url, properties.$event_type
@@ -146,7 +146,7 @@ class SessionReplayEvents:
 
         q += " order by timestamp asc"
 
-        hq = TorQLQuery(
+        hq = ClairQLQuery(
             query=q,
             values={
                 # add some wiggle room to the timings, to ensure we get all the events
@@ -158,7 +158,7 @@ class SessionReplayEvents:
             },
         )
 
-        result: TorQLQueryResponse = TorQLQueryRunner(
+        result: ClairQLQueryResponse = ClairQLQueryRunner(
             team=team,
             query=hq,
         ).calculate()

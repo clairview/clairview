@@ -14,8 +14,8 @@ from clairview import celery, redis
 from clairview.clickhouse.client.async_task_chain import add_task_to_on_commit
 from clairview.clickhouse.query_tagging import tag_queries
 from clairview.errors import ExposedCHQueryError, CHQueryErrorTooManySimultaneousQueries
-from clairview.torql.constants import LimitContext
-from clairview.torql.errors import ExposedTorQLError
+from clairview.clairql.constants import LimitContext
+from clairview.clairql.errors import ExposedClairQLError
 from clairview.renderers import SafeJSONRenderer
 from clairview.schema import QueryStatus
 from clairview.schema import ClickhouseQueryProgress
@@ -201,7 +201,7 @@ def execute_process_query(
         raise
     except Exception as err:
         query_status.results = None  # Clear results in case they are faulty
-        if isinstance(err, APIException | ExposedTorQLError | ExposedCHQueryError) or is_staff_user:
+        if isinstance(err, APIException | ExposedClairQLError | ExposedCHQueryError) or is_staff_user:
             # We can only expose the error message if it's a known safe error OR if the user is ClairView staff
             query_status.error_message = str(err)
         logger.exception("Error processing query async", team_id=team_id, query_id=query_id, exc_info=True)

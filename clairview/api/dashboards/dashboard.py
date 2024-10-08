@@ -175,7 +175,7 @@ class DashboardSerializer(DashboardBasicSerializer):
         validated_data = self._update_creation_mode(validated_data, use_template, use_dashboard)
         tags = validated_data.pop("tags", None)  # tags are created separately below as global tag relationships
         current_url = request.headers.get("Referer")
-        session_id = request.headers.get("X-Markettor-Session-Id")
+        session_id = request.headers.get("X-Clairview-Session-Id")
 
         request_filters = request.data.get("filters")
         if request_filters:
@@ -515,7 +515,7 @@ class DashboardsViewSet(
     )
     def create_from_template_json(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         current_url = request.headers.get("Referer")
-        session_id = request.headers.get("X-Markettor-Session-Id")
+        session_id = request.headers.get("X-Clairview-Session-Id")
         dashboard = Dashboard.objects.create(
             team_id=self.team_id,
             created_by=cast(User, request.user),

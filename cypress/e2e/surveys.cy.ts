@@ -281,7 +281,7 @@ describe('Surveys', () => {
 
     it('creates a new survey with branching logic', () => {
         cy.window().then((win) => {
-            win.MARKETTOR_APP_CONTEXT.current_user.organization.available_product_features = [
+            win.CLAIRVIEW_APP_CONTEXT.current_user.organization.available_product_features = [
                 {
                     key: 'surveys_multiple_questions',
                     name: 'Multiple questions',

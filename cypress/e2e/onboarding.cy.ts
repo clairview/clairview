@@ -23,7 +23,7 @@ describe('Onboarding', () => {
         cy.get('[data-attr=onboarding-breadcrumbs] > :first-child > * span').should('not.contain', 'Product intro')
 
         cy.window().then((win) => {
-            win.MARKETTOR_APP_CONTEXT.current_team.has_completed_onboarding_for = {}
+            win.CLAIRVIEW_APP_CONTEXT.current_team.has_completed_onboarding_for = {}
         })
 
         cy.get('[data-attr=menu-item-savedinsights]').click()

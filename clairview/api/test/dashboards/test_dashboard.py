@@ -11,7 +11,7 @@ from rest_framework import status
 from clairview.api.dashboards.dashboard import DashboardSerializer
 from clairview.api.test.dashboards import DashboardAPI
 from clairview.constants import AvailableFeature
-from clairview.torql_queries.legacy_compatibility.filter_to_query import filter_to_query
+from clairview.clairql_queries.legacy_compatibility.filter_to_query import filter_to_query
 from clairview.models import Dashboard, DashboardTile, Filter, Insight, Team, User
 from clairview.models.organization import Organization
 from clairview.models.sharing_configuration import SharingConfiguration
@@ -1155,7 +1155,7 @@ class TestDashboard(APIBaseTest, QueryMatchingTest):
         response = self.client.post(
             f"/api/projects/{self.team.id}/dashboards/create_from_template_json",
             {"template": valid_template, "creation_context": "onboarding"},
-            headers={"Referer": "https://clairview.com/my-referer", "X-Markettor-Session-Id": "my-session-id"},
+            headers={"Referer": "https://clairview.com/my-referer", "X-Clairview-Session-Id": "my-session-id"},
         )
         self.assertEqual(response.status_code, 200, response.content)
 
@@ -1308,7 +1308,7 @@ class TestDashboard(APIBaseTest, QueryMatchingTest):
                     "tags": [],
                     "timezone": None,
                     "updated_at": ANY,
-                    "torql": ANY,
+                    "clairql": ANY,
                     "types": ANY,
                 },
                 "is_cached": False,

@@ -8,7 +8,7 @@ from django.conf import settings
 from django.utils import timezone
 from freezegun import freeze_time
 
-from clairview.jwt import MarkettorJwtAudience
+from clairview.jwt import ClairviewJwtAudience
 from clairview.models.insight import Insight
 from clairview.models.subscription import (
     UNSUBSCRIBE_TOKEN_EXP_DAYS,
@@ -117,7 +117,7 @@ class TestSubscription(BaseTest):
         info = jwt.decode(
             token,
             "not-so-secret",
-            audience=MarkettorJwtAudience.UNSUBSCRIBE.value,
+            audience=ClairviewJwtAudience.UNSUBSCRIBE.value,
             algorithms=["HS256"],
         )
 

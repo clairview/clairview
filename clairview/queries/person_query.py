@@ -215,7 +215,7 @@ class PersonQuery:
             group_properties_joined=False,
             person_properties_mode=PersonPropertiesMode.DIRECT,
             prepend=f"person_filter_fin_{prepend}",
-            torql_context=self._filter.torql_context,
+            clairql_context=self._filter.clairql_context,
         )
         prefiltering_conditions, prefiltering_params = parse_prop_grouped_clauses(
             self._team_id,
@@ -226,7 +226,7 @@ class PersonQuery:
             # from the person BEFORE aggregation by version here, to eliminate persons early on
             person_properties_mode=PersonPropertiesMode.DIRECT_ON_PERSONS,
             prepend=f"person_filter_pre_{prepend}",
-            torql_context=self._filter.torql_context,
+            clairql_context=self._filter.clairql_context,
         )
         params.update(prefiltering_params)
         return prefiltering_conditions, finalization_conditions, params
@@ -337,7 +337,7 @@ class PersonQuery:
                 group_properties_joined=False,
                 person_properties_mode=PersonPropertiesMode.DIRECT,
                 _top_level=False,
-                torql_context=self._filter.torql_context,
+                clairql_context=self._filter.clairql_context,
             )
             finalization_sql = f"AND ({finalization_conditions_sql} OR {id_conditions_sql})"
 
@@ -354,7 +354,7 @@ class PersonQuery:
                 # from the person BEFORE aggregation by version here, to eliminate persons early on
                 person_properties_mode=PersonPropertiesMode.DIRECT_ON_PERSONS,
                 _top_level=False,
-                torql_context=self._filter.torql_context,
+                clairql_context=self._filter.clairql_context,
             )
             params.update(prefiltering_params)
             prefiltering_sql = f"""AND ({prefiltering_conditions_sql} OR {id_conditions_sql})"""

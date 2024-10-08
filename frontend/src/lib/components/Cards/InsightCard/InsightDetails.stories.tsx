@@ -69,9 +69,9 @@ Lifecycle.args = {
     insight: require('../../../../mocks/fixtures/api/projects/team_id/insights/lifecycle.json'),
 }
 
-export const DataTableTorQLQuery = Template.bind({})
-DataTableTorQLQuery.args = {
-    insight: require('../../../../mocks/fixtures/api/projects/team_id/insights/dataTableTorQL.json'),
+export const DataTableClairQLQuery = Template.bind({})
+DataTableClairQLQuery.args = {
+    insight: require('../../../../mocks/fixtures/api/projects/team_id/insights/dataTableClairQL.json'),
 }
 
 export const DataTableEventsQuery = Template.bind({})

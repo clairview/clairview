@@ -6,12 +6,12 @@ import clairview from 'clairview-js'
 
 import { OnlineExportContext, QueryExportContext } from '~/types'
 
-import { DashboardFilter, DataNode, TorQLQuery, TorQLQueryResponse, NodeKind, PersonsNode, QueryStatus } from './schema'
+import { DashboardFilter, DataNode, ClairQLQuery, ClairQLQueryResponse, NodeKind, PersonsNode, QueryStatus } from './schema'
 import {
     isAsyncResponse,
     isDataTableNode,
     isDataVisualizationNode,
-    isTorQLQuery,
+    isClairQLQuery,
     isInsightVizNode,
     isPersonsNode,
 } from './utils'
@@ -35,8 +35,8 @@ export function queryExportContext<N extends DataNode>(
 
 const SYNC_ONLY_QUERY_KINDS = [
     'HogQuery',
-    'TorQLMetadata',
-    'TorQLAutocomplete',
+    'ClairQLMetadata',
+    'ClairQLAutocomplete',
     'DatabaseSchemaQuery',
     'ErrorTrackingQuery',
 ] satisfies NodeKind[keyof NodeKind][]
@@ -143,8 +143,8 @@ export async function performQuery<N extends DataNode>(
                 filtersOverride,
                 pollOnly
             )
-            if (isTorQLQuery(queryNode) && response && typeof response === 'object') {
-                logParams.clickhouse_sql = (response as TorQLQueryResponse)?.clickhouse
+            if (isClairQLQuery(queryNode) && response && typeof response === 'object') {
+                logParams.clickhouse_sql = (response as ClairQLQueryResponse)?.clickhouse
             }
         }
         clairview.capture('query completed', { query: queryNode, duration: performance.now() - startTime, ...logParams })
@@ -169,9 +169,9 @@ export function getPersonsEndpoint(query: PersonsNode): string {
     return api.persons.determineListUrl(params)
 }
 
-export async function torqlQuery(queryString: string, values?: Record<string, any>): Promise<TorQLQueryResponse> {
-    return await performQuery<TorQLQuery>({
-        kind: NodeKind.TorQLQuery,
+export async function clairqlQuery(queryString: string, values?: Record<string, any>): Promise<ClairQLQueryResponse> {
+    return await performQuery<ClairQLQuery>({
+        kind: NodeKind.ClairQLQuery,
         query: queryString,
         values,
     })

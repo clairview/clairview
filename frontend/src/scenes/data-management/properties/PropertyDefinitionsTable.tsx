@@ -73,7 +73,7 @@ export function PropertyDefinitionsTable(): JSX.Element {
             <LemonBanner className="mb-4" type="info">
                 Looking for {filters.type === 'person' ? 'person ' : ''}property usage statistics?{' '}
                 <Link
-                    to={urls.insightNewTorQL(
+                    to={urls.insightNewClairQL(
                         'SELECT arrayJoin(JSONExtractKeys(properties)) AS property_key, count()\n' +
                             (filters.type === 'person' ? 'FROM persons\n' : 'FROM events\n') +
                             (filters.type === 'person' ? '' : 'WHERE {filters}\n') +

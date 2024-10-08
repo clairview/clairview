@@ -248,8 +248,8 @@ def test_can_patch_config_with_invalid_old_values(client: HttpClient, interval):
         assert args.get("invalid_key", None) is None
 
 
-def test_can_patch_torql_query(client: HttpClient):
-    """Test we can patch a schema with a TorQL query."""
+def test_can_patch_clairql_query(client: HttpClient):
+    """Test we can patch a schema with a ClairQL query."""
     temporal = sync_connect()
 
     destination_data = {
@@ -284,7 +284,7 @@ def test_can_patch_torql_query(client: HttpClient):
 
         new_batch_export_data = {
             "name": "my-production-s3-bucket-destination",
-            "torql_query": "select toString(uuid) as uuid, 'test' as test, toInt(1+1) as n from events",
+            "clairql_query": "select toString(uuid) as uuid, 'test' as test, toInt(1+1) as n from events",
         }
 
         response = patch_batch_export(client, team.pk, batch_export["id"], new_batch_export_data)
@@ -301,15 +301,15 @@ def test_can_patch_torql_query(client: HttpClient):
                 },
                 {
                     "alias": "test",
-                    "expression": "%(torql_val_0)s",
+                    "expression": "%(clairql_val_0)s",
                 },
                 {
                     "alias": "n",
-                    "expression": "accurateCastOrNull(plus(1, 1), %(torql_val_1)s)",
+                    "expression": "accurateCastOrNull(plus(1, 1), %(clairql_val_1)s)",
                 },
             ],
-            "values": {"torql_val_0": "test", "torql_val_1": "Int64"},
-            "torql_query": "SELECT toString(uuid) AS uuid, 'test' AS test, toInt(plus(1, 1)) AS n FROM events",
+            "values": {"clairql_val_0": "test", "clairql_val_1": "Int64"},
+            "clairql_query": "SELECT toString(uuid) AS uuid, 'test' AS test, toInt(plus(1, 1)) AS n FROM events",
         }
 
         # validate the underlying temporal schedule has been updated
@@ -330,20 +330,20 @@ def test_can_patch_torql_query(client: HttpClient):
                     },
                     {
                         "alias": "test",
-                        "expression": "%(torql_val_0)s",
+                        "expression": "%(clairql_val_0)s",
                     },
                     {
                         "alias": "n",
-                        "expression": "accurateCastOrNull(plus(1, 1), %(torql_val_1)s)",
+                        "expression": "accurateCastOrNull(plus(1, 1), %(clairql_val_1)s)",
                     },
                 ],
-                "values": {"torql_val_0": "test", "torql_val_1": "Int64"},
-                "torql_query": "SELECT toString(uuid) AS uuid, 'test' AS test, toInt(plus(1, 1)) AS n FROM events",
+                "values": {"clairql_val_0": "test", "clairql_val_1": "Int64"},
+                "clairql_query": "SELECT toString(uuid) AS uuid, 'test' AS test, toInt(plus(1, 1)) AS n FROM events",
             },
         }
 
 
-def test_patch_returns_error_on_unsupported_torql_query(client: HttpClient):
+def test_patch_returns_error_on_unsupported_clairql_query(client: HttpClient):
     temporal = sync_connect()
 
     destination_data = {
@@ -379,8 +379,8 @@ def test_patch_returns_error_on_unsupported_torql_query(client: HttpClient):
 
         new_batch_export_data = {
             "name": "my-production-s3-bucket-destination",
-            # toInt32 is not a supported TorQL function
-            "torql_query": "select toInt32(1+1) as n from events",
+            # toInt32 is not a supported ClairQL function
+            "clairql_query": "select toInt32(1+1) as n from events",
         }
         response = put_batch_export(client, team.pk, batch_export["id"], new_batch_export_data)
         assert response.status_code == status.HTTP_400_BAD_REQUEST

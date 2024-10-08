@@ -2,7 +2,7 @@ import uuid
 from django.conf import settings
 from dlt.common.schema.typing import TSchemaTables
 from dlt.common.data_types.typing import TDataType
-from clairview.torql.database.models import (
+from clairview.clairql.database.models import (
     BooleanDatabaseField,
     DatabaseField,
     DateDatabaseField,
@@ -33,37 +33,37 @@ from clairview.warehouse.models.external_data_schema import ExternalDataSchema
 from dlt.common.normalizers.naming.snake_case import NamingConvention
 
 
-def dlt_to_torql_type(dlt_type: TDataType | None) -> str:
-    torql_type: type[DatabaseField] = DatabaseField
+def dlt_to_clairql_type(dlt_type: TDataType | None) -> str:
+    clairql_type: type[DatabaseField] = DatabaseField
 
     if dlt_type is None:
-        torql_type = StringDatabaseField
+        clairql_type = StringDatabaseField
     elif dlt_type == "text":
-        torql_type = StringDatabaseField
+        clairql_type = StringDatabaseField
     elif dlt_type == "double":
-        torql_type = IntegerDatabaseField
+        clairql_type = IntegerDatabaseField
     elif dlt_type == "bool":
-        torql_type = BooleanDatabaseField
+        clairql_type = BooleanDatabaseField
     elif dlt_type == "timestamp":
-        torql_type = DateTimeDatabaseField
+        clairql_type = DateTimeDatabaseField
     elif dlt_type == "bigint":
-        torql_type = IntegerDatabaseField
+        clairql_type = IntegerDatabaseField
     elif dlt_type == "binary":
         raise Exception("DLT type 'binary' is not a supported column type")
     elif dlt_type == "complex":
-        torql_type = StringJSONDatabaseField
+        clairql_type = StringJSONDatabaseField
     elif dlt_type == "decimal":
-        torql_type = IntegerDatabaseField
+        clairql_type = IntegerDatabaseField
     elif dlt_type == "wei":
         raise Exception("DLT type 'wei' is not a supported column type")
     elif dlt_type == "date":
-        torql_type = DateDatabaseField
+        clairql_type = DateDatabaseField
     elif dlt_type == "time":
-        torql_type = DateTimeDatabaseField
+        clairql_type = DateTimeDatabaseField
     else:
         raise Exception(f"DLT type '{dlt_type}' is not a supported column type")
 
-    return torql_type.__name__
+    return clairql_type.__name__
 
 
 async def update_last_synced_at(job_id: str, schema_id: str, team_id: int) -> None:
@@ -175,13 +175,13 @@ async def validate_schema_and_update_table(
                     dlt_column = schema_columns.get(column_name)
                     if dlt_column is not None:
                         dlt_data_type = dlt_column.get("data_type")
-                        torql_type = dlt_to_torql_type(dlt_data_type)
+                        clairql_type = dlt_to_clairql_type(dlt_data_type)
                     else:
-                        torql_type = dlt_to_torql_type(None)
+                        clairql_type = dlt_to_clairql_type(None)
 
                     columns[column_name] = {
                         "clickhouse": db_column_type,
-                        "torql": torql_type,
+                        "clairql": clairql_type,
                     }
                 table_created.columns = columns
                 break

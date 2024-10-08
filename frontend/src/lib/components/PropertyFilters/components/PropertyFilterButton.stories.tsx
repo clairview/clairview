@@ -47,7 +47,7 @@ const propertyFilters = [
         type: 'cohort',
     },
     {
-        type: 'torql',
+        type: 'clairql',
         key: 'properties.$current_url',
         value: null,
     },

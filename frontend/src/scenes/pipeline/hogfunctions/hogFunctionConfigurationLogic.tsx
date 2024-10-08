@@ -18,7 +18,7 @@ import { userLogic } from 'scenes/userLogic'
 import { groupsModel } from '~/models/groupsModel'
 import { performQuery } from '~/queries/query'
 import { EventsNode, EventsQuery, NodeKind, TrendsQuery } from '~/queries/schema'
-import { escapePropertyAsTorQlIdentifier, torql } from '~/queries/utils'
+import { escapePropertyAsClairQlIdentifier, clairql } from '~/queries/utils'
 import {
     AnyPropertyFilter,
     AvailableFeature,
@@ -577,13 +577,13 @@ export const hogFunctionConfigurationLogic = kea<hogFunctionConfigurationLogicTy
                     const eventProperties: AnyPropertyFilter[] = [...(event.properties ?? [])]
                     if (event.id) {
                         eventProperties.push({
-                            type: PropertyFilterType.TorQL,
-                            key: torql`event = ${event.id}`,
+                            type: PropertyFilterType.ClairQL,
+                            key: clairql`event = ${event.id}`,
                         })
                     }
                     if (eventProperties.length === 0) {
                         eventProperties.push({
-                            type: PropertyFilterType.TorQL,
+                            type: PropertyFilterType.ClairQL,
                             key: 'true',
                         })
                     }
@@ -596,8 +596,8 @@ export const hogFunctionConfigurationLogic = kea<hogFunctionConfigurationLogicTy
                     const actionProperties: AnyPropertyFilter[] = [...(action.properties ?? [])]
                     if (action.id) {
                         actionProperties.push({
-                            type: PropertyFilterType.TorQL,
-                            key: torql`matchesAction(${parseInt(action.id)})`,
+                            type: PropertyFilterType.ClairQL,
+                            key: clairql`matchesAction(${parseInt(action.id)})`,
                         })
                     }
                     seriesProperties.values.push({
@@ -660,7 +660,7 @@ export const hogFunctionConfigurationLogic = kea<hogFunctionConfigurationLogicTy
                     orderBy: ['timestamp DESC'],
                 }
                 groupTypes.forEach((groupType) => {
-                    const name = escapePropertyAsTorQlIdentifier(groupType.group_type)
+                    const name = escapePropertyAsClairQlIdentifier(groupType.group_type)
                     query.select.push(
                         `tuple(${name}.created_at, ${name}.index, ${name}.key, ${name}.properties, ${name}.updated_at)`
                     )

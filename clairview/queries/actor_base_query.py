@@ -13,8 +13,8 @@ from django.db.models import OuterRef, Subquery
 from django.db.models.query import Prefetch, QuerySet
 
 from clairview.constants import INSIGHT_FUNNELS, INSIGHT_PATHS, INSIGHT_TRENDS
-from clairview.torql_queries.actor_strategies import PersonStrategy
-from clairview.torql_queries.insights.paginators import TorQLHasMorePaginator
+from clairview.clairql_queries.actor_strategies import PersonStrategy
+from clairview.clairql_queries.insights.paginators import ClairQLHasMorePaginator
 from clairview.models import Entity, Filter, PersonDistinctId, SessionRecording, Team
 from clairview.models.filters.mixins.utils import cached_property
 from clairview.models.filters.retention_filter import RetentionFilter
@@ -105,7 +105,7 @@ class ActorBaseQuery:
         query, params = self.actor_query()
         raw_result = insight_sync_execute(
             query,
-            {**params, **self._filter.torql_context.values},
+            {**params, **self._filter.clairql_context.values},
             query_type=self.QUERY_TYPE,
             filter=self._filter,
             team_id=self._team.pk,
@@ -295,7 +295,7 @@ def get_people(
 def get_serialized_people(
     team: Team, people_ids: list[Any], value_per_actor_id: Optional[dict[str, float]] = None, distinct_id_limit=1000
 ) -> list[SerializedPerson]:
-    persons_dict = PersonStrategy(team, ActorsQuery(), TorQLHasMorePaginator()).get_actors(
+    persons_dict = PersonStrategy(team, ActorsQuery(), ClairQLHasMorePaginator()).get_actors(
         people_ids, order_by="created_at DESC, uuid"
     )
     from clairview.api.person import get_person_name_helper

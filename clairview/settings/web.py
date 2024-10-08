@@ -373,7 +373,7 @@ PROMETHEUS_LATENCY_BUCKETS = [0.1, 0.3, 0.9, 2.7, 8.1, float("inf")]
 
 # temporary flag to control new UUID version setting in clairview-js
 # is set to v7 to test new generation but can be set to "og" to revert
-MARKETTOR_JS_UUID_VERSION = os.getenv("MARKETTOR_JS_UUID_VERSION", "v7")
+CLAIRVIEW_JS_UUID_VERSION = os.getenv("CLAIRVIEW_JS_UUID_VERSION", "v7")
 
 # Used only to display in the UI to inform users of allowlist options
 PUBLIC_EGRESS_IP_ADDRESSES = get_list(os.getenv("PUBLIC_EGRESS_IP_ADDRESSES", ""))

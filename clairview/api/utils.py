@@ -297,7 +297,7 @@ def create_event_definitions_sql(
 
     if event_type == EventDefinitionType.EVENT_CUSTOM:
         conditions += " AND clairview_eventdefinition.name NOT LIKE %(is_clairview_event)s"
-    if event_type == EventDefinitionType.EVENT_MARKETTOR:
+    if event_type == EventDefinitionType.EVENT_CLAIRVIEW:
         conditions += " AND clairview_eventdefinition.name LIKE %(is_clairview_event)s"
 
     additional_ordering = ""

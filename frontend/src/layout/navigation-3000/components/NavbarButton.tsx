@@ -31,7 +31,7 @@ export const NavbarButton: FunctionComponent<NavbarButtonProps> = React.forwardR
     const { sceneBreadcrumbKeys } = useValues(breadcrumbsLogic)
     const { hideNavOnMobile } = useActions(navigation3000Logic)
     const { isNavCollapsed } = useValues(navigation3000Logic)
-    const isUsingNewNav = useFeatureFlag('MARKETTOR_3000_NAV')
+    const isUsingNewNav = useFeatureFlag('CLAIRVIEW_3000_NAV')
 
     const [hasBeenClicked, setHasBeenClicked] = useState(false)
 

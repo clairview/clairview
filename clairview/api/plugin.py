@@ -52,7 +52,7 @@ from clairview.utils import format_query_params_absolute_url
 
 
 # Keep this in sync with: frontend/scenes/plugins/utils.ts
-SECRET_FIELD_VALUE = "**************** MARKETTOR SECRET FIELD ****************"
+SECRET_FIELD_VALUE = "**************** CLAIRVIEW SECRET FIELD ****************"
 
 
 def _update_plugin_attachments(request: request.Request, plugin_config: PluginConfig):

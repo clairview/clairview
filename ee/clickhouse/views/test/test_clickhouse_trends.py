@@ -280,7 +280,7 @@ def test_can_specify_number_of_smoothing_intervals(client: Client):
                         "name": "$pageview",
                         "custom_name": None,
                         "math": None,
-                        "math_torql": None,
+                        "math_clairql": None,
                         "math_property": None,
                         "math_group_type_index": ANY,
                         "properties": {},

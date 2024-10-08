@@ -13,7 +13,7 @@ from clairview.async_migrations.utils import (
     rollback_migration,
     trigger_migration,
 )
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 from clairview.models.async_migration import (
     AsyncMigration,
     AsyncMigrationError,
@@ -91,8 +91,8 @@ class AsyncMigrationSerializer(serializers.ModelSerializer):
 
     def get_is_available(self, async_migration: AsyncMigration):
         return (
-            get_instance_setting("ASYNC_MIGRATIONS_IGNORE_MARKETTOR_VERSION")
-            or Version(async_migration.clairview_min_version) <= FROZEN_MARKETTOR_VERSION
+            get_instance_setting("ASYNC_MIGRATIONS_IGNORE_CLAIRVIEW_VERSION")
+            or Version(async_migration.clairview_min_version) <= FROZEN_CLAIRVIEW_VERSION
         )
 
 

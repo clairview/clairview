@@ -37,7 +37,7 @@ export const isLegacyFunnelsFilter = (filters: Record<string, any> | undefined):
         'funnel_window_interval',
         'funnel_order_type',
         'hidden_legend_keys',
-        'funnel_aggregate_by_torql',
+        'funnel_aggregate_by_clairql',
     ]
     return legacyKeys.some((key) => key in filters)
 }
@@ -66,7 +66,7 @@ export const isLegacyPathsFilter = (filters: Record<string, any> | undefined): b
     }
 
     const legacyKeys = [
-        'paths_torql_expression',
+        'paths_clairql_expression',
         'include_event_types',
         'start_point',
         'end_point',

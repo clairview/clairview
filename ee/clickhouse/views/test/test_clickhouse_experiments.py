@@ -1397,7 +1397,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
                             "properties": [
                                 {"key": "bonk", "value": "bonk"},
                                 {"key": "id", "value": cohort_extra.id, "type": "cohort"},
-                                {"key": "properties.$current_url in ('x', 'y')", "type": "torql"},
+                                {"key": "properties.$current_url in ('x', 'y')", "type": "clairql"},
                                 {"key": "bonk-person", "value": "bonk", "type": "person"},
                             ],
                         }
@@ -1485,7 +1485,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
                                 {
                                     "event_filters": [
                                         {"key": "bonk", "type": "event", "value": "bonk"},
-                                        {"key": "properties.$current_url in ('x', 'y')", "type": "torql"},
+                                        {"key": "properties.$current_url in ('x', 'y')", "type": "clairql"},
                                     ],
                                     "event_type": "events",
                                     "explicit_datetime": "2024-01-01T10:23:00+00:00",
@@ -1581,7 +1581,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
                             "properties": [
                                 {"key": "bonk", "value": "bonk"},
                                 {"key": "id", "value": cohort_extra.id, "type": "cohort"},
-                                {"key": "properties.$current_url in ('x', 'y')", "type": "torql"},
+                                {"key": "properties.$current_url in ('x', 'y')", "type": "clairql"},
                                 {"key": "bonk-person", "value": "bonk", "type": "person"},
                             ],
                         }
@@ -1674,7 +1674,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
             target_filter["event_filters"],
             [
                 {"key": "bonk", "type": "event", "value": "bonk"},
-                {"key": "properties.$current_url in ('x', 'y')", "type": "torql"},
+                {"key": "properties.$current_url in ('x', 'y')", "type": "clairql"},
             ],
             cohort["filters"],
         )
@@ -1723,7 +1723,7 @@ class TestExperimentAuxiliaryEndpoints(ClickhouseTestMixin, APILicensedTest):
                             "entity_type": "actions",
                             "properties": [
                                 {"key": "bonk", "value": "bonk"},
-                                {"key": "properties.$current_url in ('x', 'y')", "type": "torql"},
+                                {"key": "properties.$current_url in ('x', 'y')", "type": "clairql"},
                                 {"key": "bonk-person", "value": "bonk", "type": "person"},
                             ],
                         }
@@ -1911,7 +1911,7 @@ class ClickhouseTestFunnelExperimentResults(ClickhouseTestMixin, APILicensedTest
         self.assertAlmostEqual(response_data["expected_loss"], 1, places=2)
 
     @snapshot_clickhouse_queries
-    def test_experiment_flow_with_event_results_with_torql_aggregation(self):
+    def test_experiment_flow_with_event_results_with_clairql_aggregation(self):
         journeys_for(
             {
                 "person1": [
@@ -2029,7 +2029,7 @@ class ClickhouseTestFunnelExperimentResults(ClickhouseTestMixin, APILicensedTest
                         {"order": 1, "id": "$pageleave"},
                     ],
                     "properties": [],
-                    "funnel_aggregate_by_torql": "properties.$account_id",
+                    "funnel_aggregate_by_clairql": "properties.$account_id",
                 },
             },
         )
@@ -3159,7 +3159,7 @@ class ClickhouseTestTrendExperimentResults(ClickhouseTestMixin, APILicensedTest)
         self.assertFalse(response_data["significant"])
 
     @snapshot_clickhouse_queries
-    def test_experiment_flow_with_event_results_with_torql_filter(self):
+    def test_experiment_flow_with_event_results_with_clairql_filter(self):
         journeys_for(
             {
                 "person1": [
@@ -3167,27 +3167,27 @@ class ClickhouseTestTrendExperimentResults(ClickhouseTestMixin, APILicensedTest)
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-02",
-                        "properties": {"$feature/a-b-test": "test", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "test", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-02",
-                        "properties": {"$feature/a-b-test": "test", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "test", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-02",
-                        "properties": {"$feature/a-b-test": "test", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "test", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-02",
-                        "properties": {"$feature/a-b-test": "test", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "test", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-02",
-                        "properties": {"$feature/a-b-test": "test", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "test", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
@@ -3225,24 +3225,24 @@ class ClickhouseTestTrendExperimentResults(ClickhouseTestMixin, APILicensedTest)
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-03",
-                        "properties": {"$feature/a-b-test": "control", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "control", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-04",
-                        "properties": {"$feature/a-b-test": "control", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "control", "clairql": "true"},
                     },
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-05",
-                        "properties": {"$feature/a-b-test": "control", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "control", "clairql": "true"},
                     },
                 ],
                 "person3": [
                     {
                         "event": "$pageview",
                         "timestamp": "2020-01-04",
-                        "properties": {"$feature/a-b-test": "control", "torql": "true"},
+                        "properties": {"$feature/a-b-test": "control", "clairql": "true"},
                     },
                     {
                         "event": "$feature_flag_called",
@@ -3311,8 +3311,8 @@ class ClickhouseTestTrendExperimentResults(ClickhouseTestMixin, APILicensedTest)
                             "id": "$pageview",
                             "properties": [
                                 {
-                                    "key": "properties.torql ilike 'true'",
-                                    "type": "torql",
+                                    "key": "properties.clairql ilike 'true'",
+                                    "type": "clairql",
                                     "value": None,
                                 }
                             ],

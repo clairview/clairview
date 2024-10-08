@@ -22,7 +22,7 @@ from clairview.warehouse.data_load.service import (
 )
 from clairview.warehouse.models import ExternalDataSource, ExternalDataSchema, ExternalDataJob
 from clairview.warehouse.api.external_data_schema import ExternalDataSchemaSerializer, SimpleExternalDataSchemaSerializer
-from clairview.torql.database.database import create_torql_database
+from clairview.clairql.database.database import create_clairql_database
 from clairview.temporal.data_imports.pipelines.stripe import validate_credentials as validate_stripe_credentials
 from clairview.temporal.data_imports.pipelines.zendesk import validate_credentials as validate_zendesk_credentials
 from clairview.temporal.data_imports.pipelines.vitally import validate_credentials as validate_vitally_credentials
@@ -228,7 +228,7 @@ class ExternalDataSourceViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_torql_database(team_id=self.team_id)
+        context["database"] = create_clairql_database(team_id=self.team_id)
 
         return context
 

@@ -159,11 +159,11 @@ export const insightDataLogic = kea<insightDataLogicType>([
             },
         ],
 
-        torQL: [
+        clairQL: [
             (s) => [s.insightData],
             (insightData): string | null => {
-                if (insightData && 'torql' in insightData && insightData.torql !== '') {
-                    return insightData.torql
+                if (insightData && 'clairql' in insightData && insightData.clairql !== '') {
+                    return insightData.clairql
                 }
                 return null
             },

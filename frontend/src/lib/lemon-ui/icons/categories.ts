@@ -197,6 +197,6 @@ export const TEAMS_AND_COMPANIES = {
     ],
     'Feature Success': ['IconFlask', 'IconTestTube', 'IconMultivariateTesting', 'IconSplitTesting'],
     Pipeline: ['IconWebhooks', 'IconDecisionTree'],
-    'Product OS': ['IconNotebook', 'IconTorQL', 'IconDashboard', 'IconSupport'],
+    'Product OS': ['IconNotebook', 'IconClairQL', 'IconDashboard', 'IconSupport'],
     Logos: ['IconLogomark', 'IconGithub'],
 }

@@ -7,13 +7,13 @@ describe('Redis', () => {
 
         beforeEach(() => {
             config.REDIS_URL = 'redis://localhost:6379'
-            config.MARKETTOR_REDIS_HOST = 'clairview-redis'
-            config.MARKETTOR_REDIS_PORT = 6379
-            config.MARKETTOR_REDIS_PASSWORD = 'clairview-password'
+            config.CLAIRVIEW_REDIS_HOST = 'clairview-redis'
+            config.CLAIRVIEW_REDIS_PORT = 6379
+            config.CLAIRVIEW_REDIS_PASSWORD = 'clairview-password'
             config.INGESTION_REDIS_HOST = 'ingestion-redis'
             config.INGESTION_REDIS_PORT = 6479
-            config.MARKETTOR_SESSION_RECORDING_REDIS_HOST = 'session-recording-redis'
-            config.MARKETTOR_SESSION_RECORDING_REDIS_PORT = 6579
+            config.CLAIRVIEW_SESSION_RECORDING_REDIS_HOST = 'session-recording-redis'
+            config.CLAIRVIEW_SESSION_RECORDING_REDIS_PORT = 6579
         })
 
         it('should respond with unique options if all values set', () => {
@@ -45,9 +45,9 @@ describe('Redis', () => {
         })
 
         it('should respond with REDIS_HOST if no options set', () => {
-            config.MARKETTOR_REDIS_HOST = ''
+            config.CLAIRVIEW_REDIS_HOST = ''
             config.INGESTION_REDIS_HOST = ''
-            config.MARKETTOR_SESSION_RECORDING_REDIS_HOST = ''
+            config.CLAIRVIEW_SESSION_RECORDING_REDIS_HOST = ''
 
             expect(getRedisConnectionOptions(config, 'clairview')).toMatchInlineSnapshot(`
                 Object {
@@ -66,7 +66,7 @@ describe('Redis', () => {
             `)
         })
 
-        it('should use the MARKETTOR_REDIS_HOST for ingestion if INGESTION_REDIS_HOST is not set', () => {
+        it('should use the CLAIRVIEW_REDIS_HOST for ingestion if INGESTION_REDIS_HOST is not set', () => {
             config.INGESTION_REDIS_HOST = ''
 
             expect(getRedisConnectionOptions(config, 'ingestion')).toMatchInlineSnapshot(`

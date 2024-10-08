@@ -6,7 +6,7 @@ from clairview.models import PluginConfig
 from clairview.test.base import BaseTest
 
 
-class TestTemplateMarkettor(BaseHogFunctionTemplateTest):
+class TestTemplateClairview(BaseHogFunctionTemplateTest):
     template = template_clairview
 
     def test_function_works(self):
@@ -106,7 +106,7 @@ class TestTemplateMigration(BaseTest):
                     "name": "All events",
                     "type": "events",
                     "order": 0,
-                    "properties": [{"type": "torql", "key": "event not in ('event1', 'event2', '\\'smore')"}],
+                    "properties": [{"type": "clairql", "key": "event not in ('event1', 'event2', '\\'smore')"}],
                 }
             ]
         }

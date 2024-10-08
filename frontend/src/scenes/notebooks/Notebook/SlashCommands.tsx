@@ -1,7 +1,7 @@
 import {
     IconCursor,
     IconFunnels,
-    IconTorQL,
+    IconClairQL,
     IconLifecycle,
     IconPeople,
     IconRetention,
@@ -233,16 +233,16 @@ const SLASH_COMMANDS: SlashCommandsItem[] = [
             ),
     },
     {
-        title: 'TorQL',
+        title: 'ClairQL',
         search: 'sql',
-        icon: <IconTorQL color="currentColor" />,
+        icon: <IconClairQL color="currentColor" />,
         command: (chain, pos) =>
             chain.insertContentAt(
                 pos,
                 buildNodeQueryContent({
                     kind: NodeKind.DataTableNode,
                     source: {
-                        kind: NodeKind.TorQLQuery,
+                        kind: NodeKind.ClairQLQuery,
                         query: `select event,
         person.properties.email,
         properties.$browser,

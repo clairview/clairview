@@ -15,7 +15,7 @@ from datetime import datetime
 
 
 if TYPE_CHECKING:
-    from clairviewanalytics import Markettor
+    from clairviewanalytics import Clairview
 
 REDIS_LOCK_TOKEN = "clairview:decide_analytics:lock"
 CACHE_BUCKET_SIZE = 60 * 2  # duration in seconds
@@ -64,12 +64,12 @@ def _extract_total_count_for_key_from_redis_hash(client: redis.Redis, key: str) 
     return total_count, min_time, max_time
 
 
-def capture_usage_for_all_teams(ph_client: "Markettor") -> None:
+def capture_usage_for_all_teams(ph_client: "Clairview") -> None:
     for team in Team.objects.exclude(Q(organization__for_internal_metrics=True) | Q(is_demo=True)).only("id", "uuid"):
         capture_team_decide_usage(ph_client, team.id, team.uuid)
 
 
-def capture_team_decide_usage(ph_client: "Markettor", team_id: int, team_uuid: str) -> None:
+def capture_team_decide_usage(ph_client: "Clairview", team_id: int, team_uuid: str) -> None:
     try:
         client = get_client()
         total_decide_request_count = 0

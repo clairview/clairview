@@ -18,7 +18,7 @@ const meta: Meta = {
         mockDate: '2023-02-01',
         layout: 'fullscreen',
         viewMode: 'story',
-        featureFlags: [FEATURE_FLAGS.MARKETTOR_3000_NAV],
+        featureFlags: [FEATURE_FLAGS.CLAIRVIEW_3000_NAV],
     },
 }
 export default meta

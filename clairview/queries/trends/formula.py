@@ -14,8 +14,8 @@ from clairview.queries.breakdown_props import get_breakdown_cohort_name
 from clairview.queries.insight import insight_sync_execute
 from clairview.queries.trends.util import parse_response
 
-# Regex for adding the formula variable index to all params, except TorQL params
-PARAM_DISAMBIGUATION_REGEX = re.compile(r"%\((?!torql_)")
+# Regex for adding the formula variable index to all params, except ClairQL params
+PARAM_DISAMBIGUATION_REGEX = re.compile(r"%\((?!clairql_)")
 
 
 class TrendsFormula:
@@ -29,7 +29,7 @@ class TrendsFormula:
             entity_params = {f"{idx}_{key}": value for key, value in entity_params.items()}
             queries.append(sql)
             params.update(entity_params)
-        params.update(filter.torql_context.values)
+        params.update(filter.clairql_context.values)
 
         breakdown_value = ""
         if filter.breakdown_type == "cohort":

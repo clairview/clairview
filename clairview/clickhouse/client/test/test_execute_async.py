@@ -26,7 +26,7 @@ from clairview.clickhouse.client.execute_async import (
 
 def build_query(sql):
     return {
-        "kind": "TorQLQuery",
+        "kind": "ClairQLQuery",
         "query": sql,
     }
 

@@ -14,7 +14,7 @@ from clairview.api.utils import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.request import Request
 from rest_framework.response import Response
-from clairview.torql.database.database import create_torql_database
+from clairview.clairql.database.database import create_clairql_database
 from clairview.api.log_entries import LogEntryMixin
 
 from clairview.warehouse.data_load.service import (
@@ -100,11 +100,11 @@ class ExternalDataSchemaSerializer(serializers.ModelSerializer):
     def get_table(self, schema: ExternalDataSchema) -> Optional[dict]:
         from clairview.warehouse.api.table import SimpleTableSerializer
 
-        torql_context = self.context.get("database", None)
-        if not torql_context:
-            torql_context = create_torql_database(team_id=self.context["team_id"])
+        clairql_context = self.context.get("database", None)
+        if not clairql_context:
+            clairql_context = create_clairql_database(team_id=self.context["team_id"])
 
-        return SimpleTableSerializer(schema.table, context={"database": torql_context}).data or None
+        return SimpleTableSerializer(schema.table, context={"database": clairql_context}).data or None
 
     def get_sync_frequency(self, schema: ExternalDataSchema):
         return sync_frequency_interval_to_sync_frequency(schema)
@@ -205,7 +205,7 @@ class ExternalDataSchemaViewset(TeamAndOrgViewSetMixin, LogEntryMixin, viewsets.
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_torql_database(team_id=self.team_id)
+        context["database"] = create_clairql_database(team_id=self.team_id)
         return context
 
     def safely_get_queryset(self, queryset):

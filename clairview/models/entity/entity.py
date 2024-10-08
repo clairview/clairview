@@ -37,7 +37,7 @@ MathType = Literal[
     "p90_count_per_actor",
     "p95_count_per_actor",
     "p99_count_per_actor",
-    "torql",
+    "clairql",
 ]
 
 
@@ -55,7 +55,7 @@ class Entity(PropertyMixin):
     custom_name: Optional[str]
     math: Optional[MathType]
     math_property: Optional[str]
-    math_torql: Optional[str]
+    math_clairql: Optional[str]
     math_group_type_index: Optional[GroupTypeIndex]
     # Index is not set at all by default (meaning: access = AttributeError) - it's populated in EntitiesMixin.entities
     # Used for identifying entities within a single query during query building,
@@ -91,7 +91,7 @@ class Entity(PropertyMixin):
         self.custom_name = custom_name
         self.math = data.get("math")
         self.math_property = data.get("math_property")
-        self.math_torql = data.get("math_torql")
+        self.math_clairql = data.get("math_clairql")
         self.math_group_type_index = validate_group_type_index(
             "math_group_type_index", data.get("math_group_type_index")
         )
@@ -115,7 +115,7 @@ class Entity(PropertyMixin):
             "custom_name": self.custom_name,
             "math": self.math,
             "math_property": self.math_property,
-            "math_torql": self.math_torql,
+            "math_clairql": self.math_clairql,
             "math_group_type_index": self.math_group_type_index,
             "properties": self.property_groups.to_dict(),
             "id_field": self.id_field,
@@ -177,7 +177,7 @@ class Entity(PropertyMixin):
         "custom_name",
         "math",
         "math_property",
-        "math_torql",
+        "math_clairql",
         "properties",
         "id_field",
         "timestamp_field",

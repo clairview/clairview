@@ -183,7 +183,7 @@ export const errorTrackingGroupEventsQuery = ({
     return query
 }
 
-// JSON.stringify wraps strings in double quotes and TorQL only supports single quote strings
+// JSON.stringify wraps strings in double quotes and ClairQL only supports single quote strings
 const stringifyFingerprints = (fingerprints: ErrorTrackingGroup['fingerprint'][]): string => {
     const stringifiedFingerprints = fingerprints.map((fp) => {
         const stringifiedParts = fp.map((s) => `'${s}'`)

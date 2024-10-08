@@ -86,7 +86,7 @@ class PropertiesTimelineEventQuery(EventQuery):
             team_id=self._team_id,
             table_name=self.EVENT_TABLE_ALIAS,
             person_properties_mode=PersonPropertiesMode.DIRECT_ON_EVENTS,
-            torql_context=self._filter.torql_context,
+            clairql_context=self._filter.clairql_context,
         )
 
         return entity_format_params.get("entity_query", ""), entity_params

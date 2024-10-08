@@ -29,8 +29,8 @@ import clairview from 'clairview-js'
 import { compressedEventWithTime } from 'clairview-js/lib/src/extensions/replay/sessionrecording'
 import { RecordingComment } from 'scenes/session-recordings/player/inspector/playerInspectorLogic'
 
-import { TorQLQuery, NodeKind } from '~/queries/schema'
-import { torql } from '~/queries/utils'
+import { ClairQLQuery, NodeKind } from '~/queries/schema'
+import { clairql } from '~/queries/utils'
 import {
     AnyPropertyFilter,
     EncodedRecordingSnapshot,
@@ -61,7 +61,7 @@ const IS_TEST_MODE = process.env.NODE_ENV === 'test'
 const BUFFER_MS = 60000 // +- before and after start and end of a recording to query for.
 const DEFAULT_REALTIME_POLLING_MILLIS = 3000
 
-let marketTorEEModule: ClairViewEE
+let clairViewEEModule: ClairViewEE
 
 function isRecordingSnapshot(x: unknown): x is RecordingSnapshot {
     return typeof x === 'object' && x !== null && 'type' in x && 'timestamp' in x
@@ -197,7 +197,7 @@ function coerceToEventWithTime(d: unknown, withMobileTransformer: boolean): even
     // we decompress first so that we could support partial compression on mobile in future
     const currentEvent = decompressEvent(d)
     return withMobileTransformer
-        ? marketTorEEModule?.mobileReplay?.transformEventToWeb(currentEvent) || (currentEvent as eventWithTime)
+        ? clairViewEEModule?.mobileReplay?.transformEventToWeb(currentEvent) || (currentEvent as eventWithTime)
         : (currentEvent as eventWithTime)
 }
 
@@ -207,8 +207,8 @@ export const parseEncodedSnapshots = async (
     // this is only kept so that we can export the untransformed data for debugging
     withMobileTransformer: boolean = true
 ): Promise<RecordingSnapshot[]> => {
-    if (!marketTorEEModule) {
-        marketTorEEModule = await clairviewEE()
+    if (!clairViewEEModule) {
+        clairViewEEModule = await clairviewEE()
     }
 
     const lineCount = items.length
@@ -664,9 +664,9 @@ export const sessionRecordingDataLogic = kea<sessionRecordingDataLogicType>([
                     const earliestTimestamp = timestamps.reduce((a, b) => Math.min(a, b))
                     const latestTimestamp = timestamps.reduce((a, b) => Math.max(a, b))
                     try {
-                        const query: TorQLQuery = {
-                            kind: NodeKind.TorQLQuery,
-                            query: torql`SELECT properties, uuid
+                        const query: ClairQLQuery = {
+                            kind: NodeKind.ClairQLQuery,
+                            query: clairql`SELECT properties, uuid
                                          FROM events
                                          WHERE timestamp > ${(earliestTimestamp - 1000) / 1000}
                                            AND timestamp < ${(latestTimestamp + 1000) / 1000}

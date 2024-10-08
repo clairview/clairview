@@ -1,7 +1,7 @@
 from typing import Any, Union
 
 from clairview.constants import TREND_FILTER_TYPE_ACTIONS
-from clairview.torql.torql import translate_torql
+from clairview.clairql.clairql import translate_clairql
 from clairview.models.filters.filter import Filter
 from clairview.models.group.util import get_aggregation_target_field
 from clairview.queries.event_query import EventQuery
@@ -26,12 +26,12 @@ class FunnelEventQuery(EventQuery):
                 self._person_id_alias,
             )
 
-        # Aggregating by TorQL
-        elif self._filter.funnel_aggregate_by_torql and self._filter.funnel_aggregate_by_torql != "person_id":
-            aggregation_target = translate_torql(
-                self._filter.funnel_aggregate_by_torql,
+        # Aggregating by ClairQL
+        elif self._filter.funnel_aggregate_by_clairql and self._filter.funnel_aggregate_by_clairql != "person_id":
+            aggregation_target = translate_clairql(
+                self._filter.funnel_aggregate_by_clairql,
                 events_table_alias=self.EVENT_TABLE_ALIAS,
-                context=self._filter.torql_context,
+                context=self._filter.clairql_context,
             )
 
         # Aggregating by Distinct ID

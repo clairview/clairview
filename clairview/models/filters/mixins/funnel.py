@@ -43,7 +43,7 @@ from clairview.constants import (
     FunnelCorrelationType,
     FunnelOrderType,
     FunnelVizType,
-    FUNNEL_AGGREAGTE_BY_TORQL,
+    FUNNEL_AGGREAGTE_BY_CLAIRQL,
 )
 from clairview.models.filters.mixins.base import BaseParamMixin, FunnelWindowIntervalType
 from clairview.models.filters.mixins.utils import cached_property, include_dict
@@ -211,14 +211,14 @@ class FunnelLayoutMixin(BaseParamMixin):
         return {FUNNEL_LAYOUT: self.layout} if self.layout else {}
 
 
-class FunnelTorQLAggregationMixin(BaseParamMixin):
+class FunnelClairQLAggregationMixin(BaseParamMixin):
     @cached_property
-    def funnel_aggregate_by_torql(self) -> Optional[str]:
-        return self._data.get(FUNNEL_AGGREAGTE_BY_TORQL)
+    def funnel_aggregate_by_clairql(self) -> Optional[str]:
+        return self._data.get(FUNNEL_AGGREAGTE_BY_CLAIRQL)
 
     @include_dict
-    def funnel_aggregate_by_torql_to_dict(self):
-        return {FUNNEL_AGGREAGTE_BY_TORQL: self.funnel_aggregate_by_torql} if self.funnel_aggregate_by_torql else {}
+    def funnel_aggregate_by_clairql_to_dict(self):
+        return {FUNNEL_AGGREAGTE_BY_CLAIRQL: self.funnel_aggregate_by_clairql} if self.funnel_aggregate_by_clairql else {}
 
 
 class FunnelTypeMixin(BaseParamMixin):

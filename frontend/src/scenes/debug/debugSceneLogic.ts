@@ -6,7 +6,7 @@ import { stringifiedExamples } from '~/queries/examples'
 
 import type { debugSceneLogicType } from './debugSceneLogicType'
 
-const DEFAULT_QUERY: string = stringifiedExamples['TorQLRaw']
+const DEFAULT_QUERY: string = stringifiedExamples['ClairQLRaw']
 
 export const debugSceneLogic = kea<debugSceneLogicType>([
     path(['scenes', 'query', 'debugSceneLogic']),

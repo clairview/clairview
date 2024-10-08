@@ -349,7 +349,7 @@ export const CORE_FILTER_DEFINITIONS_BY_GROUP = {
         $time: {
             label: '$time (deprecated)',
             description:
-                'Use the TorQL field `timestamp` instead. This field was previously set on some client side events.',
+                'Use the ClairQL field `timestamp` instead. This field was previously set on some client side events.',
             system: true,
             examples: ['1681211521.345'],
         },

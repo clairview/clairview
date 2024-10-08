@@ -6,12 +6,12 @@ from collections.abc import Callable
 from hogvm.python.execute import execute_bytecode, get_nested_value
 from hogvm.python.operation import (
     Operation as op,
-    TORQL_BYTECODE_IDENTIFIER as _H,
-    TORQL_BYTECODE_VERSION as VERSION,
+    CLAIRQL_BYTECODE_IDENTIFIER as _H,
+    CLAIRQL_BYTECODE_VERSION as VERSION,
 )
 from hogvm.python.utils import UncaughtHogVMException
-from clairview.torql.bytecode import create_bytecode
-from clairview.torql.parser import parse_expr, parse_program
+from clairview.clairql.bytecode import create_bytecode
+from clairview.clairql.parser import parse_expr, parse_program
 
 
 class TestBytecodeExecute:
@@ -301,7 +301,7 @@ class TestBytecodeExecute:
         )
 
     def test_version_0_and_1(self):
-        # version 0 of TorQL bytecode had arguments in a different order
+        # version 0 of ClairQL bytecode had arguments in a different order
         assert (
             execute_bytecode(["_h", op.STRING, "1", op.STRING, "2", op.CALL_GLOBAL, "concat", 2, op.RETURN]).result
             == "21"

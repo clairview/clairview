@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 from freezegun.api import freeze_time
 
 from clairview.client import sync_execute
-from clairview.torql.torql import TorQLContext
+from clairview.clairql.clairql import ClairQLContext
 from clairview.models.action import Action
 from clairview.models.cohort import Cohort
 from clairview.queries.breakdown_props import _parse_breakdown_cohorts
@@ -60,6 +60,6 @@ def test_get_earliest_timestamp_with_no_events(db, team):
 def test_parse_breakdown_cohort_query(db, team):
     action = Action.objects.create(team=team, name="$pageview", steps_json=[{"event": "$pageview"}])
     cohort1 = Cohort.objects.create(team=team, groups=[{"action_id": action.pk, "days": 3}], name="cohort1")
-    queries, params = _parse_breakdown_cohorts([cohort1], TorQLContext(team_id=team.pk))
+    queries, params = _parse_breakdown_cohorts([cohort1], ClairQLContext(team_id=team.pk))
     assert len(queries) == 1
     sync_execute(queries[0], params)

@@ -16,8 +16,8 @@ export function DatabaseTableList(): JSX.Element {
             <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
                     These are the database tables you can query under SQL insights with{' '}
-                    <Link to="https://clairview.com/manual/torql" target="_blank">
-                        TorQL
+                    <Link to="https://clairview.com/manual/clairql" target="_blank">
+                        ClairQL
                     </Link>
                     .
                 </div>

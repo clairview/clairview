@@ -19,11 +19,11 @@ from clairview.clickhouse.materialized_columns import (
     get_materialized_columns,
 )
 from clairview.constants import PropertyOperatorType
-from clairview.torql import ast
-from clairview.torql.torql import TorQLContext
-from clairview.torql.parser import parse_expr
-from clairview.torql.visitor import TraversingVisitor
-from clairview.torql.database.s3_table import S3Table
+from clairview.clairql import ast
+from clairview.clairql.clairql import ClairQLContext
+from clairview.clairql.parser import parse_expr
+from clairview.clairql.visitor import TraversingVisitor
+from clairview.clairql.database.s3_table import S3Table
 from clairview.models.action.action import Action
 from clairview.models.action.util import get_action_tables_and_properties
 from clairview.models.cohort import Cohort
@@ -76,7 +76,7 @@ def parse_prop_grouped_clauses(
     team_id: int,
     property_group: Optional[PropertyGroup],
     *,
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     prepend: str = "global",
     table_name: str = "",
     allow_denormalized_props: bool = True,
@@ -105,7 +105,7 @@ def parse_prop_grouped_clauses(
                     person_properties_mode=person_properties_mode,
                     person_id_joined_alias=person_id_joined_alias,
                     group_properties_joined=group_properties_joined,
-                    torql_context=torql_context,
+                    clairql_context=clairql_context,
                     _top_level=False,
                 )
                 group_clauses.append(clause)
@@ -126,7 +126,7 @@ def parse_prop_grouped_clauses(
             group_properties_joined=group_properties_joined,
             property_operator=property_group.type,
             team_id=team_id,
-            torql_context=torql_context,
+            clairql_context=clairql_context,
         )
 
     if not _final:
@@ -150,7 +150,7 @@ def parse_prop_clauses(
     team_id: int,
     filters: list[Property],
     *,
-    torql_context: Optional[TorQLContext],
+    clairql_context: Optional[ClairQLContext],
     prepend: str = "global",
     table_name: str = "",
     allow_denormalized_props: bool = True,
@@ -181,7 +181,7 @@ def parse_prop_clauses(
                     person_id_query, cohort_filter_params = format_filter_query(
                         cohort,
                         idx,
-                        torql_context,
+                        clairql_context,
                         custom_match_field=person_id_joined_alias,
                     )
                     params = {**params, **cohort_filter_params}
@@ -190,7 +190,7 @@ def parse_prop_clauses(
                     person_id_query, cohort_filter_params = format_cohort_subquery(
                         cohort,
                         idx,
-                        torql_context,
+                        clairql_context,
                         custom_match_field=f"{person_id_joined_alias}",
                     )
                     params = {**params, **cohort_filter_params}
@@ -342,12 +342,12 @@ def parse_prop_clauses(
             filter_query, filter_params = get_session_property_filter_statement(prop, idx, prepend)
             final.append(f"{property_operator} {filter_query}")
             params.update(filter_params)
-        elif prop.type == "torql":
-            if torql_context is None:
-                raise ValueError("TorQL is not supported here")
-            from clairview.torql.torql import translate_torql
+        elif prop.type == "clairql":
+            if clairql_context is None:
+                raise ValueError("ClairQL is not supported here")
+            from clairview.clairql.clairql import translate_clairql
 
-            filter_query = translate_torql(prop.key, torql_context)
+            filter_query = translate_clairql(prop.key, clairql_context)
             final.append(f"{property_operator} {filter_query}")
 
     if final:
@@ -843,7 +843,7 @@ def build_selector_regex(selector: Selector) -> str:
         return r""
 
 
-class TorQLPropertyChecker(TraversingVisitor):
+class ClairQLPropertyChecker(TraversingVisitor):
     def __init__(self):
         self.event_properties: list[str] = []
         self.person_properties: list[str] = []
@@ -867,8 +867,8 @@ class TorQLPropertyChecker(TraversingVisitor):
 def extract_tables_and_properties(props: list[Property]) -> TCounter[PropertyIdentifier]:
     counters: list[tuple] = []
     for prop in props:
-        if prop.type == "torql":
-            counters.extend(count_torql_properties(prop.key))
+        if prop.type == "clairql":
+            counters.extend(count_clairql_properties(prop.key))
         elif prop.type == "behavioral" and prop.event_type == "actions":
             action = Action.objects.get(pk=prop.key)
             action_counter = get_action_tables_and_properties(action)
@@ -878,13 +878,13 @@ def extract_tables_and_properties(props: list[Property]) -> TCounter[PropertyIde
     return Counter(cast(Iterable, counters))
 
 
-def count_torql_properties(
+def count_clairql_properties(
     expr: str, counter: Optional[TCounter[PropertyIdentifier]] = None
 ) -> TCounter[PropertyIdentifier]:
     if not counter:
         counter = Counter()
     node = parse_expr(expr)
-    property_checker = TorQLPropertyChecker()
+    property_checker = ClairQLPropertyChecker()
     property_checker.visit(node)
     for field in property_checker.event_properties:
         counter[(field, "event", None)] += 1
@@ -908,7 +908,7 @@ def get_session_property_filter_statement(prop: Property, idx: int, prepend: str
         )
 
     else:
-        raise exceptions.ValidationError(f"Session property '{prop.key}' is only valid in TorQL queries.")
+        raise exceptions.ValidationError(f"Session property '{prop.key}' is only valid in ClairQL queries.")
 
 
 def clear_excess_levels(prop: Union["PropertyGroup", "Property"], skip=False):

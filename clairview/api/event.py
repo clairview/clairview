@@ -17,7 +17,7 @@ from sentry_sdk import capture_exception
 from clairview.api.documentation import PropertiesSerializer, extend_schema
 from clairview.api.routing import TeamAndOrgViewSetMixin
 from clairview.client import query_with_columns, sync_execute
-from clairview.torql.constants import DEFAULT_RETURNED_ROWS, MAX_SELECT_RETURNED_ROWS
+from clairview.clairql.constants import DEFAULT_RETURNED_ROWS, MAX_SELECT_RETURNED_ROWS
 from clairview.models import Element, Filter, Person
 from clairview.models.event.query_event_list import query_events_list
 from clairview.models.event.sql import GET_CUSTOM_EVENTS, SELECT_ONE_EVENT_SQL
@@ -122,13 +122,13 @@ class EventViewSet(
             OpenApiParameter(
                 "select",
                 OpenApiTypes.STR,
-                description="(Experimental) JSON-serialized array of TorQL expressions to return",
+                description="(Experimental) JSON-serialized array of ClairQL expressions to return",
                 many=True,
             ),
             OpenApiParameter(
                 "where",
                 OpenApiTypes.STR,
-                description="(Experimental) JSON-serialized array of TorQL expressions that must pass",
+                description="(Experimental) JSON-serialized array of ClairQL expressions that must pass",
                 many=True,
             ),
             OpenApiParameter("person_id", OpenApiTypes.INT, description="Filter list by person id."),

@@ -78,12 +78,12 @@ services:
         environment:
             SENTRY_DSN: $SENTRY_DSN
             SITE_URL: https://$DOMAIN
-            SECRET_KEY: $MARKETTOR_SECRET
+            SECRET_KEY: $CLAIRVIEW_SECRET
             OBJECT_STORAGE_ACCESS_KEY_ID: 'object_storage_root_user'
             OBJECT_STORAGE_SECRET_ACCESS_KEY: 'object_storage_root_password'
             OBJECT_STORAGE_ENDPOINT: http://objectstorage:19000
             OBJECT_STORAGE_ENABLED: true
-        image: $REGISTRY_URL:$MARKETTOR_APP_TAG
+        image: $REGISTRY_URL:$CLAIRVIEW_APP_TAG
     web:
         extends:
             file: docker-compose.base.yml
@@ -91,11 +91,11 @@ services:
         command: /compose/start
         volumes:
             - ./compose:/compose
-        image: $REGISTRY_URL:$MARKETTOR_APP_TAG
+        image: $REGISTRY_URL:$CLAIRVIEW_APP_TAG
         environment:
             SENTRY_DSN: $SENTRY_DSN
             SITE_URL: https://$DOMAIN
-            SECRET_KEY: $MARKETTOR_SECRET
+            SECRET_KEY: $CLAIRVIEW_SECRET
             OBJECT_STORAGE_ACCESS_KEY_ID: 'object_storage_root_user'
             OBJECT_STORAGE_SECRET_ACCESS_KEY: 'object_storage_root_password'
             OBJECT_STORAGE_ENDPOINT: http://objectstorage:19000
@@ -111,11 +111,11 @@ services:
         extends:
             file: docker-compose.base.yml
             service: plugins
-        image: $REGISTRY_URL:$MARKETTOR_APP_TAG
+        image: $REGISTRY_URL:$CLAIRVIEW_APP_TAG
         environment:
             SENTRY_DSN: $SENTRY_DSN
             SITE_URL: https://$DOMAIN
-            SECRET_KEY: $MARKETTOR_SECRET
+            SECRET_KEY: $CLAIRVIEW_SECRET
             OBJECT_STORAGE_ACCESS_KEY_ID: 'object_storage_root_user'
             OBJECT_STORAGE_SECRET_ACCESS_KEY: 'object_storage_root_password'
             OBJECT_STORAGE_ENDPOINT: http://objectstorage:19000
@@ -157,11 +157,11 @@ services:
         extends:
             file: docker-compose.base.yml
             service: asyncmigrationscheck
-        image: $REGISTRY_URL:$MARKETTOR_APP_TAG
+        image: $REGISTRY_URL:$CLAIRVIEW_APP_TAG
         environment:
             SENTRY_DSN: $SENTRY_DSN
             SITE_URL: https://$DOMAIN
-            SECRET_KEY: $MARKETTOR_SECRET
+            SECRET_KEY: $CLAIRVIEW_SECRET
             SKIP_ASYNC_MIGRATIONS_SETUP: 0
 
     # Temporal containers
@@ -203,11 +203,11 @@ services:
             service: temporal-django-worker
         volumes:
             - ./compose:/compose
-        image: $REGISTRY_URL:$MARKETTOR_APP_TAG
+        image: $REGISTRY_URL:$CLAIRVIEW_APP_TAG
         environment:
             SENTRY_DSN: $SENTRY_DSN
             SITE_URL: https://$DOMAIN
-            SECRET_KEY: $MARKETTOR_SECRET
+            SECRET_KEY: $CLAIRVIEW_SECRET
         depends_on:
             - db
             - redis

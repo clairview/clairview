@@ -5,9 +5,9 @@ import { eventUsageLogic } from 'lib/utils/eventUsageLogic'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { TorQLQueryModifiers } from '~/queries/schema'
+import { ClairQLQueryModifiers } from '~/queries/schema'
 
-type SessionTableVersion = NonNullable<TorQLQueryModifiers['sessionTableVersion']>
+type SessionTableVersion = NonNullable<ClairQLQueryModifiers['sessionTableVersion']>
 
 const bounceRatePageViewModeOptions: LemonRadioOption<SessionTableVersion>[] = [
     {

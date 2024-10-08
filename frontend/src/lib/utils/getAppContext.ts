@@ -2,14 +2,14 @@ import { AppContext, OrganizationType, PathType, TeamType } from '~/types'
 
 declare global {
     export interface Window {
-        MARKETTOR_APP_CONTEXT?: AppContext
+        CLAIRVIEW_APP_CONTEXT?: AppContext
         SENTRY_DSN?: string
         SENTRY_ENVIRONMENT?: string
     }
 }
 
 export function getAppContext(): AppContext | undefined {
-    return window.MARKETTOR_APP_CONTEXT || undefined
+    return window.CLAIRVIEW_APP_CONTEXT || undefined
 }
 
 export function getDefaultEventName(): string {

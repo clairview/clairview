@@ -49,7 +49,7 @@ class TestLifecycleFilter(BaseTest):
                         "custom_name": None,
                         "math": "total",
                         "math_property": None,
-                        "math_torql": None,
+                        "math_clairql": None,
                         "math_group_type_index": None,
                         "properties": {},
                         "timestamp_field": None,

@@ -2,7 +2,7 @@ import { actions, afterMount, kea, listeners, path, props, reducers, selectors }
 import { combineUrl, encodeParams } from 'kea-router'
 import { lemonToast } from 'lib/lemon-ui/LemonToast/LemonToast'
 
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import { ToolbarProps } from '~/types'
 
 import type { toolbarConfigLogicType } from './toolbarConfigLogicType'
@@ -51,17 +51,17 @@ export const toolbarConfigLogic = kea<toolbarConfigLogicType>([
 
     listeners(({ values, actions }) => ({
         authenticate: () => {
-            toolbarMarkettorJS.capture('toolbar authenticate', { is_authenticated: values.isAuthenticated })
+            toolbarClairviewJS.capture('toolbar authenticate', { is_authenticated: values.isAuthenticated })
             const encodedUrl = encodeURIComponent(window.location.href)
             actions.persistConfig()
             window.location.href = `${values.apiURL}/authorize_and_redirect/?redirect=${encodedUrl}`
         },
         logout: () => {
-            toolbarMarkettorJS.capture('toolbar logout')
+            toolbarClairviewJS.capture('toolbar logout')
             localStorage.removeItem(LOCALSTORAGE_KEY)
         },
         tokenExpired: () => {
-            toolbarMarkettorJS.capture('toolbar token expired')
+            toolbarClairviewJS.capture('toolbar token expired')
             console.warn('ClairView Toolbar API token expired. Clearing session.')
             if (values.props.source !== 'localstorage') {
                 lemonToast.error('ClairView Toolbar API token expired.')
@@ -88,13 +88,13 @@ export const toolbarConfigLogic = kea<toolbarConfigLogicType>([
         if (props.instrument) {
             const distinctId = props.distinctId
 
-            void toolbarMarkettorJS.optIn()
+            void toolbarClairviewJS.optIn()
 
             if (distinctId) {
-                toolbarMarkettorJS.identify(distinctId, props.userEmail ? { email: props.userEmail } : {})
+                toolbarClairviewJS.identify(distinctId, props.userEmail ? { email: props.userEmail } : {})
             }
         }
-        toolbarMarkettorJS.capture('toolbar loaded', { is_authenticated: values.isAuthenticated })
+        toolbarClairviewJS.capture('toolbar loaded', { is_authenticated: values.isAuthenticated })
     }),
 ])
 

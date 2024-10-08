@@ -23,11 +23,11 @@ export function getDefaultConfig(): PluginsServerConfig {
         DATABASE_READONLY_URL: '',
         PLUGIN_STORAGE_DATABASE_URL: '',
         POSTGRES_CONNECTION_POOL_SIZE: 10,
-        MARKETTOR_DB_NAME: null,
-        MARKETTOR_DB_USER: 'postgres',
-        MARKETTOR_DB_PASSWORD: '',
-        MARKETTOR_POSTGRES_HOST: 'localhost',
-        MARKETTOR_POSTGRES_PORT: 5432,
+        CLAIRVIEW_DB_NAME: null,
+        CLAIRVIEW_DB_USER: 'postgres',
+        CLAIRVIEW_DB_PASSWORD: '',
+        CLAIRVIEW_POSTGRES_HOST: 'localhost',
+        CLAIRVIEW_POSTGRES_PORT: 5432,
         CLICKHOUSE_HOST: 'localhost',
         CLICKHOUSE_OFFLINE_CLUSTER_HOST: null,
         CLICKHOUSE_DATABASE: isTestEnv() ? 'clairview_test' : 'default',
@@ -70,9 +70,9 @@ export function getDefaultConfig(): PluginsServerConfig {
         REDIS_URL: 'redis://127.0.0.1',
         INGESTION_REDIS_HOST: '',
         INGESTION_REDIS_PORT: 6379,
-        MARKETTOR_REDIS_PASSWORD: '',
-        MARKETTOR_REDIS_HOST: '',
-        MARKETTOR_REDIS_PORT: 6379,
+        CLAIRVIEW_REDIS_PASSWORD: '',
+        CLAIRVIEW_REDIS_HOST: '',
+        CLAIRVIEW_REDIS_PORT: 6379,
         BASE_DIR: '.',
         PLUGINS_RELOAD_PUBSUB_CHANNEL: 'reload-plugins',
         WORKER_CONCURRENCY: 1,
@@ -162,8 +162,8 @@ export function getDefaultConfig(): PluginsServerConfig {
         SESSION_RECORDING_REDIS_PREFIX: '@clairview/replay/',
         SESSION_RECORDING_PARTITION_REVOKE_OPTIMIZATION: false,
         SESSION_RECORDING_PARALLEL_CONSUMPTION: false,
-        MARKETTOR_SESSION_RECORDING_REDIS_HOST: undefined,
-        MARKETTOR_SESSION_RECORDING_REDIS_PORT: undefined,
+        CLAIRVIEW_SESSION_RECORDING_REDIS_HOST: undefined,
+        CLAIRVIEW_SESSION_RECORDING_REDIS_PORT: undefined,
         SESSION_RECORDING_CONSOLE_LOGS_INGESTION_ENABLED: true,
         SESSION_RECORDING_REPLAY_EVENTS_INGESTION_ENABLED: true,
         SESSION_RECORDING_DEBUG_PARTITION: '',
@@ -237,16 +237,16 @@ export function overrideWithEnv(
     }
     const newConfig: PluginsServerConfig = { ...tmpConfig }
 
-    if (!newConfig.DATABASE_URL && !newConfig.MARKETTOR_DB_NAME) {
+    if (!newConfig.DATABASE_URL && !newConfig.CLAIRVIEW_DB_NAME) {
         throw Error(
-            'You must specify either DATABASE_URL or the database options MARKETTOR_DB_NAME, MARKETTOR_DB_USER, MARKETTOR_DB_PASSWORD, MARKETTOR_POSTGRES_HOST, MARKETTOR_POSTGRES_PORT!'
+            'You must specify either DATABASE_URL or the database options CLAIRVIEW_DB_NAME, CLAIRVIEW_DB_USER, CLAIRVIEW_DB_PASSWORD, CLAIRVIEW_POSTGRES_HOST, CLAIRVIEW_POSTGRES_PORT!'
         )
     }
 
     if (!newConfig.DATABASE_URL) {
-        const encodedUser = encodeURIComponent(newConfig.MARKETTOR_DB_USER)
-        const encodedPassword = encodeURIComponent(newConfig.MARKETTOR_DB_PASSWORD)
-        newConfig.DATABASE_URL = `postgres://${encodedUser}:${encodedPassword}@${newConfig.MARKETTOR_POSTGRES_HOST}:${newConfig.MARKETTOR_POSTGRES_PORT}/${newConfig.MARKETTOR_DB_NAME}`
+        const encodedUser = encodeURIComponent(newConfig.CLAIRVIEW_DB_USER)
+        const encodedPassword = encodeURIComponent(newConfig.CLAIRVIEW_DB_PASSWORD)
+        newConfig.DATABASE_URL = `postgres://${encodedUser}:${encodedPassword}@${newConfig.CLAIRVIEW_POSTGRES_HOST}:${newConfig.CLAIRVIEW_POSTGRES_PORT}/${newConfig.CLAIRVIEW_DB_NAME}`
     }
 
     if (!newConfig.JOB_QUEUE_GRAPHILE_URL) {

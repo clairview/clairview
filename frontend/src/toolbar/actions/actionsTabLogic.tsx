@@ -8,7 +8,7 @@ import { urls } from 'scenes/urls'
 import { actionsLogic } from '~/toolbar/actions/actionsLogic'
 import { toolbarLogic } from '~/toolbar/bar/toolbarLogic'
 import { toolbarConfigLogic } from '~/toolbar/toolbarConfigLogic'
-import { toolbarMarkettorJS } from '~/toolbar/toolbarMarkettorJS'
+import { toolbarClairviewJS } from '~/toolbar/toolbarClairviewJS'
 import { ActionDraftType, ActionForm } from '~/toolbar/types'
 import { actionStepToActionStepFormItem, elementToActionStep, stepToDatabaseFormat } from '~/toolbar/utils'
 import { ActionType, ElementType } from '~/types'
@@ -380,11 +380,11 @@ export const actionsTabLogic = kea<actionsTabLogicType>([
             }
         },
         showButtonActions: () => {
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'actions', enabled: true })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'actions', enabled: true })
         },
         hideButtonActions: () => {
             actions.setShowActionsTooltip(false)
-            toolbarMarkettorJS.capture('toolbar mode triggered', { mode: 'actions', enabled: false })
+            toolbarClairviewJS.capture('toolbar mode triggered', { mode: 'actions', enabled: false })
         },
         [actionsLogic.actionTypes.getActionsSuccess]: () => {
             const { userIntent, actionId } = values

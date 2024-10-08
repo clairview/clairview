@@ -16,14 +16,14 @@ from clairview.constants import (
     PATH_REPLACEMENTS,
     PATH_START_KEY,
     PATH_TYPE,
-    PATHS_TORQL_EXPRESSION,
+    PATHS_CLAIRQL_EXPRESSION,
     PATHS_EXCLUDE_EVENTS,
     PATHS_INCLUDE_CUSTOM_EVENTS,
     PATHS_INCLUDE_EVENT_TYPES,
     SCREEN_EVENT,
     START_POINT,
     STEP_LIMIT,
-    TORQL,
+    CLAIRQL,
 )
 from clairview.models.filters.mixins.common import BaseParamMixin
 from clairview.models.filters.mixins.utils import cached_property, include_dict
@@ -69,17 +69,17 @@ class EndPointMixin(BaseParamMixin):
         return {"end_point": self.end_point} if self.end_point else {}
 
 
-class PathsTorQLExpressionMixin(PathTypeMixin):
+class PathsClairQLExpressionMixin(PathTypeMixin):
     @cached_property
-    def paths_torql_expression(self) -> Optional[str]:
-        if self.path_type == TORQL or TORQL in self._data.get(PATHS_INCLUDE_EVENT_TYPES, []):
-            return self._data.get(PATHS_TORQL_EXPRESSION, "event")
+    def paths_clairql_expression(self) -> Optional[str]:
+        if self.path_type == CLAIRQL or CLAIRQL in self._data.get(PATHS_INCLUDE_EVENT_TYPES, []):
+            return self._data.get(PATHS_CLAIRQL_EXPRESSION, "event")
         else:
             return None
 
     @include_dict
-    def paths_torql_expression_to_dict(self):
-        return {"paths_torql_expression": self.paths_torql_expression} if self.paths_torql_expression else {}
+    def paths_clairql_expression_to_dict(self):
+        return {"paths_clairql_expression": self.paths_clairql_expression} if self.paths_clairql_expression else {}
 
 
 class TargetEventsMixin(BaseParamMixin):
@@ -118,8 +118,8 @@ class TargetEventsMixin(BaseParamMixin):
         return CUSTOM_EVENT in self.target_events
 
     @property
-    def include_torql(self) -> bool:
-        return TORQL in self.target_events
+    def include_clairql(self) -> bool:
+        return CLAIRQL in self.target_events
 
     @include_dict
     def target_events_to_dict(self) -> dict:

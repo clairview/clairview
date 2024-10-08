@@ -21,12 +21,12 @@ export function getRedisConnectionOptions(
     const fallback = { url: serverConfig.REDIS_URL }
     switch (kind) {
         case 'clairview':
-            return serverConfig.MARKETTOR_REDIS_HOST
+            return serverConfig.CLAIRVIEW_REDIS_HOST
                 ? {
-                      url: serverConfig.MARKETTOR_REDIS_HOST,
+                      url: serverConfig.CLAIRVIEW_REDIS_HOST,
                       options: {
-                          port: serverConfig.MARKETTOR_REDIS_PORT,
-                          password: serverConfig.MARKETTOR_REDIS_PASSWORD,
+                          port: serverConfig.CLAIRVIEW_REDIS_PORT,
+                          password: serverConfig.CLAIRVIEW_REDIS_PASSWORD,
                       },
                   }
                 : fallback
@@ -38,21 +38,21 @@ export function getRedisConnectionOptions(
                           port: serverConfig.INGESTION_REDIS_PORT,
                       },
                   }
-                : serverConfig.MARKETTOR_REDIS_HOST
+                : serverConfig.CLAIRVIEW_REDIS_HOST
                 ? {
-                      url: serverConfig.MARKETTOR_REDIS_HOST,
+                      url: serverConfig.CLAIRVIEW_REDIS_HOST,
                       options: {
-                          port: serverConfig.MARKETTOR_REDIS_PORT,
-                          password: serverConfig.MARKETTOR_REDIS_PASSWORD,
+                          port: serverConfig.CLAIRVIEW_REDIS_PORT,
+                          password: serverConfig.CLAIRVIEW_REDIS_PASSWORD,
                       },
                   }
                 : fallback
         case 'session-recording':
-            return serverConfig.MARKETTOR_SESSION_RECORDING_REDIS_HOST
+            return serverConfig.CLAIRVIEW_SESSION_RECORDING_REDIS_HOST
                 ? {
-                      url: serverConfig.MARKETTOR_SESSION_RECORDING_REDIS_HOST ?? 'localhost',
+                      url: serverConfig.CLAIRVIEW_SESSION_RECORDING_REDIS_HOST ?? 'localhost',
                       options: {
-                          port: serverConfig.MARKETTOR_SESSION_RECORDING_REDIS_PORT ?? 6379,
+                          port: serverConfig.CLAIRVIEW_SESSION_RECORDING_REDIS_PORT ?? 6379,
                       },
                   }
                 : fallback

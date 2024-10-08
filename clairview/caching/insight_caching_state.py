@@ -10,8 +10,8 @@ from prometheus_client import Counter
 
 from clairview.caching.calculate_results import calculate_cache_key
 from clairview.caching.utils import active_teams
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from clairview.torql_queries.query_runner import get_query_runner_or_none
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from clairview.clairql_queries.query_runner import get_query_runner_or_none
 from clairview.models.dashboard_tile import DashboardTile
 from clairview.models.insight import Insight, InsightViewed
 from clairview.models.insight_caching_state import InsightCachingState

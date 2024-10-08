@@ -7,7 +7,7 @@ import {
     IconFlask,
     IconFunnels,
     IconGraph,
-    IconTorQL,
+    IconClairQL,
     IconLifecycle,
     IconPerson,
     IconPieChart,
@@ -109,8 +109,8 @@ export const INSIGHT_TYPES_METADATA: Record<InsightType, InsightTypeMetadata> = 
     },
     [InsightType.SQL]: {
         name: 'SQL',
-        description: 'Use TorQL to query your data.',
-        icon: IconTorQL,
+        description: 'Use ClairQL to query your data.',
+        icon: IconClairQL,
         inMenu: true,
     },
     [InsightType.JSON]: {
@@ -122,7 +122,7 @@ export const INSIGHT_TYPES_METADATA: Record<InsightType, InsightTypeMetadata> = 
     [InsightType.HOG]: {
         name: 'Hog',
         description: 'Use Hog to query your data.',
-        icon: IconTorQL,
+        icon: IconClairQL,
         inMenu: true,
     },
 }
@@ -260,28 +260,28 @@ export const QUERY_TYPES_METADATA: Record<NodeKind, InsightTypeMetadata> = {
         icon: IconTrends,
         inMenu: true,
     },
-    [NodeKind.TorQLQuery]: {
-        name: 'TorQL',
-        description: 'Direct TorQL query',
+    [NodeKind.ClairQLQuery]: {
+        name: 'ClairQL',
+        description: 'Direct ClairQL query',
         icon: IconBrackets,
         inMenu: true,
     },
-    [NodeKind.TorQLMetadata]: {
-        name: 'TorQL Metadata',
-        description: 'Metadata for a TorQL query',
-        icon: IconTorQL,
+    [NodeKind.ClairQLMetadata]: {
+        name: 'ClairQL Metadata',
+        description: 'Metadata for a ClairQL query',
+        icon: IconClairQL,
         inMenu: true,
     },
-    [NodeKind.TorQLAutocomplete]: {
-        name: 'TorQL Autocomplete',
-        description: 'Autocomplete for the TorQL query editor',
-        icon: IconTorQL,
+    [NodeKind.ClairQLAutocomplete]: {
+        name: 'ClairQL Autocomplete',
+        description: 'Autocomplete for the ClairQL query editor',
+        icon: IconClairQL,
         inMenu: false,
     },
     [NodeKind.DatabaseSchemaQuery]: {
         name: 'Database Schema',
         description: 'Introspect the ClairView database schema',
-        icon: IconTorQL,
+        icon: IconClairQL,
         inMenu: true,
     },
     [NodeKind.WebOverviewQuery]: {
@@ -317,7 +317,7 @@ export const QUERY_TYPES_METADATA: Record<NodeKind, InsightTypeMetadata> = {
     [NodeKind.HogQuery]: {
         name: 'Hog',
         description: 'Hog query',
-        icon: IconTorQL,
+        icon: IconClairQL,
         inMenu: true,
     },
     [NodeKind.SessionAttributionExplorerQuery]: {

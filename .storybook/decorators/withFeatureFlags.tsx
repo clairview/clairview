@@ -14,7 +14,7 @@ declare module '@storybook/types' {
  *   title: 'My story',
  *   component: MyComponent,
  *   parameters: {
- *     featureFlags: ['torql'], // add flags here
+ *     featureFlags: ['clairql'], // add flags here
  *   },
  * } as ComponentMeta<typeof MyComponent>
  * ```

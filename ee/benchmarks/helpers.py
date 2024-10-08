@@ -6,7 +6,7 @@ from os.path import dirname
 
 from django.utils.timezone import now
 
-os.environ["MARKETTOR_DB_NAME"] = "clairview_test"
+os.environ["CLAIRVIEW_DB_NAME"] = "clairview_test"
 os.environ["DJANGO_SETTINGS_MODULE"] = "clairview.settings"
 sys.path.append(dirname(dirname(dirname(__file__))))
 

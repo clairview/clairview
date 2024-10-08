@@ -6,7 +6,7 @@ import { useActions, useMountedLogic, useValues } from 'kea'
 import { useEffect, useMemo } from 'react'
 import { notebookNodeLogic } from './notebookNodeLogic'
 import { NotebookNodeProps, NotebookNodeAttributeProperties } from '../Notebook/utils'
-import { containsTorQLQuery, isTorQLQuery, isInsightVizNode, isNodeWithSource } from '~/queries/utils'
+import { containsClairQLQuery, isClairQLQuery, isInsightVizNode, isNodeWithSource } from '~/queries/utils'
 import { LemonButton } from '@clairview/lemon-ui'
 import { urls } from 'scenes/urls'
 
@@ -74,7 +74,7 @@ const Component = ({
         if (NodeKind.DataTableNode === modifiedQuery.kind || NodeKind.SavedInsightNode === modifiedQuery.kind) {
             modifiedQuery.showOpenEditorButton = false
             modifiedQuery.full = false
-            modifiedQuery.showTorQLEditor = false
+            modifiedQuery.showClairQLEditor = false
             modifiedQuery.embedded = true
             modifiedQuery.showTimings = false
         }
@@ -128,7 +128,7 @@ export const Settings = ({
 
         if (NodeKind.DataTableNode === modifiedQuery.kind || NodeKind.SavedInsightNode === modifiedQuery.kind) {
             modifiedQuery.showOpenEditorButton = false
-            modifiedQuery.showTorQLEditor = true
+            modifiedQuery.showClairQLEditor = true
             modifiedQuery.showResultsTable = false
 
             modifiedQuery.showReload = true
@@ -248,12 +248,12 @@ export const NotebookNodeQuery = createClairViewWidgetNode<NotebookNodeQueryAttr
     serializedText: (attrs) => {
         let text = ''
         const q = attrs.query
-        if (containsTorQLQuery(q)) {
-            if (isTorQLQuery(q)) {
+        if (containsClairQLQuery(q)) {
+            if (isClairQLQuery(q)) {
                 text = q.query
             }
             if (isNodeWithSource(q)) {
-                text = isTorQLQuery(q.source) ? q.source.query : ''
+                text = isClairQLQuery(q.source) ? q.source.query : ''
             }
         }
         return text

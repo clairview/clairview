@@ -1,6 +1,6 @@
 import { useValues } from 'kea'
 import { HogDebug } from 'scenes/debug/HogDebug'
-import { TorQLDebug } from 'scenes/debug/TorQLDebug'
+import { ClairQLDebug } from 'scenes/debug/ClairQLDebug'
 import { Modifiers } from 'scenes/debug/Modifiers'
 import { QueryTabs } from 'scenes/debug/QueryTabs'
 
@@ -8,7 +8,7 @@ import { dataNodeLogic, DataNodeLogicProps } from '~/queries/nodes/DataNode/data
 import { insightVizDataNodeKey } from '~/queries/nodes/InsightViz/InsightViz'
 import { QueryEditor } from '~/queries/QueryEditor/QueryEditor'
 import { Node } from '~/queries/schema'
-import { isDataTableNode, isTorQLQuery, isHogQuery, isInsightVizNode } from '~/queries/utils'
+import { isDataTableNode, isClairQLQuery, isHogQuery, isInsightVizNode } from '~/queries/utils'
 
 interface DebugSceneQueryProps {
     queryKey: `new-${string}`
@@ -43,8 +43,8 @@ export function DebugSceneQuery({ query, setQuery, queryKey }: DebugSceneQueryPr
                     setQuery={(query) => setQuery(JSON.stringify(query, null, 2))}
                     debug
                 />
-            ) : isTorQLQuery(parsed) ? (
-                <TorQLDebug
+            ) : isClairQLQuery(parsed) ? (
+                <ClairQLDebug
                     queryKey={queryKey}
                     query={parsed}
                     setQuery={(query) => setQuery(JSON.stringify(query, null, 2))}

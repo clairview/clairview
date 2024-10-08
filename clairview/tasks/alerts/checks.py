@@ -13,7 +13,7 @@ from clairview.api.services.query import ExecutionMode
 from clairview.caching.calculate_results import calculate_for_query_based_insight
 from clairview.email import EmailMessage
 from clairview.errors import CHQueryErrorTooManySimultaneousQueries
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import (
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import (
     conversion_to_query_based,
 )
 from clairview.models import AlertConfiguration

@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from collections import Counter as TCounter
 
 from clairview.constants import AUTOCAPTURE_EVENT
-from clairview.torql.torql import TorQLContext
+from clairview.clairql.clairql import ClairQLContext
 from clairview.models import Filter
 from clairview.models.action import Action
 from clairview.models.action.action import ActionStepJSON
@@ -31,7 +31,7 @@ def format_action_filter_event_only(
 def format_action_filter(
     team_id: int,
     action: Action,
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     prepend: str = "action",
     filter_by_team=True,
     table_name: str = "",
@@ -105,7 +105,7 @@ def format_action_filter(
                 table_name=table_name,
                 person_properties_mode=person_properties_mode,
                 person_id_joined_alias=person_id_joined_alias,
-                torql_context=torql_context,
+                clairql_context=clairql_context,
             )
             conditions.append(prop_query.replace("AND", "", 1))
             params.update(prop_params)

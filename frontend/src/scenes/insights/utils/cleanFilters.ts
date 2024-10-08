@@ -345,8 +345,8 @@ export function cleanFilters(
             ...(filters.funnel_window_interval ? { funnel_window_interval: filters.funnel_window_interval } : {}),
             ...(filters.funnel_order_type ? { funnel_order_type: filters.funnel_order_type } : {}),
             ...(filters.hidden_legend_keys ? { hidden_legend_keys: filters.hidden_legend_keys } : {}),
-            ...(filters.funnel_aggregate_by_torql
-                ? { funnel_aggregate_by_torql: filters.funnel_aggregate_by_torql }
+            ...(filters.funnel_aggregate_by_clairql
+                ? { funnel_aggregate_by_clairql: filters.funnel_aggregate_by_clairql }
                 : {}),
             ...(filters.breakdown_attribution_type
                 ? { breakdown_attribution_type: filters.breakdown_attribution_type }
@@ -394,7 +394,7 @@ export function cleanFilters(
             // TODO: use FF for path_type undefined
             path_type: filters.path_type ? filters.path_type || PathType.PageView : undefined,
             include_event_types: filters.include_event_types || (filters.funnel_filter ? [] : [PathType.PageView]),
-            paths_torql_expression: filters.paths_torql_expression || undefined,
+            paths_clairql_expression: filters.paths_clairql_expression || undefined,
             path_groupings: filters.path_groupings || [],
             exclude_events: filters.exclude_events || [],
             ...(filters.include_event_types ? { include_event_types: filters.include_event_types } : {}),

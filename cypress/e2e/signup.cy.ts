@@ -175,7 +175,7 @@ describe('Signup', () => {
 
         cy.visit('/signup?maintenanceRedirect=true', {
             onLoad(win: Cypress.AUTWindow) {
-                ;(win as any).MARKETTOR_APP_CONTEXT.preflight.cloud = true
+                ;(win as any).CLAIRVIEW_APP_CONTEXT.preflight.cloud = true
             },
         })
 

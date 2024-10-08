@@ -7,7 +7,7 @@ import {
     EventsNode,
     EventsQuery,
     FunnelsQuery,
-    TorQLQuery,
+    ClairQLQuery,
     HogQuery,
     InsightVizNode,
     LifecycleQuery,
@@ -251,8 +251,8 @@ const InsightLifecycleQuery: LifecycleQuery = {
     series, // TODO: Visualization only supports one event or action
 }
 
-const TorQLRaw: TorQLQuery = {
-    kind: NodeKind.TorQLQuery,
+const ClairQLRaw: ClairQLQuery = {
+    kind: NodeKind.ClairQLQuery,
     query: `   select event,
           person.properties.email,
           properties.$browser,
@@ -272,8 +272,8 @@ const TorQLRaw: TorQLQuery = {
     },
 }
 
-const TorQLForDataVisualization: TorQLQuery = {
-    kind: NodeKind.TorQLQuery,
+const ClairQLForDataVisualization: ClairQLQuery = {
+    kind: NodeKind.ClairQLQuery,
     query: `select toDate(timestamp) as timestamp, count()
 from events
 where {filters} and timestamp <= now()
@@ -288,8 +288,8 @@ limit 100`,
     },
 }
 
-const TorQLForDataWarehouse: TorQLQuery = {
-    kind: NodeKind.TorQLQuery,
+const ClairQLForDataWarehouse: ClairQLQuery = {
+    kind: NodeKind.ClairQLQuery,
     query: `select toDate(timestamp) as timestamp, count()
 from events
 group by timestamp
@@ -299,18 +299,18 @@ limit 100`,
 
 const DataWarehouse: DataVisualizationNode = {
     kind: NodeKind.DataVisualizationNode,
-    source: TorQLForDataWarehouse,
+    source: ClairQLForDataWarehouse,
 }
 
-const TorQLTable: DataTableNode = {
+const ClairQLTable: DataTableNode = {
     kind: NodeKind.DataTableNode,
     full: true,
-    source: TorQLRaw,
+    source: ClairQLRaw,
 }
 
 const DataVisualization: DataVisualizationNode = {
     kind: NodeKind.DataVisualizationNode,
-    source: TorQLForDataVisualization,
+    source: ClairQLForDataVisualization,
     tableSettings: {
         columns: [
             {
@@ -352,7 +352,7 @@ const Hoggonacci: HogQuery = {
 }
 return fibonacci(16);`,
 }
-/* a subset of examples including only those we can show all users and that don't use TorQL */
+/* a subset of examples including only those we can show all users and that don't use ClairQL */
 export const queryExamples: Record<string, Node> = {
     Events,
     EventsTable,
@@ -392,8 +392,8 @@ export const stringifiedQueryExamples: Record<string, string> = Object.fromEntri
 
 export const examples: Record<string, Node> = {
     ...queryExamples,
-    TorQLRaw,
-    TorQLTable,
+    ClairQLRaw,
+    ClairQLTable,
     DataVisualization,
     Hog,
     Hoggonacci,

@@ -2413,7 +2413,7 @@ const api = {
                 signal: options?.signal,
                 headers: {
                     ...objectClean(options?.headers ?? {}),
-                    ...(getSessionId() ? { 'X-MARKETTOR-SESSION-ID': getSessionId() } : {}),
+                    ...(getSessionId() ? { 'X-CLAIRVIEW-SESSION-ID': getSessionId() } : {}),
                 },
             })
         })
@@ -2431,7 +2431,7 @@ const api = {
                     ...objectClean(options?.headers ?? {}),
                     ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
                     'X-CSRFToken': getCookie(CSRF_COOKIE_NAME) || '',
-                    ...(getSessionId() ? { 'X-MARKETTOR-SESSION-ID': getSessionId() } : {}),
+                    ...(getSessionId() ? { 'X-CLAIRVIEW-SESSION-ID': getSessionId() } : {}),
                 },
                 body: isFormData ? data : JSON.stringify(data),
                 signal: options?.signal,
@@ -2458,7 +2458,7 @@ const api = {
                     ...objectClean(options?.headers ?? {}),
                     ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
                     'X-CSRFToken': getCookie(CSRF_COOKIE_NAME) || '',
-                    ...(getSessionId() ? { 'X-MARKETTOR-SESSION-ID': getSessionId() } : {}),
+                    ...(getSessionId() ? { 'X-CLAIRVIEW-SESSION-ID': getSessionId() } : {}),
                 },
                 body: data ? (isFormData ? data : JSON.stringify(data)) : undefined,
                 signal: options?.signal,
@@ -2475,7 +2475,7 @@ const api = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-CSRFToken': getCookie(CSRF_COOKIE_NAME) || '',
-                    ...(getSessionId() ? { 'X-MARKETTOR-SESSION-ID': getSessionId() } : {}),
+                    ...(getSessionId() ? { 'X-CLAIRVIEW-SESSION-ID': getSessionId() } : {}),
                 },
             })
         )

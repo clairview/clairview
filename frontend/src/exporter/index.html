@@ -3,10 +3,10 @@
     <head>
         <meta name="robots" content="noindex" />
         <script>
-            window.MARKETTOR_EXPORTED_DATA = {{exported_data|safe}}
-            if (window.MARKETTOR_EXPORTED_DATA.type) {
+            window.CLAIRVIEW_EXPORTED_DATA = {{exported_data|safe}}
+            if (window.CLAIRVIEW_EXPORTED_DATA.type) {
               var root = document.documentElement
-              root.className += ' export-type-' + window.MARKETTOR_EXPORTED_DATA.type
+              root.className += ' export-type-' + window.CLAIRVIEW_EXPORTED_DATA.type
             }
         </script>
         {% include "head.html" %} {% if add_og_tags %}

@@ -54,20 +54,20 @@ from clairview.event_usage import groups
 from clairview.helpers.multi_property_breakdown import (
     protect_old_clients_from_multi_property_default,
 )
-from clairview.torql.constants import BREAKDOWN_VALUES_LIMIT
-from clairview.torql.errors import ExposedTorQLError
-from clairview.torql.timings import TorQLTimings
-from clairview.torql_queries.apply_dashboard_filters import (
+from clairview.clairql.constants import BREAKDOWN_VALUES_LIMIT
+from clairview.clairql.errors import ExposedClairQLError
+from clairview.clairql.timings import ClairQLTimings
+from clairview.clairql_queries.apply_dashboard_filters import (
     WRAPPER_NODE_KINDS,
     apply_dashboard_filters_to_dict,
 )
-from clairview.torql_queries.legacy_compatibility.feature_flag import (
-    torql_insights_replace_filters,
+from clairview.clairql_queries.legacy_compatibility.feature_flag import (
+    clairql_insights_replace_filters,
 )
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import (
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import (
     conversion_to_query_based,
 )
-from clairview.torql_queries.query_runner import (
+from clairview.clairql_queries.query_runner import (
     ExecutionMode,
     execution_mode_from_refresh,
     shared_insights_execution_mode,
@@ -232,7 +232,7 @@ class InsightBasicSerializer(TaggedItemSerializerMixin, serializers.ModelSeriali
 
         representation["dashboards"] = [tile["dashboard_id"] for tile in representation["dashboard_tiles"]]
 
-        if torql_insights_replace_filters(instance.team) and (
+        if clairql_insights_replace_filters(instance.team) and (
             instance.query is not None or instance.query_from_filters is not None
         ):
             representation["filters"] = {}
@@ -296,7 +296,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
     )
     query = serializers.JSONField(required=False, allow_null=True, help_text="Query node JSON string")
     query_status = serializers.SerializerMethodField()
-    torql = serializers.SerializerMethodField()
+    clairql = serializers.SerializerMethodField()
     types = serializers.SerializerMethodField()
 
     class Meta:
@@ -333,7 +333,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
             "timezone",
             "is_cached",
             "query_status",
-            "torql",
+            "clairql",
             "types",
         ]
         read_only_fields = (
@@ -357,7 +357,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
         tags = validated_data.pop("tags", None)  # tags are created separately as global tag relationships
         team_id = self.context["team_id"]
         current_url = request.headers.get("Referer")
-        session_id = request.headers.get("X-Markettor-Session-Id")
+        session_id = request.headers.get("X-Clairview-Session-Id")
 
         created_by = validated_data.pop("created_by", request.user)
         dashboards = validated_data.pop("dashboards", None)
@@ -401,7 +401,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
     @monitor(feature=Feature.INSIGHT, endpoint="insight", method="PATCH")
     def update(self, instance: Insight, validated_data: dict, **kwargs) -> Insight:
         current_url = self.context["request"].headers.get("Referer")
-        session_id = self.context["request"].headers.get("X-Markettor-Session-Id")
+        session_id = self.context["request"].headers.get("X-Clairview-Session-Id")
         dashboards_before_change: list[Union[str, dict]] = []
         try:
             # since it is possible to be undeleting a soft deleted insight
@@ -561,8 +561,8 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
     def get_query_status(self, insight: Insight):
         return self.insight_result(insight).query_status
 
-    def get_torql(self, insight: Insight):
-        return self.insight_result(insight).torql
+    def get_clairql(self, insight: Insight):
+        return self.insight_result(insight).clairql
 
     def get_types(self, insight: Insight):
         return self.insight_result(insight).types
@@ -595,7 +595,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
         request: Optional[Request] = self.context.get("request")
         dashboard_filters_override = filters_override_requested_by_client(request) if request else None
 
-        if torql_insights_replace_filters(instance.team) and (
+        if clairql_insights_replace_filters(instance.team) and (
             instance.query is not None or instance.query_from_filters is not None
         ):
             query = instance.query or instance.query_from_filters
@@ -650,7 +650,7 @@ class InsightSerializer(InsightBasicSerializer, UserPermissionsSerializerMixin):
                     user=self.context["request"].user,
                     filters_override=filters_override,
                 )
-            except ExposedTorQLError as e:
+            except ExposedClairQLError as e:
                 raise ValidationError(str(e))
 
     @lru_cache(maxsize=1)  # each serializer instance should only deal with one insight/tile combo
@@ -814,10 +814,10 @@ class InsightViewSet(
                 insight = request.GET[INSIGHT]
                 if insight == "JSON":
                     queryset = queryset.filter(query__isnull=False)
-                    queryset = queryset.exclude(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="TorQLQuery")
+                    queryset = queryset.exclude(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="ClairQLQuery")
                 elif insight == "SQL":
                     queryset = queryset.filter(query__isnull=False)
-                    queryset = queryset.filter(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="TorQLQuery")
+                    queryset = queryset.filter(query__kind__in=WRAPPER_NODE_KINDS, query__source__kind="ClairQLQuery")
                 else:
                     queryset = queryset.filter(query__isnull=True)
                     queryset = queryset.filter(filters__insight=insight)
@@ -926,11 +926,11 @@ When set, the specified dashboard's filters and date range override will be appl
     )
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def trend(self, request: request.Request, *args: Any, **kwargs: Any):
-        timings = TorQLTimings()
+        timings = ClairQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_trends(request)
-        except ExposedTorQLError as e:
+        except ExposedClairQLError as e:
             raise ValidationError(str(e))
         filter = Filter(request=request, team=self.team)
 
@@ -1012,11 +1012,11 @@ When set, the specified dashboard's filters and date range override will be appl
     )
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def funnel(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = TorQLTimings()
+        timings = ClairQLTimings()
         try:
             with timings.measure("calculate"):
                 funnel = self.calculate_funnel(request)
-        except ExposedTorQLError as e:
+        except ExposedClairQLError as e:
             raise ValidationError(str(e))
 
         funnel["result"] = protect_old_clients_from_multi_property_default(request.data, funnel["result"])
@@ -1054,11 +1054,11 @@ When set, the specified dashboard's filters and date range override will be appl
     # ******************************************
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def retention(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = TorQLTimings()
+        timings = ClairQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_retention(request)
-        except ExposedTorQLError as e:
+        except ExposedClairQLError as e:
             raise ValidationError(str(e))
 
         result["timings"] = [val.model_dump() for val in timings.to_list()]
@@ -1084,11 +1084,11 @@ When set, the specified dashboard's filters and date range override will be appl
     # ******************************************
     @action(methods=["GET", "POST"], detail=False, required_scopes=["insight:read"])
     def path(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-        timings = TorQLTimings()
+        timings = ClairQLTimings()
         try:
             with timings.measure("calculate"):
                 result = self.calculate_path(request)
-        except ExposedTorQLError as e:
+        except ExposedClairQLError as e:
             raise ValidationError(str(e))
 
         result["timings"] = [val.model_dump() for val in timings.to_list()]

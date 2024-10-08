@@ -2,7 +2,7 @@ from typing import Any
 from collections.abc import Sequence
 
 from clairview.constants import TREND_FILTER_TYPE_ACTIONS
-from clairview.torql.torql import TorQLContext
+from clairview.clairql.clairql import ClairQLContext
 from clairview.models.action.util import format_action_filter, format_action_filter_event_only
 from clairview.models.entity import Entity
 from clairview.queries.util import PersonPropertiesMode
@@ -11,7 +11,7 @@ from clairview.queries.util import PersonPropertiesMode
 def get_entity_filtering_params(
     allowed_entities: Sequence[Entity],
     team_id: int,
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     table_name: str = "",
     *,
     person_properties_mode: PersonPropertiesMode = PersonPropertiesMode.USING_PERSON_PROPERTIES_COLUMN,
@@ -41,7 +41,7 @@ def get_entity_filtering_params(
                     table_name=table_name,
                     person_properties_mode=person_properties_mode,
                     person_id_joined_alias=person_id_joined_alias,
-                    torql_context=torql_context,
+                    clairql_context=clairql_context,
                 )
                 if not deep_filtering
                 else format_action_filter_event_only(action)

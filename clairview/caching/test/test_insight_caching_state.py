@@ -247,9 +247,9 @@ def create_tile(
         ),
         pytest.param(
             create_insight,
-            {"query": {"kind": "TorQLQuery", "query": ""}, "viewed_at_delta": timedelta(days=1)},
+            {"query": {"kind": "ClairQLQuery", "query": ""}, "viewed_at_delta": timedelta(days=1)},
             TargetCacheAge.MID_PRIORITY,
-            id="insight with TorQLQuery query viewed recently",
+            id="insight with ClairQLQuery query viewed recently",
         ),
         # other types of query aren't cacheable
         pytest.param(

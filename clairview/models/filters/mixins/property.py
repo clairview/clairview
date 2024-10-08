@@ -143,5 +143,5 @@ class PropertyMixin(BaseParamMixin):
         return {"filter_by_type": list(filter_by_type)}
 
     @cached_property
-    def has_torql_property(self):
-        return any(prop.type == "torql" for prop in self.property_groups.flat)
+    def has_clairql_property(self):
+        return any(prop.type == "clairql" for prop in self.property_groups.flat)

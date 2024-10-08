@@ -40,7 +40,7 @@ from clairview.rate_limit import (
     ClickHouseSustainedRateThrottle,
     PersonalApiKeyRateThrottle,
 )
-from clairview.schema import TorQLQueryModifiers, QueryTiming
+from clairview.schema import ClairQLQueryModifiers, QueryTiming
 from clairview.session_recordings.models.session_recording import SessionRecording
 from clairview.session_recordings.models.session_recording_event import (
     SessionRecordingViewed,
@@ -350,7 +350,7 @@ class SessionRecordingViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet, U
         distinct_id = str(cast(User, request.user).distinct_id)
         modifiers = safely_read_modifiers_overrides(distinct_id, self.team)
         matching_events_query_response = ReplayFiltersEventsSubQuery(
-            filter=filter, team=self.team, torql_query_modifiers=modifiers
+            filter=filter, team=self.team, clairql_query_modifiers=modifiers
         ).get_event_ids_for_session()
 
         response = JsonResponse(data={"results": matching_events_query_response.results})
@@ -389,7 +389,7 @@ class SessionRecordingViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet, U
         serializer.is_valid(raise_exception=True)
 
         current_url = request.headers.get("Referer")
-        session_id = request.headers.get("X-Markettor-Session-Id")
+        session_id = request.headers.get("X-Clairview-Session-Id")
         durations = serializer.validated_data.get("durations", {})
         player_metadata = serializer.validated_data.get("player_metadata", {})
 
@@ -494,8 +494,8 @@ class SessionRecordingViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet, U
             "session_being_loaded": recording.session_id,
         }
 
-        if request.headers.get("X-MARKETTOR-SESSION-ID"):
-            event_properties["$session_id"] = request.headers["X-MARKETTOR-SESSION-ID"]
+        if request.headers.get("X-CLAIRVIEW-SESSION-ID"):
+            event_properties["$session_id"] = request.headers["X-CLAIRVIEW-SESSION-ID"]
 
         clairviewanalytics.capture(
             self._distinct_id_from_request(request),
@@ -532,7 +532,7 @@ class SessionRecordingViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet, U
                 f"partial_filter_chosen_{key}": value for key, value in user_modified_filters_obj.items()
             }
             current_url = request.headers.get("Referer")
-            session_id = request.headers.get("X-MARKETTOR-SESSION-ID")
+            session_id = request.headers.get("X-CLAIRVIEW-SESSION-ID")
 
             clairviewanalytics.capture(
                 str(cast(User, request.user).distinct_id),
@@ -886,7 +886,7 @@ def list_recordings(
     recordings: list[SessionRecording] = []
     more_recordings_available = False
     team = context["get_team"]()
-    torql_timings: list[QueryTiming] | None = None
+    clairql_timings: list[QueryTiming] | None = None
 
     timer = ServerTimingsGathered()
 
@@ -910,9 +910,9 @@ def list_recordings(
         distinct_id = str(cast(User, request.user).distinct_id)
         modifiers = safely_read_modifiers_overrides(distinct_id, team)
 
-        with timer("load_recordings_from_torql"):
-            (ch_session_recordings, more_recordings_available, torql_timings) = SessionRecordingListFromFilters(
-                filter=filter, team=team, torql_query_modifiers=modifiers
+        with timer("load_recordings_from_clairql"):
+            (ch_session_recordings, more_recordings_available, clairql_timings) = SessionRecordingListFromFilters(
+                filter=filter, team=team, clairql_query_modifiers=modifiers
             ).run()
 
         with timer("build_recordings"):
@@ -961,15 +961,15 @@ def list_recordings(
     session_recording_serializer = SessionRecordingSerializer(recordings, context=context, many=True)
     results = session_recording_serializer.data
 
-    all_timings = _generate_timings(torql_timings, timer)
+    all_timings = _generate_timings(clairql_timings, timer)
     return (
         {"results": results, "has_next": more_recordings_available, "version": 3},
         all_timings,
     )
 
 
-def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> TorQLQueryModifiers:
-    modifiers = TorQLQueryModifiers()
+def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> ClairQLQueryModifiers:
+    modifiers = ClairQLQueryModifiers()
 
     try:
         groups = {"organization": str(team.organization.id)}
@@ -994,12 +994,12 @@ def safely_read_modifiers_overrides(distinct_id: str, team: Team) -> TorQLQueryM
     return modifiers
 
 
-def _generate_timings(torql_timings: list[QueryTiming] | None, timer: ServerTimingsGathered) -> dict[str, float]:
+def _generate_timings(clairql_timings: list[QueryTiming] | None, timer: ServerTimingsGathered) -> dict[str, float]:
     timings_dict = timer.get_all_timings()
-    torql_timings_dict = {}
-    for key, value in torql_timings or {}:
-        new_key = f"torql_{key[1].lstrip('./').replace('/', '_')}"
-        # TorQL query timings are in seconds, convert to milliseconds
-        torql_timings_dict[new_key] = value[1] * 1000
-    all_timings = {**timings_dict, **torql_timings_dict}
+    clairql_timings_dict = {}
+    for key, value in clairql_timings or {}:
+        new_key = f"clairql_{key[1].lstrip('./').replace('/', '_')}"
+        # ClairQL query timings are in seconds, convert to milliseconds
+        clairql_timings_dict[new_key] = value[1] * 1000
+    all_timings = {**timings_dict, **clairql_timings_dict}
     return all_timings

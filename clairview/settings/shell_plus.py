@@ -17,7 +17,7 @@ SHELL_PLUS_POST_IMPORTS = [
     ("clairview.models.filters", ("Filter",)),
     ("clairview.models.property", ("Property",)),
     ("clairview.client", ("sync_execute",)),
-    ("clairview.torql", ("ast")),
-    ("clairview.torql.parser", ("parse_select", "parse_expr")),
-    ("clairview.torql.query", ("execute_torql_query")),
+    ("clairview.clairql", ("ast")),
+    ("clairview.clairql.parser", ("parse_select", "parse_expr")),
+    ("clairview.clairql.query", ("execute_clairql_query")),
 ]

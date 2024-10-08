@@ -31,7 +31,7 @@ class LifecycleActors(ActorBaseQuery):
             ),
             {
                 **event_params,
-                **self._filter.torql_context.values,
+                **self._filter.clairql_context.values,
                 "offset": self._filter.offset,
                 "limit": self._filter.limit,
                 "status": lifecycle_type,

@@ -41,8 +41,8 @@ export function ProjectHomepage(): JSX.Element {
 
     const headerButtons = (
         <>
-            {!!featureFlags[FEATURE_FLAGS.YEAR_IN_HOG] && window.MARKETTOR_APP_CONTEXT?.year_in_hog_url && (
-                <YearInHogButton url={`${window.location.origin}${window.MARKETTOR_APP_CONTEXT.year_in_hog_url}`} />
+            {!!featureFlags[FEATURE_FLAGS.YEAR_IN_HOG] && window.CLAIRVIEW_APP_CONTEXT?.year_in_hog_url && (
+                <YearInHogButton url={`${window.location.origin}${window.CLAIRVIEW_APP_CONTEXT.year_in_hog_url}`} />
             )}
             <LemonButton
                 type="secondary"

@@ -261,8 +261,8 @@ export const userLogic = kea<userLogicType>([
     }),
     urlToAction(({ values }) => ({
         '/year_in_clairview/2023': () => {
-            if (window.MARKETTOR_APP_CONTEXT?.year_in_hog_url) {
-                window.location.href = `${window.location.origin}${window.MARKETTOR_APP_CONTEXT.year_in_hog_url}`
+            if (window.CLAIRVIEW_APP_CONTEXT?.year_in_hog_url) {
+                window.location.href = `${window.location.origin}${window.CLAIRVIEW_APP_CONTEXT.year_in_hog_url}`
             }
             if (values.user?.uuid) {
                 window.location.href = `${window.location.origin}/year_in_clairview/2023/${values.user?.uuid}`

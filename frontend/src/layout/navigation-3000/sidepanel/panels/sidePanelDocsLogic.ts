@@ -6,7 +6,7 @@ import { sceneLogic } from 'scenes/sceneLogic'
 import { sidePanelStateLogic } from '../sidePanelStateLogic'
 import type { sidePanelDocsLogicType } from './sidePanelDocsLogicType'
 
-export const MARKETTOR_WEBSITE_ORIGIN = 'https://clairview.com'
+export const CLAIRVIEW_WEBSITE_ORIGIN = 'https://clairview.com'
 
 const sanitizePath = (path: string): string => {
     return path[0] === '/' ? path : `/${path}`
@@ -88,13 +88,13 @@ export const sidePanelDocsLogic = kea<sidePanelDocsLogicType>([
         iframeSrc: [
             (s) => [s.initialPath],
             (initialPath) => {
-                return `${MARKETTOR_WEBSITE_ORIGIN}${initialPath ?? ''}`
+                return `${CLAIRVIEW_WEBSITE_ORIGIN}${initialPath ?? ''}`
             },
         ],
         currentUrl: [
             (s) => [s.currentPath],
             (currentPath) => {
-                return `${MARKETTOR_WEBSITE_ORIGIN}${currentPath ?? ''}`
+                return `${CLAIRVIEW_WEBSITE_ORIGIN}${currentPath ?? ''}`
             },
         ],
     }),
@@ -146,7 +146,7 @@ export const sidePanelDocsLogic = kea<sidePanelDocsLogicType>([
         }
 
         cache.onWindowMessage = (event: MessageEvent): void => {
-            if (event.origin === MARKETTOR_WEBSITE_ORIGIN) {
+            if (event.origin === CLAIRVIEW_WEBSITE_ORIGIN) {
                 if (event.data.type === 'internal-navigation') {
                     actions.updatePath(event.data.url)
                     return

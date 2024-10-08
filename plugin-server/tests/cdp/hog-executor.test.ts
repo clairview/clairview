@@ -537,7 +537,7 @@ describe('Hog Executor', () => {
             const result = executor.execute(createInvocation(fn, globals))
             expect(result?.capturedClairViewEvents).toEqual([])
             expect(result?.logs[1].message).toMatchInlineSnapshot(
-                `"marketTorCapture was called from an event that already executed this function. To prevent infinite loops, the event was not captured."`
+                `"clairViewCapture was called from an event that already executed this function. To prevent infinite loops, the event was not captured."`
             )
         })
     })

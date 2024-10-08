@@ -87,7 +87,7 @@ const Template: StoryFn<typeof ActionFilter> = ({ ...props }: Partial<ActionFilt
                     ...groupsTaxonomicTypes,
                     TaxonomicFilterGroupType.Cohorts,
                     TaxonomicFilterGroupType.Elements,
-                    TaxonomicFilterGroupType.TorQLExpression,
+                    TaxonomicFilterGroupType.ClairQLExpression,
                 ]}
                 {...props}
             />

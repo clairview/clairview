@@ -12,11 +12,11 @@ from clairview.clickhouse.client.connection import Workload
 from clairview.clickhouse.query_tagging import tag_queries
 from clairview.client import sync_execute
 from clairview.constants import PropertyOperatorType
-from clairview.torql import ast
-from clairview.torql.constants import LimitContext
-from clairview.torql.torql import TorQLContext
-from clairview.torql.modifiers import create_default_modifiers_for_team
-from clairview.torql.printer import print_ast
+from clairview.clairql import ast
+from clairview.clairql.constants import LimitContext
+from clairview.clairql.clairql import ClairQLContext
+from clairview.clairql.modifiers import create_default_modifiers_for_team
+from clairview.clairql.printer import print_ast
 from clairview.models import Action, Filter, Team
 from clairview.models.action.util import format_action_filter
 from clairview.models.async_deletion import AsyncDeletion, DeletionType
@@ -47,7 +47,7 @@ TEMP_PRECALCULATED_MARKER = parser.parse("2021-06-07T15:00:00+00:00")
 logger = structlog.get_logger(__name__)
 
 
-def format_person_query(cohort: Cohort, index: int, torql_context: TorQLContext) -> tuple[str, dict[str, Any]]:
+def format_person_query(cohort: Cohort, index: int, clairql_context: ClairQLContext) -> tuple[str, dict[str, Any]]:
     if cohort.is_static:
         return format_static_cohort_query(cohort, index, prepend="")
 
@@ -61,7 +61,7 @@ def format_person_query(cohort: Cohort, index: int, torql_context: TorQLContext)
         Filter(
             data={"properties": cohort.properties},
             team=cohort.team,
-            torql_context=torql_context,
+            clairql_context=clairql_context,
         ),
         cohort.team,
         cohort_pk=cohort.pk,
@@ -72,8 +72,8 @@ def format_person_query(cohort: Cohort, index: int, torql_context: TorQLContext)
     return query, params
 
 
-def print_cohort_torql_query(cohort: Cohort, torql_context: TorQLContext) -> str:
-    from clairview.torql_queries.query_runner import get_query_runner
+def print_cohort_clairql_query(cohort: Cohort, clairql_context: ClairQLContext) -> str:
+    from clairview.clairql_queries.query_runner import get_query_runner
 
     if not cohort.query:
         raise ValueError("Cohort has no query")
@@ -105,10 +105,10 @@ def print_cohort_torql_query(cohort: Cohort, torql_context: TorQLContext) -> str
             else:
                 raise ValueError("Could not find a person_id, actor_id, or id column in the query")
 
-    torql_context.enable_select_queries = True
-    torql_context.limit_top_select = False
-    create_default_modifiers_for_team(cohort.team, torql_context.modifiers)
-    return print_ast(query, context=torql_context, dialect="clickhouse")
+    clairql_context.enable_select_queries = True
+    clairql_context.limit_top_select = False
+    create_default_modifiers_for_team(cohort.team, clairql_context.modifiers)
+    return print_ast(query, context=clairql_context, dialect="clickhouse")
 
 
 def format_static_cohort_query(cohort: Cohort, index: int, prepend: str) -> tuple[str, dict[str, Any]]:
@@ -150,7 +150,7 @@ def get_entity_query(
     action_id: Optional[int],
     team_id: int,
     group_idx: Union[int, str],
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
 ) -> tuple[str, dict[str, str]]:
     if event_id:
         return f"event = %({f'event_{group_idx}'})s", {f"event_{group_idx}": event_id}
@@ -160,7 +160,7 @@ def get_entity_query(
             team_id=team_id,
             action=action,
             prepend="_{}_action".format(group_idx),
-            torql_context=torql_context,
+            clairql_context=clairql_context,
         )
         return action_filter_query, action_params
     else:
@@ -226,11 +226,11 @@ def is_precalculated_query(cohort: Cohort) -> bool:
 def format_filter_query(
     cohort: Cohort,
     index: int,
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     id_column: str = "distinct_id",
     custom_match_field="person_id",
 ) -> tuple[str, dict[str, Any]]:
-    person_query, params = format_cohort_subquery(cohort, index, torql_context, custom_match_field=custom_match_field)
+    person_query, params = format_cohort_subquery(cohort, index, clairql_context, custom_match_field=custom_match_field)
 
     person_id_query = CALCULATE_COHORT_PEOPLE_SQL.format(
         query=person_query,
@@ -243,14 +243,14 @@ def format_filter_query(
 def format_cohort_subquery(
     cohort: Cohort,
     index: int,
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     custom_match_field="person_id",
 ) -> tuple[str, dict[str, Any]]:
     is_precalculated = is_precalculated_query(cohort)
     if is_precalculated:
         query, params = format_precalculated_cohort_query(cohort, index)
     else:
-        query, params = format_person_query(cohort, index, torql_context)
+        query, params = format_person_query(cohort, index, clairql_context)
 
     person_query = f"{custom_match_field} IN ({query})"
     return person_query, params
@@ -269,7 +269,7 @@ def get_person_ids_by_cohort_id(
         team_id=team.pk,
         property_group=filter.property_groups,
         table_name="pdi",
-        torql_context=filter.torql_context,
+        clairql_context=filter.clairql_context,
     )
 
     results = insight_sync_execute(
@@ -321,8 +321,8 @@ def get_static_cohort_size(cohort: Cohort) -> Optional[int]:
 def recalculate_cohortpeople(
     cohort: Cohort, pending_version: int, *, initiating_user_id: Optional[int]
 ) -> Optional[int]:
-    torql_context = TorQLContext(within_non_torql_query=True, team_id=cohort.team_id)
-    cohort_query, cohort_params = format_person_query(cohort, 0, torql_context)
+    clairql_context = ClairQLContext(within_non_clairql_query=True, team_id=cohort.team_id)
+    cohort_query, cohort_params = format_person_query(cohort, 0, clairql_context)
 
     before_count = get_cohort_size(cohort)
 
@@ -344,7 +344,7 @@ def recalculate_cohortpeople(
         recalcluate_cohortpeople_sql,
         {
             **cohort_params,
-            **torql_context.values,
+            **clairql_context.values,
             "cohort_id": cohort.pk,
             "team_id": cohort.team_id,
             "new_version": pending_version,

@@ -19,7 +19,7 @@ import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 import clairview from "clairview-js";
 
-function MarkettorInit() {
+function ClairviewInit() {
   useEffect(() => {
     clairview.init('${currentTeam?.api_token}', {
       api_host: '${apiHostOrigin()}',
@@ -39,7 +39,7 @@ startTransition(() => {
     document,
     <StrictMode>
         <RemixBrowser />
-        <MarkettorInit/>
+        <ClairviewInit/>
     </StrictMode>
   );
 });`}

@@ -4,11 +4,11 @@ from django.db import models
 
 from clairview.client import sync_execute
 from clairview.errors import wrap_query_error
-from clairview.torql import ast
-from clairview.torql.database.models import (
+from clairview.clairql import ast
+from clairview.clairql.database.models import (
     FieldOrTable,
 )
-from clairview.torql.database.s3_table import S3Table, build_function_call
+from clairview.clairql.database.s3_table import S3Table, build_function_call
 from clairview.models.team import Team
 from clairview.models.utils import (
     CreatedMetaFields,
@@ -17,7 +17,7 @@ from clairview.models.utils import (
     UpdatedMetaFields,
     sane_repr,
 )
-from clairview.schema import DatabaseSerializedFieldType, TorQLQueryModifiers
+from clairview.schema import DatabaseSerializedFieldType, ClairQLQueryModifiers
 from clairview.warehouse.models.util import remove_named_tuples
 from clairview.warehouse.models.external_data_schema import ExternalDataSchema
 from django.db.models import Q
@@ -25,7 +25,7 @@ from .credential import DataWarehouseCredential
 from uuid import UUID
 from sentry_sdk import capture_exception
 from clairview.warehouse.util import database_sync_to_async
-from clairview.warehouse.models.util import CLICKHOUSE_TORQL_MAPPING, clean_type, STR_TO_TORQL_MAPPING
+from clairview.warehouse.models.util import CLICKHOUSE_CLAIRQL_MAPPING, clean_type, STR_TO_CLAIRQL_MAPPING
 from .external_table_definitions import external_tables
 
 SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING: dict[DatabaseSerializedFieldType, str] = {
@@ -119,7 +119,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
         return self.name[len(prefix) :]
 
     def validate_column_type(self, column_key) -> bool:
-        from clairview.torql.query import execute_torql_query
+        from clairview.clairql.query import execute_clairql_query
 
         if column_key not in self.columns.keys():
             raise Exception(f"Column {column_key} does not exist on table: {self.name}")
@@ -130,7 +130,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
                 select_from=ast.JoinExpr(table=ast.Field(chain=[self.name])),
             )
 
-            execute_torql_query(query, self.team, modifiers=TorQLQueryModifiers(s3TableUseInvalidColumns=True))
+            execute_clairql_query(query, self.team, modifiers=ClairQLQueryModifiers(s3TableUseInvalidColumns=True))
             return True
         except:
             return False
@@ -163,7 +163,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
         columns = {
             str(item[0]): {
-                "torql": CLICKHOUSE_TORQL_MAPPING[clean_type(str(item[1]))].__name__,
+                "clairql": CLICKHOUSE_CLAIRQL_MAPPING[clean_type(str(item[1]))].__name__,
                 "clickhouse": item[1],
                 "valid": True,
             }
@@ -193,7 +193,7 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
         return result[0][0]
 
-    def torql_definition(self, modifiers: Optional[TorQLQueryModifiers] = None) -> S3Table:
+    def clairql_definition(self, modifiers: Optional[ClairQLQueryModifiers] = None) -> S3Table:
         columns = self.columns or {}
 
         fields: dict[str, FieldOrTable] = {}
@@ -228,12 +228,12 @@ class DataWarehouseTable(CreatedMetaFields, UpdatedMetaFields, UUIDModel, Delete
 
             # Support for 'old' style columns
             if isinstance(type, str):
-                torql_type_str = clickhouse_type.partition("(")[0]
-                torql_type = CLICKHOUSE_TORQL_MAPPING[torql_type_str]
+                clairql_type_str = clickhouse_type.partition("(")[0]
+                clairql_type = CLICKHOUSE_CLAIRQL_MAPPING[clairql_type_str]
             else:
-                torql_type = STR_TO_TORQL_MAPPING[type["torql"]]
+                clairql_type = STR_TO_CLAIRQL_MAPPING[type["clairql"]]
 
-            fields[column] = torql_type(name=column, nullable=is_nullable)
+            fields[column] = clairql_type(name=column, nullable=is_nullable)
 
         # Replace fields with any redefined fields if they exist
         external_table_fields = external_tables.get(self.table_name_without_prefix())

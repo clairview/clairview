@@ -12,8 +12,8 @@ import {
     versionToString,
 } from 'lib/utils/semver'
 
-import { TorQLQuery, NodeKind } from '~/queries/schema'
-import { torql } from '~/queries/utils'
+import { ClairQLQuery, NodeKind } from '~/queries/schema'
+import { clairql } from '~/queries/utils'
 
 import type { versionCheckerLogicType } from './versionCheckerLogicType'
 
@@ -35,14 +35,14 @@ export type SDKVersionWarning = {
     level: 'warning' | 'info' | 'error'
 }
 
-export interface MarkettorJSDeprecation {
+export interface ClairviewJSDeprecation {
     deprecateBeforeVersion?: string
     deprecateOlderThanDays?: number
 }
 
 export interface AvailableVersions {
     sdkVersions?: SemanticVersion[]
-    deprecation?: MarkettorJSDeprecation
+    deprecation?: ClairviewJSDeprecation
 }
 
 export interface VersionCheckerLogicProps {
@@ -69,7 +69,7 @@ export const versionCheckerLogic = kea<versionCheckerLogicType>([
                     )
                         .then((r) => r.json())
                         .then((r) => r.map((x: any) => tryParseVersion(x.name)).filter(isNotNil))
-                    const deprecationPromise: Promise<MarkettorJSDeprecation> = fetch(
+                    const deprecationPromise: Promise<ClairviewJSDeprecation> = fetch(
                         'https://raw.githubusercontent.com/ClairView/clairview-js/main/deprecation.json'
                     ).then((r) => r.json())
                     const settled = await Promise.allSettled([availableVersionsPromise, deprecationPromise])
@@ -88,9 +88,9 @@ export const versionCheckerLogic = kea<versionCheckerLogicType>([
             null as SDKVersion[] | null,
             {
                 loadUsedVersions: async () => {
-                    const query: TorQLQuery = {
-                        kind: NodeKind.TorQLQuery,
-                        query: torql`SELECT properties.$lib_version AS lib_version, max(timestamp) AS latest_timestamp, count(lib_version) as count
+                    const query: ClairQLQuery = {
+                        kind: NodeKind.ClairQLQuery,
+                        query: clairql`SELECT properties.$lib_version AS lib_version, max(timestamp) AS latest_timestamp, count(lib_version) as count
                                 FROM events
                                 WHERE timestamp >= now() - INTERVAL 1 DAY 
                                 AND timestamp <= now()

@@ -7,9 +7,9 @@ import clairview from 'clairview-js'
 import { useState } from 'react'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { TorQLQueryModifiers } from '~/queries/schema'
+import { ClairQLQueryModifiers } from '~/queries/schema'
 
-type PoEMode = NonNullable<TorQLQueryModifiers['personsOnEventsMode']>
+type PoEMode = NonNullable<ClairQLQueryModifiers['personsOnEventsMode']>
 
 const POE_OPTIONS: LemonRadioOption<PoEMode>[] = [
     {

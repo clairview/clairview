@@ -295,8 +295,8 @@ class AISustainedRateThrottle(UserRateThrottle):
     rate = "40/day"
 
 
-class TorQLQueryThrottle(PersonalApiKeyRateThrottle):
-    # Lower rate limit for TorQL queries
+class ClairQLQueryThrottle(PersonalApiKeyRateThrottle):
+    # Lower rate limit for ClairQL queries
     scope = "query"
     rate = "120/hour"
 

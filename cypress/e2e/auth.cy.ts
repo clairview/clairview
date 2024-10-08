@@ -25,7 +25,7 @@ describe('Auth', () => {
         cy.get('[data-attr=top-menu-item-logout]').click()
 
         cy.window().then((win) => {
-            win.MARKETTOR_APP_CONTEXT.preflight.available_social_auth_providers = {
+            win.CLAIRVIEW_APP_CONTEXT.preflight.available_social_auth_providers = {
                 'google-oauth2': true,
             }
         })

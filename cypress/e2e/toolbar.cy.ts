@@ -11,7 +11,7 @@ describe('Toolbar', () => {
                 .then((href) => {
                     cy.visit(href)
                 })
-            cy.get('#__MARKETTOR_TOOLBAR__').shadow().find('.Toolbar').should('exist')
+            cy.get('#__CLAIRVIEW_TOOLBAR__').shadow().find('.Toolbar').should('exist')
         })
     })
 

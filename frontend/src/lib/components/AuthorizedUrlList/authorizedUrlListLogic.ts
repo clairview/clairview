@@ -22,8 +22,8 @@ import { apiHostOrigin } from 'lib/utils/apiHost'
 import { teamLogic } from 'scenes/teamLogic'
 import { urls } from 'scenes/urls'
 
-import { TorQLQuery, NodeKind } from '~/queries/schema'
-import { torql } from '~/queries/utils'
+import { ClairQLQuery, NodeKind } from '~/queries/schema'
+import { clairql } from '~/queries/utils'
 import { ToolbarParams, ToolbarUserIntent } from '~/types'
 
 import type { authorizedUrlListLogicType } from './authorizedUrlListLogicType'
@@ -173,9 +173,9 @@ export const authorizedUrlListLogic = kea<authorizedUrlListLogicType>([
         suggestions: {
             __default: [] as string[],
             loadSuggestions: async () => {
-                const query: TorQLQuery = {
-                    kind: NodeKind.TorQLQuery,
-                    query: torql`select properties.$current_url, count()
+                const query: ClairQLQuery = {
+                    kind: NodeKind.ClairQLQuery,
+                    query: clairql`select properties.$current_url, count()
                         from events
                            where event = '$pageview'
                            and timestamp >= now() - interval 3 day 

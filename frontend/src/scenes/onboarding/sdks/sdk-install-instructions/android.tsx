@@ -27,8 +27,8 @@ function AndroidSetupSnippet({ includeReplay }: AndroidSetupProps): JSX.Element 
             {`class SampleApp : Application() {
 
     companion object {
-        const val MARKETTOR_API_KEY = "${currentTeam?.api_token}"
-        const val MARKETTOR_HOST = "${apiHostOrigin()}"
+        const val CLAIRVIEW_API_KEY = "${currentTeam?.api_token}"
+        const val CLAIRVIEW_HOST = "${apiHostOrigin()}"
     }
 
     override fun onCreate() {
@@ -36,8 +36,8 @@ function AndroidSetupSnippet({ includeReplay }: AndroidSetupProps): JSX.Element 
 
         // Create a ClairView Config with the given API key and host
         val config = ClairViewAndroidConfig(
-            apiKey = MARKETTOR_API_KEY,
-            host = MARKETTOR_HOST
+            apiKey = CLAIRVIEW_API_KEY,
+            host = CLAIRVIEW_HOST
         )
         ${
             includeReplay

@@ -39,7 +39,7 @@ spec:
               memory: 100Mi
           env:
           - name: CADDY_TARGET
-            value: $(${MARKETTOR_WEB_SERVICE_NAME}_SERVICE_HOST):$MARKETTOR_WEB_SERVICE_PORT
+            value: $(${CLAIRVIEW_WEB_SERVICE_NAME}_SERVICE_HOST):$CLAIRVIEW_WEB_SERVICE_PORT
           - name: TS_USERSPACE
             value: "false"
           - name: TS_HOSTNAME

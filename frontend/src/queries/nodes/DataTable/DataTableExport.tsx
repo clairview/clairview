@@ -15,12 +15,12 @@ import {
 } from '~/queries/nodes/DataTable/utils'
 import { getPersonsEndpoint } from '~/queries/query'
 import { DataNode, DataTableNode } from '~/queries/schema'
-import { isActorsQuery, isEventsQuery, isTorQLQuery, isPersonsNode } from '~/queries/utils'
+import { isActorsQuery, isEventsQuery, isClairQLQuery, isPersonsNode } from '~/queries/utils'
 import { ExporterFormat } from '~/types'
 
 import { dataTableLogic, DataTableRow } from './dataTableLogic'
 
-// Sync with clairview/torql/constants.py
+// Sync with clairview/clairql/constants.py
 export const MAX_SELECT_RETURNED_ROWS = 50000
 
 const columnDisallowList = ['person.$delete', '*']
@@ -105,7 +105,7 @@ const getCsvTableData = (dataTableRows: DataTableRow[], columns: string[], query
         return [filteredColumns, ...csvData]
     }
 
-    if (isTorQLQuery(query.source)) {
+    if (isClairQLQuery(query.source)) {
         return [columns, ...dataTableRows.map((n) => (n.result as any[]) ?? [])]
     }
 
@@ -152,7 +152,7 @@ const getJsonTableData = (
         })
     }
 
-    if (isTorQLQuery(query.source)) {
+    if (isClairQLQuery(query.source)) {
         return dataTableRows.map((n) => {
             const data = n.result ?? {}
             return columns.reduce((acc, cur, index) => {
@@ -205,7 +205,7 @@ export function DataTableExport({ query }: DataTableExportProps): JSX.Element | 
         (isPersonsNode(source) && source.search ? 1 : 0)
     const canExportAllColumns =
         (isEventsQuery(source) && source.select.includes('*')) || isPersonsNode(source) || isActorsQuery(source)
-    const showExportClipboardButtons = isPersonsNode(source) || isEventsQuery(source) || isTorQLQuery(source)
+    const showExportClipboardButtons = isPersonsNode(source) || isEventsQuery(source) || isClairQLQuery(source)
     const canSaveAsCohort = isActorsQuery(source)
 
     return (

@@ -2,7 +2,7 @@ import dataclasses
 from copy import deepcopy
 
 from clairview.cdp.templates.hog_function_template import HogFunctionTemplate, HogFunctionTemplateMigrator
-from clairview.torql.escape_sql import escape_torql_string
+from clairview.clairql.escape_sql import escape_clairql_string
 
 template: HogFunctionTemplate = HogFunctionTemplate(
     status="beta",
@@ -98,14 +98,14 @@ class TemplateClairViewMigrator(HogFunctionTemplateMigrator):
 
         hf["filters"] = {}
         if events_to_ignore:
-            event_names = ", ".join([escape_torql_string(event) for event in events_to_ignore])
+            event_names = ", ".join([escape_clairql_string(event) for event in events_to_ignore])
             hf["filters"]["events"] = [
                 {
                     "id": None,
                     "name": "All events",
                     "type": "events",
                     "order": 0,
-                    "properties": [{"type": "torql", "key": f"event not in ({event_names})"}],
+                    "properties": [{"type": "clairql", "key": f"event not in ({event_names})"}],
                 }
             ]
 

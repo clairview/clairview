@@ -38,7 +38,7 @@ import { userLogic } from 'scenes/userLogic'
 
 import { tagsModel } from '~/models/tagsModel'
 import { DataTableNode, NodeKind } from '~/queries/schema'
-import { isDataTableNode, isDataVisualizationNode, isEventsQuery, isTorQLQuery } from '~/queries/utils'
+import { isDataTableNode, isDataVisualizationNode, isEventsQuery, isClairQLQuery } from '~/queries/utils'
 import {
     ExporterFormat,
     InsightLogicProps,
@@ -73,7 +73,7 @@ export function InsightPageHeader({ insightLogicProps }: { insightLogicProps: In
     const { duplicateInsight, loadInsights } = useActions(savedInsightsLogic)
 
     // insightDataLogic
-    const { query, queryChanged, showQueryEditor, showDebugPanel, torQL, exportContext } = useValues(
+    const { query, queryChanged, showQueryEditor, showDebugPanel, clairQL, exportContext } = useValues(
         insightDataLogic(insightProps)
     )
     const { toggleQueryEditorPanel, toggleDebugPanel } = useActions(insightDataLogic(insightProps))
@@ -90,7 +90,7 @@ export function InsightPageHeader({ insightLogicProps }: { insightLogicProps: In
     const [addToDashboardModalOpen, setAddToDashboardModalOpenModal] = useState<boolean>(false)
 
     const showCohortButton =
-        isDataTableNode(query) || isDataVisualizationNode(query) || isTorQLQuery(query) || isEventsQuery(query)
+        isDataTableNode(query) || isDataVisualizationNode(query) || isClairQLQuery(query) || isEventsQuery(query)
 
     return (
         <>
@@ -244,7 +244,7 @@ export function InsightPageHeader({ insightLogicProps }: { insightLogicProps: In
                                             label="Debug panel"
                                         />
                                     ) : null}
-                                    {torQL && (
+                                    {clairQL && (
                                         <>
                                             <LemonDivider />
                                             <LemonButton
@@ -254,8 +254,8 @@ export function InsightPageHeader({ insightLogicProps }: { insightLogicProps: In
                                                         urls.insightNew(undefined, undefined, {
                                                             kind: NodeKind.DataTableNode,
                                                             source: {
-                                                                kind: NodeKind.TorQLQuery,
-                                                                query: torQL,
+                                                                kind: NodeKind.ClairQLQuery,
+                                                                query: clairQL,
                                                             },
                                                             full: true,
                                                         } as DataTableNode)
@@ -297,8 +297,8 @@ export function InsightPageHeader({ insightLogicProps }: { insightLogicProps: In
                                                             },
                                                             onSubmit: async ({ name }) => {
                                                                 createStaticCohort(name, {
-                                                                    kind: NodeKind.TorQLQuery,
-                                                                    query: torQL,
+                                                                    kind: NodeKind.ClairQLQuery,
+                                                                    query: clairQL,
                                                                 })
                                                             },
                                                         })

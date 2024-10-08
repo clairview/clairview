@@ -51,13 +51,13 @@ async function queueEvent(hub: Hub, pluginConfig: PluginConfig, data: InternalDa
     })
 }
 
-const vmMarkettorExtensionCaptureCalledCounter = new Counter({
+const vmClairviewExtensionCaptureCalledCounter = new Counter({
     name: 'vm_clairview_extension_capture_called_total',
     help: 'Count of times vm clairview extension capture was called',
     labelNames: ['plugin_id'],
 })
 
-export function createMarkettor(hub: Hub, pluginConfig: PluginConfig): DummyClairView {
+export function createClairview(hub: Hub, pluginConfig: PluginConfig): DummyClairView {
     const distinctId = pluginConfig.plugin?.name || `plugin-id-${pluginConfig.plugin_id}`
 
     return {
@@ -77,7 +77,7 @@ export function createMarkettor(hub: Hub, pluginConfig: PluginConfig): DummyClai
                 uuid: new UUIDT().toString(),
             }
             await queueEvent(hub, pluginConfig, data)
-            vmMarkettorExtensionCaptureCalledCounter.labels(String(pluginConfig.plugin?.id)).inc()
+            vmClairviewExtensionCaptureCalledCounter.labels(String(pluginConfig.plugin?.id)).inc()
         },
         api: createApi(hub, pluginConfig),
     }

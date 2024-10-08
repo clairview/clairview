@@ -63,7 +63,7 @@ class RetentionActorsByPeriod(ActorBaseQuery):
 
         results = insight_sync_execute(
             actor_query,
-            {**actor_query_params, **self._filter.torql_context.values},
+            {**actor_query_params, **self._filter.clairql_context.values},
             query_type="retention_actors",
             filter=self._filter,
             team_id=self._team.pk,

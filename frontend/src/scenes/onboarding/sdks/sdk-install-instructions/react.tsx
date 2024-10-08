@@ -11,8 +11,8 @@ function ReactEnvVarsSnippet(): JSX.Element {
     return (
         <CodeSnippet language={Language.Bash}>
             {[
-                `REACT_APP_PUBLIC_MARKETTOR_KEY=${currentTeam?.api_token}`,
-                `REACT_APP_PUBLIC_MARKETTOR_HOST=${apiHostOrigin()}`,
+                `REACT_APP_PUBLIC_CLAIRVIEW_KEY=${currentTeam?.api_token}`,
+                `REACT_APP_PUBLIC_CLAIRVIEW_HOST=${apiHostOrigin()}`,
             ].join('\n')}
         </CodeSnippet>
     )
@@ -29,14 +29,14 @@ import App from './App';
 import { ClairViewProvider} from 'clairview-js/react'
 
 const options = {
-  api_host: process.env.REACT_APP_PUBLIC_MARKETTOR_HOST,
+  api_host: process.env.REACT_APP_PUBLIC_CLAIRVIEW_HOST,
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ClairViewProvider 
-      apiKey={process.env.REACT_APP_PUBLIC_MARKETTOR_KEY}
+      apiKey={process.env.REACT_APP_PUBLIC_CLAIRVIEW_KEY}
       options={options}
     >
       <App />

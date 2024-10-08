@@ -261,7 +261,7 @@ hardcoded_prop_defs: dict = {
         },
         "$time": {
             "label": "$time (deprecated)",
-            "description": "Use the TorQL field `timestamp` instead. This field was previously set on some client side events.",
+            "description": "Use the ClairQL field `timestamp` instead. This field was previously set on some client side events.",
             "system": True,
             "examples": ["1681211521.345"],
         },

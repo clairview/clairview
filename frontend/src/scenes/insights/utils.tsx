@@ -154,13 +154,13 @@ export function humanizePathsEventTypes(includeEventTypes: PathsFilter['includeE
             humanEventTypes.push('custom events')
         }
         if (
-            (humanEventTypes.length === 0 && !includeEventTypes.includes(PathType.TorQL)) ||
+            (humanEventTypes.length === 0 && !includeEventTypes.includes(PathType.ClairQL)) ||
             humanEventTypes.length === 3
         ) {
             humanEventTypes = ['all events']
         }
-        if (includeEventTypes.includes(PathType.TorQL)) {
-            humanEventTypes.push('TorQL expression')
+        if (includeEventTypes.includes(PathType.ClairQL)) {
+            humanEventTypes.push('ClairQL expression')
         }
     }
     return humanEventTypes

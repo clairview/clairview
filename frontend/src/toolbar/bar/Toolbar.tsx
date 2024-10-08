@@ -28,7 +28,7 @@ import { ExperimentsToolbarMenu } from '~/toolbar/experiments/ExperimentsToolbar
 import { FlagsToolbarMenu } from '~/toolbar/flags/FlagsToolbarMenu'
 import { HeatmapToolbarMenu } from '~/toolbar/stats/HeatmapToolbarMenu'
 import { toolbarConfigLogic } from '~/toolbar/toolbarConfigLogic'
-import { useToolbarFeatureFlag } from '~/toolbar/toolbarMarkettorJS'
+import { useToolbarFeatureFlag } from '~/toolbar/toolbarClairviewJS'
 
 import { HedgehogMenu } from '../hedgehog/HedgehogMenu'
 import { ToolbarButton } from './ToolbarButton'

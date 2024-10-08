@@ -8,7 +8,7 @@ from clairview.constants import (
     WEEKLY_ACTIVE,
     PropertyOperatorType,
 )
-from clairview.torql.torql import TorQLContext
+from clairview.clairql.clairql import ClairQLContext
 from clairview.models.cohort import Cohort
 from clairview.models.cohort.util import format_filter_query
 from clairview.models.entity import Entity
@@ -144,7 +144,7 @@ def get_breakdown_prop_values(
         person_properties_mode=person_properties_mode,
         allow_denormalized_props=True,
         person_id_joined_alias=person_id_joined_alias,
-        torql_context=filter.torql_context,
+        clairql_context=filter.clairql_context,
     )
 
     if use_all_funnel_entities:
@@ -163,14 +163,14 @@ def get_breakdown_prop_values(
             table_name="e",
             person_id_joined_alias=person_id_joined_alias,
             person_properties_mode=person_properties_mode,
-            torql_context=filter.torql_context,
+            clairql_context=filter.clairql_context,
         )
 
     breakdown_expression, breakdown_params = _to_value_expression(
         filter.breakdown_type,
         filter.breakdown,
         filter.breakdown_group_type_index,
-        filter.torql_context,
+        filter.clairql_context,
         filter.breakdown_normalize_url,
         direct_on_events=person_properties_mode
         in [
@@ -231,7 +231,7 @@ def get_breakdown_prop_values(
             **extra_params,
             **date_params,
             **sampling_params,
-            **filter.torql_context.values,
+            **filter.clairql_context.values,
         },
         query_type="get_breakdown_prop_values",
         filter=filter,
@@ -250,7 +250,7 @@ def _to_value_expression(
     breakdown_type: Optional[BREAKDOWN_TYPES],
     breakdown: Union[str, list[Union[str, int]], None],
     breakdown_group_type_index: Optional[GroupTypeIndex],
-    torql_context: TorQLContext,
+    clairql_context: ClairQLContext,
     breakdown_normalize_url: bool = False,
     direct_on_events: bool = False,
     cast_as_float: bool = False,
@@ -286,14 +286,14 @@ def _to_value_expression(
                 f"group{breakdown_group_type_index}_properties" if direct_on_events else "group_properties"
             ),
         )
-    elif breakdown_type == "torql":
-        from clairview.torql.torql import translate_torql
+    elif breakdown_type == "clairql":
+        from clairview.clairql.clairql import translate_clairql
 
         if isinstance(breakdown, list):
-            expressions = [translate_torql(exp, torql_context) for exp in breakdown]
+            expressions = [translate_clairql(exp, clairql_context) for exp in breakdown]
             value_expression = f"array({','.join(expressions)})"
         else:
-            value_expression = translate_torql(cast(str, breakdown), torql_context)
+            value_expression = translate_clairql(cast(str, breakdown), clairql_context)
     else:
         value_expression, params = get_single_or_multi_property_string_expr(
             breakdown,
@@ -343,7 +343,7 @@ def _format_all_query(team: Team, filter: Filter, **kwargs) -> tuple[str, dict]:
         property_group=props_to_filter,
         prepend="all_cohort_",
         table_name="all_events",
-        torql_context=filter.torql_context,
+        clairql_context=filter.clairql_context,
     )
     query = f"""
             SELECT DISTINCT distinct_id, {ALL_USERS_COHORT_ID} as value
@@ -363,7 +363,7 @@ def format_breakdown_cohort_join_query(team: Team, filter: Filter, **kwargs) -> 
         if isinstance(filter.breakdown, list)
         else Cohort.objects.filter(team_id=team.pk, pk=filter.breakdown)
     )
-    cohort_queries, params = _parse_breakdown_cohorts(list(cohorts), filter.torql_context)
+    cohort_queries, params = _parse_breakdown_cohorts(list(cohorts), filter.clairql_context)
     ids = [cohort.pk for cohort in cohorts]
     if isinstance(filter.breakdown, list) and "all" in filter.breakdown:
         all_query, all_params = _format_all_query(team, filter, entity=entity)
@@ -373,12 +373,12 @@ def format_breakdown_cohort_join_query(team: Team, filter: Filter, **kwargs) -> 
     return " UNION ALL ".join(cohort_queries), ids, params
 
 
-def _parse_breakdown_cohorts(cohorts: list[Cohort], torql_context: TorQLContext) -> tuple[list[str], dict]:
+def _parse_breakdown_cohorts(cohorts: list[Cohort], clairql_context: ClairQLContext) -> tuple[list[str], dict]:
     queries = []
     params: dict[str, Any] = {}
 
     for idx, cohort in enumerate(cohorts):
-        person_id_query, cohort_filter_params = format_filter_query(cohort, idx, torql_context)
+        person_id_query, cohort_filter_params = format_filter_query(cohort, idx, clairql_context)
         params = {**params, **cohort_filter_params}
         cohort_query = person_id_query.replace(
             "SELECT distinct_id", f"SELECT distinct_id, {cohort.pk} as value", 1

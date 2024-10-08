@@ -217,7 +217,7 @@ export const USER_AGENT_CONFIG_SCHEMA = [
         key: 'enableSegmentAnalyticsJs',
         name: 'Automatically read segment_userAgent property, automatically sent by Segment via analytics.js?',
         type: 'choice' as const,
-        hint: "Segment's analytics.js library automatically sends a useragent property that Markettor sees as segment_userAgent. Enabling this causes this plugin to parse that property",
+        hint: "Segment's analytics.js library automatically sends a useragent property that Clairview sees as segment_userAgent. Enabling this causes this plugin to parse that property",
         choices: ['false', 'true'],
         default: 'false',
         required: false,

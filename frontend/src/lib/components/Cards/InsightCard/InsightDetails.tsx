@@ -203,8 +203,8 @@ function SeriesDisplay({
                 {!isFunnelsQuery(query) && (
                     <span className="leading-none">
                         counted by{' '}
-                        {mathDefinition?.category === MathCategory.TorQLExpression ? (
-                            <code>{filter.math_torql}</code>
+                        {mathDefinition?.category === MathCategory.ClairQLExpression ? (
+                            <code>{filter.math_clairql}</code>
                         ) : (
                             <>
                                 {mathDefinition?.category === MathCategory.PropertyValue && filter.math_property && (
@@ -366,7 +366,7 @@ function InsightDetailsInternal(
 ): JSX.Element {
     const { created_at, created_by, query } = insight
 
-    // TODO: Implement summaries for TorQL query insights
+    // TODO: Implement summaries for ClairQL query insights
     return (
         <div className="InsightDetails" ref={ref}>
             {isInsightVizNode(query) && (

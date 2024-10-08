@@ -16,7 +16,7 @@ def person_query(team: Team, filter: Filter, **kwargs):
 
 def run_query(team: Team, filter: Filter, **kwargs):
     query, params = PersonQuery(filter, team.pk, **kwargs).get_query()
-    rows = sync_execute(query, {**params, **filter.torql_context.values, "team_id": team.pk})
+    rows = sync_execute(query, {**params, **filter.clairql_context.values, "team_id": team.pk})
 
     if len(rows) > 0:
         return {"rows": len(rows), "columns": len(rows[0])}

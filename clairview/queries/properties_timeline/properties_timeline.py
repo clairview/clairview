@@ -132,7 +132,7 @@ class PropertiesTimeline:
         }
         raw_query_result = insight_sync_execute(
             formatted_sql,
-            {**params, **filter.torql_context.values},
+            {**params, **filter.clairql_context.values},
             query_type="properties_timeline",
             team_id=team.pk,
         )

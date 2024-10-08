@@ -9,8 +9,8 @@ import { ActionStepType } from '~/types'
 
 import { ActionStepPropertyKey } from './actions/ActionStep'
 
-export const TOOLBAR_ID = '__MARKETTOR_TOOLBAR__'
-export const LOCALSTORAGE_KEY = '_marketTorToolbarParams'
+export const TOOLBAR_ID = '__CLAIRVIEW_TOOLBAR__'
+export const LOCALSTORAGE_KEY = '_clairViewToolbarParams'
 
 export function getSafeText(el: HTMLElement): string {
     if (!el.childNodes || !el.childNodes.length) {

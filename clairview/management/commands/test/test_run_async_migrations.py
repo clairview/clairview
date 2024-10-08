@@ -5,7 +5,7 @@ from django.core.management import call_command
 from semantic_version.base import Version
 
 from clairview.async_migrations.setup import ALL_ASYNC_MIGRATIONS
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 
 pytestmark = pytest.mark.django_db
 
@@ -25,7 +25,7 @@ def test_plan_includes_all_migrations_except_past_max_version(caplog):
     call_command("run_async_migrations", "--plan")
     output = "\n".join([rec.message for rec in caplog.records])
     for migration_name, migration in ALL_ASYNC_MIGRATIONS.items():
-        if FROZEN_MARKETTOR_VERSION > Version(migration.clairview_max_version):
+        if FROZEN_CLAIRVIEW_VERSION > Version(migration.clairview_max_version):
             assert migration_name in output
         else:
             assert migration_name not in output

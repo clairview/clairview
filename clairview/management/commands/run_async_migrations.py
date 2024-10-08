@@ -16,7 +16,7 @@ from clairview.async_migrations.setup import (
     setup_async_migrations,
     setup_model,
 )
-from clairview.constants import FROZEN_MARKETTOR_VERSION
+from clairview.constants import FROZEN_CLAIRVIEW_VERSION
 from clairview.models.async_migration import (
     AsyncMigration,
     AsyncMigrationError,
@@ -38,7 +38,7 @@ def get_necessary_migrations() -> Sequence[AsyncMigration]:
 
         sm = setup_model(migration_name, definition)
 
-        if FROZEN_MARKETTOR_VERSION > Version(sm.clairview_max_version):
+        if FROZEN_CLAIRVIEW_VERSION > Version(sm.clairview_max_version):
             necessary_migrations.append(sm)
 
     return necessary_migrations

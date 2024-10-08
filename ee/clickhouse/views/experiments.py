@@ -448,7 +448,7 @@ class EnterpriseExperimentsViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet
                 target_filters = [
                     prop.to_dict()
                     for prop in entity.property_groups.flat
-                    if prop.type in ("event", "feature", "element", "torql")
+                    if prop.type in ("event", "feature", "element", "clairql")
                 ]
 
         cohort_serializer = CohortSerializer(

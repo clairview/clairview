@@ -7,8 +7,8 @@ from zoneinfo import ZoneInfo
 from rest_framework.exceptions import ValidationError
 
 from clairview.constants import ExperimentSignificanceCode, ExperimentNoResultsErrorKeys
-from clairview.torql_queries.experiments import CONTROL_VARIANT_KEY
-from clairview.torql_queries.experiments.funnel_statistics import (
+from clairview.clairql_queries.experiments import CONTROL_VARIANT_KEY
+from clairview.clairql_queries.experiments.funnel_statistics import (
     are_results_significant,
     calculate_credible_intervals,
     calculate_probabilities,

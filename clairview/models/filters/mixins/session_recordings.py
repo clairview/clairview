@@ -1,7 +1,7 @@
 import json
 from typing import Optional, Literal, Union
 
-from clairview.torql import ast
+from clairview.clairql import ast
 from clairview.constants import PERSON_UUID_FILTER, SESSION_RECORDINGS_FILTER_IDS, PropertyOperatorType
 from clairview.models.filters.mixins.common import BaseParamMixin
 from clairview.models.filters.mixins.property import PropertyMixin

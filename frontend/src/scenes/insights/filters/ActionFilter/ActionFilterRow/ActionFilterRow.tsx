@@ -15,7 +15,7 @@ import {
 } from '@clairview/lemon-ui'
 import { BuiltLogic, useActions, useValues } from 'kea'
 import { EntityFilterInfo } from 'lib/components/EntityFilterInfo'
-import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
+import { ClairQLEditor } from 'lib/components/ClairQLEditor/ClairQLEditor'
 import { PropertyFilters } from 'lib/components/PropertyFilters/PropertyFilters'
 import { PropertyKeyInfo } from 'lib/components/PropertyKeyInfo'
 import { SeriesGlyph, SeriesLetter } from 'lib/components/SeriesGlyph'
@@ -52,7 +52,7 @@ import {
     EntityType,
     EntityTypes,
     FunnelExclusionLegacy,
-    TorQLMathType,
+    ClairQLMathType,
     PropertyFilterValue,
     PropertyMathType,
 } from '~/types'
@@ -168,7 +168,7 @@ export function ActionFilterRow({
     const { mathDefinitions } = useValues(mathsLogic)
     const { dataWarehouseTablesMap } = useValues(databaseTableListLogic)
 
-    const [isTorQLDropdownVisible, setIsTorQLDropdownVisible] = useState(false)
+    const [isClairQLDropdownVisible, setIsClairQLDropdownVisible] = useState(false)
     const [isMenuVisible, setIsMenuVisible] = useState(false)
 
     const { setNodeRef, attributes, transform, transition, listeners, isDragging } = useSortable({ id: filter.uuid })
@@ -179,7 +179,7 @@ export function ActionFilterRow({
     const {
         math,
         math_property: mathProperty,
-        math_torql: mathTorQL,
+        math_clairql: mathClairQL,
         math_group_type_index: mathGroupTypeIndex,
     } = filter
 
@@ -194,14 +194,14 @@ export function ActionFilterRow({
                       mathDefinitions[selectedMath]?.category === MathCategory.PropertyValue
                           ? mathProperty ?? '$time'
                           : undefined,
-                  math_torql:
-                      mathDefinitions[selectedMath]?.category === MathCategory.TorQLExpression
-                          ? mathTorQL ?? 'count()'
+                  math_clairql:
+                      mathDefinitions[selectedMath]?.category === MathCategory.ClairQLExpression
+                          ? mathClairQL ?? 'count()'
                           : undefined,
               }
             : {
                   math_property: undefined,
-                  math_torql: undefined,
+                  math_clairql: undefined,
                   math_group_type_index: undefined,
                   math: undefined,
               }
@@ -215,17 +215,17 @@ export function ActionFilterRow({
     const onMathPropertySelect = (_: unknown, property: string): void => {
         updateFilterMath({
             ...filter,
-            math_torql: undefined,
+            math_clairql: undefined,
             math_property: property,
             index,
         })
     }
 
-    const onMathTorQLSelect = (_: unknown, torql: string): void => {
+    const onMathClairQLSelect = (_: unknown, clairql: string): void => {
         updateFilterMath({
             ...filter,
             math_property: undefined,
-            math_torql: torql,
+            math_clairql: clairql,
             index,
         })
     }
@@ -479,20 +479,20 @@ export function ActionFilterRow({
                                             </div>
                                         )}
                                         {mathDefinitions[math || BaseMathType.TotalCount]?.category ===
-                                            MathCategory.TorQLExpression && (
+                                            MathCategory.ClairQLExpression && (
                                             <div className="flex-auto overflow-hidden">
                                                 <LemonDropdown
-                                                    visible={isTorQLDropdownVisible}
+                                                    visible={isClairQLDropdownVisible}
                                                     closeOnClickInside={false}
-                                                    onClickOutside={() => setIsTorQLDropdownVisible(false)}
+                                                    onClickOutside={() => setIsClairQLDropdownVisible(false)}
                                                     overlay={
                                                         // eslint-disable-next-line react/forbid-dom-props
                                                         <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                                                            <TorQLEditor
-                                                                value={mathTorQL}
+                                                            <ClairQLEditor
+                                                                value={mathClairQL}
                                                                 onChange={(currentValue) => {
-                                                                    onMathTorQLSelect(index, currentValue)
-                                                                    setIsTorQLDropdownVisible(false)
+                                                                    onMathClairQLSelect(index, currentValue)
+                                                                    setIsClairQLDropdownVisible(false)
                                                                 }}
                                                             />
                                                         </div>
@@ -501,12 +501,12 @@ export function ActionFilterRow({
                                                     <LemonButton
                                                         fullWidth
                                                         type="secondary"
-                                                        data-attr={`math-torql-select-${index}`}
+                                                        data-attr={`math-clairql-select-${index}`}
                                                         onClick={() =>
-                                                            setIsTorQLDropdownVisible(!isTorQLDropdownVisible)
+                                                            setIsClairQLDropdownVisible(!isClairQLDropdownVisible)
                                                         }
                                                     >
-                                                        <code>{mathTorQL}</code>
+                                                        <code>{mathClairQL}</code>
                                                     </LemonButton>
                                                 </LemonDropdown>
                                             </div>
@@ -750,10 +750,10 @@ function useMathSelectorOptions({
     }
 
     options.push({
-        value: TorQLMathType.TorQL,
-        label: 'TorQL expression',
+        value: ClairQLMathType.ClairQL,
+        label: 'ClairQL expression',
         tooltip: 'Aggregate events by custom SQL expression.',
-        'data-attr': `math-node-torql-expression-${index}`,
+        'data-attr': `math-node-clairql-expression-${index}`,
     })
 
     return [

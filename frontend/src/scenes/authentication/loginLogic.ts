@@ -122,7 +122,7 @@ export const loginLogic = kea<loginLogicType>([
     listeners({
         submitLoginSuccess: () => {
             handleLoginRedirect()
-            // Reload the page after login to ensure MARKETTOR_APP_CONTEXT is set correctly.
+            // Reload the page after login to ensure CLAIRVIEW_APP_CONTEXT is set correctly.
             window.location.reload()
         },
     }),

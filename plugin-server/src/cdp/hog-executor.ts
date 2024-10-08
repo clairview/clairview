@@ -309,14 +309,14 @@ export class HogExecutor {
                                 message: sanitizeLogMessage(args, sensitiveValues),
                             })
                         },
-                        marketTorCapture: (event) => {
+                        clairViewCapture: (event) => {
                             if (typeof event.event !== 'string') {
-                                throw new Error("[HogFunction] - marketTorCapture call missing 'event' property")
+                                throw new Error("[HogFunction] - clairViewCapture call missing 'event' property")
                             }
 
                             if (result.capturedClairViewEvents!.length > 0) {
                                 throw new Error(
-                                    'marketTorCapture was called more than once. Only one call is allowed per function'
+                                    'clairViewCapture was called more than once. Only one call is allowed per function'
                                 )
                             }
                             const executionCount = globals.event.properties?.$hog_function_execution_count ?? 0
@@ -325,7 +325,7 @@ export class HogExecutor {
                                 result.logs.push({
                                     level: 'warn',
                                     timestamp: DateTime.now(),
-                                    message: `marketTorCapture was called from an event that already executed this function. To prevent infinite loops, the event was not captured.`,
+                                    message: `clairViewCapture was called from an event that already executed this function. To prevent infinite loops, the event was not captured.`,
                                 })
                                 return
                             }

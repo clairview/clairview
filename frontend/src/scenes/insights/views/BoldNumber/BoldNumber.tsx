@@ -209,7 +209,7 @@ function BoldNumberComparison({ showPersonsModal }: Pick<ChartParams, 'showPerso
     )
 }
 
-export function TorQLBoldNumber(): JSX.Element {
+export function ClairQLBoldNumber(): JSX.Element {
     const { response, responseLoading, tabularData } = useValues(dataVisualizationLogic)
 
     const displayValue =
@@ -221,7 +221,7 @@ export function TorQLBoldNumber(): JSX.Element {
         'Error'
 
     return (
-        <div className="BoldNumber LemonTable TorQL">
+        <div className="BoldNumber LemonTable ClairQL">
             <div className="BoldNumber__value">
                 <Textfit min={32} max={120}>
                     {displayValue}

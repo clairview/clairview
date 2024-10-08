@@ -115,7 +115,7 @@ services:
         environment:
             - DEBUG=1
             - OBJECT_STORAGE_ENDPOINT=http://objectstorage:19000
-            - MARKETTOR_SKIP_MIGRATION_CHECKS=true
+            - CLAIRVIEW_SKIP_MIGRATION_CHECKS=true
             - JS_URL=http://localhost:8000
         depends_on:
             - db

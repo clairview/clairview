@@ -4,24 +4,24 @@ import { ExportedData } from '~/exporter/types'
 
 declare global {
     interface Window {
-        JS_MARKETTOR_API_KEY?: string
-        JS_MARKETTOR_HOST?: string
-        JS_MARKETTOR_UI_HOST?: string
-        JS_MARKETTOR_SELF_CAPTURE?: boolean
+        JS_CLAIRVIEW_API_KEY?: string
+        JS_CLAIRVIEW_HOST?: string
+        JS_CLAIRVIEW_UI_HOST?: string
+        JS_CLAIRVIEW_SELF_CAPTURE?: boolean
         JS_CAPTURE_TIME_TO_SEE_DATA?: boolean
         JS_KEA_VERBOSE_LOGGING?: boolean
         clairview?: clairview
         ESBUILD_LOAD_SCRIPT: (name) => void
         ESBUILD_LOAD_CHUNKS: (name) => void
         ESBUILD_LOADED_CHUNKS: Set<string>
-        MARKETTOR_EXPORTED_DATA: ExportedData
-        MARKETTOR_USER_IDENTITY_WITH_FLAGS?: {
+        CLAIRVIEW_EXPORTED_DATA: ExportedData
+        CLAIRVIEW_USER_IDENTITY_WITH_FLAGS?: {
             distinctID: string
             isIdentifiedID: boolean
             featureFlags: Record<string, boolean | string>
         }
         IMPERSONATED_SESSION?: boolean
-        MARKETTOR_JS_UUID_VERSION?: string
+        CLAIRVIEW_JS_UUID_VERSION?: string
 
         EventSourcePolyfill: typeof EventSource
     }

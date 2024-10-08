@@ -3,7 +3,7 @@ import { summarizeInsight, SummaryContext } from 'scenes/insights/summarizeInsig
 import {
     BASE_MATH_DEFINITIONS,
     COUNT_PER_ACTOR_MATH_DEFINITIONS,
-    TORQL_MATH_DEFINITIONS,
+    CLAIRQL_MATH_DEFINITIONS,
     MathCategory,
     MathDefinition,
     PROPERTY_MATH_DEFINITIONS,
@@ -56,7 +56,7 @@ const mathDefinitions: Record<string, MathDefinition> = {
     },
     ...PROPERTY_MATH_DEFINITIONS,
     ...COUNT_PER_ACTOR_MATH_DEFINITIONS,
-    ...TORQL_MATH_DEFINITIONS,
+    ...CLAIRQL_MATH_DEFINITIONS,
 }
 
 const summaryContext: SummaryContext = {
@@ -556,7 +556,7 @@ describe('summarizing insights', () => {
                 kind: NodeKind.DataTableNode,
                 full: true,
                 source: {
-                    kind: NodeKind.TorQLQuery,
+                    kind: NodeKind.ClairQLQuery,
                     query: 'select event,\n          person.properties.email from events\n  where timestamp > now() - interval 1 day',
                 },
             }

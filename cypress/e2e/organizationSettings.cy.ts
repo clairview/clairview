@@ -14,7 +14,7 @@ describe('Organization settings', () => {
     it('can create a new organization', () => {
         cy.visit(urls.settings('organization'), {
             onLoad(win: Cypress.AUTWindow) {
-                ;(win as any).MARKETTOR_APP_CONTEXT.preflight.cloud = true
+                ;(win as any).CLAIRVIEW_APP_CONTEXT.preflight.cloud = true
             },
         })
         cy.get('[data-attr=breadcrumb-organization]').click()
@@ -26,7 +26,7 @@ describe('Organization settings', () => {
     it('can delete an organization', () => {
         cy.visit(urls.settings('organization'), {
             onLoad(win: Cypress.AUTWindow) {
-                ;(win as any).MARKETTOR_APP_CONTEXT.preflight.cloud = true
+                ;(win as any).CLAIRVIEW_APP_CONTEXT.preflight.cloud = true
             },
         })
         cy.get('[data-attr=organization-name-input-settings]').should('have.value', 'New Organization')

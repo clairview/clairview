@@ -1,7 +1,7 @@
 import { actions, kea, key, listeners, path, props, propsChanged, reducers } from 'kea'
 import { teamLogic } from 'scenes/teamLogic'
 
-import { TORQL_COLUMNS_KEY } from '~/queries/nodes/DataTable/defaultEventsQuery'
+import { CLAIRQL_COLUMNS_KEY } from '~/queries/nodes/DataTable/defaultEventsQuery'
 
 import type { columnConfiguratorLogicType } from './columnConfiguratorLogicType'
 
@@ -65,7 +65,7 @@ export const columnConfiguratorLogic = kea<columnConfiguratorLogicType>([
     listeners(({ values, props }) => ({
         save: () => {
             if (props.isPersistent && values.saveAsDefault) {
-                teamLogic.actions.updateCurrentTeam({ live_events_columns: [TORQL_COLUMNS_KEY, ...values.columns] })
+                teamLogic.actions.updateCurrentTeam({ live_events_columns: [CLAIRQL_COLUMNS_KEY, ...values.columns] })
             }
             props.setColumns(values.columns)
         },

@@ -8,7 +8,7 @@ import { objectsEqual, sortedKeys } from 'lib/utils'
 import { dataNodeLogic } from '~/queries/nodes/DataNode/dataNodeLogic'
 import { getQueryFeatures, QueryFeature } from '~/queries/nodes/DataTable/queryFeatures'
 import { insightVizDataCollectionId } from '~/queries/nodes/InsightViz/InsightViz'
-import { AnyDataNode, AnyResponseType, DataTableNode, EventsQuery, TorQLExpression, NodeKind } from '~/queries/schema'
+import { AnyDataNode, AnyResponseType, DataTableNode, EventsQuery, ClairQLExpression, NodeKind } from '~/queries/schema'
 import { QueryContext } from '~/queries/types'
 import { isDataTableNode, isEventsQuery } from '~/queries/utils'
 
@@ -46,7 +46,7 @@ export const dataTableLogic = kea<dataTableLogicType>([
         return props.vizKey
     }),
     path(['queries', 'nodes', 'DataTable', 'dataTableLogic']),
-    actions({ setColumnsInQuery: (columns: TorQLExpression[]) => ({ columns }) }),
+    actions({ setColumnsInQuery: (columns: ClairQLExpression[]) => ({ columns }) }),
     reducers(({ props }) => ({
         columnsInQuery: [getColumnsForQuery(props.query), { setColumnsInQuery: (_, { columns }) => columns }],
     })),
@@ -206,11 +206,11 @@ export const dataTableLogic = kea<dataTableLogicType>([
                         showElapsedTime:
                             (query.showTimings ?? flagQueryTimingsEnabled) ||
                             (query.showElapsedTime ??
-                                ((flagQueryRunningTimeEnabled || source.kind === NodeKind.TorQLQuery) && showIfFull)),
+                                ((flagQueryRunningTimeEnabled || source.kind === NodeKind.ClairQLQuery) && showIfFull)),
                         showColumnConfigurator: query.showColumnConfigurator ?? showIfFull,
                         showPersistentColumnConfigurator: query.showPersistentColumnConfigurator ?? false,
                         showSavedQueries: query.showSavedQueries ?? false,
-                        showTorQLEditor: query.showTorQLEditor ?? showIfFull,
+                        showClairQLEditor: query.showClairQLEditor ?? showIfFull,
                         allowSorting: query.allowSorting ?? true,
                         showOpenEditorButton:
                             context?.showOpenEditorButton !== undefined

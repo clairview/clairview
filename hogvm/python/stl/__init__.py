@@ -121,9 +121,9 @@ def print(args: list[Any], team: Optional["Team"], stdout: Optional[list[str]], 
 def run(args: list[Any], team: Optional["Team"], stdout: Optional[list[str]], timeout: float) -> list[Any]:
     if team is None:
         return []
-    from clairview.torql.query import execute_torql_query
+    from clairview.clairql.query import execute_clairql_query
 
-    response = execute_torql_query(query=args[0], team=team)
+    response = execute_clairql_query(query=args[0], team=team)
     return response.results
 
 

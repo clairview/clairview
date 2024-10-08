@@ -13,12 +13,12 @@ import { ErrorBoundary } from '../layout/ErrorBoundary'
 // Disable tracking for all exports and embeds.
 // This is explicitly set as to not track our customers' customers data.
 // Without it, embeds of self-hosted iframes will log metrics to app.clairview.com.
-window.JS_MARKETTOR_API_KEY = undefined
+window.JS_CLAIRVIEW_API_KEY = undefined
 
 loadClairViewJS()
 initKea()
 
-const exportedData: ExportedData = window.MARKETTOR_EXPORTED_DATA
+const exportedData: ExportedData = window.CLAIRVIEW_EXPORTED_DATA
 
 function renderApp(): void {
     const root = document.getElementById('root')

@@ -26,7 +26,7 @@ class InsightResult:
     timings: Optional[list[QueryTiming]] = None
     columns: Optional[list] = None
     query_status: Optional[Any] = None
-    torql: Optional[str] = None
+    clairql: Optional[str] = None
     types: Optional[list] = None
 
 

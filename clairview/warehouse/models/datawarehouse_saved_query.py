@@ -5,19 +5,19 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 
-from clairview.torql import ast
-from clairview.torql.database.database import Database
-from clairview.torql.database.models import FieldOrTable, SavedQuery
+from clairview.clairql import ast
+from clairview.clairql.database.database import Database
+from clairview.clairql.database.models import FieldOrTable, SavedQuery
 from clairview.models.team import Team
 from clairview.models.utils import CreatedMetaFields, DeletedMetaFields, UUIDModel
-from clairview.schema import TorQLQueryModifiers
+from clairview.schema import ClairQLQueryModifiers
 from clairview.warehouse.models.util import (
-    CLICKHOUSE_TORQL_MAPPING,
-    STR_TO_TORQL_MAPPING,
+    CLICKHOUSE_CLAIRQL_MAPPING,
+    STR_TO_CLAIRQL_MAPPING,
     clean_type,
     remove_named_tuples,
 )
-from clairview.torql.database.s3_table import S3Table
+from clairview.clairql.database.s3_table import S3Table
 from clairview.warehouse.util import database_sync_to_async
 
 
@@ -58,7 +58,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
         help_text="Dict of all columns with ClickHouse type (including Nullable())",
     )
     external_tables = models.JSONField(default=list, null=True, blank=True, help_text="List of all external tables")
-    query = models.JSONField(default=dict, null=True, blank=True, help_text="TorQL query")
+    query = models.JSONField(default=dict, null=True, blank=True, help_text="ClairQL query")
     status = models.CharField(
         null=True, choices=Status.choices, max_length=64, help_text="The status of when this SavedQuery last ran."
     )
@@ -78,7 +78,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
     def get_columns(self) -> dict[str, dict[str, Any]]:
         from clairview.api.services.query import process_query_dict
-        from clairview.torql_queries.query_runner import ExecutionMode
+        from clairview.clairql_queries.query_runner import ExecutionMode
 
         response = process_query_dict(self.team, self.query, execution_mode=ExecutionMode.CALCULATE_BLOCKING_ALWAYS)
         result = getattr(response, "types", [])
@@ -88,7 +88,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
         columns = {
             str(item[0]): {
-                "torql": CLICKHOUSE_TORQL_MAPPING[clean_type(str(item[1]))].__name__,
+                "clairql": CLICKHOUSE_CLAIRQL_MAPPING[clean_type(str(item[1]))].__name__,
                 "clickhouse": item[1],
                 "valid": True,
             }
@@ -110,20 +110,20 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
     @property
     def s3_tables(self):
-        from clairview.torql.context import TorQLContext
-        from clairview.torql.database.database import create_torql_database
-        from clairview.torql.parser import parse_select
-        from clairview.torql.query import create_default_modifiers_for_team
-        from clairview.torql.resolver import resolve_types
+        from clairview.clairql.context import ClairQLContext
+        from clairview.clairql.database.database import create_clairql_database
+        from clairview.clairql.parser import parse_select
+        from clairview.clairql.query import create_default_modifiers_for_team
+        from clairview.clairql.resolver import resolve_types
         from clairview.models.property.util import S3TableVisitor
 
-        context = TorQLContext(
+        context = ClairQLContext(
             team_id=self.team.pk,
             enable_select_queries=True,
             modifiers=create_default_modifiers_for_team(self.team),
         )
         node = parse_select(self.query["query"])
-        context.database = create_torql_database(context.team_id)
+        context.database = create_clairql_database(context.team_id)
 
         node = resolve_types(node, context, dialect="clickhouse")
         table_collector = S3TableVisitor()
@@ -141,8 +141,8 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
             f"https://{settings.AIRBYTE_BUCKET_DOMAIN}/dlt/team_{self.team.pk}_model_{self.id.hex}/modeling/{self.name}"
         )
 
-    def torql_definition(self, modifiers: Optional[TorQLQueryModifiers] = None) -> Union[SavedQuery, S3Table]:
-        from clairview.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING
+    def clairql_definition(self, modifiers: Optional[ClairQLQueryModifiers] = None) -> Union[SavedQuery, S3Table]:
+        from clairview.warehouse.models.table import CLICKHOUSE_CLAIRQL_MAPPING
 
         columns = self.columns or {}
 
@@ -172,12 +172,12 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
 
             # Support for 'old' style columns
             if isinstance(type, str):
-                torql_type_str = clickhouse_type.partition("(")[0]
-                torql_type = CLICKHOUSE_TORQL_MAPPING[torql_type_str]
+                clairql_type_str = clickhouse_type.partition("(")[0]
+                clairql_type = CLICKHOUSE_CLAIRQL_MAPPING[clairql_type_str]
             else:
-                torql_type = STR_TO_TORQL_MAPPING[type["torql"]]
+                clairql_type = STR_TO_CLAIRQL_MAPPING[type["clairql"]]
 
-            fields[column] = torql_type(name=column)
+            fields[column] = clairql_type(name=column)
 
         if (
             self.table is not None
@@ -185,7 +185,7 @@ class DataWarehouseSavedQuery(CreatedMetaFields, UUIDModel, DeletedMetaFields):
             and modifiers is not None
             and modifiers.useMaterializedViews
         ):
-            return self.table.torql_definition(modifiers)
+            return self.table.clairql_definition(modifiers)
         else:
             return SavedQuery(
                 id=str(self.id),

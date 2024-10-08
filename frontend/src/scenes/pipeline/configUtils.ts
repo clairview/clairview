@@ -3,7 +3,7 @@ import { PluginConfigChoice, PluginConfigSchema } from '@clairview/plugin-scaffo
 import { PluginType } from '~/types'
 
 // Keep this in sync with: clairview/api/plugin.py
-export const SECRET_FIELD_VALUE = '**************** MARKETTOR SECRET FIELD ****************'
+export const SECRET_FIELD_VALUE = '**************** CLAIRVIEW SECRET FIELD ****************'
 
 export function getConfigSchemaArray(
     configSchema: Record<string, PluginConfigSchema> | PluginConfigSchema[]

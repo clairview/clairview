@@ -138,7 +138,7 @@ export function ExperimentInsightCreator({ insightProps }: { insightProps: Insig
                     TaxonomicFilterGroupType.EventFeatureFlags,
                     TaxonomicFilterGroupType.Cohorts,
                     TaxonomicFilterGroupType.Elements,
-                    TaxonomicFilterGroupType.TorQLExpression,
+                    TaxonomicFilterGroupType.ClairQLExpression,
                 ]}
             />
             <div className="mt-4 space-y-4">
@@ -146,7 +146,7 @@ export function ExperimentInsightCreator({ insightProps }: { insightProps: Insig
                     <>
                         <div className="flex items-center w-full gap-2">
                             <span>Aggregating by</span>
-                            <AggregationSelect insightProps={insightProps} torqlAvailable />
+                            <AggregationSelect insightProps={insightProps} clairqlAvailable />
                         </div>
                         <FunnelConversionWindowFilter insightProps={insightProps} />
                         <AttributionSelect insightProps={insightProps} />

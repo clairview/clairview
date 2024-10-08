@@ -185,7 +185,7 @@ export const viewLinkLogic = kea<viewLinkLogicType>([
             (s) => [s.selectedJoiningTableName, s.allTables],
             (selectedJoiningTableName, tables) => tables.find((row) => row.name === selectedJoiningTableName),
         ],
-        sourceIsUsingTorQLExpression: [
+        sourceIsUsingClairQLExpression: [
             (s) => [s.selectedSourceKey, s.selectedSourceTable],
             (sourceKey, sourceTable) => {
                 if (sourceKey === null) {
@@ -195,7 +195,7 @@ export const viewLinkLogic = kea<viewLinkLogicType>([
                 return !column
             },
         ],
-        joiningIsUsingTorQLExpression: [
+        joiningIsUsingClairQLExpression: [
             (s) => [s.selectedJoiningKey, s.selectedJoiningTable],
             (joiningKey, joiningTable) => {
                 if (joiningKey === null) {

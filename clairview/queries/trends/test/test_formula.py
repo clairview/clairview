@@ -580,11 +580,11 @@ class TestFormula(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(response[1]["label"], "cohort1")
 
     @snapshot_clickhouse_queries
-    def test_breakdown_torql(self):
+    def test_breakdown_clairql(self):
         response = self._run(
             {
                 "breakdown": "concat(person.properties.$some_prop, ' : ', properties.location)",
-                "breakdown_type": "torql",
+                "breakdown_type": "clairql",
             }
         )
         self.assertEqual(

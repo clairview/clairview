@@ -6,7 +6,7 @@ from uuid import UUID
 
 from django.shortcuts import get_object_or_404
 from loginas.utils import is_impersonated_session
-from clairview.jwt import MarkettorJwtAudience, encode_jwt
+from clairview.jwt import ClairviewJwtAudience, encode_jwt
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from clairview.api.utils import action
 from rest_framework import exceptions, request, response, serializers, viewsets
@@ -198,7 +198,7 @@ class TeamSerializer(serializers.ModelSerializer, UserPermissionsSerializerMixin
         return encode_jwt(
             {"team_id": team.id, "api_token": team.api_token},
             timedelta(days=7),
-            MarkettorJwtAudience.LIVESTREAM,
+            ClairviewJwtAudience.LIVESTREAM,
         )
 
     @staticmethod

@@ -37,8 +37,8 @@ from clairview.models.utils import (
 from clairview.settings.utils import get_list
 from clairview.utils import GenericEmails
 
-from ...torql.modifiers import set_default_modifier_values
-from ...schema import TorQLQueryModifiers, PathCleaningFilter, PersonsOnEventsMode
+from ...clairql.modifiers import set_default_modifier_values
+from ...schema import ClairQLQueryModifiers, PathCleaningFilter, PersonsOnEventsMode
 from .team_caching import get_team_in_cache, set_team_in_cache
 
 if TYPE_CHECKING:
@@ -282,7 +282,7 @@ class Team(UUIDClassicModel):
     # during feature releases.
     extra_settings = models.JSONField(null=True, blank=True)
 
-    # Project level default TorQL query modifiers
+    # Project level default ClairQL query modifiers
     modifiers = models.JSONField(null=True, blank=True)
 
     # This is meant to be used as a stopgap until https://github.com/ClairView/meta/pull/39 gets implemented
@@ -318,14 +318,14 @@ class Team(UUIDClassicModel):
 
     @property
     def default_modifiers(self) -> dict:
-        modifiers = TorQLQueryModifiers()
+        modifiers = ClairQLQueryModifiers()
         set_default_modifier_values(modifiers, self)
         return modifiers.model_dump()
 
     @property
     def person_on_events_mode(self) -> PersonsOnEventsMode:
         if self.modifiers and self.modifiers.get("personsOnEventsMode") is not None:
-            # TorQL modifiers (which also act as the project-level setting) take precedence
+            # ClairQL modifiers (which also act as the project-level setting) take precedence
             mode = PersonsOnEventsMode(self.modifiers["personsOnEventsMode"])
         else:
             # Otherwise use the flag-based default
@@ -413,7 +413,7 @@ class Team(UUIDClassicModel):
                 {person_query}
             )
         """,
-            {**person_query_params, **filter.torql_context.values},
+            {**person_query_params, **filter.clairql_context.values},
         )[0][0]
 
     @lru_cache(maxsize=5)

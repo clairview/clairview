@@ -59,14 +59,14 @@ function ScrollDepthMouseInfo(): JSX.Element | null {
 export function ScrollDepth(): JSX.Element | null {
     const { clairview } = useValues(toolbarConfigLogic)
 
-    const { heatmapEnabled, heatmapFilters, heatmapElements, scrollDepthMarkettorJsError, heatmapColorPalette } =
+    const { heatmapEnabled, heatmapFilters, heatmapElements, scrollDepthClairviewJsError, heatmapColorPalette } =
         useValues(heatmapLogic)
 
     if (!heatmapEnabled || !heatmapFilters.enabled || heatmapFilters.type !== 'scrolldepth') {
         return null
     }
 
-    if (scrollDepthMarkettorJsError) {
+    if (scrollDepthClairviewJsError) {
         return null
     }
 

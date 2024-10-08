@@ -16,8 +16,8 @@ import {
     EventsNode,
     EventsQuery,
     FunnelsQuery,
-    TorQLMetadata,
-    TorQLQuery,
+    ClairQLMetadata,
+    ClairQLQuery,
     HogQuery,
     InsightActorsQuery,
     InsightFilter,
@@ -51,8 +51,8 @@ export function isDataNode(node?: Record<string, any> | null): node is EventsQue
         isPersonsNode(node) ||
         isEventsQuery(node) ||
         isActorsQuery(node) ||
-        isTorQLQuery(node) ||
-        isTorQLMetadata(node)
+        isClairQLQuery(node) ||
+        isClairQLMetadata(node)
     )
 }
 
@@ -113,12 +113,12 @@ export function isHogQuery(node?: Record<string, any> | null): node is HogQuery 
     return node?.kind === NodeKind.HogQuery
 }
 
-export function isTorQLQuery(node?: Record<string, any> | null): node is TorQLQuery {
-    return node?.kind === NodeKind.TorQLQuery
+export function isClairQLQuery(node?: Record<string, any> | null): node is ClairQLQuery {
+    return node?.kind === NodeKind.ClairQLQuery
 }
 
-export function isTorQLMetadata(node?: Record<string, any> | null): node is TorQLMetadata {
-    return node?.kind === NodeKind.TorQLMetadata
+export function isClairQLMetadata(node?: Record<string, any> | null): node is ClairQLMetadata {
+    return node?.kind === NodeKind.ClairQLMetadata
 }
 
 export function isWebOverviewQuery(node?: Record<string, any> | null): node is WebOverviewQuery {
@@ -147,11 +147,11 @@ export function isSessionAttributionExplorerQuery(
     return node?.kind === NodeKind.SessionAttributionExplorerQuery
 }
 
-export function containsTorQLQuery(node?: Record<string, any> | null): boolean {
+export function containsClairQLQuery(node?: Record<string, any> | null): boolean {
     if (!node) {
         return false
     }
-    return isTorQLQuery(node) || (isNodeWithSource(node) && isTorQLQuery(node.source))
+    return isClairQLQuery(node) || (isNodeWithSource(node) && isClairQLQuery(node.source))
 }
 
 /*
@@ -365,9 +365,9 @@ export function trimQuotes(identifier: string): string {
 }
 
 /** Make sure the property key is wrapped in quotes if it contains any special characters. */
-export function escapePropertyAsTorQlIdentifier(identifier: string): string {
+export function escapePropertyAsClairQlIdentifier(identifier: string): string {
     if (identifier.match(/^[A-Za-z_$][A-Za-z0-9_$]*$/)) {
-        // Same regex as in the backend escape_torql_identifier
+        // Same regex as in the backend escape_clairql_identifier
         return identifier // This identifier is simple
     }
     if (isQuoted(identifier)) {
@@ -376,79 +376,79 @@ export function escapePropertyAsTorQlIdentifier(identifier: string): string {
     return !identifier.includes('"') ? `"${identifier}"` : `\`${identifier}\``
 }
 
-export function taxonomicEventFilterToTorQL(
+export function taxonomicEventFilterToClairQL(
     groupType: TaxonomicFilterGroupType,
     value: TaxonomicFilterValue
 ): string | null {
     if (groupType === TaxonomicFilterGroupType.EventProperties) {
-        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsClairQlIdentifier(String(value))}`
     }
     if (groupType === TaxonomicFilterGroupType.PersonProperties) {
-        return `person.properties.${escapePropertyAsTorQlIdentifier(String(value))}`
+        return `person.properties.${escapePropertyAsClairQlIdentifier(String(value))}`
     }
     if (groupType === TaxonomicFilterGroupType.EventFeatureFlags) {
-        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsClairQlIdentifier(String(value))}`
     }
-    if (groupType === TaxonomicFilterGroupType.TorQLExpression && value) {
+    if (groupType === TaxonomicFilterGroupType.ClairQLExpression && value) {
         return String(value)
     }
     return null
 }
 
-export function taxonomicPersonFilterToTorQL(
+export function taxonomicPersonFilterToClairQL(
     groupType: TaxonomicFilterGroupType,
     value: TaxonomicFilterValue
 ): string | null {
     if (groupType === TaxonomicFilterGroupType.PersonProperties) {
-        return `properties.${escapePropertyAsTorQlIdentifier(String(value))}`
+        return `properties.${escapePropertyAsClairQlIdentifier(String(value))}`
     }
-    if (groupType === TaxonomicFilterGroupType.TorQLExpression && value) {
+    if (groupType === TaxonomicFilterGroupType.ClairQLExpression && value) {
         return String(value)
     }
     return null
 }
 
-export function isTorQlAggregation(torQl: string): boolean {
+export function isClairQlAggregation(clairQl: string): boolean {
     return (
-        torQl.includes('count(') ||
-        torQl.includes('any(') ||
-        torQl.includes('sum(') ||
-        torQl.includes('avg(') ||
-        torQl.includes('min(') ||
-        torQl.includes('max(')
+        clairQl.includes('count(') ||
+        clairQl.includes('any(') ||
+        clairQl.includes('sum(') ||
+        clairQl.includes('avg(') ||
+        clairQl.includes('min(') ||
+        clairQl.includes('max(')
     )
 }
 
-export interface TorQLIdentifier {
-    __torql_identifier: true
+export interface ClairQLIdentifier {
+    __clairql_identifier: true
     identifier: string
 }
 
-function torQlIdentifier(identifier: string): TorQLIdentifier {
+function clairQlIdentifier(identifier: string): ClairQLIdentifier {
     return {
-        __torql_identifier: true,
+        __clairql_identifier: true,
         identifier,
     }
 }
 
-function isTorQlIdentifier(value: any): value is TorQLIdentifier {
-    return !!value?.__torql_identifier
+function isClairQlIdentifier(value: any): value is ClairQLIdentifier {
+    return !!value?.__clairql_identifier
 }
 
-function formatTorQlValue(value: any): string {
+function formatClairQlValue(value: any): string {
     if (Array.isArray(value)) {
-        return `[${value.map(formatTorQlValue).join(', ')}]`
+        return `[${value.map(formatClairQlValue).join(', ')}]`
     } else if (dayjs.isDayjs(value)) {
         return value.tz(teamLogic.values.timezone).format("'YYYY-MM-DD HH:mm:ss'")
-    } else if (isTorQlIdentifier(value)) {
-        return escapePropertyAsTorQlIdentifier(value.identifier)
+    } else if (isClairQlIdentifier(value)) {
+        return escapePropertyAsClairQlIdentifier(value.identifier)
     } else if (typeof value === 'string') {
         return `'${value}'`
     } else if (typeof value === 'number') {
         return String(value)
     } else if (value === null) {
         throw new Error(
-            `null cannot be interpolated for TorQL. if a null check is needed, make 'IS NULL' part of your query`
+            `null cannot be interpolated for ClairQL. if a null check is needed, make 'IS NULL' part of your query`
         )
     } else {
         throw new Error(`Unsupported interpolated value type: ${typeof value}`)
@@ -456,13 +456,13 @@ function formatTorQlValue(value: any): string {
 }
 
 /**
- * Template tag for TorQL formatting. Handles formatting of values for you.
- * @example torql`SELECT * FROM events WHERE properties.text = ${text} AND timestamp > ${dayjs()}`
+ * Template tag for ClairQL formatting. Handles formatting of values for you.
+ * @example clairql`SELECT * FROM events WHERE properties.text = ${text} AND timestamp > ${dayjs()}`
  */
-export function torql(strings: TemplateStringsArray, ...values: any[]): string {
-    return strings.reduce((acc, str, i) => acc + str + (i < strings.length - 1 ? formatTorQlValue(values[i]) : ''), '')
+export function clairql(strings: TemplateStringsArray, ...values: any[]): string {
+    return strings.reduce((acc, str, i) => acc + str + (i < strings.length - 1 ? formatClairQlValue(values[i]) : ''), '')
 }
-torql.identifier = torQlIdentifier
+clairql.identifier = clairQlIdentifier
 
 /**
  * Wether we have a valid `breakdownFilter` or not.

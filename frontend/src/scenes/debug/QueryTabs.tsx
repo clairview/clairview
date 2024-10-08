@@ -8,11 +8,11 @@ import { useState } from 'react'
 import { ErrorBoundary } from '~/layout/ErrorBoundary'
 import { Timings } from '~/queries/nodes/DataNode/ElapsedTime'
 import { Query } from '~/queries/Query/Query'
-import { TorQLMetadataResponse, InsightVizNode, Node, NodeKind, QueryTiming } from '~/queries/schema'
+import { ClairQLMetadataResponse, InsightVizNode, Node, NodeKind, QueryTiming } from '~/queries/schema'
 import { isDataTableNode, isInsightQueryNode, isInsightVizNode } from '~/queries/utils'
 
-function toLineColumn(torql: string, position: number): { line: number; column: number } {
-    const lines = torql.split('\n')
+function toLineColumn(clairql: string, position: number): { line: number; column: number } {
+    const lines = clairql.split('\n')
     let line = 0
     let column = 0
     for (let i = 0; i < lines.length; i++) {
@@ -26,12 +26,12 @@ function toLineColumn(torql: string, position: number): { line: number; column: 
     return { line, column }
 }
 
-function toLine(torql: string, position: number): number {
-    return toLineColumn(torql, position).line
+function toLine(clairql: string, position: number): number {
+    return toLineColumn(clairql, position).line
 }
 
-function toColumn(torql: string, position: number): number {
-    return toLineColumn(torql, position).column
+function toColumn(clairql: string, position: number): number {
+    return toLineColumn(clairql, position).column
 }
 interface QueryTabsProps<Q extends Node> {
     query: Q
@@ -44,7 +44,7 @@ export function QueryTabs<Q extends Node>({ query, queryKey, setQuery, response 
     const clickHouseTime = (response?.timings as QueryTiming[])?.find(({ k }) => k === './clickhouse_execute')?.t ?? 0
     const explainTime = (response?.timings as QueryTiming[])?.find(({ k }) => k === './explain')?.t ?? 0
     const totalTime = (response?.timings as QueryTiming[])?.find(({ k }) => k === '.')?.t ?? 0
-    const torQLTime = totalTime - explainTime - clickHouseTime
+    const clairQLTime = totalTime - explainTime - clickHouseTime
     const tabs: LemonTabsProps<string>['tabs'] = query
         ? [
               response?.error && {
@@ -109,21 +109,21 @@ export function QueryTabs<Q extends Node>({ query, queryKey, setQuery, response 
                       />
                   ),
               },
-              response?.torql && {
-                  key: 'torql',
+              response?.clairql && {
+                  key: 'clairql',
                   label: (
                       <>
-                          TorQL
-                          {torQLTime && <LemonTag className="ml-2">{Math.floor(torQLTime * 10) / 10}s</LemonTag>}
+                          ClairQL
+                          {clairQLTime && <LemonTag className="ml-2">{Math.floor(clairQLTime * 10) / 10}s</LemonTag>}
                       </>
                   ),
                   content: (
                       <CodeEditor
                           className="border"
                           language="sql"
-                          value={String(response.torql)}
+                          value={String(response.clairql)}
                           height={500}
-                          path={`debug/${queryKey}/torql.sql`}
+                          path={`debug/${queryKey}/clairql.sql`}
                       />
                   ),
               },
@@ -143,7 +143,7 @@ export function QueryTabs<Q extends Node>({ query, queryKey, setQuery, response 
                           language="sql"
                           value={String(response.clickhouse)}
                           height={500}
-                          path={`debug/${queryKey}/torql.sql`}
+                          path={`debug/${queryKey}/clairql.sql`}
                       />
                   ),
               },
@@ -176,22 +176,22 @@ export function QueryTabs<Q extends Node>({ query, queryKey, setQuery, response 
                   content: (
                       <LemonTable
                           dataSource={[
-                              ...(response.metadata as TorQLMetadataResponse).errors.map((error) => ({
+                              ...(response.metadata as ClairQLMetadataResponse).errors.map((error) => ({
                                   type: 'error',
-                                  line: toLine(response.torql ?? '', error.start ?? 0),
-                                  column: toColumn(response.torql ?? '', error.start ?? 0),
+                                  line: toLine(response.clairql ?? '', error.start ?? 0),
+                                  column: toColumn(response.clairql ?? '', error.start ?? 0),
                                   ...error,
                               })),
-                              ...(response.metadata as TorQLMetadataResponse).warnings.map((warn) => ({
+                              ...(response.metadata as ClairQLMetadataResponse).warnings.map((warn) => ({
                                   type: 'warning',
-                                  line: toLine(response.torql ?? '', warn.start ?? 0),
-                                  column: toColumn(response.torql ?? '', warn.start ?? 0),
+                                  line: toLine(response.clairql ?? '', warn.start ?? 0),
+                                  column: toColumn(response.clairql ?? '', warn.start ?? 0),
                                   ...warn,
                               })),
-                              ...(response.metadata as TorQLMetadataResponse).notices.map((notice) => ({
+                              ...(response.metadata as ClairQLMetadataResponse).notices.map((notice) => ({
                                   type: 'notice',
-                                  line: toLine(response.torql ?? '', notice.start ?? 0),
-                                  column: toColumn(response.torql ?? '', notice.start ?? 0),
+                                  line: toLine(response.clairql ?? '', notice.start ?? 0),
+                                  column: toColumn(response.clairql ?? '', notice.start ?? 0),
                                   ...notice,
                               })),
                           ].sort((a, b) => (a.start ?? 0) - (b.start ?? 0))}

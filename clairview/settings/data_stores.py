@@ -36,18 +36,18 @@ def postgres_config(host: str) -> dict:
 
     return {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": get_from_env("MARKETTOR_DB_NAME"),
-        "USER": os.getenv("MARKETTOR_DB_USER", "postgres"),
-        "PASSWORD": os.getenv("MARKETTOR_DB_PASSWORD", ""),
+        "NAME": get_from_env("CLAIRVIEW_DB_NAME"),
+        "USER": os.getenv("CLAIRVIEW_DB_USER", "postgres"),
+        "PASSWORD": os.getenv("CLAIRVIEW_DB_PASSWORD", ""),
         "HOST": host,
-        "PORT": os.getenv("MARKETTOR_POSTGRES_PORT", "5432"),
+        "PORT": os.getenv("CLAIRVIEW_POSTGRES_PORT", "5432"),
         "CONN_MAX_AGE": 0,
         "DISABLE_SERVER_SIDE_CURSORS": DISABLE_SERVER_SIDE_CURSORS,
         "SSL_OPTIONS": {
-            "sslmode": os.getenv("MARKETTOR_POSTGRES_SSL_MODE", None),
-            "sslrootcert": os.getenv("MARKETTOR_POSTGRES_CLI_SSL_CA", None),
-            "sslcert": os.getenv("MARKETTOR_POSTGRES_CLI_SSL_CRT", None),
-            "sslkey": os.getenv("MARKETTOR_POSTGRES_CLI_SSL_KEY", None),
+            "sslmode": os.getenv("CLAIRVIEW_POSTGRES_SSL_MODE", None),
+            "sslrootcert": os.getenv("CLAIRVIEW_POSTGRES_CLI_SSL_CA", None),
+            "sslcert": os.getenv("CLAIRVIEW_POSTGRES_CLI_SSL_CRT", None),
+            "sslkey": os.getenv("CLAIRVIEW_POSTGRES_CLI_SSL_KEY", None),
         },
         "TEST": {
             "MIRROR": "default",
@@ -74,8 +74,8 @@ if DATABASE_URL:
     if DISABLE_SERVER_SIDE_CURSORS:
         DATABASES["default"]["DISABLE_SERVER_SIDE_CURSORS"] = True
 
-elif os.getenv("MARKETTOR_DB_NAME"):
-    DATABASES = {"default": postgres_config(os.getenv("MARKETTOR_POSTGRES_HOST", "localhost"))}
+elif os.getenv("CLAIRVIEW_DB_NAME"):
+    DATABASES = {"default": postgres_config(os.getenv("CLAIRVIEW_POSTGRES_HOST", "localhost"))}
 
     ssl_configurations = []
     for ssl_option, value in DATABASES["default"]["SSL_OPTIONS"].items():
@@ -98,13 +98,13 @@ elif os.getenv("MARKETTOR_DB_NAME"):
     )
 else:
     raise ImproperlyConfigured(
-        f'The environment vars "DATABASE_URL" or "MARKETTOR_DB_NAME" are absolutely required to run this software'
+        f'The environment vars "DATABASE_URL" or "CLAIRVIEW_DB_NAME" are absolutely required to run this software'
     )
 
 # Configure the database which will be used as a read replica.
 # This should have all the same config as our main writer DB, just use a different host.
 # Our database router will point here.
-read_host = os.getenv("MARKETTOR_POSTGRES_READ_HOST")
+read_host = os.getenv("CLAIRVIEW_POSTGRES_READ_HOST")
 if read_host:
     DATABASES["replica"] = postgres_config(read_host)
     DATABASE_ROUTERS = ["clairview.dbrouter.ReplicaRouter"]
@@ -274,25 +274,25 @@ if TEST or DEBUG or IS_COLLECT_STATIC:
 else:
     REDIS_URL = os.getenv("REDIS_URL", "")
 
-if not REDIS_URL and get_from_env("MARKETTOR_REDIS_HOST", ""):
+if not REDIS_URL and get_from_env("CLAIRVIEW_REDIS_HOST", ""):
     REDIS_URL = "redis://:{}@{}:{}/".format(
-        os.getenv("MARKETTOR_REDIS_PASSWORD", ""),
-        os.getenv("MARKETTOR_REDIS_HOST", ""),
-        os.getenv("MARKETTOR_REDIS_PORT", "6379"),
+        os.getenv("CLAIRVIEW_REDIS_PASSWORD", ""),
+        os.getenv("CLAIRVIEW_REDIS_HOST", ""),
+        os.getenv("CLAIRVIEW_REDIS_PORT", "6379"),
     )
 
 SESSION_RECORDING_REDIS_URL = REDIS_URL
 
-if get_from_env("MARKETTOR_SESSION_RECORDING_REDIS_HOST", ""):
+if get_from_env("CLAIRVIEW_SESSION_RECORDING_REDIS_HOST", ""):
     SESSION_RECORDING_REDIS_URL = "redis://{}:{}/".format(
-        os.getenv("MARKETTOR_SESSION_RECORDING_REDIS_HOST", ""),
-        os.getenv("MARKETTOR_SESSION_RECORDING_REDIS_PORT", "6379"),
+        os.getenv("CLAIRVIEW_SESSION_RECORDING_REDIS_HOST", ""),
+        os.getenv("CLAIRVIEW_SESSION_RECORDING_REDIS_PORT", "6379"),
     )
 
 
 if not REDIS_URL:
     raise ImproperlyConfigured(
-        "Env var REDIS_URL or MARKETTOR_REDIS_HOST is absolutely required to run this software.\n"
+        "Env var REDIS_URL or CLAIRVIEW_REDIS_HOST is absolutely required to run this software.\n"
         "If upgrading from ClairView 1.0.10 or earlier, see here: "
         "https://clairview.com/docs/deployment/upgrading-clairview#upgrading-from-before-1011"
     )

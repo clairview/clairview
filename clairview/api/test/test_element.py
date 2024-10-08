@@ -164,12 +164,12 @@ class TestElement(ClickhouseTestMixin, APIBaseTest, QueryMatchingTest):
         response = self.client.get(f"/api/element/stats/?paginate_response=true&properties={properties_filter}").json()
         self.assertEqual(len(response["results"]), 1)
 
-    def test_element_stats_can_filter_by_torql(self) -> None:
+    def test_element_stats_can_filter_by_clairql(self) -> None:
         self._setup_events()
         properties_filter = json.dumps(
             [
                 {
-                    "type": "torql",
+                    "type": "clairql",
                     "key": "like(properties.$current_url, '%another_page%')",
                 },
             ]

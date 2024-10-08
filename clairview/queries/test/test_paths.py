@@ -324,7 +324,7 @@ class TestPaths(ClickhouseTestMixin, APIBaseTest):
         self.assertEqual(response[3]["target"], "3_custom_event_3")
         self.assertEqual(response[3]["value"], 1)
 
-    def test_custom_torql_paths(self):
+    def test_custom_clairql_paths(self):
         _create_person(team_id=self.team.pk, distinct_ids=["person_1"])
         _create_person(team_id=self.team.pk, distinct_ids=["person_2"])
         _create_person(team_id=self.team.pk, distinct_ids=["person_3"])
@@ -413,8 +413,8 @@ class TestPaths(ClickhouseTestMixin, APIBaseTest):
 
         filter = PathFilter(
             data={
-                "path_type": "torql",
-                "paths_torql_expression": "event || properties.a",
+                "path_type": "clairql",
+                "paths_clairql_expression": "event || properties.a",
             },
             team=self.team,
         )

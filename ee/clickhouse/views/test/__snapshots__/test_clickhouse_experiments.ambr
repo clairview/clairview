@@ -320,7 +320,7 @@
   GROUP BY prop
   '''
 # ---
-# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_torql_aggregation
+# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_clairql_aggregation
   '''
   /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
@@ -332,7 +332,7 @@
   ORDER BY age;
   '''
 # ---
-# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_torql_aggregation.1
+# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_clairql_aggregation.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT array(replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', '')) AS value,
@@ -348,7 +348,7 @@
   OFFSET 0
   '''
 # ---
-# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_torql_aggregation.2
+# name: ClickhouseTestFunnelExperimentResults.test_experiment_flow_with_event_results_with_clairql_aggregation.2
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT countIf(steps = 1) step_1,
@@ -847,7 +847,7 @@
   ORDER BY breakdown_value
   '''
 # ---
-# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter
+# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_clairql_filter
   '''
   /* user_id:0 celery:clairview.tasks.tasks.sync_insight_caching_state */
   SELECT team_id,
@@ -859,7 +859,7 @@
   ORDER BY age;
   '''
 # ---
-# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter.1
+# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_clairql_filter.1
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT replaceRegexpAll(JSONExtractRaw(properties, '$feature/a-b-test'), '^"|"$', '') AS value,
@@ -870,14 +870,14 @@
     AND toTimeZone(timestamp, 'UTC') >= toDateTime('2020-01-01 00:00:00', 'UTC')
     AND toTimeZone(timestamp, 'UTC') <= toDateTime('2020-01-06 00:00:00', 'UTC')
     AND ((has(['control', 'test'], replaceRegexpAll(JSONExtractRaw(e.properties, '$feature/a-b-test'), '^"|"$', '')))
-         AND (ifNull(ilike(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'torql'), ''), 'null'), '^"|"$', ''), 'true'), 0)))
+         AND (ifNull(ilike(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'clairql'), ''), 'null'), '^"|"$', ''), 'true'), 0)))
   GROUP BY value
   ORDER BY count DESC, value DESC
   LIMIT 26
   OFFSET 0
   '''
 # ---
-# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter.2
+# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_clairql_filter.2
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT groupArray(day_start) as date,
@@ -911,7 +911,7 @@
            WHERE e.team_id = 2
              AND event = '$pageview'
              AND ((has(['control', 'test'], replaceRegexpAll(JSONExtractRaw(e.properties, '$feature/a-b-test'), '^"|"$', '')))
-                  AND (ifNull(ilike(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'torql'), ''), 'null'), '^"|"$', ''), 'true'), 0)))
+                  AND (ifNull(ilike(replaceRegexpAll(nullIf(nullIf(JSONExtractRaw(properties, 'clairql'), ''), 'null'), '^"|"$', ''), 'true'), 0)))
              AND toTimeZone(timestamp, 'UTC') >= toDateTime('2020-01-01 00:00:00', 'UTC')
              AND toTimeZone(timestamp, 'UTC') <= toDateTime('2020-01-06 00:00:00', 'UTC')
            GROUP BY day_start,
@@ -924,7 +924,7 @@
   ORDER BY breakdown_value
   '''
 # ---
-# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter.3
+# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_clairql_filter.3
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT replaceRegexpAll(JSONExtractRaw(properties, '$feature_flag_response'), '^"|"$', '') AS value,
@@ -942,7 +942,7 @@
   OFFSET 0
   '''
 # ---
-# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_torql_filter.4
+# name: ClickhouseTestTrendExperimentResults.test_experiment_flow_with_event_results_with_clairql_filter.4
   '''
   /* user_id:0 request:_snapshot_ */
   SELECT groupArray(day_start) as date,

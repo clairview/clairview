@@ -8,7 +8,7 @@ import { urls } from 'scenes/urls'
 
 import { Query } from '~/queries/Query/Query'
 import { Node } from '~/queries/schema'
-import { containsTorQLQuery, isInsightVizNode } from '~/queries/utils'
+import { containsClairQLQuery, isInsightVizNode } from '~/queries/utils'
 import { InsightShortId, ItemMode } from '~/types'
 
 import { insightCommandLogic } from './insightCommandLogic'
@@ -79,7 +79,7 @@ export function Insight({ insightId }: InsightSceneProps): JSX.Element {
                     context={{
                         showOpenEditorButton: false,
                         showQueryEditor: actuallyShowQueryEditor,
-                        showQueryHelp: insightMode === ItemMode.Edit && !containsTorQLQuery(query),
+                        showQueryHelp: insightMode === ItemMode.Edit && !containsClairQLQuery(query),
                         insightProps,
                     }}
                     filtersOverride={filtersOverride}

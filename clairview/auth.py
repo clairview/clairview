@@ -15,7 +15,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.request import Request
 
 from clairview.clickhouse.query_tagging import tag_queries
-from clairview.jwt import MarkettorJwtAudience, decode_jwt
+from clairview.jwt import ClairviewJwtAudience, decode_jwt
 from clairview.models.personal_api_key import (
     PersonalAPIKey,
     hash_key_value,
@@ -218,7 +218,7 @@ class JwtAuthentication(authentication.BaseAuthentication):
             if authorization_match:
                 try:
                     token = authorization_match.group(1).strip()
-                    info = decode_jwt(token, MarkettorJwtAudience.IMPERSONATED_USER)
+                    info = decode_jwt(token, ClairviewJwtAudience.IMPERSONATED_USER)
                     user = User.objects.get(pk=info["id"])
                     return (user, None)
                 except jwt.DecodeError:

@@ -16,9 +16,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 
 from clairview.api.services.query import process_query_dict
-from clairview.torql.constants import LimitContext
-from clairview.torql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
-from clairview.torql_queries.query_runner import ExecutionMode
+from clairview.clairql.constants import LimitContext
+from clairview.clairql_queries.legacy_compatibility.flagged_conversion_manager import conversion_to_query_based
+from clairview.clairql_queries.query_runner import ExecutionMode
 from clairview.models.exported_asset import (
     ExportedAsset,
     get_public_access_token,

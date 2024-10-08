@@ -6,11 +6,11 @@ export DEBIAN_FRONTEND=noninteractive
 # Automatically restart without asking.
 # this gets around needrestart command halting for user input
 export RESTART_MODE=l
-export MARKETTOR_APP_TAG="${MARKETTOR_APP_TAG:-latest}"
+export CLAIRVIEW_APP_TAG="${CLAIRVIEW_APP_TAG:-latest}"
 export SENTRY_DSN="${SENTRY_DSN:-'https://public@sentry.example.com/1'}"
 
-MARKETTOR_SECRET=$(head -c 28 /dev/urandom | sha224sum -b | head -c 56)
-export MARKETTOR_SECRET
+CLAIRVIEW_SECRET=$(head -c 28 /dev/urandom | sha224sum -b | head -c 56)
+export CLAIRVIEW_SECRET
 
 # Talk to the user
 echo "Welcome to the single instance ClairView installer 🦔"
@@ -23,17 +23,17 @@ echo ""
 
 if ! [ -z "$1" ]
 then
-export MARKETTOR_APP_TAG=$1
+export CLAIRVIEW_APP_TAG=$1
 else
 echo "What version of ClairView would you like to install? (We default to 'latest')"
 echo "You can check out available versions here: https://hub.docker.com/r/clairview/clairview/tags"
-read -r MARKETTOR_APP_TAG_READ
-if [ -z "$MARKETTOR_APP_TAG_READ" ]
+read -r CLAIRVIEW_APP_TAG_READ
+if [ -z "$CLAIRVIEW_APP_TAG_READ" ]
 then
-    echo "Using default and installing $MARKETTOR_APP_TAG"
+    echo "Using default and installing $CLAIRVIEW_APP_TAG"
 else
-    export MARKETTOR_APP_TAG=$MARKETTOR_APP_TAG_READ
-    echo "Using provided tag: $MARKETTOR_APP_TAG"
+    export CLAIRVIEW_APP_TAG=$CLAIRVIEW_APP_TAG_READ
+    echo "Using provided tag: $CLAIRVIEW_APP_TAG"
 fi
 fi
 echo ""
@@ -80,22 +80,22 @@ sudo apt install -y git
 git clone https://github.com/ClairView/clairview.git &> /dev/null || true
 cd clairview
 
-if [[ "$MARKETTOR_APP_TAG" = "latest-release" ]]
+if [[ "$CLAIRVIEW_APP_TAG" = "latest-release" ]]
 then
     git fetch --tags
     latestReleaseTag=$(git describe --tags `git rev-list --tags --max-count=1`)
     echo "Checking out latest ClairView release: $latestReleaseTag"
     git checkout $latestReleaseTag
-elif [[ "$MARKETTOR_APP_TAG" = "latest" ]]
+elif [[ "$CLAIRVIEW_APP_TAG" = "latest" ]]
 then
     echo "Pulling latest from current branch: $(git branch --show-current)"
     git pull
-elif [[ "$MARKETTOR_APP_TAG" =~ ^[0-9a-f]{40}$ ]]
+elif [[ "$CLAIRVIEW_APP_TAG" =~ ^[0-9a-f]{40}$ ]]
 then
-    echo "Checking out specific commit hash: $MARKETTOR_APP_TAG"
-    git checkout $MARKETTOR_APP_TAG
+    echo "Checking out specific commit hash: $CLAIRVIEW_APP_TAG"
+    git checkout $CLAIRVIEW_APP_TAG
 else
-    releaseTag="${MARKETTOR_APP_TAG/release-/""}"
+    releaseTag="${CLAIRVIEW_APP_TAG/release-/""}"
     git fetch --tags
     echo "Checking out ClairView release: $releaseTag"
     git checkout $releaseTag
@@ -127,7 +127,7 @@ EOF
 
 # Write .env file
 envsubst > .env <<EOF
-MARKETTOR_SECRET=$MARKETTOR_SECRET
+CLAIRVIEW_SECRET=$CLAIRVIEW_SECRET
 SENTRY_DSN=$SENTRY_DSN
 DOMAIN=$DOMAIN
 EOF

@@ -5,15 +5,15 @@ from rest_framework import viewsets, request, response, serializers, status
 
 from clairview.api.routing import TeamAndOrgViewSetMixin
 from clairview.auth import TemporaryTokenAuthentication
-from clairview.torql import ast
-from clairview.torql.ast import Constant
-from clairview.torql.base import Expr
-from clairview.torql.constants import LimitContext
-from clairview.torql.context import TorQLContext
-from clairview.torql.parser import parse_expr, parse_select
-from clairview.torql.query import execute_torql_query
+from clairview.clairql import ast
+from clairview.clairql.ast import Constant
+from clairview.clairql.base import Expr
+from clairview.clairql.constants import LimitContext
+from clairview.clairql.context import ClairQLContext
+from clairview.clairql.parser import parse_expr, parse_select
+from clairview.clairql.query import execute_clairql_query
 from clairview.rate_limit import ClickHouseSustainedRateThrottle, ClickHouseBurstRateThrottle
-from clairview.schema import TorQLQueryResponse
+from clairview.schema import ClairQLQueryResponse
 from clairview.utils import relative_date_parse_with_delta_mapping
 
 DEFAULT_QUERY = """
@@ -166,8 +166,8 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         exprs = self._predicate_expressions(placeholders)
 
         stmt = parse_select(raw_query, {"aggregation_count": aggregation_count, "predicates": ast.And(exprs=exprs)})
-        context = TorQLContext(team_id=self.team.pk, limit_top_select=False)
-        results = execute_torql_query(query=stmt, team=self.team, limit_context=LimitContext.HEATMAPS, context=context)
+        context = ClairQLContext(team_id=self.team.pk, limit_top_select=False)
+        results = execute_clairql_query(query=stmt, team=self.team, limit_context=LimitContext.HEATMAPS, context=context)
 
         if is_scrolldepth_query:
             return self._return_scroll_depth_response(results)
@@ -208,7 +208,7 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         return predicate_expressions
 
     @staticmethod
-    def _return_heatmap_coordinates_response(query_response: TorQLQueryResponse) -> response.Response:
+    def _return_heatmap_coordinates_response(query_response: ClairQLQueryResponse) -> response.Response:
         data = [
             {
                 "pointer_target_fixed": item[0],
@@ -224,7 +224,7 @@ class HeatmapViewSet(TeamAndOrgViewSetMixin, viewsets.GenericViewSet):
         return response.Response(response_serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
-    def _return_scroll_depth_response(query_response: TorQLQueryResponse) -> response.Response:
+    def _return_scroll_depth_response(query_response: ClairQLQueryResponse) -> response.Response:
         data = [
             {
                 "scroll_depth_bucket": item[0],

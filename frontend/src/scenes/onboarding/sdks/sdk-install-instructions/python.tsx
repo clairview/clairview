@@ -12,9 +12,9 @@ function PythonSetupSnippet(): JSX.Element {
 
     return (
         <CodeSnippet language={Language.Python}>
-            {`from clairview import Markettor
+            {`from clairview import Clairview
 
-clairview = Markettor(project_api_key='${currentTeam?.api_token}', host='${apiHostOrigin()}')
+clairview = Clairview(project_api_key='${currentTeam?.api_token}', host='${apiHostOrigin()}')
 
             `}
         </CodeSnippet>

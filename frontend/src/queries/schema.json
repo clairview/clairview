@@ -166,7 +166,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -207,7 +207,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -234,7 +234,7 @@
                 },
                 "select": {
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 },
@@ -250,7 +250,7 @@
                             "$ref": "#/definitions/FunnelCorrelationActorsQuery"
                         },
                         {
-                            "$ref": "#/definitions/TorQLQuery"
+                            "$ref": "#/definitions/ClairQLQuery"
                         }
                     ]
                 }
@@ -272,8 +272,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
@@ -283,7 +283,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -314,7 +314,7 @@
                     "type": "array"
                 }
             },
-            "required": ["columns", "torql", "limit", "offset", "results", "types"],
+            "required": ["columns", "clairql", "limit", "offset", "results", "types"],
             "type": "object"
         },
         "AggregationAxisFormat": {
@@ -363,13 +363,13 @@
                     "$ref": "#/definitions/HogQuery"
                 },
                 {
-                    "$ref": "#/definitions/TorQLQuery"
+                    "$ref": "#/definitions/ClairQLQuery"
                 },
                 {
-                    "$ref": "#/definitions/TorQLMetadata"
+                    "$ref": "#/definitions/ClairQLMetadata"
                 },
                 {
-                    "$ref": "#/definitions/TorQLAutocomplete"
+                    "$ref": "#/definitions/ClairQLAutocomplete"
                 },
                 {
                     "$ref": "#/definitions/WebOverviewQuery"
@@ -435,7 +435,7 @@
                     "$ref": "#/definitions/CohortPropertyFilter"
                 },
                 {
-                    "$ref": "#/definitions/TorQLPropertyFilter"
+                    "$ref": "#/definitions/ClairQLPropertyFilter"
                 },
                 {
                     "$ref": "#/definitions/EmptyPropertyFilter"
@@ -473,7 +473,7 @@
                     "$ref": "#/definitions/FeaturePropertyFilter"
                 },
                 {
-                    "$ref": "#/definitions/TorQLPropertyFilter"
+                    "$ref": "#/definitions/ClairQLPropertyFilter"
                 },
                 {
                     "$ref": "#/definitions/EmptyPropertyFilter"
@@ -495,13 +495,13 @@
                     "$ref": "#/definitions/HogQueryResponse"
                 },
                 {
-                    "$ref": "#/definitions/TorQLQueryResponse"
+                    "$ref": "#/definitions/ClairQLQueryResponse"
                 },
                 {
-                    "$ref": "#/definitions/TorQLMetadataResponse"
+                    "$ref": "#/definitions/ClairQLMetadataResponse"
                 },
                 {
-                    "$ref": "#/definitions/TorQLAutocompleteResponse"
+                    "$ref": "#/definitions/ClairQLAutocompleteResponse"
                 },
                 {
                     "type": "object"
@@ -744,7 +744,7 @@
                 "event",
                 "group",
                 "session",
-                "torql",
+                "clairql",
                 "data_warehouse",
                 "data_warehouse_person_property"
             ],
@@ -791,8 +791,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -809,7 +809,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -850,7 +850,7 @@
             "required": [
                 "cache_key",
                 "columns",
-                "torql",
+                "clairql",
                 "is_cached",
                 "last_refresh",
                 "limit",
@@ -889,8 +889,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -904,7 +904,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -970,8 +970,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -985,7 +985,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1026,7 +1026,7 @@
             "required": [
                 "cache_key",
                 "columns",
-                "torql",
+                "clairql",
                 "is_cached",
                 "last_refresh",
                 "next_allowed_client_refresh",
@@ -1169,8 +1169,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1184,7 +1184,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1244,8 +1244,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "isUdf": {
@@ -1259,7 +1259,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1307,7 +1307,7 @@
             ],
             "type": "object"
         },
-        "CachedTorQLQueryResponse": {
+        "CachedClairQLQueryResponse": {
             "additionalProperties": false,
             "properties": {
                 "cache_key": {
@@ -1344,8 +1344,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1359,11 +1359,11 @@
                     "type": "integer"
                 },
                 "metadata": {
-                    "$ref": "#/definitions/TorQLMetadataResponse",
+                    "$ref": "#/definitions/ClairQLMetadataResponse",
                     "description": "Query metadata output"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1568,8 +1568,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1580,7 +1580,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1636,8 +1636,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1648,7 +1648,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1704,8 +1704,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1716,7 +1716,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1779,8 +1779,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1794,7 +1794,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1855,8 +1855,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1867,7 +1867,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1923,8 +1923,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -1935,7 +1935,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -1995,8 +1995,8 @@
                     "description": "Wether more breakdown values are available.",
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2007,7 +2007,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2070,8 +2070,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2085,7 +2085,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2156,8 +2156,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2171,7 +2171,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2241,8 +2241,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2253,7 +2253,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2319,8 +2319,8 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2334,7 +2334,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2402,8 +2402,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -2414,7 +2414,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -2715,7 +2715,7 @@
                 "columns": {
                     "description": "Columns shown in the table, unless the `source` provides them.",
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 },
@@ -2734,7 +2734,7 @@
                 "hiddenColumns": {
                     "description": "Columns that aren't shown in the table, even if in columns or returned data",
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 },
@@ -2766,15 +2766,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -2805,7 +2805,7 @@
                                     "type": "array"
                                 }
                             },
-                            "required": ["columns", "torql", "results", "types"],
+                            "required": ["columns", "clairql", "results", "types"],
                             "type": "object"
                         },
                         {
@@ -2822,8 +2822,8 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
@@ -2833,7 +2833,7 @@
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -2864,7 +2864,7 @@
                                     "type": "array"
                                 }
                             },
-                            "required": ["columns", "torql", "limit", "offset", "results", "types"],
+                            "required": ["columns", "clairql", "limit", "offset", "results", "types"],
                             "type": "object"
                         },
                         {
@@ -2893,19 +2893,19 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "metadata": {
-                                    "$ref": "#/definitions/TorQLMetadataResponse",
+                                    "$ref": "#/definitions/ClairQLMetadataResponse",
                                     "description": "Query metadata output"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -2952,12 +2952,12 @@
                                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                                     "type": "string"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "query_status": {
@@ -2998,15 +2998,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -3052,15 +3052,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -3103,12 +3103,12 @@
                                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                                     "type": "string"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "query_status": {
@@ -3151,15 +3151,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -3205,15 +3205,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -3255,15 +3255,15 @@
                                 "hasMore": {
                                     "type": "boolean"
                                 },
-                                "torql": {
-                                    "description": "Generated TorQL query.",
+                                "clairql": {
+                                    "description": "Generated ClairQL query.",
                                     "type": "string"
                                 },
                                 "limit": {
                                     "type": "integer"
                                 },
                                 "modifiers": {
-                                    "$ref": "#/definitions/TorQLQueryModifiers",
+                                    "$ref": "#/definitions/ClairQLQueryModifiers",
                                     "description": "Modifiers used when performing the query"
                                 },
                                 "offset": {
@@ -3350,8 +3350,8 @@
                     "description": "Show the export button",
                     "type": "boolean"
                 },
-                "showTorQLEditor": {
-                    "description": "Include a TorQL query editor above TorQL tables",
+                "showClairQLEditor": {
+                    "description": "Include a ClairQL query editor above ClairQL tables",
                     "type": "boolean"
                 },
                 "showOpenEditorButton": {
@@ -3415,7 +3415,7 @@
                             "$ref": "#/definitions/ActorsQuery"
                         },
                         {
-                            "$ref": "#/definitions/TorQLQuery"
+                            "$ref": "#/definitions/ClairQLQuery"
                         },
                         {
                             "$ref": "#/definitions/WebOverviewQuery"
@@ -3465,7 +3465,7 @@
                     "type": "string"
                 },
                 "source": {
-                    "$ref": "#/definitions/TorQLQuery"
+                    "$ref": "#/definitions/ClairQLQuery"
                 },
                 "tableSettings": {
                     "$ref": "#/definitions/TableSettings"
@@ -3526,7 +3526,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -3681,7 +3681,7 @@
                     },
                     "type": "array"
                 },
-                "torql_value": {
+                "clairql_value": {
                     "type": "string"
                 },
                 "id": {
@@ -3700,7 +3700,7 @@
                     "$ref": "#/definitions/DatabaseSerializedFieldType"
                 }
             },
-            "required": ["name", "torql_value", "type", "schema_valid"],
+            "required": ["name", "clairql_value", "type", "schema_valid"],
             "type": "object"
         },
         "DatabaseSchemaMaterializedViewTable": {
@@ -3722,7 +3722,7 @@
                     "type": "string"
                 },
                 "query": {
-                    "$ref": "#/definitions/TorQLQuery"
+                    "$ref": "#/definitions/ClairQLQuery"
                 },
                 "status": {
                     "type": "string"
@@ -3766,7 +3766,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -3894,7 +3894,7 @@
                     "type": "string"
                 },
                 "query": {
-                    "$ref": "#/definitions/TorQLQuery"
+                    "$ref": "#/definitions/ClairQLQuery"
                 },
                 "type": {
                     "const": "view",
@@ -4043,7 +4043,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -4171,7 +4171,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "order": {
@@ -4186,7 +4186,7 @@
                 },
                 "select": {
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 }
@@ -4210,15 +4210,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -4395,7 +4395,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -4464,7 +4464,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -4495,14 +4495,14 @@
                 "select": {
                     "description": "Return a limited set of data. Required.",
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 },
                 "where": {
-                    "description": "TorQL filters to apply on returned data",
+                    "description": "ClairQL filters to apply on returned data",
                     "items": {
-                        "$ref": "#/definitions/TorQLExpression"
+                        "$ref": "#/definitions/ClairQLExpression"
                     },
                     "type": "array"
                 }
@@ -4552,15 +4552,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -4591,7 +4591,7 @@
                     "type": "array"
                 }
             },
-            "required": ["columns", "torql", "results", "types"],
+            "required": ["columns", "clairql", "results", "types"],
             "type": "object"
         },
         "ExperimentFunnelQuery": {
@@ -4605,7 +4605,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -4652,7 +4652,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -4849,7 +4849,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -4926,15 +4926,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -5025,7 +5025,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -5085,7 +5085,7 @@
                     "enum": [0, 1, 2, 3, 4],
                     "type": "number"
                 },
-                "math_torql": {
+                "math_clairql": {
                     "type": "string"
                 },
                 "math_property": {
@@ -5266,7 +5266,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -5299,7 +5299,7 @@
                     },
                     "type": "array"
                 },
-                "funnelAggregateByTorQL": {
+                "funnelAggregateByClairQL": {
                     "type": "string"
                 },
                 "funnelFromStep": {
@@ -5363,7 +5363,7 @@
                     },
                     "type": "array"
                 },
-                "funnel_aggregate_by_torql": {
+                "funnel_aggregate_by_clairql": {
                     "type": "string"
                 },
                 "funnel_from_step": {
@@ -5439,7 +5439,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -5482,15 +5482,15 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "isUdf": {
                     "type": "boolean"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -5634,10 +5634,10 @@
             "type": "object"
         },
         "HogLanguage": {
-            "enum": ["hog", "hogJson", "torQL", "torQLExpr", "hogTemplate"],
+            "enum": ["hog", "hogJson", "clairQL", "clairQLExpr", "hogTemplate"],
             "type": "string"
         },
-        "TorQLAutocomplete": {
+        "ClairQLAutocomplete": {
             "additionalProperties": false,
             "properties": {
                 "endPosition": {
@@ -5645,7 +5645,7 @@
                     "type": "integer"
                 },
                 "filters": {
-                    "$ref": "#/definitions/TorQLFilters",
+                    "$ref": "#/definitions/ClairQLFilters",
                     "description": "Table to validate the expression against"
                 },
                 "globals": {
@@ -5653,7 +5653,7 @@
                     "type": "object"
                 },
                 "kind": {
-                    "const": "TorQLAutocomplete",
+                    "const": "ClairQLAutocomplete",
                     "type": "string"
                 },
                 "language": {
@@ -5661,7 +5661,7 @@
                     "description": "Language to validate"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query": {
@@ -5669,7 +5669,7 @@
                     "type": "string"
                 },
                 "response": {
-                    "$ref": "#/definitions/TorQLAutocompleteResponse"
+                    "$ref": "#/definitions/ClairQLAutocompleteResponse"
                 },
                 "sourceQuery": {
                     "$ref": "#/definitions/AnyDataNode",
@@ -5683,7 +5683,7 @@
             "required": ["endPosition", "kind", "language", "query", "startPosition"],
             "type": "object"
         },
-        "TorQLAutocompleteResponse": {
+        "ClairQLAutocompleteResponse": {
             "additionalProperties": false,
             "properties": {
                 "incomplete_list": {
@@ -5707,12 +5707,12 @@
             "required": ["suggestions", "incomplete_list"],
             "type": "object"
         },
-        "TorQLExpression": {
+        "ClairQLExpression": {
             "type": "string"
         },
-        "TorQLFilters": {
+        "ClairQLFilters": {
             "additionalProperties": false,
-            "description": "Filters object that will be converted to a TorQL {filters} placeholder",
+            "description": "Filters object that will be converted to a ClairQL {filters} placeholder",
             "properties": {
                 "dateRange": {
                     "$ref": "#/definitions/DateRange"
@@ -5729,11 +5729,11 @@
             },
             "type": "object"
         },
-        "TorQLMathType": {
-            "const": "torql",
+        "ClairQLMathType": {
+            "const": "clairql",
             "type": "string"
         },
-        "TorQLMetadata": {
+        "ClairQLMetadata": {
             "additionalProperties": false,
             "properties": {
                 "debug": {
@@ -5741,7 +5741,7 @@
                     "type": "boolean"
                 },
                 "filters": {
-                    "$ref": "#/definitions/TorQLFilters",
+                    "$ref": "#/definitions/ClairQLFilters",
                     "description": "Extra filters applied to query via {filters}"
                 },
                 "globals": {
@@ -5749,7 +5749,7 @@
                     "type": "object"
                 },
                 "kind": {
-                    "const": "TorQLMetadata",
+                    "const": "ClairQLMetadata",
                     "type": "string"
                 },
                 "language": {
@@ -5757,7 +5757,7 @@
                     "description": "Language to validate"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query": {
@@ -5765,7 +5765,7 @@
                     "type": "string"
                 },
                 "response": {
-                    "$ref": "#/definitions/TorQLMetadataResponse"
+                    "$ref": "#/definitions/ClairQLMetadataResponse"
                 },
                 "sourceQuery": {
                     "$ref": "#/definitions/AnyDataNode",
@@ -5773,7 +5773,7 @@
                 },
                 "variables": {
                     "additionalProperties": {
-                        "$ref": "#/definitions/TorQLVariable"
+                        "$ref": "#/definitions/ClairQLVariable"
                     },
                     "description": "Variables to be subsituted into the query",
                     "type": "object"
@@ -5782,12 +5782,12 @@
             "required": ["kind", "language", "query"],
             "type": "object"
         },
-        "TorQLMetadataResponse": {
+        "ClairQLMetadataResponse": {
             "additionalProperties": false,
             "properties": {
                 "errors": {
                     "items": {
-                        "$ref": "#/definitions/TorQLNotice"
+                        "$ref": "#/definitions/ClairQLNotice"
                     },
                     "type": "array"
                 },
@@ -5799,7 +5799,7 @@
                 },
                 "notices": {
                     "items": {
-                        "$ref": "#/definitions/TorQLNotice"
+                        "$ref": "#/definitions/ClairQLNotice"
                     },
                     "type": "array"
                 },
@@ -5808,7 +5808,7 @@
                 },
                 "warnings": {
                     "items": {
-                        "$ref": "#/definitions/TorQLNotice"
+                        "$ref": "#/definitions/ClairQLNotice"
                     },
                     "type": "array"
                 }
@@ -5816,7 +5816,7 @@
             "required": ["errors", "warnings", "notices"],
             "type": "object"
         },
-        "TorQLNotice": {
+        "ClairQLNotice": {
             "additionalProperties": false,
             "properties": {
                 "end": {
@@ -5835,7 +5835,7 @@
             "required": ["message"],
             "type": "object"
         },
-        "TorQLPropertyFilter": {
+        "ClairQLPropertyFilter": {
             "additionalProperties": false,
             "properties": {
                 "key": {
@@ -5845,7 +5845,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "const": "torql",
+                    "const": "clairql",
                     "type": "string"
                 },
                 "value": {
@@ -5855,7 +5855,7 @@
             "required": ["key", "type"],
             "type": "object"
         },
-        "TorQLQuery": {
+        "ClairQLQuery": {
             "additionalProperties": false,
             "properties": {
                 "explain": {
@@ -5863,21 +5863,21 @@
                     "type": "boolean"
                 },
                 "filters": {
-                    "$ref": "#/definitions/TorQLFilters"
+                    "$ref": "#/definitions/ClairQLFilters"
                 },
                 "kind": {
-                    "const": "TorQLQuery",
+                    "const": "ClairQLQuery",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query": {
                     "type": "string"
                 },
                 "response": {
-                    "$ref": "#/definitions/TorQLQueryResponse"
+                    "$ref": "#/definitions/ClairQLQueryResponse"
                 },
                 "values": {
                     "description": "Constant values that can be referenced with the {placeholder} syntax in the query",
@@ -5885,7 +5885,7 @@
                 },
                 "variables": {
                     "additionalProperties": {
-                        "$ref": "#/definitions/TorQLVariable"
+                        "$ref": "#/definitions/ClairQLVariable"
                     },
                     "description": "Variables to be subsituted into the query",
                     "type": "object"
@@ -5894,9 +5894,9 @@
             "required": ["kind", "query"],
             "type": "object"
         },
-        "TorQLQueryModifiers": {
+        "ClairQLQueryModifiers": {
             "additionalProperties": false,
-            "description": "TorQL Query Options are automatically set per team. However, they can be overriden in the query.",
+            "description": "ClairQL Query Options are automatically set per team. However, they can be overriden in the query.",
             "properties": {
                 "bounceRatePageViewMode": {
                     "enum": ["count_pageviews", "uniq_urls", "uniq_page_screen_autocaptures"],
@@ -5956,7 +5956,7 @@
             },
             "type": "object"
         },
-        "TorQLQueryResponse": {
+        "ClairQLQueryResponse": {
             "additionalProperties": false,
             "properties": {
                 "clickhouse": {
@@ -5982,19 +5982,19 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "metadata": {
-                    "$ref": "#/definitions/TorQLMetadataResponse",
+                    "$ref": "#/definitions/ClairQLMetadataResponse",
                     "description": "Query metadata output"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -6028,7 +6028,7 @@
             "required": ["results"],
             "type": "object"
         },
-        "TorQLVariable": {
+        "ClairQLVariable": {
             "additionalProperties": false,
             "properties": {
                 "code_name": {
@@ -6053,7 +6053,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -6127,7 +6127,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -6156,7 +6156,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "response": {
@@ -6479,7 +6479,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6529,7 +6529,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6579,7 +6579,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6629,7 +6629,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6679,7 +6679,7 @@
                     "$ref": "#/definitions/NodeKind"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6792,7 +6792,7 @@
                     "description": "Properties specific to the lifecycle insight"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -6835,12 +6835,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -6932,7 +6932,7 @@
                     "$ref": "#/definitions/GroupMathType"
                 },
                 {
-                    "$ref": "#/definitions/TorQLMathType"
+                    "$ref": "#/definitions/ClairQLMathType"
                 }
             ]
         },
@@ -6950,7 +6950,7 @@
             "type": "object"
         },
         "MultipleBreakdownType": {
-            "enum": ["person", "event", "group", "session", "torql"],
+            "enum": ["person", "event", "group", "session", "clairql"],
             "type": "string"
         },
         "NodeKind": {
@@ -6962,9 +6962,9 @@
                 "EventsQuery",
                 "PersonsNode",
                 "HogQuery",
-                "TorQLQuery",
-                "TorQLMetadata",
-                "TorQLAutocomplete",
+                "ClairQLQuery",
+                "ClairQLMetadata",
+                "ClairQLAutocomplete",
                 "ActorsQuery",
                 "FunnelsActorsQuery",
                 "FunnelCorrelationActorsQuery",
@@ -7009,7 +7009,7 @@
             "type": "object"
         },
         "PathType": {
-            "enum": ["$pageview", "$screen", "custom_event", "torql"],
+            "enum": ["$pageview", "$screen", "custom_event", "clairql"],
             "type": "string"
         },
         "PathsFilter": {
@@ -7067,7 +7067,7 @@
                     "description": "Relevant only within actors query",
                     "type": "string"
                 },
-                "pathsTorQLExpression": {
+                "pathsClairQLExpression": {
                     "type": "string"
                 },
                 "startPoint": {
@@ -7132,7 +7132,7 @@
                 "path_type": {
                     "$ref": "#/definitions/PathType"
                 },
-                "paths_torql_expression": {
+                "paths_clairql_expression": {
                     "type": "string"
                 },
                 "start_point": {
@@ -7169,7 +7169,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "pathsFilter": {
@@ -7209,12 +7209,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -7319,7 +7319,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -7354,7 +7354,7 @@
                 "recording",
                 "log_entry",
                 "group",
-                "torql",
+                "clairql",
                 "data_warehouse",
                 "data_warehouse_person_property"
             ],
@@ -7465,7 +7465,7 @@
                 },
                 "query": {
                     "$ref": "#/definitions/QuerySchema",
-                    "description": "Submit a JSON string representing a query for ClairView data analysis, for example a TorQL query.\n\nExample payload:\n\n```\n\n{\"query\": {\"kind\": \"TorQLQuery\", \"query\": \"select * from events limit 100\"}}\n\n```\n\nFor more details on TorQL queries, see the [ClairView TorQL documentation](/docs/torql#api-access)."
+                    "description": "Submit a JSON string representing a query for ClairView data analysis, for example a ClairQL query.\n\nExample payload:\n\n```\n\n{\"query\": {\"kind\": \"ClairQLQuery\", \"query\": \"select * from events limit 100\"}}\n\n```\n\nFor more details on ClairQL queries, see the [ClairView ClairQL documentation](/docs/clairql#api-access)."
                 },
                 "refresh": {
                     "$ref": "#/definitions/RefreshType",
@@ -7495,15 +7495,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -7534,7 +7534,7 @@
                             "type": "array"
                         }
                     },
-                    "required": ["columns", "torql", "results", "types"],
+                    "required": ["columns", "clairql", "results", "types"],
                     "type": "object"
                 },
                 {
@@ -7551,8 +7551,8 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
@@ -7562,7 +7562,7 @@
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -7593,7 +7593,7 @@
                             "type": "array"
                         }
                     },
-                    "required": ["columns", "torql", "limit", "offset", "results", "types"],
+                    "required": ["columns", "clairql", "limit", "offset", "results", "types"],
                     "type": "object"
                 },
                 {
@@ -7715,12 +7715,12 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -7789,19 +7789,19 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "metadata": {
-                            "$ref": "#/definitions/TorQLMetadataResponse",
+                            "$ref": "#/definitions/ClairQLMetadataResponse",
                             "description": "Query metadata output"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -7840,7 +7840,7 @@
                     "properties": {
                         "errors": {
                             "items": {
-                                "$ref": "#/definitions/TorQLNotice"
+                                "$ref": "#/definitions/ClairQLNotice"
                             },
                             "type": "array"
                         },
@@ -7852,7 +7852,7 @@
                         },
                         "notices": {
                             "items": {
-                                "$ref": "#/definitions/TorQLNotice"
+                                "$ref": "#/definitions/ClairQLNotice"
                             },
                             "type": "array"
                         },
@@ -7861,7 +7861,7 @@
                         },
                         "warnings": {
                             "items": {
-                                "$ref": "#/definitions/TorQLNotice"
+                                "$ref": "#/definitions/ClairQLNotice"
                             },
                             "type": "array"
                         }
@@ -7906,12 +7906,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -7952,15 +7952,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8006,15 +8006,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8057,12 +8057,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8105,15 +8105,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8159,15 +8159,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8209,15 +8209,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8299,15 +8299,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8338,7 +8338,7 @@
                             "type": "array"
                         }
                     },
-                    "required": ["columns", "torql", "results", "types"],
+                    "required": ["columns", "clairql", "results", "types"],
                     "type": "object"
                 },
                 {
@@ -8355,8 +8355,8 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
@@ -8366,7 +8366,7 @@
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8397,7 +8397,7 @@
                             "type": "array"
                         }
                     },
-                    "required": ["columns", "torql", "limit", "offset", "results", "types"],
+                    "required": ["columns", "clairql", "limit", "offset", "results", "types"],
                     "type": "object"
                 },
                 {
@@ -8426,19 +8426,19 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "metadata": {
-                            "$ref": "#/definitions/TorQLMetadataResponse",
+                            "$ref": "#/definitions/ClairQLMetadataResponse",
                             "description": "Query metadata output"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8485,12 +8485,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8531,15 +8531,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8585,15 +8585,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8636,12 +8636,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8684,15 +8684,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8738,15 +8738,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8788,15 +8788,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -8868,12 +8868,12 @@
                             "description": "Wether more breakdown values are available.",
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8904,15 +8904,15 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "isUdf": {
                             "type": "boolean"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8953,12 +8953,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -8989,12 +8989,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -9025,12 +9025,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -9061,12 +9061,12 @@
                             "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                             "type": "string"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "query_status": {
@@ -9104,15 +9104,15 @@
                         "hasMore": {
                             "type": "boolean"
                         },
-                        "torql": {
-                            "description": "Generated TorQL query.",
+                        "clairql": {
+                            "description": "Generated ClairQL query.",
                             "type": "string"
                         },
                         "limit": {
                             "type": "integer"
                         },
                         "modifiers": {
-                            "$ref": "#/definitions/TorQLQueryModifiers",
+                            "$ref": "#/definitions/ClairQLQueryModifiers",
                             "description": "Modifiers used when performing the query"
                         },
                         "offset": {
@@ -9191,13 +9191,13 @@
                     "$ref": "#/definitions/HogQuery"
                 },
                 {
-                    "$ref": "#/definitions/TorQLQuery"
+                    "$ref": "#/definitions/ClairQLQuery"
                 },
                 {
-                    "$ref": "#/definitions/TorQLMetadata"
+                    "$ref": "#/definitions/ClairQLMetadata"
                 },
                 {
-                    "$ref": "#/definitions/TorQLAutocomplete"
+                    "$ref": "#/definitions/ClairQLAutocomplete"
                 },
                 {
                     "$ref": "#/definitions/WebOverviewQuery"
@@ -9444,7 +9444,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -9670,7 +9670,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -9710,12 +9710,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -9852,8 +9852,8 @@
                 "showHeader": {
                     "type": "boolean"
                 },
-                "showTorQLEditor": {
-                    "description": "Include a TorQL query editor above TorQL tables",
+                "showClairQLEditor": {
+                    "description": "Include a ClairQL query editor above ClairQL tables",
                     "type": "boolean"
                 },
                 "showLastComputation": {
@@ -9956,7 +9956,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -9983,15 +9983,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -10146,7 +10146,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "personId": {
@@ -10170,12 +10170,12 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -10285,7 +10285,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -10332,12 +10332,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -10407,7 +10407,7 @@
                 "dashboards",
                 "name_groups",
                 "session_properties",
-                "torql_expression",
+                "clairql_expression",
                 "notebooks",
                 "log_entries",
                 "replay"
@@ -10422,12 +10422,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -10468,8 +10468,8 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "is_cached": {
@@ -10480,7 +10480,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "next_allowed_client_refresh": {
@@ -10709,7 +10709,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -10760,12 +10760,12 @@
                     "description": "Wether more breakdown values are available.",
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -10879,7 +10879,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -10925,15 +10925,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -10992,7 +10992,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -11035,15 +11035,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -11131,7 +11131,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -11173,12 +11173,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {
@@ -11267,7 +11267,7 @@
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -11310,15 +11310,15 @@
                 "hasMore": {
                     "type": "boolean"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "limit": {
                     "type": "integer"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "offset": {
@@ -11374,7 +11374,7 @@
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "properties": {
@@ -11414,12 +11414,12 @@
                     "description": "Query error. Returned only if 'explain' or `modifiers.debug` is true. Throws an error otherwise.",
                     "type": "string"
                 },
-                "torql": {
-                    "description": "Generated TorQL query.",
+                "clairql": {
+                    "description": "Generated ClairQL query.",
                     "type": "string"
                 },
                 "modifiers": {
-                    "$ref": "#/definitions/TorQLQueryModifiers",
+                    "$ref": "#/definitions/ClairQLQueryModifiers",
                     "description": "Modifiers used when performing the query"
                 },
                 "query_status": {

@@ -13,7 +13,7 @@ import {
 import { useActions, useValues } from 'kea'
 import { Field, Form } from 'kea-forms'
 import { CodeSnippet, Language } from 'lib/components/CodeSnippet'
-import { TorQLEditor } from 'lib/components/TorQLEditor/TorQLEditor'
+import { ClairQLEditor } from 'lib/components/ClairQLEditor/ClairQLEditor'
 import { IconSwapHoriz } from 'lib/lemon-ui/icons'
 import { useState } from 'react'
 import { viewLinkLogic } from 'scenes/data-warehouse/viewLinkLogic'
@@ -55,8 +55,8 @@ export function ViewLinkForm(): JSX.Element {
         isNewJoin,
         selectedSourceKey,
         selectedJoiningKey,
-        sourceIsUsingTorQLExpression,
-        joiningIsUsingTorQLExpression,
+        sourceIsUsingClairQLExpression,
+        joiningIsUsingClairQLExpression,
         isViewLinkSubmitting,
     } = useValues(viewLinkLogic)
     const {
@@ -110,15 +110,15 @@ export function ViewLinkForm(): JSX.Element {
                                 <LemonSelect
                                     fullWidth
                                     onSelect={selectSourceKey}
-                                    value={sourceIsUsingTorQLExpression ? '' : selectedSourceKey ?? undefined}
+                                    value={sourceIsUsingClairQLExpression ? '' : selectedSourceKey ?? undefined}
                                     disabledReason={selectedSourceTableName ? '' : 'Select a table to choose join key'}
-                                    options={[...sourceTableKeys, { value: '', label: <span>TorQL Expression</span> }]}
+                                    options={[...sourceTableKeys, { value: '', label: <span>ClairQL Expression</span> }]}
                                     placeholder="Select a key"
                                 />
-                                {sourceIsUsingTorQLExpression && (
-                                    <TorQLDropdown
-                                        torQLValue={selectedSourceKey ?? ''}
-                                        onTorQLValueChange={selectSourceKey}
+                                {sourceIsUsingClairQLExpression && (
+                                    <ClairQLDropdown
+                                        clairQLValue={selectedSourceKey ?? ''}
+                                        onClairQLValueChange={selectSourceKey}
                                         tableName={selectedSourceTableName ?? ''}
                                     />
                                 )}
@@ -135,15 +135,15 @@ export function ViewLinkForm(): JSX.Element {
                                 <LemonSelect
                                     fullWidth
                                     onSelect={selectJoiningKey}
-                                    value={joiningIsUsingTorQLExpression ? '' : selectedJoiningKey ?? undefined}
+                                    value={joiningIsUsingClairQLExpression ? '' : selectedJoiningKey ?? undefined}
                                     disabledReason={selectedJoiningTableName ? '' : 'Select a table to choose join key'}
-                                    options={[...joiningTableKeys, { value: '', label: <span>TorQL Expression</span> }]}
+                                    options={[...joiningTableKeys, { value: '', label: <span>ClairQL Expression</span> }]}
                                     placeholder="Select a key"
                                 />
-                                {joiningIsUsingTorQLExpression && (
-                                    <TorQLDropdown
-                                        torQLValue={selectedJoiningKey ?? ''}
-                                        onTorQLValueChange={selectJoiningKey}
+                                {joiningIsUsingClairQLExpression && (
+                                    <ClairQLDropdown
+                                        clairQLValue={selectedJoiningKey ?? ''}
+                                        onClairQLValueChange={selectJoiningKey}
                                         tableName={selectedJoiningTableName ?? ''}
                                     />
                                 )}
@@ -211,32 +211,32 @@ export function ViewLinkForm(): JSX.Element {
     )
 }
 
-const TorQLDropdown = ({
-    torQLValue,
-    onTorQLValueChange,
+const ClairQLDropdown = ({
+    clairQLValue,
+    onClairQLValueChange,
     tableName,
 }: {
-    torQLValue: string
+    clairQLValue: string
     tableName: string
-    onTorQLValueChange: (torQLValue: string) => void
+    onClairQLValueChange: (clairQLValue: string) => void
 }): JSX.Element => {
-    const [isTorQLDropdownVisible, setIsTorQLDropdownVisible] = useState(false)
+    const [isClairQLDropdownVisible, setIsClairQLDropdownVisible] = useState(false)
 
     return (
         <div className="flex-auto overflow-hidden mt-2">
             <LemonDropdown
-                visible={isTorQLDropdownVisible}
+                visible={isClairQLDropdownVisible}
                 closeOnClickInside={false}
-                onClickOutside={() => setIsTorQLDropdownVisible(false)}
+                onClickOutside={() => setIsClairQLDropdownVisible(false)}
                 overlay={
                     // eslint-disable-next-line react/forbid-dom-props
                     <div className="w-120" style={{ maxWidth: 'max(60vw, 20rem)' }}>
-                        <TorQLEditor
-                            value={torQLValue}
-                            metadataSource={{ kind: NodeKind.TorQLQuery, query: `SELECT * FROM ${tableName}` }}
+                        <ClairQLEditor
+                            value={clairQLValue}
+                            metadataSource={{ kind: NodeKind.ClairQLQuery, query: `SELECT * FROM ${tableName}` }}
                             onChange={(currentValue) => {
-                                onTorQLValueChange(currentValue)
-                                setIsTorQLDropdownVisible(false)
+                                onClairQLValueChange(currentValue)
+                                setIsClairQLDropdownVisible(false)
                             }}
                         />
                     </div>
@@ -245,9 +245,9 @@ const TorQLDropdown = ({
                 <LemonButton
                     fullWidth
                     type="secondary"
-                    onClick={() => setIsTorQLDropdownVisible(!isTorQLDropdownVisible)}
+                    onClick={() => setIsClairQLDropdownVisible(!isClairQLDropdownVisible)}
                 >
-                    <code>{torQLValue}</code>
+                    <code>{clairQLValue}</code>
                 </LemonButton>
             </LemonDropdown>
         </div>

@@ -103,12 +103,12 @@ const cleanPropertyGroupFilterValue = (
 
 const cleanProperty = (property: Record<string, any>): AnyPropertyFilter => {
     if (Object.keys(property).length === 0) {
-        return { type: PropertyFilterType.TorQL, key: 'true' }
+        return { type: PropertyFilterType.ClairQL, key: 'true' }
     }
 
     // remove invalid properties without type
     if (property['type'] === undefined) {
-        return { type: PropertyFilterType.TorQL, key: 'true' }
+        return { type: PropertyFilterType.ClairQL, key: 'true' }
     }
 
     // fix type typo
@@ -158,7 +158,7 @@ const cleanProperty = (property: Record<string, any>): AnyPropertyFilter => {
 }
 
 const isPropertyWithOperator = (property: Record<string, any>): boolean => {
-    return !['torql'].includes(property['type'])
+    return !['clairql'].includes(property['type'])
 }
 
 // old style dict properties e.g. {"utm_medium__icontains": "email"}

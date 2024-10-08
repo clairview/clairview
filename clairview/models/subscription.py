@@ -19,7 +19,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from sentry_sdk import capture_exception
 
-from clairview.jwt import MarkettorJwtAudience, decode_jwt, encode_jwt
+from clairview.jwt import ClairviewJwtAudience, decode_jwt, encode_jwt
 from clairview.utils import absolute_uri
 
 # Copied from rrule as it is not exported
@@ -219,12 +219,12 @@ def get_unsubscribe_token(subscription: Subscription, email: str) -> str:
     return encode_jwt(
         {"id": subscription.id, "email": email},
         expiry_delta=timedelta(days=UNSUBSCRIBE_TOKEN_EXP_DAYS),
-        audience=MarkettorJwtAudience.UNSUBSCRIBE,
+        audience=ClairviewJwtAudience.UNSUBSCRIBE,
     )
 
 
 def unsubscribe_using_token(token: str) -> Subscription:
-    info = decode_jwt(token, audience=MarkettorJwtAudience.UNSUBSCRIBE)
+    info = decode_jwt(token, audience=ClairviewJwtAudience.UNSUBSCRIBE)
     subscription = Subscription.objects.get(pk=info["id"])
 
     emails = subscription.target_value.split(",")

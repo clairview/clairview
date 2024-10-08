@@ -338,7 +338,7 @@ class TestOrganizationInvitesAPI(APIBaseTest):
                 "/api/organizations/@current/invites/bulk/",
                 payload,
                 format="json",
-                headers={"X-Markettor-Session-Id": "123", "Referer": "http://test.clairview.com/my-url"},
+                headers={"X-Clairview-Session-Id": "123", "Referer": "http://test.clairview.com/my-url"},
             )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         response_data = response.json()

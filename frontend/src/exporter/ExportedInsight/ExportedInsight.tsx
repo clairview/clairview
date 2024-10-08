@@ -41,7 +41,7 @@ export function ExportedInsight({
     if (isDataTableNode(insight.query)) {
         // don't show editing controls when exporting/sharing
         insight.query.full = false
-        insight.query.showTorQLEditor = false
+        insight.query.showClairQLEditor = false
         insight.query.showActions = false
     }
 

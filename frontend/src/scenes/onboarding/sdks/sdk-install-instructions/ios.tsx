@@ -33,10 +33,10 @@ import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let MARKETTOR_API_KEY = "${currentTeam?.api_token}"
-        let MARKETTOR_HOST = "${apiHostOrigin()}"
+        let CLAIRVIEW_API_KEY = "${currentTeam?.api_token}"
+        let CLAIRVIEW_HOST = "${apiHostOrigin()}"
 
-        let config = ClairViewConfig(apiKey: MARKETTOR_API_KEY, host: MARKETTOR_HOST)
+        let config = ClairViewConfig(apiKey: CLAIRVIEW_API_KEY, host: CLAIRVIEW_HOST)
         ${
             includeReplay
                 ? `

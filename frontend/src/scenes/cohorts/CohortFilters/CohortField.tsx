@@ -225,7 +225,7 @@ export function CohortEventFiltersField({
                     TaxonomicFilterGroupType.EventProperties,
                     TaxonomicFilterGroupType.EventFeatureFlags,
                     TaxonomicFilterGroupType.Elements,
-                    TaxonomicFilterGroupType.TorQLExpression,
+                    TaxonomicFilterGroupType.ClairQLExpression,
                 ]}
                 onChange={(newValue: AnyPropertyFilter[]) => {
                     onChange({ [fieldKey]: newValue })

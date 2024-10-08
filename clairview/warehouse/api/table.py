@@ -5,8 +5,8 @@ from clairview.api.utils import action
 
 from clairview.api.routing import TeamAndOrgViewSetMixin
 from clairview.api.shared import UserBasicSerializer
-from clairview.torql.context import TorQLContext
-from clairview.torql.database.database import SerializedField, create_torql_database, serialize_fields
+from clairview.clairql.context import ClairQLContext
+from clairview.clairql.database.database import SerializedField, create_clairql_database, serialize_fields
 from clairview.schema import DatabaseSerializedFieldType
 from clairview.tasks.warehouse import validate_data_warehouse_table_columns
 from clairview.warehouse.models import (
@@ -15,7 +15,7 @@ from clairview.warehouse.models import (
     DataWarehouseTable,
 )
 from clairview.warehouse.api.external_data_source import SimpleExternalDataSourceSerializers
-from clairview.warehouse.models.table import CLICKHOUSE_TORQL_MAPPING, SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING
+from clairview.warehouse.models.table import CLICKHOUSE_CLAIRQL_MAPPING, SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING
 
 
 class CredentialSerializer(serializers.ModelSerializer):
@@ -59,16 +59,16 @@ class TableSerializer(serializers.ModelSerializer):
     def get_columns(self, table: DataWarehouseTable) -> list[SerializedField]:
         database = self.context.get("database", None)
         if not database:
-            database = create_torql_database(team_id=self.context["team_id"])
+            database = create_clairql_database(team_id=self.context["team_id"])
 
         if database.has_table(table.name):
             fields = database.get_table(table.name).fields
         else:
-            fields = table.torql_definition().fields
+            fields = table.clairql_definition().fields
 
         serializes_fields = serialize_fields(
             fields,
-            TorQLContext(database=database, team_id=self.context["team_id"]),
+            ClairQLContext(database=database, team_id=self.context["team_id"]),
             table.name,
             table.columns,
             table_type="external",
@@ -136,11 +136,11 @@ class SimpleTableSerializer(serializers.ModelSerializer):
         team_id = self.context.get("team_id", None)
 
         if not database:
-            database = create_torql_database(team_id=self.context["team_id"])
+            database = create_clairql_database(team_id=self.context["team_id"])
 
         fields = serialize_fields(
-            table.torql_definition().fields,
-            TorQLContext(database=database, team_id=team_id),
+            table.clairql_definition().fields,
+            ClairQLContext(database=database, team_id=team_id),
             table.name,
             table_type="external",
         )
@@ -172,7 +172,7 @@ class TableViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
 
     def get_serializer_context(self) -> dict[str, Any]:
         context = super().get_serializer_context()
-        context["database"] = create_torql_database(team_id=self.team_id)
+        context["database"] = create_clairql_database(team_id=self.team_id)
         context["team_id"] = self.team_id
         return context
 
@@ -227,7 +227,7 @@ class TableViewSet(TeamAndOrgViewSetMixin, viewsets.ModelViewSet):
                 columns[key] = {}
 
             columns[key]["clickhouse"] = f"Nullable({SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]})"
-            columns[key]["torql"] = CLICKHOUSE_TORQL_MAPPING[SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]].__name__
+            columns[key]["clairql"] = CLICKHOUSE_CLAIRQL_MAPPING[SERIALIZED_FIELD_TO_CLICKHOUSE_MAPPING[value]].__name__
 
         table.columns = columns
         table.save()

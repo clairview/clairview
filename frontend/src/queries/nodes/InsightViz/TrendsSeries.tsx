@@ -34,7 +34,7 @@ export function TrendsSeries(): JSX.Element | null {
         TaxonomicFilterGroupType.Cohorts,
         TaxonomicFilterGroupType.Elements,
         TaxonomicFilterGroupType.SessionProperties,
-        TaxonomicFilterGroupType.TorQLExpression,
+        TaxonomicFilterGroupType.ClairQLExpression,
         TaxonomicFilterGroupType.DataWarehouseProperties,
         TaxonomicFilterGroupType.DataWarehousePersonProperties,
     ]
@@ -57,7 +57,7 @@ export function TrendsSeries(): JSX.Element | null {
                     <div className="flex items-center">
                         Showing
                         {showGroupsOptions ? (
-                            <AggregationSelect className="mx-2" insightProps={insightProps} torqlAvailable={false} />
+                            <AggregationSelect className="mx-2" insightProps={insightProps} clairqlAvailable={false} />
                         ) : (
                             <b> Unique users </b>
                         )}
