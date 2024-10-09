@@ -34,7 +34,7 @@ jobs:
                   cache-dependency-path: clairvm/typescript/pnpm-lock.yaml
 
             - name: Install dependencies
-              run: pip install structlog celery django django-structlog && pnpm i --frozen-lockfile
+              run: pip install -r requirements.txt && pnpm i --frozen-lockfile
 
             - name: Build
               run: pnpm build

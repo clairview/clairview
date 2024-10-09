@@ -69,3 +69,5 @@ plugin-transpiler/dist
 *.log
 # pyright config (keep this until we have a standardized one)
 pyrightconfig.json
+.idea/
+archive/
