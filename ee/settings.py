@@ -28,7 +28,7 @@ SOCIAL_AUTH_SAML_SP_PRIVATE_KEY = ""
 SOCIAL_AUTH_SAML_ORG_INFO = {"en-US": {"name": "clairview", "displayname": "ClairView", "url": "https://clairview.com"}}
 SOCIAL_AUTH_SAML_TECHNICAL_CONTACT = {
     "givenName": "ClairView Support",
-    "emailAddress": "hey@clairview.com",
+    "emailAddress": "developers@clairview.io",
 }
 SOCIAL_AUTH_SAML_SUPPORT_CONTACT = SOCIAL_AUTH_SAML_TECHNICAL_CONTACT
 

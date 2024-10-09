@@ -147,7 +147,7 @@ def get_decide(request: HttpRequest):
                     generate_exception_response(
                         "decide",
                         f"Team with ID {team.id} cannot access the /decide endpoint."
-                        f"Please contact us at hey@clairview.com",
+                        f"Please contact us at developers@clairview.io",
                         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                     ),
                 )

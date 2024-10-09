@@ -38,7 +38,7 @@
     "bin": {
         "clairview-plugin-server": "bin/clairview-plugin-server"
     },
-    "author": "ClairView <hey@clairview.com>",
+    "author": "ClairView <developers@clairview.io>",
     "repository": "https://github.com/ClairView/clairview-plugin-server",
     "license": "MIT",
     "dependencies": {

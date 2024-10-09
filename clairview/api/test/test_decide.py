@@ -2679,7 +2679,7 @@ class TestDecide(BaseTest, QueryMatchingTest):
             response_data = response.json()
             self.assertEqual(
                 response_data["detail"],
-                f"Team with ID {short_circuited_team.id} cannot access the /decide endpoint.Please contact us at hey@clairview.com",
+                f"Team with ID {short_circuited_team.id} cannot access the /decide endpoint.Please contact us at developers@clairview.io",
             )
 
     def test_invalid_payload_on_decide_endpoint(self, *args):
