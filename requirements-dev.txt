@@ -60,7 +60,7 @@ cffi==1.17.1
     #   cryptography
 chardet==5.2.0
     # via prance
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via
     #   -c requirements.txt
     #   requests
@@ -190,7 +190,9 @@ packaging==24.1
 parameterized==0.9.0
     # via -r requirements-dev.in
 pathable==0.4.3
-    # via jsonschema-spec
+    # via
+    #   jsonschema-path
+    #   jsonschema-spec
 pathspec==0.12.1
     # via black
 platformdirs==3.11.0

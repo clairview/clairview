@@ -92,7 +92,7 @@ cffi==1.17.1
     #   cryptography
     #   pynacl
     #   snowflake-connector-python
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via
     #   requests
     #   snowflake-connector-python
@@ -354,6 +354,7 @@ langsmith==0.1.106
     #   langchain-core
 lxml==4.9.4
     # via
+    #   -r requirements.in
     #   python3-saml
     #   toronado
     #   xmlsec
@@ -766,7 +767,9 @@ wrapt==1.16.0
 wsproto==1.2.0
     # via trio-websocket
 xmlsec==1.3.13
-    # via python3-saml
+    # via
+    #   -r requirements.in
+    #   python3-saml
 yarl==1.14.0
     # via aiohttp
 zeep==4.2.1

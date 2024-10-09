@@ -34,7 +34,7 @@ jobs:
                   cache-dependency-path: clairvm/typescript/pnpm-lock.yaml
 
             - name: Install dependencies
-              run: cp ../../requirements.txt . && pip install -r requirements.txt && pnpm i --frozen-lockfile
+              run: apt-get install libxml2-dev libxmlsec1-dev libxmlsec1-openssl && cp ../../requirements.txt . && pip install -r requirements.txt && pnpm i --frozen-lockfile
 
             - name: Build
               run: pnpm build
