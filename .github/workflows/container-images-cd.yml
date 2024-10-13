@@ -66,7 +66,7 @@ jobs:
               with:
                   buildx-fallback: false # the fallback is so slow it's better to just fail
                   push: true
-                  tags: clairview/clairview:${{ github.sha }},clairview/clairview:latest,clairview/clairview:${{ github.sha }},clairview/clairview:master
+                  tags: clairviewdev/clairview:${{ github.sha }},clairviewdev/clairview:latest,clairviewdev/clairview:master
 #                  tags: clairview/clairview:${{ github.sha }},clairview/clairview:latest,${{ steps.aws-ecr.outputs.registry }}/clairview-cloud:master
                   platforms: linux/arm64,linux/amd64
                   build-args: COMMIT_HASH=${{ github.sha }}
