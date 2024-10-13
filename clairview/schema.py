@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
-from enum import Enum, StrEnum
+from enum import Enum
+# from enum import Enum, StrEnum
 from typing import Any, Literal, Optional, Union
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, RootModel
+
+from clairview.clairql.str_enum import StrEnum
 
 
 class SchemaRoot(RootModel[Any]):
