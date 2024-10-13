@@ -1,7 +1,8 @@
-from enum import StrEnum
+# from enum import StrEnum
 from typing import Any, Literal, Optional, Union
 from dataclasses import dataclass, field
 
+from clairview.clairql.str_enum import StrEnum
 from clairview.clairql.base import Type, Expr, CTE, ConstantType, UnknownType, AST
 from clairview.clairql.constants import ConstantDataType, ClairQLQuerySettings
 from clairview.clairql.context import ClairQLContext
