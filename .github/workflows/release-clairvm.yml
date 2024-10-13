@@ -42,6 +42,6 @@ jobs:
             - name: Publish the package in the npm registry
               id: publish-package
               run: |
-                  pnpm publish --access public --tag latest
+                  pnpm publish --access public --tag latest --no-git-checks
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
