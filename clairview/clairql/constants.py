@@ -1,8 +1,10 @@
 from datetime import date, datetime
-from enum import StrEnum
+# from enum import StrEnum
 from typing import Optional, Literal, TypeAlias
 from uuid import UUID
 from pydantic import ConfigDict, BaseModel
+
+from clairview.clairql.str_enum import StrEnum
 
 ConstantDataType: TypeAlias = Literal[
     "int",
