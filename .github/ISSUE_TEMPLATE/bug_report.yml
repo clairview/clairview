@@ -1,20 +1,47 @@
-name: Bug report
-description: Something not working as expected? Let us look into it.
-labels: ['bug']
+name: Report a bug
+description: Create a report to help us improve
 body:
-    - type: textarea
-      id: bug-description
-      attributes:
-          label: Bug Description
-          value: "## Bug description\n\n*Please describe.*\n*If this affects the front-end, screenshots would be of great help.*\n\n*If you are on ClairView Cloud it would be really valuable if you can share any links where the problem occurs. This speeds up our ability to troubleshoot tremendously.*\n\n## How to reproduce\n\n1. \n2.\n3. \n\n## Additional context\n\n"
+  - type: markdown
+    attributes:
+      value: |
+        Hi, thank you for taking the time to create an issue! Before you get started, please ensure the following are correct:
 
-    - type: textarea
-      id: debug-info
-      attributes:
-          label: Debug info
-          value: "- [ ] ClairView Cloud, Debug information: [please copy/paste from https://us.clairview.com/settings/project-details#variables or https://eu.clairview.com/settings/project-details#variables]\n- [ ] ClairView Hobby self-hosted with `docker compose`, version/commit: [please provide]\n- [ ] ClairView self-hosted with Kubernetes (deprecated, see [`Sunsetting Kubernetes support`](https://clairview.com/blog/sunsetting-helm-support-clairview)), version/commit: [please provide]\n"
-          render: shell
+        - I'm using the [latest version of Clairview](https://github.com/clairview/clairview/releases)
+        - I've completed all [Troubleshooting Steps](https://docs.clairview.io/getting-started/support/#troubleshooting-steps).
+        - There's [no other issue](https://github.com/clairview/clairview/issues?q=is%3Aissue) that already describes the problem.
 
-    - type: markdown
-      attributes:
-          value: '#### *Thank you* for your bug report – we love squashing them!'
+        _For issues specific to Clairview Cloud projects, please reach out through the Live Chat in our Cloud Dashboard._
+  - type: textarea
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: To Reproduce
+      description:
+        Steps to reproduce the behavior. Contributors should be able to follow the steps provided in order to reproduce
+        the bug.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Clairview Version
+      placeholder: v11.x.x
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Hosting Strategy
+      options:
+        - Self-Hosted (Docker Image)
+        - Self-Hosted (Custom)
+        - Clairview Cloud
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Database
+      description: If applicable, the vendor and version of the database being used. For example, PostgreSQL 16.

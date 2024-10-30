@@ -1,0 +1,45 @@
+import type { ClairviewActivity } from './activity.js';
+import type { ClairviewCollection } from './collection.js';
+import type { ClairviewComment } from './comment.js';
+import type { ClairviewDashboard } from './dashboard.js';
+import type { ClairviewExtension } from './extension.js';
+import type { ClairviewField } from './field.js';
+import type { ClairviewFile } from './file.js';
+import type { ClairviewFlow } from './flow.js';
+import type { ClairviewFolder } from './folder.js';
+import type { ClairviewNotification } from './notification.js';
+import type { ClairviewOperation } from './operation.js';
+import type { ClairviewPanel } from './panel.js';
+import type { ClairviewPermission } from './permission.js';
+import type { ClairviewPreset } from './preset.js';
+import type { ClairviewRelation } from './relation.js';
+import type { ClairviewRole } from './role.js';
+import type { ClairviewSettings } from './settings.js';
+import type { ClairviewShare } from './share.js';
+import type { ClairviewUser } from './user.js';
+import type { ClairviewVersion } from './version.js';
+import type { ClairviewWebhook } from './webhook.js';
+
+export interface CoreSchema<Schema = any> {
+	clairview_activity: ClairviewActivity<Schema>[];
+	clairview_collections: ClairviewCollection<Schema>[];
+	clairview_comments: ClairviewComment<Schema>[];
+	clairview_dashboards: ClairviewDashboard<Schema>[];
+	clairview_extensions: ClairviewExtension<Schema>[];
+	clairview_fields: ClairviewField<Schema>[];
+	clairview_files: ClairviewFile<Schema>[];
+	clairview_flows: ClairviewFlow<Schema>[];
+	clairview_folders: ClairviewFolder<Schema>[];
+	clairview_notifications: ClairviewNotification<Schema>[];
+	clairview_operations: ClairviewOperation<Schema>[];
+	clairview_panels: ClairviewPanel<Schema>[];
+	clairview_permissions: ClairviewPermission<Schema>[];
+	clairview_presets: ClairviewPreset<Schema>[];
+	clairview_relations: ClairviewRelation<Schema>[];
+	clairview_roles: ClairviewRole<Schema>[];
+	clairview_settings: ClairviewSettings<Schema>;
+	clairview_shares: ClairviewShare<Schema>[];
+	clairview_users: ClairviewUser<Schema>[];
+	clairview_versions: ClairviewVersion<Schema>[];
+	clairview_webhooks: ClairviewWebhook<Schema>[];
+}

@@ -1,0 +1,42 @@
+{
+	"name": "@clairview/sdk",
+	"version": "18.0.0",
+	"description": "Clairview JavaScript SDK",
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git",
+		"directory": "sdk"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "NODE_ENV=production tsup",
+		"dev": "NODE_ENV=development tsup",
+		"test": "vitest --typecheck --watch=false"
+	},
+	"devDependencies": {
+		"@clairview/system-data": "workspace:*",
+		"@clairview/tsconfig": "workspace:*",
+		"@types/node-fetch": "2.6.11",
+		"esbuild-plugin-replace": "1.4.0",
+		"tsup": "8.3.0",
+		"typescript": "5.6.3",
+		"vitest": "2.1.2"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}

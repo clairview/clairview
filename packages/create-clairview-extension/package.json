@@ -1,0 +1,40 @@
+{
+	"name": "create-clairview-extension",
+	"version": "11.0.4",
+	"description": "A small util that will scaffold a Clairview extension",
+	"keywords": [
+		"clairview",
+		"extensions"
+	],
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git",
+		"directory": "packages/create-clairview-extension"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "MIT",
+	"author": "Nicola Krumschmidt",
+	"contributors": [
+		"Joonas Palosuo <joonas.palosuo@gmail.com>",
+		"Rijk van Zanten <rijkvanzanten@me.com>"
+	],
+	"type": "module",
+	"exports": {
+		".": "./lib/index.js",
+		"./package.json": "./package.json"
+	},
+	"main": "lib/index.js",
+	"bin": {
+		"cde": "./lib/index.js",
+		"create-clairview-extension": "./lib/index.js"
+	},
+	"files": [
+		"lib/index.js"
+	],
+	"dependencies": {
+		"@clairview/extensions": "workspace:*",
+		"@clairview/extensions-sdk": "workspace:*",
+		"inquirer": "12.0.0"
+	}
+}

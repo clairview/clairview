@@ -1,0 +1,4 @@
+{
+	"extends": "@clairview/tsconfig/node18-esm",
+	"include": ["src"]
+}

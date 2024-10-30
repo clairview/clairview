@@ -1,0 +1,37 @@
+{
+	"name": "@clairview/system-data",
+	"version": "2.1.0",
+	"description": "Definitions and types for Clairview system collections",
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git",
+		"directory": "packages/system-data"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "MIT",
+	"author": "Tim de Heiden <tim@clairview.io>",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "NODE_ENV=production tsup",
+		"dev": "NODE_ENV=development tsup"
+	},
+	"devDependencies": {
+		"@clairview/tsconfig": "workspace:*",
+		"esbuild": "0.20.2",
+		"esbuild-yaml": "1.2.0",
+		"tsup": "8.3.0",
+		"typescript": "5.6.3"
+	}
+}

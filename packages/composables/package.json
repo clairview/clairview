@@ -1,0 +1,52 @@
+{
+	"name": "@clairview/composables",
+	"version": "11.1.2",
+	"description": "Shared Vue composables for Clairview use",
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git",
+		"directory": "packages/composables"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "MIT",
+	"author": "Rijk van Zanten <rijkvanzanten@me.com>",
+	"sideEffects": false,
+	"type": "module",
+	"exports": {
+		".": "./dist/index.js",
+		"./package.json": "./package.json"
+	},
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format=esm --dts",
+		"dev": "tsup src/index.ts --format=esm --dts --watch",
+		"test": "vitest --watch=false"
+	},
+	"dependencies": {
+		"@clairview/constants": "workspace:*",
+		"@clairview/utils": "workspace:*",
+		"axios": "1.7.7",
+		"lodash-es": "4.17.21",
+		"nanoid": "5.0.7"
+	},
+	"devDependencies": {
+		"@clairview/extensions": "workspace:*",
+		"@clairview/sdk": "workspace:*",
+		"@clairview/tsconfig": "workspace:*",
+		"@clairview/types": "workspace:*",
+		"@types/lodash-es": "4.17.12",
+		"@vitest/coverage-v8": "2.1.2",
+		"@vue/test-utils": "2.4.6",
+		"tsup": "8.3.0",
+		"typescript": "5.6.3",
+		"vitest": "2.1.2",
+		"vue": "3.5.11"
+	},
+	"peerDependencies": {
+		"vue": "^3.4"
+	}
+}

@@ -1,0 +1,50 @@
+{
+	"name": "@clairview/types",
+	"version": "12.2.0",
+	"description": "Shared types for Clairview",
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git",
+		"directory": "packages/types"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "MIT",
+	"author": "Rijk van Zanten <rijkvanzanten@me.com>",
+	"type": "module",
+	"exports": {
+		".": "./dist/index.js",
+		"./package.json": "./package.json"
+	},
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch"
+	},
+	"dependencies": {
+		"@clairview/constants": "workspace:*",
+		"@clairview/schema": "workspace:*",
+		"@types/geojson": "7946.0.14"
+	},
+	"devDependencies": {
+		"@clairview/tsconfig": "workspace:*",
+		"knex": "3.1.0",
+		"typescript": "5.6.3",
+		"vue": "3.5.11"
+	},
+	"peerDependencies": {
+		"knex": "3",
+		"vue": "^3.4"
+	},
+	"peerDependenciesMeta": {
+		"knex": {
+			"optional": true
+		},
+		"vue": {
+			"optional": true
+		}
+	}
+}

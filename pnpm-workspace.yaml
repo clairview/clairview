@@ -1,0 +1,8 @@
+packages:
+  - clairview
+  - app
+  - api
+  - docs
+  - sdk
+  - packages/*
+  - tests/*

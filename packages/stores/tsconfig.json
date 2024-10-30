@@ -1,0 +1,7 @@
+{
+	"extends": "@clairview/tsconfig/vue3",
+	"include": ["src"],
+	"typedocOptions": {
+		"entryPoints": ["./src/index.ts"]
+	}
+}

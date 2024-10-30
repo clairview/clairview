@@ -1,0 +1,11 @@
+# NOTE: Activity/collections/fields/presets/relations/revisions will have an extra hardcoded filter
+# to filter out collections you don't have read access
+
+- collection: clairview_collections
+  action: read
+
+- collection: clairview_fields
+  action: read
+
+- collection: clairview_relations
+  action: read

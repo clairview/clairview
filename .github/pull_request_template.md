@@ -1,19 +1,33 @@
-## Problem
+<!--
 
-<!-- Who are we building for, what are their needs, why is this important? -->
+Heya! Thanks for opening a Pull Request! If your PR is implementing a new feature or fix for Clairview, please make sure your PR adheres to the following requirements:
 
-## Changes
+- The PR closes an Issue (not Discussion)
+- Tests are added/updated and are passing locally if applicable
+- Documentation was added/updated if applicable
 
-<!-- If there are frontend changes, please include screenshots. -->
-<!-- If a reference design was involved, include a link to the relevant Figma frame! -->
+Please make sure to "Link" the issue you're closing. Without a Linked issue, this PR won't be accepted. See https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue for more information.
 
-👉 _Stay up-to-date with [ClairView coding conventions](https://clairview.com/docs/contribute/coding-conventions) for a smoother review._
+-->
 
-## Does this work well for both Cloud and self-hosted?
+## Scope
 
-<!-- Yes / no / it doesn't have an impact. -->
+What's changed:
 
-## How did you test this code?
+- Lorem ipsum dolor sit amet
+- Consectetur adipiscing elit
+- Sed do eiusmod tempor incididunt
 
-<!-- Briefly describe the steps you took. -->
-<!-- Include automated tests if possible, otherwise describe the manual testing routine. -->
+## Potential Risks / Drawbacks
+
+- Lorem ipsum dolor sit amet
+- Consectetur adipiscing elit
+
+## Review Notes / Questions
+
+- I would like to lorem ipsum
+- Special attention should be paid to dolor sit amet
+
+---
+
+Fixes #\<num\>

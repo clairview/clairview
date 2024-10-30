@@ -1,0 +1,116 @@
+table: clairview_collections
+
+defaults:
+  collection: null
+  hidden: false
+  singleton: false
+  icon: null
+  note: null
+  translations: null
+  display_template: null
+  accountability: 'all'
+
+data:
+  - collection: clairview_access
+    icon: admin_panel_settings
+    note: $t:clairview_collection.clairview_access
+    display_template: '{{ policy.name }}'
+    sort_field: sort
+
+  - collection: clairview_activity
+    note: $t:clairview_collection.clairview_activity
+    accountability: null
+
+  - collection: clairview_collections
+    icon: database
+    note: $t:clairview_collection.clairview_collections
+
+  - collection: clairview_comments
+    note: $t:clairview_collection.clairview_comments
+
+  - collection: clairview_fields
+    icon: input
+    note: $t:clairview_collection.clairview_fields
+
+  - collection: clairview_files
+    icon: folder
+    note: $t:clairview_collection.clairview_files
+    display_template: '{{ $thumbnail }} {{ title }}'
+
+  - collection: clairview_folders
+    note: $t:clairview_collection.clairview_folders
+    display_template: '{{ name }}'
+
+  - collection: clairview_migrations
+    note: $t:clairview_collection.clairview_migrations
+
+  - collection: clairview_permissions
+    icon: admin_panel_settings
+    note: $t:clairview_collection.clairview_permissions
+
+  - collection: clairview_policies
+    icon: admin_panel_settings
+    note: $t:clairview_collection.clairview_policies
+
+  - collection: clairview_presets
+    icon: bookmark
+    note: $t:clairview_collection.clairview_presets
+    accountability: null
+
+  - collection: clairview_relations
+    icon: merge_type
+    note: $t:clairview_collection.clairview_relations
+
+  - collection: clairview_revisions
+    note: $t:clairview_collection.clairview_revisions
+    accountability: null
+
+  - collection: clairview_roles
+    icon: supervised_user_circle
+    note: $t:clairview_collection.clairview_roles
+
+  - collection: clairview_sessions
+    note: $t:clairview_collection.clairview_sessions
+
+  - collection: clairview_settings
+    singleton: true
+    note: $t:clairview_collection.clairview_settings
+
+  - collection: clairview_users
+    archive_field: status
+    archive_value: archived
+    unarchive_value: draft
+    icon: people_alt
+    note: $t:clairview_collection.clairview_users
+    display_template: '{{ first_name }} {{ last_name }}'
+
+  - collection: clairview_webhooks
+    note: $t:clairview_collection.clairview_webhooks
+
+  - collection: clairview_dashboards
+    note: $t:clairview_collection.clairview_dashboards
+
+  - collection: clairview_panels
+    note: $t:clairview_collection.clairview_panels
+
+  - collection: clairview_notifications
+    note: $t:clairview_collection.clairview_notifications
+
+  - collection: clairview_shares
+    icon: share
+    note: $t:clairview_collection.clairview_shares
+
+  - collection: clairview_flows
+    note: $t:clairview_collection.clairview_flows
+
+  - collection: clairview_operations
+    note: $t:clairview_collection.clairview_operations
+
+  - collection: clairview_translations
+    note: $t:clairview_collection.clairview_translations
+
+  - collection: clairview_versions
+    note: $t:clairview_collection.clairview_versions
+
+  - collection: clairview_extensions
+    note: $t:clairview_collection.clairview_extensions

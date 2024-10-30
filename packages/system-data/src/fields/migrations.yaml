@@ -1,0 +1,10 @@
+# clairview_migrations isn't surfaced in the app, nor accessible from the API
+table: clairview_migrations
+
+fields:
+  - collection: clairview_migrations
+    field: version
+  - collection: clairview_migrations
+    field: name
+  - collection: clairview_migrations
+    field: timestamp

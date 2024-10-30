@@ -1,0 +1,21 @@
+table: clairview_extensions
+
+fields:
+  - collection: clairview_extensions
+    field: id
+    special:
+      - uuid
+
+  - collection: clairview_extensions
+    field: folder
+
+  - collection: clairview_extensions
+    field: source
+
+  - collection: clairview_extensions
+    field: bundle
+
+  - collection: clairview_extensions
+    field: enabled
+    special:
+      - cast-boolean

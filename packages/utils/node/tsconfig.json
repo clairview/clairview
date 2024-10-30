@@ -1,0 +1,7 @@
+{
+	"extends": "@clairview/tsconfig/node18-esm",
+	"compilerOptions": {
+		"types": ["node"]
+	},
+	"include": ["."]
+}

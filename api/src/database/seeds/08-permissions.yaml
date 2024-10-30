@@ -1,0 +1,32 @@
+table: clairview_permissions
+
+columns:
+  id:
+    increments: true
+  role:
+    type: uuid
+    references:
+      table: clairview_roles
+      column: id
+  collection:
+    type: string
+    length: 64
+    nullable: false
+    references:
+      table: clairview_collections
+      column: collection
+  action:
+    type: string
+    length: 10
+    nullable: false
+  permissions:
+    type: json
+  validation:
+    type: json
+  presets:
+    type: json
+  fields:
+    type: text
+  limit:
+    type: integer
+    unsigned: true

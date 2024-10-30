@@ -1,0 +1,9 @@
+{
+	"extends": "@clairview/tsconfig/vue3",
+	"compilerOptions": {
+		"paths": {
+			"@/*": ["./*"]
+		}
+	},
+	"include": ["env.d.ts", "**/*.vue"]
+}

@@ -1,0 +1,10 @@
+{
+	"extends": "@clairview/tsconfig/node18-esm",
+	"compilerOptions": {
+		"isolatedModules": true
+	},
+	"include": ["src"],
+	"typedocOptions": {
+		"entryPoints": ["./src"]
+	}
+}

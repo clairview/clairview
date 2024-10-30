@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Request a new feature
+    url: https://github.com/clairview/clairview/discussions/new
+    about: Share your ideas on how to make Clairview better.
+  - name: Ask a question
+    url: https://clairview.chat/
+    about: Please ask and answer questions here.

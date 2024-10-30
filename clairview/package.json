@@ -1,0 +1,63 @@
+{
+	"name": "clairview",
+	"version": "11.1.2",
+	"description": "Clairview is a real-time API and App dashboard for managing SQL database content",
+	"keywords": [
+		"clairview",
+		"realtime",
+		"database",
+		"content",
+		"api",
+		"rest",
+		"graphql",
+		"app",
+		"dashboard",
+		"headless",
+		"cms",
+		"mysql",
+		"postgresql",
+		"cockroachdb",
+		"sqlite",
+		"framework",
+		"vue"
+	],
+	"homepage": "https://clairview.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clairview/clairview.git"
+	},
+	"funding": "https://github.com/clairview/clairview?sponsor=1",
+	"license": "BUSL-1.1",
+	"author": {
+		"name": "Monospace Inc",
+		"email": "info@monospace.io",
+		"url": "https://monospace.io"
+	},
+	"maintainers": [
+		{
+			"name": "Rijk van Zanten",
+			"email": "rijkvanzanten@me.com",
+			"url": "https://github.com/rijkvanzanten"
+		},
+		{
+			"name": "Ben Haynes",
+			"email": "ben@rngr.org",
+			"url": "https://github.com/benhaynes"
+		}
+	],
+	"type": "module",
+	"exports": {
+		"./package.json": "./package.json",
+		"./version": "./version.js"
+	},
+	"bin": {
+		"clairview": "cli.js"
+	},
+	"dependencies": {
+		"@clairview/api": "workspace:*",
+		"@clairview/update-check": "workspace:*"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}
