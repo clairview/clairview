@@ -2,12 +2,14 @@ name: Release
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v[0-9]*'
 
 env:
   GHCR_IMAGE: ghcr.io/${{ github.repository }}
-  DOCKERHUB_IMAGE: ${{ github.repository }}
+  DOCKERHUB_IMAGE: getclairview/clairview
 
 jobs:
   check-version:
@@ -57,7 +59,7 @@ jobs:
 
       - name: Publish packages to NPM
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
         run: |
           pnpm --recursive publish \
@@ -105,7 +107,7 @@ jobs:
         if: env.DOCKERHUB_IMAGE
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -127,9 +129,6 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
-      # Temp fix:
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
