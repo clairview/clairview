@@ -495,7 +495,7 @@ type CustomTypes = {
 const clairview = new Clairview<CustomTypes>('https://example.clairview.app');
 
 await clairview.auth.login({
-	email: 'admin@example.com',
+	email: 'developers@digi-trans.org',
 	password: 'password',
 });
 
@@ -530,7 +530,7 @@ before the current token is returned.
 
 ```js
 await clairview.auth.login({
-	email: 'admin@example.com',
+	email: 'developers@digi-trans.org',
 	password: 'd1r3ctu5',
 });
 ```
@@ -571,14 +571,14 @@ By default, the address defined in `PUBLIC_URL` on `.env` file is used for the l
 the email:
 
 ```js
-await clairview.auth.password.request('admin@example.com');
+await clairview.auth.password.request('developers@digi-trans.org');
 ```
 
 But a custom address can be passed as second argument:
 
 ```js
 await clairview.auth.password.request(
-	'admin@example.com',
+	'developers@digi-trans.org',
 	'https://myapp.com' // In this case, the link will be https://myapp.com?token=FEE0A...
 );
 ```
@@ -1114,7 +1114,7 @@ Same methods as `clairview.items("clairview_users")`, and:
 ### Invite a New User
 
 ```js
-await clairview.users.invites.send('admin@example.com', 'fe38136e-52f7-4622-8498-112b8a32a1e2');
+await clairview.users.invites.send('developers@digi-trans.org', 'fe38136e-52f7-4622-8498-112b8a32a1e2');
 ```
 
 The second parameter is the role of the user

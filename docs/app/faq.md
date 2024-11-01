@@ -7,7 +7,7 @@
 You can do this with the following command:
 
 ```sh
-npx clairview users passwd --email admin@example.com --password newpasswordhere
+npx clairview users passwd --email developers@digi-trans.org --password newpasswordhere
 ```
 
 ## Why isn't Clairview properly saving Chinese characters or emoji?

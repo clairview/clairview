@@ -76,7 +76,7 @@ export default async function init(): Promise<void> {
 			type: 'input',
 			name: 'email',
 			message: 'Email',
-			default: 'admin@example.com',
+			default: 'developers@digi-trans.org',
 			validate: (input: string) => {
 				const emailSchema = Joi.string().email().required();
 				const { error } = emailSchema.validate(input);

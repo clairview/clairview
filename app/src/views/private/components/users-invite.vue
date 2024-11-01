@@ -96,7 +96,7 @@ async function loadRoles() {
 				<div class="grid">
 					<div class="field">
 						<div class="type-label">{{ t('emails') }}</div>
-						<v-textarea v-model="emails" :nullable="false" placeholder="admin@example.com, user@example.com..." />
+						<v-textarea v-model="emails" :nullable="false" placeholder="developers@digi-trans.org, user@example.com..." />
 					</div>
 					<div v-if="!role" class="field">
 						<div class="type-label">{{ t('role') }}</div>

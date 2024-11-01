@@ -82,9 +82,9 @@ watchEffect(async () => {
 			</v-button>
 		</template>
 
-		<template #title-outer:append>
-			<v-chip class="beta" outlined small>Beta</v-chip>
-		</template>
+<!--		<template #title-outer:append>-->
+<!--			<v-chip class="beta" outlined small>Beta</v-chip>-->
+<!--		</template>-->
 
 		<template #navigation>
 			<settings-navigation />

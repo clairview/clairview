@@ -59,7 +59,7 @@ const gqlResult = await client.query<OutputType>(`
 ```ts
 const client = createClairview<Schema>('https://api.clairview.io').with(rest()).with(authentication('json'));
 
-await client.login('admin@example.com', 'd1r3ctu5');
+await client.login('developers@digi-trans.org', 'd1r3ctu5');
 
 // do authenticated requests
 ```

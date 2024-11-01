@@ -49,7 +49,7 @@ services:
       - ./extensions:/clairview/extensions
     environment:
       SECRET: "replace-with-secure-random-value"
-      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_EMAIL: "developers@digi-trans.org"
       ADMIN_PASSWORD: "d1r3ctu5"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/clairview/database/data.db"

@@ -98,7 +98,7 @@ When this is enabled, the user will receive emails for notifications.
 	"id": "0bc7b36a-9ba9-4ce0-83f0-0a526f354e07",
 	"first_name": "Admin",
 	"last_name": "User",
-	"email": "admin@example.com",
+	"email": "developers@digi-trans.org",
 	"password": "**********",
 	"location": "New York City",
 	"title": "CTO",
@@ -637,7 +637,7 @@ Returns the [user objects](#the-user-object) for the created users.
 ```json
 [
 	{
-		"email": "admin@example.com",
+		"email": "developers@digi-trans.org",
 		"password": "p455w0rd",
 		"role": "c86c2761-65d3-43c3-897f-6f74ad6a5bd7"
 	},
@@ -659,7 +659,7 @@ mutation {
 	create_users_items(
 		data: [
 			{
-				email: "admin@example.com"
+				email: "developers@digi-trans.org"
 				password: "p455w0rd"
 				role: { id: "c86c2761-65d3-43c3-897f-6f74ad6a5bd7", name: "Public", admin_access: false, enforce_tfa: false }
 			}

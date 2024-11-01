@@ -353,7 +353,7 @@ The token's expiration time can be configured through
 
 ```json
 {
-	"email": "admin@example.com",
+	"email": "developers@digi-trans.org",
 	"password": "d1r3ctu5"
 }
 ```
@@ -365,7 +365,7 @@ The token's expiration time can be configured through
 
 ```graphql
 mutation {
-	auth_login(email: "admin@example.com", password: "d1r3ctu5") {
+	auth_login(email: "developers@digi-trans.org", password: "d1r3ctu5") {
 		access_token
 		refresh_token
 	}
@@ -381,10 +381,10 @@ import { createClairview, authentication, rest, login } from '@clairview/sdk';
 const client = createClairview('https://clairview.example.com').with(authentication()).with(rest());
 
 // login using the authentication composable
-const result = await client.login('admin@example.com', 'd1r3ctu5');
+const result = await client.login('developers@digi-trans.org', 'd1r3ctu5');
 
 // login http request
-const result = await client.request(login('admin@example.com', 'd1r3ctu5'));
+const result = await client.request(login('developers@digi-trans.org', 'd1r3ctu5'));
 ```
 
 </template>
@@ -674,7 +674,7 @@ Provide a custom reset url which the link in the email will lead to. The reset t
 
 ```json
 {
-	"email": "admin@example.com"
+	"email": "developers@digi-trans.org"
 }
 ```
 
@@ -685,7 +685,7 @@ Provide a custom reset url which the link in the email will lead to. The reset t
 
 ```graphql
 mutation {
-	auth_password_request(email: "admin@example.com")
+	auth_password_request(email: "developers@digi-trans.org")
 }
 ```
 
@@ -697,7 +697,7 @@ import { createClairview, rest, passwordRequest } from '@clairview/sdk';
 
 const client = createClairview('https://clairview.example.com').with(rest());
 
-const result = await client.request(passwordRequest('admin@example.com'));
+const result = await client.request(passwordRequest('developers@digi-trans.org'));
 ```
 
 </template>

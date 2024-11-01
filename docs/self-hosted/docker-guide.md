@@ -46,7 +46,7 @@ Docker bootstrap logs when starting Clairview for the first time. To configure t
 include the following environment variables:
 
 ```bash
-ADMIN_EMAIL="admin@example.com"
+ADMIN_EMAIL="developers@digi-trans.org"
 ADMIN_PASSWORD="d1r3ctu5"
 ```
 
@@ -143,7 +143,7 @@ services:
       CACHE_STORE: "redis"
       REDIS: "redis://cache:6379"
 
-      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_EMAIL: "developers@digi-trans.org"
       ADMIN_PASSWORD: "d1r3ctu5"
 
       # Make sure to set this in production

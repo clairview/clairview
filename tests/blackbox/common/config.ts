@@ -72,7 +72,7 @@ const clairviewStorageConfig = {
 
 const clairviewConfig = {
 	...process.env,
-	ADMIN_EMAIL: 'admin@example.com',
+	ADMIN_EMAIL: 'developers@digi-trans.org',
 	ADMIN_PASSWORD: 'password',
 	SECRET: 'clairview-test',
 	TELEMETRY: 'false',

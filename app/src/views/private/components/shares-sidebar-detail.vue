@@ -313,7 +313,7 @@ async function copy(id: string) {
 
 						<div class="field">
 							<div class="type-label">{{ t('emails') }}</div>
-							<v-textarea v-model="sendEmails" :nullable="false" placeholder="admin@example.com, user@example.com..." />
+							<v-textarea v-model="sendEmails" :nullable="false" placeholder="developers@digi-trans.org, user@example.com..." />
 						</div>
 					</div>
 				</v-card-text>

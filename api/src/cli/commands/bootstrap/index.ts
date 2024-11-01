@@ -99,8 +99,8 @@ async function createDefaultAdmin(schema: SchemaOverview) {
 	let adminEmail = env['ADMIN_EMAIL'];
 
 	if (!adminEmail) {
-		logger.info('No admin email provided. Defaulting to "admin@example.com"');
-		adminEmail = 'admin@example.com';
+		logger.info('No admin email provided. Defaulting to "developers@digi-trans.org"');
+		adminEmail = 'developers@digi-trans.org';
 	}
 
 	let adminPassword = env['ADMIN_PASSWORD'];

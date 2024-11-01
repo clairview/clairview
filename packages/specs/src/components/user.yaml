@@ -14,7 +14,7 @@ properties:
     type: string
   email:
     description: Unique email address for the user.
-    example: admin@example.com
+    example: developers@digi-trans.org
     type: string
     format: email
   password:
